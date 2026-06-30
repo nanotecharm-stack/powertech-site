@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 132" width="600" height="132" role="img" aria-label="PowerTech">
+  <title>PowerTech — dark</title>
+  <defs>
+    <mask id="ptLkD" maskUnits="userSpaceOnUse" x="0" y="0" width="132" height="132">
+      <rect width="132" height="132" fill="#fff"></rect>
+      <path d="M74 8 L46 70 L64 70 L54 128 L94 62 L72 62 Z" fill="#000" stroke="#000" stroke-width="14" stroke-linejoin="round"></path>
+    </mask>
+  </defs>
+  <rect x="26" y="22" width="80" height="92" rx="3" fill="none" stroke="#D6D9DD" stroke-width="9" mask="url(#ptLkD)"></rect>
+  <path d="M74 8 L46 70 L64 70 L54 128 L94 62 L72 62 Z" fill="#F25749"></path>
+  <text x="156" y="92" font-family="&#39;Helvetica Neue&#39;,Arial,sans-serif" font-weight="600" font-size="72" letter-spacing="-2.5" fill="#FFFFFF">PowerTech</text>
+</svg>
