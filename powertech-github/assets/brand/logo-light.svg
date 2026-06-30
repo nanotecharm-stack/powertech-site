@@ -1,0 +1,8 @@
+<svg width="350" height="84" viewBox="0 0 350 84" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PowerTech">
+  <rect x="6" y="16" width="9" height="46" rx="2" fill="#3E8EFF"></rect>
+  <rect x="21" y="30" width="9" height="32" rx="2" fill="#23C9E0"></rect>
+  <rect x="36" y="40" width="9" height="22" rx="2" fill="#23C9E0"></rect>
+  <rect x="51" y="48" width="9" height="14" rx="2" fill="#5b6a78"></rect>
+  <rect x="4" y="64" width="60" height="3.5" rx="1.75" fill="#cdd6df"></rect>
+  <text font-family="Inter, &#39;Segoe UI&#39;, system-ui, sans-serif" font-weight="600" letter-spacing="-1" x="82" y="60" font-size="51" fill="#ffffff">PowerTech</text>
+</svg>
