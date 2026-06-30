@@ -1772,6 +1772,11 @@ html[lang="hy"] .as-item { letter-spacing: .07em; }
 @media (max-width: 1199px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
+  /* Mobile header stays stable on scroll: the CTA lives in the hamburger menu (not
+     the bar), and the language switch is never swapped out — so the bar doesn't
+     "reshuffle" the moment you scroll past the Hero. */
+  .site-nav.cta-visible .btn-nav-cta { display: none; }
+  .site-nav.cta-visible .lang-switch { display: flex; }
 }
 /* Armenian (Noto Sans Armenian) renders visibly larger than Inter at the same px.
    Trim the inline nav labels a touch so the header reads at the same visual size as
