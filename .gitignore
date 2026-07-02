@@ -1,0 +1,23 @@
+# ── OS / editor cruft ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+
+# ── Heavy image SOURCES ─────────────────────────────────────────
+# The site serves only the optimised .webp files. The original PNG
+# sources (~20 MB) are kept locally for re-export but are NOT uploaded.
+assets/*.png
+
+# Legacy / unused asset (replaced by about-engineer.webp)
+assets/about-photo.webp
+
+# ── Internal working docs / tooling (not part of the published site) ──
+CLAUDE.md
+PROJECT_STATUS.md
+SITE_BRIEF.md
+CONTENT_*.md
+.claude/
+design-references/
