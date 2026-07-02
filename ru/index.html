@@ -29,11 +29,11 @@
   <meta name="twitter:image" content="https://powertech.am/assets/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@700&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=131" />
+  <link rel="stylesheet" href="/style.css?v=134" />
 </head>
 <body>
 
@@ -45,13 +45,20 @@
           <rect class="pt-sq" width="100" height="100" rx="20"/>
           <path class="pt-bolt" d="M52 18 L38 50 L47 50 L42 82 L62 47 L51 47 Z"/>
         </svg>
-        <span class="logo-text">PowerTech</span>
+        <span class="logo-stack">
+          <span class="logo-text">PowerTech</span>
+          <svg class="logo-pulse" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2 8h118l6-6 6 9 5-3h49" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="192" cy="8" r="2.6" fill="#F25749"/>
+          </svg>
+        </span>
       </a>
       <nav class="nav-links" aria-label="Навигация">
         <a href="#s02">Когда нужно</a>
         <a href="#s07">Где важно</a>
         <a href="#s05">Как проходит</a>
         <a href="#s06">Что измеряем</a>
+        <a href="#report">Отчёт</a>
         <a href="#s09">О компании</a>
       </nav>
       <div class="nav-right">
@@ -62,7 +69,7 @@
           <span aria-hidden="true">·</span>
           <a href="/ru/" hreflang="ru" class="is-current" aria-current="page">RU</a>
         </div>
-        <a href="#contact" class="btn-nav-cta">Подать заявку</a>
+        <a href="#contact" class="btn-nav-cta">Обсудить объект</a>
         <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-mobile">
           <span></span><span></span><span></span>
         </button>
@@ -73,8 +80,9 @@
       <a href="#s07">Где важно</a>
       <a href="#s05">Как проходит</a>
       <a href="#s06">Что измеряем</a>
+      <a href="#report">Отчёт</a>
       <a href="#s09">О компании</a>
-      <a href="#contact" class="nav-mobile-cta">Подать заявку</a>
+      <a href="#contact" class="nav-mobile-cta">Обсудить объект</a>
     </nav>
   </header>
 
@@ -85,9 +93,9 @@
     <div class="container hero-content">
       <p class="hero-tag">МОНИТОРИНГ КАЧЕСТВА ЭЛЕКТРОЭНЕРГИИ</p>
       <h1 class="hero-h1">Проверьте, как<br>работает электросеть<br>вашего объекта</h1>
-      <p class="hero-sub">PowerTech проводит 7-дневный мониторинг качества электроэнергии под рабочей нагрузкой. Мы фиксируем отклонения в сети, анализируем возможные причины и готовим технический вывод для владельца объекта, инженера или проектного партнёра.</p>
+      <p class="hero-sub">PowerTech проводит 7-дневный мониторинг качества электроэнергии под рабочей нагрузкой: фиксируем отклонения, анализируем возможные причины и готовим технический вывод для владельца, инженера или проектного партнёра.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-coral">Подать заявку</a>
+        <a href="#contact" class="btn btn-coral">Обсудить объект</a>
         <a href="#s05" class="btn btn-ghost">Как проходит проверка</a>
       </div>
     </div>
@@ -106,10 +114,10 @@
         <div class="s02-left">
           <div class="s02-eyebrow-row">
             <span class="s02-idx" aria-hidden="true">01</span>
-            <span class="s02-eyebrow">МОНИТОРИНГ КАЧЕСТВА ЭЛЕКТРОЭНЕРГИИ</span>
+            <span class="s02-eyebrow">ТИПОВЫЕ СИТУАЦИИ</span>
           </div>
           <h2 class="s02-h2" id="s02-heading">Когда нужны измерения</h2>
-          <p class="s02-intro">Они нужны, когда визуального осмотра недостаточно и решение должно опираться на данные о работе электросети в реальных условиях.</p>
+          <p class="s02-intro">Когда визуального осмотра недостаточно — и решение должно опираться на данные о работе электросети в реальных условиях.</p>
         </div>
 
       </div><!-- /s02-top -->
@@ -198,7 +206,7 @@
           </div>
           <h2 class="obj-h2" id="obj-heading">Где измерения важны</h2>
         </div>
-        <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение по объекту.</p>
+        <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
       </div>
 
       <div class="obj-matrix">
@@ -238,7 +246,7 @@
             <h3 class="obj-name">Солнечные станции</h3>
           </div>
           <div class="obj-desc">
-            <div class="obj-field">              <p class="obj-ftext">При низкой выработке, приёмке, модернизации или спорных технических вопросах.</p>
+            <div class="obj-field">              <p class="obj-ftext">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
             </div>
             <div class="obj-field">              <p class="obj-ftext">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
             </div>
@@ -282,7 +290,7 @@
           <div class="obj-desc">
             <div class="obj-field">              <p class="obj-ftext">Когда стабильное питание важно для точной и безопасной работы оборудования.</p>
             </div>
-            <div class="obj-field">              <p class="obj-ftext">Снижение риска нестабильной работы чувствительного оборудования.</p>
+            <div class="obj-field">              <p class="obj-ftext">Измеренная картина питания чувствительных линий — до того, как отклонения скажутся на работе.</p>
             </div>
           </div>
         </div>
@@ -303,7 +311,7 @@
           <div class="obj-desc">
             <div class="obj-field">              <p class="obj-ftext">Когда даже кратковременные отклонения могут привести к сбоям.</p>
             </div>
-            <div class="obj-field">              <p class="obj-ftext">Оценка устойчивости питания при кратковременных отклонениях и критичных нагрузках.</p>
+            <div class="obj-field">              <p class="obj-ftext">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
             </div>
           </div>
         </div>
@@ -324,7 +332,7 @@
           <div class="obj-desc">
             <div class="obj-field">              <p class="obj-ftext">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
             </div>
-            <div class="obj-field">              <p class="obj-ftext">Измеренные данные для технической оценки объекта и принятия решения.</p>
+            <div class="obj-field">              <p class="obj-ftext">Независимые измеренные данные как основа для решения.</p>
             </div>
           </div>
         </div>
@@ -340,7 +348,7 @@
 
       <div class="proc-head">
         <div class="proc-eyebrow-row">
-          <span class="proc-mark" aria-hidden="true"></span>
+          <span class="proc-idx" aria-hidden="true">03</span>
           <span class="proc-eyebrow">ФОРМАТ ИЗМЕРЕНИЙ</span>
         </div>
       </div>
@@ -498,7 +506,7 @@
               <span class="pm-num">05</span>
               <h3 class="pm-title">Реактивная мощность</h3>
             </div>
-            <p class="pm-text">Показывает лишнюю нагрузку на элементы сети и эффективность использования электроэнергии.</p>
+            <p class="pm-text">Показывает дополнительную нагрузку на элементы сети и эффективность использования электроэнергии.</p>
           </div>
           <div class="pm-signal" aria-hidden="true">
             <svg viewBox="0 0 180 54" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -534,6 +542,112 @@
     </div><!-- /container -->
   </section>
 
+  <!-- ═══════════════════════════════ SECTION — Что вы получаете (отчёт) ═══════════════════════════════ -->
+  <section class="report" id="report" aria-labelledby="report-heading">
+    <div class="container">
+      <div class="report-grid">
+
+        <div class="report-left">
+          <div class="report-eyebrow-row">
+            <span class="report-idx" aria-hidden="true">05</span>
+            <span class="report-eyebrow">РЕЗУЛЬТАТ</span>
+          </div>
+          <h2 class="report-h2" id="report-heading">Что вы получаете</h2>
+          <p class="report-intro">Итог проверки — технический отчёт: зафиксированные события, графики параметров и вывод, с которым можно принимать решения.</p>
+
+          <div class="rep-list">
+            <div class="rep-item">
+              <span class="rep-num" aria-hidden="true">01</span>
+              <div>
+                <h3>События в сети</h3>
+                <p>Что было зафиксировано и в какие моменты работы это возникало.</p>
+              </div>
+            </div>
+            <div class="rep-item">
+              <span class="rep-num" aria-hidden="true">02</span>
+              <div>
+                <h3>Графики параметров</h3>
+                <p>Поведение напряжения, тока и других параметров за период измерений.</p>
+              </div>
+            </div>
+            <div class="rep-item">
+              <span class="rep-num" aria-hidden="true">03</span>
+              <div>
+                <h3>Сопоставление с нормами</h3>
+                <p>Отклонения оцениваются с ориентиром на EN 50160.</p>
+              </div>
+            </div>
+            <div class="rep-item">
+              <span class="rep-num" aria-hidden="true">04</span>
+              <div>
+                <h3>Технический вывод</h3>
+                <p>Что это значит на практике и какие вопросы стоит рассмотреть дальше.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="report-instrument">Измерения выполняет анализатор качества электроэнергии, установленный в точке измерения на весь период проверки.</p>
+        </div>
+
+        <figure class="report-right">
+          <div class="rep-doc" role="img" aria-label="Пример страницы отчёта: график напряжения за 7 дней с отмеченным событием и журнал событий">
+            <div class="rep-doc-head">
+              <span class="rep-doc-brand">PowerTech</span>
+              <span class="rep-doc-type">ОТЧЁТ · PQ-МОНИТОРИНГ</span>
+            </div>
+            <div class="rep-doc-meta">
+              <span>Период: <b>7 дней</b></span>
+              <span>Точка: <b>ГРЩ, ввод</b></span>
+              <span>Норматив: <b>EN 50160</b></span>
+            </div>
+            <div class="rep-chart" aria-hidden="true">
+              <svg viewBox="0 0 560 216" fill="none">
+                <!-- allowed band ±10% -->
+                <rect x="16" y="58" width="530" height="84" fill="rgba(27,27,27,.032)"/>
+                <line x1="16" y1="58" x2="546" y2="58" stroke="#E2DED6" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="16" y1="142" x2="546" y2="142" stroke="#E2DED6" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="16" y1="100" x2="546" y2="100" stroke="#ECEAE4" stroke-width="1"/>
+                <text x="20" y="52" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#8C8C8C">+10%</text>
+                <text x="20" y="156" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#8C8C8C">−10%</text>
+                <text x="514" y="96" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#8C8C8C">230 В</text>
+                <!-- day ticks -->
+                <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#8C8C8C">
+                  <text x="16" y="204">Д1</text><text x="98" y="204">Д2</text><text x="180" y="204">Д3</text>
+                  <text x="262" y="204">Д4</text><text x="344" y="204">Д5</text><text x="426" y="204">Д6</text>
+                  <text x="508" y="204">Д7</text>
+                </g>
+                <line x1="16" y1="188" x2="546" y2="188" stroke="#ECEAE4" stroke-width="1"/>
+                <!-- voltage curve with one dip event -->
+                <path d="M16 96 C40 90 58 106 82 100 S128 88 152 97 S198 108 222 99 L252 99 L262 158 L272 97 C296 90 314 104 338 98 S384 90 408 100 S454 106 478 96 S524 92 546 98"
+                      stroke="#1B1B1B" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- event marker -->
+                <circle cx="262" cy="158" r="3.4" fill="#F25749"/>
+                <line x1="262" y1="158" x2="262" y2="188" stroke="#F25749" stroke-width="1" stroke-dasharray="2 3"/>
+                <text x="272" y="176" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#F25749">провал · L2</text>
+              </svg>
+            </div>
+            <div class="rep-events">
+              <div class="rep-ev rep-ev-h" aria-hidden="true">
+                <span>СОБЫТИЕ</span><span>ДЕНЬ · ВРЕМЯ</span><span>ФАЗА</span><span>ДЛИТ.</span>
+              </div>
+              <div class="rep-ev">
+                <b class="ev-flag">Провал напряжения</b><span>Д3 · 02:41</span><span>L2</span><span>180 мс</span>
+              </div>
+              <div class="rep-ev">
+                <b>Перенапряжение</b><span>Д5 · 21:07</span><span>L3</span><span>90 мс</span>
+              </div>
+              <div class="rep-ev">
+                <b>THD выше нормы</b><span>Д6 · 12:10</span><span>L1</span><span>2 ч 20 мин</span>
+              </div>
+            </div>
+          </div>
+          <figcaption class="rep-caption">Фрагмент — пример оформления. Состав отчёта зависит от задачи и режима работы объекта.</figcaption>
+        </figure>
+
+      </div><!-- /report-grid -->
+    </div><!-- /container -->
+  </section>
+
   <!-- ═══════════════════════════════ SECTION — Сначала данные, потом выводы ═══════════════════════════════ -->
   <section class="appr" id="s08" aria-labelledby="appr-heading">
     <div class="container appr-body">
@@ -541,7 +655,7 @@
       <div class="appr-top">
         <div class="appr-head">
           <div class="appr-eyebrow-row">
-            <span class="appr-mark" aria-hidden="true"></span>
+            <span class="appr-idx" aria-hidden="true">06</span>
             <span class="appr-eyebrow">ПОДХОД</span>
           </div>
           <span class="appr-accent" aria-hidden="true"></span>
@@ -549,7 +663,7 @@
         </div>
         <div class="appr-text">
           <p class="appr-lead">PowerTech работает с задачами, где недостаточно осмотра щита или описания проблемы. Нам важно отделить факты от предположений и показать, что происходит с электроснабжением в реальной работе объекта.</p>
-          <p class="appr-p">Результат формулируется как технический вывод: что было зафиксировано, насколько это важно для объекта и какие вопросы стоит рассмотреть дальше.</p>
+          <p class="appr-p">Результат формулируется как технический вывод: что было зафиксировано, насколько это существенно и какие вопросы стоит рассмотреть дальше.</p>
           <p class="appr-note">Наша задача — не заменить проектировщика или подрядчика, а дать измеренную техническую картину для принятия решения.</p>
         </div>
       </div>
@@ -617,7 +731,7 @@
           <span class="contact-mark" aria-hidden="true"></span>
           <span class="contact-eyebrow">СЛЕДУЮЩИЙ ШАГ</span>
         </div>
-        <h2 class="contact-h2" id="contact-heading">Оставить заявку</h2>
+        <h2 class="contact-h2" id="contact-heading">Обсудить объект</h2>
         <p class="contact-intro">Расскажите, что происходит на объекте: сбои оборудования, приёмка, покупка, низкая выработка, модернизация или другая техническая ситуация. Мы подскажем, где проверка электросети в рабочих условиях может быть полезна.</p>
         </div>
 
@@ -654,7 +768,8 @@
               </div>
             </div>
             <button type="submit" class="btn btn-coral cf-submit">Отправить запрос</button>
-            <p class="cf-note">Инженер PowerTech изучит запрос и свяжется после его рассмотрения.</p>
+            <p class="cf-note">Запрос читает инженер PowerTech — он же и свяжется с вами.</p>
+            <p class="cf-privacy">Данные из формы используются только для ответа на ваш запрос.</p>
             <p class="cf-status" role="status" aria-live="polite" hidden></p>
           </div>
         </form>
@@ -672,9 +787,47 @@
 
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <span class="footer-brand">PowerTech · инженерная диагностика электроснабжения</span>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="/ru/" class="footer-logo" aria-label="PowerTech — на главную">
+          <svg class="logo-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect class="pt-sq" width="100" height="100" rx="20"/>
+            <path class="pt-bolt" d="M52 18 L38 50 L47 50 L42 82 L62 47 L51 47 Z"/>
+          </svg>
+          <span class="logo-stack">
+            <span class="logo-text">PowerTech</span>
+            <svg class="logo-pulse" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 8h118l6-6 6 9 5-3h49" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="192" cy="8" r="2.6" fill="#F25749"/>
+            </svg>
+          </span>
+        </a>
+        <p class="footer-tag">Инженерная диагностика качества электроэнергии — по измеренным данным.</p>
+      </div>
+      <nav class="footer-col" aria-label="Разделы сайта">
+        <span class="footer-h">Разделы</span>
+        <a href="#s02">Когда нужны измерения</a>
+        <a href="#s07">Где измерения важны</a>
+        <a href="#s05">Как проходит проверка</a>
+        <a href="#s06">Параметры сети</a>
+        <a href="#report">Отчёт</a>
+        <a href="#s09">О компании</a>
+      </nav>
+      <div class="footer-col">
+        <span class="footer-h">Контакты</span>
+        <a href="tel:+37441000014">+374 41 00 00 14</a>
+        <a href="mailto:sales@powertech.am">sales@powertech.am</a>
+        <span class="footer-line">Давташен 1, 13-25, Ереван, Армения, 0058</span>
+        <span class="footer-line">Пн–Пт, 9:00–18:00</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
       <span class="footer-copy">© 2026 PowerTech LLC</span>
+      <div class="footer-langs" aria-label="Язык сайта">
+        <a href="/" hreflang="hy">HY</a>
+        <a href="/en/" hreflang="en">EN</a>
+        <a href="/ru/" hreflang="ru" class="is-current" aria-current="page">RU</a>
+      </div>
     </div>
   </footer>
 

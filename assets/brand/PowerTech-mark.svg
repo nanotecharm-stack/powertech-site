@@ -1,11 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="PowerTech">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="PowerTech">
   <title>PowerTech — mark</title>
-  <defs>
-    <mask id="ptMk" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
-      <rect width="120" height="120" fill="#fff"></rect>
-      <path d="M66 2 L40 60 L56 60 L48 118 L84 54 L64 54 Z" fill="#000" stroke="#000" stroke-width="13" stroke-linejoin="round"></path>
-    </mask>
-  </defs>
-  <rect x="24" y="16" width="72" height="88" rx="2" fill="none" stroke="#3D4753" stroke-width="8" mask="url(#ptMk)"></rect>
-  <path d="M66 2 L40 60 L56 60 L48 118 L84 54 L64 54 Z" fill="#F25749"></path>
+  <rect width="100" height="100" rx="20" fill="#F25749"/>
+  <path d="M52 18 L38 50 L47 50 L42 82 L62 47 L51 47 Z" fill="#FFFFFF"/>
 </svg>
