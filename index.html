@@ -33,7 +33,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=136" />
+  <link rel="stylesheet" href="/style.css?v=137" />
 </head>
 <body>
 
@@ -86,6 +86,7 @@
       <a href="#s09">Մեր մասին</a>
       <a href="#contact" class="nav-mobile-cta">Քննարկել օբյեկտը</a>
     </nav>
+    <span class="nav-progress" aria-hidden="true"></span>
   </header>
 
   <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
@@ -938,6 +939,53 @@
           });
         }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
         spySections.forEach(function (s) { spy.observe(s); });
+      }
+
+      // Premium scroll — quiet reveal for section blocks (same pattern as the
+      // objects grid: progressive enhancement, gated behind IO + motion-ok,
+      // safety timer guarantees visibility).
+      var rvSel = ['.s02-left', '.s02-trigger', '.obj-head', '.proc-figure', '.proc-point',
+        '.params-head', '.param-module', '.report-left', '.report-right',
+        '.appr-head', '.appr-text', '.appr-principle', '.about-panel',
+        '.contact-info', '.contact-form', '.contact-strip'];
+      if ('IntersectionObserver' in window &&
+          !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        var rvEls = Array.prototype.slice.call(document.querySelectorAll(rvSel.join(',')));
+        var rvGroups = [];
+        rvEls.forEach(function (el) {
+          el.classList.add('rv');
+          // stagger siblings that share a parent (cards, points, principles)
+          var rec = null, p = el.parentElement;
+          for (var i = 0; i < rvGroups.length; i++) if (rvGroups[i].p === p) rec = rvGroups[i];
+          if (!rec) { rec = { p: p, n: 0 }; rvGroups.push(rec); }
+          el.style.transitionDelay = (rec.n * 70) + 'ms';
+          rec.n++;
+        });
+        var rvSeen = false;
+        var rvIO = new IntersectionObserver(function (entries) {
+          rvSeen = true;
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+        rvEls.forEach(function (el) { rvIO.observe(el); });
+        // Safety: if the observer never ran (throttled/broken env), reveal all
+        setTimeout(function () {
+          if (!rvSeen) rvEls.forEach(function (el) { el.classList.add('in'); });
+        }, 3000);
+      }
+
+      // Reading progress — hairline under the scrolled header (1:1 with scroll,
+      // not an animation, so it stays on with reduced motion)
+      var prog = document.querySelector('.nav-progress');
+      if (prog) {
+        var updProg = function () {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+        };
+        window.addEventListener('scroll', updProg, { passive: true });
+        window.addEventListener('resize', updProg);
+        updProg();
       }
 
       // Contact form → Web3Forms (AJAX, no reload; falls back to a normal POST without JS)

@@ -2253,3 +2253,52 @@ html[lang="hy"] .appr-text { min-width: 0; }
   line-height: 1.55;
   color: var(--text-soft);
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   PREMIUM SCROLL — quiet reveal, reading progress, refined scrollbar.
+   Reveal classes are applied by JS only when IntersectionObserver exists
+   and motion is allowed, so content is always visible without JS and
+   with prefers-reduced-motion.
+   ══════════════════════════════════════════════════════════════ */
+.rv {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+/* Print / any non-scroll context: never hide revealed content */
+@media print {
+  .rv { opacity: 1 !important; transform: none !important; }
+}
+
+/* Reading progress — a hairline measurement trace under the scrolled header */
+.nav-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: var(--coral);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+  pointer-events: none;
+}
+.site-nav.scrolled .nav-progress { opacity: .9; }
+
+/* Scrollbar — thin and calm, coral on grab */
+html { scrollbar-color: #CFC9BE #FFFFFF; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #FFFFFF; }
+::-webkit-scrollbar-thumb {
+  background: #D6D0C6;
+  border-radius: 5px;
+  border: 2px solid #FFFFFF;
+}
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active { background: var(--coral); }
