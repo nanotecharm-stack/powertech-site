@@ -446,15 +446,17 @@ button:focus-visible {
   inset: 0;
   background: url('assets/hero-industrial-bg.webp') center / cover no-repeat;
   /* Texture is desaturated but present: the cabinet/equipment should read as
-     faint material — visible, not a black void. */
+     faint material — visible, not a black void. Blur is the anti-shimmer knob:
+     it removes the high-frequency detail that vibrates behind the hero text. */
   opacity: .30;
-  filter: grayscale(100%) contrast(1.02) brightness(.84) blur(2px);
+  filter: grayscale(100%) contrast(1.0) brightness(.82) blur(3.5px);
   transform: scale(1.08);
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, rgba(8,8,8,.78) 38%, rgba(8,8,8,.24) 100%);
+  /* Deeper plate under the text column (left), texture stays visible right */
+  background: linear-gradient(105deg, rgba(8,8,8,.90) 30%, rgba(8,8,8,.72) 46%, rgba(8,8,8,.22) 100%);
 }
 /* Custom measurement overlay — rendered above the gradient, below the text
    (.hero-content has z-index:2). Built in CSS so all language pages share it. */
