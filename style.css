@@ -2291,14 +2291,14 @@ html[lang="hy"] .appr-text { min-width: 0; }
 }
 .site-nav.scrolled .nav-progress { opacity: .9; }
 
-/* Scrollbar — thin and calm, coral on grab */
-html { scrollbar-color: #CFC9BE #FFFFFF; scrollbar-width: thin; }
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #FFFFFF; }
+/* Scrollbar — thin and calm but clearly visible, coral on grab */
+html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #F1EFEA; }
 ::-webkit-scrollbar-thumb {
-  background: #D6D0C6;
-  border-radius: 5px;
-  border: 2px solid #FFFFFF;
+  background: #8F887C;
+  border-radius: 6px;
+  border: 2px solid #F1EFEA;
 }
 ::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active { background: var(--coral); }
