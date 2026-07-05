@@ -33,7 +33,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=138" />
+  <link rel="stylesheet" href="/style.css?v=139" />
 </head>
 <body>
 
@@ -834,6 +834,10 @@
     </div>
   </footer>
 
+  <button class="to-top" id="to-top" type="button" aria-label="Վերև">
+    <svg viewBox="0 0 22 12" fill="none" aria-hidden="true"><path d="M2 10l9-8 9 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
   <script>
     (function () {
       var nav = document.getElementById('site-nav');
@@ -973,6 +977,18 @@
         setTimeout(function () {
           if (!rvSeen) rvEls.forEach(function (el) { el.classList.add('in'); });
         }, 3000);
+      }
+
+      // Back-to-top — shows after one viewport of scrolling
+      var toTop = document.getElementById('to-top');
+      if (toTop) {
+        var updTop = function () { toTop.classList.toggle('show', window.scrollY > window.innerHeight); };
+        window.addEventListener('scroll', updTop, { passive: true });
+        updTop();
+        toTop.addEventListener('click', function () {
+          var smooth = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+          window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+        });
       }
 
       // Reading progress — hairline under the scrolled header (1:1 with scroll,
