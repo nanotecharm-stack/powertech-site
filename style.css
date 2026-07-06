@@ -2230,17 +2230,21 @@ html[lang="hy"] .appr-text { min-width: 0; }
   transition: color .2s var(--ease);
 }
 .footer-col a:hover { color: var(--graphite); }
-/* Contacts column: coral line icon + text on each row */
+/* Contacts column: coral line icon + text on each row.
+   Align to the FIRST text line (not the block centre) so a wrapping
+   address keeps its icon at the top; margin-top optically centres the
+   15px icon on the 14px/1.5 line. */
 .footer-contacts a,
 .footer-contacts .footer-line {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
 }
 .fc-icon {
   width: 15px;
   height: 15px;
   flex-shrink: 0;
+  margin-top: 3px;
   color: var(--coral);
 }
 /* the brand lockup is an <a> inside .footer-col — keep it a shrink-wrapped
