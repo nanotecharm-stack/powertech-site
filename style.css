@@ -2238,7 +2238,7 @@ html[lang="hy"] .appr-text { min-width: 0; }
 .footer-contacts .footer-line {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 12px;
 }
 .fc-icon {
   width: 15px;
