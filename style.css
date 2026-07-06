@@ -4,31 +4,26 @@
 
 /* ── Mardoto (Armenian display/text face). Used for Armenian glyphs on the HY
    page via the font stack; Latin/brand stays Inter (per-glyph fallback).
-   Only downloaded when matched (so RU/EN, which use Inter, never fetch it). ── */
+   Only downloaded when matched (so RU/EN, which use Inter, never fetch it).
+   WOFF2 only (~28 KB per weight vs ~68 KB TTF); the unused Light (300) face
+   was dropped. ── */
 @font-face {
   font-family: "Mardoto";
-  src: url("/assets/fonts/Mardoto-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Mardoto";
-  src: url("/assets/fonts/Mardoto-Regular.ttf") format("truetype");
+  src: url("/assets/fonts/Mardoto-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Mardoto";
-  src: url("/assets/fonts/Mardoto-Medium.ttf") format("truetype");
+  src: url("/assets/fonts/Mardoto-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Mardoto";
-  src: url("/assets/fonts/Mardoto-Bold.ttf") format("truetype");
+  src: url("/assets/fonts/Mardoto-Bold.woff2") format("woff2");
   font-weight: 600 700;
   font-style: normal;
   font-display: swap;
