@@ -37,25 +37,39 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "PowerTech",
-    "legalName": "PowerTech LLC",
-    "url": "https://powertech.am/ru/",
-    "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
-    "image": "https://powertech.am/assets/og-cover.jpg",
-    "description": "PowerTech проводит 7-дневный мониторинг качества электроэнергии под рабочей нагрузкой с инженерным заключением на основе измеренных данных. Армения.",
-    "slogan": "Мониторинг качества электроэнергии в Армении",
-    "email": "sales@powertech.am",
-    "telephone": "+374-41-00-00-14",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Давташен 1, 13-25",
-      "addressLocality": "Ереван",
-      "postalCode": "0058",
-      "addressCountry": "AM"
-    },
-    "areaServed": { "@type": "Country", "name": "Armenia" },
-    "knowsLanguage": ["hy", "ru", "en"]
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://powertech.am/#website",
+        "name": "PowerTech",
+        "alternateName": "PowerTech Armenia",
+        "url": "https://powertech.am/",
+        "inLanguage": "ru",
+        "publisher": { "@id": "https://powertech.am/#org" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://powertech.am/#org",
+        "name": "PowerTech",
+        "legalName": "PowerTech LLC",
+        "url": "https://powertech.am/ru/",
+        "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
+        "image": "https://powertech.am/assets/og-cover.jpg",
+        "description": "PowerTech проводит 7-дневный мониторинг качества электроэнергии под рабочей нагрузкой с инженерным заключением на основе измеренных данных. Армения.",
+        "slogan": "Мониторинг качества электроэнергии в Армении",
+        "email": "sales@powertech.am",
+        "telephone": "+374-41-00-00-14",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Давташен 1, 13-25",
+          "addressLocality": "Ереван",
+          "postalCode": "0058",
+          "addressCountry": "AM"
+        },
+        "areaServed": { "@type": "Country", "name": "Armenia" },
+        "knowsLanguage": ["hy", "ru", "en"]
+      }
+    ]
   }
   </script>
 </head>

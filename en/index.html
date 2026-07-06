@@ -37,25 +37,39 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "PowerTech",
-    "legalName": "PowerTech LLC",
-    "url": "https://powertech.am/en/",
-    "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
-    "image": "https://powertech.am/assets/og-cover.jpg",
-    "description": "PowerTech provides 7-day power quality monitoring under working load, with an engineering conclusion based on measured data. Serving Armenia.",
-    "slogan": "Power quality monitoring in Armenia",
-    "email": "sales@powertech.am",
-    "telephone": "+374-41-00-00-14",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Davtashen 1, 13-25",
-      "addressLocality": "Yerevan",
-      "postalCode": "0058",
-      "addressCountry": "AM"
-    },
-    "areaServed": { "@type": "Country", "name": "Armenia" },
-    "knowsLanguage": ["hy", "ru", "en"]
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://powertech.am/#website",
+        "name": "PowerTech",
+        "alternateName": "PowerTech Armenia",
+        "url": "https://powertech.am/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://powertech.am/#org" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://powertech.am/#org",
+        "name": "PowerTech",
+        "legalName": "PowerTech LLC",
+        "url": "https://powertech.am/en/",
+        "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
+        "image": "https://powertech.am/assets/og-cover.jpg",
+        "description": "PowerTech provides 7-day power quality monitoring under working load, with an engineering conclusion based on measured data. Serving Armenia.",
+        "slogan": "Power quality monitoring in Armenia",
+        "email": "sales@powertech.am",
+        "telephone": "+374-41-00-00-14",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Davtashen 1, 13-25",
+          "addressLocality": "Yerevan",
+          "postalCode": "0058",
+          "addressCountry": "AM"
+        },
+        "areaServed": { "@type": "Country", "name": "Armenia" },
+        "knowsLanguage": ["hy", "ru", "en"]
+      }
+    ]
   }
   </script>
 </head>

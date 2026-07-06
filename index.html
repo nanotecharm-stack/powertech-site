@@ -37,25 +37,39 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "PowerTech",
-    "legalName": "PowerTech LLC",
-    "url": "https://powertech.am/",
-    "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
-    "image": "https://powertech.am/assets/og-cover.jpg",
-    "description": "PowerTech-ն իրականացնում է էլեկտրաէներգիայի որակի 7-օրյա մոնիթորինգ աշխատանքային բեռնվածության տակ՝ չափված տվյալների վրա հիմնված ինժեներական եզրակացությամբ։ Հայաստան։",
-    "slogan": "Էլեկտրաէներգիայի որակի մոնիթորինգ Հայաստանում",
-    "email": "sales@powertech.am",
-    "telephone": "+374-41-00-00-14",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Դավթաշեն 1, 13-25",
-      "addressLocality": "Երևան",
-      "postalCode": "0058",
-      "addressCountry": "AM"
-    },
-    "areaServed": { "@type": "Country", "name": "Armenia" },
-    "knowsLanguage": ["hy", "ru", "en"]
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://powertech.am/#website",
+        "name": "PowerTech",
+        "alternateName": "PowerTech Armenia",
+        "url": "https://powertech.am/",
+        "inLanguage": "hy",
+        "publisher": { "@id": "https://powertech.am/#org" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://powertech.am/#org",
+        "name": "PowerTech",
+        "legalName": "PowerTech LLC",
+        "url": "https://powertech.am/",
+        "logo": "https://powertech.am/assets/brand/PowerTech-mark@512.png",
+        "image": "https://powertech.am/assets/og-cover.jpg",
+        "description": "PowerTech-ն իրականացնում է էլեկտրաէներգիայի որակի 7-օրյա մոնիթորինգ աշխատանքային բեռնվածության տակ՝ չափված տվյալների վրա հիմնված ինժեներական եզրակացությամբ։ Հայաստան։",
+        "slogan": "Էլեկտրաէներգիայի որակի մոնիթորինգ Հայաստանում",
+        "email": "sales@powertech.am",
+        "telephone": "+374-41-00-00-14",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Դավթաշեն 1, 13-25",
+          "addressLocality": "Երևան",
+          "postalCode": "0058",
+          "addressCountry": "AM"
+        },
+        "areaServed": { "@type": "Country", "name": "Armenia" },
+        "knowsLanguage": ["hy", "ru", "en"]
+      }
+    ]
   }
   </script>
 </head>
