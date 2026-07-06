@@ -2230,6 +2230,19 @@ html[lang="hy"] .appr-text { min-width: 0; }
   transition: color .2s var(--ease);
 }
 .footer-col a:hover { color: var(--graphite); }
+/* Contacts column: coral line icon + text on each row */
+.footer-contacts a,
+.footer-contacts .footer-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.fc-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--coral);
+}
 /* the brand lockup is an <a> inside .footer-col — keep it a shrink-wrapped
    inline-flex row (mark + stack), not a stretched block link */
 .footer-col a.footer-logo { display: inline-flex; padding: 0; }
