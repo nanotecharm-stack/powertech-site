@@ -1829,9 +1829,15 @@ html[lang="hy"] .contact-h2 {
    letter-spacing overrides the near-zero group value above for the hero only. */
 html[lang="hy"] .hero-h1 {
   font-size: clamp(38px, 5.5vw, 70px);
-  line-height: 1.06;
+  /* Armenian glyphs are taller than Latin, so 1.06 (RU/EN) reads cramped —
+     1.14 gives the 3-line block room while keeping the same visual density. */
+  line-height: 1.14;
   letter-spacing: -.02em;
+  margin-bottom: 36px;
 }
+/* More breathing room around the Armenian hero — it runs taller/denser */
+html[lang="hy"] .hero-tag { margin-bottom: 34px; }
+html[lang="hy"] .hero-sub { line-height: 1.72; margin-bottom: 52px; }
 /* Dark-section heading + the "7" caption: open leading, calmer caps tracking */
 html[lang="hy"] .appr-h2 { line-height: 1.14; }
 html[lang="hy"] .contact-h2 { line-height: 1.12; }
