@@ -219,7 +219,7 @@ button:focus-visible {
   font-size: 13.5px;
   font-weight: 400;
   letter-spacing: .01em;
-  color: rgba(255,255,255,.78);
+  color: rgba(255,255,255,.9);
   transition: color .2s;
   white-space: nowrap;
 }
@@ -450,8 +450,12 @@ button:focus-visible {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  /* Deeper plate under the text column (left), texture stays visible right */
-  background: linear-gradient(105deg, rgba(8,8,8,.90) 30%, rgba(8,8,8,.72) 46%, rgba(8,8,8,.22) 100%);
+  /* Two layers: a top scrim so the transparent header always reads over the
+     photo's bright top-right area, and a deeper plate under the text column
+     (left) — texture stays visible on the right. */
+  background:
+    linear-gradient(180deg, rgba(8,8,8,.62) 0, rgba(8,8,8,0) 170px),
+    linear-gradient(105deg, rgba(8,8,8,.90) 30%, rgba(8,8,8,.72) 46%, rgba(8,8,8,.22) 100%);
 }
 /* Custom measurement overlay — rendered above the gradient, below the text
    (.hero-content has z-index:2). Built in CSS so all language pages share it. */
@@ -1766,7 +1770,7 @@ button:focus-visible {
   flex-shrink: 0;
 }
 .lang-switch a {
-  color: rgba(255,255,255,.6);
+  color: rgba(255,255,255,.75);
   transition: color .2s var(--ease);
   /* comfortable touch target (~44px tall) without changing the visual layout */
   padding: 14px 5px;
@@ -2330,7 +2334,7 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
   pointer-events: auto;
 }
 .to-top:hover { background: var(--coral-dk); }
-.to-top svg { width: 16px; height: 9px; display: block; }
+.to-top svg { width: 17px; height: 17px; display: block; }
 @media (prefers-reduced-motion: no-preference) {
   .to-top:hover { transform: translateY(-2px); }
   .to-top:active { transform: translateY(0); }
