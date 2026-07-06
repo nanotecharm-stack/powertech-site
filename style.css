@@ -2234,11 +2234,14 @@ html[lang="hy"] .appr-text { min-width: 0; }
    Align to the FIRST text line (not the block centre) so a wrapping
    address keeps its icon at the top; margin-top optically centres the
    15px icon on the 14px/1.5 line. */
+/* span.footer-line needs the element in the selector to beat the base
+   `.footer-col span.footer-line { display:block }` rule — otherwise flex
+   and gap never apply and the icon sits inline against the text. */
 .footer-contacts a,
-.footer-contacts .footer-line {
+.footer-contacts span.footer-line {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 11px;
 }
 .fc-icon {
   width: 15px;
