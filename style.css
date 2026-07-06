@@ -840,9 +840,8 @@ button:focus-visible {
   width: 100%;
   height: auto;
   margin-bottom: 22px;
-  /* The line isometrics are drawn very light — lift tone so they read as
-     intentional technical drawings, not unloaded placeholders. */
-  filter: contrast(1.12) saturate(1.08) brightness(.985);
+  /* Line tone is baked into the source webp now (linework darkened, white bg
+     preserved) — no CSS contrast filter, which used to wash the light lines out. */
 }
 /* Skeleton placeholder behind each illustration: visible until the (opaque)
    image paints over it, then hidden by the image itself. Pure CSS, no JS. */
