@@ -2384,3 +2384,24 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
 @media (max-width: 600px) {
   .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   RU COLOUR TEST — no pure black / no pure white.
+   Dark text  #1B1B1B → dark graphite  #2A2D33
+   Body/soft grays shifted into the same cool-graphite family.
+   Solid white text on dark sections → light graphite #E4E7EB.
+   Scoped to html[lang="ru"] only; other languages unchanged.
+   ══════════════════════════════════════════════════════════════ */
+html[lang="ru"] {
+  --graphite:  #2A2D33;   /* headings + all var(--graphite) dark text */
+  --text-mid:  #474B52;   /* body paragraphs */
+  --text-soft: #62666E;   /* eyebrows, small labels, captions (>=5:1 on white) */
+}
+html[lang="ru"] body { color: #2A2D33; }
+/* pure-white content text on the dark sections → light graphite */
+html[lang="ru"] .hero-h1,
+html[lang="ru"] .pp-title,
+html[lang="ru"] .appr-h2,
+html[lang="ru"] .ap-title,
+html[lang="ru"] .logo-text { color: #E4E7EB; }
