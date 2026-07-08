@@ -2394,14 +2394,14 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
    Scoped to html[lang="ru"] only; other languages unchanged.
    ══════════════════════════════════════════════════════════════ */
 html[lang="ru"] {
-  --graphite:  #2A2D33;   /* headings + all var(--graphite) dark text */
-  --text-mid:  #474B52;   /* body paragraphs */
-  --text-soft: #62666E;   /* eyebrows, small labels, captions (>=5:1 on white) */
+  --graphite:  #363B42;   /* headings + all var(--graphite) dark text (~11:1) */
+  --text-mid:  #565B63;   /* body paragraphs (~6.9:1) */
+  --text-soft: #6E737B;   /* eyebrows, small labels, captions (~4.8:1) */
 }
-html[lang="ru"] body { color: #2A2D33; }
+html[lang="ru"] body { color: #363B42; }
 /* pure-white content text on the dark sections → light graphite */
 html[lang="ru"] .hero-h1,
 html[lang="ru"] .pp-title,
 html[lang="ru"] .appr-h2,
 html[lang="ru"] .ap-title,
-html[lang="ru"] .logo-text { color: #E4E7EB; }
+html[lang="ru"] .logo-text { color: #D3D7DD; }
