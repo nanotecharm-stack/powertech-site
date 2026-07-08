@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Vaveris">
+  <title>Vaveris — favicon</title>
+  <g transform="translate(29,27)">
+    <circle r="20" fill="none" stroke="#23292E" stroke-width="4.5"/>
+    <path d="M-13 0 C-8.5 -8.5 -4.5 -8.5 0 0 C4.5 8.5 8.5 8.5 13 0" fill="none" stroke="#23292E" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="-6.5" cy="-6" r="3.4" fill="#E3624B"/>
+    <line x1="14.1" y1="14.1" x2="27" y2="27" stroke="#23292E" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

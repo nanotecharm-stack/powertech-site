@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Vaveris">
+  <title>Vaveris — значок (для тёмного фона)</title>
+  <g transform="translate(42,40)">
+    <circle r="26" fill="none" stroke="#F4F3F1" stroke-width="4"/>
+    <path d="M-17 0 C-11 -11 -6 -11 0 0 C6 11 11 11 17 0" fill="none" stroke="#F4F3F1" stroke-width="3.4" stroke-linecap="round"/>
+    <circle cx="-8.5" cy="-8" r="4" fill="#E3624B"/>
+    <line x1="18.4" y1="18.4" x2="34" y2="34" stroke="#F4F3F1" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
