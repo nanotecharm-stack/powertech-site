@@ -2396,12 +2396,15 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
 html[lang="ru"] {
   --graphite:  #363B42;   /* headings + all var(--graphite) dark text (~11:1) */
   --text-mid:  #565B63;   /* body paragraphs (~6.9:1) */
-  --text-soft: #6E737B;   /* eyebrows, small labels, captions (~4.8:1) */
+  --text-soft: #565A60;   /* eyebrows / small labels / captions — kept darker so
+                             small text stays crisp, not washed grey (~6.7:1) */
 }
 html[lang="ru"] body { color: #363B42; }
-/* pure-white content text on the dark sections → light graphite */
+/* pure-white content text on the DARK sections → light graphite.
+   .logo-text is scoped to the header only: over the hero it's light, but the
+   footer logo (on white) stays dark via var(--graphite). */
 html[lang="ru"] .hero-h1,
 html[lang="ru"] .pp-title,
 html[lang="ru"] .appr-h2,
 html[lang="ru"] .ap-title,
-html[lang="ru"] .logo-text { color: #D3D7DD; }
+html[lang="ru"] .site-nav .logo-text { color: #D3D7DD; }
