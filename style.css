@@ -2401,10 +2401,15 @@ html[lang="ru"] {
 }
 html[lang="ru"] body { color: #363B42; }
 /* pure-white content text on the DARK sections → light graphite.
-   .logo-text is scoped to the header only: over the hero it's light, but the
-   footer logo (on white) stays dark via var(--graphite). */
+   .logo-text kept at low specificity (0,2,1) on purpose: the existing
+   .site-nav.scrolled/.menu-open .logo-text rules (0,3,0) still win and turn
+   the header logo dark on white. The footer logo is re-asserted dark below. */
 html[lang="ru"] .hero-h1,
 html[lang="ru"] .pp-title,
 html[lang="ru"] .appr-h2,
-html[lang="ru"] .ap-title,
-html[lang="ru"] .site-nav .logo-text { color: #D3D7DD; }
+html[lang="ru"] .ap-title { color: #D3D7DD; }
+/* Header logo: light ONLY while over the hero (nav transparent). Once the nav
+   is scrolled or the mobile menu is open (white/light bg) it must be dark —
+   :not() makes this unambiguous regardless of specificity. Footer logo (white
+   bg) uses the default var(--graphite) dark. */
+html[lang="ru"] .site-nav:not(.scrolled):not(.menu-open) .logo-text { color: #D3D7DD; }
