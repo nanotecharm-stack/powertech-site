@@ -2387,29 +2387,21 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
 
 
 /* ══════════════════════════════════════════════════════════════
-   RU COLOUR TEST — no pure black / no pure white.
-   Dark text  #1B1B1B → dark graphite  #2A2D33
-   Body/soft grays shifted into the same cool-graphite family.
-   Solid white text on dark sections → light graphite #E4E7EB.
-   Scoped to html[lang="ru"] only; other languages unchanged.
+   GRAPHITE COLOUR SYSTEM (all languages) — no pure black / no pure white.
+   Dark text  → dark graphite  #363B42   (headings, body via vars)
+   Small text kept darker so it stays crisp, not washed grey.
+   Solid white content text on dark sections → light graphite #D3D7DD.
+   Logo: light over the hero; dark when the nav is scrolled/menu-open and in
+   the footer (those rules use var(--graphite), higher specificity than base).
    ══════════════════════════════════════════════════════════════ */
-html[lang="ru"] {
+:root {
   --graphite:  #363B42;   /* headings + all var(--graphite) dark text (~11:1) */
   --text-mid:  #565B63;   /* body paragraphs (~6.9:1) */
-  --text-soft: #565A60;   /* eyebrows / small labels / captions — kept darker so
-                             small text stays crisp, not washed grey (~6.7:1) */
+  --text-soft: #565A60;   /* eyebrows / small labels / captions (~6.7:1) */
 }
-html[lang="ru"] body { color: #363B42; }
-/* pure-white content text on the DARK sections → light graphite.
-   .logo-text kept at low specificity (0,2,1) on purpose: the existing
-   .site-nav.scrolled/.menu-open .logo-text rules (0,3,0) still win and turn
-   the header logo dark on white. The footer logo is re-asserted dark below. */
-html[lang="ru"] .hero-h1,
-html[lang="ru"] .pp-title,
-html[lang="ru"] .appr-h2,
-html[lang="ru"] .ap-title { color: #D3D7DD; }
-/* Header logo: light ONLY while over the hero (nav transparent). Once the nav
-   is scrolled or the mobile menu is open (white/light bg) it must be dark —
-   :not() makes this unambiguous regardless of specificity. Footer logo (white
-   bg) uses the default var(--graphite) dark. */
-html[lang="ru"] .site-nav:not(.scrolled):not(.menu-open) .logo-text { color: #D3D7DD; }
+body { color: #363B42; }
+.hero-h1,
+.pp-title,
+.appr-h2,
+.ap-title,
+.logo-text { color: #D3D7DD; }
