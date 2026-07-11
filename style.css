@@ -364,8 +364,11 @@ button:focus-visible {
    ══════════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh; /* mobile: track the dynamic viewport (collapsing URL bar) */
+  min-height: 100vh;   /* fallback for browsers without svh */
+  min-height: 100svh;  /* small viewport height: a STABLE height that does not change
+                          as the iOS toolbar collapses/expands. Using dvh here caused a
+                          phantom gap below the footer — the hero shrank when toolbars
+                          reappeared at rest, parking the scroll past the new page end. */
   display: flex;
   align-items: center;
   background: #0A0A0A;
