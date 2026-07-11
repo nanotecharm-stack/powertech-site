@@ -29,6 +29,11 @@
   <meta name="twitter:image" content="https://powertech.am/assets/og-cover.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Preload the Armenian hero faces (Mardoto) so they are ready by first paint:
+       kills the FOUT "jump" where the H1/sub first render in a fallback font and
+       then reflow when Mardoto loads. HY page only — RU/EN don't use Mardoto. -->
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Mardoto-Bold.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Mardoto-Regular.woff2" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@700&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
