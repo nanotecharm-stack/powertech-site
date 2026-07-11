@@ -2417,3 +2417,156 @@ body { color: #363B42; }
 .appr-h2,
 .ap-title,
 .logo-text { color: #D3D7DD; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   STANDARDS BROCHURES v2 — decor on §04 (#parameters) & §05 (#report)
+   The hero "normative base" paper objects, recoloured to the warm
+   brand palette (graphite ink, coral accent, warm paper). Single warm
+   light vector → tinted (never black) shadows, down-right. aria-hidden.
+   §04: two crisp readable brochures around the heading (bleed off edge).
+   §05: a faint brochure cluster behind the report content.
+   Real designations only; small trademark note under §05.  (v=167)
+   ══════════════════════════════════════════════════════════════ */
+
+.std-doc { position: absolute; width: 200px; }
+.std-doc-cover {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 1 / 1.414;
+  border-radius: 3px;
+  /* paper aligned to the section it sits on: a hair off pure white so the
+     cover reads as clean paper, not a differently-tinted patch. */
+  background: #FEFEFE;
+  padding: 16px 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* realistic object shadow: one 135° light (top-left) → cast down-right.
+     A tight contact shadow grounds the sheet; a couple of soft ambient layers
+     add depth. Near-neutral grey (barely-warm) at low alpha and modest spread
+     so it reads as a shadow, NOT a coloured panel around the paper. */
+  box-shadow:
+    0 1px 1px    hsl(30 6% 22% / .20),
+    1px 2px 4px  hsl(30 5% 24% / .12),
+    2px 5px 10px hsl(30 5% 26% / .08),
+    5px 11px 22px hsl(30 4% 28% / .05);
+}
+/* spine shadow (left) + highlight top-left / shade bottom-right (135° light) */
+.std-doc-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, hsl(30 8% 18% / .07), hsl(30 8% 18% / .02) 8%, transparent 14%),
+    linear-gradient(135deg, hsl(0 0% 100% / .10) 0%, transparent 45%, hsl(30 8% 16% / .045) 100%);
+}
+/* warm paper grain */
+.std-doc-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  mix-blend-mode: multiply;
+  opacity: .26;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='150'%3E%3Cfilter%20id='wg'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20seed='7'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.11%20%200%200%200%200%200.11%20%200%200%200%200%200.11%20%200%200%200%200.05%200'/%3E%3C/filter%3E%3Crect%20width='150'%20height='150'%20filter='url(%23wg)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+}
+/* page block behind the cover — a stack of leaves */
+.std-doc-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 3px;
+  transform: translate(2px, 2px) rotate(.2deg);
+  /* neutral leaf-edge so the page block aligns with the paper */
+  background: repeating-linear-gradient(to bottom, #F5F5F4 0 1px, #E9E9E7 1px 2px);
+  box-shadow: 1px 2px 3px hsl(30 5% 24% / .14);
+}
+.std-doc-accent {
+  position: absolute;
+  z-index: 2;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--coral);
+  border-radius: 3px 3px 0 0;
+}
+.std-doc-desig {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -.01em;
+  line-height: 1;
+  color: var(--graphite);
+  text-shadow: 0 1px 0 hsl(40 40% 100% / .9), 0 -1px 0 hsl(28 18% 30% / .18);
+}
+.std-doc-rule {
+  height: 1px;
+  background: hsl(28 20% 25% / .16);
+  margin: 11px 0;
+}
+.std-doc-title {
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.34;
+  color: hsl(28 22% 20% / .86);
+}
+.std-doc-meta {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 8.5px;
+  letter-spacing: .01em;
+  color: var(--text-soft);
+}
+
+/* — §04 placement: two crisp brochures around the heading — */
+.params { position: relative; overflow: hidden; }
+.params-body { position: relative; z-index: 1; }
+.params-decor {
+  /* anchored to the content column (mirrors .container), so the brochures
+     always start at the text column's right edge and bleed outward —
+     they clear the intro at every viewport width, never sit under text. */
+  position: absolute;
+  z-index: 0;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 1200px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.params-decor .std-doc { width: 184px; }
+/* left:100% = container's right edge; the negative margin pulls each brochure
+   back just to the intro's right whitespace, the rest bleeds off-screen. */
+/* lowered to the section's vertical centre; the cluster is centred on top:50% */
+.params-decor .d-en   { top: 50%; margin-top: -92px;  left: 100%; margin-left: -30px; transform: rotate(6deg); }
+.params-decor .d-iec  { top: 50%; margin-top: -178px; left: 100%; margin-left: -8px;  transform: rotate(-9deg); }
+
+/* trademark note under §04 (real designations shown) */
+.std-note {
+  margin-top: 40px;
+  max-width: 760px;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: #6B665D;   /* muted; clears WCAG AA (4.5:1) on the white §04 section */
+}
+
+/* — responsive: hide the corner brochures where they would crowd the text — */
+@media (max-width: 1199px) {
+  .params-decor { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* opacity-only fade — never touches each brochure's own rotate transform */
+  .std-doc-cover, .std-doc-edge { animation: stdRise .7s var(--ease) both; }
+}
+@keyframes stdRise {
+  from { opacity: 0; }
+}
