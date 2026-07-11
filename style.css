@@ -41,10 +41,6 @@ html {
   /* Hard stop at the page edges on mobile: no elastic "keep scrolling past the
      end" bounce, no accidental pull-to-refresh, no scroll-chaining. */
   overscroll-behavior: none;
-  /* Horizontal guard lives on the ROOT, not on body: `overflow` on the body
-     element makes iOS Safari/WebKit treat body as a scroll context, which adds a
-     phantom extra viewport of vertical scroll and breaks position:fixed. */
-  overflow-x: clip;
 }
 body {
   font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
@@ -2394,7 +2390,11 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
   .to-top:active { transform: translateY(0); }
 }
 @media (max-width: 600px) {
-  .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+  .to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+  /* Keep it faint on mobile so it never obstructs content and reads as calm even
+     if the iOS toolbar shifts it near the edge; brightens on press. */
+  .to-top.show { opacity: .5; }
+  .to-top.show:active { opacity: .92; }
 }
 
 
