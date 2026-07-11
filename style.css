@@ -2,9 +2,11 @@
    PowerTech — style.css
    ══════════════════════════════════════════════════════════════ */
 
-/* ── Mardoto (Armenian display/text face). Used for Armenian glyphs on the HY
-   page via the font stack; Latin/brand stays Inter (per-glyph fallback).
-   Only downloaded when matched (so RU/EN, which use Inter, never fetch it).
+/* ── Mardoto (Armenian display/text face). Primary face for the HY page:
+   Armenian glyphs render in Mardoto; Latin/brand falls through to IBM Plex Sans.
+   Only downloaded when matched (RU/EN use IBM Plex and never fetch it).
+   font-display:optional + <link rel=preload> on the HY page: the faces are ready
+   by first paint, and if ever late the fallback is kept with NO reflow (no jump).
    WOFF2 only (~28 KB per weight vs ~68 KB TTF); the unused Light (300) face
    was dropped. ── */
 @font-face {
@@ -12,21 +14,21 @@
   src: url("/assets/fonts/Mardoto-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: "Mardoto";
   src: url("/assets/fonts/Mardoto-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: "Mardoto";
   src: url("/assets/fonts/Mardoto-Bold.woff2") format("woff2");
   font-weight: 600 700;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -1804,11 +1806,11 @@ button:focus-visible {
 .site-nav.cta-visible .lang-switch { display: none; }
 
 /* Armenian (default) page — scoped by lang attribute, so RU/EN pages are unaffected.
-   Inter stays first so Latin/brand text keeps the approved typography (per-glyph fallback);
-   Armenian glyphs fall through to Mardoto (if present) then Noto Sans Armenian.
-   Mardoto is NOT bundled (no confirmed safe source); Noto Sans Armenian is the working fallback. */
+   Mardoto (self-hosted, preloaded) renders Armenian; Latin/brand falls through to
+   IBM Plex Sans (already loaded for the brand). system-ui is the graceful fallback
+   for the rare load where Mardoto isn't ready — no downloaded Inter/Noto needed. */
 html[lang="hy"] body {
-  font-family: "Mardoto", "Inter", "Noto Sans Armenian", system-ui, -apple-system, sans-serif;
+  font-family: "Mardoto", "IBM Plex Sans", system-ui, -apple-system, sans-serif;
 }
 /* Armenian display headings: relax the Latin-tuned negative tracking.
    Armenian reads better near-neutral at any face (Noto today, Mardoto once licensed).
@@ -1869,7 +1871,7 @@ html[lang="hy"] .as-item { letter-spacing: .07em; }
   .site-nav.cta-visible .btn-nav-cta { display: none; }
   .site-nav.cta-visible .lang-switch { display: flex; }
 }
-/* Armenian (Noto Sans Armenian) renders visibly larger than Inter at the same px.
+/* Armenian glyphs render visibly larger than the Latin faces at the same px.
    Trim the inline nav labels a touch so the header reads at the same visual size as
    EN/RU — and centre HY like the other languages so the bar doesn't shift size or
    position when switching languages. (The smaller labels also clear the right
