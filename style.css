@@ -533,6 +533,9 @@ button:focus-visible {
     opacity: .85;
   }
   .hero-overlay::before { background-size: 64px 64px, 64px 64px; }
+  /* Scroll cue is redundant on touch (no fixed viewport tail) and, on tall
+     mobile hero, its measurement line/arrow can overlap the CTA. Hide it. */
+  .hero-scroll { display: none; }
 }
 
 
