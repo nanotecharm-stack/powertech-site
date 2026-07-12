@@ -2613,7 +2613,9 @@ body { color: #363B42; }
   width: 420px;
   height: auto;
   margin-top: -315px;
-  margin-left: -170px;
+  /* peek from just past the content column's right edge so the render never
+     overlaps the right-column parameter text (clears it at every width ≥1200). */
+  margin-left: -55px;
 }
 
 /* trademark note under §04 (real designations shown) */
