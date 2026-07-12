@@ -1161,7 +1161,10 @@ button:focus-visible {
   position: relative;
   padding: 84px 0 88px;
   scroll-margin-top: calc(var(--nav-h) + 24px);
-  background: var(--bg-card);
+  /* Matched to the brochure render's own background tone (the light field around
+     the booklets, checker midpoint ≈ #FAFAFA) so the render's rectangle blends
+     into the section — no visible box/edge around the books. */
+  background: #FAFAFA;
 }
 
 /* Head — marker + heading left, intro right */
@@ -2599,12 +2602,30 @@ body { color: #363B42; }
   transform: translateX(-50%);
   pointer-events: none;
 }
-.params-decor .std-doc { width: 184px; }
-/* left:100% = container's right edge; the negative margin pulls each brochure
-   back just to the intro's right whitespace, the rest bleeds off-screen. */
-/* lowered to the section's vertical centre; the cluster is centred on top:50% */
-.params-decor .d-en   { top: 50%; margin-top: -92px;  left: 100%; margin-left: -30px; transform: rotate(6deg); }
-.params-decor .d-iec  { top: 50%; margin-top: -178px; left: 100%; margin-left: -8px;  transform: rotate(-9deg); }
+/* Single pre-composed render (both brochures, tilt + shadow baked in, transparent
+   webp). Anchored to the content column's right edge, vertically centred, bleeding
+   outward — sits in the intro's right whitespace. Tune margins to taste. */
+.params-decor .std-render {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 420px;
+  height: auto;
+  margin-top: -273px;
+  margin-left: -170px;
+  /* The render ships with an opaque near-white ground (its export flattened the
+     transparency). Feather all four edges to transparent so that faint edge and
+     any box are gone — the brochures + their soft shadow sit centred, blending
+     into the white §04. Feather (5%) stays well inside the render's ≥8% margins. */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0, #000 5%, #000 95%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(to right,  transparent 0, #000 5%, #000 95%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
+          mask-composite: intersect;
+}
 
 /* trademark note under §04 (real designations shown) */
 .std-note {
@@ -2621,7 +2642,7 @@ body { color: #363B42; }
 }
 @media (prefers-reduced-motion: no-preference) {
   /* opacity-only fade — never touches each brochure's own rotate transform */
-  .std-doc-cover, .std-doc-edge { animation: stdRise .7s var(--ease) both; }
+  .std-doc-cover, .std-doc-edge, .std-render { animation: stdRise .7s var(--ease) both; }
 }
 @keyframes stdRise {
   from { opacity: 0; }
