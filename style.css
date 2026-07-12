@@ -488,6 +488,62 @@ button:focus-visible {
   background-position: right -1% bottom 11%;
   background-size: min(54%, 640px) auto;
 }
+
+/* ── Hero entrance — a quiet "technical" arrival: the grid draws in, the copy
+   reveals in sequence, corner ticks + two coral measurement nodes settle in.
+   Everything is gated behind prefers-reduced-motion; content is visible without
+   motion and without JS. ── */
+.hero-fx { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hf-corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 0 solid rgba(255,255,255,.26);
+  opacity: 0;
+}
+.hf-tl { top: 92px;   left: 28px;  border-top-width: 1px;    border-left-width: 1px; }
+.hf-tr { top: 92px;   right: 28px; border-top-width: 1px;    border-right-width: 1px; }
+.hf-bl { bottom: 30px; left: 28px;  border-bottom-width: 1px; border-left-width: 1px; }
+.hf-br { bottom: 30px; right: 28px; border-bottom-width: 1px; border-right-width: 1px; }
+.hf-node {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 1px;
+  background: rgba(242,87,73,.6);
+  opacity: 0;
+}
+.hf-n1 { top: 32%; left: 15%; }
+.hf-n2 { top: 66%; right: 13%; }
+
+@keyframes hero-reveal {
+  from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes hero-grid-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes hero-fx-in { to { opacity: 1; } }
+@keyframes hero-float {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(6px, -10px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-tag     { animation: hero-reveal .8s var(--ease) both .15s; }
+  .hero-h1      { animation: hero-reveal .9s var(--ease) both .30s; }
+  .hero-sub     { animation: hero-reveal .9s var(--ease) both .52s; }
+  .hero-actions { animation: hero-reveal .9s var(--ease) both .74s; }
+  .hero-overlay::before { animation: hero-grid-in 1.5s var(--ease) both; transform-origin: 72% 42%; }
+  .hf-corner { animation: hero-fx-in 1s var(--ease) forwards; }
+  .hf-tl { animation-delay: .95s; }
+  .hf-tr { animation-delay: 1.1s; }
+  .hf-bl { animation-delay: 1.25s; }
+  .hf-br { animation-delay: 1.4s; }
+  .hf-node { animation: hero-fx-in .8s var(--ease) forwards, hero-float 8s ease-in-out infinite; }
+  .hf-n1 { animation-delay: 1.35s, 1.6s; }
+  .hf-n2 { animation-delay: 1.6s, 1.9s; }
+}
+@media (max-width: 600px) { .hero-fx { display: none; } }
+
 .hero-content {
   position: relative;
   z-index: 2;
