@@ -1161,10 +1161,7 @@ button:focus-visible {
   position: relative;
   padding: 84px 0 88px;
   scroll-margin-top: calc(var(--nav-h) + 24px);
-  /* Matched to the brochure render's own background tone (the light field around
-     the booklets, checker midpoint ≈ #FAFAFA) so the render's rectangle blends
-     into the section — no visible box/edge around the books. */
-  background: #FAFAFA;
+  background: var(--bg-card);
 }
 
 /* Head — marker + heading left, intro right */
@@ -2609,22 +2606,14 @@ body { color: #363B42; }
   position: absolute;
   top: 50%;
   left: 100%;
+  /* Transparent render (real alpha) — no ground, so it drops cleanly on any
+     section colour; no mask/bg-match needed. Sits at the content column's right
+     edge, vertically centred, bleeding outward. margin-top ≈ half the rendered
+     height (420 × 1536/1024 = 630). Tune margins to taste. */
   width: 420px;
   height: auto;
-  margin-top: -273px;
+  margin-top: -315px;
   margin-left: -170px;
-  /* The render ships with an opaque near-white ground (its export flattened the
-     transparency). Feather all four edges to transparent so that faint edge and
-     any box are gone — the brochures + their soft shadow sit centred, blending
-     into the white §04. Feather (5%) stays well inside the render's ≥8% margins. */
-  -webkit-mask-image:
-    linear-gradient(to right,  transparent 0, #000 5%, #000 95%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
-  -webkit-mask-composite: source-in;
-          mask-image:
-    linear-gradient(to right,  transparent 0, #000 5%, #000 95%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
-          mask-composite: intersect;
 }
 
 /* trademark note under §04 (real designations shown) */
