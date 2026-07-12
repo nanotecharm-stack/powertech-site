@@ -2503,10 +2503,10 @@ body { color: #363B42; }
      add depth. Near-neutral grey (barely-warm) at low alpha and modest spread
      so it reads as a shadow, NOT a coloured panel around the paper. */
   box-shadow:
-    0 1px 1px    hsl(30 6% 22% / .20),
-    1px 2px 4px  hsl(30 5% 24% / .12),
-    2px 5px 10px hsl(30 5% 26% / .08),
-    5px 11px 22px hsl(30 4% 28% / .05);
+    0 1px 1px    hsl(0 0% 22% / .20),
+    1px 2px 4px  hsl(0 0% 24% / .12),
+    2px 5px 10px hsl(0 0% 26% / .08),
+    5px 11px 22px hsl(0 0% 28% / .05);
 }
 /* spine shadow (left) + highlight top-left / shade bottom-right (135° light) */
 .std-doc-cover::before {
@@ -2516,8 +2516,8 @@ body { color: #363B42; }
   pointer-events: none;
   border-radius: inherit;
   background:
-    linear-gradient(90deg, hsl(30 8% 18% / .07), hsl(30 8% 18% / .02) 8%, transparent 14%),
-    linear-gradient(135deg, hsl(0 0% 100% / .10) 0%, transparent 45%, hsl(30 8% 16% / .045) 100%);
+    linear-gradient(90deg, hsl(0 0% 18% / .07), hsl(0 0% 18% / .02) 8%, transparent 14%),
+    linear-gradient(135deg, hsl(0 0% 100% / .10) 0%, transparent 45%, hsl(0 0% 16% / .045) 100%);
 }
 /* warm paper grain */
 .std-doc-cover::after {
@@ -2539,8 +2539,8 @@ body { color: #363B42; }
   border-radius: 3px;
   transform: translate(2px, 2px) rotate(.2deg);
   /* neutral leaf-edge so the page block aligns with the paper */
-  background: repeating-linear-gradient(to bottom, #F5F5F4 0 1px, #E9E9E7 1px 2px);
-  box-shadow: 1px 2px 3px hsl(30 5% 24% / .14);
+  background: repeating-linear-gradient(to bottom, #F5F5F5 0 1px, #E8E8E8 1px 2px);
+  box-shadow: 1px 2px 3px hsl(0 0% 24% / .14);
 }
 .std-doc-accent {
   position: absolute;
