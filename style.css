@@ -89,11 +89,6 @@ button:focus-visible {
   --border-lt:   #ECEAE4;
   --nav-h:       68px;
   --ease:        cubic-bezier(.4, 0, .2, 1);
-  /* Elevation — soft, warm, two-layer (ambient + key). Low-opacity so surfaces
-     read as lifted paper on the warm ground, never as heavy drop-shadows. */
-  --shadow-sm:    0 1px 2px rgba(20,20,20,.04), 0 6px 16px rgba(20,20,20,.05);
-  --shadow-md:    0 1px 2px rgba(20,20,20,.04), 0 18px 40px rgba(20,20,20,.07);
-  --shadow-coral: 0 10px 24px -10px rgba(242,87,73,.42);
 }
 
 /* ── Container ──────────────────────────────────────────────── */
@@ -120,9 +115,8 @@ button:focus-visible {
   background: var(--coral);
   color: #fff;
   border: 1.5px solid var(--coral);
-  box-shadow: var(--shadow-coral);
 }
-.btn-coral:hover { background: var(--coral-dk); border-color: var(--coral-dk); box-shadow: 0 14px 30px -10px rgba(242,87,73,.55); }
+.btn-coral:hover { background: var(--coral-dk); border-color: var(--coral-dk); }
 .btn-ghost {
   background: transparent;
   color: rgba(255,255,255,.85);
@@ -146,7 +140,7 @@ button:focus-visible {
   background: rgba(255,255,255,.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 rgba(20,20,20,.05), 0 10px 28px -14px rgba(20,20,20,.16);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08);
 }
 
 .nav-inner {
@@ -854,9 +848,6 @@ button:focus-visible {
   width: 100%;
   height: auto;
   margin-bottom: 22px;
-  border: 1px solid var(--border-lt);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
   /* Line tone is baked into the source webp now (linework darkened, white bg
      preserved) — no CSS contrast filter, which used to wash the light lines out. */
 }
@@ -869,7 +860,7 @@ button:focus-visible {
   left: 0;
   width: 100%;
   aspect-ratio: 1120 / 323;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #EFEDE7;
   z-index: 0;
   pointer-events: none;
@@ -1176,20 +1167,15 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 24px 26px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-lt);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow .3s var(--ease), transform .3s var(--ease);
+  padding-top: 26px;
+  border-top: 1px solid var(--border-lt);
 }
-.param-module:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
 /* coral measurement node anchoring each parameter on its rule (grows on hover) */
 .param-module::before {
   content: "";
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: -3.5px;
+  left: 0;
   width: 6px;
   height: 6px;
   border-radius: 1px;
@@ -1978,8 +1964,7 @@ html[lang="hy"] .appr-text { min-width: 0; }
   /* Buttons — subtle lift on hover, settle on press */
   .btn {
     transition: background .2s var(--ease), color .2s var(--ease),
-                border-color .2s var(--ease), transform .25s var(--ease),
-                box-shadow .25s var(--ease);
+                border-color .2s var(--ease), transform .25s var(--ease);
   }
   .btn:hover { transform: translateY(-2px); }
   .btn:active { transform: translateY(0); }
