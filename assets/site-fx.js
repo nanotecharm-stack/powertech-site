@@ -54,13 +54,26 @@
       targets.forEach(function (t) { spy.observe(t.el); });
 
       /* hide the rail while the hero owns the screen — it must never sit
-         on the oscilloscope traces; it settles in as section 01 arrives */
+         on the oscilloscope traces. Driven straight from the scroll
+         handler (not an IntersectionObserver): during a fast jump to the
+         top an observer fires a beat late and the rail flashed over the
+         animation before fading. */
       var heroEl = document.querySelector('.hero');
       if (heroEl) {
         rail.classList.add('over-hero');
-        new IntersectionObserver(function (es) {
-          rail.classList.toggle('over-hero', es[0].isIntersecting);
-        }, { rootMargin: '-32% 0px -32% 0px', threshold: 0 }).observe(heroEl);
+        var railTick = false;
+        var updHero = function () {
+          railTick = false;
+          var vh = innerHeight || 1;
+          /* hidden while the hero still covers the upper third band —
+             the same window the old -32% rootMargin observer used */
+          rail.classList.toggle('over-hero', heroEl.getBoundingClientRect().bottom > vh * 0.32);
+        };
+        addEventListener('scroll', function () {
+          if (!railTick) { railTick = true; requestAnimationFrame(updHero); }
+        }, { passive: true });
+        addEventListener('resize', updHero);
+        updHero();
       }
 
       /* …and again once the reader scrolls past "About" into the

@@ -2784,6 +2784,9 @@ body { color: #363B42; }
   opacity: 0;
   transform: translateY(calc(-50% - 12px));
   pointer-events: none;
+  /* vanish fast (a fast scroll-to-top must not flash the rail over the
+     hero animation); the .5s ease applies only when settling back in */
+  transition-duration: .15s;
 }
 @media (max-width: 1339px), (max-height: 560px) {
   .side-rail { display: none; }
