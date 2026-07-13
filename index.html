@@ -38,7 +38,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=173" />
+  <link rel="stylesheet" href="/style.css?v=174" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -136,21 +136,26 @@
   <section class="hero" id="hero" aria-label="Գլխավոր էկրան">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
+    <canvas class="hero-canvas" data-unit="Վ" aria-hidden="true"></canvas>
     <div class="hero-fx" aria-hidden="true">
       <span class="hf-corner hf-tl"></span>
       <span class="hf-corner hf-tr"></span>
       <span class="hf-corner hf-bl"></span>
       <span class="hf-corner hf-br"></span>
-      <span class="hf-node hf-n1"></span>
-      <span class="hf-node hf-n2"></span>
     </div>
     <div class="container hero-content">
       <p class="hero-tag">ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՅԻ ՈՐԱԿԻ ՄՈՆԻԹՈՐԻՆԳ</p>
-      <h1 class="hero-h1">Ստուգեք, ինչպես է<br>աշխատում ձեր<br>էլեկտրացանցը</h1>
+      <h1 class="hero-h1"><span class="hl"><span class="hl-in">Ստուգեք, ինչպես է</span></span><span class="hl"><span class="hl-in">աշխատում ձեր</span></span><span class="hl"><span class="hl-in">էլեկտրացանցը</span></span></h1>
       <p class="hero-sub">PowerTech-ն իրականացնում է էլեկտրաէներգիայի որակի 7-օրյա մոնիթորինգ աշխատանքային բեռնվածության տակ։ Մենք գրանցում ենք ցանցի շեղումները, վերլուծում հնարավոր պատճառները և պատրաստում տեխնիկական եզրակացություն սեփականատիրոջ, ինժեների կամ նախագծային գործընկերոջ համար։</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-coral">Ստուգման հայտ</a>
         <a href="#how" class="btn btn-ghost">Ինչպես ենք աշխատում</a>
+      </div>
+      <div class="hero-hud" aria-hidden="true">
+        <span class="hud-std"><span class="hud-dot"></span>EN&nbsp;50160</span>
+        <span class="hud-chip"><span class="hud-k">U</span><span class="hud-v" data-hud="u">230.0</span><span class="hud-u">Վ</span></span>
+        <span class="hud-chip"><span class="hud-k">f</span><span class="hud-v" data-hud="f">50.00</span><span class="hud-u">Հց</span></span>
+        <span class="hud-chip"><span class="hud-k">THD</span><span class="hud-v" data-hud="thd">2.4</span><span class="hud-u">%</span></span>
       </div>
     </div>
     <a class="hero-scroll cue-init" href="#when" aria-label="Ոլորել ներքև">
@@ -883,6 +888,7 @@
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 3.5h10M10 16.5V7M5.8 10.8 10 6.6l4.2 4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
+  <script defer src="/assets/hero-scope.js?v=1"></script>
   <script>
     (function () {
       var nav = document.getElementById('site-nav');
