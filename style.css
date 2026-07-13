@@ -2727,6 +2727,7 @@ body { color: #363B42; }
   top: 50%;
   right: 26px;
   transform: translateY(-50%);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
   z-index: 240;
   display: flex;
   flex-direction: column;
@@ -2786,6 +2787,14 @@ body { color: #363B42; }
   background: rgba(16,17,19,.92);
   border-color: rgba(255,255,255,.16);
   color: rgba(255,255,255,.8);
+}
+/* Hidden while the hero is on screen — the live oscilloscope owns the
+   first viewport; the rail settles in as section 01 arrives. No fixed
+   vertical offset can dodge the traces on every screen height. */
+.side-rail.over-hero {
+  opacity: 0;
+  transform: translateY(calc(-50% - 12px));
+  pointer-events: none;
 }
 @media (max-width: 1339px), (max-height: 560px) {
   .side-rail { display: none; }

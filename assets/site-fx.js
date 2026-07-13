@@ -53,6 +53,16 @@
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
       targets.forEach(function (t) { spy.observe(t.el); });
 
+      /* hide the rail while the hero owns the screen — it must never sit
+         on the oscilloscope traces; it settles in as section 01 arrives */
+      var heroEl = document.querySelector('.hero');
+      if (heroEl) {
+        rail.classList.add('over-hero');
+        new IntersectionObserver(function (es) {
+          rail.classList.toggle('over-hero', es[0].isIntersecting);
+        }, { rootMargin: '-32% 0px -32% 0px', threshold: 0 }).observe(heroEl);
+      }
+
       /* invert the rail while it crosses the dark sections (hero, proc) */
       var darkState = [];
       var darkEls = document.querySelectorAll('.hero, .proc');
