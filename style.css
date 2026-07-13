@@ -140,7 +140,9 @@ button:focus-visible {
   background: rgba(255,255,255,.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08);
+  /* crisp 1px rule — strong enough that the white bar never dissolves
+     into the light sections (replaces the coral reading-progress line) */
+  box-shadow: 0 1px 0 rgba(27,27,27,.16);
 }
 
 .nav-inner {
@@ -2453,21 +2455,9 @@ html[lang="hy"] .appr-text { min-width: 0; }
   .rv { opacity: 1 !important; transform: none !important; }
 }
 
-/* Reading progress — a hairline measurement trace under the scrolled header */
-.nav-progress {
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 2px;
-  background: var(--coral);
-  transform: scaleX(0);
-  transform-origin: left;
-  opacity: 0;
-  transition: opacity .3s var(--ease);
-  pointer-events: none;
-}
-.site-nav.scrolled .nav-progress { opacity: .9; }
+/* Reading progress line removed: the side measurement rail already
+   communicates position; the scrolled header keeps a crisp hairline
+   (see .site-nav.scrolled) so it never dissolves into light sections. */
 
 /* Scrollbar — thin and calm but clearly visible, coral on grab */
 html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
