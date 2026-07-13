@@ -2778,10 +2778,12 @@ body { color: #363B42; }
   border-color: rgba(255,255,255,.16);
   color: rgba(255,255,255,.8);
 }
-/* Hidden while the hero is on screen — the live oscilloscope owns the
-   first viewport; the rail settles in as section 01 arrives. No fixed
-   vertical offset can dodge the traces on every screen height. */
-.side-rail.over-hero {
+/* Hidden while the hero is on screen (the live oscilloscope owns the
+   first viewport; no fixed vertical offset can dodge the traces on
+   every screen height) — and again past "About", where the contact
+   block and footer close the story and the rail's job is done. */
+.side-rail.over-hero,
+.side-rail.over-end {
   opacity: 0;
   transform: translateY(calc(-50% - 12px));
   pointer-events: none;

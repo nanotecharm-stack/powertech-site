@@ -63,6 +63,23 @@
         }, { rootMargin: '-32% 0px -32% 0px', threshold: 0 }).observe(heroEl);
       }
 
+      /* …and again once the reader scrolls past "About" into the
+         contact block / footer — the rail's job is done there */
+      var endEls = document.querySelectorAll('.contact, .site-footer');
+      if (endEls.length) {
+        var endState = [];
+        var endIO = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            var i = Array.prototype.indexOf.call(endEls, e.target);
+            endState[i] = e.isIntersecting;
+          });
+          var any = false;
+          for (var i = 0; i < endState.length; i++) if (endState[i]) any = true;
+          rail.classList.toggle('over-end', any);
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+        Array.prototype.forEach.call(endEls, function (el) { endIO.observe(el); });
+      }
+
       /* invert the rail while it crosses the dark sections
          (hero, 7-day proc, approach) */
       var darkState = [];
