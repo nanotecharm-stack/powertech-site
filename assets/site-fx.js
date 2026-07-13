@@ -63,9 +63,10 @@
         }, { rootMargin: '-32% 0px -32% 0px', threshold: 0 }).observe(heroEl);
       }
 
-      /* invert the rail while it crosses the dark sections (hero, proc) */
+      /* invert the rail while it crosses the dark sections
+         (hero, 7-day proc, approach) */
       var darkState = [];
-      var darkEls = document.querySelectorAll('.hero, .proc');
+      var darkEls = document.querySelectorAll('.hero, .proc, .appr');
       var darkIO = new IntersectionObserver(function (es) {
         es.forEach(function (e) {
           var i = Array.prototype.indexOf.call(darkEls, e.target);
