@@ -2711,3 +2711,136 @@ body { color: #363B42; }
 @keyframes stdRise {
   from { opacity: 0; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION CHOREOGRAPHY (site-fx.js) — the "everything is measured"
+   layer: side measurement rail, draw-on-scroll signal SVGs, event
+   pops, report event-log arrival, photo parallax, form focus.
+   All motion sits behind prefers-reduced-motion; without JS none
+   of the fx-* classes exist and everything is simply visible.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Side rail — a fixed measurement scale on the right edge ── */
+.side-rail {
+  position: fixed;
+  top: 50%;
+  right: 26px;
+  transform: translateY(-50%);
+  z-index: 240;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-end;
+}
+.side-rail a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  line-height: 1;
+  padding: 2px 0;
+}
+.sr-tick {
+  display: block;
+  width: 14px;
+  height: 1px;
+  background: rgba(27,27,27,.34);
+  transition: width .3s var(--ease), background .3s var(--ease);
+}
+.sr-num {
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: rgba(27,27,27,.38);
+  transition: color .3s var(--ease);
+}
+.sr-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--text-mid);
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--border-lt);
+  border-radius: 3px;
+  padding: 5px 9px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.side-rail a:hover .sr-label,
+.side-rail a:focus-visible .sr-label { opacity: 1; transform: none; }
+.side-rail a:hover .sr-tick { width: 22px; background: rgba(27,27,27,.6); }
+.side-rail a.active .sr-tick { width: 30px; background: var(--coral); }
+.side-rail a.active .sr-num { color: var(--coral); }
+/* inverted while crossing the dark hero / dark 7-day section */
+.side-rail.over-dark .sr-tick { background: rgba(255,255,255,.38); }
+.side-rail.over-dark .sr-num { color: rgba(255,255,255,.45); }
+.side-rail.over-dark a.active .sr-tick { background: var(--coral); }
+.side-rail.over-dark a.active .sr-num { color: var(--coral); }
+.side-rail.over-dark .sr-label {
+  background: rgba(16,17,19,.92);
+  border-color: rgba(255,255,255,.16);
+  color: rgba(255,255,255,.8);
+}
+@media (max-width: 1339px), (max-height: 560px) {
+  .side-rail { display: none; }
+}
+
+/* ── fx primitives used by site-fx.js ─────────────────────────
+   (SVG dashed guides, labels, dots: hidden → revealed) */
+.fx-hide { opacity: 0; transition: opacity .7s var(--ease); }
+.fx-hide.fx-in { opacity: 1; }
+circle.fx-dot,
+.fx-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.2,1.4,.4,1), opacity .3s var(--ease);
+}
+.fx-dot.fx-in { transform: scale(1); opacity: 1; }
+
+/* ── Report document: the event log types itself in after the
+      curve draw starts (site-fx.js adds .live to .rep-doc) ── */
+@media (prefers-reduced-motion: no-preference) {
+  .rep-doc .rep-ev { transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  /* fx-armed is added by site-fx.js — without JS nothing is ever hidden */
+  .rep-doc.fx-armed:not(.live) .rep-ev { opacity: 0; transform: translateY(7px); }
+  .rep-doc.live .rep-ev:nth-child(1) { transition-delay: 1.45s; }
+  .rep-doc.live .rep-ev:nth-child(2) { transition-delay: 1.60s; }
+  .rep-doc.live .rep-ev:nth-child(3) { transition-delay: 1.75s; }
+  .rep-doc.live .rep-ev:nth-child(4) { transition-delay: 1.90s; }
+}
+
+/* ── About photo parallax (site-fx.js drives the translate) ── */
+.about-photo img.fx-parallax { transform: scale(1.09); will-change: transform; }
+
+/* ── Dark 7-day section: the same faint technical grid as the hero,
+      so the two dark plates read as one instrument family ── */
+.proc {
+  position: relative;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 84px 84px;
+}
+
+/* ── Contact form: measurement-style focus states (pure CSS) ── */
+.cf-field { position: relative; }
+.cf-field:focus-within .cf-lab label { color: var(--graphite); }
+.cf-field:focus-within .cf-idx { font-weight: 600; }
+.cf-field input:focus,
+.cf-field textarea:focus {
+  border-color: var(--coral);
+  outline: none;
+  box-shadow: 0 1px 0 0 var(--coral);
+}
+
+/* ── Parameter modules: the coral node breathes once on hover via
+      existing rule; sharpen the number too ── */
+.param-module:hover .pm-num { color: var(--coral-dk); }
