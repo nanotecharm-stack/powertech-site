@@ -2733,11 +2733,16 @@ body { color: #363B42; }
   line-height: 1;
   padding: 2px 0;
 }
+/* Ticks and numbers invert against the ground PER PIXEL via
+   mix-blend-mode: difference, so the rail stays readable even while
+   it straddles a light/dark section boundary (a single observer-based
+   color scheme used to blank half the rail at every transition). */
 .sr-tick {
   display: block;
   width: 14px;
   height: 1px;
-  background: rgba(27,27,27,.34);
+  background: #A9A9A9;
+  mix-blend-mode: difference;
   transition: width .3s var(--ease), background .3s var(--ease);
 }
 .sr-num {
@@ -2745,7 +2750,8 @@ body { color: #363B42; }
   font-size: 10px;
   font-weight: 500;
   letter-spacing: .06em;
-  color: rgba(27,27,27,.38);
+  color: #A2A2A2;
+  mix-blend-mode: difference;
   transition: color .3s var(--ease);
 }
 .sr-label {
@@ -2765,19 +2771,10 @@ body { color: #363B42; }
 }
 .side-rail a:hover .sr-label,
 .side-rail a:focus-visible .sr-label { opacity: 1; transform: none; }
-.side-rail a:hover .sr-tick { width: 22px; background: rgba(27,27,27,.6); }
-.side-rail a.active .sr-tick { width: 30px; background: var(--coral); }
-.side-rail a.active .sr-num { color: var(--coral); }
-/* inverted while crossing the dark hero / dark 7-day section */
-.side-rail.over-dark .sr-tick { background: rgba(255,255,255,.38); }
-.side-rail.over-dark .sr-num { color: rgba(255,255,255,.45); }
-.side-rail.over-dark a.active .sr-tick { background: var(--coral); }
-.side-rail.over-dark a.active .sr-num { color: var(--coral); }
-.side-rail.over-dark .sr-label {
-  background: rgba(16,17,19,.92);
-  border-color: rgba(255,255,255,.16);
-  color: rgba(255,255,255,.8);
-}
+.side-rail a:hover .sr-tick { width: 22px; background: #D2D2D2; }
+/* the active item opts out of blending: coral reads on every ground */
+.side-rail a.active .sr-tick { width: 30px; background: var(--coral); mix-blend-mode: normal; }
+.side-rail a.active .sr-num { color: var(--coral); mix-blend-mode: normal; }
 /* Hidden while the hero is on screen (the live oscilloscope owns the
    first viewport; no fixed vertical offset can dodge the traces on
    every screen height) — and again past "About", where the contact

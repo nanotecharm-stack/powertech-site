@@ -80,20 +80,9 @@
         Array.prototype.forEach.call(endEls, function (el) { endIO.observe(el); });
       }
 
-      /* invert the rail while it crosses the dark sections
-         (hero, 7-day proc, approach) */
-      var darkState = [];
-      var darkEls = document.querySelectorAll('.hero, .proc, .appr, .site-footer');
-      var darkIO = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          var i = Array.prototype.indexOf.call(darkEls, e.target);
-          darkState[i] = e.isIntersecting;
-        });
-        var any = false;
-        for (var i = 0; i < darkState.length; i++) if (darkState[i]) any = true;
-        rail.classList.toggle('over-dark', any);
-      }, { rootMargin: '-50% 0px -49% 0px', threshold: 0 });
-      Array.prototype.forEach.call(darkEls, function (el) { darkIO.observe(el); });
+      /* No dark-section color observer anymore: tick/number colors
+         invert per pixel via mix-blend-mode: difference in CSS, which
+         also handles the rail straddling a section boundary. */
     }
   }());
 
