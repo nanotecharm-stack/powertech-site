@@ -66,7 +66,7 @@
       /* invert the rail while it crosses the dark sections
          (hero, 7-day proc, approach) */
       var darkState = [];
-      var darkEls = document.querySelectorAll('.hero, .proc, .appr');
+      var darkEls = document.querySelectorAll('.hero, .proc, .appr, .site-footer');
       var darkIO = new IntersectionObserver(function (es) {
         es.forEach(function (e) {
           var i = Array.prototype.indexOf.call(darkEls, e.target);
@@ -228,6 +228,31 @@
       if (dot) finishFx(dot);
     });
     onSeen(svg, go, 0.5);
+  }());
+
+  /* d. Footer — the closing pulse line draws across, its coral node
+        lands, then the three columns settle in */
+  (function footerFx() {
+    var foot = document.querySelector('.site-footer');
+    if (!foot) return;
+    var line = foot.querySelector('.f-pulse path');
+    var dot = foot.querySelector('.f-pulse circle');
+    var cols = foot.querySelectorAll('.f-brand, .f-contact, .f-nav');
+    if (!line || !cols.length) return;
+    var haveLine = prepDraw(line);
+    if (dot) prepPop(dot);
+    Array.prototype.forEach.call(cols, prepFade);
+    var go = function () {
+      if (haveLine) runDraw(line, 1400, 100);
+      if (dot) runPop(dot, 1350);
+      Array.prototype.forEach.call(cols, function (el, i) { runFade(el, 250 + i * 150); });
+    };
+    pending.push(function () {
+      if (haveLine) finishDraw(line);
+      if (dot) finishFx(dot);
+      Array.prototype.forEach.call(cols, finishFx);
+    });
+    onSeen(foot, go, 0.12);
   }());
 
   /* ── 3. Count-ups ─────────────────────────────────────────── */

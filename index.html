@@ -38,7 +38,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=176" />
+  <link rel="stylesheet" href="/style.css?v=177" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -838,10 +838,16 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <!-- ═══════════════════════════════ FOOTER — instrument plate ═══════════════════════════════ -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-col">
+    <div class="f-pulse" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+        <path d="M0 26 H1008 L1024 10 L1040 34 L1053 20 L1061 26 H1414" stroke="rgba(255,255,255,.30)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        <circle cx="1414" cy="26" r="3.2" fill="#F25749"/>
+      </svg>
+    </div>
+    <div class="container f-main">
+      <div class="f-brand">
         <a href="/" class="footer-logo" aria-label="PowerTech — գլխավոր">
           <svg class="logo-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <rect class="pt-sq" width="100" height="100" rx="20"/>
@@ -855,27 +861,31 @@
             </svg>
           </span>
         </a>
-        <p class="footer-tag">Էլեկտրաէներգիայի որակի ինժեներական դիագնոստիկա՝ չափված տվյալների հիման վրա։</p>
+        <p class="f-tag">Էլեկտրաէներգիայի որակի ինժեներական դիագնոստիկա՝ չափված տվյալների հիման վրա։</p>
+        <div class="f-chips" aria-hidden="true">
+          <span class="f-chip">EN 50160</span>
+          <span class="f-chip">IEC 61000-4-30</span>
+        </div>
       </div>
-      <nav class="footer-col" aria-label="Կայքի բաժիններ">
-        <span class="footer-h">Բաժիններ</span>
-        <a href="#when">Երբ են պետք չափումները</a>
-        <a href="#objects">Որտեղ են կարևոր չափումները</a>
-        <a href="#how">Չափման ընթացքը</a>
-        <a href="#parameters">Ցանցի պարամետրերը</a>
-        <a href="#report">Հաշվետվություն</a>
-        <a href="#about">Մեր մասին</a>
+      <div class="f-contact">
+        <span class="f-h">Կոնտակտներ</span>
+        <a class="f-mail" href="mailto:sales@powertech.am">sales@powertech.am</a>
+        <a class="f-tel" href="tel:+37441000014">+374 41 00 00 14</a>
+        <p class="f-addr">Դավթաշեն 1, 13-25, Երևան, Հայաստան, 0058<br>Երկ–Ուրբ, 9:00–18:00</p>
+      </div>
+      <nav class="f-nav" aria-label="Կայքի բաժիններ">
+        <span class="f-h">Բաժիններ</span>
+        <a href="#when"><i aria-hidden="true">01</i><span>Երբ են պետք չափումները</span></a>
+        <a href="#objects"><i aria-hidden="true">02</i><span>Որտեղ են կարևոր չափումները</span></a>
+        <a href="#how"><i aria-hidden="true">03</i><span>Չափման ընթացքը</span></a>
+        <a href="#parameters"><i aria-hidden="true">04</i><span>Ցանցի պարամետրերը</span></a>
+        <a href="#report"><i aria-hidden="true">05</i><span>Հաշվետվություն</span></a>
+        <a href="#about"><i aria-hidden="true">06</i><span>Մեր մասին</span></a>
       </nav>
-      <div class="footer-col footer-contacts">
-        <span class="footer-h">Կոնտակտներ</span>
-        <a href="tel:+37441000014"><svg class="fc-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h3l1.5 4-2 1.5a8 8 0 0 0 4 4l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A13 13 0 0 1 3.5 4.6 1.5 1.5 0 0 1 5 3z"/></svg>+374 41 00 00 14</a>
-        <a href="mailto:sales@powertech.am"><svg class="fc-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="1.5"/><path d="M3 5.5l7 5 7-5"/></svg>sales@powertech.am</a>
-        <span class="footer-line"><svg class="fc-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18c3.5-4 6-6.6 6-9.5A6 6 0 0 0 4 8.5C4 11.4 6.5 14 10 18z"/><circle cx="10" cy="8.5" r="2"/></svg>Դավթաշեն 1, 13-25, Երևան, Հայաստան, 0058</span>
-        <span class="footer-line"><svg class="fc-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2"/></svg>Երկ–Ուրբ, 9:00–18:00</span>
-      </div>
     </div>
-    <div class="container footer-bottom">
-      <span class="footer-copy">© 2026 PowerTech LLC</span>
+    <div class="container f-bottom">
+      <span class="f-copy">© 2026 PowerTech LLC</span>
+      <span class="f-coord" aria-hidden="true">ԵՐԵՎԱՆ · 40.21° N · 44.49° E</span>
       <div class="footer-langs" aria-label="Կայքի լեզու">
         <a href="/" hreflang="hy" class="is-current" aria-current="page">HY</a>
         <a href="/en/" hreflang="en">EN</a>
@@ -889,7 +899,7 @@
   </button>
 
   <script defer src="/assets/hero-scope.js?v=1"></script>
-  <script defer src="/assets/site-fx.js?v=3"></script>
+  <script defer src="/assets/site-fx.js?v=4"></script>
   <script>
     (function () {
       var nav = document.getElementById('site-nav');
