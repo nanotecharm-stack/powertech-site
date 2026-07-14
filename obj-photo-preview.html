@@ -79,14 +79,13 @@
 
     .hs-stage {
       position: relative;
-      display: grid;
       overflow: hidden;
       border-radius: 6px;
       aspect-ratio: 4 / 3.1;
       background: #EFEDE7;
     }
     .hs-img {
-      grid-area: 1 / 1;
+      position: absolute; inset: 0;
       width: 100%; height: 100%; object-fit: cover;
       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
       filter: saturate(.82) contrast(.95) brightness(1.02);
@@ -95,6 +94,28 @@
       .hs-img { transition: clip-path .8s cubic-bezier(.33, 1, .68, 1); }
     }
     .hs-img.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    /* the caption lives ON the photo: graphite scrim + white text */
+    .hs-scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(13,14,16,0) 46%, rgba(13,14,16,.55) 72%, rgba(13,14,16,.9) 100%);
+      pointer-events: none;
+    }
+    .hs-cap {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      padding: 0 22px 18px;
+      opacity: 0; visibility: hidden;
+    }
+    .hs-cap.active { opacity: 1; visibility: visible; }
+    @media (prefers-reduced-motion: no-preference) {
+      .hs-cap { transition: opacity .4s var(--ease), visibility 0s .4s; transform: translateY(6px); }
+      .hs-cap.active { transition: opacity .45s var(--ease) .25s, transform .45s var(--ease) .25s, visibility 0s; transform: none; }
+    }
+    .hs-t { font-size: 13px; line-height: 1.58; color: rgba(255,255,255,.74); }
+    .hs-strong { position: relative; margin-top: 5px; padding-left: 16px; color: rgba(255,255,255,.95); font-weight: 500; }
+    .hs-strong::before {
+      content: ""; position: absolute; left: 0; top: 6px;
+      width: 6px; height: 6px; border-radius: 1px; background: var(--coral);
+    }
     /* mobile: the hover pattern has no hover — stack as compact cards */
     @media (max-width: 880px) {
       .hs-wrap { grid-template-columns: 1fr; }
@@ -141,7 +162,7 @@
 </head>
 <body>
   <p class="pv-note">Превью · §02 · hover-слайдер против фото-карточек · не для публикации</p>
-  <p class="pv-note pv-var">НОВАЯ КОМПОНОВКА v2 · типографский индекс — приборный отклик при наведении</p>
+  <p class="pv-note pv-var">НОВАЯ КОМПОНОВКА v3 · тексты на фото, вводный абзац убран</p>
   <section class="objects">
     <div class="container obj-body">
       <div class="obj-head">
@@ -152,7 +173,6 @@
           </div>
           <h2 class="obj-h2">Где измерения важны</h2>
         </div>
-        <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
       </div>
       <div class="hs-wrap">
         <div class="hs-list" role="tablist" aria-label="Отрасли">
@@ -176,13 +196,38 @@
           </button>
         </div>
         <div class="hs-side">
-          <div class="hs-stage" aria-hidden="true">
+          <div class="hs-stage">
             <img class="hs-img" data-i="0" src="/assets/_src-objects/01-production.png" alt="" style="object-position:50% 30%">
             <img class="hs-img" data-i="1" src="/assets/_src-objects/02-solar.png" alt="" style="object-position:50% 62%">
             <img class="hs-img" data-i="2" src="/assets/_src-objects/03-buildings.png" alt="" style="object-position:50% 38%">
             <img class="hs-img" data-i="3" src="/assets/_src-objects/04-medical.png" alt="" style="object-position:50% 45%">
             <img class="hs-img" data-i="4" src="/assets/_src-objects/05-datacenter.png" alt="" style="object-position:50% 40%">
             <img class="hs-img" data-i="5" src="/assets/_src-objects/06-banksRU.png" alt="" style="object-position:50% 40%">
+            <div class="hs-scrim" aria-hidden="true"></div>
+            <div class="hs-cap" data-i="0">
+              <p class="hs-t">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
+              <p class="hs-t hs-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
+            </div>
+            <div class="hs-cap" data-i="1">
+              <p class="hs-t">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
+              <p class="hs-t hs-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
+            </div>
+            <div class="hs-cap" data-i="2">
+              <p class="hs-t">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
+              <p class="hs-t hs-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
+            </div>
+            <div class="hs-cap" data-i="3">
+              <p class="hs-t">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
+              <p class="hs-t hs-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
+            </div>
+            <div class="hs-cap" data-i="4">
+              <p class="hs-t">Когда даже кратковременные отклонения могут привести к сбоям.</p>
+              <p class="hs-t hs-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
+            </div>
+            <div class="hs-cap" data-i="5">
+              <p class="hs-t">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
+              <p class="hs-t hs-strong">Независимые измеренные данные как основа для решения.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -268,12 +313,14 @@
 
     var items = Array.prototype.slice.call(document.querySelectorAll('.hs-item'));
     var imgs = Array.prototype.slice.call(document.querySelectorAll('.hs-img'));
+    var caps = Array.prototype.slice.call(document.querySelectorAll('.hs-cap'));
     function setActive(n) {
       items.forEach(function (b, j) {
         b.classList.toggle('active', j === n);
         b.setAttribute('aria-selected', j === n ? 'true' : 'false');
       });
       imgs.forEach(function (im, j) { im.classList.toggle('active', j === n); });
+      caps.forEach(function (c, j) { c.classList.toggle('active', j === n); });
     }
     items.forEach(function (btn, i) {
       btn.addEventListener('mouseenter', function () { setActive(i); });
