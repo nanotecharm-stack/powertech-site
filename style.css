@@ -3308,30 +3308,32 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
 .hs-img { z-index: 0; }
 .hs-stage.hs-anim .hs-img { transition: none; }
 .hs-scan {
-  position: absolute; left: 0; right: 0; top: 0; z-index: 3;
+  position: absolute; left: 0; right: 0; top: 0; z-index: 5;
   height: 2px;
   background: var(--coral);
   box-shadow: 0 0 14px rgba(242,87,73,.5), 0 0 3px rgba(242,87,73,.8);
   pointer-events: none;
 }
 .hs-count {
-  position: absolute; top: 12px; right: 14px; z-index: 3;
+  position: absolute; top: 10px; right: 10px; z-index: 5;
   display: flex; align-items: baseline; gap: 5px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: rgba(13,14,16,.5);
   font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   font-size: 11px; letter-spacing: .12em;
-  color: rgba(255,255,255,.72);
-  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+  color: rgba(255,255,255,.75);
   pointer-events: none;
 }
 .hs-count b { font-weight: 600; color: #fff; display: inline-block; }
 /* caption on the photo: bottom graphite scrim + white text */
 .hs-scrim {
-  position: absolute; inset: 0; z-index: 1;
+  position: absolute; inset: 0; z-index: 3;   /* above every photo layer (0-2) */
   background: linear-gradient(180deg, rgba(13,14,16,0) 40%, rgba(13,14,16,.66) 68%, rgba(13,14,16,.93) 100%);
   pointer-events: none;
 }
 .hs-cap {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
   padding: 0 22px 18px;
   opacity: 0; visibility: hidden;
 }

@@ -241,6 +241,7 @@
       var img = imgs[i];
       if (!img) return;
       imgs.forEach(function (im, j) {
+        /* photo layers live at 0-2; scrim/captions/instruments sit above (3+) */
         gsap.set(im, { zIndex: j === i ? 2 : (j === prev ? 1 : 0) });
       });
       prev = i;
