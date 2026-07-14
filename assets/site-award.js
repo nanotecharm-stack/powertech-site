@@ -203,13 +203,15 @@
     });
   }());
 
-  /* ── 6b. Objects, award layer — the stage becomes an instrument:
-        every photo is "scanned in" by a coral sweep line (the
-        oscilloscope beam), a mono counter flips in the corner, and
-        until the visitor takes over the section quietly walks the
-        industries by itself. Whole file is a no-op under reduced
-        motion; the CSS clip transitions in style.css remain the
-        fallback when this layer is absent. ── */
+  /* ── 6b. Objects, award layer — editorial mask reveal: the incoming
+        photo opens along the direction of travel through the index
+        (down the list → wipes left-to-right, up → right-to-left),
+        settling from a slight over-scale anchored on the leading
+        edge. No decorative line — the motion itself is the effect.
+        A mono counter flips in the corner; until the visitor takes
+        over, the section quietly walks the industries by itself.
+        Whole file is a no-op under reduced motion; the CSS clip
+        transitions in style.css remain the fallback without it. ── */
   (function objectsAward() {
     var stage = document.querySelector('.hs-stage');
     var api = window.__ptSlider;
@@ -218,40 +220,42 @@
     if (!imgs.length) return;
     stage.classList.add('hs-anim');   /* CSS transitions off — GSAP owns the stage */
 
-    var scan = document.createElement('div');
-    scan.className = 'hs-scan';
-    scan.setAttribute('aria-hidden', 'true');
-    stage.appendChild(scan);
     var count = document.createElement('div');
     count.className = 'hs-count';
     count.setAttribute('aria-hidden', 'true');
     count.innerHTML = '<b>01</b><span>/ 0' + api.count + '</span>';
     stage.appendChild(count);
-    gsap.set(scan, { autoAlpha: 0 });
 
-    var FULL = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
-    var HID = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
     var prev = -1;
 
     /* Independent tweens with overwrite:'auto' — no timelines and no
        deferred cleanup. The outgoing photo simply stays FULL beneath
        the incoming one (opaque cover-fit), so a rapid hover chain has
        nothing to race against. */
-    function sweep(i) {
+    function reveal(i) {
       var img = imgs[i];
       if (!img) return;
+      /* travel direction through the (cyclic) index — shortest way wins */
+      var n = imgs.length;
+      var fwd = prev === -1 || ((i - prev + n) % n) <= n / 2;
       imgs.forEach(function (im, j) {
         /* photo layers live at 0-2; scrim/captions/instruments sit above (3+) */
         gsap.set(im, { zIndex: j === i ? 2 : (j === prev ? 1 : 0) });
       });
       prev = i;
       gsap.fromTo(img,
-        { clipPath: HID, scale: 1.06, transformOrigin: '50% 0%' },
-        { clipPath: FULL, scale: 1, duration: 0.9, ease: 'power2.inOut', overwrite: 'auto' });
-      gsap.killTweensOf(scan);
-      gsap.fromTo(scan, { top: 0, autoAlpha: 1 },
-        { top: '100%', duration: 0.9, ease: 'power2.inOut', overwrite: 'auto' });
-      gsap.to(scan, { autoAlpha: 0, duration: 0.22, delay: 0.8, overwrite: false });
+        {
+          clipPath: fwd ? 'inset(0% 100% 0% 0%)' : 'inset(0% 0% 0% 100%)',
+          scale: 1.07,
+          transformOrigin: fwd ? '0% 50%' : '100% 50%'
+        },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          scale: 1,
+          duration: 1.0,
+          ease: 'power3.inOut',
+          overwrite: 'auto'
+        });
       var b = count.querySelector('b');
       if (b) {
         gsap.killTweensOf(b);
@@ -264,12 +268,12 @@
         });
       }
     }
-    document.addEventListener('pt:objslide', function (e) { sweep(e.detail.i); });
+    document.addEventListener('pt:objslide', function (e) { reveal(e.detail.i); });
 
-    /* entrance: the first photo is scanned in as the stage arrives */
+    /* entrance: the first photo opens as the stage arrives */
     ScrollTrigger.create({
       trigger: stage, start: 'top 80%', once: true,
-      onEnter: function () { sweep(api.index()); }
+      onEnter: function () { reveal(api.index()); }
     });
 
     /* quiet self-demo: advance every ~5s while the section is on
