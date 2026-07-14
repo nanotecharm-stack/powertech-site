@@ -37,7 +37,10 @@
        copy), so a fixed fraction of H can land the traces on the CTAs.
        Anchor the band to the real bottom of the content instead. */
     contentBottom = 0;
-    var last = hero.querySelector('.hero-hud') || hero.querySelector('.hero-actions');
+    var last = hero.querySelector('.hero-hud');
+    /* the HUD is display:none on some layouts (HY phones) — fall back
+       to the CTA row; offsetParent is null for hidden elements */
+    if (!last || !last.offsetParent) last = hero.querySelector('.hero-actions');
     if (last) {
       var lr = last.getBoundingClientRect();
       contentBottom = Math.max(0, lr.bottom - r.top);

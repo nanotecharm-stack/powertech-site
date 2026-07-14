@@ -670,6 +670,10 @@ button:focus-visible {
   .hero-scroll { display: none; }
   .hero-hud { margin-top: 40px; gap: 8px 18px; font-size: 11px; }
   .hero-content { padding-bottom: 118px; }
+  /* Armenian copy is the longest — without the HUD row the hero fits a
+     phone screen (per owner). hero-scope.js measures the content bottom
+     from the last VISIBLE block, so the traces re-anchor automatically. */
+  html[lang="hy"] .hero-hud { display: none; }
 }
 
 
