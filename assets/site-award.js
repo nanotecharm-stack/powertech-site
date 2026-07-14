@@ -231,27 +231,31 @@
 
     var FULL = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
     var HID = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
+    var prev = -1;
 
+    /* Independent tweens with overwrite:'auto' — no timelines and no
+       deferred cleanup. The outgoing photo simply stays FULL beneath
+       the incoming one (opaque cover-fit), so a rapid hover chain has
+       nothing to race against. */
     function sweep(i) {
       var img = imgs[i];
       if (!img) return;
-      gsap.killTweensOf(imgs.concat([scan]));
-      imgs.forEach(function (im, j) { gsap.set(im, { zIndex: j === i ? 1 : 0 }); });
-      gsap.set(img, { clipPath: HID, scale: 1.05, transformOrigin: '50% 0%' });
-      gsap.set(scan, { top: 0, autoAlpha: 1 });
-      var tl = gsap.timeline();
-      tl.to(img, { clipPath: FULL, duration: 0.85, ease: 'power2.inOut' }, 0);
-      tl.to(scan, { top: '100%', duration: 0.85, ease: 'power2.inOut' }, 0);
-      tl.to(img, { scale: 1, duration: 1.1, ease: 'power2.out' }, 0.1);
-      tl.to(scan, { autoAlpha: 0, duration: 0.22 }, 0.76);
-      tl.add(function () {
-        imgs.forEach(function (im, j) { if (j !== i) gsap.set(im, { clipPath: HID }); });
+      imgs.forEach(function (im, j) {
+        gsap.set(im, { zIndex: j === i ? 2 : (j === prev ? 1 : 0) });
       });
+      prev = i;
+      gsap.fromTo(img,
+        { clipPath: HID, scale: 1.06, transformOrigin: '50% 0%' },
+        { clipPath: FULL, scale: 1, duration: 0.9, ease: 'power2.inOut', overwrite: 'auto' });
+      gsap.killTweensOf(scan);
+      gsap.fromTo(scan, { top: 0, autoAlpha: 1 },
+        { top: '100%', duration: 0.9, ease: 'power2.inOut', overwrite: 'auto' });
+      gsap.to(scan, { autoAlpha: 0, duration: 0.22, delay: 0.8, overwrite: false });
       var b = count.querySelector('b');
       if (b) {
         gsap.killTweensOf(b);
         gsap.to(b, {
-          yPercent: -60, autoAlpha: 0, duration: 0.16, ease: 'power2.in',
+          yPercent: -60, autoAlpha: 0, duration: 0.16, ease: 'power2.in', overwrite: 'auto',
           onComplete: function () {
             b.textContent = '0' + (i + 1);
             gsap.fromTo(b, { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.22, ease: 'power2.out' });

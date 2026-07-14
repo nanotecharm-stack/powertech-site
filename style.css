@@ -3348,6 +3348,13 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
   width: 6px; height: 6px; border-radius: 1px;
   background: var(--coral);
 }
+/* desktop: the stage mirrors the index exactly — same top, same
+   bottom (the list column defines the row height) */
+@media (min-width: 881px) {
+  .hs-wrap { align-items: stretch; }
+  .hs-side { position: relative; min-height: 320px; }
+  .hs-stage { position: absolute; inset: 0; aspect-ratio: auto; }
+}
 @media (max-width: 880px) {
   .hs-wrap { grid-template-columns: 1fr; }
   .hs-side { order: -1; }
