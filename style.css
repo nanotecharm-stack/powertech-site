@@ -3231,7 +3231,7 @@ html:not([lang="hy"]) .contact-h2 {
    ══════════════════════════════════════════════════════════════ */
 .hs-wrap {
   display: grid;
-  grid-template-columns: 1fr 460px;
+  grid-template-columns: 1fr 560px;
   gap: clamp(32px, 5vw, 72px);
   align-items: start;
 }
@@ -3239,7 +3239,7 @@ html:not([lang="hy"]) .contact-h2 {
 .hs-item {
   position: relative;
   display: flex; align-items: baseline; gap: 13px;
-  padding: 14px 0 13px;
+  padding: 18px 0 17px;
   border: none; border-bottom: 1px solid var(--border-lt);
   background: none; cursor: pointer; text-align: left;
   font-family: inherit;
@@ -3334,7 +3334,7 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
 }
 .hs-cap {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
-  padding: 0 22px 18px;
+  padding: 0 24px 20px;
   opacity: 0; visibility: hidden;
 }
 .hs-cap.active { opacity: 1; visibility: visible; }
@@ -3342,7 +3342,7 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
   .hs-cap { transition: opacity .4s var(--ease), visibility 0s .4s; transform: translateY(6px); }
   .hs-cap.active { transition: opacity .45s var(--ease) .25s, transform .45s var(--ease) .25s, visibility 0s; transform: none; }
 }
-.hs-t { font-size: 13px; line-height: 1.58; color: rgba(255,255,255,.74); }
+.hs-t { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.78); }
 .hs-strong { position: relative; margin-top: 5px; padding-left: 16px; color: rgba(255,255,255,.95); font-weight: 500; }
 .hs-strong::before {
   content: "";
@@ -3354,7 +3354,7 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
    bottom (the list column defines the row height) */
 @media (min-width: 881px) {
   .hs-wrap { align-items: stretch; }
-  .hs-side { position: relative; min-height: 320px; }
+  .hs-side { position: relative; min-height: 380px; }
   .hs-stage { position: absolute; inset: 0; aspect-ratio: auto; }
 }
 @media (max-width: 880px) {
@@ -3364,6 +3364,6 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
   .hs-item { padding: 13px 0 12px; }
 }
 @media (max-width: 560px) {
-  .hs-cap { padding: 0 16px 14px; }
-  .hs-t { font-size: 12.5px; }
+  .hs-cap { padding: 0 16px 15px; }
+  .hs-t { font-size: 14px; }
 }
