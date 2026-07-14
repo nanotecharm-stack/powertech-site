@@ -39,24 +39,42 @@
     }
     .hs-item.active .hs-idx { color: var(--coral); }
     .hs-name {
-      font-size: clamp(20px, 2.4vw, 30px);
+      font-size: clamp(21px, 2.6vw, 33px);
       font-weight: 600; line-height: 1.14; letter-spacing: -.02em;
+      color: #B4AFA6;
+      transition: color .35s var(--ease), transform .35s var(--ease);
+    }
+    .hs-item.active .hs-name {
       color: var(--graphite);
+      transform: translateX(6px);
     }
-    /* per-character double layer (dim resting / full active) */
-    .hs-name .wd { display: inline-block; white-space: nowrap; }
-    .hs-name .ch { position: relative; display: inline-block; overflow: hidden; vertical-align: top; }
-    .hs-name .ch-a, .hs-name .ch-b { display: inline-block; white-space: pre; }
-    .hs-name .ch-a { opacity: .22; }
-    .hs-name .ch-b { position: absolute; left: 0; top: 0; opacity: 1; transform: translateY(110%); }
+    /* instrument response: a coral measurement line draws under the
+       active row, its node lands at the end — the site's own language */
+    .hs-item { position: relative; }
+    .hs-item::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -1px;
+      height: 1.5px;
+      background: var(--coral);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+    }
+    .hs-item::before {
+      content: "";
+      position: absolute;
+      right: 0; bottom: -4px;
+      width: 7px; height: 7px;
+      border-radius: 1px;
+      background: var(--coral);
+      transform: scale(0);
+    }
     @media (prefers-reduced-motion: no-preference) {
-      .hs-name .ch-a, .hs-name .ch-b {
-        transition: transform .3s cubic-bezier(.25, .46, .45, .94);
-        transition-delay: var(--d, 0s);
-      }
+      .hs-item::after { transition: transform .5s cubic-bezier(.33, 1, .68, 1); }
+      .hs-item::before { transition: transform .3s cubic-bezier(.2, 1.4, .4, 1) .34s; }
     }
-    .hs-item.active .ch-a { transform: translateY(-110%); }
-    .hs-item.active .ch-b { transform: translateY(0); }
+    .hs-item.active::after { transform: scaleX(1); }
+    .hs-item.active::before { transform: scale(1); }
     .hs-item:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 2px; }
 
     .hs-stage {
@@ -77,18 +95,6 @@
       .hs-img { transition: clip-path .8s cubic-bezier(.33, 1, .68, 1); }
     }
     .hs-img.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    .hs-desc { display: none; padding-top: 18px; }
-    .hs-desc.active { display: block; }
-    @media (prefers-reduced-motion: no-preference) {
-      .hs-desc.active { animation: hsd .45s cubic-bezier(.4, 0, .2, 1) both; }
-      @keyframes hsd { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
-    }
-    .hs-t { font-size: 13.5px; line-height: 1.6; color: var(--text-mid); }
-    .hs-strong { position: relative; margin-top: 6px; padding-left: 16px; color: var(--graphite); font-weight: 500; }
-    .hs-strong::before {
-      content: ""; position: absolute; left: 0; top: 6px;
-      width: 6px; height: 6px; border-radius: 1px; background: var(--coral);
-    }
     /* mobile: the hover pattern has no hover — stack as compact cards */
     @media (max-width: 880px) {
       .hs-wrap { grid-template-columns: 1fr; }
@@ -135,7 +141,7 @@
 </head>
 <body>
   <p class="pv-note">Превью · §02 · hover-слайдер против фото-карточек · не для публикации</p>
-  <p class="pv-note pv-var">НОВАЯ КОМПОНОВКА · типографский индекс + фото-сцена (hover-слайдер)</p>
+  <p class="pv-note pv-var">НОВАЯ КОМПОНОВКА v2 · типографский индекс — приборный отклик при наведении</p>
   <section class="objects">
     <div class="container obj-body">
       <div class="obj-head">
@@ -177,30 +183,6 @@
             <img class="hs-img" data-i="3" src="/assets/_src-objects/04-medical.png" alt="" style="object-position:50% 45%">
             <img class="hs-img" data-i="4" src="/assets/_src-objects/05-datacenter.png" alt="" style="object-position:50% 40%">
             <img class="hs-img" data-i="5" src="/assets/_src-objects/06-banksRU.png" alt="" style="object-position:50% 40%">
-          </div>
-          <div class="hs-desc" data-i="0">
-            <p class="hs-t">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
-            <p class="hs-t hs-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
-          </div>
-          <div class="hs-desc" data-i="1">
-            <p class="hs-t">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
-            <p class="hs-t hs-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
-          </div>
-          <div class="hs-desc" data-i="2">
-            <p class="hs-t">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
-            <p class="hs-t hs-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
-          </div>
-          <div class="hs-desc" data-i="3">
-            <p class="hs-t">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
-            <p class="hs-t hs-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
-          </div>
-          <div class="hs-desc" data-i="4">
-            <p class="hs-t">Когда даже кратковременные отклонения могут привести к сбоям.</p>
-            <p class="hs-t hs-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
-          </div>
-          <div class="hs-desc" data-i="5">
-            <p class="hs-t">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
-            <p class="hs-t hs-strong">Независимые измеренные данные как основа для решения.</p>
           </div>
         </div>
       </div>
@@ -284,46 +266,14 @@
   (function () {
     'use strict';
 
-    /* split names into double-layer characters with stagger delays */
-    document.querySelectorAll('.hs-name').forEach(function (el) {
-      var text = el.textContent;
-      el.setAttribute('aria-label', text);
-      el.textContent = '';
-      var frag = document.createDocumentFragment();
-      var gi = 0;
-      text.split(' ').forEach(function (word, wi) {
-        if (wi) { frag.appendChild(document.createTextNode(' ')); gi++; }
-        var wd = document.createElement('span');
-        wd.className = 'wd';
-        wd.setAttribute('aria-hidden', 'true');
-        for (var i = 0; i < word.length; i++, gi++) {
-          var ch = document.createElement('span');
-          ch.className = 'ch';
-          ch.style.setProperty('--d', (Math.min(gi, 28) * 0.025) + 's');
-          var a = document.createElement('span');
-          a.className = 'ch-a';
-          a.textContent = word[i];
-          var b = document.createElement('span');
-          b.className = 'ch-b';
-          b.textContent = word[i];
-          ch.appendChild(a); ch.appendChild(b);
-          wd.appendChild(ch);
-        }
-        frag.appendChild(wd);
-      });
-      el.appendChild(frag);
-    });
-
     var items = Array.prototype.slice.call(document.querySelectorAll('.hs-item'));
     var imgs = Array.prototype.slice.call(document.querySelectorAll('.hs-img'));
-    var descs = Array.prototype.slice.call(document.querySelectorAll('.hs-desc'));
     function setActive(n) {
       items.forEach(function (b, j) {
         b.classList.toggle('active', j === n);
         b.setAttribute('aria-selected', j === n ? 'true' : 'false');
       });
       imgs.forEach(function (im, j) { im.classList.toggle('active', j === n); });
-      descs.forEach(function (d, j) { d.classList.toggle('active', j === n); });
     }
     items.forEach(function (btn, i) {
       btn.addEventListener('mouseenter', function () { setActive(i); });
