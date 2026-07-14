@@ -3024,3 +3024,81 @@ circle.fx-dot,
 @media (max-width: 560px) {
   .f-coord { order: 3; width: 100%; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   AWARD PASS — support styles for the GSAP choreography layer
+   (/assets/site-award.js). Everything here is inert without JS:
+   the elements are injected, and the CSS vars default to the
+   final resting state, so a no-JS page looks complete.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Headline word masks — each word rises out of its own clipping row.
+   Tiny padding keeps descenders (у, р, g, y) out of the clip. */
+.aw-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: .12em;
+  margin-bottom: -.12em;
+}
+.aw-wi { display: inline-block; will-change: transform; }
+
+/* Calibration rule — injected into section eyebrow rows by JS.
+   Same visual language as .about-baseline: mm ticks on a hairline,
+   a coral node at the measured end. */
+.aw-rule {
+  position: relative;
+  flex: 1 1 40px;
+  min-width: 48px;
+  height: 9px;
+  margin-left: 4px;
+  background-image: repeating-linear-gradient(90deg, rgba(20,20,20,.14) 0 1px, transparent 1px 22px);
+  border-bottom: 1px solid var(--border);
+}
+.aw-rule i {
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--coral);
+}
+.aw-rule-dark {
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.15) 0 1px, transparent 1px 22px);
+  border-bottom-color: rgba(255,255,255,.18);
+}
+@media (max-width: 560px) {
+  .aw-rule { display: none; }   /* narrow heads stay calm */
+}
+
+/* Object illustration frame — JS wraps each .obj-illus for the
+   plotter-style clip reveal + the slow scroll drift inside it. */
+.aw-illus {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 22px;
+}
+.aw-illus .obj-illus { margin-bottom: 0; will-change: transform; }
+
+/* Section 01 — the shared measurement line and the coral taps are
+   driven from GSAP via CSS vars; both default to their final state. */
+.s02-map::before {
+  transform-origin: 0 50%;
+  transform: scaleX(var(--awline, 1));
+}
+.s02-trigger::before { transform: scale(var(--awdot, 1)); }
+
+/* Display scale — a firmer editorial size for the section headlines.
+   HY keeps its own tuned sizes (Armenian glyphs render larger). */
+html:not([lang="hy"]) .s02-h2,
+html:not([lang="hy"]) .obj-h2,
+html:not([lang="hy"]) .params-h2,
+html:not([lang="hy"]) .report-h2,
+html:not([lang="hy"]) .appr-h2,
+html:not([lang="hy"]) .contact-h2 {
+  font-size: clamp(33px, 4.1vw, 52px);
+}
