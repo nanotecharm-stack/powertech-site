@@ -987,172 +987,10 @@ button:focus-visible {
   letter-spacing: -.022em;
   color: var(--graphite);
 }
-.obj-intro {
-  font-size: 14.5px;
-  font-weight: 400;
-  line-height: 1.74;
-  color: var(--text-mid);
-  max-width: 440px;
-}
-
-/* Matrix — engineering application board: framed, gridded, coral markers */
-/* Open index — entries float on measurement baselines, no frame, no cells */
-/* Two-column masonry — entries pack tightly by height (no empty pockets like a
-   rigid grid), reads as an authored editorial layout, not a list/table. */
-.obj-matrix {
-  position: relative;
-  /* Column count: change --obj-cols (2 or 3) to switch the grid. */
-  --obj-cols: 2;
-  display: grid;
-  grid-template-columns: repeat(var(--obj-cols), 1fr);
-  column-gap: 72px;
-  row-gap: 60px;
-  align-items: start;
-}
-
-.obj-row {
-  position: relative;
-  margin-bottom: 0;
-  padding: 22px 0 0 0;
-  border-top: 1px solid var(--border-lt);
-}
-
-/* index number + sphere name on one line, below the (clean) illustration */
-.obj-lead {
-  display: flex;
-  align-items: baseline;
-  gap: 11px;
-  margin-bottom: 14px;
-}
-.obj-lead-top { margin: 0; flex-shrink: 0; }
-.obj-num {
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: .01em;
-  color: var(--coral);
-}
-.obj-ico {
-  display: none; /* replaced by per-sphere illustration banners (.obj-illus) */
-  align-self: center;
-  color: #8A8A8A;
-  transition: color .2s var(--ease);
-}
-/* Per-sphere illustration banner at the top of each object card */
-.obj-illus {
-  display: block;
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: auto;
-  margin-bottom: 22px;
-  /* Line tone is baked into the source webp now (linework darkened, white bg
-     preserved) — no CSS contrast filter, which used to wash the light lines out. */
-}
-/* Skeleton placeholder behind each illustration: visible until the (opaque)
-   image paints over it, then hidden by the image itself. Pure CSS, no JS. */
-.obj-row::after {
-  content: "";
-  position: absolute;
-  top: 22px;
-  left: 0;
-  width: 100%;
-  aspect-ratio: 1120 / 323;
-  border-radius: 5px;
-  background: #EFEDE7;
-  z-index: 0;
-  pointer-events: none;
-}
-/* Fade the illustration in over the skeleton once it loads (JS toggles the
-   classes). Without JS the image stays visible; on error the skeleton remains
-   as a graceful fallback. */
-@media (prefers-reduced-motion: no-preference) {
-  .obj-illus { transition: opacity .7s var(--ease); }
-}
-.obj-illus.is-loading,
-.obj-illus.is-error { opacity: 0; }
-.obj-illus.is-loaded { opacity: 1; }
-.obj-ico svg { width: 20px; height: 20px; }
-.obj-row:hover .obj-ico { color: var(--coral); }
-.obj-name {
-  position: relative;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -.015em;
-  color: var(--graphite);
-  margin-bottom: 14px;
-  padding-bottom: 5px;
-}
-/* coral underline draws in on hover */
-.obj-name::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 1.5px;
-  background: var(--coral);
-  transition: width .4s var(--ease);
-}
-.obj-row:hover .obj-name::after { width: 40px; }
-
-/* Right zone — no repeating labels. A muted context line, then the outcome set
-   apart by a coral measurement node + firmer text; the node carries the
-   "what measuring gives" meaning the label used to spell out. Reads as a quiet
-   statement, not a table cell. */
-.obj-desc {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 640px;
-}
-.obj-ftext {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.64;
-  color: var(--text-mid);
-}
-.obj-field + .obj-field {
-  position: relative;
-  padding-left: 18px;
-}
-.obj-field + .obj-field::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 7px;
-  width: 6px;
-  height: 6px;
-  border-radius: 1px;
-  background: var(--coral);
-}
-.obj-field + .obj-field .obj-ftext {
-  color: var(--graphite);
-  font-weight: 500;
-}
-
-/* Quiet staggered reveal on scroll. Armed only by JS (.reveal) so the content
-   is fully visible without JS; disabled under reduced-motion. */
-@media (prefers-reduced-motion: no-preference) {
-  /* opacity-only fade — safe inside CSS multi-column (no transform reflow) */
-  .obj-matrix.reveal .obj-row {
-    opacity: 0;
-    transition: opacity .6s var(--ease);
-  }
-  .obj-matrix.reveal .obj-row.in {
-    opacity: 1;
-  }
-}
 
 /* ── Section "Объекты и задачи" responsive ──────────────────── */
 @media (max-width: 880px) {
   .obj-head { grid-template-columns: 1fr; gap: 20px; align-items: start; margin-bottom: 48px; }
-  .obj-intro { max-width: 560px; }
-  .obj-matrix { --obj-cols: 1; column-gap: 0; row-gap: 48px; }
-  .obj-row { padding: 22px 0 0 0; }
-  .obj-desc { gap: 12px; max-width: 560px; }
 }
 
 
@@ -1909,32 +1747,6 @@ button:focus-visible {
   .cs-item:nth-child(odd) { border-left: none; padding-left: 0; }
 }
 
-/* ── Footer ─────────────────────────────────────────────────── */
-.site-footer {
-  padding: 26px 0;
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-}
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.footer-brand {
-  font-size: 12.5px;
-  letter-spacing: .02em;
-  color: var(--text-soft);
-}
-.footer-copy {
-  font-size: 12.5px;
-  letter-spacing: .02em;
-  color: var(--text-soft);
-}
-@media (max-width: 560px) {
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
-}
 
 
 /* ── Placeholder notice ─────────────────────────────────────── */
@@ -2103,7 +1915,6 @@ html[lang="hy"] .obj-h2,
 html[lang="hy"] .params-h2,
 html[lang="hy"] .appr-h2,
 html[lang="hy"] .contact-h2,
-html[lang="hy"] .obj-name,
 html[lang="hy"] .pm-title,
 html[lang="hy"] .tr-title { overflow-wrap: break-word; }
 /* allow stacked grid tracks to shrink below a long Armenian word's min-content */
@@ -2119,7 +1930,6 @@ html[lang="hy"] .appr-text { min-width: 0; }
 /* Lead / intro paragraphs */
 .hero-sub,
 .s02-intro { font-size: 17px; line-height: 1.6; }
-.obj-intro,
 .params-intro,
 .proc-intro,
 .appr-p,
@@ -2129,8 +1939,7 @@ html[lang="hy"] .appr-text { min-width: 0; }
 .tr-text,
 .pm-text,
 .ap-text,
-.pp-text,
-.obj-ftext { font-size: 15.5px; line-height: 1.55; }
+.pp-text { font-size: 15.5px; line-height: 1.55; }
 .appr-note { font-size: 16px; }
 .pp-title { font-size: 16.5px; }
 .cd-row dd { font-size: 16px; }
@@ -2159,8 +1968,6 @@ html[lang="hy"] .appr-text { min-width: 0; }
 .ap-num { font-size: 13.5px; }
 .as-item,
 .as-dot { font-size: 13px; }
-.footer-brand,
-.footer-copy { font-size: 13.5px; }
 /* Mobile menu links */
 .nav-mobile a { font-size: 16px; }
 
@@ -2410,18 +2217,6 @@ html[lang="hy"] .appr-text { min-width: 0; }
 /* ══════════════════════════════════════════════════════════════
    FOOTER — grounded: brand, section nav, contacts, legal + languages.
    ══════════════════════════════════════════════════════════════ */
-.site-footer {
-  padding: 0;
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1.2fr;
-  gap: 48px;
-  padding-top: 56px;
-  padding-bottom: 48px;
-}
 .footer-logo {
   display: inline-flex;
   align-items: center;
@@ -2432,66 +2227,7 @@ html[lang="hy"] .appr-text { min-width: 0; }
 .footer-logo .logo-mark { height: 24px; width: 24px; }
 .footer-logo .logo-text { font-size: 15.5px; color: var(--graphite); }
 .footer-logo .logo-pulse { height: 4px; color: rgba(27,27,27,.45); }
-.footer-tag {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-soft);
-  max-width: 300px;
-}
-.footer-h {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  margin-bottom: 16px;
-}
-.footer-col a,
-.footer-col span.footer-line {
-  display: block;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-mid);
-  padding: 4px 0;
-  transition: color .2s var(--ease);
-}
-.footer-col a:hover { color: var(--graphite); }
-/* Contacts column: coral line icon + text on each row.
-   Align to the FIRST text line (not the block centre) so a wrapping
-   address keeps its icon at the top; margin-top optically centres the
-   15px icon on the 14px/1.5 line. */
-/* span.footer-line needs the element in the selector to beat the base
-   `.footer-col span.footer-line { display:block }` rule — otherwise flex
-   and gap never apply and the icon sits inline against the text. */
-.footer-contacts a,
-.footer-contacts span.footer-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
-}
-.fc-icon {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  margin-top: 3px;
-  color: var(--coral);
-}
-/* the brand lockup is an <a> inside .footer-col — keep it a shrink-wrapped
-   inline-flex row (mark + stack), not a stretched block link */
-.footer-col a.footer-logo { display: inline-flex; padding: 0; }
 .footer-logo .logo-stack { width: auto; }
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding-top: 18px;
-  padding-bottom: 20px;
-  border-top: 1px solid var(--border-lt);
-}
-.footer-copy { font-size: 12.5px; letter-spacing: .02em; color: var(--text-soft); }
 .footer-langs {
   display: flex;
   gap: 14px;
@@ -2502,9 +2238,6 @@ html[lang="hy"] .appr-text { min-width: 0; }
 .footer-langs a:hover { color: var(--graphite); }
 .footer-langs a.is-current { color: var(--coral); }
 
-@media (max-width: 860px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
-}
 
 /* Privacy micro-copy under the form */
 .cf-privacy {
@@ -2621,147 +2354,11 @@ body { color: #363B42; }
 
 
 /* ══════════════════════════════════════════════════════════════
-   STANDARDS BROCHURES v2 — decor on §04 (#parameters) & §05 (#report)
-   The hero "normative base" paper objects, recoloured to the warm
-   brand palette (graphite ink, coral accent, warm paper). Single warm
-   light vector → tinted (never black) shadows, down-right. aria-hidden.
-   §04: two crisp readable brochures around the heading (bleed off edge).
-   §05: a faint brochure cluster behind the report content.
-   Real designations only; small trademark note under §05.  (v=167)
+   §04 layout guards + trademark note (survivors of the removed
+   standards-brochure decor; see git history for the brochures)
    ══════════════════════════════════════════════════════════════ */
-
-.std-doc { position: absolute; width: 200px; }
-.std-doc-cover {
-  position: relative;
-  z-index: 1;
-  aspect-ratio: 1 / 1.414;
-  border-radius: 3px;
-  /* paper aligned to the section it sits on: a hair off pure white so the
-     cover reads as clean paper, not a differently-tinted patch. */
-  background: #FEFEFE;
-  padding: 16px 16px 14px 18px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  /* realistic object shadow: one 135° light (top-left) → cast down-right.
-     A tight contact shadow grounds the sheet; a couple of soft ambient layers
-     add depth. Near-neutral grey (barely-warm) at low alpha and modest spread
-     so it reads as a shadow, NOT a coloured panel around the paper. */
-  box-shadow:
-    0 1px 1px    hsl(0 0% 22% / .20),
-    1px 2px 4px  hsl(0 0% 24% / .12),
-    2px 5px 10px hsl(0 0% 26% / .08),
-    5px 11px 22px hsl(0 0% 28% / .05);
-}
-/* spine shadow (left) + highlight top-left / shade bottom-right (135° light) */
-.std-doc-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background:
-    linear-gradient(90deg, hsl(0 0% 18% / .07), hsl(0 0% 18% / .02) 8%, transparent 14%),
-    linear-gradient(135deg, hsl(0 0% 100% / .10) 0%, transparent 45%, hsl(0 0% 16% / .045) 100%);
-}
-/* warm paper grain */
-.std-doc-cover::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  mix-blend-mode: multiply;
-  opacity: .26;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='150'%3E%3Cfilter%20id='wg'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20seed='7'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.11%20%200%200%200%200%200.11%20%200%200%200%200%200.11%20%200%200%200%200.05%200'/%3E%3C/filter%3E%3Crect%20width='150'%20height='150'%20filter='url(%23wg)'/%3E%3C/svg%3E");
-  background-size: 150px 150px;
-}
-/* page block behind the cover — a stack of leaves */
-.std-doc-edge {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: 3px;
-  transform: translate(2px, 2px) rotate(.2deg);
-  /* neutral leaf-edge so the page block aligns with the paper */
-  background: repeating-linear-gradient(to bottom, #F5F5F5 0 1px, #E8E8E8 1px 2px);
-  box-shadow: 1px 2px 3px hsl(0 0% 24% / .14);
-}
-.std-doc-accent {
-  position: absolute;
-  z-index: 2;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--coral);
-  border-radius: 3px 3px 0 0;
-}
-.std-doc-desig {
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: -.01em;
-  line-height: 1;
-  color: var(--graphite);
-  text-shadow: 0 1px 0 hsl(40 40% 100% / .9), 0 -1px 0 hsl(28 18% 30% / .18);
-}
-.std-doc-rule {
-  height: 1px;
-  background: hsl(28 20% 25% / .16);
-  margin: 11px 0;
-}
-.std-doc-title {
-  font-size: 10.5px;
-  font-weight: 500;
-  line-height: 1.34;
-  color: hsl(28 22% 20% / .86);
-}
-.std-doc-meta {
-  margin-top: auto;
-  padding-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  font-variant-numeric: tabular-nums;
-  font-size: 8.5px;
-  letter-spacing: .01em;
-  color: var(--text-soft);
-}
-
-/* — §04 placement: two crisp brochures around the heading — */
 .params { position: relative; overflow: hidden; }
 .params-body { position: relative; z-index: 1; }
-.params-decor {
-  /* anchored to the content column (mirrors .container), so the brochures
-     always start at the text column's right edge and bleed outward —
-     they clear the intro at every viewport width, never sit under text. */
-  position: absolute;
-  z-index: 0;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 100%;
-  max-width: 1200px;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-/* Single pre-composed render (both brochures, tilt + shadow baked in, transparent
-   webp). Anchored to the content column's right edge, vertically centred, bleeding
-   outward — sits in the intro's right whitespace. Tune margins to taste. */
-.params-decor .std-render {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  /* Transparent render (real alpha) — no ground, so it drops cleanly on any
-     section colour; no mask/bg-match needed. Sits at the content column's right
-     edge, vertically centred, bleeding outward. margin-top ≈ half the rendered
-     height (420 × 1536/1024 = 630). Tune margins to taste. */
-  width: 420px;
-  height: auto;
-  margin-top: -315px;
-  /* peek from just past the content column's right edge so the render never
-     overlaps the right-column parameter text (clears it at every width ≥1200). */
-  margin-left: -55px;
-}
 
 /* trademark note under §04 (real designations shown) */
 .std-note {
@@ -2770,18 +2367,6 @@ body { color: #363B42; }
   font-size: 10.5px;
   line-height: 1.5;
   color: #6B665D;   /* muted; clears WCAG AA (4.5:1) on the white §04 section */
-}
-
-/* — responsive: hide the corner brochures where they would crowd the text — */
-@media (max-width: 1199px) {
-  .params-decor { display: none; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  /* opacity-only fade — never touches each brochure's own rotate transform */
-  .std-doc-cover, .std-doc-edge, .std-render { animation: stdRise .7s var(--ease) both; }
-}
-@keyframes stdRise {
-  from { opacity: 0; }
 }
 
 

@@ -160,7 +160,7 @@
 
   /* ── 3. Intros / editorial paragraphs — quiet rise ───────────── */
   gsap.utils.toArray(
-    '.s02-intro, .obj-intro, .params-intro, .report-intro, .proc-intro, .contact-intro'
+    '.s02-intro, .params-intro, .report-intro, .proc-intro, .contact-intro'
   ).forEach(function (el) { rise(el, el, { y: 22 }); });
   rise('.appr-lead, .appr-p, .appr-note', '.appr-text', { y: 22, stagger: 0.12 });
 
