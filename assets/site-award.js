@@ -185,10 +185,23 @@
     });
   }());
 
-  /* ── 6. Objects — the rows arrive with the same quiet staggered
-        rise as the rest of the page; the illustrations keep their
-        own load fade and stay untouched ───────────────────────── */
-  batchRise('.obj-row', { y: 24, stagger: 0.1 });
+  /* ── 6. Objects — the industry index rises row by row, the photo
+        stage fades in beside it (switching lives in site-fx.js) ── */
+  batchRise('.hs-item', { y: 16, stagger: 0.07 });
+  (function objectsStage() {
+    var stage = document.querySelector('.hs-stage');
+    if (!stage) return;
+    gsap.set(stage, { autoAlpha: 0, y: 20 });
+    ScrollTrigger.create({
+      trigger: stage, start: 'top 86%', once: true,
+      onEnter: function () {
+        gsap.to(stage, {
+          autoAlpha: 1, y: 0, duration: 0.9, ease: EASE,
+          onComplete: function () { gsap.set(stage, { clearProps: 'transform,opacity,visibility' }); }
+        });
+      }
+    });
+  }());
 
   /* ── 7. Dark section — the signature: the week measures itself.
         Scrub-linked: the baseline draws, day ticks land one per

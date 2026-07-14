@@ -3218,3 +3218,123 @@ html:not([lang="hy"]) .appr-h2,
 html:not([lang="hy"]) .contact-h2 {
   font-size: clamp(33px, 4.1vw, 52px);
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION 02 — industry hover-slider: a typographic index drives a
+   clip-path photo stage. The instrument response on the active row
+   (graphite name + coral measurement line with a landing node) is the
+   same language as the nav underline and footer links. Works without
+   JS: the first industry is pre-activated in the markup; switching is
+   wired in site-fx.js (dependency-free), so it also works with
+   reduced motion — transitions are simply instant there.
+   ══════════════════════════════════════════════════════════════ */
+.hs-wrap {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.hs-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+.hs-item {
+  position: relative;
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 17px 0 15px;
+  border: none; border-bottom: 1px solid var(--border-lt);
+  background: none; cursor: pointer; text-align: left;
+  font-family: inherit;
+}
+.hs-idx {
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 12px; font-weight: 500; letter-spacing: .04em;
+  color: #B7B2A9; flex-shrink: 0; width: 22px;
+  transition: color .3s var(--ease);
+}
+.hs-item.active .hs-idx { color: var(--coral); }
+.hs-name {
+  font-size: clamp(21px, 2.6vw, 33px);
+  font-weight: 600; line-height: 1.14; letter-spacing: -.02em;
+  color: #938D83;   /* resting: quiet, but ≥3:1 for large text */
+  transition: color .35s var(--ease), transform .35s var(--ease);
+}
+.hs-item.active .hs-name {
+  color: var(--graphite);
+  transform: translateX(6px);
+}
+html[lang="hy"] .hs-name { letter-spacing: 0; font-size: clamp(19px, 2.35vw, 29px); }
+/* coral measurement line draws under the active row, node lands at its end */
+.hs-item::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1.5px;
+  background: var(--coral);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.hs-item::before {
+  content: "";
+  position: absolute; right: 0; bottom: -4px;
+  width: 7px; height: 7px; border-radius: 1px;
+  background: var(--coral);
+  transform: scale(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hs-item::after { transition: transform .5s cubic-bezier(.33, 1, .68, 1); }
+  .hs-item::before { transition: transform .3s cubic-bezier(.2, 1.4, .4, 1) .34s; }
+}
+.hs-item.active::after { transform: scaleX(1); }
+.hs-item.active::before { transform: scale(1); }
+.hs-item:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 2px; }
+
+.hs-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  aspect-ratio: 4 / 3.1;
+  background: #EFEDE7;
+}
+.hs-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  filter: saturate(.82) contrast(.95) brightness(1.02);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hs-img { transition: clip-path .8s cubic-bezier(.33, 1, .68, 1); }
+}
+.hs-img.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+/* caption on the photo: bottom graphite scrim + white text */
+.hs-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(13,14,16,0) 40%, rgba(13,14,16,.66) 68%, rgba(13,14,16,.93) 100%);
+  pointer-events: none;
+}
+.hs-cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 0 22px 18px;
+  opacity: 0; visibility: hidden;
+}
+.hs-cap.active { opacity: 1; visibility: visible; }
+@media (prefers-reduced-motion: no-preference) {
+  .hs-cap { transition: opacity .4s var(--ease), visibility 0s .4s; transform: translateY(6px); }
+  .hs-cap.active { transition: opacity .45s var(--ease) .25s, transform .45s var(--ease) .25s, visibility 0s; transform: none; }
+}
+.hs-t { font-size: 13px; line-height: 1.58; color: rgba(255,255,255,.74); }
+.hs-strong { position: relative; margin-top: 5px; padding-left: 16px; color: rgba(255,255,255,.95); font-weight: 500; }
+.hs-strong::before {
+  content: "";
+  position: absolute; left: 0; top: 6px;
+  width: 6px; height: 6px; border-radius: 1px;
+  background: var(--coral);
+}
+@media (max-width: 880px) {
+  .hs-wrap { grid-template-columns: 1fr; }
+  .hs-side { order: -1; }
+  .hs-name { font-size: 20px; }
+  html[lang="hy"] .hs-name { font-size: 19px; }
+  .hs-item { padding: 14px 0 13px; }
+}
+@media (max-width: 560px) {
+  .hs-cap { padding: 0 16px 14px; }
+  .hs-t { font-size: 12.5px; }
+}

@@ -91,4 +91,28 @@
          the rail straddling a section boundary. */
     }
   }());
+
+  /* ── §02 industry slider — the typographic index drives the photo
+        stage. Plain class toggling: CSS owns every transition, so it
+        works identically with reduced motion (instant) and without
+        GSAP. The first industry is pre-activated in the markup. ── */
+  (function objectsSlider() {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.hs-item'));
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.hs-img'));
+    var caps = Array.prototype.slice.call(document.querySelectorAll('.hs-cap'));
+    if (!items.length || items.length !== imgs.length) return;
+    function setActive(n) {
+      items.forEach(function (b, j) {
+        b.classList.toggle('active', j === n);
+        b.setAttribute('aria-selected', j === n ? 'true' : 'false');
+      });
+      imgs.forEach(function (im, j) { im.classList.toggle('active', j === n); });
+      caps.forEach(function (c, j) { c.classList.toggle('active', j === n); });
+    }
+    items.forEach(function (btn, i) {
+      btn.addEventListener('mouseenter', function () { setActive(i); });
+      btn.addEventListener('focus', function () { setActive(i); });
+      btn.addEventListener('click', function () { setActive(i); });
+    });
+  }());
 }());
