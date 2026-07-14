@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ПРЕВЬЮ — §02, А-мини v2: две компоновки</title>
+  <title>ПРЕВЬЮ — §02, фото как фон карточки</title>
   <link rel="stylesheet" href="/style.css?v=186" />
   <style>
     body { padding-top: 40px; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
@@ -16,11 +16,70 @@
     .pv-var { margin-top: 44px; color: #F25749; }
     @media (max-width: 560px) { .pv-note { padding: 0 24px; } }
 
-    /* shared item pieces */
-    .vm-photo {
-      margin: 0; overflow: hidden; border-radius: 5px;
-      border: 1px solid var(--border-lt);
+    /* ══ Photo-background cards ══ */
+    .vp-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 22px;
     }
+    .vp-card {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #101114;
+      display: flex;
+      align-items: flex-end;
+    }
+    .vp-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      filter: grayscale(1) brightness(.72) contrast(1.02);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .vp-bg { transition: filter .5s var(--ease), transform .7s var(--ease); }
+      .vp-card:hover .vp-bg { filter: grayscale(0) brightness(.78) contrast(1); transform: scale(1.025); }
+    }
+    /* readability scrim: near-transparent top, deep graphite where the text sits */
+    .vp-scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(13,14,16,.10) 0%,
+        rgba(13,14,16,.28) 42%,
+        rgba(13,14,16,.86) 78%,
+        rgba(13,14,16,.94) 100%);
+      pointer-events: none;
+    }
+    .vp-body {
+      position: relative; z-index: 1;
+      padding: 22px 24px 20px;
+    }
+    .vp-title { display: flex; align-items: baseline; gap: 11px; margin-bottom: 8px; }
+    .vp-num { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--coral); }
+    .vp-name {
+      font-size: 17px; font-weight: 600; line-height: 1.28;
+      letter-spacing: -.012em; color: #fff;
+    }
+    .vp-text { font-size: 13px; line-height: 1.58; color: rgba(255,255,255,.72); max-width: 460px; }
+    .vp-strong {
+      position: relative; margin-top: 6px; padding-left: 16px;
+      color: rgba(255,255,255,.94); font-weight: 500;
+    }
+    .vp-strong::before {
+      content: ""; position: absolute; left: 0; top: 6px;
+      width: 6px; height: 6px; border-radius: 1px; background: var(--coral);
+    }
+    @media (max-width: 880px) {
+      .vp-grid { grid-template-columns: 1fr; }
+      .vp-card { aspect-ratio: 16 / 10; }
+    }
+    @media (max-width: 560px) {
+      .vp-card { aspect-ratio: 4 / 3; }
+      .vp-body { padding: 16px 16px 15px; }
+      .vp-text:not(.vp-strong) { display: none; }
+    }
+
+    /* ══ comparison: dense catalog ══ */
+    .vm-photo { margin: 0; overflow: hidden; border-radius: 5px; border: 1px solid var(--border-lt); }
     .vm-photo img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: grayscale(1) sepia(.08) contrast(.92) brightness(1.05);
@@ -28,62 +87,105 @@
     @media (prefers-reduced-motion: no-preference) {
       .vm-photo img { transition: filter .5s var(--ease); }
     }
-    .vb-item:hover .vm-photo img,
-    .vc-row:hover .vm-photo img { filter: none; }
+    .vb-item:hover .vm-photo img { filter: none; }
     .vm-title { display: flex; align-items: baseline; gap: 11px; margin-bottom: 7px; }
     .vm-num { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--coral); }
-    .vm-name {
-      font-size: 16px; font-weight: 600; line-height: 1.28;
-      letter-spacing: -.012em; color: var(--graphite);
-    }
+    .vm-name { font-size: 16px; font-weight: 600; line-height: 1.28; letter-spacing: -.012em; color: var(--graphite); }
     .vm-text { font-size: 13px; line-height: 1.55; color: var(--text-mid); }
     .vm-strong { position: relative; margin-top: 5px; padding-left: 16px; color: var(--graphite); font-weight: 500; }
     .vm-strong::before {
       content: ""; position: absolute; left: 0; top: 6px;
       width: 6px; height: 6px; border-radius: 1px; background: var(--coral);
     }
-
-    /* ══ composition 1: dense two-column catalog ══ */
-    .vb-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      column-gap: 72px; border-top: 1px solid var(--border);
-    }
+    .vb-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 72px; border-top: 1px solid var(--border); }
     .vb-item {
       display: grid; grid-template-columns: 150px 1fr; gap: 22px;
-      align-items: center; padding: 22px 0;
-      border-bottom: 1px solid var(--border-lt);
+      align-items: center; padding: 22px 0; border-bottom: 1px solid var(--border-lt);
     }
     .vb-item .vm-photo { aspect-ratio: 4 / 3; }
-    @media (max-width: 880px) {
-      .vb-grid { grid-template-columns: 1fr; column-gap: 0; }
-    }
+    @media (max-width: 880px) { .vb-grid { grid-template-columns: 1fr; column-gap: 0; } }
     @media (max-width: 560px) {
       .vb-item { grid-template-columns: 104px 1fr; gap: 16px; align-items: start; padding: 16px 0; }
       .vb-item .vm-photo { aspect-ratio: 1 / 1; }
       .vb-item .vm-text:not(.vm-strong) { display: none; }
       .vb-item .vm-title { flex-direction: column; gap: 3px; }
     }
-
-    /* ══ composition 2: full-width single list ══ */
-    .vc-list { border-top: 1px solid var(--border); }
-    .vc-row {
-      display: grid; grid-template-columns: 224px 1fr; gap: 36px;
-      align-items: center; padding: 20px 0;
-      border-bottom: 1px solid var(--border-lt);
-    }
-    .vc-row .vm-photo { aspect-ratio: 16 / 9; }
-    .vc-row .vm-text { max-width: 620px; }
-    @media (max-width: 560px) {
-      .vc-row { grid-template-columns: 104px 1fr; gap: 16px; align-items: start; padding: 16px 0; }
-      .vc-row .vm-photo { aspect-ratio: 1 / 1; }
-      .vc-row .vm-text:not(.vm-strong) { display: none; }
-      .vc-row .vm-title { flex-direction: column; gap: 3px; }
-    }
   </style>
 </head>
 <body>
-  <p class="pv-note">Превью · §02 · А-мини v2 — две компоновки без колонки «точка» · не для публикации</p>
-  <p class="pv-note pv-var">КОМПОНОВКА 1 · плотная сетка — две колонки, без правой колонки «точка»</p>
+  <p class="pv-note">Превью · §02 · фото как фон карточки · не для публикации</p>
+  <p class="pv-note pv-var">НОВАЯ КОМПОНОВКА · фото — фон карточки, текст на графитовом скриме</p>
+  <section class="objects">
+    <div class="container obj-body">
+      <div class="obj-head">
+        <div class="obj-head-left">
+          <div class="obj-eyebrow-row">
+            <span class="obj-idx" aria-hidden="true">02</span>
+            <span class="obj-eyebrow">ГДЕ ЭТО ПРИМЕНИМО</span>
+          </div>
+          <h2 class="obj-h2">Где измерения важны</h2>
+        </div>
+        <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
+      </div>
+      <div class="vp-grid">
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">01</span><h3 class="vp-name">Производства</h3></div>
+            <p class="vp-text">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
+            <p class="vp-text vp-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
+          </div>
+        </article>
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">02</span><h3 class="vp-name">Солнечные станции</h3></div>
+            <p class="vp-text">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
+            <p class="vp-text vp-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
+          </div>
+        </article>
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">03</span><h3 class="vp-name">Частные дома и коммерческие помещения</h3></div>
+            <p class="vp-text">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
+            <p class="vp-text vp-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
+          </div>
+        </article>
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">04</span><h3 class="vp-name">Медицинские центры и лаборатории</h3></div>
+            <p class="vp-text">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
+            <p class="vp-text vp-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
+          </div>
+        </article>
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">05</span><h3 class="vp-name">Дата-центры и IT-инфраструктура</h3></div>
+            <p class="vp-text">Когда даже кратковременные отклонения могут привести к сбоям.</p>
+            <p class="vp-text vp-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
+          </div>
+        </article>
+        <article class="vp-card">
+          <img class="vp-bg" src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%">
+          <div class="vp-scrim" aria-hidden="true"></div>
+          <div class="vp-body">
+            <div class="vp-title"><span class="vp-num">06</span><h3 class="vp-name">Банки, инвесторы и проектные партнёры</h3></div>
+            <p class="vp-text">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
+            <p class="vp-text vp-strong">Независимые измеренные данные как основа для решения.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <p class="pv-note pv-var">ДЛЯ СРАВНЕНИЯ · плотная сетка (компоновка 1 из прошлого шага)</p>
   <section class="objects">
     <div class="container obj-body">
       <div class="obj-head">
@@ -148,71 +250,6 @@
       </div>
     </div>
   </section>
-  <p class="pv-note pv-var">КОМПОНОВКА 2 · один список во всю ширину — без правой колонки</p>
-  <section class="objects">
-    <div class="container obj-body">
-      <div class="obj-head">
-        <div class="obj-head-left">
-          <div class="obj-eyebrow-row">
-            <span class="obj-idx" aria-hidden="true">02</span>
-            <span class="obj-eyebrow">ГДЕ ЭТО ПРИМЕНИМО</span>
-          </div>
-          <h2 class="obj-h2">Где измерения важны</h2>
-        </div>
-        <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
-      </div>
-      <div class="vc-list">
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">01</span><h3 class="vm-name">Производства</h3></div>
-            <p class="vm-text">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
-            <p class="vm-text vm-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
-          </div>
-        </div>
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">02</span><h3 class="vm-name">Солнечные станции</h3></div>
-            <p class="vm-text">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
-            <p class="vm-text vm-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
-          </div>
-        </div>
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">03</span><h3 class="vm-name">Частные дома и коммерческие помещения</h3></div>
-            <p class="vm-text">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
-            <p class="vm-text vm-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
-          </div>
-        </div>
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">04</span><h3 class="vm-name">Медицинские центры и лаборатории</h3></div>
-            <p class="vm-text">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
-            <p class="vm-text vm-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
-          </div>
-        </div>
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">05</span><h3 class="vm-name">Дата-центры и IT-инфраструктура</h3></div>
-            <p class="vm-text">Когда даже кратковременные отклонения могут привести к сбоям.</p>
-            <p class="vm-text vm-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
-          </div>
-        </div>
-        <div class="vc-row">
-          <figure class="vm-photo"><img src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
-          <div class="vm-main">
-            <div class="vm-title"><span class="vm-num">06</span><h3 class="vm-name">Банки, инвесторы и проектные партнёры</h3></div>
-            <p class="vm-text">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
-            <p class="vm-text vm-strong">Независимые измеренные данные как основа для решения.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <script src="/assets/vendor/gsap.min.js"></script>
   <script src="/assets/vendor/ScrollTrigger.min.js"></script>
@@ -223,12 +260,12 @@
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
-    gsap.utils.toArray('.vb-item, .vc-row').forEach(function (el) {
-      gsap.set(el, { autoAlpha: 0, y: 16 });
+    gsap.utils.toArray('.vp-card, .vb-item').forEach(function (el) {
+      gsap.set(el, { autoAlpha: 0, y: 22 });
       ScrollTrigger.create({
-        trigger: el, start: 'top 90%', once: true,
+        trigger: el, start: 'top 88%', once: true,
         onEnter: function () {
-          gsap.to(el, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out',
+          gsap.to(el, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out',
             onComplete: function () { gsap.set(el, { clearProps: 'transform,opacity,visibility' }); } });
         }
       });
