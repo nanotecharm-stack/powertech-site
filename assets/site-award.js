@@ -207,41 +207,10 @@
     });
   }());
 
-  /* ── 6. Objects — rows reveal; each illustration comes off the
-        plotter (left→right clip), then drifts gently on scroll ── */
-  (function objects() {
-    var rows = gsap.utils.toArray('.obj-row');
-    if (!rows.length) return;
-    rows.forEach(function (row) {
-      var img = row.querySelector('.obj-illus');
-      if (img) {
-        var wrap = document.createElement('div');
-        wrap.className = 'aw-illus';
-        img.parentNode.insertBefore(wrap, img);
-        wrap.appendChild(img);
-        gsap.set(wrap, { clipPath: 'inset(0 100% 0 0)' });
-        ScrollTrigger.create({
-          trigger: wrap, start: 'top 88%', once: true,
-          onEnter: function () {
-            gsap.to(wrap, { clipPath: 'inset(0 0% 0 0)', duration: 1.15, ease: 'power2.inOut' });
-          }
-        });
-      }
-      var parts = row.querySelectorAll('.obj-lead, .obj-desc');
-      rise(parts, row, { y: 24, stagger: 0.1 });
-    });
-    /* desktop: quiet vertical drift inside the illustration frame */
-    mm.add('(min-width: 861px)', function () {
-      gsap.utils.toArray('.aw-illus .obj-illus').forEach(function (img) {
-        gsap.fromTo(img,
-          { yPercent: -5, scale: 1.11 },
-          {
-            yPercent: 5, scale: 1.11, ease: 'none',
-            scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
-          });
-      });
-    });
-  }());
+  /* ── 6. Objects — the rows arrive with the same quiet staggered
+        rise as the rest of the page; the illustrations keep their
+        own load fade and stay untouched ───────────────────────── */
+  batchRise('.obj-row', { y: 24, stagger: 0.1 });
 
   /* ── 7. Dark section — the signature: the week measures itself.
         Scrub-linked: the baseline draws, day ticks land one per

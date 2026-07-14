@@ -3073,17 +3073,6 @@ circle.fx-dot,
   .aw-rule { display: none; }   /* narrow heads stay calm */
 }
 
-/* Object illustration frame — JS wraps each .obj-illus for the
-   plotter-style clip reveal + the slow scroll drift inside it. */
-.aw-illus {
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  border-radius: 5px;
-  margin-bottom: 22px;
-}
-.aw-illus .obj-illus { margin-bottom: 0; will-change: transform; }
-
 /* Section 01 — the shared measurement line and the coral taps are
    driven from GSAP via CSS vars; both default to their final state. */
 .s02-map::before {
