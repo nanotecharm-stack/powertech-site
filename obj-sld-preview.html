@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ПРЕВЬЮ v3 — §02, живой чертёж (вариант B)</title>
+  <title>ПРЕВЬЮ v4 — §02, живой чертёж, RU/EN/HY</title>
   <link rel="stylesheet" href="/style.css?v=186" />
   <style>
-    body { padding-top: 40px; }
+    body { padding-top: 40px; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
     .pv-note {
       max-width: 1200px;
       margin: 0 auto 8px;
@@ -18,10 +18,9 @@
       color: #B7B2A9;
       text-transform: uppercase;
     }
+    .pv-lang { margin-top: 34px; color: #F25749; }
     @media (max-width: 560px) { .pv-note { padding: 0 24px; } }
 
-    /* ── Drawing sheet v3: quiet paper, no title block — the drawing
-         and its choreography carry the piece ── */
     .sld-sheet {
       position: relative;
       margin: 0 0 22px;
@@ -39,9 +38,8 @@
       height: auto;
       font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
     }
-    .obj-row::after { display: none; }   /* no raster skeleton on this page */
+    .obj-row::after { display: none; }
 
-    /* diagram grammar */
     .sld-ln   { stroke: #1B1B1B; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .sld-thin { stroke: #1B1B1B; stroke-width: 1.1; fill: none; stroke-linecap: round; }
     .sld-bus  { stroke: #1B1B1B; stroke-width: 3.4; fill: none; stroke-linecap: round; }
@@ -63,28 +61,24 @@
 </head>
 <body>
 
-  <p class="pv-note">Превью v3 · вариант B — живой чертёж · не для публикации</p>
-
-  <section class="objects" id="objects" aria-labelledby="obj-heading">
+  <p class="pv-note">Превью v4 · вариант B — живой чертёж, три языка · не для публикации</p>
+  <p class="pv-note pv-lang">RU · русская версия</p>
+  <section class="objects" aria-label="RU · русская версия">
     <div class="container obj-body">
-
       <div class="obj-head">
         <div class="obj-head-left">
           <div class="obj-eyebrow-row">
             <span class="obj-idx" aria-hidden="true">02</span>
             <span class="obj-eyebrow">ГДЕ ЭТО ПРИМЕНИМО</span>
           </div>
-          <h2 class="obj-h2" id="obj-heading">Где измерения важны</h2>
+          <h2 class="obj-h2">Где измерения важны</h2>
         </div>
         <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
       </div>
-
       <div class="obj-matrix">
-
-        <!-- ═══ 01 Производства ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема производства: сеть, трансформатор, шина ГРЩ 0,4 кВ, насосы, линия с частотным приводом, автоматика; анализатор качества электроэнергии подключён на вводе">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема производства: сеть, трансформатор, ГРЩ 0,4 кВ, насосы, линия с ЧРП, КИПиА; анализатор качества электроэнергии на вводе">
               <text x="40" y="20" text-anchor="middle" class="sld-ann">СЕТЬ</text>
               <circle cx="40" cy="44" r="13" class="sld-sym"/>
               <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
@@ -92,7 +86,7 @@
               <circle cx="111" cy="37" r="9" class="sld-sym"/>
               <circle cx="111" cy="51" r="9" class="sld-sym"/>
               <path d="M120 44 H152 V78" class="sld-ln"/>
-              <text x="162" y="66" class="sld-ann">ГРЩ · 0,4 кВ</text>
+              <text x="162" y="64" class="sld-ann">ГРЩ · 0,4 кВ</text>
               <line x1="152" y1="78" x2="536" y2="78" class="sld-bus"/>
               <g class="pq-g" transform="translate(210,78)">
                 <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
@@ -127,18 +121,16 @@
             <div class="obj-field"><p class="obj-ftext">Оценка стабильности питания и возможных рисков для оборудования.</p></div>
           </div>
         </div>
-
-        <!-- ═══ 02 Солнечные станции ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема солнечной станции: фотоэлектрический массив, инвертор, учёт, сеть; анализатор подключён в точке присоединения">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема солнечной станции: PV-модули, инвертор, учёт, сеть; анализатор в точке присоединения">
               <rect x="28" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
               <line x1="28" y1="46" x2="52" y2="30" class="sld-thin"/>
               <rect x="58" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
               <line x1="58" y1="46" x2="82" y2="30" class="sld-thin"/>
               <rect x="88" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
               <line x1="88" y1="46" x2="112" y2="30" class="sld-thin"/>
-              <text x="70" y="152" text-anchor="middle" class="sld-lab">PV-МАССИВ</text>
+              <text x="70" y="152" text-anchor="middle" class="sld-lab">PV-МОДУЛИ</text>
               <path d="M70 46 V78 H150" class="sld-ln"/>
               <rect x="150" y="61" width="34" height="34" class="sld-sym"/>
               <line x1="150" y1="95" x2="184" y2="61" class="sld-thin"/>
@@ -173,11 +165,9 @@
             <div class="obj-field"><p class="obj-ftext">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p></div>
           </div>
         </div>
-
-        <!-- ═══ 03 Дома и коммерческие помещения ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема здания: сеть, учёт, распределительный щит, группы освещения, розеток и климата; анализатор подключён на вводе объекта">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема здания: сеть, учёт, ВРУ, освещение, розетки, ОВиК; анализатор на вводе объекта">
               <text x="40" y="20" text-anchor="middle" class="sld-ann">СЕТЬ</text>
               <circle cx="40" cy="44" r="13" class="sld-sym"/>
               <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
@@ -185,30 +175,30 @@
               <circle cx="117" cy="44" r="15" class="sld-sym"/>
               <text x="117" y="48" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
               <line x1="132" y1="44" x2="168" y2="44" class="sld-ln"/>
-              <text x="192" y="20" text-anchor="middle" class="sld-ann">ЩИТ</text>
+              <text x="192" y="20" text-anchor="middle" class="sld-ann">ВРУ</text>
               <rect x="168" y="29" width="48" height="30" class="sld-sym"/>
               <line x1="180" y1="36" x2="180" y2="52" class="sld-thin"/>
               <line x1="192" y1="36" x2="192" y2="52" class="sld-thin"/>
               <line x1="204" y1="36" x2="204" y2="52" class="sld-thin"/>
               <path d="M216 44 H244 V78" class="sld-ln"/>
               <line x1="244" y1="78" x2="536" y2="78" class="sld-bus"/>
-              <g class="pq-g" transform="translate(290,78)">
+              <g class="pq-g" transform="translate(272,78)">
                 <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
                 <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
                 <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
                 <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
                 <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
               </g>
-              <text x="290" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
-              <line x1="390" y1="78" x2="390" y2="124" class="sld-ln"/>
-              <path d="M384 118 L390 127 L396 118" class="sld-ln"/>
-              <text x="390" y="152" text-anchor="middle" class="sld-lab">СВЕТ</text>
-              <line x1="445" y1="78" x2="445" y2="124" class="sld-ln"/>
-              <path d="M439 118 L445 127 L451 118" class="sld-ln"/>
-              <text x="445" y="152" text-anchor="middle" class="sld-lab">РОЗЕТКИ</text>
+              <text x="272" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="373" y1="78" x2="373" y2="124" class="sld-ln"/>
+              <path d="M367 118 L373 127 L379 118" class="sld-ln"/>
+              <text x="373" y="152" text-anchor="middle" class="sld-lab">ОСВ.</text>
+              <line x1="450" y1="78" x2="450" y2="124" class="sld-ln"/>
+              <path d="M444 118 L450 127 L456 118" class="sld-ln"/>
+              <text x="450" y="152" text-anchor="middle" class="sld-lab">РОЗЕТКИ</text>
               <line x1="524" y1="78" x2="524" y2="124" class="sld-ln"/>
               <path d="M518 118 L524 127 L530 118" class="sld-ln"/>
-              <text x="536" y="152" text-anchor="end" class="sld-lab">КЛИМАТ</text>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">ОВиК</text>
             </svg>
           </figure>
           <div class="obj-lead">
@@ -220,11 +210,9 @@
             <div class="obj-field"><p class="obj-ftext">Проверка работы электросети в реальных условиях эксплуатации.</p></div>
           </div>
         </div>
-
-        <!-- ═══ 04 Медицинские центры ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема медицинского центра: два ввода, АВР, разделительный трансформатор, чувствительные линии лаборатории и диагностики; анализатор подключён на чувствительной линии">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема медцентра: два ввода, АВР, разделительный трансформатор, чувствительные линии; анализатор на чувствительной линии">
               <text x="40" y="20" text-anchor="middle" class="sld-ann">ВВОД 1</text>
               <circle cx="40" cy="44" r="11" class="sld-sym"/>
               <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
@@ -239,7 +227,7 @@
               <line x1="144" y1="78" x2="176" y2="78" class="sld-ln"/>
               <circle cx="187" cy="71" r="9" class="sld-sym"/>
               <circle cx="187" cy="85" r="9" class="sld-sym"/>
-              <text x="187" y="152" text-anchor="middle" class="sld-lab">IT-ТР</text>
+              <text x="187" y="152" text-anchor="middle" class="sld-lab">РАЗД. ТР</text>
               <line x1="196" y1="78" x2="536" y2="78" class="sld-ln" stroke-width="2.6"/>
               <text x="236" y="62" class="sld-ann">ЧУВСТВИТЕЛЬНЫЕ ЛИНИИ</text>
               <g class="pq-g" transform="translate(292,78)">
@@ -267,11 +255,9 @@
             <div class="obj-field"><p class="obj-ftext">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p></div>
           </div>
         </div>
-
-        <!-- ═══ 05 Дата-центры ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема дата-центра: два ввода, АВР, ИБП, критическая шина, стойки и охлаждение; анализатор подключён на критической шине">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Однолинейная схема дата-центра: два ввода, АВР, ИБП, шина гарантированного питания, стойки, охлаждение; анализатор на шине">
               <text x="40" y="20" text-anchor="middle" class="sld-ann">ВВОД A</text>
               <circle cx="40" cy="44" r="11" class="sld-sym"/>
               <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
@@ -291,7 +277,7 @@
               <text x="191" y="152" text-anchor="middle" class="sld-lab">ИБП</text>
               <line x1="216" y1="78" x2="248" y2="78" class="sld-ln"/>
               <line x1="248" y1="78" x2="536" y2="78" class="sld-bus"/>
-              <text x="260" y="62" class="sld-ann">КРИТИЧЕСКАЯ ШИНА</text>
+              <text x="260" y="62" class="sld-ann">ГАРАНТ. ПИТАНИЕ</text>
               <g class="pq-g" transform="translate(296,78)">
                 <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
                 <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
@@ -324,11 +310,9 @@
             <div class="obj-field"><p class="obj-ftext">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p></div>
           </div>
         </div>
-
-        <!-- ═══ 06 Банки и инвесторы ═══ -->
         <div class="obj-row">
           <figure class="sld-sheet">
-            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Схема для банков и инвесторов: объект, семидневное измерение, отчёт, решение">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Схема: объект, 7 дней измерений, отчёт, решение">
               <rect x="36" y="50" width="66" height="52" class="sld-sym"/>
               <path d="M47 63 h9 M64 63 h9 M81 63 h9 M47 76 h9 M64 76 h9 M81 76 h9 M62 102 v-13 h14 v13" class="sld-thin"/>
               <text x="69" y="152" text-anchor="middle" class="sld-lab">ОБЪЕКТ</text>
@@ -362,18 +346,587 @@
             <div class="obj-field"><p class="obj-ftext">Независимые измеренные данные как основа для решения.</p></div>
           </div>
         </div>
-
-      </div><!-- /obj-matrix -->
-
-    </div><!-- /container -->
+      </div>
+    </div>
+  </section>
+  <p class="pv-note pv-lang">EN · English version</p>
+  <section class="objects" aria-label="EN · English version">
+    <div class="container obj-body">
+      <div class="obj-head">
+        <div class="obj-head-left">
+          <div class="obj-eyebrow-row">
+            <span class="obj-idx" aria-hidden="true">02</span>
+            <span class="obj-eyebrow">WHERE IT APPLIES</span>
+          </div>
+          <h2 class="obj-h2">Where measurements matter</h2>
+        </div>
+        <p class="obj-intro">Checking the network in normal operation is useful where power quality affects equipment, costs, safety or a technical decision.</p>
+      </div>
+      <div class="obj-matrix">
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Single-line diagram of a production site: grid, transformer, main switchboard 0.4 kV, pumps, VFD line, controls; power quality analyser at the incomer">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">GRID</text>
+              <circle cx="40" cy="44" r="13" class="sld-sym"/>
+              <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <line x1="53" y1="44" x2="100" y2="44" class="sld-ln"/>
+              <circle cx="111" cy="37" r="9" class="sld-sym"/>
+              <circle cx="111" cy="51" r="9" class="sld-sym"/>
+              <path d="M120 44 H152 V78" class="sld-ln"/>
+              <text x="162" y="64" class="sld-ann">MAIN SWITCHBOARD · 0.4 kV</text>
+              <line x1="152" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <g class="pq-g" transform="translate(210,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="210" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <rect x="316" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="320" y1="94" x2="320" y2="106" class="sld-ln"/>
+              <circle cx="320" cy="119" r="12" class="sld-sym"/>
+              <text x="320" y="123" text-anchor="middle" class="sld-in">M</text>
+              <text x="320" y="152" text-anchor="middle" class="sld-lab">PUMPS</text>
+              <rect x="426" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="430" y1="94" x2="430" y2="106" class="sld-ln"/>
+              <rect x="410" y="106" width="40" height="24" class="sld-sym"/>
+              <text x="430" y="122" text-anchor="middle" class="sld-in">VFD</text>
+              <text x="430" y="152" text-anchor="middle" class="sld-lab">LINE</text>
+              <rect x="512" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="516" y1="94" x2="516" y2="124" class="sld-ln"/>
+              <path d="M510 118 L516 127 L522 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">CONTROLS</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">01</span></div>
+            <h3 class="obj-name">Manufacturing</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">When the site has machines, motors, compressors, pumps, production lines, automation systems or variable-frequency drives.</p></div>
+            <div class="obj-field"><p class="obj-ftext">An assessment of supply stability and possible risks to equipment.</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Single-line diagram of a solar plant: PV array, inverter, metering, grid; analyser at the point of connection">
+              <rect x="28" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="28" y1="46" x2="52" y2="30" class="sld-thin"/>
+              <rect x="58" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="58" y1="46" x2="82" y2="30" class="sld-thin"/>
+              <rect x="88" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="88" y1="46" x2="112" y2="30" class="sld-thin"/>
+              <text x="70" y="152" text-anchor="middle" class="sld-lab">PV ARRAY</text>
+              <path d="M70 46 V78 H150" class="sld-ln"/>
+              <rect x="150" y="61" width="34" height="34" class="sld-sym"/>
+              <line x1="150" y1="95" x2="184" y2="61" class="sld-thin"/>
+              <line x1="156" y1="70" x2="167" y2="70" class="sld-thin"/>
+              <line x1="156" y1="74" x2="167" y2="74" class="sld-thin"/>
+              <path d="M168 87 q3.5 -7 7 0 t7 0" class="sld-thin"/>
+              <text x="167" y="152" text-anchor="middle" class="sld-lab">INVERTER</text>
+              <line x1="184" y1="78" x2="256" y2="78" class="sld-ln"/>
+              <circle cx="271" cy="78" r="15" class="sld-sym"/>
+              <text x="271" y="82" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
+              <text x="271" y="152" text-anchor="middle" class="sld-lab">METERING</text>
+              <line x1="286" y1="78" x2="482" y2="78" class="sld-ln"/>
+              <g class="pq-g" transform="translate(376,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="376" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <circle cx="495" cy="78" r="13" class="sld-sym"/>
+              <path d="M486 78 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <text x="495" y="152" text-anchor="middle" class="sld-lab">GRID</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">02</span></div>
+            <h3 class="obj-name">Solar power plants</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">With low output, handover, modernisation or a technical dispute.</p></div>
+            <div class="obj-field"><p class="obj-ftext">Understanding whether deviations relate to the grid, the connection or how the plant is operated.</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Single-line diagram of a building: grid, metering, distribution board, lighting, sockets, HVAC; analyser at the intake">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">GRID</text>
+              <circle cx="40" cy="44" r="13" class="sld-sym"/>
+              <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <line x1="53" y1="44" x2="102" y2="44" class="sld-ln"/>
+              <circle cx="117" cy="44" r="15" class="sld-sym"/>
+              <text x="117" y="48" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
+              <line x1="132" y1="44" x2="168" y2="44" class="sld-ln"/>
+              <text x="192" y="20" text-anchor="middle" class="sld-ann">MAIN DB</text>
+              <rect x="168" y="29" width="48" height="30" class="sld-sym"/>
+              <line x1="180" y1="36" x2="180" y2="52" class="sld-thin"/>
+              <line x1="192" y1="36" x2="192" y2="52" class="sld-thin"/>
+              <line x1="204" y1="36" x2="204" y2="52" class="sld-thin"/>
+              <path d="M216 44 H244 V78" class="sld-ln"/>
+              <line x1="244" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <g class="pq-g" transform="translate(272,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="272" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="376" y1="78" x2="376" y2="124" class="sld-ln"/>
+              <path d="M370 118 L376 127 L382 118" class="sld-ln"/>
+              <text x="376" y="152" text-anchor="middle" class="sld-lab">LIGHTING</text>
+              <line x1="458" y1="78" x2="458" y2="124" class="sld-ln"/>
+              <path d="M452 118 L458 127 L464 118" class="sld-ln"/>
+              <text x="458" y="152" text-anchor="middle" class="sld-lab">SOCKETS</text>
+              <line x1="524" y1="78" x2="524" y2="124" class="sld-ln"/>
+              <path d="M518 118 L524 127 L530 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">HVAC</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">03</span></div>
+            <h3 class="obj-name">Homes and commercial premises</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Before handover, purchase, refurbishment or connecting new loads.</p></div>
+            <div class="obj-field"><p class="obj-ftext">A check of how the network works under real operating conditions.</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Single-line diagram of a medical centre: two incomers, ATS, isolating IT transformer, sensitive lines; analyser on the sensitive line">
+              <text x="8" y="20" text-anchor="start" class="sld-ann">INCOMER 1</text>
+              <circle cx="40" cy="44" r="11" class="sld-sym"/>
+              <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <circle cx="40" cy="104" r="11" class="sld-sym"/>
+              <path d="M32.5 104 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <text x="8" y="134" text-anchor="start" class="sld-ann">INCOMER 2</text>
+              <line x1="51" y1="44" x2="98" y2="44" class="sld-ln"/>
+              <line x1="51" y1="104" x2="98" y2="104" class="sld-ln"/>
+              <path d="M98 44 V64 M98 104 V92" class="sld-ln"/>
+              <rect x="98" y="64" width="46" height="28" class="sld-sym"/>
+              <text x="121" y="82" text-anchor="middle" class="sld-in">ATS</text>
+              <line x1="144" y1="78" x2="176" y2="78" class="sld-ln"/>
+              <circle cx="187" cy="71" r="9" class="sld-sym"/>
+              <circle cx="187" cy="85" r="9" class="sld-sym"/>
+              <text x="187" y="152" text-anchor="middle" class="sld-lab">IT TX</text>
+              <line x1="196" y1="78" x2="536" y2="78" class="sld-ln" stroke-width="2.6"/>
+              <text x="236" y="62" class="sld-ann">SENSITIVE LINES</text>
+              <g class="pq-g" transform="translate(292,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="292" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="410" y1="78" x2="410" y2="124" class="sld-ln"/>
+              <path d="M404 118 L410 127 L416 118" class="sld-ln"/>
+              <text x="410" y="152" text-anchor="middle" class="sld-lab">LAB</text>
+              <line x1="514" y1="78" x2="514" y2="124" class="sld-ln"/>
+              <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">IMAGING</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">04</span></div>
+            <h3 class="obj-name">Medical centres and laboratories</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Where stable power matters for accurate and safe operation of equipment.</p></div>
+            <div class="obj-field"><p class="obj-ftext">A measured baseline of the supply to sensitive lines before deviations affect operation.</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Single-line diagram of a data centre: two feeds, ATS, UPS, critical bus, racks, cooling; analyser on the critical bus">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">FEED A</text>
+              <circle cx="40" cy="44" r="11" class="sld-sym"/>
+              <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <circle cx="40" cy="104" r="11" class="sld-sym"/>
+              <path d="M32.5 104 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <text x="40" y="134" text-anchor="middle" class="sld-ann">FEED B</text>
+              <line x1="51" y1="44" x2="94" y2="44" class="sld-ln"/>
+              <line x1="51" y1="104" x2="94" y2="104" class="sld-ln"/>
+              <path d="M94 44 V64 M94 104 V92" class="sld-ln"/>
+              <rect x="94" y="64" width="46" height="28" class="sld-sym"/>
+              <text x="117" y="82" text-anchor="middle" class="sld-in">ATS</text>
+              <line x1="140" y1="78" x2="166" y2="78" class="sld-ln"/>
+              <rect x="166" y="61" width="50" height="34" class="sld-sym"/>
+              <line x1="177" y1="72" x2="177" y2="84" class="sld-thin"/>
+              <line x1="182" y1="75" x2="182" y2="81" class="sld-thin"/>
+              <path d="M192 78 q4 -8 8 0 t8 0" class="sld-thin"/>
+              <text x="191" y="152" text-anchor="middle" class="sld-lab">UPS</text>
+              <line x1="216" y1="78" x2="248" y2="78" class="sld-ln"/>
+              <line x1="248" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <text x="260" y="62" class="sld-ann">CRITICAL BUS</text>
+              <g class="pq-g" transform="translate(296,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="296" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="404" y1="78" x2="404" y2="98" class="sld-ln"/>
+              <rect x="386" y="98" width="16" height="30" class="sld-sym" stroke-width="1.4"/>
+              <line x1="389" y1="106" x2="399" y2="106" class="sld-thin"/>
+              <line x1="389" y1="113" x2="399" y2="113" class="sld-thin"/>
+              <line x1="389" y1="120" x2="399" y2="120" class="sld-thin"/>
+              <rect x="406" y="98" width="16" height="30" class="sld-sym" stroke-width="1.4"/>
+              <line x1="409" y1="106" x2="419" y2="106" class="sld-thin"/>
+              <line x1="409" y1="113" x2="419" y2="113" class="sld-thin"/>
+              <line x1="409" y1="120" x2="419" y2="120" class="sld-thin"/>
+              <text x="404" y="152" text-anchor="middle" class="sld-lab">RACKS</text>
+              <line x1="514" y1="78" x2="514" y2="124" class="sld-ln"/>
+              <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">COOLING</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">05</span></div>
+            <h3 class="obj-name">Data centres and IT infrastructure</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">When even brief deviations can cause failures.</p></div>
+            <div class="obj-field"><p class="obj-ftext">An assessment of supply resilience and network behaviour under peak load.</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Diagram: facility, 7-day measurement, report, decision">
+              <rect x="36" y="50" width="66" height="52" class="sld-sym"/>
+              <path d="M47 63 h9 M64 63 h9 M81 63 h9 M47 76 h9 M64 76 h9 M81 76 h9 M62 102 v-13 h14 v13" class="sld-thin"/>
+              <text x="69" y="152" text-anchor="middle" class="sld-lab">FACILITY</text>
+              <line x1="102" y1="76" x2="170" y2="76" class="sld-ln"/>
+              <g class="pq-g" transform="translate(188,76)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="188" y="152" text-anchor="middle" class="sld-pq-lab">PQ · 7 DAYS</text>
+              <line x1="196" y1="76" x2="298" y2="76" class="sld-pq-ln"/>
+              <path d="M298 50 h30 l12 12 v40 h-42 Z" class="sld-sym"/>
+              <path d="M328 50 v12 h12" class="sld-thin"/>
+              <path d="M308 72 h22 M308 81 h22 M308 90 h13" class="sld-thin"/>
+              <text x="319" y="152" text-anchor="middle" class="sld-lab">REPORT</text>
+              <line x1="340" y1="76" x2="438" y2="76" class="sld-ln"/>
+              <path d="M431 70 L440 76 L431 82" class="sld-ln"/>
+              <rect x="444" y="54" width="44" height="44" class="sld-sym"/>
+              <path d="M455 76 l6 8 l13 -16" class="sld-pq-ln" stroke-width="1.8"/>
+              <text x="466" y="152" text-anchor="middle" class="sld-lab">DECISION</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">06</span></div>
+            <h3 class="obj-name">Banks, investors and project partners</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">During financing, handover, modernisation or technical assessment of a facility.</p></div>
+            <div class="obj-field"><p class="obj-ftext">Independent measured data as a basis for decisions.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <p class="pv-note pv-lang">HY · հայերեն տարբերակ</p>
+  <section class="objects" aria-label="HY · հայերեն տարբերակ">
+    <div class="container obj-body">
+      <div class="obj-head">
+        <div class="obj-head-left">
+          <div class="obj-eyebrow-row">
+            <span class="obj-idx" aria-hidden="true">02</span>
+            <span class="obj-eyebrow">ՈՐՏԵՂ Է ԿԻՐԱՌԵԼԻ</span>
+          </div>
+          <h2 class="obj-h2">Որտեղ են կարևոր չափումները</h2>
+        </div>
+        <p class="obj-intro">Ցանցի ստուգումն իրական շահագործման ընթացքում օգտակար է այնտեղ, որտեղ էլեկտրաէներգիայի որակն ազդում է սարքավորման, ծախսերի, անվտանգության կամ տեխնիկական որոշման վրա։</p>
+      </div>
+      <div class="obj-matrix">
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Արտադրության միագիծ սխեմա. ցանց, տրանսֆորմատոր, գլխավոր վահանակ 0,4 կՎ, պոմպեր, գիծ VFD-ով, ավտոմատիկա. անալիզատորը միացված է մուտքին">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">ՑԱՆՑ</text>
+              <circle cx="40" cy="44" r="13" class="sld-sym"/>
+              <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <line x1="53" y1="44" x2="100" y2="44" class="sld-ln"/>
+              <circle cx="111" cy="37" r="9" class="sld-sym"/>
+              <circle cx="111" cy="51" r="9" class="sld-sym"/>
+              <path d="M120 44 H152 V78" class="sld-ln"/>
+              <text x="162" y="64" class="sld-ann">ԳԼԽԱՎՈՐ ՎԱՀԱՆԱԿ · 0,4 կՎ</text>
+              <line x1="152" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <g class="pq-g" transform="translate(210,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="210" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <rect x="316" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="320" y1="94" x2="320" y2="106" class="sld-ln"/>
+              <circle cx="320" cy="119" r="12" class="sld-sym"/>
+              <text x="320" y="123" text-anchor="middle" class="sld-in">M</text>
+              <text x="320" y="152" text-anchor="middle" class="sld-lab">ՊՈՄՊԵՐ</text>
+              <rect x="426" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="430" y1="94" x2="430" y2="106" class="sld-ln"/>
+              <rect x="410" y="106" width="40" height="24" class="sld-sym"/>
+              <text x="430" y="122" text-anchor="middle" class="sld-in">VFD</text>
+              <text x="430" y="152" text-anchor="middle" class="sld-lab">ԳԻԾ</text>
+              <rect x="512" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
+              <line x1="516" y1="94" x2="516" y2="124" class="sld-ln"/>
+              <path d="M510 118 L516 127 L522 118" class="sld-ln"/>
+              <text x="516" y="152" text-anchor="middle" class="sld-lab">ԿԻՊ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">01</span></div>
+            <h3 class="obj-name">Արտադրություններ</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Երբ կան հաստոցներ, շարժիչներ, կոմպրեսորներ, պոմպեր, գծեր, ավտոմատիկա կամ հաճախականային փոխակերպիչներ։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Սնուցման կայունության և սարքավորման հնարավոր ռիսկերի գնահատում։</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Արևային կայանի միագիծ սխեմա. PV մոդուլներ, ինվերտոր, հաշվառում, ցանց. անալիզատորը միացման կետում">
+              <rect x="28" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="28" y1="46" x2="52" y2="30" class="sld-thin"/>
+              <rect x="58" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="58" y1="46" x2="82" y2="30" class="sld-thin"/>
+              <rect x="88" y="30" width="24" height="16" class="sld-sym" stroke-width="1.4"/>
+              <line x1="88" y1="46" x2="112" y2="30" class="sld-thin"/>
+              <text x="70" y="152" text-anchor="middle" class="sld-lab">PV ՄՈԴՈՒԼ</text>
+              <path d="M70 46 V78 H150" class="sld-ln"/>
+              <rect x="150" y="61" width="34" height="34" class="sld-sym"/>
+              <line x1="150" y1="95" x2="184" y2="61" class="sld-thin"/>
+              <line x1="156" y1="70" x2="167" y2="70" class="sld-thin"/>
+              <line x1="156" y1="74" x2="167" y2="74" class="sld-thin"/>
+              <path d="M168 87 q3.5 -7 7 0 t7 0" class="sld-thin"/>
+              <text x="167" y="152" text-anchor="middle" class="sld-lab">ԻՆՎԵՐՏՈՐ</text>
+              <line x1="184" y1="78" x2="256" y2="78" class="sld-ln"/>
+              <circle cx="271" cy="78" r="15" class="sld-sym"/>
+              <text x="271" y="82" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
+              <text x="271" y="152" text-anchor="middle" class="sld-lab">ՀԱՇՎԱՌՈՒՄ</text>
+              <line x1="286" y1="78" x2="482" y2="78" class="sld-ln"/>
+              <g class="pq-g" transform="translate(376,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="376" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <circle cx="495" cy="78" r="13" class="sld-sym"/>
+              <path d="M486 78 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <text x="495" y="152" text-anchor="middle" class="sld-lab">ՑԱՆՑ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">02</span></div>
+            <h3 class="obj-name">Արևային կայաններ</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Ցածր արտադրության, շահագործման հանձնման, արդիականացման կամ վիճելի տեխնիկական հարցերի դեպքում։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Հասկանալ՝ շեղումները կապ ունե՞ն ցանցի, միացման կամ կայանի աշխատանքային ռեժիմի հետ։</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Շենքի միագիծ սխեմա. ցանց, հաշվառում, վահանակ, լուսավորում, վարդակներ, կլիմա. անալիզատորը օբյեկտի մուտքին">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">ՑԱՆՑ</text>
+              <circle cx="40" cy="44" r="13" class="sld-sym"/>
+              <path d="M31 44 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
+              <line x1="53" y1="44" x2="102" y2="44" class="sld-ln"/>
+              <circle cx="117" cy="44" r="15" class="sld-sym"/>
+              <text x="117" y="48" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
+              <line x1="132" y1="44" x2="168" y2="44" class="sld-ln"/>
+              <text x="192" y="20" text-anchor="middle" class="sld-ann">ՎԱՀԱՆԱԿ</text>
+              <rect x="168" y="29" width="48" height="30" class="sld-sym"/>
+              <line x1="180" y1="36" x2="180" y2="52" class="sld-thin"/>
+              <line x1="192" y1="36" x2="192" y2="52" class="sld-thin"/>
+              <line x1="204" y1="36" x2="204" y2="52" class="sld-thin"/>
+              <path d="M216 44 H244 V78" class="sld-ln"/>
+              <line x1="244" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <g class="pq-g" transform="translate(272,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="272" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="366" y1="78" x2="366" y2="124" class="sld-ln"/>
+              <path d="M360 118 L366 127 L372 118" class="sld-ln"/>
+              <text x="366" y="152" text-anchor="middle" class="sld-lab">ԼՈՒՍԱՎ.</text>
+              <line x1="448" y1="78" x2="448" y2="124" class="sld-ln"/>
+              <path d="M442 118 L448 127 L454 118" class="sld-ln"/>
+              <text x="448" y="152" text-anchor="middle" class="sld-lab">ՎԱՐԴԱԿ</text>
+              <line x1="524" y1="78" x2="524" y2="124" class="sld-ln"/>
+              <path d="M518 118 L524 127 L530 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">ԿԼԻՄԱ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">03</span></div>
+            <h3 class="obj-name">Բնակելի և կոմերցիոն տարածքներ</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Շահագործման հանձնումից, գնումից, վերակառուցումից կամ նոր բեռների միացումից առաջ։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Ստուգել, ինչպես է ցանցն աշխատում իրական շահագործման պայմաններում։</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Բժշկական կենտրոնի միագիծ սխեմա. երկու մուտք, ԱՎՌ, բաժանարար տրանսֆորմատոր, զգայուն գծեր. անալիզատորը զգայուն գծի վրա">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">ՄՈՒՏՔ 1</text>
+              <circle cx="40" cy="44" r="11" class="sld-sym"/>
+              <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <circle cx="40" cy="104" r="11" class="sld-sym"/>
+              <path d="M32.5 104 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <text x="40" y="134" text-anchor="middle" class="sld-ann">ՄՈՒՏՔ 2</text>
+              <line x1="51" y1="44" x2="98" y2="44" class="sld-ln"/>
+              <line x1="51" y1="104" x2="98" y2="104" class="sld-ln"/>
+              <path d="M98 44 V64 M98 104 V92" class="sld-ln"/>
+              <rect x="98" y="64" width="46" height="28" class="sld-sym"/>
+              <text x="121" y="82" text-anchor="middle" class="sld-in">ԱՎՌ</text>
+              <line x1="144" y1="78" x2="176" y2="78" class="sld-ln"/>
+              <circle cx="187" cy="71" r="9" class="sld-sym"/>
+              <circle cx="187" cy="85" r="9" class="sld-sym"/>
+              <text x="187" y="152" text-anchor="middle" class="sld-lab">ԲԱԺ. ՏՐ</text>
+              <line x1="196" y1="78" x2="536" y2="78" class="sld-ln" stroke-width="2.6"/>
+              <text x="236" y="62" class="sld-ann">ԶԳԱՅՈՒՆ ԳԾԵՐ</text>
+              <g class="pq-g" transform="translate(292,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="292" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="410" y1="78" x2="410" y2="124" class="sld-ln"/>
+              <path d="M404 118 L410 127 L416 118" class="sld-ln"/>
+              <text x="410" y="152" text-anchor="middle" class="sld-lab">ԼԱԲ.</text>
+              <line x1="514" y1="78" x2="514" y2="124" class="sld-ln"/>
+              <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">ԱԽՏՈՐՈՇՈՒՄ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">04</span></div>
+            <h3 class="obj-name">Բժշկական կենտրոններ և լաբորատորիաներ</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Այնտեղ, որտեղ կայուն սնուցումը կարևոր է սարքավորման ճշգրիտ և անվտանգ աշխատանքի համար։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Զգայուն գծերի սնուցման փաստացի պատկեր՝ նախքան շեղումները կանդրադառնան աշխատանքի վրա։</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Տվյալների կենտրոնի միագիծ սխեմա. երկու մուտք, ԱՎՌ, UPS, երաշխավորված սնուցում, սերվերներ, հովացում. անալիզատորը երաշխավորված գծի վրա">
+              <text x="40" y="20" text-anchor="middle" class="sld-ann">ՄՈՒՏՔ A</text>
+              <circle cx="40" cy="44" r="11" class="sld-sym"/>
+              <path d="M32.5 44 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <circle cx="40" cy="104" r="11" class="sld-sym"/>
+              <path d="M32.5 104 q3.8 -8 7.5 0 t7.5 0" class="sld-ln" stroke-width="1.4"/>
+              <text x="40" y="134" text-anchor="middle" class="sld-ann">ՄՈՒՏՔ B</text>
+              <line x1="51" y1="44" x2="94" y2="44" class="sld-ln"/>
+              <line x1="51" y1="104" x2="94" y2="104" class="sld-ln"/>
+              <path d="M94 44 V64 M94 104 V92" class="sld-ln"/>
+              <rect x="94" y="64" width="46" height="28" class="sld-sym"/>
+              <text x="117" y="82" text-anchor="middle" class="sld-in">ԱՎՌ</text>
+              <line x1="140" y1="78" x2="166" y2="78" class="sld-ln"/>
+              <rect x="166" y="61" width="50" height="34" class="sld-sym"/>
+              <line x1="177" y1="72" x2="177" y2="84" class="sld-thin"/>
+              <line x1="182" y1="75" x2="182" y2="81" class="sld-thin"/>
+              <path d="M192 78 q4 -8 8 0 t8 0" class="sld-thin"/>
+              <text x="191" y="152" text-anchor="middle" class="sld-lab">UPS</text>
+              <line x1="216" y1="78" x2="248" y2="78" class="sld-ln"/>
+              <line x1="248" y1="78" x2="536" y2="78" class="sld-bus"/>
+              <text x="260" y="62" class="sld-ann">ԵՐԱՇԽԱՎՈՐՎԱԾ ՍՆՈՒՑՈՒՄ</text>
+              <g class="pq-g" transform="translate(296,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="296" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
+              <line x1="404" y1="78" x2="404" y2="98" class="sld-ln"/>
+              <rect x="386" y="98" width="16" height="30" class="sld-sym" stroke-width="1.4"/>
+              <line x1="389" y1="106" x2="399" y2="106" class="sld-thin"/>
+              <line x1="389" y1="113" x2="399" y2="113" class="sld-thin"/>
+              <line x1="389" y1="120" x2="399" y2="120" class="sld-thin"/>
+              <rect x="406" y="98" width="16" height="30" class="sld-sym" stroke-width="1.4"/>
+              <line x1="409" y1="106" x2="419" y2="106" class="sld-thin"/>
+              <line x1="409" y1="113" x2="419" y2="113" class="sld-thin"/>
+              <line x1="409" y1="120" x2="419" y2="120" class="sld-thin"/>
+              <text x="404" y="152" text-anchor="middle" class="sld-lab">ՍԵՐՎԵՐՆԵՐ</text>
+              <line x1="514" y1="78" x2="514" y2="124" class="sld-ln"/>
+              <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
+              <text x="536" y="152" text-anchor="end" class="sld-lab">ՀՈՎԱՑՈՒՄ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">05</span></div>
+            <h3 class="obj-name">Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Երբ նույնիսկ կարճատև շեղումները կարող են հանգեցնել խափանումների։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Սնուցման կայունության և ցանցի վարքի գնահատում առավելագույն բեռնվածության տակ։</p></div>
+          </div>
+        </div>
+        <div class="obj-row">
+          <figure class="sld-sheet">
+            <svg viewBox="0 0 560 168" fill="none" role="img" aria-label="Սխեմա. օբյեկտ, 7 օր չափում, հաշվետվություն, որոշում">
+              <rect x="36" y="50" width="66" height="52" class="sld-sym"/>
+              <path d="M47 63 h9 M64 63 h9 M81 63 h9 M47 76 h9 M64 76 h9 M81 76 h9 M62 102 v-13 h14 v13" class="sld-thin"/>
+              <text x="69" y="152" text-anchor="middle" class="sld-lab">ՕԲՅԵԿՏ</text>
+              <line x1="102" y1="76" x2="170" y2="76" class="sld-ln"/>
+              <g class="pq-g" transform="translate(188,76)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
+              <text x="188" y="152" text-anchor="middle" class="sld-pq-lab">PQ · 7 ՕՐ</text>
+              <line x1="196" y1="76" x2="298" y2="76" class="sld-pq-ln"/>
+              <path d="M298 50 h30 l12 12 v40 h-42 Z" class="sld-sym"/>
+              <path d="M328 50 v12 h12" class="sld-thin"/>
+              <path d="M308 72 h22 M308 81 h22 M308 90 h13" class="sld-thin"/>
+              <text x="319" y="152" text-anchor="middle" class="sld-lab">ՀԱՇՎԵՏՎՈՒԹՅՈՒՆ</text>
+              <line x1="340" y1="76" x2="438" y2="76" class="sld-ln"/>
+              <path d="M431 70 L440 76 L431 82" class="sld-ln"/>
+              <rect x="444" y="54" width="44" height="44" class="sld-sym"/>
+              <path d="M455 76 l6 8 l13 -16" class="sld-pq-ln" stroke-width="1.8"/>
+              <text x="466" y="152" text-anchor="middle" class="sld-lab">ՈՐՈՇՈՒՄ</text>
+            </svg>
+          </figure>
+          <div class="obj-lead">
+            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">06</span></div>
+            <h3 class="obj-name">Բանկեր, ներդրողներ և նախագծային գործընկերներ</h3>
+          </div>
+          <div class="obj-desc">
+            <div class="obj-field"><p class="obj-ftext">Ֆինանսավորման, շահագործման հանձնման, արդիականացման կամ տեխնիկական գնահատման ժամանակ։</p></div>
+            <div class="obj-field"><p class="obj-ftext">Անկախ չափված տվյալներ՝ որպես որոշման հիմք։</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <script src="/assets/vendor/gsap.min.js"></script>
   <script src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script>
-  /* ══ Живой чертёж: перо прочерчивает цепь, символы встают, клещи
-        защёлкиваются на шине, прибор включается, осциллограмма бежит.
-        Reduced-motion / нет GSAP → лист статичен и полностью виден. ══ */
   (function () {
     'use strict';
     if (!window.gsap || !window.ScrollTrigger) return;
@@ -411,7 +964,7 @@
       var corLns = [];
       svg.querySelectorAll('.sld-pq-ln').forEach(function (el) {
         if (el === wave || el === lead || el.closest('.pq-g')) return;
-        if (prepDraw(el)) corLns.push(el);   /* coral flow lines of sheet 06 */
+        if (prepDraw(el)) corLns.push(el);
       });
       [ring, dev].forEach(function (el) { if (el) el.style.transformBox = 'fill-box'; });
       var leadL = lead ? prepDraw(lead) : 0;
@@ -427,12 +980,10 @@
         scrollTrigger: { trigger: svg, start: 'top 82%', once: true },
         defaults: { ease: 'power2.inOut' }
       });
-      /* the pen draws the circuit */
       tl.to(draws, { strokeDashoffset: 0, duration: 0.55, stagger: 0.055 }, 0);
       tl.to(pops, { scale: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.05 }, 0.3);
       var grayTexts = texts.filter(function (t) { return t !== pqLab; });
       tl.to(grayTexts, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.045 }, 0.55);
-      /* the clamp snaps onto the bus, the analyzer wakes up */
       var t0 = 1.05;
       if (ring) tl.to(ring, { scale: 1, duration: 0.45, ease: 'back.out(3)' }, t0);
       if (lead && leadL) tl.to(lead, { strokeDashoffset: 0, duration: 0.3 }, t0 + 0.25);
@@ -445,10 +996,9 @@
       if (corLns.length) tl.to(corLns, { strokeDashoffset: 0, duration: 0.45 }, t0 + 0.6);
       if (pqLab) tl.to(pqLab, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' }, t0 + 0.9);
 
-      /* hover: the trace runs again */
-      var sheet = svg.closest('.sld-sheet');
-      if (sheet && wave) {
-        sheet.addEventListener('mouseenter', function () {
+      var sheetEl = svg.closest('.sld-sheet');
+      if (sheetEl && wave) {
+        sheetEl.addEventListener('mouseenter', function () {
           gsap.fromTo(wave, { strokeDashoffset: 0 }, { strokeDashoffset: -148, duration: 2, ease: 'none', overwrite: 'auto' });
         });
       }
