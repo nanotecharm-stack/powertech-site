@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ПРЕВЬЮ v2 — §02, чертёжные листы (вариант B)</title>
+  <title>ПРЕВЬЮ v3 — §02, живой чертёж (вариант B)</title>
   <link rel="stylesheet" href="/style.css?v=186" />
   <style>
     body { padding-top: 40px; }
@@ -20,16 +20,16 @@
     }
     @media (max-width: 560px) { .pv-note { padding: 0 24px; } }
 
-    /* ── Drawing sheet: framed plate with a faint drafting grid and a
-         title-block stamp, same paper language as the report mock ── */
+    /* ── Drawing sheet v3: quiet paper, no title block — the drawing
+         and its choreography carry the piece ── */
     .sld-sheet {
       position: relative;
       margin: 0 0 22px;
       border: 1px solid var(--border-lt);
       border-radius: 6px;
       background:
-        repeating-linear-gradient(90deg, rgba(20,20,20,.022) 0 1px, transparent 1px 38px),
-        repeating-linear-gradient(0deg, rgba(20,20,20,.018) 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(90deg, rgba(20,20,20,.02) 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(0deg, rgba(20,20,20,.016) 0 1px, transparent 1px 38px),
         #FFFFFF;
       overflow: hidden;
     }
@@ -39,20 +39,6 @@
       height: auto;
       font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
     }
-    .sld-stamp {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      padding: 8px 14px 9px;
-      border-top: 1px solid var(--border-lt);
-      font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .ss-code { color: var(--coral); font-weight: 500; white-space: nowrap; }
-    .ss-note { color: #A8A296; text-align: right; }
     .obj-row::after { display: none; }   /* no raster skeleton on this page */
 
     /* diagram grammar */
@@ -66,39 +52,18 @@
     .sld-pq-ln  { stroke: #F25749; stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .sld-pq-sym { stroke: #F25749; stroke-width: 1.8; fill: #FFFFFF; }
     .sld-pq-lab { font-size: 11.5px; letter-spacing: .08em; fill: #F25749; font-weight: 500; }
+    .pq-wave    { stroke-dasharray: 60 14; }
     @media (max-width: 600px) {
       .sld-lab    { font-size: 14.5px; }
       .sld-ann    { font-size: 13px; }
       .sld-in     { font-size: 13px; }
       .sld-pq-lab { font-size: 13.5px; }
-      .sld-stamp  { padding: 7px 12px 8px; font-size: 9px; }
-    }
-    /* the analyzer screen trace runs on hover — one quiet live moment */
-    @media (prefers-reduced-motion: no-preference) {
-      .pq-wave { stroke-dasharray: 60 14; }
-      .sld-sheet:hover .pq-wave { animation: pq-wave-run 1.2s linear infinite; }
-      @keyframes pq-wave-run { to { stroke-dashoffset: -74; } }
     }
   </style>
 </head>
 <body>
 
-  <p class="pv-note">Превью v2 · вариант B — чертёжные листы · не для публикации</p>
-
-  <!-- shared symbol: clamp CT on the bus + lead + analyzer with a live trace.
-       Placed via <use> at the tap point of every sheet (origin = clamp centre). -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <g id="pq-asm">
-        <circle cx="0" cy="0" r="8" class="sld-pq-sym"/>
-        <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln"/>
-        <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym"/>
-        <path class="sld-pq-ln pq-wave" stroke-width="1.3"
-              d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
-        <circle cx="14" cy="35" r="1.4" fill="#F25749"/>
-      </g>
-    </defs>
-  </svg>
+  <p class="pv-note">Превью v3 · вариант B — живой чертёж · не для публикации</p>
 
   <section class="objects" id="objects" aria-labelledby="obj-heading">
     <div class="container obj-body">
@@ -129,7 +94,13 @@
               <path d="M120 44 H152 V78" class="sld-ln"/>
               <text x="162" y="66" class="sld-ann">ГРЩ · 0,4 кВ</text>
               <line x1="152" y1="78" x2="536" y2="78" class="sld-bus"/>
-              <use href="#pq-asm" x="210" y="78"/>
+              <g class="pq-g" transform="translate(210,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="210" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
               <rect x="316" y="86" width="8" height="8" class="sld-sym" stroke-width="1.4"/>
               <line x1="320" y1="94" x2="320" y2="106" class="sld-ln"/>
@@ -146,10 +117,6 @@
               <path d="M510 118 L516 127 L522 118" class="sld-ln"/>
               <text x="516" y="152" text-anchor="middle" class="sld-lab">КИПиА</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·01</span>
-              <span class="ss-note">Точка измерения — ввод ГРЩ</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">01</span></div>
@@ -184,16 +151,18 @@
               <text x="271" y="82" text-anchor="middle" class="sld-in" font-size="9.5">kWh</text>
               <text x="271" y="152" text-anchor="middle" class="sld-lab">УЧЁТ</text>
               <line x1="286" y1="78" x2="482" y2="78" class="sld-ln"/>
-              <use href="#pq-asm" x="376" y="78"/>
+              <g class="pq-g" transform="translate(376,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="376" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
               <circle cx="495" cy="78" r="13" class="sld-sym"/>
               <path d="M486 78 q4.5 -9 9 0 t9 0" class="sld-ln" stroke-width="1.5"/>
               <text x="495" y="152" text-anchor="middle" class="sld-lab">СЕТЬ</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·02</span>
-              <span class="ss-note">Точка измерения — присоединение к сети</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">02</span></div>
@@ -223,7 +192,13 @@
               <line x1="204" y1="36" x2="204" y2="52" class="sld-thin"/>
               <path d="M216 44 H244 V78" class="sld-ln"/>
               <line x1="244" y1="78" x2="536" y2="78" class="sld-bus"/>
-              <use href="#pq-asm" x="290" y="78"/>
+              <g class="pq-g" transform="translate(290,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="290" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
               <line x1="390" y1="78" x2="390" y2="124" class="sld-ln"/>
               <path d="M384 118 L390 127 L396 118" class="sld-ln"/>
@@ -235,10 +210,6 @@
               <path d="M518 118 L524 127 L530 118" class="sld-ln"/>
               <text x="536" y="152" text-anchor="end" class="sld-lab">КЛИМАТ</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·03</span>
-              <span class="ss-note">Точка измерения — ввод объекта</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">03</span></div>
@@ -271,7 +242,13 @@
               <text x="187" y="152" text-anchor="middle" class="sld-lab">IT-ТР</text>
               <line x1="196" y1="78" x2="536" y2="78" class="sld-ln" stroke-width="2.6"/>
               <text x="236" y="62" class="sld-ann">ЧУВСТВИТЕЛЬНЫЕ ЛИНИИ</text>
-              <use href="#pq-asm" x="292" y="78"/>
+              <g class="pq-g" transform="translate(292,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="292" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
               <line x1="410" y1="78" x2="410" y2="124" class="sld-ln"/>
               <path d="M404 118 L410 127 L416 118" class="sld-ln"/>
@@ -280,10 +257,6 @@
               <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
               <text x="536" y="152" text-anchor="end" class="sld-lab">ДИАГН.</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·04</span>
-              <span class="ss-note">Точка измерения — чувствительная линия</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">04</span></div>
@@ -319,7 +292,13 @@
               <line x1="216" y1="78" x2="248" y2="78" class="sld-ln"/>
               <line x1="248" y1="78" x2="536" y2="78" class="sld-bus"/>
               <text x="260" y="62" class="sld-ann">КРИТИЧЕСКАЯ ШИНА</text>
-              <use href="#pq-asm" x="296" y="78"/>
+              <g class="pq-g" transform="translate(296,78)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="296" y="152" text-anchor="middle" class="sld-pq-lab">PQ · U·I·THD</text>
               <line x1="404" y1="78" x2="404" y2="98" class="sld-ln"/>
               <rect x="386" y="98" width="16" height="30" class="sld-sym" stroke-width="1.4"/>
@@ -335,10 +314,6 @@
               <path d="M508 118 L514 127 L520 118" class="sld-ln"/>
               <text x="536" y="152" text-anchor="end" class="sld-lab">ОХЛАЖД.</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·05</span>
-              <span class="ss-note">Точка измерения — критическая шина</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">05</span></div>
@@ -358,7 +333,13 @@
               <path d="M47 63 h9 M64 63 h9 M81 63 h9 M47 76 h9 M64 76 h9 M81 76 h9 M62 102 v-13 h14 v13" class="sld-thin"/>
               <text x="69" y="152" text-anchor="middle" class="sld-lab">ОБЪЕКТ</text>
               <line x1="102" y1="76" x2="170" y2="76" class="sld-ln"/>
-              <use href="#pq-asm" x="188" y="76"/>
+              <g class="pq-g" transform="translate(188,76)">
+                <circle cx="0" cy="0" r="8" class="sld-pq-sym pq-ring"/>
+                <line x1="0" y1="8" x2="0" y2="30" class="sld-pq-ln pq-lead"/>
+                <rect x="-19" y="30" width="38" height="26" rx="4" class="sld-pq-sym pq-dev"/>
+                <path class="sld-pq-ln pq-wave" stroke-width="1.3" d="M-13 43 l3 -5 l3 8 l3 -7 l3 6 l3 -5 l3 4 l3 -3 l3 2 l2 0"/>
+                <circle cx="14" cy="35" r="1.4" fill="#F25749" class="pq-led"/>
+              </g>
               <text x="188" y="152" text-anchor="middle" class="sld-pq-lab">PQ · 7 ДНЕЙ</text>
               <line x1="196" y1="76" x2="298" y2="76" class="sld-pq-ln"/>
               <path d="M298 50 h30 l12 12 v40 h-42 Z" class="sld-sym"/>
@@ -371,10 +352,6 @@
               <path d="M455 76 l6 8 l13 -16" class="sld-pq-ln" stroke-width="1.8"/>
               <text x="466" y="152" text-anchor="middle" class="sld-lab">РЕШЕНИЕ</text>
             </svg>
-            <figcaption class="sld-stamp">
-              <span class="ss-code">PT·SLD·06</span>
-              <span class="ss-note">Измеренные данные — основа решения</span>
-            </figcaption>
           </figure>
           <div class="obj-lead">
             <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">06</span></div>
@@ -391,5 +368,92 @@
     </div><!-- /container -->
   </section>
 
+  <script src="/assets/vendor/gsap.min.js"></script>
+  <script src="/assets/vendor/ScrollTrigger.min.js"></script>
+  <script>
+  /* ══ Живой чертёж: перо прочерчивает цепь, символы встают, клещи
+        защёлкиваются на шине, прибор включается, осциллограмма бежит.
+        Reduced-motion / нет GSAP → лист статичен и полностью виден. ══ */
+  (function () {
+    'use strict';
+    if (!window.gsap || !window.ScrollTrigger) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
+    function prepDraw(el) {
+      var L; try { L = el.getTotalLength(); } catch (e) { return 0; }
+      if (!L) return 0;
+      el.style.strokeDasharray = L + ' ' + (L + 2);
+      el.style.strokeDashoffset = L;
+      return L;
+    }
+
+    document.querySelectorAll('.sld-sheet svg').forEach(function (svg) {
+      var draws = [], texts = [], pops = [];
+      svg.querySelectorAll('.sld-ln, .sld-thin, .sld-bus').forEach(function (el) {
+        if (el.closest('.pq-g')) return;
+        if (prepDraw(el)) draws.push(el);
+      });
+      svg.querySelectorAll('circle.sld-sym, rect.sld-sym').forEach(function (el) {
+        if (el.closest('.pq-g')) return;
+        el.style.transformBox = 'fill-box';
+        pops.push(el);
+      });
+      svg.querySelectorAll('text').forEach(function (el) { texts.push(el); });
+
+      var ring = svg.querySelector('.pq-ring');
+      var lead = svg.querySelector('.pq-lead');
+      var dev  = svg.querySelector('.pq-dev');
+      var wave = svg.querySelector('.pq-wave');
+      var led  = svg.querySelector('.pq-led');
+      var pqLab = svg.querySelector('.sld-pq-lab');
+      var corLns = [];
+      svg.querySelectorAll('.sld-pq-ln').forEach(function (el) {
+        if (el === wave || el === lead || el.closest('.pq-g')) return;
+        if (prepDraw(el)) corLns.push(el);   /* coral flow lines of sheet 06 */
+      });
+      [ring, dev].forEach(function (el) { if (el) el.style.transformBox = 'fill-box'; });
+      var leadL = lead ? prepDraw(lead) : 0;
+
+      gsap.set(pops, { scale: 0, transformOrigin: '50% 50%' });
+      gsap.set(texts, { autoAlpha: 0, y: 4 });
+      if (ring) gsap.set(ring, { scale: 0, transformOrigin: '50% 50%' });
+      if (dev)  gsap.set(dev,  { scale: 0, transformOrigin: '50% 50%' });
+      if (wave) gsap.set(wave, { autoAlpha: 0 });
+      if (led)  gsap.set(led,  { autoAlpha: 0 });
+
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: svg, start: 'top 82%', once: true },
+        defaults: { ease: 'power2.inOut' }
+      });
+      /* the pen draws the circuit */
+      tl.to(draws, { strokeDashoffset: 0, duration: 0.55, stagger: 0.055 }, 0);
+      tl.to(pops, { scale: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.05 }, 0.3);
+      var grayTexts = texts.filter(function (t) { return t !== pqLab; });
+      tl.to(grayTexts, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.045 }, 0.55);
+      /* the clamp snaps onto the bus, the analyzer wakes up */
+      var t0 = 1.05;
+      if (ring) tl.to(ring, { scale: 1, duration: 0.45, ease: 'back.out(3)' }, t0);
+      if (lead && leadL) tl.to(lead, { strokeDashoffset: 0, duration: 0.3 }, t0 + 0.25);
+      if (dev) tl.to(dev, { scale: 1, duration: 0.4, ease: 'back.out(2.2)' }, t0 + 0.45);
+      if (led) tl.to(led, { autoAlpha: 1, duration: 0.15, repeat: 3, yoyo: true }, t0 + 0.75);
+      if (wave) {
+        tl.to(wave, { autoAlpha: 1, duration: 0.2 }, t0 + 0.8);
+        tl.to(wave, { strokeDashoffset: -148, duration: 2.4, ease: 'none' }, t0 + 0.85);
+      }
+      if (corLns.length) tl.to(corLns, { strokeDashoffset: 0, duration: 0.45 }, t0 + 0.6);
+      if (pqLab) tl.to(pqLab, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' }, t0 + 0.9);
+
+      /* hover: the trace runs again */
+      var sheet = svg.closest('.sld-sheet');
+      if (sheet && wave) {
+        sheet.addEventListener('mouseenter', function () {
+          gsap.fromTo(wave, { strokeDashoffset: 0 }, { strokeDashoffset: -148, duration: 2, ease: 'none', overwrite: 'auto' });
+        });
+      }
+    });
+  }());
+  </script>
 </body>
 </html>
