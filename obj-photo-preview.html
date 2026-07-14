@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>ПРЕВЬЮ — §02, вариант А-мини (компактный индекс)</title>
+  <title>ПРЕВЬЮ — §02, А-мини v2: две компоновки</title>
   <link rel="stylesheet" href="/style.css?v=186" />
   <style>
     body { padding-top: 40px; font-family: 'IBM Plex Sans', system-ui, sans-serif; }
@@ -15,91 +15,75 @@
     }
     .pv-var { margin-top: 44px; color: #F25749; }
     @media (max-width: 560px) { .pv-note { padding: 0 24px; } }
-    .obj-row::after { display: none; }
-    .pv-wave { width: 46px; height: 12px; flex-shrink: 0; }
-    .pv-wave path { stroke: var(--coral); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
-    @media (prefers-reduced-motion: no-preference) {
-      .pv-wave path { stroke-dasharray: 52 12; }
-      .va-row:hover .pv-wave path,
-      .v1-sheet:hover .pv-wave path { animation: pvw 1.1s linear infinite; }
-      @keyframes pvw { to { stroke-dashoffset: -64; } }
-    }
 
-    /* ══ Variant A-min — compact catalog index ══ */
-    .va-list { border-top: 1px solid var(--border); }
-    .va-row {
-      display: grid;
-      grid-template-columns: 210px 1fr 216px;
-      gap: 30px;
-      align-items: center;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border-lt);
-    }
-    .va-photo {
-      margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 5px;
+    /* shared item pieces */
+    .vm-photo {
+      margin: 0; overflow: hidden; border-radius: 5px;
       border: 1px solid var(--border-lt);
     }
-    .va-photo img {
+    .vm-photo img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: grayscale(1) sepia(.08) contrast(.92) brightness(1.05);
     }
     @media (prefers-reduced-motion: no-preference) {
-      .va-photo img { transition: filter .5s var(--ease), transform .6s var(--ease); }
+      .vm-photo img { transition: filter .5s var(--ease); }
     }
-    .va-row:hover .va-photo img { filter: none; }
-    .va-title { display: flex; align-items: baseline; gap: 11px; margin-bottom: 7px; }
-    .va-num { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--coral); }
-    .va-name {
-      font-size: 16.5px; font-weight: 600; line-height: 1.28;
+    .vb-item:hover .vm-photo img,
+    .vc-row:hover .vm-photo img { filter: none; }
+    .vm-title { display: flex; align-items: baseline; gap: 11px; margin-bottom: 7px; }
+    .vm-num { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--coral); }
+    .vm-name {
+      font-size: 16px; font-weight: 600; line-height: 1.28;
       letter-spacing: -.012em; color: var(--graphite);
     }
-    .va-text { font-size: 13px; line-height: 1.55; color: var(--text-mid); max-width: 560px; }
-    .va-strong { position: relative; margin-top: 4px; padding-left: 16px; color: var(--graphite); font-weight: 500; }
-    .va-strong::before {
+    .vm-text { font-size: 13px; line-height: 1.55; color: var(--text-mid); }
+    .vm-strong { position: relative; margin-top: 5px; padding-left: 16px; color: var(--graphite); font-weight: 500; }
+    .vm-strong::before {
       content: ""; position: absolute; left: 0; top: 6px;
       width: 6px; height: 6px; border-radius: 1px; background: var(--coral);
     }
-    .va-meta {
-      display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
-      font-family: 'IBM Plex Mono', ui-monospace, monospace;
-      font-size: 10px; letter-spacing: .1em; color: #A8A296;
-      text-align: right; text-transform: uppercase;
+
+    /* ══ composition 1: dense two-column catalog ══ */
+    .vb-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      column-gap: 72px; border-top: 1px solid var(--border);
     }
-    @media (max-width: 900px) {
-      .va-row { grid-template-columns: 150px 1fr; gap: 20px; }
-      .va-meta { display: none; }
+    .vb-item {
+      display: grid; grid-template-columns: 150px 1fr; gap: 22px;
+      align-items: center; padding: 22px 0;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .vb-item .vm-photo { aspect-ratio: 4 / 3; }
+    @media (max-width: 880px) {
+      .vb-grid { grid-template-columns: 1fr; column-gap: 0; }
     }
     @media (max-width: 560px) {
-      .va-row { grid-template-columns: 104px 1fr; gap: 16px; align-items: start; padding: 16px 0; }
-      .va-photo { aspect-ratio: 1 / 1; }
-      .va-text { display: none; }
-      .va-strong { display: block; margin-top: 6px; }
-      .va-title { flex-direction: column; gap: 3px; margin-bottom: 0; }
+      .vb-item { grid-template-columns: 104px 1fr; gap: 16px; align-items: start; padding: 16px 0; }
+      .vb-item .vm-photo { aspect-ratio: 1 / 1; }
+      .vb-item .vm-text:not(.vm-strong) { display: none; }
+      .vb-item .vm-title { flex-direction: column; gap: 3px; }
     }
 
-    /* ══ previous V1 (for comparison) ══ */
-    .v1-sheet {
-      margin: 0 0 22px; border: 1px solid var(--border-lt); border-radius: 6px;
-      overflow: hidden; background: #fff;
+    /* ══ composition 2: full-width single list ══ */
+    .vc-list { border-top: 1px solid var(--border); }
+    .vc-row {
+      display: grid; grid-template-columns: 224px 1fr; gap: 36px;
+      align-items: center; padding: 20px 0;
+      border-bottom: 1px solid var(--border-lt);
     }
-    .v1-photo { position: relative; aspect-ratio: 16 / 7; overflow: hidden; }
-    .v1-photo img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(1) sepia(.1) contrast(.9) brightness(1.05);
+    .vc-row .vm-photo { aspect-ratio: 16 / 9; }
+    .vc-row .vm-text { max-width: 620px; }
+    @media (max-width: 560px) {
+      .vc-row { grid-template-columns: 104px 1fr; gap: 16px; align-items: start; padding: 16px 0; }
+      .vc-row .vm-photo { aspect-ratio: 1 / 1; }
+      .vc-row .vm-text:not(.vm-strong) { display: none; }
+      .vc-row .vm-title { flex-direction: column; gap: 3px; }
     }
-    .v1-strip {
-      display: flex; align-items: center; gap: 10px;
-      padding: 8px 14px; border-top: 1px solid var(--border-lt);
-      font-family: 'IBM Plex Mono', ui-monospace, monospace;
-      font-size: 10px; letter-spacing: .1em; color: var(--coral);
-    }
-    .v1-strip span { flex: 1; }
-    .v1-strip b { font-weight: 600; letter-spacing: .06em; }
   </style>
 </head>
 <body>
-  <p class="pv-note">Превью · §02 · вариант А-мини против прежней подачи · не для публикации</p>
-  <p class="pv-note pv-var">НОВАЯ ПОДАЧА · вариант А-мини — компактный индекс, монохром, цвет по наведению</p>
+  <p class="pv-note">Превью · §02 · А-мини v2 — две компоновки без колонки «точка» · не для публикации</p>
+  <p class="pv-note pv-var">КОМПОНОВКА 1 · плотная сетка — две колонки, без правой колонки «точка»</p>
   <section class="objects">
     <div class="container obj-body">
       <div class="obj-head">
@@ -112,83 +96,59 @@
         </div>
         <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
       </div>
-      <div class="va-list">
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">01</span><h3 class="va-name">Производства</h3></div>
-            <p class="va-text">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
-            <p class="va-text va-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ТОЧКА · ВВОД ГРЩ</span>
+      <div class="vb-grid">
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">01</span><h3 class="vm-name">Производства</h3></div>
+            <p class="vm-text">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
+            <p class="vm-text vm-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
           </div>
         </div>
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">02</span><h3 class="va-name">Солнечные станции</h3></div>
-            <p class="va-text">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
-            <p class="va-text va-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ТОЧКА · ПРИСОЕДИНЕНИЕ К СЕТИ</span>
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">02</span><h3 class="vm-name">Солнечные станции</h3></div>
+            <p class="vm-text">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
+            <p class="vm-text vm-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
           </div>
         </div>
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">03</span><h3 class="va-name">Частные дома и коммерческие помещения</h3></div>
-            <p class="va-text">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
-            <p class="va-text va-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ТОЧКА · ВВОД ОБЪЕКТА</span>
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">03</span><h3 class="vm-name">Частные дома и коммерческие помещения</h3></div>
+            <p class="vm-text">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
+            <p class="vm-text vm-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
           </div>
         </div>
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">04</span><h3 class="va-name">Медицинские центры и лаборатории</h3></div>
-            <p class="va-text">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
-            <p class="va-text va-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ТОЧКА · ЧУВСТВИТЕЛЬНАЯ ЛИНИЯ</span>
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">04</span><h3 class="vm-name">Медицинские центры и лаборатории</h3></div>
+            <p class="vm-text">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
+            <p class="vm-text vm-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
           </div>
         </div>
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">05</span><h3 class="va-name">Дата-центры и IT-инфраструктура</h3></div>
-            <p class="va-text">Когда даже кратковременные отклонения могут привести к сбоям.</p>
-            <p class="va-text va-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ТОЧКА · ШИНА ГАРАНТ. ПИТАНИЯ</span>
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">05</span><h3 class="vm-name">Дата-центры и IT-инфраструктура</h3></div>
+            <p class="vm-text">Когда даже кратковременные отклонения могут привести к сбоям.</p>
+            <p class="vm-text vm-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
           </div>
         </div>
-        <div class="va-row">
-          <figure class="va-photo"><img src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
-          <div class="va-main">
-            <div class="va-title"><span class="va-num">06</span><h3 class="va-name">Банки, инвесторы и проектные партнёры</h3></div>
-            <p class="va-text">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
-            <p class="va-text va-strong">Независимые измеренные данные как основа для решения.</p>
-          </div>
-          <div class="va-meta">
-            <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-            <span>ДАННЫЕ ДЛЯ РЕШЕНИЯ</span>
+        <div class="vb-item">
+          <figure class="vm-photo"><img src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">06</span><h3 class="vm-name">Банки, инвесторы и проектные партнёры</h3></div>
+            <p class="vm-text">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
+            <p class="vm-text vm-strong">Независимые измеренные данные как основа для решения.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <p class="pv-note pv-var">ДЛЯ СРАВНЕНИЯ · прежняя подача варианта А (крупные карточки)</p>
+  <p class="pv-note pv-var">КОМПОНОВКА 2 · один список во всю ширину — без правой колонки</p>
   <section class="objects">
     <div class="container obj-body">
       <div class="obj-head">
@@ -201,113 +161,53 @@
         </div>
         <p class="obj-intro">Проверка электросети в реальной эксплуатации полезна там, где качество электроэнергии влияет на работу оборудования, расходы, безопасность или техническое решение.</p>
       </div>
-      <div class="obj-matrix">
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ТОЧКА · ВВОД ГРЩ</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">01</span></div>
-            <h3 class="obj-name">Производства</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Оценка стабильности питания и возможных рисков для оборудования.</p></div>
+      <div class="vc-list">
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/01-production.png" alt="" loading="lazy" style="object-position:50% 30%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">01</span><h3 class="vm-name">Производства</h3></div>
+            <p class="vm-text">Когда есть станки, двигатели, компрессоры, насосы, линии, автоматика или частотные преобразователи.</p>
+            <p class="vm-text vm-strong">Оценка стабильности питания и возможных рисков для оборудования.</p>
           </div>
         </div>
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ТОЧКА · ПРИСОЕДИНЕНИЕ К СЕТИ</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">02</span></div>
-            <h3 class="obj-name">Солнечные станции</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p></div>
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/02-solar.png" alt="" loading="lazy" style="object-position:50% 62%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">02</span><h3 class="vm-name">Солнечные станции</h3></div>
+            <p class="vm-text">При низкой выработке, приёмке, модернизации или спорных технических ситуациях.</p>
+            <p class="vm-text vm-strong">Понимание, связаны ли отклонения с сетью, подключением или режимом работы станции.</p>
           </div>
         </div>
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ТОЧКА · ВВОД ОБЪЕКТА</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">03</span></div>
-            <h3 class="obj-name">Частные дома и коммерческие помещения</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Проверка работы электросети в реальных условиях эксплуатации.</p></div>
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/03-buildings.png" alt="" loading="lazy" style="object-position:50% 38%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">03</span><h3 class="vm-name">Частные дома и коммерческие помещения</h3></div>
+            <p class="vm-text">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
+            <p class="vm-text vm-strong">Проверка работы электросети в реальных условиях эксплуатации.</p>
           </div>
         </div>
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ТОЧКА · ЧУВСТВИТЕЛЬНАЯ ЛИНИЯ</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">04</span></div>
-            <h3 class="obj-name">Медицинские центры и лаборатории</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p></div>
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/04-medical.png" alt="" loading="lazy" style="object-position:50% 45%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">04</span><h3 class="vm-name">Медицинские центры и лаборатории</h3></div>
+            <p class="vm-text">Там, где стабильное питание важно для точной и безопасной работы оборудования.</p>
+            <p class="vm-text vm-strong">Фактическая картина питания чувствительных линий ещё до того, как отклонения скажутся на работе.</p>
           </div>
         </div>
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ТОЧКА · ШИНА ГАРАНТ. ПИТАНИЯ</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">05</span></div>
-            <h3 class="obj-name">Дата-центры и IT-инфраструктура</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">Когда даже кратковременные отклонения могут привести к сбоям.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p></div>
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/05-datacenter.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">05</span><h3 class="vm-name">Дата-центры и IT-инфраструктура</h3></div>
+            <p class="vm-text">Когда даже кратковременные отклонения могут привести к сбоям.</p>
+            <p class="vm-text vm-strong">Оценка устойчивости питания и поведения сети под критической нагрузкой.</p>
           </div>
         </div>
-        <div class="obj-row">
-          <figure class="v1-sheet">
-            <div class="v1-photo"><img src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%"></div>
-            <figcaption class="v1-strip">
-              <svg class="pv-wave" viewBox="0 0 46 12" fill="none" aria-hidden="true"><path d="M2 6 l4 -3 l4 5 l4 -4 l4 3 l4 -3 l4 2 l4 -2 l4 1 h6"/></svg>
-              <span>ДАННЫЕ ДЛЯ РЕШЕНИЯ</span>
-              <b>PQ</b>
-            </figcaption>
-          </figure>
-          <div class="obj-lead">
-            <div class="obj-lead-top"><span class="obj-num" aria-hidden="true">06</span></div>
-            <h3 class="obj-name">Банки, инвесторы и проектные партнёры</h3>
-          </div>
-          <div class="obj-desc">
-            <div class="obj-field"><p class="obj-ftext">При финансировании, приёмке, модернизации или технической оценке объекта.</p></div>
-            <div class="obj-field"><p class="obj-ftext">Независимые измеренные данные как основа для решения.</p></div>
+        <div class="vc-row">
+          <figure class="vm-photo"><img src="/assets/_src-objects/06-banksRU.png" alt="" loading="lazy" style="object-position:50% 40%"></figure>
+          <div class="vm-main">
+            <div class="vm-title"><span class="vm-num">06</span><h3 class="vm-name">Банки, инвесторы и проектные партнёры</h3></div>
+            <p class="vm-text">При финансировании, приёмке, модернизации или технической оценке объекта.</p>
+            <p class="vm-text vm-strong">Независимые измеренные данные как основа для решения.</p>
           </div>
         </div>
       </div>
@@ -323,12 +223,12 @@
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
-    gsap.utils.toArray('.va-row, .obj-row').forEach(function (el, i) {
-      gsap.set(el, { autoAlpha: 0, y: 18 });
+    gsap.utils.toArray('.vb-item, .vc-row').forEach(function (el) {
+      gsap.set(el, { autoAlpha: 0, y: 16 });
       ScrollTrigger.create({
-        trigger: el, start: 'top 88%', once: true,
+        trigger: el, start: 'top 90%', once: true,
         onEnter: function () {
-          gsap.to(el, { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power3.out',
+          gsap.to(el, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out',
             onComplete: function () { gsap.set(el, { clearProps: 'transform,opacity,visibility' }); } });
         }
       });
