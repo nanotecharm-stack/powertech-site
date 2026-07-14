@@ -27,13 +27,11 @@
   <meta name="twitter:title" content="PowerTech — Power Quality Monitoring in Armenia" />
   <meta name="twitter:description" content="7-day power quality monitoring under normal operating load." />
   <meta name="twitter:image" content="https://powertech.am/assets/og-cover.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/assets/fonts/plex-sans-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=185" />
+  <link rel="stylesheet" href="/style.css?v=186" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -699,6 +697,11 @@
         </figure>
 
       </div><!-- /report-grid -->
+
+      <div class="report-next">
+        <p class="rn-q">A similar situation at your facility?</p>
+        <a class="rn-link" href="#contact">Discuss your facility <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9.5 3.5 14 8l-4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
     </div><!-- /container -->
   </section>
 
@@ -785,7 +788,7 @@
           <span class="contact-mark" aria-hidden="true"></span>
           <span class="contact-eyebrow">NEXT STEP</span>
         </div>
-        <h2 class="contact-h2" id="contact-heading">Get in touch</h2>
+        <h2 class="contact-h2" id="contact-heading">Request a check</h2>
         <p class="contact-intro">Tell us what is happening at the facility: equipment faults, handover, purchase, low output, modernisation or another technical situation. We'll tell you where checking the network in normal operation can help.</p>
         </div>
 
@@ -896,7 +899,7 @@
   <script defer src="/assets/vendor/gsap.min.js"></script>
   <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="/assets/site-fx.js?v=8"></script>
-  <script defer src="/assets/site-award.js?v=2"></script>
+  <script defer src="/assets/site-award.js?v=3"></script>
   <script>
     (function () {
       var nav = document.getElementById('site-nav');

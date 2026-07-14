@@ -87,23 +87,6 @@
     });
   }
 
-  /* count a small "01…06" index (or any integer) up from zero */
-  function countUp(el, to, dur, pad) {
-    var o = { v: 0 };
-    ScrollTrigger.create({
-      trigger: el, start: 'top 88%', once: true,
-      onEnter: function () {
-        gsap.to(o, {
-          v: to, duration: dur, ease: 'power2.out',
-          onUpdate: function () {
-            var v = Math.round(o.v);
-            el.textContent = pad && v < 10 ? '0' + v : '' + v;
-          }
-        });
-      }
-    });
-  }
-
   /* ── 1. Headline reveals — words rise out of their own masks ── */
   /* Armenian compounds are long: HY falls back to a whole-block rise
      so no word ever refuses to wrap. */
@@ -135,29 +118,31 @@
 
   gsap.utils.toArray('.s02-h2, .obj-h2, .params-h2, .report-h2, .appr-h2, .contact-h2')
     .forEach(function (h) {
-      if (isHY) { rise(h, h, { y: 30 }); return; }
+      if (isHY) { rise(h, h, { y: 26, duration: 0.7 }); return; }
       var words = splitWords(h);
       if (!words.length) return;
       gsap.set(words, { yPercent: 112 });
       ScrollTrigger.create({
-        trigger: h, start: 'top 86%', once: true,
+        trigger: h, start: 'top 88%', once: true,
         onEnter: function () {
           gsap.to(words, {
-            yPercent: 0, duration: 0.85, ease: 'power4.out', stagger: 0.065,
+            /* quick: the text must never lag behind the reader */
+            yPercent: 0, duration: 0.6, ease: 'power4.out', stagger: 0.045,
             onComplete: function () { gsap.set(words, { clearProps: 'transform' }); }
           });
         }
       });
     });
 
-  /* ── 2. Calibration rules — every section head gets "measured in":
-        a tick ruler draws across the eyebrow row, a coral node lands ── */
+  /* ── 2. Calibration rules — light-section heads get "measured in":
+        a tick ruler draws across the eyebrow row, a coral node lands.
+        Dark sections (§03/§06) carry their own peaks and stay clean. ── */
   gsap.utils.toArray(
-    '.s02-eyebrow-row, .obj-eyebrow-row, .proc-eyebrow-row, .params-eyebrow-row,' +
-    '.report-eyebrow-row, .appr-eyebrow-row, .contact-eyebrow-row'
+    '.s02-eyebrow-row, .obj-eyebrow-row, .params-eyebrow-row,' +
+    '.report-eyebrow-row, .contact-eyebrow-row'
   ).forEach(function (row) {
     var rule = document.createElement('span');
-    rule.className = 'aw-rule' + (row.closest('.proc, .appr') ? ' aw-rule-dark' : '');
+    rule.className = 'aw-rule';
     rule.setAttribute('aria-hidden', 'true');
     var node = document.createElement('i');
     rule.appendChild(node);
@@ -173,14 +158,7 @@
     });
   });
 
-  /* ── 3. Section index marks tick up from 00 ──────────────────── */
-  gsap.utils.toArray('.s02-idx, .obj-idx, .proc-idx, .params-idx, .report-idx, .appr-idx')
-    .forEach(function (el) {
-      var n = parseInt(el.textContent, 10);
-      if (n) countUp(el, n, 0.55, true);
-    });
-
-  /* ── 4. Intros / editorial paragraphs — quiet rise ───────────── */
+  /* ── 3. Intros / editorial paragraphs — quiet rise ───────────── */
   gsap.utils.toArray(
     '.s02-intro, .obj-intro, .params-intro, .report-intro, .proc-intro, .contact-intro'
   ).forEach(function (el) { rise(el, el, { y: 22 }); });
@@ -394,17 +372,6 @@
       });
     }
     rise(panel.querySelectorAll('.about-lead, .about-text'), panel, { y: 18, stagger: 0.12, start: 'top 70%' });
-
-    mm.add('(min-width: 861px)', function () {
-      var img = document.querySelector('.about-photo img');
-      if (!img) return;
-      gsap.fromTo(img,
-        { yPercent: -4, scale: 1.1 },
-        {
-          yPercent: 4, scale: 1.1, ease: 'none',
-          scrollTrigger: { trigger: '.about-photo', start: 'top bottom', end: 'bottom top', scrub: 0.6 }
-        });
-    });
   }());
 
   /* ── 12. Contact — the request sheet assembles field by field ── */
