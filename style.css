@@ -38,15 +38,15 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Hard stop at the page edges on mobile: no elastic "keep scrolling past the
-     end" bounce, no accidental pull-to-refresh, no scroll-chaining. */
-  overscroll-behavior: none;
+  /* NOTE: no overscroll-behavior on the root. In iOS Safari 16+ setting
+     it to none also suppresses the collapsing address bar on scroll —
+     the native elastic bounce is the price of the native toolbar UX.
+     The mobile menu keeps its own local `overscroll-behavior: contain`. */
 }
 body {
   font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   background: #fff;
   color: #1B1B1B;
-  overscroll-behavior: none;
 }
 img { display: block; max-width: 100%; height: auto; }
 a { text-decoration: none; color: inherit; }
