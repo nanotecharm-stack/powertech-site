@@ -3303,6 +3303,27 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
   .hs-img { transition: clip-path .8s cubic-bezier(.33, 1, .68, 1); }
 }
 .hs-img.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+/* award layer (site-award.js injects .hs-scan/.hs-count and adds
+   .hs-anim to hand the stage to GSAP; without it CSS above rules) */
+.hs-img { z-index: 0; }
+.hs-stage.hs-anim .hs-img { transition: none; }
+.hs-scan {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 3;
+  height: 2px;
+  background: var(--coral);
+  box-shadow: 0 0 14px rgba(242,87,73,.5), 0 0 3px rgba(242,87,73,.8);
+  pointer-events: none;
+}
+.hs-count {
+  position: absolute; top: 12px; right: 14px; z-index: 3;
+  display: flex; align-items: baseline; gap: 5px;
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px; letter-spacing: .12em;
+  color: rgba(255,255,255,.72);
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+  pointer-events: none;
+}
+.hs-count b { font-weight: 600; color: #fff; display: inline-block; }
 /* caption on the photo: bottom graphite scrim + white text */
 .hs-scrim {
   position: absolute; inset: 0; z-index: 1;

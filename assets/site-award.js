@@ -203,6 +203,91 @@
     });
   }());
 
+  /* ── 6b. Objects, award layer — the stage becomes an instrument:
+        every photo is "scanned in" by a coral sweep line (the
+        oscilloscope beam), a mono counter flips in the corner, and
+        until the visitor takes over the section quietly walks the
+        industries by itself. Whole file is a no-op under reduced
+        motion; the CSS clip transitions in style.css remain the
+        fallback when this layer is absent. ── */
+  (function objectsAward() {
+    var stage = document.querySelector('.hs-stage');
+    var api = window.__ptSlider;
+    if (!stage || !api) return;
+    var imgs = gsap.utils.toArray(stage.querySelectorAll('.hs-img'));
+    if (!imgs.length) return;
+    stage.classList.add('hs-anim');   /* CSS transitions off — GSAP owns the stage */
+
+    var scan = document.createElement('div');
+    scan.className = 'hs-scan';
+    scan.setAttribute('aria-hidden', 'true');
+    stage.appendChild(scan);
+    var count = document.createElement('div');
+    count.className = 'hs-count';
+    count.setAttribute('aria-hidden', 'true');
+    count.innerHTML = '<b>01</b><span>/ 0' + api.count + '</span>';
+    stage.appendChild(count);
+    gsap.set(scan, { autoAlpha: 0 });
+
+    var FULL = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
+    var HID = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
+
+    function sweep(i) {
+      var img = imgs[i];
+      if (!img) return;
+      gsap.killTweensOf(imgs.concat([scan]));
+      imgs.forEach(function (im, j) { gsap.set(im, { zIndex: j === i ? 1 : 0 }); });
+      gsap.set(img, { clipPath: HID, scale: 1.05, transformOrigin: '50% 0%' });
+      gsap.set(scan, { top: 0, autoAlpha: 1 });
+      var tl = gsap.timeline();
+      tl.to(img, { clipPath: FULL, duration: 0.85, ease: 'power2.inOut' }, 0);
+      tl.to(scan, { top: '100%', duration: 0.85, ease: 'power2.inOut' }, 0);
+      tl.to(img, { scale: 1, duration: 1.1, ease: 'power2.out' }, 0.1);
+      tl.to(scan, { autoAlpha: 0, duration: 0.22 }, 0.76);
+      tl.add(function () {
+        imgs.forEach(function (im, j) { if (j !== i) gsap.set(im, { clipPath: HID }); });
+      });
+      var b = count.querySelector('b');
+      if (b) {
+        gsap.killTweensOf(b);
+        gsap.to(b, {
+          yPercent: -60, autoAlpha: 0, duration: 0.16, ease: 'power2.in',
+          onComplete: function () {
+            b.textContent = '0' + (i + 1);
+            gsap.fromTo(b, { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.22, ease: 'power2.out' });
+          }
+        });
+      }
+    }
+    document.addEventListener('pt:objslide', function (e) { sweep(e.detail.i); });
+
+    /* entrance: the first photo is scanned in as the stage arrives */
+    ScrollTrigger.create({
+      trigger: stage, start: 'top 80%', once: true,
+      onEnter: function () { sweep(api.index()); }
+    });
+
+    /* quiet self-demo: advance every ~5s while the section is on
+       screen, stop forever at the visitor's first own interaction */
+    var stopped = false, timer = null, inView = false;
+    function ensureTimer() {
+      if (inView && !stopped && !timer) {
+        timer = setInterval(function () { api.go(api.index() + 1, 'auto'); }, 5200);
+      }
+      if ((!inView || stopped) && timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+    document.addEventListener('pt:objslide', function (e) {
+      if (e.detail.src !== 'auto' && e.detail.src !== 'init') { stopped = true; ensureTimer(); }
+    });
+    ScrollTrigger.create({
+      trigger: stage, start: 'top 78%', end: 'bottom 12%',
+      onToggle: function (st) { inView = st.isActive; ensureTimer(); }
+    });
+  }());
+
   /* ── 7. Dark section — the signature: the week measures itself.
         Scrub-linked: the baseline draws, day ticks land one per
         scroll-step, the "7" counts the days, the coral marker pops ── */
