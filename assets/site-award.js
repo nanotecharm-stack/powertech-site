@@ -293,57 +293,105 @@
     });
   }());
 
-  /* ── 7. Dark section — the signature: the week measures itself.
-        Scrub-linked: the baseline draws, day ticks land one per
-        scroll-step, the "7" counts the days, the coral marker pops ── */
+  /* ── 7. Dark section — the signature scene: the week measures itself.
+        Desktop: the section PINS and the visitor's scroll plays the
+        week Д1→Д7 — the baseline draws, day ticks + labels land, the
+        "7" counts, the two report events (Д3 dip, Д6 THD) flag
+        themselves, the four points file in, the coral marker closes
+        the week. Touch/small screens keep the old non-pinned scrub —
+        no pinning ever happens there (iOS toolbar stays untouched). ── */
   (function proc() {
     var sec = document.querySelector('.proc');
     if (!sec) return;
     var svg = sec.querySelector('.proc-timeline svg');
     var seven = sec.querySelector('.proc-7');
     var label = sec.querySelector('.proc-7-label');
+    var els = {
+      base: svg && svg.querySelector('.pt-base'),
+      ticks: svg ? gsap.utils.toArray(svg.querySelectorAll('.pt-tick')) : [],
+      days: svg ? gsap.utils.toArray(svg.querySelectorAll('.pt-day')) : [],
+      evs: svg ? gsap.utils.toArray(svg.querySelectorAll('.pt-ev')) : [],
+      t7: svg && svg.querySelector('.pt-t7'),
+      dot: svg && svg.querySelector('.pt-dot')
+    };
 
-    var tl = gsap.timeline({
-      scrollTrigger: { trigger: sec, start: 'top 78%', end: 'top 22%', scrub: 0.5 }
+    /* the week plays into tl; DAY(i) = position when day i (1..7) lands */
+    function playWeek(tl) {
+      var STEP = 0.22, T0 = 0.16;
+      function DAY(i) { return T0 + (i - 1) * STEP; }
+      if (label) {
+        gsap.set(label, { autoAlpha: 0 });
+        tl.to(label, { autoAlpha: 1, duration: 0.25 }, 0);
+      }
+      if (els.base && prepDraw(els.base)) {
+        tl.to(els.base, { strokeDashoffset: 0, duration: DAY(7) - 0.04, ease: 'none' }, 0.04);
+      }
+      els.ticks.forEach(function (t, i) {           /* ticks = Д1..Д6 */
+        gsap.set(t, { autoAlpha: 0 });
+        tl.to(t, { autoAlpha: 1, duration: 0.07 }, DAY(i + 1));
+      });
+      els.days.forEach(function (d, i) {            /* labels Д1..Д7 */
+        gsap.set(d, { autoAlpha: 0 });
+        tl.to(d, { autoAlpha: 1, duration: 0.09 }, DAY(i + 1) + 0.03);
+      });
+      els.evs.forEach(function (g, i) {             /* events at Д3 / Д6 */
+        gsap.set(g, { autoAlpha: 0, y: -3 });
+        tl.to(g, { autoAlpha: 1, y: 0, duration: 0.12, ease: 'power2.out' }, DAY(i === 0 ? 3 : 6) + 0.08);
+      });
+      if (els.t7) {
+        gsap.set(els.t7, { autoAlpha: 0 });
+        tl.to(els.t7, { autoAlpha: 1, duration: 0.07 }, DAY(7));
+      }
+      if (els.dot) {
+        gsap.set(els.dot, { scale: 0, transformOrigin: '50% 50%' });
+        tl.to(els.dot, { scale: 1, duration: 0.16, ease: 'back.out(3)' }, DAY(7) + 0.04);
+      }
+      if (seven && seven.textContent.trim() === '7') {
+        var o = { d: 1 };
+        tl.to(o, {
+          d: 7, duration: DAY(7) - DAY(1), ease: 'none',
+          onUpdate: function () { seven.textContent = '' + Math.round(o.d); }
+        }, DAY(1));
+      }
+      return DAY(7);
+    }
+
+    mm.add('(min-width: 981px) and (hover: hover) and (pointer: fine)', function () {
+      /* desktop: pin the plate and let the scroll play the whole week */
+      sec.classList.add('is-pinned');
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec, start: 'top top', end: '+=130%',
+          pin: true, scrub: 0.55, anticipatePin: 1
+        }
+      });
+      var d7 = playWeek(tl);
+      var points = gsap.utils.toArray(sec.querySelectorAll('.proc-point'));
+      points.forEach(function (p, i) {
+        gsap.set(p, { autoAlpha: 0, y: 26 });
+        tl.to(p, { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out' }, 0.28 + i * 0.36);
+      });
+      var note = sec.querySelector('.proc-note');
+      if (note) {
+        gsap.set(note, { autoAlpha: 0, y: 14 });
+        tl.to(note, { autoAlpha: 1, y: 0, duration: 0.22 }, d7 + 0.1);
+      }
+      tl.to({}, { duration: 0.28 });   /* rest: the finished week holds before unpin */
+      return function () {
+        sec.classList.remove('is-pinned');
+        gsap.set(sec.querySelectorAll('.proc-point, .proc-note'), { clearProps: 'all' });
+      };
     });
 
-    if (label) {
-      gsap.set(label, { autoAlpha: 0 });
-      tl.to(label, { autoAlpha: 1, duration: 0.3 }, 0);
-    }
-    if (svg) {
-      var lines = svg.querySelectorAll('line');
-      var baseline = lines[0];
-      var ticks = [], coral = null;
-      Array.prototype.forEach.call(lines, function (l, i) {
-        if (i === 0) return;
-        if ((l.getAttribute('stroke') || '').indexOf('F25749') > -1) coral = l;
-        else ticks.push(l);
+    mm.add('(max-width: 980.98px), (hover: none), (pointer: coarse)', function () {
+      /* touch / narrow: the week plays as the section crosses the viewport */
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: sec, start: 'top 78%', end: 'top 22%', scrub: 0.5 }
       });
-      var dot = svg.querySelector('circle');
-      if (prepDraw(baseline)) tl.to(baseline, { strokeDashoffset: 0, duration: 1, ease: 'none' }, 0);
-      ticks.forEach(function (t, i) {
-        gsap.set(t, { autoAlpha: 0 });
-        tl.to(t, { autoAlpha: 1, duration: 0.08 }, 0.12 + i * 0.14);
-      });
-      if (coral) {
-        gsap.set(coral, { autoAlpha: 0 });
-        tl.to(coral, { autoAlpha: 1, duration: 0.08 }, 1.02);
-      }
-      if (dot) {
-        gsap.set(dot, { scale: 0, transformOrigin: '50% 50%' });
-        tl.to(dot, { scale: 1, duration: 0.18, ease: 'back.out(3)' }, 1.06);
-      }
-    }
-    if (seven && seven.textContent.trim() === '7') {
-      var o = { d: 1 };
-      tl.to(o, {
-        d: 7, duration: 1.1, ease: 'none',
-        onUpdate: function () { seven.textContent = '' + Math.round(o.d); }
-      }, 0);
-    }
-    batchRise('.proc-point', { y: 26, stagger: 0.1 });
-    rise('.proc-note', '.proc-note', { y: 16 });
+      playWeek(tl);
+      batchRise('.proc-point', { y: 26, stagger: 0.1 });
+      rise('.proc-note', '.proc-note', { y: 16 });
+    });
   }());
 
   /* ── 8. Parameters — each module arrives, then its signal trace
@@ -424,8 +472,9 @@
     });
   }());
 
-  /* ── 10. Approach — the coral accent draws, principles line up,
-        their ticks extend ─────────────────────────────────────── */
+  /* ── 10. Approach — the coral accent draws, principles line up as a
+        measurement chain: the row line draws itself across, then the
+        coral ticks land one per principle ─────────────────────── */
   (function appr() {
     var accent = document.querySelector('.appr-accent');
     if (accent) {
@@ -436,6 +485,31 @@
       });
     }
     batchRise('.appr-principle', { y: 26, stagger: 0.12 });
+
+    /* chain only where the principles share one row line (>700px) */
+    mm.add('(min-width: 701px)', function () {
+      var row = document.querySelector('.appr-principles');
+      if (!row) return;
+      var line = document.createElement('span');
+      line.className = 'appr-chainline';
+      line.setAttribute('aria-hidden', 'true');
+      row.classList.add('fx-chain');
+      row.appendChild(line);
+      gsap.set(line, { clipPath: 'inset(0 100% 0 0)' });
+      var ticks = gsap.utils.toArray(row.querySelectorAll('.appr-principle'));
+      ticks.forEach(function (p) { gsap.set(p, { '--aptick': 0 }); });
+      ScrollTrigger.create({
+        trigger: row, start: 'top 84%', once: true,
+        onEnter: function () {
+          gsap.to(line, { clipPath: 'inset(0 0% 0 0)', duration: 1.15, ease: 'power2.inOut' });
+          gsap.to(ticks, { '--aptick': 1, duration: 0.5, ease: 'power2.out', stagger: 0.22, delay: 0.3 });
+        }
+      });
+      return function () {
+        row.classList.remove('fx-chain');
+        line.remove();
+      };
+    });
   }());
 
   /* ── 11. About — the engineering sheet settles, the wordmark rises
