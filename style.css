@@ -3238,8 +3238,8 @@ html:not([lang="hy"]) .contact-h2 {
 .hs-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
 .hs-item {
   position: relative;
-  display: flex; align-items: baseline; gap: 14px;
-  padding: 17px 0 15px;
+  display: flex; align-items: baseline; gap: 13px;
+  padding: 14px 0 13px;
   border: none; border-bottom: 1px solid var(--border-lt);
   background: none; cursor: pointer; text-align: left;
   font-family: inherit;
@@ -3252,16 +3252,16 @@ html:not([lang="hy"]) .contact-h2 {
 }
 .hs-item.active .hs-idx { color: var(--coral); }
 .hs-name {
-  font-size: clamp(21px, 2.6vw, 33px);
-  font-weight: 600; line-height: 1.14; letter-spacing: -.02em;
-  color: #938D83;   /* resting: quiet, but ≥3:1 for large text */
+  font-size: clamp(16px, 1.6vw, 18px);   /* the site's card-title scale */
+  font-weight: 600; line-height: 1.3; letter-spacing: -.012em;
+  color: var(--text-soft);               /* resting: the site's soft tone */
   transition: color .35s var(--ease), transform .35s var(--ease);
 }
 .hs-item.active .hs-name {
   color: var(--graphite);
   transform: translateX(6px);
 }
-html[lang="hy"] .hs-name { letter-spacing: 0; font-size: clamp(19px, 2.35vw, 29px); }
+html[lang="hy"] .hs-name { letter-spacing: 0; }
 /* coral measurement line draws under the active row, node lands at its end */
 .hs-item::after {
   content: "";
@@ -3330,9 +3330,8 @@ html[lang="hy"] .hs-name { letter-spacing: 0; font-size: clamp(19px, 2.35vw, 29p
 @media (max-width: 880px) {
   .hs-wrap { grid-template-columns: 1fr; }
   .hs-side { order: -1; }
-  .hs-name { font-size: 20px; }
-  html[lang="hy"] .hs-name { font-size: 19px; }
-  .hs-item { padding: 14px 0 13px; }
+  .hs-name { font-size: 16px; }
+  .hs-item { padding: 13px 0 12px; }
 }
 @media (max-width: 560px) {
   .hs-cap { padding: 0 16px 14px; }
