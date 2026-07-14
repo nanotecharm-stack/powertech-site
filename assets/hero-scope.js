@@ -27,11 +27,21 @@
   var UNIT = canvas.getAttribute('data-unit') || 'V';  /* per-language volt symbol */
   var W = 0, H = 0, narrow = false;
 
+  var contentBottom = 0;   /* bottom edge of the copy block within the hero */
   function resize() {
     var r = hero.getBoundingClientRect();
     W = Math.max(1, Math.round(r.width));
     H = Math.max(1, Math.round(r.height));
     narrow = W < 700;
+    /* On phones the hero often grows TALLER than the viewport (long
+       copy), so a fixed fraction of H can land the traces on the CTAs.
+       Anchor the band to the real bottom of the content instead. */
+    contentBottom = 0;
+    var last = hero.querySelector('.hero-hud') || hero.querySelector('.hero-actions');
+    if (last) {
+      var lr = last.getBoundingClientRect();
+      contentBottom = Math.max(0, lr.bottom - r.top);
+    }
     var dpr = Math.min(window.devicePixelRatio || 1, narrow ? 1.5 : 2);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
@@ -41,8 +51,21 @@
   }
 
   /* ── signal model ─────────────────────────────────────────── */
-  function baseY()  { return H * (narrow ? 0.84 : 0.60); }
-  function ampl()   { return narrow ? Math.min(30, H * 0.05) : Math.min(64, H * 0.085); }
+  function baseY() {
+    if (!narrow) return H * 0.60;
+    var y = H * 0.84;
+    if (contentBottom > 0) {
+      /* centre of the free band below the copy, clamped near the edge */
+      y = Math.max(y, Math.min(H - 14, contentBottom + (H - contentBottom) * 0.55));
+    }
+    return y;
+  }
+  function ampl() {
+    if (!narrow) return Math.min(64, H * 0.085);
+    var a = Math.min(30, H * 0.05);
+    if (contentBottom > 0) a = Math.min(a, Math.max(10, (H - contentBottom) * 0.34));
+    return a;
+  }
   var WL = 210;          /* px per cycle */
   var SPEED = 1.35;      /* rad/s drift */
 
@@ -275,6 +298,11 @@
   function frame(t) {
     ctx.clearRect(0, 0, W, H);
 
+    /* Small phones: when the copy fills the hero there is no free band
+       for the traces at all — draw nothing rather than crowd the HUD
+       (the ticking readouts carry the instrument feel there). */
+    if (narrow && contentBottom > 0 && H - contentBottom < 56) return;
+
     /* entrance: traces sweep in from the left over ~1.6s */
     var p = Math.min(1, t / 1.6);
     if (p < 1) {
@@ -303,7 +331,9 @@
     tracePath(t, 0, 1); ctx.stroke();
     ctx.restore();
 
-    drawEvent(t);
+    /* On phones the band under the copy is too tight for the marker +
+       label — the HUD flash carries the event; the dip stays visible. */
+    if (!narrow) drawEvent(t);
     if (!narrow) drawCursor(t);
     if (!drawnIn) ctx.restore();
   }
