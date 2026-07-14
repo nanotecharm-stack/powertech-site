@@ -2710,39 +2710,6 @@ circle.fx-dot,
   .aw-rule { display: none; }   /* narrow heads stay calm */
 }
 
-/* CTA bridge after the report — one calm invitation where the reader
-   is most convinced; same line language as the section rules. */
-.report-next {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 10px 24px;
-  margin-top: 64px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-}
-.rn-q {
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--text-mid);
-}
-.rn-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -.005em;
-  color: var(--graphite);
-  transition: color .25s var(--ease);
-}
-.rn-link svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--coral); }
-.rn-link:hover { color: var(--coral); }
-@media (prefers-reduced-motion: no-preference) {
-  .rn-link svg { transition: transform .3s var(--ease); }
-  .rn-link:hover svg { transform: translateX(4px); }
-}
 
 /* Form success — the journey's real ending gets one quiet branded
    response: a coral node lands and a short measurement tick draws
