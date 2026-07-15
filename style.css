@@ -2917,3 +2917,162 @@ html[lang="hy"] .hs-name { letter-spacing: 0; }
   .hs-cap { padding: 0 16px 15px; }
   .hs-t { font-size: 14px; }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   VISION B — «листы на поле» + приборные планки секций (v=198).
+   После удаления H2 секции 01/02/04/05 открывает полноширинная
+   планка-прибор (site-fx.js инъецирует, site-award.js анимирует):
+   крупный tabular-индекс, mono-метка, калибровочная линейка с
+   коралловым узлом, бегущая осциллограмма. CSS-умолчания = финальное
+   состояние (без JS планок нет — остаются исходные eyebrow-ряды,
+   скрываемые только под html.has-ih).
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── приборная планка ── */
+.ih {
+  display: flex; align-items: center; gap: 20px;
+  margin: 0 0 56px;
+}
+.ih-idx {
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: clamp(38px, 4.6vw, 58px);
+  font-weight: 500; line-height: .9; letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--graphite);
+}
+.ih-label {
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-soft);
+  max-width: 220px; line-height: 1.5;
+}
+html[lang="hy"] .ih-label {
+  font-family: "Mardoto", "IBM Plex Sans", system-ui, sans-serif;  /* у Plex Mono нет армянских глифов */
+  letter-spacing: .1em;
+}
+.ih-rule {
+  position: relative; flex: 1 1 60px; min-width: 60px; height: 9px;
+  background-image: repeating-linear-gradient(90deg, rgba(20,20,20,.16) 0 1px, transparent 1px 22px);
+  border-bottom: 1px solid var(--border);
+}
+.ih-node {
+  position: absolute; right: 0; bottom: -3px;
+  width: 7px; height: 7px; border-radius: 1px; background: var(--coral);
+}
+.ih-wave { width: 188px; height: 26px; flex-shrink: 0; }
+.ih-wave path { stroke: var(--coral); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .ih-wave path { stroke-dasharray: 190 36; animation: ihw 3.4s linear infinite; }
+  @keyframes ihw { to { stroke-dashoffset: -226; } }
+}
+@media (max-width: 720px) {
+  .ih { gap: 14px; flex-wrap: wrap; margin-bottom: 34px; }
+  .ih-rule { display: none; }
+  .ih-label { max-width: none; flex: 1; }
+  .ih-wave { width: 120px; }
+}
+
+/* планки заменяют исходные eyebrow-ряды (только когда JS их создал) */
+html.has-ih .s02-eyebrow-row,
+html.has-ih .obj-head,
+html.has-ih .params-eyebrow-row,
+html.has-ih .report-eyebrow-row { display: none; }
+html.has-ih .s02-left { display: none; }
+html.has-ih .params-head { display: block; margin-bottom: 0; }
+
+/* ── воздух и поле секций ── */
+.s02 { padding: 130px 0 130px; background: var(--bg-off); }
+.params { padding: 130px 0 140px; background: var(--bg-off); border-top: 1px solid var(--border-lt); }
+.report { padding: 130px 0 150px; }
+
+/* §01: фото щита — полноширинная вклейка (на узких экранах его нет) */
+@media (min-width: 961px) {
+  .s02-top { display: block; min-height: 360px; }
+  .s02-top::before { width: 100%; left: 0; }
+}
+@media (max-width: 960px) { .s02-top { min-height: 0; } }
+
+/* ── листы: общая пластика (референс wondersmart) ── */
+.s02-map { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 24px; padding-top: 0; }
+.s02-map::before { display: none; }
+.s02-trigger,
+.param-module {
+  background: #fff;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(27,27,27,.03), 0 12px 36px -12px rgba(27,27,27,.09);
+  position: relative;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .s02-trigger:hover, .param-module:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 4px rgba(27,27,27,.03), 0 26px 52px -14px rgba(27,27,27,.14);
+  }
+}
+/* коралловая закладка на верхней кромке листа */
+.s02-trigger::after, .param-module::after {
+  content: ""; position: absolute; top: 0; left: 30px;
+  width: 26px; height: 2px; background: var(--coral);
+}
+/* листы без собственных номеров — счёт ведёт индекс секции */
+.tr-num, .pm-num { display: none; }
+
+/* §01: лист сценария — иконка в мягком тайле */
+.s02-trigger { padding: 26px 32px 30px; }
+.s02-trigger::before { display: none; }
+.tr-head { margin-bottom: 20px; }
+.tr-ico {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: #F7F5F1;
+  box-shadow: 0 8px 18px -8px rgba(27,27,27,.12), inset 0 1px 0 rgba(255,255,255,.9);
+  color: #4A4A4A;
+  transition: background .28s var(--ease), color .28s var(--ease);
+}
+.tr-ico svg { width: 24px; height: 24px; }
+.s02-trigger:hover .tr-ico { background: var(--coral); color: #fff; }
+.tr-title {
+  text-transform: uppercase; font-size: 14px;
+  letter-spacing: .05em; margin-bottom: 9px;
+}
+html[lang="hy"] .tr-title { letter-spacing: .02em; }
+.tr-text { color: var(--text-soft); font-size: 14px; }
+@media (max-width: 720px) { .s02-map { grid-template-columns: 1fr; } }
+
+/* §04: лист параметра — сигнал в тайле-дисплее */
+.params-field { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.param-module { padding: 26px 30px 28px; border-top: none; }
+.param-module::before { display: none; }
+.pm-signal {
+  order: -1;
+  display: flex; align-items: center; justify-content: center;
+  height: 88px; width: 100%;
+  margin-bottom: 20px; padding: 0 20px;
+  background: #F7F5F1;
+  border-radius: 14px;
+  box-shadow: inset 0 1px 3px rgba(27,27,27,.05);
+  transition: background .28s var(--ease);
+}
+.param-module:hover .pm-signal { background: #F2EFE9; }
+.pm-signal svg { max-width: 230px; }
+.pm-title {
+  text-transform: uppercase; font-size: 13px;
+  letter-spacing: .05em;
+}
+html[lang="hy"] .pm-title { letter-spacing: .02em; }
+.pm-text { color: var(--text-soft); font-size: 13.5px; }
+@media (max-width: 1020px) { .params-field { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .params-field { grid-template-columns: 1fr; } }
+
+/* §05: документ слева, список справа, широкая канава */
+.report-grid { grid-template-columns: 7fr 5fr; gap: 96px; }
+.report-right { order: 1; }
+.report-left { order: 2; }
+@media (max-width: 980px) {
+  .report-grid { grid-template-columns: 1fr; gap: 48px; }
+  .report { padding: 96px 0 110px; }
+  .s02 { padding: 96px 0 96px; }
+  .params { padding: 96px 0 104px; }
+}

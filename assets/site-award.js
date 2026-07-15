@@ -594,4 +594,41 @@
     if (cols.length) rise(cols, foot, { y: 22, stagger: 0.13, start: 'top 88%' });
   }());
 
+  /* ── 14. Instrument heads — entrance choreography for the bars
+        injected by site-fx.js: the index counts up, the label fades,
+        the ruler draws while its coral node travels to the end, the
+        trace switches on. Static final state without this layer. ── */
+  (function instrumentHeads() {
+    gsap.utils.toArray('.ih').forEach(function (ih) {
+      var idx = ih.querySelector('.ih-idx');
+      var label = ih.querySelector('.ih-label');
+      var rule = ih.querySelector('.ih-rule');
+      var node = ih.querySelector('.ih-node');
+      var wave = ih.querySelector('.ih-wave');
+      if (!idx || !rule) return;
+      var n = parseInt(idx.textContent, 10) || 0;
+      gsap.set(rule, { clipPath: 'inset(0 100% 0 0)' });
+      gsap.set([label, wave], { autoAlpha: 0 });
+      ScrollTrigger.create({
+        trigger: ih, start: 'top 86%', once: true,
+        onEnter: function () {
+          var o = { v: 0 };
+          gsap.to(o, {
+            v: n, duration: 0.7, ease: 'power2.out',
+            onUpdate: function () {
+              var v = Math.round(o.v);
+              idx.textContent = v < 10 ? '0' + v : '' + v;
+            }
+          });
+          gsap.to(label, { autoAlpha: 1, duration: 0.5, delay: 0.15 });
+          gsap.to(rule, { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power2.inOut', delay: 0.2 });
+          if (node) {
+            gsap.fromTo(node, { x: -(rule.clientWidth - 7) }, { x: 0, duration: 1.0, ease: 'power2.inOut', delay: 0.2 });
+          }
+          gsap.to(wave, { autoAlpha: 1, duration: 0.6, delay: 0.95 });
+        }
+      });
+    });
+  }());
+
 }());

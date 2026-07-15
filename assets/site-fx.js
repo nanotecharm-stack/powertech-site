@@ -68,4 +68,45 @@
     }
     window.__ptSlider = { go: setActive, count: items.length, index: function () { return current; } };
   }());
+
+  /* ── Section instrument heads — after the H2 removal the eyebrow
+        rows became full-width instrument bars: big tabular index,
+        mono label, calibration ruler with a coral node, a running
+        trace. Injected here (dependency-free) so they exist without
+        GSAP and under reduced motion; site-award.js animates the
+        entrance when motion is allowed. CSS defaults are the final
+        state. Labels are read from the page's own eyebrow texts, so
+        every language localises itself. ── */
+  (function instrumentHeads() {
+    var WAVE = '<svg class="ih-wave" viewBox="0 0 188 26" fill="none" aria-hidden="true">' +
+      '<path d="M4 13 l8 -7 l8 11 l8 -9 l8 7 l8 -6 l8 5 l8 -8 l8 9 l8 -6 l8 4 l8 -5 l8 6 l8 -4 l8 3 l8 -5 l8 4 l8 -2 l8 1 h20"/></svg>';
+    var DEFS = [
+      { sel: '.s02', idx: '.s02-idx', eye: '.s02-eyebrow',
+        host: function (sec) { var b = sec.querySelector('.s02-body'); return b && { p: b, before: b.firstElementChild }; } },
+      { sel: '.objects', idx: '.obj-idx', eye: '.obj-eyebrow',
+        host: function (sec) { var w = sec.querySelector('.hs-wrap'); return w && { p: w.parentNode, before: w }; } },
+      { sel: '.params', idx: '.params-idx', eye: '.params-eyebrow',
+        host: function (sec) { var b = sec.querySelector('.params-body'); return b && { p: b, before: b.firstElementChild }; } },
+      { sel: '.report', idx: '.report-idx', eye: '.report-eyebrow',
+        host: function (sec) { var g = sec.querySelector('.report-grid'); return g && { p: g.parentNode, before: g }; } }
+    ];
+    var made = 0;
+    DEFS.forEach(function (d) {
+      var sec = document.querySelector(d.sel);
+      if (!sec) return;
+      var idxEl = sec.querySelector(d.idx);
+      var eyeEl = sec.querySelector(d.eye);
+      var h = d.host(sec);
+      if (!idxEl || !eyeEl || !h) return;
+      var ih = document.createElement('div');
+      ih.className = 'ih';
+      ih.setAttribute('aria-hidden', 'true');
+      ih.innerHTML = '<b class="ih-idx">' + idxEl.textContent.trim() + '</b>' +
+        '<span class="ih-label">' + eyeEl.textContent.trim() + '</span>' +
+        '<span class="ih-rule"><i class="ih-node"></i></span>' + WAVE;
+      h.p.insertBefore(ih, h.before);
+      made++;
+    });
+    if (made) document.documentElement.classList.add('has-ih');
+  }());
 }());
