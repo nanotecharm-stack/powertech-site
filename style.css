@@ -225,26 +225,22 @@ button:focus-visible {
 }
 .logo-mark {
   flex-shrink: 0;
-  height: 28px;
-  width: 28px;
+  height: 30px;
+  width: 30px;
 }
-.logo-mark .pt-sq { fill: var(--coral); }
-.logo-mark .pt-bolt { fill: #fff; }
-/* Logo micro-interaction: subtle lift + a one-off "spark" on the bolt */
+/* Logo micro-interaction: subtle lift on hover */
 .logo-mark { transition: transform .3s var(--ease); }
 .logo:hover .logo-mark { transform: scale(1.08); }
-@media (prefers-reduced-motion: no-preference) {
-  .logo:hover .pt-bolt { animation: ptSpark .55s var(--ease); }
-}
-@keyframes ptSpark { 0%, 100% { opacity: 1; } 45% { opacity: .25; } }
 .logo-text {
   font-size: 17px;
   font-weight: 700;
-  letter-spacing: -.005em;
+  letter-spacing: -.02em;
   line-height: 1;
   color: #fff;
   transition: color .25s var(--ease);
 }
+/* "Tech" keeps the logo red in every nav state (supplied lockup palette) */
+.logo-text .lt-t { color: #EC3013; font-style: normal; }
 /* Brand wordmark + language switch are always Latin — pin them to fixed fonts so
    they render identically across all languages (HY otherwise falls back to
    Mardoto/Inter and the header shifts). The wordmark uses the brand display face
@@ -252,22 +248,6 @@ button:focus-visible {
 .logo-text { font-family: 'Instrument Sans', 'IBM Plex Sans', system-ui, -apple-system, sans-serif; }
 .lang-switch { font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif; }
 .site-nav.scrolled .logo-text { color: var(--graphite); }
-
-/* Wordmark lockup: text over a thin measurement pulse line (variant 2) */
-.logo-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-.logo-pulse {
-  display: block;
-  width: 100%;
-  height: 4.6px;
-  color: rgba(255,255,255,.55);
-  transition: color .25s var(--ease);
-}
-.site-nav.scrolled .logo-pulse { color: rgba(27,27,27,.5); }
 
 /* Nav links — centered absolutely */
 .nav-links {
@@ -2224,10 +2204,8 @@ html[lang="hy"] .appr-text { min-width: 0; }
   color: var(--graphite);
   margin-bottom: 14px;
 }
-.footer-logo .logo-mark { height: 24px; width: 24px; }
+.footer-logo .logo-mark { height: 26px; width: 26px; }
 .footer-logo .logo-text { font-size: 15.5px; color: var(--graphite); }
-.footer-logo .logo-pulse { height: 4px; color: rgba(27,27,27,.45); }
-.footer-logo .logo-stack { width: auto; }
 .footer-langs {
   display: flex;
   gap: 14px;
@@ -2537,7 +2515,6 @@ circle.fx-dot,
 .site-footer .footer-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .site-footer .footer-logo .logo-mark { height: 26px; width: 26px; }
 .site-footer .footer-logo .logo-text { color: #fff; font-size: 16px; }
-.site-footer .footer-logo .logo-pulse { color: rgba(255,255,255,.5); height: 4px; }
 .f-tag {
   margin-top: 18px;
   max-width: 270px;
