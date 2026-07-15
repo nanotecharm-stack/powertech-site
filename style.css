@@ -225,14 +225,14 @@ button:focus-visible {
 }
 .logo-mark {
   flex-shrink: 0;
-  height: 30px;
-  width: 30px;
+  height: 34.5px;
+  width: 34.5px;
 }
 /* Logo micro-interaction: subtle lift on hover */
 .logo-mark { transition: transform .3s var(--ease); }
 .logo:hover .logo-mark { transform: scale(1.08); }
 .logo-text {
-  font-size: 17px;
+  font-size: 19.5px;
   font-weight: 700;
   letter-spacing: -.01em;
   line-height: 1;
@@ -2207,8 +2207,8 @@ html[lang="hy"] .appr-text { min-width: 0; }
   color: var(--graphite);
   margin-bottom: 14px;
 }
-.footer-logo .logo-mark { height: 26px; width: 26px; }
-.footer-logo .logo-text { font-size: 15.5px; color: var(--graphite); }
+.footer-logo .logo-mark { height: 30px; width: 30px; }
+.footer-logo .logo-text { font-size: 17.8px; color: var(--graphite); }
 .footer-langs {
   display: flex;
   gap: 14px;
@@ -2516,8 +2516,8 @@ circle.fx-dot,
 
 /* brand column — white lockup on the dark plate */
 .site-footer .footer-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.site-footer .footer-logo .logo-mark { height: 26px; width: 26px; }
-.site-footer .footer-logo .logo-text { color: #fff; font-size: 16px; }
+.site-footer .footer-logo .logo-mark { height: 30px; width: 30px; }
+.site-footer .footer-logo .logo-text { color: #fff; font-size: 18.4px; }
 .f-tag {
   margin-top: 18px;
   max-width: 270px;
