@@ -11,6 +11,11 @@
 (function () {
   'use strict';
 
+  /* Russian pages use the decimal comma (230,0 / 50,00 / 2,4);
+     other languages keep the dot. */
+  var RU_DEC = (document.documentElement.lang || '') === 'ru';
+  function fmtNum(str) { return RU_DEC ? String(str).replace('.', ',') : str; }
+
   var hero = document.querySelector('.hero');
   var canvas = document.querySelector('.hero-canvas');
   if (!hero || !canvas || !canvas.getContext) return;
@@ -85,8 +90,8 @@
       dur: 2.6 + Math.random() * 1.4,
       depth: depth,
       type: sag ? 'sag' : 'thd',
-      label: sag ? ('U↓ −' + (depth * 100).toFixed(1) + '%')
-                 : ('THD ' + (2.3 + depth * 100).toFixed(1) + '%')
+      label: sag ? ('U↓ −' + fmtNum((depth * 100).toFixed(1)) + '%')
+                 : ('THD ' + fmtNum((2.3 + depth * 100).toFixed(1)) + '%')
     };
     nextEvAt = t + ev.dur + 4.5 + Math.random() * 4.5;
     flashChip(sag ? 'u' : 'thd');
@@ -187,7 +192,7 @@
     ctx.arc(cur.x, yv, 7, 0, TAU);
     ctx.stroke();
 
-    var val = (230 + (wave(cur.x, t, 0, 1) / A) * 7.5).toFixed(1) + ' ' + UNIT;
+    var val = fmtNum((230 + (wave(cur.x, t, 0, 1) / A) * 7.5).toFixed(1)) + ' ' + UNIT;
     ctx.font = '10.5px "IBM Plex Mono", ui-monospace, Menlo, monospace';
     var tw = ctx.measureText(val).width;
     var bx = Math.min(cur.x + 12, W - tw - 22), by = yv - 26;
@@ -271,7 +276,7 @@
   function hudInit() {
     for (var k in chips) {
       chips[k].show = chips[k].target = HUD[k].base;
-      chips[k].el.textContent = HUD[k].base.toFixed(HUD[k].dp);
+      chips[k].el.textContent = fmtNum(HUD[k].base.toFixed(HUD[k].dp));
     }
   }
   function hudStep(t) {
@@ -286,7 +291,7 @@
       if (k === 'u' && ev && ev.type === 'sag') goal -= evPhase(t) * ev.depth * 230;
       if (k === 'thd' && ev && ev.type === 'thd') goal += evPhase(t) * ev.depth * 100;
       c.show += (goal - c.show) * 0.06;
-      c.el.textContent = c.show.toFixed(cfg.dp);
+      c.el.textContent = fmtNum(c.show.toFixed(cfg.dp));
     }
   }
   function flashChip(k) {
