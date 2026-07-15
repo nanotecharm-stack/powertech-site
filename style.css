@@ -234,13 +234,16 @@ button:focus-visible {
 .logo-text {
   font-size: 17px;
   font-weight: 700;
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
   line-height: 1;
   color: #fff;
   transition: color .25s var(--ease);
 }
-/* "Tech" keeps the logo red in every nav state (supplied lockup palette) */
-.logo-text .lt-t { color: #EC3013; font-style: normal; }
+/* "Tech" is coral. Bright site coral over the dark hero (the darker brick
+   red blends into black); the supplied darker red on light backgrounds. */
+.logo-text .lt-t { color: var(--coral); font-style: normal; }
+.site-nav.scrolled .logo-text .lt-t,
+.site-nav.menu-open .logo-text .lt-t { color: #E23A1F; }
 /* Brand wordmark + language switch are always Latin — pin them to fixed fonts so
    they render identically across all languages (HY otherwise falls back to
    Mardoto/Inter and the header shifts). The wordmark uses the brand display face
