@@ -2798,7 +2798,9 @@ html[lang="hy"] .contact-h2 {
 .hs-item {
   position: relative;
   display: flex; align-items: baseline; gap: 13px;
-  padding: 18px 0 17px;
+  padding: 27px 0 26px;   /* roomier rows: the list grows taller than the image
+                             min-height, so (align-items:stretch) the image matches
+                             it and the labels sit evenly top-to-bottom with the photo */
   border: none; border-bottom: 1px solid var(--border-lt);
   background: none; cursor: pointer; text-align: left;
   font-family: inherit;
