@@ -2390,7 +2390,7 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
 :root {
   --graphite:  #363B42;   /* headings + all var(--graphite) dark text (~11:1) */
   --text-mid:  #565B63;   /* body paragraphs (~6.9:1) */
-  --text-soft: #565A60;   /* eyebrows / small labels / captions (~6.7:1) */
+  --text-soft: #484C53;   /* eyebrows / small labels / captions — darkened for readability on the warmer field (~9:1 on white) */
 }
 body { color: #363B42; }
 .hero-h1,
@@ -3004,8 +3004,8 @@ html[lang="hy"] .ih-label {
 }
 .ih-rule {
   position: relative; flex: 1 1 60px; min-width: 60px; height: 9px;
-  background-image: repeating-linear-gradient(90deg, rgba(20,20,20,.16) 0 1px, transparent 1px 22px);
-  border-bottom: 1px solid var(--border);
+  background-image: repeating-linear-gradient(90deg, rgba(20,20,20,.34) 0 1px, transparent 1px 22px);
+  border-bottom: 1px solid rgba(20,20,20,.22);
 }
 .ih-node {
   position: absolute; right: 0; bottom: -3px;
@@ -3126,4 +3126,117 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; }
   .report { padding: 96px 0 110px; }
   .s02 { padding: 96px 0 96px; }
   .params { padding: 96px 0 104px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   §01 CARD — CoffeeTech reference treatment (EXPERIMENT, scoped to §01).
+   Exact colours from coffee-tech.com: field #E5E2DD, card #DCD8D3, white
+   1px outline, 14px radius, no shadow. Hover = card bg lightens + content
+   zoom, both very smooth (their cubic-bezier). Placed last so it wins.
+   NOT applied to other sections. Remove/roll out once approved.
+   ══════════════════════════════════════════════════════════════ */
+.s02 { background: #E5E2DD; }
+.s02-top { display: none; }   /* §01 top switchboard photo removed per user — cleaner start */
+.s02 .s02-trigger {
+  background: #DCD8D3;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color .8s cubic-bezier(.35, .01, 0, .99);
+}
+.s02 .s02-trigger:hover {
+  background: #EAE6E1;      /* bg lightens */
+  transform: none;         /* no lift (reference has none) */
+  box-shadow: none;
+  border-color: #fff;
+}
+.s02 .tr-ico {
+  background: #EFEBE5;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+  transition: transform .9s cubic-bezier(.35, .01, 0, .99);
+}
+.s02 .s02-trigger:hover .tr-ico {
+  background: #EFEBE5;     /* no coral flip */
+  color: #4A4A4A;
+  transform: scale(1.06);
+}
+.s02 .tr-title, .s02 .tr-text {
+  transform-origin: left center;
+  transition: transform .9s cubic-bezier(.35, .01, 0, .99);
+}
+.s02 .s02-trigger:hover .tr-title,
+.s02 .s02-trigger:hover .tr-text { transform: scale(1.06); }
+
+/* §04 — same CoffeeTech treatment (EXPERIMENT, scoped to §04). */
+.params { background: #E5E2DD; }
+.params .param-module {
+  background: #DCD8D3;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color .8s cubic-bezier(.35, .01, 0, .99);
+}
+.params .param-module:hover {
+  background: #EAE6E1;
+  transform: none;
+  box-shadow: none;
+  border-color: #fff;
+}
+.params .pm-signal {
+  background: #EFEBE5;
+  transition: transform .9s cubic-bezier(.35, .01, 0, .99);
+}
+.params .param-module:hover .pm-signal { transform: scale(1.06); }
+.params .pm-title, .params .pm-text {
+  transform-origin: left center;
+  transition: transform .9s cubic-bezier(.35, .01, 0, .99);
+}
+.params .param-module:hover .pm-title,
+.params .param-module:hover .pm-text { transform: scale(1.06); }
+
+/* ── Readability pass: small text on the warm cards was hard to read.
+   Darker body, a touch larger + more leading; near-black titles with less
+   tracking; roomier / darker mono scale label. ── */
+.s02 .tr-text, .params .pm-text {
+  color: #3D424A;
+  font-size: 15px;
+  line-height: 1.56;
+}
+.s02 .tr-title, .params .pm-title {
+  color: #2C3036;          /* near-black — crisp on the taupe fill */
+  letter-spacing: .03em;   /* uppercase reads easier with less tracking */
+  font-size: 14.5px;
+}
+.ih-label {
+  color: #3D424A;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+/* Contact form — same CoffeeTech card treatment (EXPERIMENT, scoped to §contact). */
+.contact { background: #E5E2DD; }
+.contact-form {
+  background: #DCD8D3;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  box-shadow: none;
+}
+.cf-head { border-bottom-color: rgba(20,20,20,.12); }
+.cf-head span { color: #857F76; }
+/* inputs: a soft warm off-white — lighter than the card but not stark white,
+   so they read as fields without harsh contrast */
+.cf-field input, .cf-field textarea {
+  background: #EAE6E0;
+  border-color: rgba(20,20,20,.13);
+}
+.cf-field label { color: #363B42; }        /* darker labels */
+.cf-note, .cf-privacy { color: #4A4E55; }   /* readable helper text */
+
+/* §02 — same treatment: warm field + rounded photo zone like the reference (EXPERIMENT). */
+.objects { background: #E5E2DD; }
+.hs-stage {
+  border-radius: 16px;
+  border: 1px solid #fff;   /* subtle white frame, consistent with the cards */
 }
