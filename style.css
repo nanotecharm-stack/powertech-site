@@ -3240,3 +3240,43 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; }
   border-radius: 16px;
   border: 1px solid #fff;   /* subtle white frame, consistent with the cards */
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ALWAYS-DARK HEADER (EXPERIMENT) — the bar stays dark in every state
+   (over the hero and scrolled over the light sections). Overrides the
+   .scrolled / .menu-open light-bar rules to keep text/marks light.
+   ══════════════════════════════════════════════════════════════ */
+.site-nav {
+  background: transparent;          /* seamless over the hero — no seam vs the hero bg */
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  box-shadow: none;
+  transition: background-color .3s var(--ease);
+}
+.site-nav.scrolled,
+.site-nav.menu-open {
+  background: #0A0A0A;               /* same black as the hero — stays dark on scroll */
+  box-shadow: 0 1px 0 rgba(255,255,255,.06);
+}
+.site-nav.scrolled .logo-text,
+.site-nav.menu-open .logo-text { color: #fff; }
+.site-nav.scrolled .logo-text .lt-t,
+.site-nav.menu-open .logo-text .lt-t { color: var(--coral); }
+.site-nav.scrolled .nav-links a { color: rgba(255,255,255,.9); }
+.site-nav.scrolled .nav-links a:hover,
+.site-nav.scrolled .nav-links a.active { color: #fff; }
+.site-nav.scrolled .nav-toggle span,
+.site-nav.menu-open .nav-toggle span { background: #fff; }
+/* language selector — light in every state */
+.site-nav.scrolled .lang-seg-globe,
+.site-nav.menu-open .lang-seg-globe { color: rgba(255,255,255,.5); }
+.site-nav.scrolled .lang-seg-set,
+.site-nav.menu-open .lang-seg-set { border-color: rgba(255,255,255,.20); }
+.site-nav.scrolled .lang-seg-item,
+.site-nav.menu-open .lang-seg-item { color: rgba(255,255,255,.6); }
+.site-nav.scrolled .lang-seg-item:hover,
+.site-nav.menu-open .lang-seg-item:hover { color: rgba(255,255,255,.92); }
+/* mobile menu panel — dark to match */
+.nav-mobile { background: #121317; border-top-color: rgba(255,255,255,.08); }
+.nav-mobile a { color: rgba(255,255,255,.82); border-bottom-color: rgba(255,255,255,.07); }
+.nav-mobile a:hover { color: #fff; }
