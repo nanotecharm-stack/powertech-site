@@ -444,7 +444,7 @@ button:focus-visible {
   position: relative;
   width: 1px;
   height: 46px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.24));
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.42));
 }
 /* the travelling pulse */
 .hs-track::after {
@@ -460,11 +460,14 @@ button:focus-visible {
   box-shadow: 0 0 8px 1px rgba(242,87,73,.5);
 }
 .hs-chev {
-  width: 22px;
-  height: 12px;
-  color: var(--coral);
-  -webkit-filter: drop-shadow(0 0 4px rgba(242,87,73,.4));
-          filter: drop-shadow(0 0 4px rgba(242,87,73,.4));
+  width: 24px;
+  height: 13px;
+  /* Light chevron: the coral one blended into the coral hero oscilloscope behind
+     it and read as a stray red line. White separates it and reads as an arrow;
+     the coral travelling pulse on the track keeps the signal accent. */
+  color: rgba(255,255,255,.9);
+  -webkit-filter: drop-shadow(0 1px 3px rgba(0,0,0,.55));
+          filter: drop-shadow(0 1px 3px rgba(0,0,0,.55));
   transition: transform .2s var(--ease);
 }
 .hero-scroll:hover .hs-track {
