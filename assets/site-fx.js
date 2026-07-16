@@ -109,4 +109,30 @@
     });
     if (made) document.documentElement.classList.add('has-ih');
   }());
+
+  /* ── Chrome on iOS (CriOS) only: on first load WKWebView mis-computes the
+        root scroll bounds / fixed-element frame, which shows as phantom scroll
+        space below the footer and a clipped "to-top" button. A real resize
+        (lock/unlock, rotate) clears it — so we force one relayout after load.
+        Strictly CriOS-gated: Safari iOS and all desktop browsers are untouched,
+        so the iOS address-bar auto-hide for the Safari majority is preserved. ── */
+  (function iosChromeReflowFix() {
+    var ua = navigator.userAgent || '';
+    if (ua.indexOf('CriOS') === -1) return;          // Chrome on iOS only
+    document.documentElement.classList.add('is-crios');
+    function relayout() {
+      var d = document.documentElement;
+      var prev = d.style.minHeight;
+      // Nudge the document height by 1px, then restore next frame. The set/reset
+      // pair forces the same scroll-bounds recompute a manual resize triggers.
+      d.style.minHeight = (window.innerHeight + 1) + 'px';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { d.style.minHeight = prev; });
+      });
+    }
+    window.addEventListener('load', function () { setTimeout(relayout, 60); });
+    window.addEventListener('orientationchange', function () { setTimeout(relayout, 220); });
+    // Back/forward cache restore re-triggers the glitch
+    window.addEventListener('pageshow', function (e) { if (e.persisted) relayout(); });
+  }());
 }());

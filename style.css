@@ -2416,7 +2416,10 @@ circle.fx-dot,
 /* ── §01 measurement-log sparklines: a grey idle trace under each
       scenario; on hover the coral pen re-draws it (pathLength=1 in
       the markup makes the dash math unit-free) ── */
-.tr-spark { display: block; margin-top: 16px; }
+/* Decorative mini-waveforms under the §01 trigger cards removed to lighten the
+   section (audit p.9). The markup is aria-hidden; hiding it here keeps the change
+   reversible. Child .sp-* rules below are now inert. */
+.tr-spark { display: none; }
 .tr-spark svg {
   display: block;
   width: 100%;
