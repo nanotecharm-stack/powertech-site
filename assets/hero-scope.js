@@ -178,7 +178,9 @@
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 5]);
     ctx.beginPath();
-    ctx.moveTo(cur.x + 0.5, y0 - A * 1.9);
+    /* keep the crosshair mostly below the baseline so it clears the headline
+       (the long RU/HY H1 reaches deep into the scope on the right) */
+    ctx.moveTo(cur.x + 0.5, y0 - A * 1.05);
     ctx.lineTo(cur.x + 0.5, y0 + A * 1.9);
     ctx.stroke();
     ctx.setLineDash([]);
@@ -195,7 +197,8 @@
     var val = fmtNum((230 + (wave(cur.x, t, 0, 1) / A) * 7.5).toFixed(1)) + ' ' + UNIT;
     ctx.font = '10.5px "IBM Plex Mono", ui-monospace, Menlo, monospace';
     var tw = ctx.measureText(val).width;
-    var bx = Math.min(cur.x + 12, W - tw - 22), by = yv - 26;
+    /* label sits BELOW the reading dot (was above → collided with the H1) */
+    var bx = Math.min(cur.x + 12, W - tw - 22), by = yv + 12;
     chipRect(bx, by, tw + 14, 19);
     ctx.fillStyle = 'rgba(255,255,255,.9)';
     ctx.fillText(val, bx + 7, by + 13);
@@ -224,18 +227,20 @@
     ctx.lineWidth = 1;
     ctx.setLineDash([4, 4]);
     ctx.beginPath();
-    ctx.moveTo(ev.x + 0.5, y0 - A * 2.1);
+    /* bias the marker line downward so it doesn't spear the headline; the label
+       + node now live BELOW the trace, in the clear lower-right band */
+    ctx.moveTo(ev.x + 0.5, y0 - A * 1.05);
     ctx.lineTo(ev.x + 0.5, y0 + A * 2.1);
     ctx.stroke();
     ctx.setLineDash([]);
 
     ctx.fillStyle = 'rgba(' + CORAL + ',.9)';
-    ctx.fillRect(ev.x - 2, y0 - A * 2.1 - 2, 4, 4);
+    ctx.fillRect(ev.x - 2, y0 + A * 2.1 - 2, 4, 4);
 
     ctx.font = '10.5px "IBM Plex Mono", ui-monospace, Menlo, monospace';
     var tw = ctx.measureText(ev.label).width;
     var bx = Math.min(Math.max(8, ev.x - (tw + 14) / 2), W - tw - 22);
-    var by = y0 - A * 2.1 - 30;
+    var by = y0 + A * 2.1 + 8;
     chipRect(bx, by, tw + 14, 19);
     ctx.fillStyle = 'rgba(' + CORAL + ',.95)';
     ctx.fillText(ev.label, bx + 7, by + 13);
