@@ -280,7 +280,6 @@ button:focus-visible {
    Mardoto/Inter and the header shifts). The wordmark uses the brand display face
    Instrument Sans (Bold), loaded in every page's <head>. */
 .logo-text { font-family: 'Instrument Sans', 'IBM Plex Sans', system-ui, -apple-system, sans-serif; }
-.lang-switch { font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif; }
 .site-nav.scrolled .logo-text { color: var(--graphite); }
 
 /* Nav links — centered absolutely */
@@ -1839,34 +1838,54 @@ button:focus-visible {
   align-items: center;
   gap: 18px;
 }
-.lang-switch {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  letter-spacing: .05em;
-  flex-shrink: 0;
-}
-.lang-switch a {
-  color: rgba(255,255,255,.75);
+/* Language dropdown: a trigger showing the current language + caret, and a
+   card menu with the three languages. Inherits the page font so the current
+   name always renders in the right script (Mardoto on HY, Plex on RU/EN). */
+.lang-dd { position: relative; flex-shrink: 0; }
+.lang-dd-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 4px; margin: -8px -4px;      /* ~44px touch target, no layout shift */
+  background: none; border: 0; cursor: pointer;
+  font-family: inherit; font-size: 13px; letter-spacing: .01em;
+  color: rgba(255,255,255,.82);
   transition: color .2s var(--ease);
-  /* comfortable touch target (~44px tall) without changing the visual layout */
-  padding: 14px 5px;
-  margin: -14px -5px;
 }
-.lang-switch a:hover { color: var(--coral); }
-.lang-switch a.is-current { color: var(--coral); font-weight: 600; }
-.lang-switch span { color: rgba(255,255,255,.28); }
-.site-nav.scrolled .lang-switch a { color: var(--text-soft); }
-.site-nav.scrolled .lang-switch a:hover,
-.site-nav.scrolled .lang-switch a.is-current { color: var(--coral); }
-.site-nav.scrolled .lang-switch span { color: var(--border); }
-.site-nav.menu-open .lang-switch a { color: var(--text-soft); }
-.site-nav.menu-open .lang-switch a:hover,
-.site-nav.menu-open .lang-switch a.is-current { color: var(--coral); }
-/* When the CTA appears on scroll, hide the language switch so the header stays
-   light — over the Hero it's lang only, scrolled it's the CTA only. */
-.site-nav.cta-visible .lang-switch { display: none; }
+.lang-dd-btn:hover { color: #fff; }
+.lang-dd-btn:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; border-radius: 3px; }
+.lang-dd-caret { width: 10px; height: 6px; opacity: .7; transition: transform .25s var(--ease); }
+.lang-dd.open .lang-dd-caret { transform: rotate(180deg); }
+.site-nav.scrolled .lang-dd-btn,
+.site-nav.menu-open .lang-dd-btn { color: var(--text-mid); }
+.site-nav.scrolled .lang-dd-btn:hover,
+.site-nav.menu-open .lang-dd-btn:hover { color: var(--graphite); }
+
+.lang-dd-menu {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 60;
+  min-width: 154px; display: flex; flex-direction: column; gap: 2px;
+  padding: 6px; border-radius: 10px;
+  background: #fff; border: 1px solid rgba(27,27,27,.10);
+  box-shadow: 0 1px 0 rgba(27,27,27,.04), 0 14px 30px rgba(18,18,22,.20);
+  opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.99);
+  transform-origin: top right;
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s .18s;
+}
+.lang-dd.open .lang-dd-menu {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s;
+}
+.lang-dd-menu a {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 9px 12px; border-radius: 6px;
+  font-size: 14px; line-height: 1.2; color: var(--text-mid);
+  transition: background .15s var(--ease), color .15s var(--ease);
+}
+.lang-dd-menu a:hover { background: var(--bg-off); color: var(--graphite); }
+.lang-dd-menu a.is-current { color: var(--coral); font-weight: 600; }
+.lang-dd-menu a.is-current::after {
+  content: ""; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--coral);
+}
+/* When the CTA appears on scroll (desktop), hide the switch as before. */
+.site-nav.cta-visible .lang-dd { display: none; }
 
 /* Armenian (default) page — scoped by lang attribute, so RU/EN pages are unaffected.
    Mardoto (self-hosted, preloaded) renders Armenian; Latin/brand falls through to
@@ -1939,7 +1958,7 @@ html[lang="hy"] .as-item { letter-spacing: .07em; }
      the bar), and the language switch is never swapped out — so the bar doesn't
      "reshuffle" the moment you scroll past the Hero. */
   .site-nav.cta-visible .btn-nav-cta { display: none; }
-  .site-nav.cta-visible .lang-switch { display: flex; }
+  .site-nav.cta-visible .lang-dd { display: block; }
 }
 /* Armenian glyphs render visibly larger than the Latin faces at the same px.
    Trim the inline nav labels a touch so the header reads at the same visual size as
