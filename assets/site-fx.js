@@ -135,29 +135,4 @@
     // Back/forward cache restore re-triggers the glitch
     window.addEventListener('pageshow', function (e) { if (e.persisted) relayout(); });
   }());
-
-  /* ── Language dropdown (nav): toggle the menu, close on outside click /
-        Escape / selection. Works with or without motion (CSS owns the fade). ── */
-  (function langDropdown() {
-    var dd = document.querySelector('[data-lang-dd]');
-    if (!dd) return;
-    var btn = dd.querySelector('.lang-dd-btn');
-    var menu = dd.querySelector('.lang-dd-menu');
-    if (!btn || !menu) return;
-    function setOpen(open) {
-      dd.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      setOpen(!dd.classList.contains('open'));
-    });
-    document.addEventListener('click', function (e) {
-      if (!dd.contains(e.target)) setOpen(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' || e.keyCode === 27) setOpen(false);
-    });
-    menu.addEventListener('click', function () { setOpen(false); });
-  }());
 }());
