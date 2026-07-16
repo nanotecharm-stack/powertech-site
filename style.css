@@ -627,7 +627,9 @@ button:focus-visible {
   font-weight: 500;
   letter-spacing: .17em;
   text-transform: uppercase;
-  color: var(--coral);
+  /* muted white — matches the eyebrow on the other dark sections (§03/§06),
+     so the hero reads as the same system rather than a louder coral variant */
+  color: rgba(255,255,255,.62);
   margin-bottom: 28px;
 }
 .hero-h1 {
