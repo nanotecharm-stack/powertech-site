@@ -1173,12 +1173,17 @@
     document.body.style.overflow='hidden'; hideCur(); playContent();
     document.getElementById('obm-close').focus(); }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow=''; elImg.style.transform=''; if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
+    document.body.style.overflow=''; elImg.style.transform=''; elImg.style.transition=''; elImg._pl=false;
+    if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
   function step(d){ render((cur+d+N)%N); playContent(); }
   function currentIndex(){ return (window.__ptSlider&&window.__ptSlider.index)?window.__ptSlider.index():cur; }
 
   stage.addEventListener('click', function(){ open(currentIndex()); });
   document.getElementById('obm-close').addEventListener('click', close);
+  /* CTA: close the overlay first, then the default #contact jump proceeds
+     (body scroll is restored inside close(), so the anchor works) */
+  var mcta = modal.querySelector('.obm-actions .btn-coral');
+  if (mcta) mcta.addEventListener('click', function(){ close(); });
   document.getElementById('obm-prev').addEventListener('click', function(){ step(-1); });
   document.getElementById('obm-next').addEventListener('click', function(){ step(1); });
   modal.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', function(e){ if(e.target===el) close(); }); });
@@ -1224,9 +1229,12 @@
         b.addEventListener('mouseleave', function(){ ic.style.transform=''; }); }
       magnet('obm-close',0.5); magnet('obm-prev',0.55); magnet('obm-next',0.55);
 
-      /* modal image parallax — depth on pointer move */
+      /* modal image parallax — depth on pointer move.
+         Inline short transition overrides the stylesheet's delayed entry
+         transition (1.2s + .14s delay), which made the motion stutter. */
       var mcard=modal.querySelector('.obm-card');
       mcard.addEventListener('mousemove', function(e){ if(!modal.classList.contains('open')) return;
+        if(!elImg._pl){ elImg.style.transition='transform .5s cubic-bezier(.22,1,.36,1)'; elImg._pl=true; }
         var r=mcard.getBoundingClientRect();
         var x=((e.clientX-r.left)/r.width-0.5), y=((e.clientY-r.top)/r.height-0.5);
         elImg.style.transform='scale(1.07) translate('+(x*-16)+'px,'+(y*-16)+'px)'; });

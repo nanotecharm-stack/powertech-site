@@ -209,7 +209,7 @@
             </div>
             <div class="hs-cap">
               <p class="hs-t">При выработке ниже ожидаемой, приёмке, модернизации или техническом споре.</p>
-              <p class="hs-t hs-strong">Связь отклонений с внешней сетью, точкой присоединения или режимом эксплуатации станции.</p>
+              <p class="hs-t hs-strong">Связь отклонений с внешней сетью, точкой подключения или режимом эксплуатации станции.</p>
             </div>
             <div class="hs-cap">
               <p class="hs-t">Перед сдачей, покупкой, реконструкцией или подключением новых нагрузок.</p>
@@ -1089,10 +1089,10 @@
       list:['Момент и глубина каждого провала напряжения — по журналу событий с меткой времени.','Причина перегрева двигателей: несимметрия напряжений 2 % сокращает их ресурс на четверть (NEMA MG-1).','Расчёт компенсации реактивной мощности и фильтров под фактическую нагрузку.'],
       statFig:'80 %', statTxt:'производственных остановок из-за качества питания — это провалы напряжения <i>EPRI</i>' },
     { name:'Солнечные электростанции', img:'/assets/objects/solar.webp',
-      pain:'При избытке генерации на линии напряжение в точке присоединения поднимается выше 253 В, и инверторы отключаются или ограничивают выработку.',
-      mech:'Недовыработку легко отнести на погоду или оборудование. Измерения в точке присоединения определяют фактический источник потерь — станция или внешняя сеть.',
-      list:['Сколько теряется и где — на станции или во внешней сети.','Соблюдает ли станция нормы по напряжению и гармоникам в точке присоединения.','Измерения при приёмке — доказательная база для спора с EPC-подрядчиком.'],
-      statFig:'', statTxt:'Независимые измерения в точке присоединения принимают и подрядчик, и энергокомпания.' },
+      pain:'При избытке генерации на линии напряжение в точке подключения поднимается выше 253 В, и инверторы отключаются или ограничивают выработку.',
+      mech:'Недовыработку легко отнести на погоду или оборудование. Измерения в точке подключения определяют фактический источник потерь — станция или внешняя сеть.',
+      list:['Сколько теряется и где — на станции или во внешней сети.','Соблюдает ли станция нормы по напряжению и гармоникам в точке подключения.','Измерения при приёмке — доказательная база для спора с EPC-подрядчиком.'],
+      statFig:'', statTxt:'Независимые измерения в точке подключения принимают и подрядчик, и энергокомпания.' },
     { name:'Жилые и коммерческие объекты', img:'/assets/objects/buildings.webp',
       pain:'Претензии арендаторов по вышедшей из строя технике, ложные срабатывания автоматических выключателей, завышенные счета за электроэнергию.',
       mech:'При разбирательстве «кто виноват» без измерений позиции нет ни у одной стороны, а ущерб по качеству электроэнергии страховые компании, как правило, из покрытия исключают.',
@@ -1174,12 +1174,17 @@
     document.body.style.overflow='hidden'; hideCur(); playContent();
     document.getElementById('obm-close').focus(); }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow=''; elImg.style.transform=''; if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
+    document.body.style.overflow=''; elImg.style.transform=''; elImg.style.transition=''; elImg._pl=false;
+    if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
   function step(d){ render((cur+d+N)%N); playContent(); }
   function currentIndex(){ return (window.__ptSlider&&window.__ptSlider.index)?window.__ptSlider.index():cur; }
 
   stage.addEventListener('click', function(){ open(currentIndex()); });
   document.getElementById('obm-close').addEventListener('click', close);
+  /* CTA: close the overlay first, then the default #contact jump proceeds
+     (body scroll is restored inside close(), so the anchor works) */
+  var mcta = modal.querySelector('.obm-actions .btn-coral');
+  if (mcta) mcta.addEventListener('click', function(){ close(); });
   document.getElementById('obm-prev').addEventListener('click', function(){ step(-1); });
   document.getElementById('obm-next').addEventListener('click', function(){ step(1); });
   modal.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', function(e){ if(e.target===el) close(); }); });
@@ -1225,9 +1230,12 @@
         b.addEventListener('mouseleave', function(){ ic.style.transform=''; }); }
       magnet('obm-close',0.5); magnet('obm-prev',0.55); magnet('obm-next',0.55);
 
-      /* modal image parallax — depth on pointer move */
+      /* modal image parallax — depth on pointer move.
+         Inline short transition overrides the stylesheet's delayed entry
+         transition (1.2s + .14s delay), which made the motion stutter. */
       var mcard=modal.querySelector('.obm-card');
       mcard.addEventListener('mousemove', function(e){ if(!modal.classList.contains('open')) return;
+        if(!elImg._pl){ elImg.style.transition='transform .5s cubic-bezier(.22,1,.36,1)'; elImg._pl=true; }
         var r=mcard.getBoundingClientRect();
         var x=((e.clientX-r.left)/r.width-0.5), y=((e.clientY-r.top)/r.height-0.5);
         elImg.style.transform='scale(1.07) translate('+(x*-16)+'px,'+(y*-16)+'px)'; });
