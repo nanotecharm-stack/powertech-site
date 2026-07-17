@@ -943,7 +943,7 @@
   .obm-card {
     position: relative; width: min(1080px, 100%); min-width: 0; max-height: calc(100vh - 56px); max-height: calc(100dvh - 56px); overflow: hidden;
     background: #141312; color: #F2EFEA; border: 1px solid rgba(255,255,255,.12); border-radius: 4px;
-    display: grid; grid-template-columns: 42% 1fr;
+    display: grid; grid-template-columns: 42% minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
     opacity: 0; clip-path: inset(48% 0 48% 0 round 4px);
     transition: clip-path .62s cubic-bezier(.16,1,.3,1), opacity .4s ease;
   }
@@ -966,7 +966,8 @@
   .obm.open .obm-figure img { clip-path: inset(0 0 0 0); transform: scale(1); }
   .obm-figure::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(90deg, rgba(20,19,18,0) 62%, rgba(20,19,18,.92) 100%); }
-  .obm-body { padding: 38px 44px 34px; overflow-y: auto; min-width: 0; }
+  .obm-body { padding: 38px 44px 34px; overflow-y: auto; min-width: 0; min-height: 0;
+    -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
   .obm-meta {
     display: flex; justify-content: space-between; align-items: center;
     padding-bottom: 14px; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,.12);
@@ -1044,7 +1045,8 @@
     .obm-stat.solo span { font-size: .9rem; }
   }
   @media (max-width: 900px) {
-    .obm-card { grid-template-columns: 1fr; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); }
+    .obm-card { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr);
+      max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); }
     .obm-figure { height: 172px; }
     .obm-figure::after { background: linear-gradient(180deg, rgba(20,19,18,0) 40%, rgba(20,19,18,.92) 100%); }
     .obm-prev { left: 8px; } .obm-next { right: 8px; }
@@ -1175,12 +1177,22 @@
     else { elStat.classList.add('solo'); elStatFig.style.display='none'; }
     elCounter.textContent=(i+1)+' / '+N; elScroll.scrollTop=0;
   }
+  /* iOS-safe background scroll lock: overflow:hidden alone does not stop
+     body scroll on iOS Safari — pin the body and restore the position after. */
+  var lockY = 0;
+  function lockScroll(){ lockY = window.scrollY || document.documentElement.scrollTop || 0;
+    var b = document.body.style;
+    b.position='fixed'; b.top=(-lockY)+'px'; b.left='0'; b.right='0'; b.width='100%'; b.overflow='hidden'; }
+  function unlockScroll(){ var b = document.body.style;
+    b.position=''; b.top=''; b.left=''; b.right=''; b.width=''; b.overflow='';
+    var d = document.documentElement, prev = d.style.scrollBehavior;
+    d.style.scrollBehavior='auto'; window.scrollTo(0, lockY); d.style.scrollBehavior=prev; }
   function open(i){ lastFocus=document.activeElement; render(i);
     modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden'; hideCur(); playContent();
+    lockScroll(); hideCur(); playContent();
     document.getElementById('obm-close').focus(); }
   function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow=''; elImg.style.transform=''; elImg.style.transition=''; elImg._pl=false;
+    unlockScroll(); elImg.style.transform=''; elImg.style.transition=''; elImg._pl=false;
     if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
   function step(d){ render((cur+d+N)%N); playContent(); }
   function currentIndex(){ return (window.__ptSlider&&window.__ptSlider.index)?window.__ptSlider.index():cur; }
