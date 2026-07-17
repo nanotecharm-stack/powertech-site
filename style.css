@@ -3135,7 +3135,9 @@ html[lang="hy"] .tr-title { letter-spacing: .02em; }
   text-transform: uppercase; font-size: 13px;
   letter-spacing: .05em;
 }
-html[lang="hy"] .pm-title { letter-spacing: .02em; }
+/* Armenian: don't force-uppercase — CSS uppercasing splits the «և» ligature
+   into «ԵՎ», which reads as a glitch. Natural case keeps «և» clean. */
+html[lang="hy"] .pm-title { letter-spacing: .02em; text-transform: none; }
 .pm-text { color: var(--text-soft); font-size: 13.5px; }
 @media (max-width: 1020px) { .params-field { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .params-field { grid-template-columns: 1fr; } }
