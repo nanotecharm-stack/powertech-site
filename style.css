@@ -3293,3 +3293,11 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; }
 .nav-mobile { background: #121317; border-top-color: rgba(255,255,255,.08); }
 .nav-mobile a { color: rgba(255,255,255,.82); border-bottom-color: rgba(255,255,255,.07); }
 .nav-mobile a:hover { color: #fff; }
+
+/* ── EN hero: a touch more breathing room (scoped; desktop only) ── */
+@media (min-width: 601px) {
+  html[lang="en"] .hero-tag  { margin-bottom: 28px; }
+  html[lang="en"] .hero-h1   { line-height: 1.08; margin-bottom: 40px; }
+  html[lang="en"] .hero-sub  { margin-bottom: 56px; }
+  html[lang="en"] .hero-hud  { margin-top: 76px; }
+}
