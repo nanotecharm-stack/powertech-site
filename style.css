@@ -138,8 +138,8 @@ button:focus-visible {
 
 /* ── Variables ──────────────────────────────────────────────── */
 :root {
-  --coral:       #F25749;
-  --coral-dk:    #D74C3C;
+  --coral:       #C8603D;
+  --coral-dk:    #AA5234;
   --graphite:    #1B1B1B;
   --text-mid:    #4A4A4A;
   /* #6E6E6E gives 5.1:1 on white — small labels (eyebrows, indexes, captions)
@@ -178,22 +178,22 @@ button:focus-visible {
    Reads correctly on both the dark hero and the light contact form. The lift on
    hover / press on click is the existing translateY (motion-gated). */
 .btn-coral {
-  background: linear-gradient(180deg, #F76B5E 0%, #F25749 52%, #E1492F 100%);
+  background: linear-gradient(180deg, #D9784E 0%, #C8603D 52%, #AC4A28 100%);
   color: #fff;
-  border: 1.5px solid #E1492F;
-  text-shadow: 0 1px 1px rgba(120,24,12,.35);
+  border: 1.5px solid #AC4A28;
+  text-shadow: 0 1px 1px rgba(92,42,20,.35);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.30),
-              inset 0 -2px 3px rgba(150,35,20,.28),
+              inset 0 -2px 3px rgba(120,52,26,.28),
               0 2px 4px rgba(0,0,0,.30),
-              0 7px 16px rgba(205,50,30,.22);
+              0 7px 16px rgba(176,78,42,.22);
 }
 .btn-coral:hover {
-  background: linear-gradient(180deg, #F0604F 0%, #E44E3D 52%, #D2402C 100%);
-  border-color: #D2402C;
+  background: linear-gradient(180deg, #CE6E46 0%, #B85433 52%, #9C3F20 100%);
+  border-color: #9C3F20;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.34),
-              inset 0 -2px 3px rgba(150,35,20,.28),
+              inset 0 -2px 3px rgba(120,52,26,.28),
               0 4px 7px rgba(0,0,0,.30),
-              0 12px 22px rgba(205,50,30,.28);
+              0 12px 22px rgba(176,78,42,.28);
 }
 .btn-coral:active {
   box-shadow: inset 0 2px 4px rgba(120,25,12,.45), 0 1px 2px rgba(0,0,0,.30);
@@ -445,7 +445,7 @@ button:focus-visible {
                           reappeared at rest, parking the scroll past the new page end. */
   display: flex;
   align-items: center;
-  background: #0A0A0A;
+  background: #0D0E13;
   overflow: hidden;
 }
 /* Scroll cue: a thin "measurement line" with a coral pulse running down it
@@ -486,8 +486,8 @@ button:focus-visible {
   height: 15px;
   margin-left: -1.5px;
   border-radius: 2px;
-  background: linear-gradient(to bottom, rgba(242,87,73,0), var(--coral));
-  box-shadow: 0 0 8px 1px rgba(242,87,73,.5);
+  background: linear-gradient(to bottom, rgba(200,96,61,0), var(--coral));
+  box-shadow: 0 0 8px 1px rgba(200,96,61,.5);
 }
 .hs-chev {
   width: 24px;
@@ -501,7 +501,7 @@ button:focus-visible {
   transition: transform .2s var(--ease);
 }
 .hero-scroll:hover .hs-track {
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(242,87,73,.55));
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(200,96,61,.55));
 }
 .hero-scroll:hover .hs-chev { transform: translateY(2px); }
 @media (prefers-reduced-motion: no-preference) {
@@ -525,9 +525,9 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(1100px 640px at 76% 68%, rgba(242,87,73,.075), transparent 62%),
+    radial-gradient(1100px 640px at 76% 68%, rgba(200,96,61,.075), transparent 62%),
     radial-gradient(900px 620px at 10% -12%, rgba(150,166,182,.06), transparent 55%),
-    linear-gradient(158deg, #0C0D10 0%, #08090B 52%, #0B0C0F 100%);
+    linear-gradient(158deg, #0C0D10 0%, #08090B 52%, #0D0E13 100%);
 }
 .hero-bg::after {
   content: "";
@@ -715,7 +715,7 @@ button:focus-visible {
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--coral);
-  box-shadow: 0 0 6px 1px rgba(242,87,73,.55);
+  box-shadow: 0 0 6px 1px rgba(200,96,61,.55);
 }
 @media (prefers-reduced-motion: no-preference) {
   .hud-dot { animation: hud-dot 2.4s ease-in-out infinite; }
@@ -1756,7 +1756,7 @@ button:focus-visible {
 .cf-field textarea:focus {
   outline: none;
   border-color: var(--coral);
-  box-shadow: 0 0 0 3px rgba(242,87,73,.14);
+  box-shadow: 0 0 0 3px rgba(200,96,61,.14);
 }
 .cf-submit {
   margin-top: 22px;
@@ -1874,7 +1874,7 @@ button:focus-visible {
 .lang-seg-item:hover { color: rgba(255,255,255,.92); }
 .lang-seg-item.on, .lang-seg-item.on:hover {
   color: #fff;
-  background: linear-gradient(180deg, #F76B5E, #E1492F);
+  background: linear-gradient(180deg, #D9784E, #AC4A28);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 1px 2px rgba(0,0,0,.25);
 }
 .lang-seg-item:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
@@ -2376,7 +2376,7 @@ html { scrollbar-color: #8F887C #F1EFEA; scrollbar-width: thin; }
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 26px -12px rgba(242,87,73,.6);
+  box-shadow: 0 12px 26px -12px rgba(200,96,61,.6);
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
@@ -2578,8 +2578,8 @@ circle.fx-dot,
   border-top: none;
   color: #fff;
   background:
-    radial-gradient(900px 420px at 80% 110%, rgba(242,87,73,.07), transparent 62%),
-    #0B0C0F;
+    radial-gradient(900px 420px at 80% 110%, rgba(200,96,61,.07), transparent 62%),
+    #0D0E13;
   overflow: hidden;
 }
 /* same faint technical grid as the hero / dark sections */
@@ -2692,7 +2692,7 @@ circle.fx-dot,
   font-style: normal;
   font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   font-size: 10.5px;
-  color: rgba(242,87,73,.55);
+  color: rgba(200,96,61,.55);
   min-width: 18px;
   transition: color .25s var(--ease);
 }
@@ -3293,7 +3293,7 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; text-transform: none; }
 }
 .site-nav.scrolled,
 .site-nav.menu-open {
-  background: #0A0A0A;               /* same black as the hero — stays dark on scroll */
+  background: #0D0E13;               /* same black as the hero — stays dark on scroll */
   box-shadow: 0 1px 0 rgba(255,255,255,.06);
 }
 .site-nav.scrolled .logo-text,
@@ -3319,10 +3319,14 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; text-transform: none; }
 .nav-mobile a { color: rgba(255,255,255,.82); border-bottom-color: rgba(255,255,255,.07); }
 .nav-mobile a:hover { color: #fff; }
 
-/* ── EN hero: a touch more breathing room (scoped; desktop only) ── */
+/* ── EN + RU hero: a touch more breathing room (scoped; desktop only) ── */
 @media (min-width: 601px) {
-  html[lang="en"] .hero-tag  { margin-bottom: 28px; }
-  html[lang="en"] .hero-h1   { line-height: 1.08; margin-bottom: 40px; }
-  html[lang="en"] .hero-sub  { margin-bottom: 56px; }
-  html[lang="en"] .hero-hud  { margin-top: 76px; }
+  html[lang="en"] .hero-tag,
+  html[lang="ru"] .hero-tag  { margin-bottom: 28px; }
+  html[lang="en"] .hero-h1,
+  html[lang="ru"] .hero-h1   { line-height: 1.08; margin-bottom: 40px; }
+  html[lang="en"] .hero-sub,
+  html[lang="ru"] .hero-sub  { margin-bottom: 56px; }
+  html[lang="en"] .hero-hud,
+  html[lang="ru"] .hero-hud  { margin-top: 76px; }
 }

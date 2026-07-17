@@ -28,7 +28,7 @@
   hero.classList.add('scope-on'); /* hides the static CSS fallback waveform */
 
   var TAU = Math.PI * 2;
-  var CORAL = '242,87,73';
+  var CORAL = '200,96,61';
   var UNIT = canvas.getAttribute('data-unit') || 'V';  /* per-language volt symbol */
   var W = 0, H = 0, narrow = false;
 
@@ -340,7 +340,7 @@
     ctx.lineWidth = narrow ? 1.4 : 1.7;
     ctx.shadowColor = 'rgba(' + CORAL + ',.55)';
     ctx.shadowBlur = narrow ? 6 : 12;
-    ctx.strokeStyle = traceGradient(242, 87, 73, narrow ? 0.9 : 0.95);
+    ctx.strokeStyle = traceGradient(200, 96, 61, narrow ? 0.9 : 0.95);
     tracePath(t, 0, 1); ctx.stroke();
     ctx.restore();
 

@@ -440,11 +440,11 @@
     var chart = doc.querySelector('.rep-chart svg');
     if (chart) {
       var curve = chart.querySelector('path[stroke="#1B1B1B"]');
-      var evDot = chart.querySelector('circle[fill="#F25749"]');
-      var evLine = chart.querySelector('line[stroke="#F25749"]');
+      var evDot = chart.querySelector('circle[fill="#C8603D"]');
+      var evLine = chart.querySelector('line[stroke="#C8603D"]');
       var evText = null, volts = null;
       Array.prototype.forEach.call(chart.querySelectorAll('text'), function (t) {
-        if (t.getAttribute('fill') === '#F25749') evText = t;
+        if (t.getAttribute('fill') === '#C8603D') evText = t;
         else if ((t.getAttribute('x') | 0) > 480 && (t.getAttribute('y') | 0) < 110) volts = t;
       });
       var tl = gsap.timeline({
