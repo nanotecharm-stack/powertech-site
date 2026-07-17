@@ -11,9 +11,9 @@
 (function () {
   'use strict';
 
-  /* Russian pages use the decimal comma (230,0 / 50,00 / 2,4);
-     other languages keep the dot. */
-  var RU_DEC = (document.documentElement.lang || '') === 'ru';
+  /* Russian and Armenian pages use the decimal comma (230,0 / 50,00 / 2,4);
+     English keeps the dot. */
+  var RU_DEC = /^(ru|hy)$/.test(document.documentElement.lang || '');
   function fmtNum(str) { return RU_DEC ? String(str).replace('.', ',') : str; }
 
   var hero = document.querySelector('.hero');

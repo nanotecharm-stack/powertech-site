@@ -1729,6 +1729,7 @@ button:focus-visible {
   color: var(--text-mid);
 }
 .cf-field input,
+.cf-field select,
 .cf-field textarea {
   border: 1px solid var(--border);
   border-radius: 5px;
@@ -1739,9 +1740,19 @@ button:focus-visible {
   transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
 }
 .cf-field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+/* Native select styled to match the text inputs, with a subtle caret. */
+.cf-field select {
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  cursor: pointer;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%236E6E6E' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
 .cf-field input::placeholder,
 .cf-field textarea::placeholder { color: #BBB6AE; }
 .cf-field input:focus,
+.cf-field select:focus,
 .cf-field textarea:focus {
   outline: none;
   border-color: var(--coral);
@@ -2251,6 +2262,9 @@ html[lang="hy"] .appr-text { min-width: 0; }
   color: var(--graphite);
 }
 .rep-ev .ev-flag { color: var(--coral); }
+/* HY report sample carries an extra magnitude column (per the HY spec).
+   Scoped to the Armenian page so EN/RU keep their four-column layout. */
+html[lang="hy"] .rep-ev { grid-template-columns: 1.5fr 1.05fr .4fr .72fr .58fr; }
 .rep-caption {
   margin-top: 16px;
   font-size: 12.5px;
@@ -2266,6 +2280,10 @@ html[lang="hy"] .appr-text { min-width: 0; }
   .rep-doc { padding: 22px 20px 18px; }
   .rep-ev { grid-template-columns: 1.6fr 1fr .5fr; }
   .rep-ev span:last-child { display: none; }
+  /* HY: collapse to name · date · phase — hide duration + magnitude */
+  html[lang="hy"] .rep-ev { grid-template-columns: 1.5fr 1fr .5fr; }
+  html[lang="hy"] .rep-ev > *:nth-child(4),
+  html[lang="hy"] .rep-ev > *:nth-child(5) { display: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════
