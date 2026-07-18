@@ -1607,6 +1607,19 @@ button:focus-visible {
 @media (max-width: 820px) { .about-band { aspect-ratio: 3 / 2; } }
 @media (prefers-reduced-motion: reduce) { .about-band .ab-top { animation: none; } }
 
+/* ── About — clip-path "corporate" image trio (measurement / analysis / report) ── */
+.acx-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.about-mission { margin: 20px auto 0; max-width: 30em; font-size: clamp(19px, 2vw, 25px); font-weight: 500; line-height: 1.5; letter-spacing: -.01em; color: var(--graphite); }
+.about-clip { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 26px); max-width: 1080px; margin: clamp(40px, 5vw, 68px) auto 0; padding: 0 24px; }
+.about-clip figure { margin: 0; }
+.about-clip img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: transform .6s var(--ease); }
+.about-clip figure:hover img { transform: scale(1.05); }
+.acx1 { clip-path: url(#acx1); }
+.acx2 { clip-path: url(#acx2); }
+.acx3 { clip-path: url(#acx3); }
+@media (max-width: 640px) { .about-clip { grid-template-columns: 1fr; max-width: 340px; } }
+@media (prefers-reduced-motion: reduce) { .about-clip figure:hover img { transform: none; } }
+
 /* ── Section "PowerTech" responsive ─────────────────────────── */
 @media (max-width: 760px) {
   .about-lower { grid-template-columns: 1fr; gap: 28px; }
