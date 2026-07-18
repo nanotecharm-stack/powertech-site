@@ -1386,6 +1386,7 @@ button:focus-visible {
 }
 .appr-note {
   padding-left: 16px;
+  margin-left: -18px;   /* coral accent sits in the margin so the text lines up with the statements above */
   border-left: 2px solid var(--coral);
   font-size: 14px;
   font-weight: 400;
