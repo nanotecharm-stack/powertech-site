@@ -84,7 +84,7 @@
       { sel: '.s02', idx: '.s02-idx', eye: '.s02-eyebrow',
         host: function (sec) { var b = sec.querySelector('.s02-body'); return b && { p: b, before: b.firstElementChild }; } },
       { sel: '.objects', idx: '.obj-idx', eye: '.obj-eyebrow',
-        host: function (sec) { var w = sec.querySelector('.hs-wrap'); return w && { p: w.parentNode, before: w }; } },
+        host: function (sec) { var w = sec.querySelector('.sx-grid'); return w && { p: w.parentNode, before: w }; } },
       { sel: '.params', idx: '.params-idx', eye: '.params-eyebrow',
         host: function (sec) { var b = sec.querySelector('.params-body'); return b && { p: b, before: b.firstElementChild }; } },
       { sel: '.report', idx: '.report-idx', eye: '.report-eyebrow',
