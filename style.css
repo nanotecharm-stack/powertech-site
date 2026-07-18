@@ -3167,11 +3167,15 @@ html[lang="hy"] .ih-label {
 }
 
 /* планки заменяют исходные eyebrow-ряды (только когда JS их создал) */
-html.has-ih .s02-eyebrow-row,
+html.has-ih .proc-head,
 html.has-ih .obj-head,
 html.has-ih .params-eyebrow-row,
 html.has-ih .report-eyebrow-row { display: none; }
 html.has-ih .s02-left { display: none; }
+/* instrument rail on the dark Monitoring section — light-on-dark colours */
+.proc .ih-idx { color: rgba(255,255,255,.92); }
+.proc .ih-label { color: rgba(255,255,255,.5); }
+.proc .ih-rule { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.3) 0 1px, transparent 1px 22px); border-bottom-color: rgba(255,255,255,.18); }
 html.has-ih .params-head { display: block; margin-bottom: 0; }
 
 /* ── воздух и поле секций ── */

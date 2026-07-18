@@ -81,8 +81,8 @@
     var WAVE = '<svg class="ih-wave" viewBox="0 0 188 26" fill="none" aria-hidden="true">' +
       '<path d="M4 13 l8 -7 l8 11 l8 -9 l8 7 l8 -6 l8 5 l8 -8 l8 9 l8 -6 l8 4 l8 -5 l8 6 l8 -4 l8 3 l8 -5 l8 4 l8 -2 l8 1 h20"/></svg>';
     var DEFS = [
-      { sel: '.s02', idx: '.s02-idx', eye: '.s02-eyebrow',
-        host: function (sec) { var b = sec.querySelector('.s02-body'); return b && { p: b, before: b.firstElementChild }; } },
+      { sel: '.proc', idx: '.proc-idx', eye: '.proc-eyebrow',
+        host: function (sec) { var b = sec.querySelector('.proc-body'); return b && { p: b, before: b.firstElementChild }; } },
       { sel: '.objects', idx: '.obj-idx', eye: '.obj-eyebrow',
         host: function (sec) { var w = sec.querySelector('.sx-grid'); return w && { p: w.parentNode, before: w }; } },
       { sel: '.params', idx: '.params-idx', eye: '.params-eyebrow',
