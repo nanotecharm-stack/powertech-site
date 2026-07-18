@@ -1562,6 +1562,27 @@ button:focus-visible {
   mix-blend-mode: multiply;
 }
 
+/* Two-photo crossfade in the About panel — full-bleed photos (no white cut-out),
+   so blend/position defaults are overridden. Calm ~14s cycle, motion-gated. */
+.about-photo.about-slideshow img {
+  position: absolute;
+  inset: 0;
+  object-position: center;
+  mix-blend-mode: normal;
+}
+.about-slideshow .as-top {
+  opacity: 0;
+  animation: aboutXfade 14s ease-in-out infinite;
+}
+@keyframes aboutXfade {
+  0%, 43%  { opacity: 0; }
+  50%, 93% { opacity: 1; }
+  100%     { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-slideshow .as-top { animation: none; }
+}
+
 /* ── Section "PowerTech" responsive ─────────────────────────── */
 @media (max-width: 760px) {
   .about-lower { grid-template-columns: 1fr; gap: 28px; }
