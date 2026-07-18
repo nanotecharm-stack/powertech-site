@@ -37,7 +37,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=242" />
+  <link rel="stylesheet" href="/style.css?v=243" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -160,11 +160,47 @@
         <span class="hud-chip"><span class="hud-k">THD</span><span class="hud-v" data-hud="thd">2,4</span><span class="hud-u">%</span></span>
       </div>
     </div>
-    <a class="hero-scroll cue-init" href="#objects" aria-label="Ոլորել ներքև">
+    <a class="hero-scroll cue-init" href="#problem" aria-label="Ոլորել ներքև">
       <span class="hs-track"></span>
       <svg class="hs-chev" viewBox="0 0 22 12" fill="none" aria-hidden="true"><path d="M2 2l9 8 9-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </section>
+
+  <!-- ═══════════════════════════════ SECTION — Խնդիրը ցանցում աչքով չի երևում ═══════════════════════════════ -->
+  <section class="problem" id="problem" aria-label="Խնդիրը">
+    <div class="container problem-grid">
+      <div class="pb-text">
+        <p class="pb-k">Ինչու է դա կարևոր</p>
+        <h2 class="pb-h2">Ցանցի խնդիրներն աչքով չեն երևում</h2>
+        <p class="pb-lead">Լարման անկումները, գերլարումներն ու աղավաղումները տևում են միլիվայրկյաններ։ Մեկանգամյա չափումը դրանք բաց է թողնում, իսկ խափանումների պատճառը վերագրվում է սարքավորմանը կամ եղանակին։</p>
+        <p class="pb-lead"><span class="em">Դրանք հնարավոր է նկատել միայն անընդհատ գրանցման դեպքում</span>՝ շահագործման սովորական ռեժիմում։</p>
+      </div>
+      <div class="pb-scope" role="img" aria-label="Օսցիլոգրամ՝ լարման կարճատև անկում L2 փուլում շահագործման սովորական ռեժիմում">
+        <div class="pb-scope-top">
+          <span class="ch">U · L2</span>
+          <span class="ev"><span class="d"></span>REC</span>
+        </div>
+        <svg viewBox="0 0 480 240" aria-hidden="true">
+          <g class="grid">
+            <line x1="0" y1="48" x2="480" y2="48"/><line x1="0" y1="96" x2="480" y2="96"/>
+            <line x1="0" y1="144" x2="480" y2="144"/><line x1="0" y1="192" x2="480" y2="192"/>
+            <line x1="96" y1="0" x2="96" y2="240"/><line x1="192" y1="0" x2="192" y2="240"/>
+            <line x1="288" y1="0" x2="288" y2="240"/><line x1="384" y1="0" x2="384" y2="240"/>
+          </g>
+          <line class="band" x1="0" y1="60" x2="480" y2="60"/>
+          <line class="band" x1="0" y1="180" x2="480" y2="180"/>
+          <line class="nominal" x1="0" y1="120" x2="480" y2="120"/>
+          <path class="trace" d="M0 120 L40 119 L60 121 L90 120 L120 120 L150 119 L180 121 L206 120"/>
+          <path class="trace-dip" d="M206 120 L224 121 L236 210 L258 98 L276 120 L300 120 L340 119 L370 121 L400 120 L440 120 L480 120"/>
+          <text class="lab" x="438" y="114">230 V</text>
+          <text class="lab" x="8" y="56">+10 %</text>
+          <text class="lab" x="8" y="176">−10 %</text>
+          <text class="lab-c" x="214" y="230">−15 %</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════════════════ SECTION — Ոլորտներ և խնդիրներ ═══════════════════════════════ -->
   <section class="objects" id="objects" aria-label="Ոլորտներ">
     <div class="container obj-body">
