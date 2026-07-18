@@ -3170,7 +3170,11 @@ html[lang="hy"] .ih-label {
 html.has-ih .proc-head,
 html.has-ih .obj-head,
 html.has-ih .params-eyebrow-row,
-html.has-ih .report-eyebrow-row { display: none; }
+html.has-ih .report-eyebrow-row,
+html.has-ih .appr-eyebrow-row { display: none; }
+/* Approach header aligned to P1: coral overline (32×2) + big statement, no number */
+html.has-ih .appr-accent { width: 32px; height: 2px; margin-bottom: 18px; }
+html:not([lang="hy"]) .appr-h2 { font-family: 'Instrument Sans', 'IBM Plex Sans', system-ui, sans-serif; }
 html.has-ih .s02-left { display: none; }
 /* instrument rail on the dark Monitoring section — light-on-dark colours */
 .proc .ih-idx { color: rgba(255,255,255,.92); }
