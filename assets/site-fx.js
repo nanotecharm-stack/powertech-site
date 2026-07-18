@@ -135,4 +135,32 @@
     // Back/forward cache restore re-triggers the glitch
     window.addEventListener('pageshow', function (e) { if (e.persisted) relayout(); });
   }());
+
+  /* ── TEMP — test-period notice bar. Localised, dismissible for the session.
+        REMOVE this whole IIFE + the `.testbar` CSS block once the site is
+        final. Shows a slim bottom strip so visitors know edits are ongoing. ── */
+  (function testBar() {
+    try { if (sessionStorage.getItem('pt-testbar') === 'off') return; } catch (e) { /* private mode */ }
+    var lang = (document.documentElement.lang || 'ru').slice(0, 2);
+    var T = {
+      ru: { m: 'Тестовый период — сайт дорабатывается, контент и оформление могут меняться.', a: 'Скрыть уведомление' },
+      en: { m: 'Testing period — the site is being refined; content and design may change.', a: 'Dismiss notice' },
+      hy: { m: 'Փորձնական շրջան — կայքը դեռ կատարելագործվում է, բովանդակությունն ու ձևավորումը կարող են փոփոխվել։', a: 'Փակել ծանուցումը' }
+    }[lang] || { m: 'Testing period — the site is being refined.', a: 'Dismiss' };
+    var bar = document.createElement('div');
+    bar.className = 'testbar';
+    bar.setAttribute('role', 'status');
+    bar.innerHTML = '<span class="tb-dot" aria-hidden="true"></span><span class="tb-msg"></span>' +
+      '<button type="button" class="tb-x" aria-label="' + T.a + '">&times;</button>';
+    bar.querySelector('.tb-msg').textContent = T.m;
+    bar.querySelector('.tb-x').addEventListener('click', function () {
+      bar.classList.remove('in');
+      document.body.classList.remove('has-testbar');
+      try { sessionStorage.setItem('pt-testbar', 'off'); } catch (e) { /* ignore */ }
+      setTimeout(function () { if (bar.parentNode) bar.parentNode.removeChild(bar); }, 500);
+    });
+    document.body.appendChild(bar);
+    document.body.classList.add('has-testbar');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { bar.classList.add('in'); }); });
+  }());
 }());
