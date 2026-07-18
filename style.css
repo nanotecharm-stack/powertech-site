@@ -3453,3 +3453,15 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; text-transform: none; }
   html[lang="en"] .hero-hud,
   html[lang="ru"] .hero-hud  { margin-top: 76px; }
 }
+
+
+/* ═══ Section header P1 — coral overline + clean name (no number/ruler/wave) ═══ */
+.ih { display: block; align-items: initial; gap: 0; margin: 0 0 clamp(40px, 5vw, 64px); flex-wrap: initial; }
+.ih::before { content: ""; display: block; width: 32px; height: 2px; background: var(--coral); margin-bottom: 18px; }
+.ih-idx, .ih-rule, .ih-wave { display: none; }
+.ih-label { display: block; max-width: none; flex: initial;
+  font-family: 'Instrument Sans', 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 600; font-size: clamp(28px, 3.2vw, 42px); letter-spacing: -.03em;
+  line-height: 1.02; text-transform: none; color: var(--graphite); }
+html[lang="hy"] .ih-label { font-family: "Mardoto", "IBM Plex Sans", system-ui, sans-serif; letter-spacing: -.01em; }
+.proc .ih-label { color: #fff; }
