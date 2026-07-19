@@ -1400,12 +1400,15 @@ body.has-testbar .to-top { bottom: 64px; }
 }
 .pb-k::before { content: ""; width: 22px; height: 1px; background: var(--coral); }
 .pb-h2 {
-  font-size: 41px;
+  /* Scenario hook: one clear step below the .ih section-name rail (~30px),
+     so the rail stays the section's single dominant heading. */
+  font-size: clamp(20px, 2.2vw, 25px);
   font-weight: 600;
-  letter-spacing: -1.1px;
-  line-height: 1.06;
+  letter-spacing: -.5px;
+  line-height: 1.25;
   color: var(--graphite);
-  margin: 0 0 28px;
+  margin: 0 0 26px;
+  max-width: 34ch;
   text-wrap: balance;
 }
 html:not([lang="hy"]) .pb-h2 {
