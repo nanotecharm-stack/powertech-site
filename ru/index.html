@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=251" />
+  <link rel="stylesheet" href="/style.css?v=252" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -162,184 +162,215 @@
   </section>
 
   <!-- ═══ SECTION — Зачем это нужно: калькулятор (4 сценария, ротация на визит) ═══ -->
-  <section class="problem" id="problem" aria-label="Экономика">
+  <section class="problem" id="problem" aria-label="Масштаб">
     <div class="container">
-      <div class="pb-eyebrow-row"><span class="pb-idx" aria-hidden="true">01</span><span class="pb-eyebrow">Экономика</span></div>
-      <h2 class="pb-h2" id="pqc-h2">Цена невидимого</h2>
-      <p class="pqc-lead" id="pqc-lead"></p>
-      <div id="pqc"></div>
+      <p class="sc-eyebrow">Масштаб</p>
+      <h2 class="sc-h2">Сколько раз это повторяется?</h2>
+      <p class="sc-sub">Данные за последние 12 месяцев.</p>
+
+      <div class="sc-grid">
+        <div class="sc-inputs">
+
+          <div class="sc-field">
+            <div class="sc-lab">
+              <label for="sc-events">Похожих событий за год</label>
+              <button type="button" class="sc-help" aria-label="Что считается событием" data-tip="Отключения, ошибки, срабатывания защиты, перегрев или нестабильная работа.">?</button>
+              <input type="number" id="sc-events-num" class="sc-numbox" min="0" max="50" step="1" value="0" inputmode="numeric" aria-label="Похожих событий за год, число">
+            </div>
+            <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Похожих событий за год">
+            <div class="sc-scale"><span>0</span><span>50</span></div>
+          </div>
+
+          <div class="sc-field">
+            <div class="sc-lab"><label for="sc-recovery">Время до восстановления</label></div>
+            <div class="sc-inline">
+              <input type="number" id="sc-recovery" min="0" max="4320" step="1" value="0" inputmode="numeric" aria-label="Время до восстановления">
+              <div class="sc-unit" role="group" aria-label="Единицы времени">
+                <button type="button" data-unit="min" class="on" aria-pressed="true" aria-label="Минуты">мин</button>
+                <button type="button" data-unit="hours" aria-pressed="false" aria-label="Часы">ч</button>
+              </div>
+            </div>
+            <p class="sc-hint">Среднее время от возникновения события до возвращения оборудования к штатной работе.</p>
+          </div>
+
+          <div class="sc-field sc-unconf-field">
+            <div class="sc-lab">
+              <label for="sc-unconf">Из них без подтверждённой причины</label>
+              <span class="sc-val" id="sc-unconf-val">0</span>
+            </div>
+            <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
+            <div class="sc-scale"><span>0</span><span id="sc-unconf-max">50</span></div>
+            <label class="sc-check"><input type="checkbox" id="sc-unknown"> Не знаю</label>
+          </div>
+
+        </div>
+
+        <div class="sc-result" id="sc-result" aria-live="polite">
+          <div id="sc-result-main"></div>
+        </div>
+      </div>
+
+      <div class="sc-cost">
+        <button type="button" class="sc-cost-toggle" id="sc-cost-toggle" aria-expanded="false" aria-controls="sc-cost-body">+ Добавить затраты</button>
+        <div class="sc-cost-body" id="sc-cost-body" hidden>
+          <div class="sc-field">
+            <div class="sc-lab">
+              <label for="sc-cost">Средние затраты на один случай</label>
+              <button type="button" class="sc-help" aria-label="Что входит в затраты" data-tip="Ремонт, простой, выезд специалиста или другие прямые расходы.">?</button>
+            </div>
+            <div class="sc-inline">
+              <input type="text" id="sc-cost" inputmode="numeric" value="" placeholder="0" aria-label="Средние затраты на один случай">
+              <div class="sc-cur" role="group" aria-label="Валюта">
+                <button type="button" data-cur="amd" class="on" aria-pressed="true" aria-label="Драм">֏</button>
+                <button type="button" data-cur="usd" aria-pressed="false" aria-label="Доллар">$</button>
+                <button type="button" data-cur="eur" aria-pressed="false" aria-label="Евро">€</button>
+              </div>
+            </div>
+          </div>
+          <div id="sc-cost-result" hidden></div>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <p class="sc-note">Расчёт показывает масштаб, а не причину.<br>Чтобы проверить причину, нужны данные в момент события.</p>
+        <div class="sc-cta">
+          <a href="#contact" class="btn btn-coral" id="sc-cta">Обсудить ситуацию</a>
+          <span class="sc-micro">Покупать оборудование не нужно.</span>
+        </div>
+      </div>
     </div>
   </section>
   <script>
-  var L={"comment": "SECTION - Экономика: калькулятор (4 сценария, табы + ротация на визит)", "aria": "Экономика", "name": "Экономика", "sectionH2": "Цена невидимого", "curAria": "Валюта", "tabsAria": "Сценарии", "u": {"k": "тыс", "m": "млн", "b": "млрд", "h": "ч"}, "sym": {"amd": "֏", "usd": "$", "eur": "€"}, "s": {"downtime": {"tab": "Простой", "lead": "Каждая остановка приходит со счётом.", "mLabel": "Стоимость часа простоя", "aLabel": "Незапланированных остановок в год", "bLabel": "Средняя длительность остановки", "rlab": "Незапланированные остановки за год", "perYr": "", "rows": ["Часов простоя в год", "В месяц", "За 5 лет"], "fact": "До 80 % производственных остановок, связанных с качеством электроэнергии, вызваны провалами напряжения — событиями длиной в миллисекунды.", "src": "EPRI", "note": "Оценка по вашим данным. Мы не обещаем экономию — мы делаем причину остановок измеримой: 7 дней записи показывают, связаны ли они с электросетью."}, "repairs": {"tab": "Ремонты", "lead": "Пока причина в сети, замена узлов не помогает.", "mLabel": "Средняя стоимость внепланового ремонта", "aLabel": "Внеплановых ремонтов в год", "bLabel": "Из них повторные — причина не устранена", "rlab": "Внеплановые ремонты за год", "perYr": "", "rows": ["Повторные — причина осталась в сети", "В месяц", "За 5 лет"], "fact": "Провал напряжения проходит за миллисекунды: разовый замер после отказа показывает «всё в норме», и ремонт идёт перебором — заменили узел, отказ повторился.", "src": "EPRI", "note": "Оценка по вашим данным. Запись в момент отказа отделяет причину от следствия — ремонт становится адресным, а не повторным."}, "aging": {"tab": "Ресурс", "lead": "Перегрев не ломает оборудование — он тихо сокращает его ресурс.", "mLabel": "Стоимость двигателей и приводов на объекте", "aLabel": "Нормативный срок службы", "bLabel": "", "rlab": "Надбавка к амортизации за год", "perYr": " / год", "rows": ["Амортизация по нормативу", "При несимметрии 2 % (−25 % ресурса)", "Переплата за 5 лет"], "fact": "Несимметрия напряжений 2 % сокращает ресурс двигателя примерно на четверть. Перегрев обмоток идёт годами и не виден ни в счёте, ни при осмотре.", "src": "NEMA MG-1 · модельный расчёт", "note": "Модельный расчёт по порогу NEMA MG-1 на ваших данных. Есть ли несимметрия на вашем объекте — показывает измерение, а не предположение."}, "risk": {"tab": "Риск", "lead": "Полис, скорее всего, этот случай не покроет.", "mLabel": "Стоимость одного серьёзного инцидента", "aLabel": "Случается примерно раз в", "bLabel": "", "rlab": "Риск в годовом выражении", "perYr": "", "rows": ["Инцидентов за 10 лет — примерно", "За 5 лет", "Покрытие полисом — как правило"], "fact": "Страховые полисы, как правило, исключают ущерб от нарушений качества электроэнергии или ставят высокую франшизу. Более чем у половины дата-центров серьёзный сбой стоил дороже 100 000 долларов США.", "src": "страховая практика · Uptime Institute", "note": "Оценка по вашим данным. Запись параметров сети — документ, который делает такой инцидент доказуемым: для поставщика, страховой и регулятора."}}};
+  (function(){
+    'use strict';
+    var sec = document.getElementById('problem'); if(!sec) return;
+    var $ = function(id){ return document.getElementById(id); };
+    var elEvents=$('sc-events'), elEventsNum=$('sc-events-num'),
+        elRecovery=$('sc-recovery'), unitBtns=sec.querySelectorAll('.sc-unit button'),
+        elUnconf=$('sc-unconf'), elUnconfVal=$('sc-unconf-val'), elUnconfMax=$('sc-unconf-max'),
+        elUnknown=$('sc-unknown'), unconfField=sec.querySelector('.sc-unconf-field'),
+        costToggle=$('sc-cost-toggle'), costBody=$('sc-cost-body'), elCost=$('sc-cost'),
+        curBtns=sec.querySelectorAll('.sc-cur button'), resMain=$('sc-result-main'),
+        costRes=$('sc-cost-result'), cta=$('sc-cta');
+    var recoveryUnit='min', currency='amd', started=false, completed=false;
 
-(function(){
-  'use strict';
-  var LANG=document.documentElement.lang||'ru';
-  var host=document.getElementById('pqc'); if(!host) return;
-  var leadEl=document.getElementById('pqc-lead');
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function grp(n){ n=Math.round(n); return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+    function plural(n,one,few,many){ var a=n%10,b=n%100;
+      if(a===1&&b!==11) return one;
+      if(a>=2&&a<=4&&(b<12||b>14)) return few;
+      return many; }
+    function money(n){ n=Math.max(0,Math.round(n));
+      if(currency==='amd') return grp(n)+' ֏';
+      if(currency==='usd') return '$'+grp(n);
+      return '€'+grp(n); }
+    function fmtTime(m){ m=Math.round(m);
+      if(m<60) return m+' мин';
+      if(m<1440){ var h=Math.floor(m/60),mn=m%60; return mn? h+' ч '+mn+' мин' : h+' ч'; }
+      var d=Math.floor(m/1440),rem=m%1440,hh=Math.floor(rem/60),dw=plural(d,'день','дня','дней');
+      return hh? d+' '+dw+' '+hh+' ч' : d+' '+dw; }
+    function track(ev){ try{
+      if(window.dataLayer&&window.dataLayer.push) window.dataLayer.push({event:ev});
+      if(typeof window.gtag==='function') window.gtag('event',ev);
+      if(typeof window.plausible==='function') window.plausible(ev);
+    }catch(e){} }
+    function start(){ if(!started){ started=true; track('calculator_started'); } }
+    function costVal(){ var v=(elCost.value||'').replace(/[^\d]/g,''); return v?parseInt(v,10):0; }
 
-  function grp(n){ n=Math.round(n);
-    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, LANG==='en'?',':' '); }
-  function dec(x){ var s=x.toFixed(1); return LANG==='en'?s:s.replace('.',','); }
-  function abbr(n){
-    if(n>=1e9) return dec(n/1e9)+' '+L.u.b;
-    if(n>=1e6) return (n%1e6? dec(n/1e6):(n/1e6))+' '+L.u.m;
-    if(n>=1e3) return (n%1e3? dec(n/1e3):(n/1e3))+' '+L.u.k;
-    return ''+n;
-  }
-  function mfmt(n,cur){
-    var body = n>=1e9 ? abbr(n) : grp(n);
-    if(LANG==='en'){ var p=L.sym[cur]; return p+(p.length>1?' ':'')+body; }
-    return body+' '+L.sym[cur];
-  }
-  function yearsRu(n){ var m10=n%10,m100=n%100;
-    if(m10===1&&m100!==11) return 'год';
-    if(m10>=2&&m10<=4&&(m100<12||m100>14)) return 'года';
-    return 'лет'; }
-  function yearsVal(n){
-    if(SCEN_CUR==='risk'&&n===1){ return LANG==='ru'?'год':(LANG==='hy'?'տարին մեկ':'year'); }
-    if(LANG==='ru') return n+' '+yearsRu(n);
-    if(LANG==='hy') return n+' '+(SCEN_CUR==='risk'?'տարին մեկ':'տարի');
-    return n+' '+(n===1?'year':'years');
-  }
-  function hoursVal(v){ var h=v/2; var s=(h%1? dec(h):h); return s+' '+L.u.h; }
-
-  var KEYS=['downtime','repairs','aging','risk'];
-  var RANGES={
-    downtime:{amd:[5e4,5e6,25e3],  usd:[100,12e3,100],  eur:[100,12e3,100],  def:.18},
-    repairs: {amd:[1e5,2e7,5e4],   usd:[200,5e4,200],   eur:[200,5e4,200],   def:.22},
-    aging:   {amd:[5e6,2e9,1e6],   usd:[1e4,5e6,1e4],   eur:[1e4,5e6,1e4],   def:.3},
-    risk:    {amd:[1e6,5e8,5e5],   usd:[2e3,1e6,1e3],   eur:[2e3,1e6,1e3],   def:.35}
-  };
-  var SLD2={downtime:[1,50,6], repairs:[1,60,8], aging:[5,30,15], risk:[1,15,5]};
-  var SLD3={downtime:[1,48,8], repairs:[0,80,30]};
-
-  var idx=null, qm=location.search.match(/[?&]scen=(\d)/);
-  if(qm) idx=+qm[1];
-  else{ try{ var st=sessionStorage.getItem('pt-scen'); if(st!==null) idx=+st; }catch(e){} }
-  if(idx===null||!(idx>=0&&idx<4)){ idx=Math.floor(Math.random()*4); }
-
-  var SCEN_CUR,S,R,S2,S3, cur='amd', shown=0, animId=null, first=true;
-
-  function $(k){ return host.querySelector('[data-el='+k+']'); }
-  function money(){ var r=R[cur], t=$('r1').value/100;
-    var val=r[0]*Math.pow(r[1]/r[0], t);
-    return Math.round(val/r[2])*r[2]; }
-  function calc(m,a,b){
-    if(SCEN_CUR==='downtime') return m*a*(b/2);
-    if(SCEN_CUR==='repairs')  return m*a;
-    if(SCEN_CUR==='aging')    return m/(a*0.75)-m/a;
-    return m/a;
-  }
-  function rows(m,a,b){
-    var y=calc(m,a,b), sym=cur;
-    if(SCEN_CUR==='downtime') return [
-      [S.rows[0], grp(a*b/2)+' '+L.u.h, ''],
-      [S.rows[1], mfmt(y/12,sym), ''],
-      [S.rows[2], mfmt(y*5,sym), '']];
-    if(SCEN_CUR==='repairs') return [
-      [S.rows[0], mfmt(y*b/100,sym), 'c'],
-      [S.rows[1], mfmt(y/12,sym), ''],
-      [S.rows[2], mfmt(y*5,sym), '']];
-    if(SCEN_CUR==='aging') return [
-      [S.rows[0], mfmt(m/a,sym)+S.perYr, ''],
-      [S.rows[1], mfmt(m/(a*0.75),sym)+S.perYr, 'c'],
-      [S.rows[2], mfmt(y*5,sym), '']];
-    return [
-      [S.rows[0], ''+Math.max(1,Math.round(10/a)), ''],
-      [S.rows[1], mfmt(y*5,sym), ''],
-      [S.rows[2], mfmt(0,sym), 'c']];
-  }
-  function animateTo(t){
-    if(reduce||first){ $('big').textContent=mfmt(t,cur); shown=t; first=false; return; }
-    cancelAnimationFrame(animId);
-    var from=shown, t0=null, DUR=500;
-    function tick(ts){ if(t0===null)t0=ts;
-      var k=Math.min(1,(ts-t0)/DUR); k=1-Math.pow(1-k,3);
-      shown=from+(t-from)*k; $('big').textContent=mfmt(shown,cur);
-      if(k<1) animId=requestAnimationFrame(tick); }
-    animId=requestAnimationFrame(tick);
-  }
-  function upd(){
-    var m=money(), a=+$('r2').value, b=S3?+$('r3').value:0;
-    $('v1').textContent=mfmt(m,cur);
-    $('s1a').textContent=abbr(R[cur][0]); $('s1b').textContent=abbr(R[cur][1]);
-    if(SCEN_CUR==='aging'||SCEN_CUR==='risk'){ $('v2').textContent=yearsVal(a); }
-    else { $('v2').textContent=a; }
-    $('s2a').textContent=S2[0]; $('s2b').textContent=S2[1];
-    if(S3){
-      if(SCEN_CUR==='downtime'){ $('v3').textContent=hoursVal(b); $('s3a').textContent=hoursVal(S3[0]); $('s3b').textContent=hoursVal(S3[1]); }
-      else { $('v3').textContent=b+' %'; $('s3a').textContent=S3[0]+' %'; $('s3b').textContent=S3[1]+' %'; }
+    function setEvents(v){ v=Math.max(0,Math.min(50,Math.round(v||0)));
+      elEvents.value=v; elEventsNum.value=v;
+      elUnconf.max=v; elUnconfMax.textContent=v;
+      if(+elUnconf.value>v) elUnconf.value=v;
     }
-    $('break').innerHTML=rows(m,a,b).map(function(rr){
-      return '<div class="pqc-row"><span>'+rr[0]+'</span><b'+(rr[2]==='c'?' class="c"':'')+'>'+rr[1]+'</b></div>';
-    }).join('');
-    animateTo(calc(m,a,b));
-  }
-  function bind(){
-    host.querySelectorAll('input[type=range]').forEach(function(rg){ rg.addEventListener('input',upd); });
-    host.querySelectorAll('.pqc-cur button').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        host.querySelectorAll('.pqc-cur button').forEach(function(x){x.classList.remove('on');});
-        btn.classList.add('on'); cur=btn.getAttribute('data-cur'); upd();
-      });
+
+    function renderSeg(events, unconf, unknown){
+      var s='<div class="sc-seg">';
+      if(events<=20){
+        s+='<div class="sc-seg-bars" aria-hidden="true">';
+        for(var i=0;i<events;i++){ s+='<span class="sc-bar'+((!unknown&&i<unconf)?' c':'')+'"></span>'; }
+        s+='</div>';
+      } else {
+        var frac=unknown?0:(unconf/events);
+        s+='<div class="sc-seg-line" aria-hidden="true"><span class="sc-seg-fill" style="width:'+(frac*100).toFixed(1)+'%"></span></div>';
+      }
+      s+='<span class="sc-seg-lab">'+(unknown?'причина — нет данных':(unconf+' из '+events))+'</span></div>';
+      return s;
+    }
+
+    function update(){
+      var events=+elEvents.value;
+      var recRaw=parseFloat(elRecovery.value)||0;
+      var recMin=recoveryUnit==='hours'?recRaw*60:recRaw;
+      var unknown=elUnknown.checked;
+      var unconf=unknown?0:Math.min(+elUnconf.value,events);
+      elUnconfVal.textContent=unknown?'—':unconf;
+
+      if(events<1){
+        resMain.innerHTML='<p class="sc-empty">Укажите данные</p><p class="sc-empty-sub">Результат появится здесь.</p>';
+        costRes.hidden=true; return;
+      }
+      if(!completed){ completed=true; track('calculator_completed'); }
+
+      var total=events*recMin;
+      var h='<p class="sc-rlab">За 12 месяцев</p>';
+      h+='<p class="sc-big">'+events+' '+plural(events,'событие','события','событий')+'</p>';
+      h+='<p class="sc-line">'+fmtTime(total)+' на восстановление</p>';
+      h+= unknown ? '<p class="sc-line sc-muted">Причина — нет данных</p>'
+                  : '<p class="sc-line sc-line-c">'+unconf+' без подтверждённой причины</p>';
+      h+=renderSeg(events,unconf,unknown);
+      resMain.innerHTML=h;
+
+      if(costToggle.getAttribute('aria-expanded')==='true'){
+        var cpe=costVal();
+        if(cpe>0){
+          var c='<p class="sc-rlab">По указанной сумме</p>';
+          c+='<div class="sc-crow"><span>Все случаи</span><b>'+money(events*cpe)+'</b></div>';
+          if(!unknown) c+='<div class="sc-crow"><span>Без подтверждённой причины</span><b class="c">'+money(unconf*cpe)+'</b></div>';
+          costRes.innerHTML=c; costRes.hidden=false;
+        } else { costRes.hidden=true; }
+      } else { costRes.hidden=true; }
+    }
+
+    elEvents.addEventListener('input',function(){ start(); setEvents(+elEvents.value); update(); });
+    elEventsNum.addEventListener('input',function(){ start(); setEvents(parseInt(elEventsNum.value,10)); update(); });
+
+    function clampRecovery(){ var max=recoveryUnit==='hours'?72:4320; var v=parseFloat(elRecovery.value);
+      if(isNaN(v)||v<0) v=0; if(v>max) v=max;
+      v = recoveryUnit==='min'? Math.round(v) : Math.round(v*2)/2;
+      elRecovery.value=v; }
+    elRecovery.addEventListener('input',function(){ start(); clampRecovery(); update(); });
+    unitBtns.forEach(function(b){ b.addEventListener('click',function(){
+      var u=b.getAttribute('data-unit'); if(u===recoveryUnit) return;
+      start(); var cur=parseFloat(elRecovery.value)||0;
+      if(u==='hours'){ var hrs=(recoveryUnit==='min'?cur/60:cur); elRecovery.value=Math.min(72,Math.round(hrs*2)/2); elRecovery.step='0.5'; elRecovery.max='72'; }
+      else { var mins=(recoveryUnit==='hours'?cur*60:cur); elRecovery.value=Math.min(4320,Math.round(mins)); elRecovery.step='1'; elRecovery.max='4320'; }
+      recoveryUnit=u;
+      unitBtns.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+      update();
+    }); });
+
+    elUnconf.addEventListener('input',function(){ start();
+      if(elUnknown.checked){ elUnknown.checked=false; applyUnknown(); }
+      update(); });
+    function applyUnknown(){ var u=elUnknown.checked; elUnconf.disabled=u; unconfField.classList.toggle('is-unknown',u); }
+    elUnknown.addEventListener('change',function(){ start(); applyUnknown(); update(); });
+
+    costToggle.addEventListener('click',function(){
+      var open=costToggle.getAttribute('aria-expanded')!=='true';
+      costToggle.setAttribute('aria-expanded',open); costBody.hidden=!open;
+      costToggle.textContent=open?'− Скрыть затраты':'+ Добавить затраты';
+      if(open) track('calculator_cost_opened');
+      update();
     });
-    host.querySelectorAll('.pqc-tab').forEach(function(tb){
-      tb.addEventListener('click',function(){
-        var i=+tb.getAttribute('data-i');
-        if(i===idx) return;
-        if(reduce){ mount(i); return; }
-        host.classList.add('sw'); leadEl.style.opacity=0;
-        setTimeout(function(){ mount(i); host.classList.remove('sw'); leadEl.style.opacity=1; },170);
-      });
-    });
-  }
-  function ctl(iNum,label,rangeAttrs,valEl,scaleA,scaleB){
-    return '<div class="pqc-ctl"><label><span class="pqc-lab"><i class="pqc-ci">'+iNum+'</i>'+label+'</span> <span class="pqc-v" data-el="'+valEl+'"></span></label>'+
-      '<input type="range" '+rangeAttrs+' aria-label="'+label+'">'+
-      '<div class="pqc-scale"><span data-el="'+scaleA+'"></span><span data-el="'+scaleB+'"></span></div></div>';
-  }
-  function mount(i){
-    idx=((i%4)+4)%4;
-    try{ sessionStorage.setItem('pt-scen', idx); }catch(e){}
-    SCEN_CUR=KEYS[idx]; S=L.s[SCEN_CUR]; R=RANGES[SCEN_CUR]; S2=SLD2[SCEN_CUR]; S3=SLD3[SCEN_CUR]||null;
-    first=true; cancelAnimationFrame(animId);
-    leadEl.textContent=S.lead;
-    var tabs=KEYS.map(function(k,j){
-      return '<button type="button" class="pqc-tab'+(j===idx?' on':'')+'" role="tab" aria-selected="'+(j===idx)+'" data-i="'+j+'">'+
-        '<span class="n">0'+(j+1)+'</span><span class="t">'+L.s[k].tab+'</span></button>';
-    }).join('');
-    var s3html = S3 ? ctl('03', S.bLabel,
-      'data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'"','v3','s3a','s3b') : '';
-    host.innerHTML=
-      '<div class="pqc-panel">'+
-        '<div class="pqc-tabs" role="tablist" aria-label="'+L.tabsAria+'">'+tabs+'</div>'+
-        '<div class="pqc-body"><div class="pqc-grid">'+
-          '<div class="pqc-cc">'+
-            '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
-              '<button data-cur="amd"'+(cur==='amd'?' class="on"':'')+'>֏ AMD</button>'+
-              '<button data-cur="usd"'+(cur==='usd'?' class="on"':'')+'>$ USD</button>'+
-              '<button data-cur="eur"'+(cur==='eur'?' class="on"':'')+'>€ EUR</button>'+
-            '</div>'+
-            ctl('01', S.mLabel, 'data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'"','v1','s1a','s1b')+
-            ctl('02', S.aLabel, 'data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'"','v2','s2a','s2b')+
-            s3html+
-          '</div>'+
-          '<div class="pqc-cr">'+
-            '<p class="pqc-rlab">'+S.rlab+'</p>'+
-            '<p class="pqc-big"><span data-el="big">0</span></p>'+
-            '<div class="pqc-break" data-el="break"></div>'+
-            '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
-          '</div>'+
-        '</div></div>'+
-        '<div class="pqc-pfoot">'+S.note+'</div>'+
-      '</div>';
-    bind(); upd();
-  }
-  mount(idx);
-})();
+    elCost.addEventListener('input',function(){ start(); var v=costVal(); elCost.value=v?grp(v):''; update(); });
+    curBtns.forEach(function(b){ b.addEventListener('click',function(){
+      currency=b.getAttribute('data-cur');
+      curBtns.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+      update();
+    }); });
+    if(cta) cta.addEventListener('click',function(){ track('calculator_cta_clicked'); });
+
+    update();
+  })();
   </script>
 
   <!-- ═══════════════════════════════ SECTION — Объекты и задачи ═══════════════════════════════ -->
