@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=252" />
+  <link rel="stylesheet" href="/style.css?v=253" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -168,76 +168,80 @@
       <h2 class="sc-h2">Сколько раз это повторяется?</h2>
       <p class="sc-sub">Данные за последние 12 месяцев.</p>
 
-      <div class="sc-grid">
-        <div class="sc-inputs">
+      <div class="sc-panel">
+        <div class="sc-body">
+          <div class="sc-grid">
+            <div class="sc-inputs">
 
-          <div class="sc-field">
-            <div class="sc-lab">
-              <label for="sc-events">Похожих событий за год</label>
-              <button type="button" class="sc-help" aria-label="Что считается событием" data-tip="Отключения, ошибки, срабатывания защиты, перегрев или нестабильная работа.">?</button>
-              <input type="number" id="sc-events-num" class="sc-numbox" min="0" max="50" step="1" value="0" inputmode="numeric" aria-label="Похожих событий за год, число">
-            </div>
-            <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Похожих событий за год">
-            <div class="sc-scale"><span>0</span><span>50</span></div>
-          </div>
-
-          <div class="sc-field">
-            <div class="sc-lab"><label for="sc-recovery">Время до восстановления</label></div>
-            <div class="sc-inline">
-              <input type="number" id="sc-recovery" min="0" max="4320" step="1" value="0" inputmode="numeric" aria-label="Время до восстановления">
-              <div class="sc-unit" role="group" aria-label="Единицы времени">
-                <button type="button" data-unit="min" class="on" aria-pressed="true" aria-label="Минуты">мин</button>
-                <button type="button" data-unit="hours" aria-pressed="false" aria-label="Часы">ч</button>
+              <div class="sc-field">
+                <div class="sc-lab">
+                  <label for="sc-events">Похожих событий за год</label>
+                  <button type="button" class="sc-help" aria-label="Что считается событием" data-tip="Отключения, ошибки, срабатывания защиты, перегрев или нестабильная работа.">?</button>
+                  <input type="number" id="sc-events-num" class="sc-numbox" min="0" max="50" step="1" value="0" inputmode="numeric" aria-label="Похожих событий за год, число">
+                </div>
+                <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Похожих событий за год">
+                <div class="sc-scale"><span>0</span><span>50</span></div>
               </div>
-            </div>
-            <p class="sc-hint">Среднее время от возникновения события до возвращения оборудования к штатной работе.</p>
-          </div>
 
-          <div class="sc-field sc-unconf-field">
-            <div class="sc-lab">
-              <label for="sc-unconf">Из них без подтверждённой причины</label>
-              <span class="sc-val" id="sc-unconf-val">0</span>
-            </div>
-            <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
-            <div class="sc-scale"><span>0</span><span id="sc-unconf-max">50</span></div>
-            <label class="sc-check"><input type="checkbox" id="sc-unknown"> Не знаю</label>
-          </div>
-
-        </div>
-
-        <div class="sc-result" id="sc-result" aria-live="polite">
-          <div id="sc-result-main"></div>
-        </div>
-      </div>
-
-      <div class="sc-cost">
-        <button type="button" class="sc-cost-toggle" id="sc-cost-toggle" aria-expanded="false" aria-controls="sc-cost-body">+ Добавить затраты</button>
-        <div class="sc-cost-body" id="sc-cost-body" hidden>
-          <div class="sc-field">
-            <div class="sc-lab">
-              <label for="sc-cost">Средние затраты на один случай</label>
-              <button type="button" class="sc-help" aria-label="Что входит в затраты" data-tip="Ремонт, простой, выезд специалиста или другие прямые расходы.">?</button>
-            </div>
-            <div class="sc-inline">
-              <input type="text" id="sc-cost" inputmode="numeric" value="" placeholder="0" aria-label="Средние затраты на один случай">
-              <div class="sc-cur" role="group" aria-label="Валюта">
-                <button type="button" data-cur="amd" class="on" aria-pressed="true" aria-label="Драм">֏</button>
-                <button type="button" data-cur="usd" aria-pressed="false" aria-label="Доллар">$</button>
-                <button type="button" data-cur="eur" aria-pressed="false" aria-label="Евро">€</button>
+              <div class="sc-field">
+                <div class="sc-lab"><label for="sc-recovery">Время до восстановления</label></div>
+                <div class="sc-inline">
+                  <input type="number" id="sc-recovery" min="0" max="4320" step="1" value="0" inputmode="numeric" aria-label="Время до восстановления">
+                  <div class="sc-unit" role="group" aria-label="Единицы времени">
+                    <button type="button" data-unit="min" class="on" aria-pressed="true" aria-label="Минуты">мин</button>
+                    <button type="button" data-unit="hours" aria-pressed="false" aria-label="Часы">ч</button>
+                  </div>
+                </div>
+                <p class="sc-hint">Среднее время от возникновения события до возвращения оборудования к штатной работе.</p>
               </div>
+
+              <div class="sc-field sc-unconf-field">
+                <div class="sc-lab">
+                  <label for="sc-unconf">Из них без подтверждённой причины</label>
+                  <span class="sc-val" id="sc-unconf-val">0</span>
+                </div>
+                <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
+                <div class="sc-scale"><span>0</span><span id="sc-unconf-max">50</span></div>
+                <label class="sc-check"><input type="checkbox" id="sc-unknown"> Не знаю</label>
+              </div>
+
+            </div>
+
+            <div class="sc-result" id="sc-result" aria-live="polite">
+              <div id="sc-result-main"></div>
             </div>
           </div>
-          <div id="sc-cost-result" hidden></div>
-        </div>
-      </div>
 
-      <div class="sc-foot">
-        <p class="sc-note">Расчёт показывает масштаб, а не причину.<br>Чтобы проверить причину, нужны данные в момент события.</p>
-        <div class="sc-cta">
-          <a href="#contact" class="btn btn-coral" id="sc-cta">Обсудить ситуацию</a>
-          <span class="sc-micro">Покупать оборудование не нужно.</span>
+          <div class="sc-cost">
+            <button type="button" class="sc-cost-toggle" id="sc-cost-toggle" aria-expanded="false" aria-controls="sc-cost-body">+ Добавить затраты</button>
+            <div class="sc-cost-body" id="sc-cost-body" hidden>
+              <div class="sc-field">
+                <div class="sc-lab">
+                  <label for="sc-cost">Средние затраты на один случай</label>
+                  <button type="button" class="sc-help" aria-label="Что входит в затраты" data-tip="Ремонт, простой, выезд специалиста или другие прямые расходы.">?</button>
+                </div>
+                <div class="sc-inline">
+                  <input type="text" id="sc-cost" inputmode="numeric" value="" placeholder="0" aria-label="Средние затраты на один случай">
+                  <div class="sc-cur" role="group" aria-label="Валюта">
+                    <button type="button" data-cur="amd" class="on" aria-pressed="true" aria-label="Драм">֏</button>
+                    <button type="button" data-cur="usd" aria-pressed="false" aria-label="Доллар">$</button>
+                    <button type="button" data-cur="eur" aria-pressed="false" aria-label="Евро">€</button>
+                  </div>
+                </div>
+              </div>
+              <div id="sc-cost-result" hidden></div>
+            </div>
+          </div>
+        </div><!-- /sc-body -->
+
+        <div class="sc-foot">
+          <p class="sc-note">Расчёт показывает масштаб, а не причину.<br>Чтобы проверить причину, нужны данные в момент события.</p>
+          <div class="sc-cta">
+            <a href="#contact" class="btn btn-coral" id="sc-cta">Обсудить ситуацию</a>
+            <span class="sc-micro">Покупать оборудование не нужно.</span>
+          </div>
         </div>
-      </div>
+      </div><!-- /sc-panel -->
     </div>
   </section>
   <script>
@@ -254,20 +258,20 @@
         costRes=$('sc-cost-result'), cta=$('sc-cta');
     var recoveryUnit='min', currency='amd', started=false, completed=false;
 
-    function grp(n){ n=Math.round(n); return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+    function grp(n){ n=Math.round(n); return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
     function plural(n,one,few,many){ var a=n%10,b=n%100;
       if(a===1&&b!==11) return one;
       if(a>=2&&a<=4&&(b<12||b>14)) return few;
       return many; }
     function money(n){ n=Math.max(0,Math.round(n));
-      if(currency==='amd') return grp(n)+' ֏';
+      if(currency==='amd') return grp(n)+' ֏';
       if(currency==='usd') return '$'+grp(n);
       return '€'+grp(n); }
     function fmtTime(m){ m=Math.round(m);
-      if(m<60) return m+' мин';
-      if(m<1440){ var h=Math.floor(m/60),mn=m%60; return mn? h+' ч '+mn+' мин' : h+' ч'; }
+      if(m<60) return m+' мин';
+      if(m<1440){ var h=Math.floor(m/60),mn=m%60; return mn? h+' ч '+mn+' мин' : h+' ч'; }
       var d=Math.floor(m/1440),rem=m%1440,hh=Math.floor(rem/60),dw=plural(d,'день','дня','дней');
-      return hh? d+' '+dw+' '+hh+' ч' : d+' '+dw; }
+      return hh? d+' '+dw+' '+hh+' ч' : d+' '+dw; }
     function track(ev){ try{
       if(window.dataLayer&&window.dataLayer.push) window.dataLayer.push({event:ev});
       if(typeof window.gtag==='function') window.gtag('event',ev);
@@ -292,7 +296,7 @@
         var frac=unknown?0:(unconf/events);
         s+='<div class="sc-seg-line" aria-hidden="true"><span class="sc-seg-fill" style="width:'+(frac*100).toFixed(1)+'%"></span></div>';
       }
-      s+='<span class="sc-seg-lab">'+(unknown?'причина — нет данных':(unconf+' из '+events))+'</span></div>';
+      s+='<span class="sc-seg-lab">'+(unknown?'причина — нет данных':(unconf+' из '+events))+'</span></div>';
       return s;
     }
 
@@ -312,7 +316,7 @@
 
       var total=events*recMin;
       var h='<p class="sc-rlab">За 12 месяцев</p>';
-      h+='<p class="sc-big">'+events+' '+plural(events,'событие','события','событий')+'</p>';
+      h+='<p class="sc-big">'+events+' '+plural(events,'событие','события','событий')+'</p>';
       h+='<p class="sc-line">'+fmtTime(total)+' на восстановление</p>';
       h+= unknown ? '<p class="sc-line sc-muted">Причина — нет данных</p>'
                   : '<p class="sc-line sc-line-c">'+unconf+' без подтверждённой причины</p>';
