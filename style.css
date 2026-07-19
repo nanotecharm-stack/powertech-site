@@ -3898,6 +3898,7 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 
 .sc-foot { padding:22px 38px 24px; border-top:1px solid rgba(20,20,20,.12); }
 .sc-note { font-size:14.5px; line-height:1.6; color:#4A4E55; margin:0 0 20px; max-width:60ch; }
+.sc-note-em { color:var(--graphite); font-weight:500; }
 .sc-cta { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
 .sc-micro { font-size:13.5px; color:#857F76; }
 
