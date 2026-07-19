@@ -31,7 +31,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=248" />
+  <link rel="stylesheet" href="/style.css?v=249" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -161,22 +161,22 @@
   </section>
 
   <!-- ═══ SECTION — Why it matters: cost calculator (4 scenarios, per-visit rotation) ═══ -->
-  <section class="problem" id="problem" aria-label="Why it matters">
+  <section class="problem" id="problem" aria-label="Economics">
     <div class="container">
-      <p class="pb-k">Why it matters</p>
-      <h2 class="pb-h2" id="pqc-h2">Only you know what an hour of downtime costs</h2>
+      <div class="pb-eyebrow-row"><span class="pb-idx" aria-hidden="true">01</span><span class="pb-eyebrow">Economics</span></div>
+      <h2 class="pb-h2" id="pqc-h2">The cost of the invisible</h2>
+      <p class="pqc-lead" id="pqc-lead"></p>
       <div id="pqc"></div>
     </div>
   </section>
   <script>
-  var L={"comment": "SECTION — Why it matters: cost calculator (4 scenarios, per-visit rotation)", "aria": "Why it matters", "kicker": "Why it matters", "curAria": "Currency", "cta": "Discuss your situation", "micro": "No obligation to buy equipment.", "nav": {"prev": "Previous scenario", "next": "Next scenario"}, "u": {"k": "k", "m": "m", "b": "bn", "h": "h"}, "sym": {"amd": "AMD", "usd": "$", "eur": "€"}, "s": {"downtime": {"h2": "Only you know what an hour of downtime costs", "mLabel": "Cost of one hour of downtime", "aLabel": "Unplanned stops per year", "bLabel": "Average stop duration", "rlab": "Unplanned stops are costing", "per": "per year", "perYr": "", "rows": ["Hours of downtime per year", "Per month", "Over 5 years"], "fact": "Up to 80% of power-quality-related production stoppages are caused by voltage dips — events lasting milliseconds.", "src": "EPRI", "note": "An estimate based on your numbers. We don’t promise savings — we make the cause measurable: seven days of recording show whether the stops are linked to the network."}, "repairs": {"h2": "Repairs repeat until the cause is found", "mLabel": "Average cost of an unplanned repair", "aLabel": "Unplanned repairs per year", "bLabel": "Repeat repairs — cause not fixed", "rlab": "Unplanned repairs are costing", "per": "per year", "perYr": "", "rows": ["Repeats — the cause is still in the network", "Per month", "Over 5 years"], "fact": "A voltage dip is over in milliseconds: a one-off measurement after the failure reads “all normal”, and repairs proceed by trial and error — a unit gets replaced, the failure returns.", "src": "EPRI", "note": "An estimate based on your numbers. A record captured at the moment of failure separates cause from effect — repairs become targeted instead of repeated."}, "aging": {"h2": "Equipment doesn’t fail — it ages faster", "mLabel": "Value of motors and drives on site", "aLabel": "Rated service life", "bLabel": "", "rlab": "Accelerated ageing adds to depreciation", "per": "per year", "perYr": " / yr", "rows": ["Normal depreciation", "With 2% unbalance (−25% life)", "Extra cost over 5 years"], "fact": "A 2% voltage unbalance cuts motor life by roughly a quarter. Winding overheating develops over years and shows up neither on the bill nor during inspection.", "src": "NEMA MG-1 · model scenario", "note": "A model calculation at the NEMA MG-1 threshold using your numbers. Whether unbalance exists on your site is shown by measurement, not assumption."}, "risk": {"h2": "This risk is usually uninsured", "mLabel": "Cost of one serious incident", "aLabel": "Happens about every", "bLabel": "", "rlab": "Yearly equivalent of this risk", "per": "", "perYr": "", "rows": ["Incidents in 10 years — about", "Over 5 years", "Insurance coverage — usually"], "fact": "Insurance policies typically exclude damage caused by power-quality disturbances or set a high deductible. For more than half of data centres, a serious outage cost over $100,000.", "src": "insurance practice · Uptime Institute", "note": "An estimate based on your numbers. A record of network parameters is a document that makes such an incident provable — to the supplier, the insurer and the regulator."}}};
-
+  var L={"comment": "SECTION - Economics: cost calculator (4 scenarios, tabs)", "aria": "Economics", "name": "Economics", "sectionH2": "The cost of the invisible", "curAria": "Currency", "tabsAria": "Scenarios", "u": {"k": "k", "m": "m", "b": "bn", "h": "h"}, "sym": {"amd": "AMD", "usd": "$", "eur": "€"}, "s": {"downtime": {"tab": "Downtime", "lead": "Every stop comes with a bill.", "mLabel": "Cost of one hour of downtime", "aLabel": "Unplanned stops per year", "bLabel": "Average stop duration", "rlab": "Unplanned stops, per year", "perYr": "", "rows": ["Hours of downtime per year", "Per month", "Over 5 years"], "fact": "Up to 80% of power-quality-related production stoppages are caused by voltage dips — events lasting milliseconds.", "src": "EPRI", "note": "An estimate based on your numbers. We don’t promise savings — we make the cause measurable: seven days of recording show whether the stops are linked to the network."}, "repairs": {"tab": "Repairs", "lead": "While the cause stays in the network, replacing parts doesn’t help.", "mLabel": "Average cost of an unplanned repair", "aLabel": "Unplanned repairs per year", "bLabel": "Repeat repairs — cause not fixed", "rlab": "Unplanned repairs, per year", "perYr": "", "rows": ["Repeats — the cause is still in the network", "Per month", "Over 5 years"], "fact": "A voltage dip is over in milliseconds: a one-off measurement after the failure reads “all normal”, and repairs proceed by trial and error — a unit gets replaced, the failure returns.", "src": "EPRI", "note": "An estimate based on your numbers. A record captured at the moment of failure separates cause from effect — repairs become targeted instead of repeated."}, "aging": {"tab": "Lifespan", "lead": "Overheating doesn’t break equipment — it quietly shortens its life.", "mLabel": "Value of motors and drives on site", "aLabel": "Rated service life", "bLabel": "", "rlab": "Added depreciation, per year", "perYr": " / yr", "rows": ["Normal depreciation", "With 2% unbalance (−25% life)", "Extra cost over 5 years"], "fact": "A 2% voltage unbalance cuts motor life by roughly a quarter. Winding overheating develops over years and shows up neither on the bill nor during inspection.", "src": "NEMA MG-1 · model scenario", "note": "A model calculation at the NEMA MG-1 threshold using your numbers. Whether unbalance exists on your site is shown by measurement, not assumption."}, "risk": {"tab": "Risk", "lead": "Your policy most likely won’t cover this one.", "mLabel": "Cost of one serious incident", "aLabel": "Happens about every", "bLabel": "", "rlab": "Yearly risk equivalent", "perYr": "", "rows": ["Incidents in 10 years — about", "Over 5 years", "Insurance coverage — usually"], "fact": "Insurance policies typically exclude damage caused by power-quality disturbances or set a high deductible. For more than half of data centres, a serious outage cost over $100,000.", "src": "insurance practice · Uptime Institute", "note": "An estimate based on your numbers. A record of network parameters is a document that makes such an incident provable — to the supplier, the insurer and the regulator."}}};
 
 (function(){
   'use strict';
   var LANG=document.documentElement.lang||'ru';
   var host=document.getElementById('pqc'); if(!host) return;
-  var h2el=document.getElementById('pqc-h2');
+  var leadEl=document.getElementById('pqc-lead');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function grp(n){ n=Math.round(n);
@@ -221,16 +221,6 @@
   if(idx===null||!(idx>=0&&idx<4)){ idx=Math.floor(Math.random()*4); }
 
   var SCEN_CUR,S,R,S2,S3, cur='amd', shown=0, animId=null, first=true;
-
-  h2el.insertAdjacentHTML('afterend',
-    '<div class="pqc-nav">'+
-    '<button type="button" class="pqc-arr" data-dir="-1" aria-label="'+L.nav.prev+'">'+
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>'+
-    '<span class="pqc-count" aria-hidden="true"></span>'+
-    '<button type="button" class="pqc-arr" data-dir="1" aria-label="'+L.nav.next+'">'+
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>');
-  var sect=host.closest('section')||document.body;
-  var countEl=sect.querySelector('.pqc-count');
 
   function $(k){ return host.querySelector('[data-el='+k+']'); }
   function money(){ var r=R[cur], t=$('r1').value/100;
@@ -295,54 +285,60 @@
         btn.classList.add('on'); cur=btn.getAttribute('data-cur'); upd();
       });
     });
+    host.querySelectorAll('.pqc-tab').forEach(function(tb){
+      tb.addEventListener('click',function(){
+        var i=+tb.getAttribute('data-i');
+        if(i===idx) return;
+        if(reduce){ mount(i); return; }
+        host.classList.add('sw'); leadEl.style.opacity=0;
+        setTimeout(function(){ mount(i); host.classList.remove('sw'); leadEl.style.opacity=1; },170);
+      });
+    });
+  }
+  function ctl(iNum,label,rangeAttrs,valEl,scaleA,scaleB){
+    return '<div class="pqc-ctl"><label><span class="pqc-lab"><i class="pqc-ci">'+iNum+'</i>'+label+'</span> <span class="pqc-v" data-el="'+valEl+'"></span></label>'+
+      '<input type="range" '+rangeAttrs+' aria-label="'+label+'">'+
+      '<div class="pqc-scale"><span data-el="'+scaleA+'"></span><span data-el="'+scaleB+'"></span></div></div>';
   }
   function mount(i){
     idx=((i%4)+4)%4;
     try{ sessionStorage.setItem('pt-scen', idx); }catch(e){}
     SCEN_CUR=KEYS[idx]; S=L.s[SCEN_CUR]; R=RANGES[SCEN_CUR]; S2=SLD2[SCEN_CUR]; S3=SLD3[SCEN_CUR]||null;
     first=true; cancelAnimationFrame(animId);
-    countEl.textContent=(idx+1)+' / 4';
-    h2el.textContent=S.h2;
-    var s3html = S3 ? '<div class="pqc-ctl"><label>'+S.bLabel+' <span class="pqc-v" data-el="v3"></span></label>'+
-      '<input type="range" data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'" aria-label="'+S.bLabel+'">'+
-      '<div class="pqc-scale"><span data-el="s3a"></span><span data-el="s3b"></span></div></div>' : '';
+    leadEl.textContent=S.lead;
+    var tabs=KEYS.map(function(k,j){
+      return '<button type="button" class="pqc-tab'+(j===idx?' on':'')+'" role="tab" aria-selected="'+(j===idx)+'" data-i="'+j+'">'+
+        '<span class="n">0'+(j+1)+'</span><span class="t">'+L.s[k].tab+'</span></button>';
+    }).join('');
+    var s3html = S3 ? ctl('03', S.bLabel,
+      'data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'"','v3','s3a','s3b') : '';
     host.innerHTML=
-      '<div class="pqc-grid">'+
-        '<div class="pqc-cc">'+
-          '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
-            '<button data-cur="amd"'+(cur==='amd'?' class="on"':'')+'>֏ AMD</button>'+
-            '<button data-cur="usd"'+(cur==='usd'?' class="on"':'')+'>$ USD</button>'+
-            '<button data-cur="eur"'+(cur==='eur'?' class="on"':'')+'>€ EUR</button>'+
+      '<div class="pqc-panel">'+
+        '<div class="pqc-tabs" role="tablist" aria-label="'+L.tabsAria+'">'+tabs+'</div>'+
+        '<div class="pqc-body"><div class="pqc-grid">'+
+          '<div class="pqc-cc">'+
+            '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
+              '<button data-cur="amd"'+(cur==='amd'?' class="on"':'')+'>֏ AMD</button>'+
+              '<button data-cur="usd"'+(cur==='usd'?' class="on"':'')+'>$ USD</button>'+
+              '<button data-cur="eur"'+(cur==='eur'?' class="on"':'')+'>€ EUR</button>'+
+            '</div>'+
+            ctl('01', S.mLabel, 'data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'"','v1','s1a','s1b')+
+            ctl('02', S.aLabel, 'data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'"','v2','s2a','s2b')+
+            s3html+
           '</div>'+
-          '<div class="pqc-ctl"><label>'+S.mLabel+' <span class="pqc-v" data-el="v1"></span></label>'+
-            '<input type="range" data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'" aria-label="'+S.mLabel+'">'+
-            '<div class="pqc-scale"><span data-el="s1a"></span><span data-el="s1b"></span></div></div>'+
-          '<div class="pqc-ctl"><label>'+S.aLabel+' <span class="pqc-v" data-el="v2"></span></label>'+
-            '<input type="range" data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'" aria-label="'+S.aLabel+'">'+
-            '<div class="pqc-scale"><span data-el="s2a"></span><span data-el="s2b"></span></div></div>'+
-          s3html+
-        '</div>'+
-        '<div class="pqc-cr">'+
-          '<p class="pqc-rlab">'+S.rlab+'</p>'+
-          '<p class="pqc-big"><span data-el="big">0</span><span class="per">'+(S.per||'')+'</span></p>'+
-          '<div class="pqc-break" data-el="break"></div>'+
-          '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
-        '</div>'+
-      '</div>'+
-      '<p class="pqc-note">'+S.note+'</p>';
+          '<div class="pqc-cr">'+
+            '<p class="pqc-rlab">'+S.rlab+'</p>'+
+            '<p class="pqc-big"><span data-el="big">0</span></p>'+
+            '<div class="pqc-break" data-el="break"></div>'+
+            '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
+          '</div>'+
+        '</div></div>'+
+        '<div class="pqc-pfoot">'+S.note+'</div>'+
+      '</div>';
     bind(); upd();
   }
-  sect.querySelectorAll('.pqc-arr').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var d=+btn.getAttribute('data-dir');
-      if(reduce){ mount(idx+d); return; }
-      host.style.opacity=0; h2el.style.opacity=0;
-      setTimeout(function(){ mount(idx+d); host.style.opacity=1; h2el.style.opacity=1; },180);
-    });
-  });
   mount(idx);
 })();
-
   </script>
 
   <!-- ═══════════════════════════════ SECTION — Sectors ═══════════════════════════════ -->

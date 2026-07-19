@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=248" />
+  <link rel="stylesheet" href="/style.css?v=249" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -162,22 +162,22 @@
   </section>
 
   <!-- ═══ SECTION — Зачем это нужно: калькулятор (4 сценария, ротация на визит) ═══ -->
-  <section class="problem" id="problem" aria-label="Зачем это нужно">
+  <section class="problem" id="problem" aria-label="Экономика">
     <div class="container">
-      <p class="pb-k">Зачем это нужно</p>
-      <h2 class="pb-h2" id="pqc-h2">Сколько стоит час простоя — знаете только вы</h2>
+      <div class="pb-eyebrow-row"><span class="pb-idx" aria-hidden="true">01</span><span class="pb-eyebrow">Экономика</span></div>
+      <h2 class="pb-h2" id="pqc-h2">Цена невидимого</h2>
+      <p class="pqc-lead" id="pqc-lead"></p>
       <div id="pqc"></div>
     </div>
   </section>
   <script>
-  var L={"comment": "SECTION — Зачем это нужно: калькулятор (4 сценария, ротация на визит)", "aria": "Зачем это нужно", "kicker": "Зачем это нужно", "curAria": "Валюта", "cta": "Обсудить ситуацию", "micro": "Без обязательства покупать оборудование.", "nav": {"prev": "Предыдущий сценарий", "next": "Следующий сценарий"}, "u": {"k": "тыс", "m": "млн", "b": "млрд", "h": "ч"}, "sym": {"amd": "֏", "usd": "$", "eur": "€"}, "s": {"downtime": {"h2": "Сколько стоит час простоя — знаете только вы", "mLabel": "Стоимость часа простоя", "aLabel": "Незапланированных остановок в год", "bLabel": "Средняя длительность остановки", "rlab": "Незапланированные остановки обходятся в", "per": "в год", "perYr": "", "rows": ["Часов простоя в год", "В месяц", "За 5 лет"], "fact": "До 80 % производственных остановок, связанных с качеством электроэнергии, вызваны провалами напряжения — событиями длиной в миллисекунды.", "src": "EPRI", "note": "Оценка по вашим данным. Мы не обещаем экономию — мы делаем причину остановок измеримой: 7 дней записи показывают, связаны ли они с электросетью."}, "repairs": {"h2": "Ремонт без найденной причины повторяется", "mLabel": "Средняя стоимость внепланового ремонта", "aLabel": "Внеплановых ремонтов в год", "bLabel": "Из них повторные — причина не устранена", "rlab": "Внеплановые ремонты обходятся в", "per": "в год", "perYr": "", "rows": ["Повторные — причина осталась в сети", "В месяц", "За 5 лет"], "fact": "Провал напряжения проходит за миллисекунды: разовый замер после отказа показывает «всё в норме», и ремонт идёт перебором — заменили узел, отказ повторился.", "src": "EPRI", "note": "Оценка по вашим данным. Запись в момент отказа отделяет причину от следствия — ремонт становится адресным, а не повторным."}, "aging": {"h2": "Оборудование не ломается — оно стареет быстрее", "mLabel": "Стоимость двигателей и приводов на объекте", "aLabel": "Нормативный срок службы", "bLabel": "", "rlab": "Ускоренное старение добавляет к амортизации", "per": "в год", "perYr": " / год", "rows": ["Амортизация по нормативу", "При несимметрии 2 % (−25 % ресурса)", "Переплата за 5 лет"], "fact": "Несимметрия напряжений 2 % сокращает ресурс двигателя примерно на четверть. Перегрев обмоток идёт годами и не виден ни в счёте, ни при осмотре.", "src": "NEMA MG-1 · модельный расчёт", "note": "Модельный расчёт по порогу NEMA MG-1 на ваших данных. Есть ли несимметрия на вашем объекте — показывает измерение, а не предположение."}, "risk": {"h2": "Этот риск, как правило, не застрахован", "mLabel": "Стоимость одного серьёзного инцидента", "aLabel": "Случается примерно раз в", "bLabel": "", "rlab": "Годовой эквивалент риска", "per": "", "perYr": "", "rows": ["Инцидентов за 10 лет — примерно", "За 5 лет", "Покрытие полисом — как правило"], "fact": "Страховые полисы, как правило, исключают ущерб от нарушений качества электроэнергии или ставят высокую франшизу. Более чем у половины дата-центров серьёзный сбой стоил дороже 100 000 долларов США.", "src": "страховая практика · Uptime Institute", "note": "Оценка по вашим данным. Запись параметров сети — документ, который делает такой инцидент доказуемым: для поставщика, страховой и регулятора."}}};
-
+  var L={"comment": "SECTION - Экономика: калькулятор (4 сценария, табы + ротация на визит)", "aria": "Экономика", "name": "Экономика", "sectionH2": "Цена невидимого", "curAria": "Валюта", "tabsAria": "Сценарии", "u": {"k": "тыс", "m": "млн", "b": "млрд", "h": "ч"}, "sym": {"amd": "֏", "usd": "$", "eur": "€"}, "s": {"downtime": {"tab": "Простой", "lead": "Каждая остановка приходит со счётом.", "mLabel": "Стоимость часа простоя", "aLabel": "Незапланированных остановок в год", "bLabel": "Средняя длительность остановки", "rlab": "Незапланированные остановки за год", "perYr": "", "rows": ["Часов простоя в год", "В месяц", "За 5 лет"], "fact": "До 80 % производственных остановок, связанных с качеством электроэнергии, вызваны провалами напряжения — событиями длиной в миллисекунды.", "src": "EPRI", "note": "Оценка по вашим данным. Мы не обещаем экономию — мы делаем причину остановок измеримой: 7 дней записи показывают, связаны ли они с электросетью."}, "repairs": {"tab": "Ремонты", "lead": "Пока причина в сети, замена узлов не помогает.", "mLabel": "Средняя стоимость внепланового ремонта", "aLabel": "Внеплановых ремонтов в год", "bLabel": "Из них повторные — причина не устранена", "rlab": "Внеплановые ремонты за год", "perYr": "", "rows": ["Повторные — причина осталась в сети", "В месяц", "За 5 лет"], "fact": "Провал напряжения проходит за миллисекунды: разовый замер после отказа показывает «всё в норме», и ремонт идёт перебором — заменили узел, отказ повторился.", "src": "EPRI", "note": "Оценка по вашим данным. Запись в момент отказа отделяет причину от следствия — ремонт становится адресным, а не повторным."}, "aging": {"tab": "Ресурс", "lead": "Перегрев не ломает оборудование — он тихо сокращает его ресурс.", "mLabel": "Стоимость двигателей и приводов на объекте", "aLabel": "Нормативный срок службы", "bLabel": "", "rlab": "Надбавка к амортизации за год", "perYr": " / год", "rows": ["Амортизация по нормативу", "При несимметрии 2 % (−25 % ресурса)", "Переплата за 5 лет"], "fact": "Несимметрия напряжений 2 % сокращает ресурс двигателя примерно на четверть. Перегрев обмоток идёт годами и не виден ни в счёте, ни при осмотре.", "src": "NEMA MG-1 · модельный расчёт", "note": "Модельный расчёт по порогу NEMA MG-1 на ваших данных. Есть ли несимметрия на вашем объекте — показывает измерение, а не предположение."}, "risk": {"tab": "Риск", "lead": "Полис, скорее всего, этот случай не покроет.", "mLabel": "Стоимость одного серьёзного инцидента", "aLabel": "Случается примерно раз в", "bLabel": "", "rlab": "Риск в годовом выражении", "perYr": "", "rows": ["Инцидентов за 10 лет — примерно", "За 5 лет", "Покрытие полисом — как правило"], "fact": "Страховые полисы, как правило, исключают ущерб от нарушений качества электроэнергии или ставят высокую франшизу. Более чем у половины дата-центров серьёзный сбой стоил дороже 100 000 долларов США.", "src": "страховая практика · Uptime Institute", "note": "Оценка по вашим данным. Запись параметров сети — документ, который делает такой инцидент доказуемым: для поставщика, страховой и регулятора."}}};
 
 (function(){
   'use strict';
   var LANG=document.documentElement.lang||'ru';
   var host=document.getElementById('pqc'); if(!host) return;
-  var h2el=document.getElementById('pqc-h2');
+  var leadEl=document.getElementById('pqc-lead');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function grp(n){ n=Math.round(n);
@@ -222,16 +222,6 @@
   if(idx===null||!(idx>=0&&idx<4)){ idx=Math.floor(Math.random()*4); }
 
   var SCEN_CUR,S,R,S2,S3, cur='amd', shown=0, animId=null, first=true;
-
-  h2el.insertAdjacentHTML('afterend',
-    '<div class="pqc-nav">'+
-    '<button type="button" class="pqc-arr" data-dir="-1" aria-label="'+L.nav.prev+'">'+
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>'+
-    '<span class="pqc-count" aria-hidden="true"></span>'+
-    '<button type="button" class="pqc-arr" data-dir="1" aria-label="'+L.nav.next+'">'+
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>');
-  var sect=host.closest('section')||document.body;
-  var countEl=sect.querySelector('.pqc-count');
 
   function $(k){ return host.querySelector('[data-el='+k+']'); }
   function money(){ var r=R[cur], t=$('r1').value/100;
@@ -296,54 +286,60 @@
         btn.classList.add('on'); cur=btn.getAttribute('data-cur'); upd();
       });
     });
+    host.querySelectorAll('.pqc-tab').forEach(function(tb){
+      tb.addEventListener('click',function(){
+        var i=+tb.getAttribute('data-i');
+        if(i===idx) return;
+        if(reduce){ mount(i); return; }
+        host.classList.add('sw'); leadEl.style.opacity=0;
+        setTimeout(function(){ mount(i); host.classList.remove('sw'); leadEl.style.opacity=1; },170);
+      });
+    });
+  }
+  function ctl(iNum,label,rangeAttrs,valEl,scaleA,scaleB){
+    return '<div class="pqc-ctl"><label><span class="pqc-lab"><i class="pqc-ci">'+iNum+'</i>'+label+'</span> <span class="pqc-v" data-el="'+valEl+'"></span></label>'+
+      '<input type="range" '+rangeAttrs+' aria-label="'+label+'">'+
+      '<div class="pqc-scale"><span data-el="'+scaleA+'"></span><span data-el="'+scaleB+'"></span></div></div>';
   }
   function mount(i){
     idx=((i%4)+4)%4;
     try{ sessionStorage.setItem('pt-scen', idx); }catch(e){}
     SCEN_CUR=KEYS[idx]; S=L.s[SCEN_CUR]; R=RANGES[SCEN_CUR]; S2=SLD2[SCEN_CUR]; S3=SLD3[SCEN_CUR]||null;
     first=true; cancelAnimationFrame(animId);
-    countEl.textContent=(idx+1)+' / 4';
-    h2el.textContent=S.h2;
-    var s3html = S3 ? '<div class="pqc-ctl"><label>'+S.bLabel+' <span class="pqc-v" data-el="v3"></span></label>'+
-      '<input type="range" data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'" aria-label="'+S.bLabel+'">'+
-      '<div class="pqc-scale"><span data-el="s3a"></span><span data-el="s3b"></span></div></div>' : '';
+    leadEl.textContent=S.lead;
+    var tabs=KEYS.map(function(k,j){
+      return '<button type="button" class="pqc-tab'+(j===idx?' on':'')+'" role="tab" aria-selected="'+(j===idx)+'" data-i="'+j+'">'+
+        '<span class="n">0'+(j+1)+'</span><span class="t">'+L.s[k].tab+'</span></button>';
+    }).join('');
+    var s3html = S3 ? ctl('03', S.bLabel,
+      'data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'"','v3','s3a','s3b') : '';
     host.innerHTML=
-      '<div class="pqc-grid">'+
-        '<div class="pqc-cc">'+
-          '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
-            '<button data-cur="amd"'+(cur==='amd'?' class="on"':'')+'>֏ AMD</button>'+
-            '<button data-cur="usd"'+(cur==='usd'?' class="on"':'')+'>$ USD</button>'+
-            '<button data-cur="eur"'+(cur==='eur'?' class="on"':'')+'>€ EUR</button>'+
+      '<div class="pqc-panel">'+
+        '<div class="pqc-tabs" role="tablist" aria-label="'+L.tabsAria+'">'+tabs+'</div>'+
+        '<div class="pqc-body"><div class="pqc-grid">'+
+          '<div class="pqc-cc">'+
+            '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
+              '<button data-cur="amd"'+(cur==='amd'?' class="on"':'')+'>֏ AMD</button>'+
+              '<button data-cur="usd"'+(cur==='usd'?' class="on"':'')+'>$ USD</button>'+
+              '<button data-cur="eur"'+(cur==='eur'?' class="on"':'')+'>€ EUR</button>'+
+            '</div>'+
+            ctl('01', S.mLabel, 'data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'"','v1','s1a','s1b')+
+            ctl('02', S.aLabel, 'data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'"','v2','s2a','s2b')+
+            s3html+
           '</div>'+
-          '<div class="pqc-ctl"><label>'+S.mLabel+' <span class="pqc-v" data-el="v1"></span></label>'+
-            '<input type="range" data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'" aria-label="'+S.mLabel+'">'+
-            '<div class="pqc-scale"><span data-el="s1a"></span><span data-el="s1b"></span></div></div>'+
-          '<div class="pqc-ctl"><label>'+S.aLabel+' <span class="pqc-v" data-el="v2"></span></label>'+
-            '<input type="range" data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'" aria-label="'+S.aLabel+'">'+
-            '<div class="pqc-scale"><span data-el="s2a"></span><span data-el="s2b"></span></div></div>'+
-          s3html+
-        '</div>'+
-        '<div class="pqc-cr">'+
-          '<p class="pqc-rlab">'+S.rlab+'</p>'+
-          '<p class="pqc-big"><span data-el="big">0</span><span class="per">'+(S.per||'')+'</span></p>'+
-          '<div class="pqc-break" data-el="break"></div>'+
-          '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
-        '</div>'+
-      '</div>'+
-      '<p class="pqc-note">'+S.note+'</p>';
+          '<div class="pqc-cr">'+
+            '<p class="pqc-rlab">'+S.rlab+'</p>'+
+            '<p class="pqc-big"><span data-el="big">0</span></p>'+
+            '<div class="pqc-break" data-el="break"></div>'+
+            '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
+          '</div>'+
+        '</div></div>'+
+        '<div class="pqc-pfoot">'+S.note+'</div>'+
+      '</div>';
     bind(); upd();
   }
-  sect.querySelectorAll('.pqc-arr').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var d=+btn.getAttribute('data-dir');
-      if(reduce){ mount(idx+d); return; }
-      host.style.opacity=0; h2el.style.opacity=0;
-      setTimeout(function(){ mount(idx+d); host.style.opacity=1; h2el.style.opacity=1; },180);
-    });
-  });
   mount(idx);
 })();
-
   </script>
 
   <!-- ═══════════════════════════════ SECTION — Объекты и задачи ═══════════════════════════════ -->

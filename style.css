@@ -1531,27 +1531,68 @@ html[lang="hy"] .pb-eyebrow { font-family: "Mardoto", sans-serif; letter-spacing
 .pqc-note { margin-top: 34px; font-size: 13px; color: var(--text-soft); max-width: 74ch; line-height: 1.6; }
 .pqc-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
 .pqc-micro { font-size: 13.5px; color: var(--text-soft); }
-/* scenario pager: side arrows on desktop, inline row on small screens */
+/* ── §Экономика v3: instrument panel (mirrors the contact-form frame:
+      1px border-lt, radius 8, faint blueprint grid) with scenario tabs
+      in the panel header — switching sits right on the content. ── */
 .problem { position: relative; }
-.pqc-nav { display: flex; align-items: center; gap: 14px; margin: -6px 0 30px; }
-.pqc-count { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .08em; color: var(--text-soft); font-variant-numeric: tabular-nums; }
-.pqc-arr {
-  width: 46px; height: 46px; border-radius: 50%;
-  border: 1px solid var(--border); background: var(--bg-card); color: var(--graphite);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  transition: border-color .2s, color .2s, transform .25s var(--ease);
-  padding: 0;
+.pqc-lead { font-size: 17px; line-height: 1.6; color: var(--text-mid); margin: -8px 0 34px; max-width: 56ch; transition: opacity .17s ease; }
+.pqc-panel {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(20,20,20,.04), 0 14px 36px rgba(20,20,20,.06);
+  overflow: hidden;
 }
-.pqc-arr svg { width: 18px; height: 18px; display: block; }
-.pqc-arr:hover { border-color: var(--coral); color: var(--coral); transform: translateY(-1px); }
-.pqc-arr:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
-@media (min-width: 961px) {
-  .pqc-arr { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; }
-  .pqc-arr:hover { transform: translateY(calc(-50% - 1px)); }
-  .pqc-arr[data-dir="-1"] { left: 18px; }
-  .pqc-arr[data-dir="1"] { right: 18px; }
+.pqc-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(20,20,20,.022) 0 1px, transparent 1px 38px),
+    repeating-linear-gradient(0deg, rgba(20,20,20,.018) 0 1px, transparent 1px 38px);
+  pointer-events: none;
 }
-#pqc, #pqc-h2 { transition: opacity .18s ease; }
+.pqc-tabs { position: relative; display: flex; border-bottom: 1px solid var(--border-lt); }
+.pqc-tab {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 15px 20px 13px;
+  background: none; border: 0; border-right: 1px solid var(--border-lt);
+  box-shadow: inset 0 -2px 0 transparent;
+  cursor: pointer; text-align: left; font-family: inherit;
+  transition: background .2s, box-shadow .25s var(--ease);
+}
+.pqc-tab:last-child { border-right: 0; }
+.pqc-tab .n { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 10.5px; letter-spacing: .08em; color: var(--text-soft); transition: color .2s; }
+.pqc-tab .t { font-size: 14px; font-weight: 600; letter-spacing: -.1px; color: var(--text-soft); transition: color .2s; }
+.pqc-tab:hover { background: var(--bg-off); }
+.pqc-tab:hover .t { color: var(--graphite); }
+.pqc-tab.on { background: var(--bg-off); box-shadow: inset 0 -2px 0 var(--coral); }
+.pqc-tab.on .n { color: var(--coral); }
+.pqc-tab.on .t { color: var(--graphite); }
+.pqc-tab:focus-visible { outline: 2px solid var(--coral); outline-offset: -2px; }
+.pqc-body { position: relative; padding: 30px 32px 32px; }
+.pqc-body .pqc-grid { margin-top: 0; }
+.pqc-lab { display: inline-flex; align-items: baseline; gap: 8px; }
+.pqc-ci { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .04em; color: var(--coral); font-style: normal; }
+.pqc-pfoot {
+  position: relative;
+  padding: 15px 32px;
+  border-top: 1px solid var(--border-lt);
+  font-size: 12.5px; line-height: 1.6; color: var(--text-soft);
+}
+#pqc.sw .pqc-body, #pqc.sw .pqc-pfoot { opacity: 0; }
+.pqc-body, .pqc-pfoot { transition: opacity .17s ease; }
+html[lang="hy"] .pqc-tab .n { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+@media (max-width: 700px) {
+  .pqc-tabs { flex-wrap: wrap; }
+  .pqc-tab { flex: 1 1 50%; border-bottom: 1px solid var(--border-lt); }
+  .pqc-tab:nth-child(2n) { border-right: 0; }
+  .pqc-body { padding: 22px 20px 24px; }
+  .pqc-pfoot { padding: 13px 20px; }
+  .pqc-lead { font-size: 15.5px; margin-bottom: 26px; }
+}
 /* HY: mono has no Armenian glyphs — fall back to Mardoto for mixed labels */
 html[lang="hy"] .pqc-v, html[lang="hy"] .pqc-scale,
 html[lang="hy"] .pqc-row b, html[lang="hy"] .pqc-rlab,
