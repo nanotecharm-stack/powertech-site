@@ -1465,6 +1465,13 @@ html[lang="hy"] .pb-h2 { letter-spacing: 0; }
   .pb-h2 { font-size: 30px; }
 }
 
+/* #problem section name row — no-JS fallback only; under html.has-ih the
+   injected .ih rail replaces it (same format as every other section). */
+.pb-eyebrow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.pb-idx { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--coral); }
+.pb-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--coral); }
+html[lang="hy"] .pb-eyebrow { font-family: "Mardoto", sans-serif; letter-spacing: .09em; }
+
 /* ── #problem v2: the cost calculator (4 rotating scenarios).
       One scenario is picked at random per visit (sessionStorage keeps it
       stable during the session). Markup is JS-rendered into #pqc from the
@@ -3385,6 +3392,7 @@ html.has-ih .proc-head,
 html.has-ih .obj-head,
 html.has-ih .params-eyebrow-row,
 html.has-ih .report-eyebrow-row,
+html.has-ih .pb-eyebrow-row,
 html.has-ih .appr-eyebrow-row { display: none; }
 /* Approach header aligned to P1: coral overline (32×2) + big statement, no number */
 html.has-ih .appr-accent { width: 32px; height: 2px; margin-bottom: 18px; }
