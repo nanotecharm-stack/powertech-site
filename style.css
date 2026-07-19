@@ -3717,6 +3717,23 @@ html[lang="hy"] .pm-title { letter-spacing: .02em; text-transform: none; }
   .pqc-tab { border-bottom-color: rgba(20,20,20,.12); }
 }
 
+/* §04 Отчёт — same CoffeeTech card treatment as the enquiry form:
+   beige ground #E5E2DD, doc card #DCD8D3, 1px white outline, 14px radius,
+   no shadow; inner hairlines/text re-tuned for the beige card. */
+.report { background: #E5E2DD; }
+.rep-doc { background: #DCD8D3; border: 1px solid #fff; border-radius: 14px; box-shadow: none; }
+.rep-doc-head { border-bottom-color: rgba(20,20,20,.12); }
+.rep-doc-type { color: #857F76; }
+.rep-doc-meta { color: #4A4E55; }
+.rep-doc-meta b { color: var(--graphite); }
+.rep-events { border-top-color: rgba(20,20,20,.12); }
+.rep-ev { border-bottom-color: rgba(20,20,20,.1); color: #4A4E55; }
+.rep-ev.rep-ev-h { color: #857F76; }
+.rep-ev b { color: var(--graphite); }
+/* deliverables list + instrument note sit on the beige section ground */
+.rep-item p { color: #4A4E55; }
+.report-instrument { color: #4A4E55; }
+
 /* §02 — same treatment: warm field + rounded photo zone like the reference (EXPERIMENT). */
 .objects { background: #E5E2DD; }
 .hs-stage {
