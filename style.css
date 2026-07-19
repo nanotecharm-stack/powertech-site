@@ -1531,6 +1531,27 @@ html[lang="hy"] .pb-eyebrow { font-family: "Mardoto", sans-serif; letter-spacing
 .pqc-note { margin-top: 34px; font-size: 13px; color: var(--text-soft); max-width: 74ch; line-height: 1.6; }
 .pqc-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
 .pqc-micro { font-size: 13.5px; color: var(--text-soft); }
+/* scenario pager: side arrows on desktop, inline row on small screens */
+.problem { position: relative; }
+.pqc-nav { display: flex; align-items: center; gap: 14px; margin: -6px 0 30px; }
+.pqc-count { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .08em; color: var(--text-soft); font-variant-numeric: tabular-nums; }
+.pqc-arr {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--graphite);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color .2s, color .2s, transform .25s var(--ease);
+  padding: 0;
+}
+.pqc-arr svg { width: 18px; height: 18px; display: block; }
+.pqc-arr:hover { border-color: var(--coral); color: var(--coral); transform: translateY(-1px); }
+.pqc-arr:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+@media (min-width: 961px) {
+  .pqc-arr { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; }
+  .pqc-arr:hover { transform: translateY(calc(-50% - 1px)); }
+  .pqc-arr[data-dir="-1"] { left: 18px; }
+  .pqc-arr[data-dir="1"] { right: 18px; }
+}
+#pqc, #pqc-h2 { transition: opacity .18s ease; }
 /* HY: mono has no Armenian glyphs — fall back to Mardoto for mixed labels */
 html[lang="hy"] .pqc-v, html[lang="hy"] .pqc-scale,
 html[lang="hy"] .pqc-row b, html[lang="hy"] .pqc-rlab,
