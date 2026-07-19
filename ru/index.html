@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=254" />
+  <link rel="stylesheet" href="/style.css?v=255" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -179,8 +179,18 @@
                   <button type="button" class="sc-help" aria-label="Что считается событием" data-tip="Отключения, ошибки, срабатывания защиты, перегрев или нестабильная работа.">?</button>
                   <input type="number" id="sc-events-num" class="sc-numbox" min="0" max="50" step="1" value="0" inputmode="numeric" aria-label="Похожих событий за год, число">
                 </div>
-                <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Похожих событий за год">
-                <div class="sc-scale"><span>0</span><span>50</span></div>
+                <div class="sc-measure" id="sc-events-measure">
+                  <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Похожих событий за год">
+                  <output class="sc-bubble" id="sc-events-bubble" for="sc-events">0</output>
+                  <div class="sc-ruler" aria-hidden="true">
+                    <span style="left:calc(13px + 0*(100% - 26px))">0</span>
+                    <span style="left:calc(13px + .2*(100% - 26px))">10</span>
+                    <span style="left:calc(13px + .4*(100% - 26px))">20</span>
+                    <span style="left:calc(13px + .6*(100% - 26px))">30</span>
+                    <span style="left:calc(13px + .8*(100% - 26px))">40</span>
+                    <span style="left:calc(13px + 1*(100% - 26px))">50</span>
+                  </div>
+                </div>
               </div>
 
               <div class="sc-field">
@@ -200,8 +210,13 @@
                   <label for="sc-unconf">Из них без подтверждённой причины</label>
                   <span class="sc-val" id="sc-unconf-val">0</span>
                 </div>
-                <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
-                <div class="sc-scale"><span>0</span><span id="sc-unconf-max">50</span></div>
+                <div class="sc-measure c" id="sc-unconf-measure">
+                  <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
+                  <div class="sc-ruler" aria-hidden="true">
+                    <span style="left:calc(13px + 0*(100% - 26px))">0</span>
+                    <span style="left:calc(13px + 1*(100% - 26px))" id="sc-unconf-max">50</span>
+                  </div>
+                </div>
                 <label class="sc-check"><input type="checkbox" id="sc-unknown"> Не знаю</label>
               </div>
 
@@ -255,8 +270,13 @@
         elUnknown=$('sc-unknown'), unconfField=sec.querySelector('.sc-unconf-field'),
         costToggle=$('sc-cost-toggle'), costBody=$('sc-cost-body'), elCost=$('sc-cost'),
         curBtns=sec.querySelectorAll('.sc-cur button'), resMain=$('sc-result-main'),
-        costRes=$('sc-cost-result'), cta=$('sc-cta');
+        costRes=$('sc-cost-result'), cta=$('sc-cta'),
+        evMeasure=$('sc-events-measure'), evBubble=$('sc-events-bubble'),
+        unMeasure=$('sc-unconf-measure');
     var recoveryUnit='min', currency='amd', started=false, completed=false;
+
+    function fillEvents(){ var v=+elEvents.value; if(evMeasure) evMeasure.style.setProperty('--p', v/50); if(evBubble) evBubble.textContent=v; }
+    function fillUnconf(){ if(!unMeasure) return; var mx=+elUnconf.max||1; unMeasure.style.setProperty('--p', (+elUnconf.value)/(mx||1)); }
 
     function grp(n){ n=Math.round(n); return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
     function plural(n,one,few,many){ var a=n%10,b=n%100;
@@ -284,6 +304,7 @@
       elEvents.value=v; elEventsNum.value=v;
       elUnconf.max=v; elUnconfMax.textContent=v;
       if(+elUnconf.value>v) elUnconf.value=v;
+      fillEvents(); fillUnconf();
     }
 
     function renderSeg(events, unconf, unknown){
@@ -354,7 +375,7 @@
 
     elUnconf.addEventListener('input',function(){ start();
       if(elUnknown.checked){ elUnknown.checked=false; applyUnknown(); }
-      update(); });
+      fillUnconf(); update(); });
     function applyUnknown(){ var u=elUnknown.checked; elUnconf.disabled=u; unconfField.classList.toggle('is-unknown',u); }
     elUnknown.addEventListener('change',function(){ start(); applyUnknown(); update(); });
 
@@ -373,6 +394,7 @@
     }); });
     if(cta) cta.addEventListener('click',function(){ track('calculator_cta_clicked'); });
 
+    fillEvents(); fillUnconf();
     update();
   })();
   </script>
