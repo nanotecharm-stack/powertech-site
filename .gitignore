@@ -23,3 +23,9 @@ CONTENT_*.md
 design-references/
 vaveris-logo/
 assets/_src-objects/
+
+# ── Design exploration mockups / drafts (NOT part of the site) ──
+variants-*.html
+portfolio/
+ru/zachem/
+assets/vendor/three.min.js
