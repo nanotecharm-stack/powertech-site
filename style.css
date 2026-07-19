@@ -3817,11 +3817,15 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 .sc-eyebrow::before { content:""; width:26px; height:1px; background:var(--coral); }
 .sc-h2 { font-family:'Instrument Sans','IBM Plex Sans',system-ui,sans-serif; font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:-1.4px; line-height:1.05; color:var(--graphite); margin:0 0 56px; text-wrap:balance; }
 
-.sc-panel { background:#DCD8D3; border:1px solid #fff; border-radius:14px; box-shadow:none; }
-.sc-body { padding:34px 38px 36px; }
-.sc-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:start; }
-.sc-inputs { display:flex; flex-direction:column; gap:34px; padding-right:56px; }
-.sc-result { border-left:1px solid rgba(20,20,20,.12); padding-left:56px; min-height:220px; }
+.sc-panel { background:#DCD8D3; border:1px solid #fff; border-radius:16px; box-shadow:none; }
+.sc-body { padding:40px 42px 40px; }
+.sc-grid { display:grid; grid-template-columns:1fr 1fr; gap:46px; align-items:stretch; }
+.sc-inputs { display:flex; flex-direction:column; gap:36px; }
+/* framed instrument readout — the payoff information as a lit display */
+.sc-result { position:relative; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(162deg,#EAE7E2 0%,#DFDBD5 100%); border:1px solid #fff; border-radius:13px; padding:36px 34px; min-height:264px; box-shadow:inset 0 1px 0 rgba(255,255,255,.55); }
+.sc-result::before, .sc-result::after { content:""; position:absolute; width:13px; height:13px; pointer-events:none; }
+.sc-result::before { top:14px; left:14px; border-top:1px solid rgba(20,20,20,.26); border-left:1px solid rgba(20,20,20,.26); }
+.sc-result::after { bottom:14px; right:14px; border-bottom:1px solid rgba(20,20,20,.26); border-right:1px solid rgba(20,20,20,.26); }
 
 .sc-field { display:flex; flex-direction:column; }
 .sc-lab { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
@@ -3879,8 +3883,9 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 
 .sc-empty { font-size:22px; font-weight:600; color:#857F76; margin:0 0 8px; }
 .sc-empty-sub { font-size:14px; color:#9A968E; margin:0; }
-.sc-rlab { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#857F76; margin:0 0 14px; }
-.sc-big { font-family:'Instrument Sans','IBM Plex Sans',sans-serif; font-size:clamp(40px,5.2vw,60px); font-weight:600; letter-spacing:-2px; line-height:1; color:var(--graphite); margin:0 0 18px; font-variant-numeric:tabular-nums; }
+.sc-rlab { display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#857F76; margin:0 0 16px; }
+.sc-rlab::before { content:""; width:18px; height:1px; background:var(--coral); flex:none; }
+.sc-big { font-family:'Instrument Sans','IBM Plex Sans',sans-serif; font-size:clamp(44px,5.6vw,64px); font-weight:600; letter-spacing:-2.2px; line-height:1; color:var(--graphite); margin:0 0 20px; font-variant-numeric:tabular-nums; }
 .sc-line { font-size:16px; line-height:1.5; color:#4A4E55; margin:0 0 6px; }
 .sc-line.sc-line-c { color:var(--coral); font-weight:500; }
 .sc-line.sc-muted { color:#857F76; }
@@ -3909,9 +3914,8 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 
 @media (max-width: 820px){
   .sc-body { padding:26px 22px 28px; }
-  .sc-grid { grid-template-columns:1fr; gap:0; }
-  .sc-inputs { padding-right:0; }
-  .sc-result { border-left:0; padding-left:0; border-top:1px solid rgba(20,20,20,.12); padding-top:30px; margin-top:34px; min-height:0; }
+  .sc-grid { grid-template-columns:1fr; gap:28px; }
+  .sc-result { padding:26px 24px; min-height:0; }
   .sc-foot { padding:20px 22px 22px; }
   .sc-h2 { margin-bottom:36px; }
   .sc-field input[type=range] { height:34px; }
