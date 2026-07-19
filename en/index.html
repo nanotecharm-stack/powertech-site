@@ -31,7 +31,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=244" />
+  <link rel="stylesheet" href="/style.css?v=245" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -160,40 +160,164 @@
     </a>
   </section>
 
-  <!-- ═══════════════════════════════ SECTION — Network problems are invisible ═══════════════════════════════ -->
-  <section class="problem" id="problem" aria-label="The problem">
-    <div class="container problem-grid">
-      <div class="pb-text">
-        <p class="pb-k">Why it matters</p>
-        <h2 class="pb-h2">Power quality problems are often invisible</h2>
-        <p class="pb-lead">Voltage dips, spikes and distortion last milliseconds. A single measurement misses them, and failures get blamed on equipment or the weather.</p>
-        <p class="pb-lead"><span class="em">They show up only under continuous recording</span> — while the site runs as usual.</p>
-      </div>
-      <div class="pb-scope" role="img" aria-label="Oscillogram: a short voltage dip on phase L2 during normal operation">
-        <div class="pb-scope-top">
-          <span class="ch">U · L2</span>
-          <span class="ev"><span class="d"></span>REC</span>
-        </div>
-        <svg viewBox="0 0 480 240" aria-hidden="true">
-          <g class="grid">
-            <line x1="0" y1="48" x2="480" y2="48"/><line x1="0" y1="96" x2="480" y2="96"/>
-            <line x1="0" y1="144" x2="480" y2="144"/><line x1="0" y1="192" x2="480" y2="192"/>
-            <line x1="96" y1="0" x2="96" y2="240"/><line x1="192" y1="0" x2="192" y2="240"/>
-            <line x1="288" y1="0" x2="288" y2="240"/><line x1="384" y1="0" x2="384" y2="240"/>
-          </g>
-          <line class="band" x1="0" y1="60" x2="480" y2="60"/>
-          <line class="band" x1="0" y1="180" x2="480" y2="180"/>
-          <line class="nominal" x1="0" y1="120" x2="480" y2="120"/>
-          <path class="trace" d="M0 120 L40 119 L60 121 L90 120 L120 120 L150 119 L180 121 L206 120"/>
-          <path class="trace-dip" d="M206 120 L224 121 L236 210 L258 98 L276 120 L300 120 L340 119 L370 121 L400 120 L440 120 L480 120"/>
-          <text class="lab" x="438" y="114">230 V</text>
-          <text class="lab" x="8" y="56">+10 %</text>
-          <text class="lab" x="8" y="176">−10 %</text>
-          <text class="lab-c" x="214" y="230">−15 %</text>
-        </svg>
-      </div>
+  <!-- ═══ SECTION — Why it matters: cost calculator (4 scenarios, per-visit rotation) ═══ -->
+  <section class="problem" id="problem" aria-label="Why it matters">
+    <div class="container">
+      <p class="pb-k">Why it matters</p>
+      <h2 class="pb-h2" id="pqc-h2">Only you know what an hour of downtime costs</h2>
+      <div id="pqc"></div>
     </div>
   </section>
+  <script>
+  var L={"comment": "SECTION — Why it matters: cost calculator (4 scenarios, per-visit rotation)", "aria": "Why it matters", "kicker": "Why it matters", "curAria": "Currency", "cta": "Discuss your situation", "micro": "No obligation to buy equipment.", "u": {"k": "k", "m": "m", "b": "bn", "h": "h"}, "sym": {"amd": "AMD", "usd": "$", "eur": "€"}, "s": {"downtime": {"h2": "Only you know what an hour of downtime costs", "mLabel": "Cost of one hour of downtime", "aLabel": "Unplanned stops per year", "bLabel": "Average stop duration", "rlab": "Unplanned stops are costing", "per": "per year", "perYr": "", "rows": ["Hours of downtime per year", "Per month", "Over 5 years"], "fact": "Up to 80% of power-quality-related production stoppages are caused by voltage dips — events lasting milliseconds.", "src": "EPRI", "note": "An estimate based on your numbers. We don’t promise savings — we make the cause measurable: seven days of recording show whether the stops are linked to the network."}, "repairs": {"h2": "Repairs repeat until the cause is found", "mLabel": "Average cost of an unplanned repair", "aLabel": "Unplanned repairs per year", "bLabel": "Repeat repairs — cause not fixed", "rlab": "Unplanned repairs are costing", "per": "per year", "perYr": "", "rows": ["Repeats — the cause is still in the network", "Per month", "Over 5 years"], "fact": "A voltage dip is over in milliseconds: a one-off measurement after the failure reads “all normal”, and repairs proceed by trial and error — a unit gets replaced, the failure returns.", "src": "EPRI", "note": "An estimate based on your numbers. A record captured at the moment of failure separates cause from effect — repairs become targeted instead of repeated."}, "aging": {"h2": "Equipment doesn’t fail — it ages faster", "mLabel": "Value of motors and drives on site", "aLabel": "Rated service life", "bLabel": "", "rlab": "Accelerated ageing adds to depreciation", "per": "per year", "perYr": " / yr", "rows": ["Normal depreciation", "With 2% unbalance (−25% life)", "Extra cost over 5 years"], "fact": "A 2% voltage unbalance cuts motor life by roughly a quarter. Winding overheating develops over years and shows up neither on the bill nor during inspection.", "src": "NEMA MG-1 · model scenario", "note": "A model calculation at the NEMA MG-1 threshold using your numbers. Whether unbalance exists on your site is shown by measurement, not assumption."}, "risk": {"h2": "This risk is usually uninsured", "mLabel": "Cost of one serious incident", "aLabel": "Happens about every", "bLabel": "", "rlab": "Yearly equivalent of this risk", "per": "", "perYr": "", "rows": ["Incidents in 10 years — about", "Over 5 years", "Insurance coverage — usually"], "fact": "Insurance policies typically exclude damage caused by power-quality disturbances or set a high deductible. For more than half of data centres, a serious outage cost over $100,000.", "src": "insurance practice · Uptime Institute", "note": "An estimate based on your numbers. A record of network parameters is a document that makes such an incident provable — to the supplier, the insurer and the regulator."}}};
+
+(function(){
+  'use strict';
+  var LANG=document.documentElement.lang||'ru';
+  var host=document.getElementById('pqc'); if(!host) return;
+  var h2el=document.getElementById('pqc-h2');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function grp(n){ n=Math.round(n);
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, LANG==='en'?',':' '); }
+  function dec(x){ var s=x.toFixed(1); return LANG==='en'?s:s.replace('.',','); }
+  function abbr(n){
+    if(n>=1e9) return dec(n/1e9)+' '+L.u.b;
+    if(n>=1e6) return (n%1e6? dec(n/1e6):(n/1e6))+' '+L.u.m;
+    if(n>=1e3) return (n%1e3? dec(n/1e3):(n/1e3))+' '+L.u.k;
+    return ''+n;
+  }
+  function mfmt(n,cur){
+    var body = n>=1e9 ? abbr(n) : grp(n);
+    if(LANG==='en'){ var p=L.sym[cur]; return p+(p.length>1?' ':'')+body; }
+    return body+' '+L.sym[cur];
+  }
+  function yearsRu(n){ var m10=n%10,m100=n%100;
+    if(m10===1&&m100!==11) return 'год';
+    if(m10>=2&&m10<=4&&(m100<12||m100>14)) return 'года';
+    return 'лет'; }
+  function yearsVal(n){
+    if(LANG==='ru') return n+' '+yearsRu(n);
+    if(LANG==='hy') return n+' '+(SCEN_CUR==='risk'?'տարին մեկ':'տարի');
+    return n+' '+(n===1?'year':'years');
+  }
+  function hoursVal(v){ var h=v/2; var s=(h%1? dec(h):h); return s+' '+L.u.h; }
+
+  var KEYS=['downtime','repairs','aging','risk'];
+  var idx=null, qm=location.search.match(/[?&]scen=(\d)/);
+  if(qm) idx=+qm[1];
+  else{ try{ var st=sessionStorage.getItem('pt-scen'); if(st!==null) idx=+st; }catch(e){} }
+  if(idx===null||!(idx>=0&&idx<4)){ idx=Math.floor(Math.random()*4); }
+  try{ sessionStorage.setItem('pt-scen', idx); }catch(e){}
+  var SCEN_CUR=KEYS[idx];
+  var S=L.s[SCEN_CUR];
+
+  h2el.textContent=S.h2;
+
+  var RANGES={
+    downtime:{amd:[5e4,5e6,25e3],  usd:[100,12e3,100],  eur:[100,12e3,100],  def:.18},
+    repairs: {amd:[1e5,2e7,5e4],   usd:[200,5e4,200],   eur:[200,5e4,200],   def:.22},
+    aging:   {amd:[5e6,2e9,1e6],   usd:[1e4,5e6,1e4],   eur:[1e4,5e6,1e4],   def:.3},
+    risk:    {amd:[1e6,5e8,5e5],   usd:[2e3,1e6,1e3],   eur:[2e3,1e6,1e3],   def:.35}
+  };
+  var SLD2={downtime:[1,50,6], repairs:[1,60,8], aging:[5,30,15], risk:[1,15,5]};
+  var SLD3={downtime:[1,48,8], repairs:[0,80,30]};
+  var R=RANGES[SCEN_CUR], S2=SLD2[SCEN_CUR], S3=SLD3[SCEN_CUR]||null;
+
+  var s3html = S3 ? '<div class="pqc-ctl"><label>'+S.bLabel+' <span class="pqc-v" data-el="v3"></span></label>'+
+    '<input type="range" data-el="r3" min="'+S3[0]+'" max="'+S3[1]+'" value="'+S3[2]+'" aria-label="'+S.bLabel+'">'+
+    '<div class="pqc-scale"><span data-el="s3a"></span><span data-el="s3b"></span></div></div>' : '';
+
+  host.innerHTML=
+    '<div class="pqc-grid">'+
+      '<div class="pqc-cc">'+
+        '<div class="pqc-cur" role="group" aria-label="'+L.curAria+'">'+
+          '<button data-cur="amd" class="on">֏ AMD</button><button data-cur="usd">$ USD</button><button data-cur="eur">€ EUR</button>'+
+        '</div>'+
+        '<div class="pqc-ctl"><label>'+S.mLabel+' <span class="pqc-v" data-el="v1"></span></label>'+
+          '<input type="range" data-el="r1" min="0" max="100" value="'+Math.round(R.def*100)+'" aria-label="'+S.mLabel+'">'+
+          '<div class="pqc-scale"><span data-el="s1a"></span><span data-el="s1b"></span></div></div>'+
+        '<div class="pqc-ctl"><label>'+S.aLabel+' <span class="pqc-v" data-el="v2"></span></label>'+
+          '<input type="range" data-el="r2" min="'+S2[0]+'" max="'+S2[1]+'" value="'+S2[2]+'" aria-label="'+S.aLabel+'">'+
+          '<div class="pqc-scale"><span data-el="s2a"></span><span data-el="s2b"></span></div></div>'+
+        s3html+
+      '</div>'+
+      '<div class="pqc-cr">'+
+        '<p class="pqc-rlab">'+S.rlab+'</p>'+
+        '<p class="pqc-big"><span data-el="big">0</span><span class="per">'+(S.per||'')+'</span></p>'+
+        '<div class="pqc-break" data-el="break"></div>'+
+        '<p class="pqc-fact">'+S.fact+'<span class="pqc-src">'+S.src+'</span></p>'+
+      '</div>'+
+    '</div>'+
+    '<p class="pqc-note">'+S.note+'</p>'+
+    '<div class="pqc-cta"><a href="#contact" class="btn btn-coral">'+L.cta+'</a><span class="pqc-micro">'+L.micro+'</span></div>';
+
+  var $=function(k){ return host.querySelector('[data-el='+k+']'); };
+  var cur='amd', shown=0, animId=null, first=true;
+  function money(){ var r=R[cur], t=$('r1').value/100;
+    var val=r[0]*Math.pow(r[1]/r[0], t);
+    return Math.round(val/r[2])*r[2]; }
+  function calc(m,a,b){
+    if(SCEN_CUR==='downtime') return m*a*(b/2);
+    if(SCEN_CUR==='repairs')  return m*a;
+    if(SCEN_CUR==='aging')    return m/(a*0.75)-m/a;
+    return m/a;
+  }
+  function rows(m,a,b){
+    var y=calc(m,a,b), sym=cur;
+    if(SCEN_CUR==='downtime') return [
+      [S.rows[0], grp(a*b/2)+' '+L.u.h, ''],
+      [S.rows[1], mfmt(y/12,sym), ''],
+      [S.rows[2], mfmt(y*5,sym), '']];
+    if(SCEN_CUR==='repairs') return [
+      [S.rows[0], mfmt(y*b/100,sym), 'c'],
+      [S.rows[1], mfmt(y/12,sym), ''],
+      [S.rows[2], mfmt(y*5,sym), '']];
+    if(SCEN_CUR==='aging') return [
+      [S.rows[0], mfmt(m/a,sym)+S.perYr, ''],
+      [S.rows[1], mfmt(m/(a*0.75),sym)+S.perYr, 'c'],
+      [S.rows[2], mfmt(y*5,sym), '']];
+    return [
+      [S.rows[0], ''+Math.max(1,Math.round(10/a)), ''],
+      [S.rows[1], mfmt(y*5,sym), ''],
+      [S.rows[2], mfmt(0,sym), 'c']];
+  }
+  function animateTo(t){
+    if(reduce||first){ $('big').textContent=mfmt(t,cur); shown=t; first=false; return; }
+    cancelAnimationFrame(animId);
+    var from=shown, t0=null, DUR=500;
+    function tick(ts){ if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/DUR); k=1-Math.pow(1-k,3);
+      shown=from+(t-from)*k; $('big').textContent=mfmt(shown,cur);
+      if(k<1) animId=requestAnimationFrame(tick); }
+    animId=requestAnimationFrame(tick);
+  }
+  function upd(){
+    var m=money(), a=+$('r2').value, b=S3?+$('r3').value:0;
+    $('v1').textContent=mfmt(m,cur);
+    $('s1a').textContent=abbr(R[cur][0]); $('s1b').textContent=abbr(R[cur][1]);
+    if(SCEN_CUR==='aging'||SCEN_CUR==='risk'){ $('v2').textContent=yearsVal(a); }
+    else { $('v2').textContent=a; }
+    $('s2a').textContent=S2[0]; $('s2b').textContent=S2[1];
+    if(S3){
+      if(SCEN_CUR==='downtime'){ $('v3').textContent=hoursVal(b); $('s3a').textContent=hoursVal(S3[0]); $('s3b').textContent=hoursVal(S3[1]); }
+      else { $('v3').textContent=b+' %'; $('s3a').textContent=S3[0]+' %'; $('s3b').textContent=S3[1]+' %'; }
+    }
+    $('break').innerHTML=rows(m,a,b).map(function(rr){
+      return '<div class="pqc-row"><span>'+rr[0]+'</span><b'+(rr[2]==='c'?' class="c"':'')+'>'+rr[1]+'</b></div>';
+    }).join('');
+    animateTo(calc(m,a,b));
+  }
+  host.querySelectorAll('input[type=range]').forEach(function(rg){ rg.addEventListener('input',upd); });
+  host.querySelectorAll('.pqc-cur button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      host.querySelectorAll('.pqc-cur button').forEach(function(x){x.classList.remove('on');});
+      btn.classList.add('on'); cur=btn.getAttribute('data-cur'); upd();
+    });
+  });
+  upd();
+})();
+  </script>
 
   <!-- ═══════════════════════════════ SECTION — Sectors ═══════════════════════════════ -->
   <section class="objects" id="objects" aria-label="Where monitoring matters">
