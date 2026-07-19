@@ -197,6 +197,7 @@
     if(m10>=2&&m10<=4&&(m100<12||m100>14)) return 'года';
     return 'лет'; }
   function yearsVal(n){
+    if(SCEN_CUR==='risk'&&n===1){ return LANG==='ru'?'год':(LANG==='hy'?'տարին մեկ':'year'); }
     if(LANG==='ru') return n+' '+yearsRu(n);
     if(LANG==='hy') return n+' '+(SCEN_CUR==='risk'?'տարին մեկ':'տարի');
     return n+' '+(n===1?'year':'years');
