@@ -3816,7 +3816,7 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 .sc-eyebrow { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--coral); display:flex; align-items:center; gap:12px; margin:0 0 22px; }
 .sc-eyebrow::before { content:""; width:26px; height:1px; background:var(--coral); }
 .sc-h2 { font-family:'Instrument Sans','IBM Plex Sans',system-ui,sans-serif; font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:-1.4px; line-height:1.05; color:var(--graphite); margin:0 0 12px; text-wrap:balance; }
-.sc-sub { font-size:15px; color:#4A4E55; margin:0 0 40px; }
+.sc-sub { font-size:16px; line-height:1.6; color:#4A4E55; margin:0 0 42px; max-width:64ch; }
 
 .sc-panel { background:#DCD8D3; border:1px solid #fff; border-radius:14px; box-shadow:none; }
 .sc-body { padding:34px 38px 36px; }
