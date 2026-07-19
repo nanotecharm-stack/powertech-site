@@ -3815,8 +3815,7 @@ html[lang="hy"] .ih-label { font-family: "Mardoto", "IBM Plex Sans", system-ui, 
 html[lang="ru"] .problem { background: #E5E2DD; }
 .sc-eyebrow { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--coral); display:flex; align-items:center; gap:12px; margin:0 0 22px; }
 .sc-eyebrow::before { content:""; width:26px; height:1px; background:var(--coral); }
-.sc-h2 { font-family:'Instrument Sans','IBM Plex Sans',system-ui,sans-serif; font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:-1.4px; line-height:1.05; color:var(--graphite); margin:0 0 12px; text-wrap:balance; }
-.sc-sub { font-size:16px; line-height:1.6; color:#4A4E55; margin:0 0 42px; max-width:64ch; }
+.sc-h2 { font-family:'Instrument Sans','IBM Plex Sans',system-ui,sans-serif; font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:-1.4px; line-height:1.05; color:var(--graphite); margin:0 0 56px; text-wrap:balance; }
 
 .sc-panel { background:#DCD8D3; border:1px solid #fff; border-radius:14px; box-shadow:none; }
 .sc-body { padding:34px 38px 36px; }
@@ -3867,6 +3866,7 @@ html[lang="ru"] .problem { background: #E5E2DD; }
 .sc-unit button.on, .sc-cur button.on { background:var(--graphite); color:#fff; }
 .sc-unit button:focus-visible, .sc-cur button:focus-visible { outline:2px solid var(--coral); outline-offset:-2px; }
 .sc-hint { font-size:12.5px; line-height:1.5; color:#4A4E55; margin:10px 0 0; max-width:44ch; }
+.sc-fieldhint { font-size:12.5px; line-height:1.4; color:#6E6E6E; margin:-6px 0 16px; }
 .sc-check { display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13.5px; color:#4A4E55; cursor:pointer; min-height:24px; }
 .sc-check input { width:16px; height:16px; accent-color:var(--coral); }
 .sc-unconf-field.is-unknown .sc-ruler, .sc-unconf-field.is-unknown label[for="sc-unconf"] { opacity:.5; }
@@ -3913,7 +3913,7 @@ html[lang="ru"] .problem { background: #E5E2DD; }
   .sc-inputs { padding-right:0; }
   .sc-result { border-left:0; padding-left:0; border-top:1px solid rgba(20,20,20,.12); padding-top:30px; margin-top:34px; min-height:0; }
   .sc-foot { padding:20px 22px 22px; }
-  .sc-sub { margin-bottom:30px; }
+  .sc-h2 { margin-bottom:36px; }
   .sc-field input[type=range] { height:34px; }
-  .sc-bubble { opacity:1; }
+  .sc-bubble { display:none; }
 }
