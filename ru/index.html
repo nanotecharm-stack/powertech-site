@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=262" />
+  <link rel="stylesheet" href="/style.css?v=263" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -876,6 +876,17 @@
   var N=SECTORS.length, KICK="СЕКТОР", SUB="Что покажет проверка", CTA="Обсудить объект";
   var grid=document.getElementById('sx-grid'); if(!grid) return;
   var cards=Array.prototype.slice.call(grid.querySelectorAll('.sx-card'));
+  /* hover panel: paper slab with the first sentence of the sector's own
+     story slides up from the card's bottom edge (desktop pointers only) */
+  cards.forEach(function(c,i){
+    var s=SECTORS[i]; if(!s) return;
+    var sum=s.pain, dot=sum.indexOf('.');
+    if(dot>40) sum=sum.slice(0,dot+1);
+    var d=document.createElement('span');
+    d.className='sx-panel'; d.setAttribute('aria-hidden','true');
+    d.innerHTML='<span class="sx-pidx">0'+(i+1)+'</span><span class="sx-pname">'+s.name+'</span><span class="sx-psum">'+sum+'</span>';
+    c.appendChild(d);
+  });
   var ov=document.getElementById('ov'), ovCard=document.getElementById('ov-card'),
       ovFig=document.getElementById('ov-fig'), ovImg=document.getElementById('ov-img'),
       ovBody=document.getElementById('ov-body'), ovCount=document.getElementById('ov-count'),
