@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=259" />
+  <link rel="stylesheet" href="/style.css?v=261" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -155,248 +155,13 @@
         <span class="hud-chip"><span class="hud-k">THD</span><span class="hud-v" data-hud="thd">2,4</span><span class="hud-u">%</span></span>
       </div>
     </div>
-    <a class="hero-scroll cue-init" href="#problem" aria-label="Прокрутить вниз">
+    <a class="hero-scroll cue-init" href="#objects" aria-label="Прокрутить вниз">
       <span class="hs-track"></span>
       <svg class="hs-chev" viewBox="0 0 22 12" fill="none" aria-hidden="true"><path d="M2 2l9 8 9-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </section>
 
   <!-- ═══ SECTION — Зачем это нужно: калькулятор (4 сценария, ротация на визит) ═══ -->
-  <section class="problem" id="problem" aria-label="Масштаб">
-    <div class="container">
-      <p class="sc-eyebrow">Повторяющиеся сбои</p>
-      <h2 class="sc-h2">Оцените масштаб за год</h2>
-
-      <div class="sc-panel">
-        <div class="sc-body">
-          <div class="sc-grid">
-            <div class="sc-inputs">
-
-              <div class="sc-field">
-                <div class="sc-lab">
-                  <label for="sc-events">Сбоев за год</label>
-                  <input type="number" id="sc-events-num" class="sc-numbox" min="0" max="50" step="1" value="0" inputmode="numeric" aria-label="Сбоев за год, число">
-                </div>
-                <p class="sc-fieldhint">Остановки, ошибки, срабатывания защиты, перегрев.</p>
-                <div class="sc-measure" id="sc-events-measure">
-                  <input type="range" id="sc-events" min="0" max="50" step="1" value="0" aria-label="Сбоев за год">
-                  <output class="sc-bubble" id="sc-events-bubble" for="sc-events">0</output>
-                  <div class="sc-ruler" aria-hidden="true">
-                    <span style="left:calc(13px + 0*(100% - 26px))">0</span>
-                    <span style="left:calc(13px + .2*(100% - 26px))">10</span>
-                    <span style="left:calc(13px + .4*(100% - 26px))">20</span>
-                    <span style="left:calc(13px + .6*(100% - 26px))">30</span>
-                    <span style="left:calc(13px + .8*(100% - 26px))">40</span>
-                    <span style="left:calc(13px + 1*(100% - 26px))">50</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="sc-field">
-                <div class="sc-lab"><label for="sc-recovery">Среднее время восстановления</label></div>
-                <div class="sc-inline">
-                  <input type="number" id="sc-recovery" min="0" max="4320" step="1" value="0" inputmode="numeric" aria-label="Время до восстановления">
-                  <div class="sc-unit" role="group" aria-label="Единицы времени">
-                    <button type="button" data-unit="min" class="on" aria-pressed="true" aria-label="Минуты">мин</button>
-                    <button type="button" data-unit="hours" aria-pressed="false" aria-label="Часы">ч</button>
-                  </div>
-                </div>
-                <p class="sc-hint">До возвращения к штатной работе.</p>
-              </div>
-
-              <div class="sc-field sc-unconf-field">
-                <div class="sc-lab">
-                  <label for="sc-unconf">Из них без подтверждённой причины</label>
-                  <span class="sc-val" id="sc-unconf-val">0</span>
-                </div>
-                <div class="sc-measure c" id="sc-unconf-measure">
-                  <input type="range" id="sc-unconf" min="0" max="50" step="1" value="0" aria-label="Из них без подтверждённой причины">
-                  <div class="sc-ruler" aria-hidden="true">
-                    <span style="left:calc(13px + 0*(100% - 26px))">0</span>
-                    <span style="left:calc(13px + 1*(100% - 26px))" id="sc-unconf-max">50</span>
-                  </div>
-                </div>
-                <label class="sc-check"><input type="checkbox" id="sc-unknown"> Не знаю</label>
-              </div>
-
-            </div>
-
-            <div class="sc-result" id="sc-result" aria-live="polite">
-              <div id="sc-result-main"></div>
-            </div>
-          </div>
-
-          <div class="sc-cost">
-            <button type="button" class="sc-cost-toggle" id="sc-cost-toggle" aria-expanded="false" aria-controls="sc-cost-body">+ Добавить затраты</button>
-            <div class="sc-cost-body" id="sc-cost-body" hidden>
-              <div class="sc-field">
-                <div class="sc-lab">
-                  <label for="sc-cost">Средние затраты на один случай</label>
-                  <button type="button" class="sc-help" aria-label="Что входит в затраты" data-tip="Ремонт, простой, выезд специалиста или другие прямые расходы.">?</button>
-                </div>
-                <div class="sc-inline">
-                  <input type="text" id="sc-cost" inputmode="numeric" value="" placeholder="0" aria-label="Средние затраты на один случай">
-                  <div class="sc-cur" role="group" aria-label="Валюта">
-                    <button type="button" data-cur="amd" class="on" aria-pressed="true" aria-label="Драм">֏</button>
-                    <button type="button" data-cur="usd" aria-pressed="false" aria-label="Доллар">$</button>
-                    <button type="button" data-cur="eur" aria-pressed="false" aria-label="Евро">€</button>
-                  </div>
-                </div>
-              </div>
-              <div id="sc-cost-result" hidden></div>
-            </div>
-          </div>
-        </div><!-- /sc-body -->
-
-        <div class="sc-foot">
-          <p class="sc-note">Расчёт показывает масштаб, а не причину.<br>Чтобы проверить, связан ли сбой с электропитанием, анализируют <span class="sc-note-em">запись параметров электросети</span> в момент сбоя.</p>
-          <div class="sc-cta">
-            <a href="#contact" class="btn btn-coral" id="sc-cta">Обсудить ситуацию</a>
-            <span class="sc-micro">Покупать оборудование не нужно.</span>
-          </div>
-        </div>
-      </div><!-- /sc-panel -->
-    </div>
-  </section>
-  <script>
-  (function(){
-    'use strict';
-    var sec = document.getElementById('problem'); if(!sec) return;
-    var $ = function(id){ return document.getElementById(id); };
-    var elEvents=$('sc-events'), elEventsNum=$('sc-events-num'),
-        elRecovery=$('sc-recovery'), unitBtns=sec.querySelectorAll('.sc-unit button'),
-        elUnconf=$('sc-unconf'), elUnconfVal=$('sc-unconf-val'), elUnconfMax=$('sc-unconf-max'),
-        elUnknown=$('sc-unknown'), unconfField=sec.querySelector('.sc-unconf-field'),
-        costToggle=$('sc-cost-toggle'), costBody=$('sc-cost-body'), elCost=$('sc-cost'),
-        curBtns=sec.querySelectorAll('.sc-cur button'), resMain=$('sc-result-main'),
-        costRes=$('sc-cost-result'), cta=$('sc-cta'),
-        evMeasure=$('sc-events-measure'), evBubble=$('sc-events-bubble'),
-        unMeasure=$('sc-unconf-measure');
-    var recoveryUnit='min', currency='amd', started=false, completed=false;
-
-    function fillEvents(){ var v=+elEvents.value; if(evMeasure) evMeasure.style.setProperty('--p', v/50); if(evBubble) evBubble.textContent=v; }
-    function fillUnconf(){ if(!unMeasure) return; var mx=+elUnconf.max||1; unMeasure.style.setProperty('--p', (+elUnconf.value)/(mx||1)); }
-
-    function grp(n){ n=Math.round(n); return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
-    function plural(n,one,few,many){ var a=n%10,b=n%100;
-      if(a===1&&b!==11) return one;
-      if(a>=2&&a<=4&&(b<12||b>14)) return few;
-      return many; }
-    function money(n){ n=Math.max(0,Math.round(n));
-      if(currency==='amd') return grp(n)+' ֏';
-      if(currency==='usd') return '$'+grp(n);
-      return '€'+grp(n); }
-    function fmtTime(m){ m=Math.round(m);
-      if(m<60) return m+' мин';
-      if(m<1440){ var h=Math.floor(m/60),mn=m%60; return mn? h+' ч '+mn+' мин' : h+' ч'; }
-      var d=Math.floor(m/1440),rem=m%1440,hh=Math.floor(rem/60),dw=plural(d,'день','дня','дней');
-      return hh? d+' '+dw+' '+hh+' ч' : d+' '+dw; }
-    function track(ev){ try{
-      if(window.dataLayer&&window.dataLayer.push) window.dataLayer.push({event:ev});
-      if(typeof window.gtag==='function') window.gtag('event',ev);
-      if(typeof window.plausible==='function') window.plausible(ev);
-    }catch(e){} }
-    function start(){ if(!started){ started=true; track('calculator_started'); } }
-    function costVal(){ var v=(elCost.value||'').replace(/[^\d]/g,''); return v?parseInt(v,10):0; }
-
-    function setEvents(v){ v=Math.max(0,Math.min(50,Math.round(v||0)));
-      elEvents.value=v; elEventsNum.value=v;
-      elUnconf.max=v; elUnconfMax.textContent=v;
-      if(+elUnconf.value>v) elUnconf.value=v;
-      fillEvents(); fillUnconf();
-    }
-
-    function renderSeg(events, unconf, unknown){
-      var s='<div class="sc-seg">';
-      if(events<=20){
-        s+='<div class="sc-seg-bars" aria-hidden="true">';
-        for(var i=0;i<events;i++){ s+='<span class="sc-bar'+((!unknown&&i<unconf)?' c':'')+'"></span>'; }
-        s+='</div>';
-      } else {
-        var frac=unknown?0:(unconf/events);
-        s+='<div class="sc-seg-line" aria-hidden="true"><span class="sc-seg-fill" style="width:'+(frac*100).toFixed(1)+'%"></span></div>';
-      }
-      s+='<span class="sc-seg-lab">'+(unknown?'причина — нет данных':(unconf+' из '+events))+'</span></div>';
-      return s;
-    }
-
-    function update(){
-      var events=+elEvents.value;
-      var recRaw=parseFloat(elRecovery.value)||0;
-      var recMin=recoveryUnit==='hours'?recRaw*60:recRaw;
-      var unknown=elUnknown.checked;
-      var unconf=unknown?0:Math.min(+elUnconf.value,events);
-      elUnconfVal.textContent=unknown?'—':unconf;
-
-      if(events<1){
-        resMain.innerHTML='<p class="sc-empty">Укажите данные</p><p class="sc-empty-sub">Результат появится здесь.</p>';
-        costRes.hidden=true; return;
-      }
-      if(!completed){ completed=true; track('calculator_completed'); }
-
-      var total=events*recMin;
-      var h='<p class="sc-rlab">За 12 месяцев</p>';
-      h+='<p class="sc-big">'+events+' '+plural(events,'сбой','сбоя','сбоев')+'</p>';
-      h+='<p class="sc-line">'+fmtTime(total)+' восстановления</p>';
-      h+= unknown ? '<p class="sc-line sc-muted">Причина — нет данных</p>'
-                  : '<p class="sc-line sc-line-c">'+unconf+' без подтверждённой причины</p>';
-      h+=renderSeg(events,unconf,unknown);
-      resMain.innerHTML=h;
-
-      if(costToggle.getAttribute('aria-expanded')==='true'){
-        var cpe=costVal();
-        if(cpe>0){
-          var c='<p class="sc-rlab">По указанной сумме</p>';
-          c+='<div class="sc-crow"><span>Все случаи</span><b>'+money(events*cpe)+'</b></div>';
-          if(!unknown) c+='<div class="sc-crow"><span>Без подтверждённой причины</span><b class="c">'+money(unconf*cpe)+'</b></div>';
-          costRes.innerHTML=c; costRes.hidden=false;
-        } else { costRes.hidden=true; }
-      } else { costRes.hidden=true; }
-    }
-
-    elEvents.addEventListener('input',function(){ start(); setEvents(+elEvents.value); update(); });
-    elEventsNum.addEventListener('input',function(){ start(); setEvents(parseInt(elEventsNum.value,10)); update(); });
-
-    function clampRecovery(){ var max=recoveryUnit==='hours'?72:4320; var v=parseFloat(elRecovery.value);
-      if(isNaN(v)||v<0) v=0; if(v>max) v=max;
-      v = recoveryUnit==='min'? Math.round(v) : Math.round(v*2)/2;
-      elRecovery.value=v; }
-    elRecovery.addEventListener('input',function(){ start(); clampRecovery(); update(); });
-    unitBtns.forEach(function(b){ b.addEventListener('click',function(){
-      var u=b.getAttribute('data-unit'); if(u===recoveryUnit) return;
-      start(); var cur=parseFloat(elRecovery.value)||0;
-      if(u==='hours'){ var hrs=(recoveryUnit==='min'?cur/60:cur); elRecovery.value=Math.min(72,Math.round(hrs*2)/2); elRecovery.step='0.5'; elRecovery.max='72'; }
-      else { var mins=(recoveryUnit==='hours'?cur*60:cur); elRecovery.value=Math.min(4320,Math.round(mins)); elRecovery.step='1'; elRecovery.max='4320'; }
-      recoveryUnit=u;
-      unitBtns.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
-      update();
-    }); });
-
-    elUnconf.addEventListener('input',function(){ start();
-      if(elUnknown.checked){ elUnknown.checked=false; applyUnknown(); }
-      fillUnconf(); update(); });
-    function applyUnknown(){ var u=elUnknown.checked; elUnconf.disabled=u; unconfField.classList.toggle('is-unknown',u); }
-    elUnknown.addEventListener('change',function(){ start(); applyUnknown(); update(); });
-
-    costToggle.addEventListener('click',function(){
-      var open=costToggle.getAttribute('aria-expanded')!=='true';
-      costToggle.setAttribute('aria-expanded',open); costBody.hidden=!open;
-      costToggle.textContent=open?'− Скрыть затраты':'+ Добавить затраты';
-      if(open) track('calculator_cost_opened');
-      update();
-    });
-    elCost.addEventListener('input',function(){ start(); var v=costVal(); elCost.value=v?grp(v):''; update(); });
-    curBtns.forEach(function(b){ b.addEventListener('click',function(){
-      currency=b.getAttribute('data-cur');
-      curBtns.forEach(function(x){ var on=x===b; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
-      update();
-    }); });
-    if(cta) cta.addEventListener('click',function(){ track('calculator_cta_clicked'); });
-
-    fillEvents(); fillUnconf();
-    update();
-  })();
-  </script>
 
   <!-- ═══════════════════════════════ SECTION — Объекты и задачи ═══════════════════════════════ -->
   <section class="objects" id="objects" aria-label="Где мониторинг полезен">
@@ -413,12 +178,12 @@
 
       <div class="sx-grid" id="sx-grid">
         <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="sxc2" clipPathUnits="objectBoundingBox"><path d="M0.1145 0.139138L0.235656 0.0147291C0.244771 0.0053695 0.257945 0 0.271794 0H0.5H0.96C0.982091 0 1 0.016076 1 0.0359066V0.964093C1 0.983924 0.982091 1 0.96 1H0.04C0.0179086 1 0 0.983924 0 0.964093V0.5V0.265845C0 0.255659 0.00428628 0.24585 0.0120005 0.238381L0.1145 0.139138Z"/></clipPath><clipPath id="sxc3" clipPathUnits="objectBoundingBox"><path d="M0 0.0351351C0 0.0157306 0.0174609 0 0.039 0H0.5H0.727414C0.741798 0 0.755513 0.00547207 0.765179 0.0150678L0.858 0.107207L0.98622 0.236143C0.995093 0.245066 1 0.256625 1 0.268605V0.5V0.964865C1 0.984269 0.982539 1 0.961 1H0.039C0.0174609 1 0 0.984269 0 0.964865V0.0351351Z"/></clipPath></defs></svg>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/production.webp" alt="Автоматизированная производственная линия" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">01</span><span class="sx-cname">Промышленность</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/solar.webp" alt="Наземная солнечная электростанция" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">02</span><span class="sx-cname">Солнечная энергетика</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/buildings.webp" alt="Здание с солнечными панелями" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">03</span><span class="sx-cname">Здания</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/medical.webp" alt="Медицинское диагностическое оборудование" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">04</span><span class="sx-cname">Медицина и лаборатории</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/datacenter.webp" alt="Серверные стойки ЦОД" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">05</span><span class="sx-cname">ЦОД и ИТ</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
-        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/banks-ru.webp" alt="Отчёт по качеству электроэнергии" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">06</span><span class="sx-cname">Финансы и инвестиции</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/production.webp" alt="Автоматизированная производственная линия" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">01</span><span class="sx-cname">Промышленность</span><span class="sx-swap"><span class="sx-q">Почему линия встаёт, если напряжение «в норме»?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/solar.webp" alt="Наземная солнечная электростанция" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">02</span><span class="sx-cname">Солнечная энергетика</span><span class="sx-swap"><span class="sx-q">Куда уходит выработка в ясный день?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/buildings.webp" alt="Здание с солнечными панелями" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">03</span><span class="sx-cname">Здания</span><span class="sx-swap"><span class="sx-q">Кто отвечает: сеть, здание или арендатор?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/medical.webp" alt="Медицинское диагностическое оборудование" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">04</span><span class="sx-cname">Медицина и лаборатории</span><span class="sx-swap"><span class="sx-q">Почему гарантия на МРТ зависит от питания?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/datacenter.webp" alt="Серверные стойки ЦОД" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">05</span><span class="sx-cname">ЦОД и ИТ</span><span class="sx-swap"><span class="sx-q">Что случилось за миллисекунды до перезапуска?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+        <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/banks-ru.webp" alt="Отчёт по качеству электроэнергии" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">06</span><span class="sx-cname">Финансы и инвестиции</span><span class="sx-swap"><span class="sx-q">Чем доказать убыток страховой и регулятору?</span><span class="sx-a"></span></span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
       </div>
 
     </div><!-- /container -->
@@ -1111,6 +876,14 @@
   var N=SECTORS.length, KICK="СЕКТОР", SUB="Что покажет проверка", CTA="Обсудить объект";
   var grid=document.getElementById('sx-grid'); if(!grid) return;
   var cards=Array.prototype.slice.call(grid.querySelectorAll('.sx-card'));
+  /* hover: the card starts answering its own question — first words of the
+     sector's pain text, cut mid-sentence; the full read is one click away */
+  cards.forEach(function(c,i){
+    var a=c.querySelector('.sx-a'), s=SECTORS[i];
+    if(!a||!s) return;
+    var t=s.pain; if(t.length>86){ t=t.slice(0,86); t=t.slice(0,t.lastIndexOf(' ')); }
+    a.textContent=t+'…';
+  });
   var ov=document.getElementById('ov'), ovCard=document.getElementById('ov-card'),
       ovFig=document.getElementById('ov-fig'), ovImg=document.getElementById('ov-img'),
       ovBody=document.getElementById('ov-body'), ovCount=document.getElementById('ov-count'),
