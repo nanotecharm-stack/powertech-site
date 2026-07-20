@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=263" />
+  <link rel="stylesheet" href="/style.css?v=264" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -184,6 +184,10 @@
         <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/medical.webp" alt="Медицинское диагностическое оборудование" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">04</span><span class="sx-cname">Медицина и лаборатории</span><span class="sx-q">Почему гарантия на МРТ зависит от питания?</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
         <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/datacenter.webp" alt="Серверные стойки ЦОД" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">05</span><span class="sx-cname">ЦОД и ИТ</span><span class="sx-q">Что случилось за миллисекунды до перезапуска?</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
         <div class="sx-card" role="button" tabindex="0" aria-haspopup="dialog"><span class="sx-ctick" aria-hidden="true"></span><img src="/assets/objects/banks-ru.webp" alt="Отчёт по качеству электроэнергии" decoding="async" loading="lazy"><span class="sx-scrim" aria-hidden="true"></span><span class="sx-cbody"><span class="sx-ctxt"><span class="sx-cidx">06</span><span class="sx-cname">Финансы и инвестиции</span><span class="sx-q">Чем доказать убыток страховой и регулятору?</span></span><span class="sx-cgo" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div>
+      </div>
+      <div class="sx-nav" aria-label="Листать отрасли">
+        <button type="button" class="sx-nb" data-dir="-1" aria-label="Назад"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button type="button" class="sx-nb" data-dir="1" aria-label="Вперёд"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
 
     </div><!-- /container -->
@@ -876,17 +880,20 @@
   var N=SECTORS.length, KICK="СЕКТОР", SUB="Что покажет проверка", CTA="Обсудить объект";
   var grid=document.getElementById('sx-grid'); if(!grid) return;
   var cards=Array.prototype.slice.call(grid.querySelectorAll('.sx-card'));
-  /* hover panel: paper slab with the first sentence of the sector's own
-     story slides up from the card's bottom edge (desktop pointers only) */
-  cards.forEach(function(c,i){
-    var s=SECTORS[i]; if(!s) return;
-    var sum=s.pain, dot=sum.indexOf('.');
-    if(dot>40) sum=sum.slice(0,dot+1);
-    var d=document.createElement('span');
-    d.className='sx-panel'; d.setAttribute('aria-hidden','true');
-    d.innerHTML='<span class="sx-pidx">0'+(i+1)+'</span><span class="sx-pname">'+s.name+'</span><span class="sx-psum">'+sum+'</span>';
-    c.appendChild(d);
-  });
+  /* carousel: arrow paging + edge-disable */
+  var nav=document.querySelector('.sx-nav');
+  if(nav){
+    var nbs=Array.prototype.slice.call(nav.querySelectorAll('.sx-nb'));
+    var step=function(){ var c=cards[0]; return c? c.getBoundingClientRect().width+18 : 320; };
+    nbs.forEach(function(b){ b.addEventListener('click',function(){
+      grid.scrollBy({left:step()*parseInt(b.getAttribute('data-dir'),10), behavior:'smooth'});
+    }); });
+    var upd=function(){ var max=grid.scrollWidth-grid.clientWidth-2;
+      nbs[0].disabled=grid.scrollLeft<=2; nbs[1].disabled=grid.scrollLeft>=max; };
+    grid.addEventListener('scroll',upd,{passive:true});
+    window.addEventListener('resize',upd); upd();
+  }
+
   var ov=document.getElementById('ov'), ovCard=document.getElementById('ov-card'),
       ovFig=document.getElementById('ov-fig'), ovImg=document.getElementById('ov-img'),
       ovBody=document.getElementById('ov-body'), ovCount=document.getElementById('ov-count'),
