@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=268" />
+  <link rel="stylesheet" href="/style.css?v=269" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -976,7 +976,6 @@
       if(typeof gsap==='undefined' || innerWidth<760) return;
       var sec=document.querySelector('.objects'); if(!sec||sec.querySelector('.st-stage')) return;
       sec.classList.add('stage-on');
-      SECTORS.forEach(function(s){ var im=new Image(); im.src=s.img; });
       var st=document.createElement('div'); st.className='st-stage';
       var nm=SECTORS.map(function(s,i){return '<button type="button" class="st-num'+(i?'':' on')+'" data-i="'+i+'" aria-label="'+s.name+'">0'+(i+1)+'</button>';}).join('');
       st.innerHTML=
@@ -993,7 +992,6 @@
        +    '<div class="st-cta"><button type="button" class="btn btn-coral" id="st-open">Открыть разбор</button></div>'
        +  '</div>'
        +  '<div class="st-plot" aria-hidden="true">'
-       +    '<figure class="st-photo"><img id="st-img" src="'+SECTORS[0].img+'" alt="" decoding="async"></figure>'
        +    '<div class="st-wave">'
        +      '<svg viewBox="0 0 560 230" preserveAspectRatio="none">'
        +        '<line x1="0" y1="118" x2="560" y2="118" class="st-base"/>'
@@ -1012,7 +1010,7 @@
       var nums=st.querySelectorAll('.st-num');
       var elTag=st.querySelector('#st-tag'), elName=st.querySelector('#st-name'),
           elLine=st.querySelector('#st-line'), elCur=st.querySelector('#st-cur'),
-          elMark=st.querySelector('#st-mark'), elImg=st.querySelector('#st-img'),
+          elMark=st.querySelector('#st-mark'),
           path=st.querySelector('#st-trace');
       var cur=0, busy=false;
 
@@ -1034,12 +1032,8 @@
       function go(i,dir){
         if(busy) return; i=(i+N)%N; if(i===cur) return;
         cur=i;
-        if(RM){ setTxt(i); elImg.src=SECTORS[i].img; draw(i); return; }
+        if(RM){ setTxt(i); draw(i); return; }
         busy=true;
-        gsap.to(elImg,{autoAlpha:0,duration:.22,ease:'power2.in',onComplete:function(){
-          elImg.src=SECTORS[i].img;
-          gsap.to(elImg,{autoAlpha:1,duration:.45,ease:'power2.out'});
-        }});
         gsap.timeline({onComplete:function(){ busy=false; }})
           .to([elTag,elName,elLine],{y:-12,autoAlpha:0,duration:.22,ease:'power2.in',stagger:.03,
             onComplete:function(){ setTxt(i); draw(i); }})
