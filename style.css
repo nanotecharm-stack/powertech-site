@@ -3808,11 +3808,13 @@ html[lang="hy"] .ih-label { font-family: "Mardoto", "IBM Plex Sans", system-ui, 
 /* ── §Сферы (RU) — white-framed card carousel (enquiry-form language):
    big photos, 1px white кромка, arrow paging; the tile control still
    turns coral and rotates → to ↗ on hover. ── */
-.sx-q { display:block; font-size:12.5px; line-height:1.4; font-weight:400; color:rgba(255,255,255,.82); margin-top:6px; max-width:34ch; text-shadow:0 1px 8px rgba(0,0,0,.4); transition:color .3s var(--ease); }
+.sx-q { display:block; font-size:15px; line-height:1.45; font-weight:400; color:rgba(255,255,255,.86); margin-top:8px; max-width:36ch; text-shadow:0 1px 8px rgba(0,0,0,.4); transition:color .3s var(--ease); }
 .sx-card:hover .sx-q, .sx-card:focus-visible .sx-q { color:#fff; }
+html[lang="ru"] .sx-cname { font-size:21px; }
+html[lang="ru"] .sx-cidx { font-size:12px; }
 html[lang="ru"] .sx-grid { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x proximity; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 html[lang="ru"] .sx-grid::-webkit-scrollbar { display:none; }
-html[lang="ru"] .sx-card:nth-child(n) { flex:0 0 clamp(320px,38vw,520px); scroll-snap-align:start; clip-path:none; border:1px solid #fff; border-radius:14px; }
+html[lang="ru"] .sx-card:nth-child(n) { flex:0 0 clamp(360px,44vw,600px); scroll-snap-align:start; clip-path:none; border:1px solid #fff; border-radius:14px; }
 html[lang="ru"] .sx-card img { aspect-ratio:3/2; }
 html[lang="ru"] .sx-cbody { padding:18px 18px 18px 20px; }
 html[lang="ru"] .sx-nav { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
@@ -3826,7 +3828,8 @@ html[lang="ru"] .sx-cgo { border-radius:10px; transition:background .4s var(--ea
 }
 @media (max-width:700px){
   .sx-q { max-width:none; }
-  html[lang="ru"] .sx-card:nth-child(n) { flex-basis:82vw; }
+  html[lang="ru"] .sx-card:nth-child(n) { flex-basis:86vw; }
+  html[lang="ru"] .sx-cname { font-size:19px; }
 }
 @media (prefers-reduced-motion: reduce){
   html[lang="ru"] .sx-cgo { transition:none; }
