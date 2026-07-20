@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=266" />
+  <link rel="stylesheet" href="/style.css?v=267" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -944,6 +944,86 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classList.contains('on'))close();});
   var _qs=(location.search.match(/[?&]open=(\d+)/)||[])[1];
   if(_qs){setTimeout(function(){var k=Math.max(0,Math.min(N-1,parseInt(_qs,10)-1));open(k,cards[k]);},80);}
+
+  /* ── viewing stage (award pass): white-framed window; sectors wipe
+     through it. Built on load (after the .ih rail), desktop >=760px;
+     the swipe carousel below stays as the fallback. ── */
+  (function stageInit(){
+    var TAGS=['провалы напряжения','повышенное напряжение','срабатывания защит','гармоники и провалы','импульсные помехи','прерывания питания'];
+    var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function init(){
+      if(typeof gsap==='undefined' || innerWidth<760) return;
+      var sec=document.querySelector('.objects'); if(!sec||sec.querySelector('.st-stage')) return;
+      sec.classList.add('stage-on');
+      var st=document.createElement('div'); st.className='st-stage';
+      var ph=SECTORS.map(function(s,i){return '<figure class="st-ph'+(i?'':' on')+'"><img src="'+s.img+'" alt="" decoding="async"></figure>';}).join('');
+      var nm=SECTORS.map(function(s,i){return '<button type="button" class="st-num'+(i?'':' on')+'" data-i="'+i+'" aria-label="'+s.name+'">0'+(i+1)+'</button>';}).join('');
+      st.innerHTML=
+        '<div class="st-bg" aria-hidden="true">'+ph+'<span class="st-scrim"></span></div>'
+       +'<p class="st-count" aria-hidden="true"><b id="st-cur">01</b><span> / 0'+N+'</span></p>'
+       +'<div class="st-ui"><div class="st-txt">'
+       +'<span class="st-tag" id="st-tag"></span>'
+       +'<h3 class="st-name" id="st-name"></h3>'
+       +'<p class="st-line" id="st-line"></p>'
+       +'<div class="st-cta"><button type="button" class="btn btn-coral" id="st-open">Открыть разбор</button></div>'
+       +'</div></div>'
+       +'<div class="st-nums" aria-label="Сектора">'+nm+'</div>'
+       +'<div class="st-nav">'
+       +'<button type="button" class="st-nb" data-d="-1" aria-label="Назад"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>'
+       +'<button type="button" class="st-nb" data-d="1" aria-label="Вперёд"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
+       +'</div>';
+      grid.parentNode.insertBefore(st, grid);
+      var phs=st.querySelectorAll('.st-ph'), nums=st.querySelectorAll('.st-num');
+      var elTag=st.querySelector('#st-tag'), elName=st.querySelector('#st-name'),
+          elLine=st.querySelector('#st-line'), elCur=st.querySelector('#st-cur');
+      var cur=0, busy=false;
+      function setTxt(i){
+        elTag.textContent=TAGS[i]||'';
+        elName.textContent=SECTORS[i].name;
+        var q=cards[i]&&cards[i].querySelector('.sx-q');
+        elLine.textContent=q?q.textContent:'';
+        elCur.textContent='0'+(i+1);
+        nums.forEach(function(b,k){ b.classList.toggle('on',k===i); });
+      }
+      function kb(f){ if(!RM) gsap.fromTo(f.querySelector('img'),{scale:1.08},{scale:1.15,duration:8,ease:'none',overwrite:true}); }
+      function go(i,dir){
+        if(busy) return; i=(i+N)%N; if(i===cur) return;
+        var from=phs[cur], to=phs[i]; cur=i;
+        if(RM){ from.classList.remove('on'); to.classList.add('on'); setTxt(i); return; }
+        busy=true;
+        to.classList.add('on'); to.style.zIndex=2; from.style.zIndex=1;
+        gsap.fromTo(to,{clipPath:dir>0?'inset(0 0 0 100%)':'inset(0 100% 0 0)'},
+          {clipPath:'inset(0 0% 0 0%)',duration:.85,ease:'power3.inOut',
+           onComplete:function(){ from.classList.remove('on'); to.style.zIndex=''; from.style.zIndex=''; busy=false; }});
+        kb(to);
+        gsap.timeline()
+          .to([elTag,elName,elLine],{y:-14,autoAlpha:0,duration:.25,ease:'power2.in',stagger:.03,
+            onComplete:function(){ setTxt(i); }})
+          .to([elTag,elName,elLine],{y:0,autoAlpha:1,duration:.6,ease:'power3.out',stagger:.07},'+=.05');
+      }
+      st.querySelectorAll('.st-nb').forEach(function(b){
+        b.addEventListener('click',function(){ var d=parseInt(b.getAttribute('data-d'),10); go(cur+d,d); }); });
+      nums.forEach(function(b){
+        b.addEventListener('click',function(){ var i=+b.getAttribute('data-i'); go(i, i>cur?1:-1); }); });
+      st.querySelector('#st-open').addEventListener('click',function(){ open(cur, cards[cur]); });
+      document.addEventListener('keydown',function(e){
+        if(ov.classList.contains('on')) return;
+        var r=st.getBoundingClientRect();
+        if(r.top>innerHeight*.7 || r.bottom<innerHeight*.3) return;
+        if(e.key==='ArrowRight') go(cur+1,1);
+        if(e.key==='ArrowLeft') go(cur-1,-1);
+      });
+      var tx=null;
+      st.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; },{passive:true});
+      st.addEventListener('touchend',function(e){
+        if(tx===null) return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+        if(Math.abs(dx)>48) go(cur+(dx<0?1:-1), dx<0?1:-1); },{passive:true});
+      setTxt(0); kb(phs[0]);
+    }
+    if(document.readyState==='complete') init();
+    else window.addEventListener('load', init);
+  }());
+
 }());
 </script>
 
