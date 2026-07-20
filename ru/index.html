@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=267" />
+  <link rel="stylesheet" href="/style.css?v=266" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -711,55 +711,6 @@
   <script defer src="/assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="/assets/site-fx.js?v=22"></script>
   <script defer src="/assets/site-award.js?v=12"></script>
-
-  <script>
-  (function(){
-    'use strict';
-    var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.addEventListener('DOMContentLoaded', function(){
-      if (typeof gsap === 'undefined') return;
-
-      /* ── hero: char-mask reveal (the RU CSS turns the row keyframes off) ── */
-      if (!RM) {
-        var chs = [];
-        document.querySelectorAll('.hero-h1 .hl-in').forEach(function(line){
-          var txt = line.textContent; line.textContent = '';
-          txt.split('').forEach(function(c){
-            if (c === ' ') { line.appendChild(document.createTextNode(' ')); return; }
-            var s = document.createElement('span'); s.className = 'hch'; s.textContent = c;
-            line.appendChild(s); chs.push(s);
-          });
-        });
-        if (chs.length) gsap.fromTo(chs, { yPercent: 115 }, { yPercent: 0, duration: 1.05, ease: 'power4.out', stagger: 0.035, delay: 0.3,
-          onComplete: function(){ gsap.set(chs, { clearProps: 'transform' }); } });
-      }
-
-      /* ── §Сферы: pinned horizontal journey (desktop pointers only) ── */
-      var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-      var sec = document.querySelector('.objects'), grid = document.getElementById('sx-grid');
-      if (RM || !fine || innerWidth < 980 || !sec || !grid || !window.ScrollTrigger) return;
-      gsap.registerPlugin(ScrollTrigger);
-      sec.classList.add('hz-on');
-      var bar = document.createElement('div');
-      bar.className = 'hzp'; bar.setAttribute('aria-hidden','true');
-      bar.innerHTML = '<span class="hzp-line"><i></i></span><b>01</b><span class="hzp-of">/ 06</span>';
-      grid.parentNode.insertBefore(bar, grid.nextSibling);
-      var fill = bar.querySelector('i'), num = bar.querySelector('b');
-      var dist = function(){ return grid.scrollWidth - grid.clientWidth; };
-      gsap.to(grid, { x: function(){ return -dist(); }, ease: 'none',
-        scrollTrigger: {
-          trigger: sec, start: 'top top',
-          end: function(){ return '+=' + (dist() + innerHeight * 0.3); },
-          pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true,
-          onUpdate: function(st){
-            fill.style.transform = 'scaleX(' + st.progress + ')';
-            num.textContent = '0' + Math.min(6, Math.max(1, Math.round(st.progress * 5) + 1));
-          }
-        } });
-    });
-  })();
-  </script>
-
   <script>
     (function () {
       var nav = document.getElementById('site-nav');

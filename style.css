@@ -3835,39 +3835,3 @@ html[lang="ru"] .sx-cgo { border-radius:10px; transition:background .4s var(--ea
   html[lang="ru"] .sx-cgo { transition:none; }
   html[lang="ru"] .sx-card:hover .sx-cgo { transform:none; }
 }
-
-/* ── RU hero — case-study composition: bottom-anchored, giant uppercase
-   char-reveal, coral kick, HUD as a full-width meta grid. ── */
-html[lang="ru"] .hero-content { margin-top:auto; padding-top:calc(var(--nav-h) + 24px); padding-bottom:52px; }
-html[lang="ru"] .hero-tag { display:flex; align-items:center; gap:14px; color:var(--coral); font-size:11px; letter-spacing:.3em; margin-bottom:20px; }
-html[lang="ru"] .hero-tag::before { content:""; width:34px; height:1px; background:var(--coral); flex:none; }
-html[lang="ru"] .hero-h1 { font-size:clamp(42px,6.4vw,96px); line-height:.96; letter-spacing:-.04em; text-transform:uppercase; margin-bottom:24px; }
-html[lang="ru"] .hero-h1 .hl-in { animation:none; }
-html[lang="ru"] .hero-h1 .hch { display:inline-block; will-change:transform; }
-html[lang="ru"] .hero-sub { font-size:16px; line-height:1.6; color:rgba(255,255,255,.72); max-width:54ch; margin-bottom:34px; }
-html[lang="ru"] .hero-hud { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; max-width:none; margin-top:44px; padding-top:20px; border-top:1px solid rgba(255,255,255,.14); }
-html[lang="ru"] .hud-std { display:grid; align-content:start; gap:8px; color:rgba(255,255,255,.85); font-size:12px; letter-spacing:.06em; grid-template-columns:auto auto; justify-content:start; align-items:center; column-gap:8px; }
-html[lang="ru"] .hud-std::before { content:"Стандарт"; grid-column:1/-1; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--coral); font-weight:500; }
-html[lang="ru"] .hud-chip { display:grid; grid-template-columns:auto auto; justify-content:start; column-gap:7px; align-items:baseline; }
-html[lang="ru"] .hud-k { grid-column:1/-1; margin-bottom:8px; background:none; border:0; padding:0; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--coral); font-weight:500; }
-html[lang="ru"] .hud-v { font-size:15px; color:#fff; }
-html[lang="ru"] .hud-u { font-size:11px; color:rgba(255,255,255,.55); }
-@media (max-width:760px){
-  html[lang="ru"] .hero-hud { grid-template-columns:1fr 1fr; gap:16px; }
-  html[lang="ru"] .hero-h1 { text-transform:none; font-size:clamp(40px,10vw,62px); line-height:1.04; letter-spacing:-.03em; }
-}
-@media (prefers-reduced-motion: reduce){
-  html[lang="ru"] .hero-h1 .hl-in { animation:none; }
-}
-
-/* ── RU §Сферы — pinned horizontal journey (JS adds .hz-on on desktop) ── */
-html[lang="ru"] .objects.hz-on { overflow:hidden; min-height:100svh; display:flex; align-items:center; }
-html[lang="ru"] .objects.hz-on .obj-body { width:100%; }
-html[lang="ru"] .objects.hz-on .sx-grid { overflow:visible; scroll-snap-type:none; }
-html[lang="ru"] .objects.hz-on .sx-card:nth-child(n) { flex-basis:min(56vw,660px); }
-html[lang="ru"] .objects.hz-on .sx-nav { display:none; }
-html[lang="ru"] .hzp { display:flex; align-items:center; gap:16px; margin-top:26px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.2em; color:var(--text-soft); }
-html[lang="ru"] .hzp b { color:var(--coral); font-weight:500; }
-html[lang="ru"] .hzp-line { flex:1; height:1px; background:rgba(20,20,20,.16); position:relative; overflow:hidden; }
-html[lang="ru"] .hzp-line i { position:absolute; inset:0; background:var(--coral); transform:scaleX(0); transform-origin:left; }
-
