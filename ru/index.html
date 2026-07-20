@@ -32,7 +32,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=269" />
+  <link rel="stylesheet" href="/style.css?v=270" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -945,31 +945,99 @@
   var _qs=(location.search.match(/[?&]open=(\d+)/)||[])[1];
   if(_qs){setTimeout(function(){var k=Math.max(0,Math.min(N-1,parseInt(_qs,10)-1));open(k,cards[k]);},80);}
 
-  /* ── §Сферы, «чертёжный лист»: white blueprint sheet; each sector's
-     typical disturbance signature is drawn plotter-style in coral, the
-     photo is a small witness chip. Desktop >=760px; the swipe carousel
-     below stays as the fallback. ── */
+  /* ── §Сферы, typographic index + WebGL frame (award pass).
+     Left: the sector menu as the typographic hero. Right: a white-framed
+     viewport where photos hand over through a shader displacement
+     dissolve (raw WebGL, zero deps) with a mouse micro-parallax; the
+     instrument plate draws each sector's U(t) signature. GSAP choreographs
+     the entrance. Fallbacks: no WebGL -> clip wipe; <760px / no GSAP ->
+     the swipe carousel below. ── */
   (function stageInit(){
     var TAGS=['провалы напряжения','повышенное напряжение','срабатывания защит','гармоники и провалы','импульсные помехи','прерывания питания'];
     var KIND=['dip','over','trip','harm','spike','gap'];
     var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* schematic U(t) signature per disturbance kind (decorative) */
     function trace(kind){
-      var W=560,H=230,mid=118,amp=62,per=78,pts=[],x,y,k;
-      for(x=0;x<=W;x+=3){
-        var s=Math.sin(x/per*6.2832);
-        var a=amp, off=0;
-        if(kind==='dip'   && x>212&&x<318) a=amp*.32;
-        if(kind==='over'  && x>250)        a=amp*1.38;
-        if(kind==='harm')                  s=Math.sin(x/per*6.2832)+.4*Math.sin(3*x/per*6.2832)+.18*Math.sin(5*x/per*6.2832), s=s/1.4;
-        if(kind==='trip'  && x>300){ pts.push((x)+','+mid); continue; }
-        if(kind==='gap'   && x>244&&x<332){ pts.push(x+','+mid); continue; }
-        y=mid - s*a - off;
-        if(kind==='spike' && x>256&&x<272) y=mid - amp - (1-Math.abs(x-264)/8)*54*(Math.sin(x/per*6.2832)>=0?1:.6);
+      var W=340,mid=50,amp=26,per=52,pts=[],x,y;
+      for(x=0;x<=W;x+=2){
+        var s=Math.sin(x/per*6.2832), a=amp;
+        if(kind==='dip'   && x>128&&x<196) a=amp*.32;
+        if(kind==='over'  && x>150)        a=amp*1.42;
+        if(kind==='harm')                  s=(Math.sin(x/per*6.2832)+.4*Math.sin(3*x/per*6.2832)+.18*Math.sin(5*x/per*6.2832))/1.4;
+        if(kind==='trip'  && x>184){ pts.push(x+','+mid); continue; }
+        if(kind==='gap'   && x>146&&x<206){ pts.push(x+','+mid); continue; }
+        y=mid - s*a;
+        if(kind==='spike' && x>156&&x<168) y=mid - amp - (1-Math.abs(x-162)/6)*26;
         pts.push(x+','+y);
       }
       return 'M'+pts.join(' L');
+    }
+
+    /* raw-WebGL displacement slider: two textures dissolve through a
+       procedural noise map; uTilt gives the resting frame a quiet
+       parallax. Renders only while something moves. */
+    function makeGL(canvas, urls){
+      var gl=canvas.getContext('webgl',{alpha:false,antialias:false,preserveDrawingBuffer:false});
+      if(!gl) return null;
+      function sh(t,src){ var s=gl.createShader(t); gl.shaderSource(s,src); gl.compileShader(s);
+        if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) return null; return s; }
+      var vs=sh(gl.VERTEX_SHADER,'attribute vec2 p;varying vec2 v;void main(){v=(p+1.)*.5;v.y=1.-v.y;gl_Position=vec4(p,0.,1.);}');
+      var fs=sh(gl.FRAGMENT_SHADER,
+        'precision mediump float;varying vec2 v;'
+       +'uniform sampler2D uA,uB,uN;uniform float uP,uDir,uAA,uAB,uCA;uniform vec2 uT;'
+       +'vec2 cov(vec2 uv,float ia){float ca=uCA;vec2 s=vec2(1.);vec2 o=vec2(0.);'
+       +'if(ca>ia){s.y=ia/ca;o.y=(1.-s.y)*.5;}else{s.x=ca/ia;o.x=(1.-s.x)*.5;}return uv*s+o;}'
+       +'void main(){vec2 uv=v+uT*.014;'
+       +'float d=texture2D(uN,v*1.6).r;'
+       +'float t=uP;'
+       +'vec2 a=cov(uv+vec2(t*(d-.5)*.34*uDir,t*(d-.5)*.12),uAA);'
+       +'vec2 b=cov(uv-vec2((1.-t)*(d-.5)*.34*uDir,(1.-t)*(d-.5)*.12),uAB);'
+       +'vec4 ca=texture2D(uA,a);vec4 cb=texture2D(uB,b);'
+       +'gl_FragColor=mix(ca,cb,smoothstep(.05,.95,t));}');
+      if(!vs||!fs) return null;
+      var pr=gl.createProgram(); gl.attachShader(pr,vs); gl.attachShader(pr,fs); gl.linkProgram(pr);
+      if(!gl.getProgramParameter(pr,gl.LINK_STATUS)) return null;
+      gl.useProgram(pr);
+      var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+      var loc=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+      var U={}; ['uA','uB','uN','uP','uDir','uAA','uAB','uCA','uT'].forEach(function(n){ U[n]=gl.getUniformLocation(pr,n); });
+      function tex(){ var t=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR); return t; }
+      /* procedural smooth-noise displacement map */
+      var nc=document.createElement('canvas'); nc.width=nc.height=256;
+      var nx=nc.getContext('2d'); nx.fillStyle='#808080'; nx.fillRect(0,0,256,256);
+      for(var k=0;k<46;k++){ var g=nx.createRadialGradient(Math.random()*256,Math.random()*256,0,Math.random()*256,Math.random()*256,30+Math.random()*70);
+        var v0=Math.floor(Math.random()*255);
+        g.addColorStop(0,'rgba('+v0+','+v0+','+v0+',.55)'); g.addColorStop(1,'rgba('+v0+','+v0+','+v0+',0)');
+        nx.fillStyle=g; nx.fillRect(0,0,256,256); }
+      var tN=tex(); gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,nc);
+      var texs=[], asps=[], ready=0;
+      urls.forEach(function(u,i){ var im=new Image(); im.crossOrigin='anonymous';
+        im.onload=function(){ texs[i]=tex(); gl.bindTexture(gl.TEXTURE_2D,texs[i]);
+          gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);
+          asps[i]=im.width/im.height; ready++; };
+        im.src=u; });
+      var S={a:0,b:0,p:0,dir:1,tx:0,ty:0,need:true};
+      function size(){ var r=canvas.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2);
+        var w=Math.round(r.width*d), hh=Math.round(r.height*d);
+        if(canvas.width!==w||canvas.height!==hh){ canvas.width=w; canvas.height=hh; gl.viewport(0,0,w,hh); S.need=true; } }
+      function render(){ if(!texs[S.a]||!texs[S.b]) return;
+        size();
+        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,texs[S.a]); gl.uniform1i(U.uA,0);
+        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D,texs[S.b]); gl.uniform1i(U.uB,1);
+        gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D,tN); gl.uniform1i(U.uN,2);
+        gl.uniform1f(U.uP,S.p); gl.uniform1f(U.uDir,S.dir);
+        gl.uniform1f(U.uAA,asps[S.a]||1.5); gl.uniform1f(U.uAB,asps[S.b]||1.5);
+        gl.uniform1f(U.uCA,canvas.width/Math.max(1,canvas.height));
+        gl.uniform2f(U.uT,S.tx,S.ty);
+        gl.drawArrays(gl.TRIANGLE_STRIP,0,4); S.need=false; }
+      gsap.ticker.add(function(){ if(S.need) render(); });
+      addEventListener('resize',function(){ S.need=true; },{passive:true});
+      return { S:S, isReady:function(i){ return !!texs[i]; }, poke:function(){ S.need=true; } };
     }
 
     function init(){
@@ -977,72 +1045,100 @@
       var sec=document.querySelector('.objects'); if(!sec||sec.querySelector('.st-stage')) return;
       sec.classList.add('stage-on');
       var st=document.createElement('div'); st.className='st-stage';
-      var nm=SECTORS.map(function(s,i){return '<button type="button" class="st-num'+(i?'':' on')+'" data-i="'+i+'" aria-label="'+s.name+'">0'+(i+1)+'</button>';}).join('');
+      var menu=SECTORS.map(function(s,i){
+        return '<button type="button" class="st-item'+(i?'':' on')+'" data-i="'+i+'">'
+              +'<span class="st-ii">0'+(i+1)+'</span><span class="st-in">'+s.name+'</span></button>';
+      }).join('');
+      var figs=SECTORS.map(function(s,i){
+        return '<figure class="st-f'+(i?'':' on')+'"><img src="'+s.img+'" alt="" decoding="async"></figure>';
+      }).join('');
       st.innerHTML=
-        '<span class="st-mark" id="st-mark" aria-hidden="true">01</span>'
-       +'<div class="st-head" aria-hidden="true">'
-       +  '<span class="st-count"><b id="st-cur">01</b> / 0'+N+'</span>'
-       +  '<div class="st-nums">'+nm+'</div>'
-       +'</div>'
-       +'<div class="st-cols">'
-       +  '<div class="st-txt">'
-       +    '<span class="st-tag" id="st-tag"></span>'
-       +    '<h3 class="st-name" id="st-name"></h3>'
-       +    '<p class="st-line" id="st-line"></p>'
-       +    '<div class="st-cta"><button type="button" class="btn btn-coral" id="st-open">Открыть разбор</button></div>'
-       +  '</div>'
-       +  '<div class="st-plot" aria-hidden="true">'
-       +    '<div class="st-wave">'
-       +      '<svg viewBox="0 0 560 230" preserveAspectRatio="none">'
-       +        '<line x1="0" y1="118" x2="560" y2="118" class="st-base"/>'
+        '<div class="st-menu">'+menu+'</div>'
+       +'<div class="st-view">'
+       +  '<p class="st-count" aria-hidden="true"><b id="st-cur">01</b><span> / 0'+N+'</span></p>'
+       +  '<div class="st-viz">'
+       +    '<div class="st-frame">'+figs+'<canvas class="st-gl" aria-hidden="true"></canvas><span class="st-tag" id="st-tag" aria-hidden="true"></span></div>'
+       +    '<div class="st-plate" aria-hidden="true">'
+       +      '<svg viewBox="0 0 340 96" preserveAspectRatio="none">'
+       +        '<line x1="0" y1="50" x2="340" y2="50" class="st-base"/>'
        +        '<path id="st-trace" class="st-line-path" fill="none" d=""/>'
        +      '</svg>'
-       +      '<span class="st-cap">U(t) · типовая сигнатура</span>'
+       +      '<span class="st-cap">U(t)</span>'
        +    '</div>'
        +  '</div>'
-       +'</div>'
-       +'<div class="st-nav">'
-       +  '<button type="button" class="st-nb" data-d="-1" aria-label="Назад"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>'
-       +  '<button type="button" class="st-nb" data-d="1" aria-label="Вперёд"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
+       +  '<p class="st-line" id="st-line"></p>'
+       +  '<div class="st-row">'
+       +    '<button type="button" class="btn btn-coral" id="st-open">Открыть разбор</button>'
+       +    '<div class="st-nav">'
+       +      '<button type="button" class="st-nb" data-d="-1" aria-label="Назад"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>'
+       +      '<button type="button" class="st-nb" data-d="1" aria-label="Вперёд"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'
+       +    '</div>'
+       +  '</div>'
        +'</div>';
       grid.parentNode.insertBefore(st, grid);
 
-      var nums=st.querySelectorAll('.st-num');
-      var elTag=st.querySelector('#st-tag'), elName=st.querySelector('#st-name'),
-          elLine=st.querySelector('#st-line'), elCur=st.querySelector('#st-cur'),
-          elMark=st.querySelector('#st-mark'),
-          path=st.querySelector('#st-trace');
+      var items=st.querySelectorAll('.st-item'), figsEl=st.querySelectorAll('.st-f');
+      var frame=st.querySelector('.st-frame'), cnv=st.querySelector('.st-gl');
+      var elTag=st.querySelector('#st-tag'), elLine=st.querySelector('#st-line'),
+          elCur=st.querySelector('#st-cur'), path=st.querySelector('#st-trace');
       var cur=0, busy=false;
+
+      var GL = RM ? null : makeGL(cnv, SECTORS.map(function(s){ return s.img; }));
+      if(GL){ frame.classList.add('gl-on'); GL.poke(); }
+      else cnv.parentNode.removeChild(cnv);
+
+      /* quiet parallax inside the frame */
+      if(GL && matchMedia('(hover:hover) and (pointer:fine)').matches){
+        frame.addEventListener('mousemove',function(e){
+          var r=frame.getBoundingClientRect();
+          gsap.to(GL.S,{tx:(e.clientX-r.left)/r.width-.5, ty:(e.clientY-r.top)/r.height-.5,
+            duration:.8, ease:'power2.out', onUpdate:GL.poke});
+        });
+        frame.addEventListener('mouseleave',function(){
+          gsap.to(GL.S,{tx:0,ty:0,duration:1,ease:'power2.out',onUpdate:GL.poke});
+        });
+      }
 
       function setTxt(i){
         elTag.textContent=TAGS[i]||'';
-        elName.textContent=SECTORS[i].name;
         var q=cards[i]&&cards[i].querySelector('.sx-q');
         elLine.textContent=q?q.textContent:'';
-        elCur.textContent='0'+(i+1); elMark.textContent='0'+(i+1);
-        nums.forEach(function(b,k){ b.classList.toggle('on',k===i); });
+        elCur.textContent='0'+(i+1);
+        items.forEach(function(b,k){ b.classList.toggle('on',k===i); });
       }
       function draw(i){
         path.setAttribute('d', trace(KIND[i]||'dip'));
         if(RM){ path.style.strokeDasharray='none'; path.style.strokeDashoffset='0'; return; }
         var L=path.getTotalLength();
         path.style.strokeDasharray=L;
-        gsap.fromTo(path,{strokeDashoffset:L},{strokeDashoffset:0,duration:1.1,ease:'power2.inOut',overwrite:true});
+        gsap.fromTo(path,{strokeDashoffset:L},{strokeDashoffset:0,duration:.9,ease:'power2.inOut',overwrite:true,delay:.15});
       }
       function go(i,dir){
         if(busy) return; i=(i+N)%N; if(i===cur) return;
-        cur=i;
-        if(RM){ setTxt(i); draw(i); return; }
+        dir = dir || (i>cur?1:-1);
+        var prev=cur; cur=i;
+        if(RM){ figsEl[prev].classList.remove('on'); figsEl[i].classList.add('on'); setTxt(i); draw(i); return; }
         busy=true;
-        gsap.timeline({onComplete:function(){ busy=false; }})
-          .to([elTag,elName,elLine],{y:-12,autoAlpha:0,duration:.22,ease:'power2.in',stagger:.03,
+        if(GL && GL.isReady(i) && GL.isReady(prev)){
+          GL.S.a=prev; GL.S.b=i; GL.S.p=0; GL.S.dir=dir;
+          gsap.to(GL.S,{p:1,duration:1.05,ease:'power3.inOut',onUpdate:GL.poke,
+            onComplete:function(){ GL.S.a=i; GL.S.p=0; GL.poke(); busy=false; }});
+        } else {
+          var from=figsEl[prev], to=figsEl[i];
+          to.classList.add('on'); to.style.zIndex=2; from.style.zIndex=1;
+          gsap.fromTo(to,{clipPath:dir>0?'inset(0 0 0 100%)':'inset(0 100% 0 0)'},
+            {clipPath:'inset(0 0% 0 0%)',duration:.9,ease:'power3.inOut',
+             onComplete:function(){ from.classList.remove('on'); to.style.zIndex=''; from.style.zIndex=''; busy=false; }});
+        }
+        gsap.timeline()
+          .to([elTag,elLine],{y:-10,autoAlpha:0,duration:.2,ease:'power2.in',
             onComplete:function(){ setTxt(i); draw(i); }})
-          .to([elTag,elName,elLine],{y:0,autoAlpha:1,duration:.55,ease:'power3.out',stagger:.07},'+=.04');
+          .to([elTag,elLine],{y:0,autoAlpha:1,duration:.5,ease:'power3.out',stagger:.06},'+=.05');
       }
+      items.forEach(function(b){
+        b.addEventListener('click',function(){ go(+b.getAttribute('data-i')); }); });
       st.querySelectorAll('.st-nb').forEach(function(b){
         b.addEventListener('click',function(){ var d=parseInt(b.getAttribute('data-d'),10); go(cur+d,d); }); });
-      nums.forEach(function(b){
-        b.addEventListener('click',function(){ var i=+b.getAttribute('data-i'); go(i, i>cur?1:-1); }); });
       st.querySelector('#st-open').addEventListener('click',function(){ open(cur, cards[cur]); });
       document.addEventListener('keydown',function(e){
         if(ov.classList.contains('on')) return;
@@ -1057,10 +1153,23 @@
         if(tx===null) return; var dx=e.changedTouches[0].clientX-tx; tx=null;
         if(Math.abs(dx)>48) go(cur+(dx<0?1:-1), dx<0?1:-1); },{passive:true});
       setTxt(0);
-      /* first draw when the sheet scrolls into view */
-      if(window.ScrollTrigger){
+
+      /* entrance choreography — the composition assembles once, on arrival */
+      if(!RM && window.ScrollTrigger){
         gsap.registerPlugin(ScrollTrigger);
-        ScrollTrigger.create({trigger:st,start:'top 78%',once:true,onEnter:function(){ draw(0); }});
+        gsap.set(items,{y:26,autoAlpha:0});
+        gsap.set(['.st-count','.st-line','.st-row'],{y:16,autoAlpha:0});
+        gsap.set(frame,{clipPath:'inset(0 0 100% 0)'});
+        gsap.set('.st-plate',{y:16,autoAlpha:0});
+        ScrollTrigger.create({trigger:st,start:'top 74%',once:true,onEnter:function(){
+          gsap.timeline()
+            .to(items,{y:0,autoAlpha:1,duration:.7,ease:'power3.out',stagger:.07})
+            .to(frame,{clipPath:'inset(0 0 0% 0)',duration:.95,ease:'power3.inOut',
+                onComplete:function(){ gsap.set(frame,{clearProps:'clip-path'}); }},'-=.55')
+            .to('.st-plate',{y:0,autoAlpha:1,duration:.6,ease:'power3.out',
+                onStart:function(){ draw(0); }},'-=.3')
+            .to(['.st-count','.st-line','.st-row'],{y:0,autoAlpha:1,duration:.6,ease:'power3.out',stagger:.08},'-=.45');
+        }});
       } else draw(0);
     }
     if(document.readyState==='complete') init();

@@ -3836,40 +3836,52 @@ html[lang="ru"] .sx-cgo { border-radius:10px; transition:background .4s var(--ea
   html[lang="ru"] .sx-card:hover .sx-cgo { transform:none; }
 }
 
-/* ── RU §Сферы — «чертёжный лист»: white blueprint sheet, coral
-   disturbance signature drawn plotter-style, small witness photo.
+/* ── RU §Сферы — typographic index (award pass): giant sector menu left;
+   white-framed photo right with directional wipe + inner parallax; the
+   instrument plate draws the U(t) signature over the frame corner.
    The swipe carousel below is the <760px / no-GSAP fallback. ── */
 html[lang="ru"] .objects.stage-on .sx-grid,
 html[lang="ru"] .objects.stage-on .sx-nav { display:none; }
-html[lang="ru"] .st-stage { position:relative; background:#fff; border:1px solid var(--border-lt); border-radius:10px; box-shadow:0 1px 2px rgba(20,20,20,.04), 0 14px 36px rgba(20,20,20,.06); padding:clamp(26px,3.4vw,48px) clamp(26px,3.6vw,52px) clamp(22px,2.8vw,36px); overflow:hidden; }
-html[lang="ru"] .st-stage::before { content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(90deg, rgba(20,20,20,.022) 0 1px, transparent 1px 38px),
-                   repeating-linear-gradient(0deg, rgba(20,20,20,.018) 0 1px, transparent 1px 38px); }
-html[lang="ru"] .st-mark { position:absolute; right:clamp(18px,2.4vw,44px); bottom:-.14em; z-index:0; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:clamp(120px,15vw,220px); font-weight:500; line-height:1; color:transparent; -webkit-text-stroke:1px rgba(20,20,20,.10); pointer-events:none; }
-html[lang="ru"] .st-head { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:clamp(22px,3vw,38px); }
-html[lang="ru"] .st-count { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.22em; color:var(--text-soft); }
+html[lang="ru"] .st-stage { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,46%); gap:clamp(36px,5vw,84px); align-items:start; }
+/* menu — the typographic hero */
+html[lang="ru"] .st-menu { display:flex; flex-direction:column; }
+html[lang="ru"] .st-item { position:relative; display:flex; align-items:baseline; gap:18px; padding:clamp(13px,1.6vw,19px) 0 clamp(13px,1.6vw,19px) 26px; background:none; border:0; border-bottom:1px solid rgba(20,20,20,.09); cursor:pointer; text-align:left; }
+html[lang="ru"] .st-item:first-child { border-top:1px solid rgba(20,20,20,.09); }
+html[lang="ru"] .st-ii { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.14em; color:#B7B3AB; flex:none; transition:color .35s var(--ease); }
+html[lang="ru"] .st-in { font-family:'Instrument Sans','IBM Plex Sans',system-ui,sans-serif; font-size:clamp(21px,2.4vw,34px); font-weight:600; letter-spacing:-.02em; line-height:1.1; color:#B3AFA7; transition:color .35s var(--ease), transform .45s var(--ease); }
+html[lang="ru"] .st-item::before { content:""; position:absolute; left:0; top:50%; width:14px; height:2px; background:var(--coral); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+html[lang="ru"] .st-item:hover .st-in { color:var(--graphite); }
+html[lang="ru"] .st-item.on .st-in { color:var(--graphite); transform:translateX(4px); }
+html[lang="ru"] .st-item.on .st-ii { color:var(--coral); }
+html[lang="ru"] .st-item.on::before { transform:scaleX(1); }
+html[lang="ru"] .st-item:focus-visible { outline:2px solid var(--coral); outline-offset:2px; }
+/* view — framed photo + plate + line + actions */
+html[lang="ru"] .st-count { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.22em; color:var(--text-soft); margin:0 0 12px; }
 html[lang="ru"] .st-count b { color:var(--coral); font-weight:500; }
-html[lang="ru"] .st-nums { display:flex; gap:14px; }
-html[lang="ru"] .st-num { position:relative; background:none; border:0; padding:6px 2px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; letter-spacing:.14em; color:#A8A399; cursor:pointer; transition:color .3s var(--ease); }
-html[lang="ru"] .st-num:hover { color:var(--graphite); }
-html[lang="ru"] .st-num.on { color:var(--graphite); }
-html[lang="ru"] .st-num.on::after { content:""; position:absolute; left:2px; right:2px; bottom:0; height:2px; background:var(--coral); }
-html[lang="ru"] .st-num:focus-visible { outline:2px solid var(--coral); outline-offset:2px; }
-html[lang="ru"] .st-cols { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:clamp(28px,4vw,64px); align-items:end; }
-html[lang="ru"] .st-tag { display:inline-block; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--coral); border:1px solid rgba(200,96,61,.45); border-radius:3px; padding:6px 10px 5px; margin-bottom:18px; }
-html[lang="ru"] .st-name { font-size:clamp(30px,3.6vw,52px); font-weight:600; letter-spacing:-.02em; line-height:1.04; color:var(--graphite); margin:0 0 12px; }
-html[lang="ru"] .st-line { font-size:15.5px; line-height:1.55; color:var(--text-mid); margin:0 0 26px; max-width:44ch; }
-html[lang="ru"] .st-plot { display:flex; flex-direction:column; justify-content:center; }
-html[lang="ru"] .st-wave { position:relative; }
-html[lang="ru"] .st-wave svg { display:block; width:100%; height:clamp(180px,21vw,270px); }
-html[lang="ru"] .st-base { stroke:rgba(20,20,20,.16); stroke-width:1; stroke-dasharray:3 5; }
-html[lang="ru"] .st-line-path { stroke:var(--coral); stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
-html[lang="ru"] .st-cap { display:block; margin-top:8px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#A8A399; }
-html[lang="ru"] .st-nav { position:relative; z-index:2; display:flex; gap:10px; justify-content:flex-start; margin-top:clamp(20px,2.6vw,30px); }
+html[lang="ru"] .st-viz { position:relative; }
+html[lang="ru"] .st-frame { position:relative; aspect-ratio:4/3; border:1px solid #fff; border-radius:12px; overflow:hidden; background:#E9E6E0; }
+html[lang="ru"] .st-f { position:absolute; inset:0; margin:0; visibility:hidden; will-change:clip-path; }
+html[lang="ru"] .st-f.on { visibility:visible; }
+html[lang="ru"] .st-f img { width:100%; height:100%; object-fit:cover; will-change:transform; }
+html[lang="ru"] .st-gl { position:absolute; inset:0; z-index:2; display:block; width:100%; height:100%; }
+html[lang="ru"] .st-frame.gl-on .st-f { visibility:hidden; }
+html[lang="ru"] .st-tag { position:absolute; z-index:3; top:14px; left:14px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#fff; background:rgba(13,14,19,.55); border:1px solid rgba(255,255,255,.35); border-radius:3px; padding:6px 10px 5px; backdrop-filter:blur(4px); }
+html[lang="ru"] .st-plate { position:absolute; z-index:4; left:-22px; bottom:-24px; width:min(58%,340px); background:#fff; border:1px solid var(--border-lt); border-radius:10px; padding:12px 14px 8px; box-shadow:0 1px 2px rgba(20,20,20,.05), 0 12px 28px rgba(20,20,20,.08); }
+html[lang="ru"] .st-plate::before { content:""; position:absolute; inset:0; border-radius:10px; pointer-events:none;
+  background-image:repeating-linear-gradient(90deg, rgba(20,20,20,.025) 0 1px, transparent 1px 22px),
+                   repeating-linear-gradient(0deg, rgba(20,20,20,.02) 0 1px, transparent 1px 22px); }
+html[lang="ru"] .st-plate svg { display:block; width:100%; height:64px; }
+html[lang="ru"] .st-base { stroke:rgba(20,20,20,.15); stroke-width:1; stroke-dasharray:3 5; }
+html[lang="ru"] .st-line-path { stroke:var(--coral); stroke-width:1.8; stroke-linejoin:round; stroke-linecap:round; }
+html[lang="ru"] .st-cap { display:block; margin-top:4px; font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:9px; letter-spacing:.2em; color:#A8A399; }
+html[lang="ru"] .st-line { font-size:15.5px; line-height:1.55; color:var(--text-mid); margin:44px 0 0; min-height:3.1em; }
+html[lang="ru"] .st-row { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:14px; }
+html[lang="ru"] .st-nav { display:flex; gap:10px; }
 html[lang="ru"] .st-nb { width:44px; height:44px; border-radius:12px; border:1px solid rgba(20,20,20,.2); background:none; color:var(--graphite); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease); }
 html[lang="ru"] .st-nb:hover { background:var(--coral); border-color:var(--coral); color:#fff; }
 html[lang="ru"] .st-nb:focus-visible { outline:2px solid var(--coral); outline-offset:2px; }
 @media (max-width:1000px){
-  html[lang="ru"] .st-cols { grid-template-columns:1fr; gap:26px; }
-  html[lang="ru"] .st-photo { width:200px; }
+  html[lang="ru"] .st-stage { grid-template-columns:1fr; gap:34px; }
+  html[lang="ru"] .st-in { font-size:20px; }
+  html[lang="ru"] .st-plate { left:-10px; bottom:-18px; }
 }
