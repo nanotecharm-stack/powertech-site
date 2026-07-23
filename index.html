@@ -11,6 +11,12 @@
 <script defer src="./support.js"></script>
 </head>
 <body>
+<div id="ptfx" style="position:fixed;inset:0;background:#EFEDEA;z-index:2147483600;opacity:0;pointer-events:none;display:none;transition:opacity .3s ease;"></div>
+<script>
+(function(){var f=document.getElementById('ptfx');if(!f)return;
+if(sessionStorage.getItem('ptlang')){sessionStorage.removeItem('ptlang');f.style.display='block';f.style.transition='none';f.style.opacity='1';var t0=Date.now();var iv=setInterval(function(){if(document.getElementById('top')||Date.now()-t0>4000){clearInterval(iv);setTimeout(function(){f.style.transition='opacity .4s ease';f.style.opacity='0';setTimeout(function(){f.style.display='none';f.style.pointerEvents='none';},450);},80);}},50);}
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a'):null;if(!a)return;var h=a.getAttribute('href');if(h==='hy.html'||h==='/'){e.preventDefault();sessionStorage.setItem('ptlang','1');f.style.display='block';f.style.pointerEvents='auto';f.style.transition='opacity .2s ease';setTimeout(function(){f.style.opacity='1';},10);setTimeout(function(){location.href=h;},210);}},true);})();
+</script>
 <x-dc>
 <helmet>
   <style>html{background:#EFEDEA;}</style>
