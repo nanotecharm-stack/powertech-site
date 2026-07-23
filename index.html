@@ -449,7 +449,14 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">What happened?</div>
           <textarea id="ptfMsg" placeholder="Describe the trip, alarm, shutdown or recurring condition. Include approximate times, affected equipment and available error codes or logs." style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">Attachments <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#A8AAAE;">— optional</span></div>
-          <div style="border:1px dashed #C9C6C0;border-radius:12px;padding:18px 20px;font-size:14px;line-height:1.75;color:#71747B;margin-bottom:28px;">Single-line diagram, panel photo, alarm screenshot, inverter or UPS log, previous report.</div>
+          <div style="border:1px dashed #C9C6C0;border-radius:12px;padding:18px 20px;margin-bottom:12px;">
+            <div style="font-size:14px;line-height:1.75;color:#71747B;margin-bottom:12px;">Single-line diagram, panel photo, alarm screenshot, inverter or UPS log, previous report.</div>
+            <input id="ptfFiles" type="file" multiple="multiple" accept="image/*,.pdf,.csv,.txt,.log,.xls,.xlsx,.doc,.docx,.zip" style="display:block;width:100%;font-size:13px;color:#484B51;font-family:inherit;">
+          </div>
+          <sc-if value="{{ sizeErr }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;color:#C5280D;margin-bottom:10px;">Attachments exceed the 10 MB limit — please remove some files.</div>
+          </sc-if>
+          <div style="font-size:12px;color:#A8AAAE;margin-bottom:28px;">Up to 10 MB total.</div>
           <button onClick="{{ submitForm }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Send the details <span style="font-size:12px;">↗</span></button>
           <div style="font-size:14px;line-height:1.75;color:#71747B;margin-top:28px;border-top:1px solid #E4E1DC;padding-top:20px;">sales@powertech.am · +374 41 00 00 14 · Davtashen 1, 13-25, Yerevan 0058 · Mon–Fri 09:00–18:00 (UTC+4)</div>
         </sc-if>
@@ -757,15 +764,32 @@ class Component extends DCLogic {
         const gv = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
         const typesEl = document.getElementById('ptfTypes');
         const app = typesEl && typesEl.children[this.state.picked] ? typesEl.children[this.state.picked].textContent.trim() : '';
-        const payload = {name: gv('ptfName'), company: gv('ptfCompany'), email: gv('ptfEmail'), phone: gv('ptfPhone'), application: app, message: gv('ptfMsg'), _subject: 'PowerTech website request'};
-        this.setState({sending: true});
-        fetch('https://formsubmit.co/ajax/sales@powertech.am', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(payload)})
-          .then((r) => { if (!r.ok) throw new Error('send failed'); this.setState({submitted: true, sending: false}); })
-          .catch(() => {
-            const body = encodeURIComponent('Name: ' + payload.name + '\nCompany: ' + payload.company + '\nEmail: ' + payload.email + '\nPhone: ' + payload.phone + '\nApplication: ' + payload.application + '\n\n' + payload.message);
-            window.location.href = 'mailto:sales@powertech.am?subject=' + encodeURIComponent('PowerTech website request') + '&body=' + body;
-            this.setState({submitted: true, sending: false});
-          });
+        const fileEl = document.getElementById('ptfFiles');
+        const files = fileEl && fileEl.files ? Array.prototype.slice.call(fileEl.files) : [];
+        const total = files.reduce((s, f) => s + f.size, 0);
+        if (total > 10 * 1024 * 1024) { this.setState({sizeErr: true}); return; }
+        const fields = {name: gv('ptfName'), company: gv('ptfCompany'), email: gv('ptfEmail'), phone: gv('ptfPhone'), application: app, message: gv('ptfMsg')};
+        this.setState({sending: true, sizeErr: false});
+        if (files.length) {
+          const fd = new FormData();
+          Object.keys(fields).forEach((k) => fd.append(k, fields[k]));
+          fd.append('_subject', 'PowerTech website request');
+          fd.append('_captcha', 'false');
+          fd.append('_template', 'table');
+          files.forEach((f) => fd.append('attachment', f, f.name));
+          fetch('https://formsubmit.co/sales@powertech.am', {method: 'POST', body: fd, mode: 'no-cors'})
+            .then(() => this.setState({submitted: true, sending: false}))
+            .catch(() => this.setState({submitted: true, sending: false}));
+        } else {
+          const payload = Object.assign({}, fields, {_subject: 'PowerTech website request'});
+          fetch('https://formsubmit.co/ajax/sales@powertech.am', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(payload)})
+            .then((r) => { if (!r.ok) throw new Error('send failed'); this.setState({submitted: true, sending: false}); })
+            .catch(() => {
+              const body = encodeURIComponent('Name: ' + fields.name + '\nCompany: ' + fields.company + '\nEmail: ' + fields.email + '\nPhone: ' + fields.phone + '\nApplication: ' + fields.application + '\n\n' + fields.message);
+              window.location.href = 'mailto:sales@powertech.am?subject=' + encodeURIComponent('PowerTech website request') + '&body=' + body;
+              this.setState({submitted: true, sending: false});
+            });
+        }
       },
       appTypes: ['Manufacturing', 'Solar PV', 'Healthcare or laboratory', 'Data center or IT infrastructure', 'Commercial building', 'Investment and Technical Review', 'Other'].map((label, i) => ({
         label,
@@ -777,6 +801,7 @@ class Component extends DCLogic {
       formOpen: this.state.formOpen,
       submitted: this.state.submitted,
       notSubmitted: !this.state.submitted,
+      sizeErr: this.state.sizeErr,
       toTop: () => { if (this._lenis) this._lenis.scrollTo(0, {duration: 1.2}); else window.scrollTo({top: 0, behavior: 'smooth'}); },
       logoBeat: () => { const tile = document.getElementById('ptLogoTile'); if (tile) { tile.style.animation = 'none'; void tile.getBoundingClientRect(); tile.style.animation = 'ptLogoBeat .65s cubic-bezier(0.34,1.56,0.64,1)'; const p = tile.querySelector('path'); if (p && p.getTotalLength) { const len = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; void p.getBoundingClientRect(); p.style.transition = 'stroke-dashoffset .7s ease .12s'; p.style.strokeDashoffset = '0'; } } },
       btnOpacity: btShown ? 1 : 0,
