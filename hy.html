@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,35 +9,35 @@
 <x-dc>
 <helmet>
   <style>html{background:#EFEDEA;}</style>
-  <style id="pt-fonts">body{font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;}
-h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:0.022em !important;}
-[data-mono]{font-family:'Martian Mono',monospace;}</style>
+  <style id="pt-fonts">body{font-family:'Mardoto','Roboto','Noto Sans Armenian','Helvetica Neue',sans-serif;}
+h1,h2,h3,[data-head]{font-family:'Noto Sans Armenian','Archivo',sans-serif;font-stretch:100%;font-weight:700;letter-spacing:0 !important;}
+[data-mono]{font-family:'Martian Mono','Mardoto','Noto Sans Armenian',monospace;letter-spacing:0.04em !important;text-transform:none !important;}</style>
   <link rel="preload" as="image" href="uploads/img/hero_home.jpg" fetchpriority="high">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PowerTech — Power Quality Monitoring</title>
-<meta name="description" content="PowerTech monitors electrical parameters and power quality events while your system is operating, and provides a clear engineering assessment based on the recorded data.">
+<title>PowerTech | Էլեկտրաէներգիայի որակի մոնիթորինգ</title>
+<meta name="description" content="PowerTech-ը համակարգի աշխատանքի ընթացքում գրանցում է էլեկտրական պարամետրերն ու էլեկտրաէներգիայի որակի իրադարձությունները և ներկայացնում հստակ ինժեներական գնահատում։">
 <link rel="alternate" hreflang="en" href="https://powertech.am/">
 <link rel="alternate" hreflang="hy" href="https://powertech.am/hy.html">
-<link rel="canonical" href="https://powertech.am/">
+<link rel="canonical" href="https://powertech.am/hy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PowerTech">
-<meta property="og:title" content="PowerTech — Power Quality Monitoring">
-<meta property="og:description" content="Power quality monitoring and diagnostics in Armenia. Time-stamped measurement of electrical parameters with a clear engineering assessment.">
-<meta property="og:url" content="https://powertech.am/">
+<meta property="og:title" content="PowerTech | Էլեկտրաէներգիայի որակի մոնիթորինգ">
+<meta property="og:description" content="Էլեկտրաէներգիայի որակի մոնիթորինգ և ախտորոշում Հայաստանում. էլեկտրական պարամետրերի ժամանակային դրոշմով չափում և հստակ ինժեներական գնահատում։">
+<meta property="og:url" content="https://powertech.am/hy.html">
 <meta property="og:image" content="https://powertech.am/uploads/img/hero_home.jpg">
-<meta property="og:locale" content="en">
-<meta property="og:locale:alternate" content="hy_AM">
+<meta property="og:locale" content="hy_AM">
+<meta property="og:locale:alternate" content="en">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23ec3013'/%3E%3Cpath d='M10 32 C17 15 25 15 32 32 C39 49 47 49 54 32' stroke='%23f7f5f4' stroke-width='5.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="description" content="PowerTech-ը գրանցում և վերլուծում է էլեկտրական պարամետրերն ու էլեկտրաէներգիայի որակի իրադարձությունները՝ համակարգի աշխատանքի ընթացքում։">
 <link rel="stylesheet" href="fonts/fonts.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis/dist/lenis.min.js"></script>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-armenian-400-armenian.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-armenian-700-armenian.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/archivo-400-latin.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/archivo-500-latin.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/big-shoulders-display-600-latin.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/big-shoulders-display-700-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/martian-mono-600-latin.woff2">
 <style>
   html,body{margin:0;padding:0;background:#EFEDEA;font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1C1E22;-webkit-font-smoothing:antialiased;}
@@ -99,15 +99,15 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
       <span style="font-family:'Archivo','Helvetica Neue',sans-serif;font-weight:600;font-size:20px;letter-spacing:-0.015em;color:#201e1d;line-height:1;">Power<span style="color:#ec3013;">Tech</span></span>
     </a>
     <nav style="display:flex;align-items:center;gap:36px;font-size:14.5px;font-weight:500;color:#3A3D42;">
-      <a href="#services" style="color:#3A3D42;" style-hover="color:#E8622C;">Services</a>
-      <a href="#applications" style="color:#3A3D42;" style-hover="color:#E8622C;">Industries</a>
-      <a href="#company" style="color:#3A3D42;" style-hover="color:#E8622C;">Company</a>
+      <a href="#services" style="color:#3A3D42;" style-hover="color:#E8622C;">Ծառայություններ</a>
+      <a href="#applications" style="color:#3A3D42;" style-hover="color:#E8622C;">Ոլորտներ</a>
+      <a href="#company" style="color:#3A3D42;" style-hover="color:#E8622C;">Ընկերություն</a>
       <span style="display:inline-flex;align-items:center;border:1px solid #C9C6C0;border-radius:999px;padding:3px;gap:2px;">
-        <span data-mono="1" title="English" style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;background:#1C1E22;color:#F4F3F1;letter-spacing:0.05em;line-height:1;">EN</span>
-        <a href="hy.html" title="Հայերեն" style="font-family:'Noto Sans Armenian','Archivo',sans-serif;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;color:#575B62;letter-spacing:0.03em;line-height:1;" style-hover="background:#E4E1DC;color:#1C1E22;">ՀԱՅ</a>
+        <span title="Հայերեն" style="font-family:'Noto Sans Armenian','Roboto',sans-serif;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;background:#1C1E22;color:#F4F3F1;letter-spacing:0.03em;line-height:1;">ՀԱՅ</span>
+        <a href="/" data-mono="1" title="English" style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;color:#575B62;letter-spacing:0.05em;line-height:1;" style-hover="background:#E4E1DC;color:#1C1E22;">EN</a>
       </span>
     </nav>
-    <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:10px;background:#1C1E22;color:#F4F3F1;font-size:14.5px;font-weight:500;padding:12px 20px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Describe the issue <span style="font-size:12px;">↗</span></button>
+    <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:10px;background:#1C1E22;color:#F4F3F1;font-size:14.5px;font-weight:500;padding:12px 20px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Նկարագրել խնդիրը <span style="font-size:12px;">↗</span></button>
   </header>
 
   <section id="top" style="position:relative;border-radius:24px;overflow:hidden;min-height:640px;background:#101216;isolation:isolate;box-shadow:0 24px 48px -20px rgba(16,18,22,0.35);display:flex;align-items:center;scroll-margin-top:16px;">
@@ -118,15 +118,15 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
       <div style="width:11px;height:11px;border-radius:50%;background:{{ accent }};box-shadow:0 0 0 5px {{ accentGlow }};animation:ptDot 2.8s ease-in-out 2s infinite;"></div>
       <div style="width:0;height:58px;border-left:1px dashed rgba(244,243,241,0.72);"></div>
       <div data-mono="1" style="font-size:14px;font-weight:600;letter-spacing:0.04em;color:#F4F3F1;text-align:center;line-height:1.7;">{{ liveV }}<br>{{ liveHz }}</div>
-      <div data-mono="1" style="font-size:9px;font-weight:600;letter-spacing:0.14em;color:rgba(244,243,241,0.6);text-transform:uppercase;margin-top:2px;">Live</div>
+      <div data-mono="1" style="font-size:9px;font-weight:600;letter-spacing:0.14em;color:rgba(244,243,241,0.6);text-transform:uppercase;margin-top:2px;">ՈՒՂԻՂ</div>
     </div>
     <div style="position:relative;padding:80px 72px;max-width:680px;z-index:2;">
-      <div data-mono="1" style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:22px;animation:ptRise .8s cubic-bezier(0.22,1,0.36,1) .05s both;">Power Quality Monitoring</div>
-      <h1 style="font-size:60px;line-height:1.04;font-weight:700;letter-spacing:-0.025em;color:#F4F3F1;margin:0 0 28px;animation:ptRise .9s cubic-bezier(0.22,1,0.36,1) .15s both;">See how your<br>electrical system<br><span style="color:{{ accent }};">performs</span></h1>
-      <p style="font-size:16px;line-height:1.65;color:rgba(244,243,241,0.92);margin:0 0 36px;max-width:400px;animation:ptRise .9s cubic-bezier(0.22,1,0.36,1) .28s both;">PowerTech monitors electrical parameters and power quality events while your system is operating. We interpret the recorded data and provide a clear engineering assessment.</p>
+      <div data-mono="1" style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:22px;animation:ptRise .8s cubic-bezier(0.22,1,0.36,1) .05s both;">ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՅԻ ՈՐԱԿԻ ՄՈՆԻԹՈՐԻՆԳ</div>
+      <h1 style="font-size:50px;line-height:1.14;font-weight:700;letter-spacing:-0.01em;color:#F4F3F1;margin:0 0 32px;max-width:560px;text-wrap:balance;animation:ptRise .9s cubic-bezier(0.22,1,0.36,1) .15s both;">Ստուգեք, թե ինչպես է աշխատում <span style="color:{{ accent }};">ձեր էլեկտրացանցը</span></h1>
+      <p style="font-size:16px;line-height:1.65;color:rgba(244,243,241,0.92);margin:0 0 40px;max-width:430px;animation:ptRise .9s cubic-bezier(0.22,1,0.36,1) .28s both;">PowerTech-ը համակարգի աշխատանքի ընթացքում գրանցում է էլեկտրական պարամետրերն ու էլեկտրաէներգիայի որակի իրադարձությունները։ Մենք վերլուծում ենք գրանցված տվյալները և ներկայացնում հստակ ինժեներական գնահատում։</p>
       <div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;row-gap:16px;animation:ptRise .9s cubic-bezier(0.22,1,0.36,1) .42s both;">
-        <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:12px;background:#F4F3F1;color:#1C1E22;font-size:14px;font-weight:500;padding:15px 26px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Describe the issue <span style="font-size:12px;">↗</span></button>
-        <a href="#services" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;color:rgba(244,243,241,0.9);border-bottom:1px solid rgba(244,243,241,0.68);padding-bottom:3px;" style-hover="color:#fff;">How monitoring works <span style="font-size:11px;">↓</span></a>
+        <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:12px;background:#F4F3F1;color:#1C1E22;font-size:14px;font-weight:500;padding:15px 26px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Նկարագրել խնդիրը <span style="font-size:12px;">↗</span></button>
+        <a href="#services" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;color:rgba(244,243,241,0.9);border-bottom:1px solid rgba(244,243,241,0.68);padding-bottom:3px;" style-hover="color:#fff;">Ինչպես է իրականացվում մոնիթորինգը <span style="font-size:11px;">↓</span></a>
       </div>
     </div>
   </section>
@@ -134,10 +134,10 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   <section id="why" style="height:240vh;padding:0 48px;">
     <div style="position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:32px 0;">
     <div data-reveal="1" style="display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;margin-bottom:72px;">
-      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:0;">The event may be over before anyone can inspect it</h2>
+      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:0;">Իրադարձությունը կարող է ավարտվել մինչև ստուգումը սկսվի</h2>
       <div>
-        <p style="font-size:15px;line-height:1.8;color:#484B51;margin:0 0 24px;max-width:520px;">Some voltage events last only milliseconds or a few cycles. By the time the system is inspected, measured values may have returned to normal. Monitoring provides a time-stamped record of the event and the conditions around it.</p>
-        <a href="#applications" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;border-bottom:1px solid #1C1E22;padding-bottom:3px;">See where monitoring helps <span style="font-size:11px;">↓</span></a>
+        <p style="font-size:15px;line-height:1.8;color:#484B51;margin:0 0 24px;max-width:520px;">Լարման որոշ իրադարձություններ տևում են ընդամենը միլիվայրկյաններ կամ մի քանի ցիկլ։ Ստուգման պահին չափվող արժեքները կարող են արդեն վերադարձած լինել բնականոն մակարդակի։ Մոնիթորինգը պահպանում է իրադարձության ժամանակային նշումը և դրա պահին գրանցված պայմանները։</p>
+        <a href="#applications" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;border-bottom:1px solid #1C1E22;padding-bottom:3px;">Տեսնել, թե որտեղ է օգնում մոնիթորինգը <span style="font-size:11px;">↓</span></a>
       </div>
     </div>
     <div style="position:relative;padding-top:6px;">
@@ -149,7 +149,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
             <div style="width:11px;height:11px;border-radius:50%;background:{{ t.dotBg }};box-shadow:{{ t.dotShadow }};border:1px solid {{ t.dotBorder }};animation:{{ t.anim }};"></div>
             <div>
               <div data-mono="1" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:#71747B;margin-bottom:6px;">{{ t.num }}</div>
-              <div style="font-size:14px;font-weight:600;line-height:1.45;max-width:180px;color:{{ t.color }};">{{ t.label }}</div>
+              <div style="font-size:14px;font-weight:600;line-height:1.4;max-width:180px;color:{{ t.color }};">{{ t.label }}</div>
             </div>
           </div>
         </sc-for>
@@ -160,34 +160,34 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
 
   <section id="applications" style="scroll-margin-top:24px;padding:20px 8px 120px;display:grid;grid-template-columns:250px 1fr;gap:48px;align-items:center;">
     <div data-reveal="1">
-      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin:0 0 18px;">Where monitoring helps</h2>
+      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;margin:0 0 18px;">Որտեղ է օգնում մոնիթորինգը</h2>
       <div style="width:36px;height:2px;background:#1C1E22;margin-bottom:24px;"></div>
-      <p style="font-size:14.5px;line-height:1.8;color:#484B51;margin:0 0 24px;">Power quality problems are not limited to one sector. Monitoring is useful when electrical conditions affect equipment or operations, or when an engineering decision requires measured evidence.</p>
+      <p style="font-size:14.5px;line-height:1.8;color:#484B51;margin:0 0 24px;">Էլեկտրաէներգիայի որակի խնդիրները չեն սահմանափակվում մեկ ոլորտով։ Մոնիթորինգը կիրառելի է, երբ էլեկտրական պայմաններն ազդում են սարքավորումների կամ աշխատանքային գործընթացների վրա, կամ երբ ինժեներական որոշման համար անհրաժեշտ են չափված տվյալներ։</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
       <div style="display:flex;justify-content:flex-end;gap:10px;">
-        <button onClick="{{ scrollAppsPrev }}" title="Previous" data-magnet="1" style="width:52px;height:52px;border-radius:50%;background:#1C1E22;color:#F4F3F1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:inherit;box-shadow:0 8px 20px rgba(16,18,22,0.22);" style-hover="background:#E8622C;transform:scale(1.06);">←</button>
-        <button onClick="{{ scrollAppsNext }}" title="Next" data-magnet="1" style="width:52px;height:52px;border-radius:50%;background:#1C1E22;color:#F4F3F1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:inherit;box-shadow:0 8px 20px rgba(16,18,22,0.22);" style-hover="background:#E8622C;transform:scale(1.06);">→</button>
+        <button onClick="{{ scrollAppsPrev }}" title="Նախորդ ոլորտը" data-magnet="1" style="width:52px;height:52px;border-radius:50%;background:#1C1E22;color:#F4F3F1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:inherit;box-shadow:0 8px 20px rgba(16,18,22,0.22);" style-hover="background:#E8622C;transform:scale(1.06);">←</button>
+        <button onClick="{{ scrollAppsNext }}" title="Հաջորդ ոլորտը" data-magnet="1" style="width:52px;height:52px;border-radius:50%;background:#1C1E22;color:#F4F3F1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:inherit;box-shadow:0 8px 20px rgba(16,18,22,0.22);" style-hover="background:#E8622C;transform:scale(1.06);">→</button>
       </div>
     <div id="appsScroller" data-reveal="stagger" style="display:flex;align-items:stretch;gap:14px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;cursor:grab;user-select:none;">
       <sc-for list="{{ apps }}" as="app" hint-placeholder-count="6">
-        <div onClick="{{ app.open }}" style="position:relative;display:block;border-radius:16px;overflow:hidden;flex:0 0 210px;height:300px;background:#1C1E22;cursor:pointer;isolation:isolate;" style-hover="transform:translateY(-6px);box-shadow:0 14px 28px -10px rgba(16,18,22,0.28);">
+        <div onClick="{{ app.open }}" style="position:relative;display:block;overflow:hidden;flex:0 0 210px;height:300px;background:#1C1E22;cursor:pointer;isolation:isolate;" style-hover="transform:translateY(-6px);box-shadow:0 14px 28px -10px rgba(16,18,22,0.28);">
           {{ app.gridImgEl }}
           <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,18,22,0) 30%, rgba(16,18,22,0.88) 100%);"></div>
           <div data-mono="1" style="position:absolute;top:14px;left:14px;width:34px;height:34px;border:2px solid rgba(244,243,241,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#F4F3F1;background:rgba(16,18,22,0.5);backdrop-filter:blur(6px);">{{ app.num }}</div>
           <div style="position:absolute;left:16px;bottom:16px;right:12px;color:#F4F3F1;">
             <div data-head="1" style="font-size:17px;font-weight:600;line-height:1.25;overflow-wrap:break-word;hyphens:auto;margin-bottom:10px;">{{ app.title }}</div>
-            <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.04em;color:{{ accent }};">View details <span style="font-size:10px;">↗</span></div>
+            <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.04em;color:{{ accent }};">Մանրամասներ <span style="font-size:10px;">↗</span></div>
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ openFormOther }}" style="position:relative;display:flex;flex-direction:column;justify-content:space-between;text-align:left;border-radius:16px;background:#1C1E22;color:#F4F3F1;padding:64px 22px 24px;flex:0 0 300px;border:none;cursor:pointer;font-family:inherit;" style-hover="transform:translateY(-6px);box-shadow:0 14px 28px -10px rgba(16,18,22,0.28);">
+      <button onClick="{{ openFormOther }}" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;background:#1C1E22;color:#F4F3F1;padding:64px 22px 24px;flex:0 0 300px;border:none;cursor:pointer;font-family:inherit;" style-hover="transform:translateY(-6px);box-shadow:0 14px 28px -10px rgba(16,18,22,0.28);">
         <div>
           <div data-mono="1" style="position:absolute;top:14px;left:14px;width:34px;height:34px;border:2px solid rgba(244,243,241,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#F4F3F1;background:rgba(16,18,22,0.5);backdrop-filter:blur(6px);">07</div>
-          <div data-head="1" style="font-size:18px;font-weight:600;line-height:1.3;margin-bottom:10px;">Other Critical Electrical Systems</div>
-          <div style="font-size:14px;line-height:1.72;color:rgba(244,243,241,0.82);">Do not see your sector here? Describe the issue and the equipment affected. Monitoring is defined by the technical question, not by the sector alone.</div>
+          <div data-head="1" style="font-size:18px;font-weight:600;line-height:1.3;margin-bottom:10px;">Այլ կարևոր էլեկտրական համակարգեր</div>
+          <div style="font-size:14px;line-height:1.72;color:rgba(244,243,241,0.82);text-wrap:balance;">Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։</div>
         </div>
-        <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:{{ accent }};margin-top:16px;">Describe the issue <span style="font-size:11px;">↗</span></div>
+        <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:{{ accent }};margin-top:16px;">Նկարագրել խնդիրը <span style="font-size:11px;">↗</span></div>
       </button>
       </div>
     </div>
@@ -201,13 +201,13 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,18,22,0.15) 0%, rgba(16,18,22,0.7) 100%);"></div>
           <button onClick="{{ closeApp }}" style="position:absolute;top:20px;right:20px;width:38px;height:38px;border-radius:50%;background:rgba(244,243,241,0.92);border:none;cursor:pointer;font-size:16px;color:#1C1E22;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
           <div style="position:absolute;left:44px;bottom:24px;color:#F4F3F1;">
-            <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.8);margin-bottom:8px;">Application {{ active.num }}</div>
+            <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.8);margin-bottom:8px;">ՈԼՈՐՏ {{ active.num }}</div>
             <div data-head="1" style="font-size:34px;font-weight:600;letter-spacing:-0.01em;">{{ active.title }}</div>
           </div>
         </div>
         <div style="padding:36px 44px 44px;">
           <p style="font-size:15px;line-height:1.75;color:#1C1E22;margin:0 0 28px;">{{ active.p1 }}</p>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:14px;">What the report can address</div>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:14px;">ԻՆՉ ՀԱՐՑԵՐԻ ԿԱՐՈՂ Է ՊԱՏԱՍԽԱՆԵԼ ՀԱՇՎԵՏՎՈՒԹՅՈՒՆԸ</div>
           <div style="display:flex;flex-direction:column;">
             <sc-for list="{{ active.findings }}" as="f" hint-placeholder-count="3">
               <div style="display:flex;gap:14px;align-items:baseline;font-size:14px;line-height:1.7;color:#3A3D42;border-top:1px solid #E4E1DC;padding:12px 0;"><span style="color:{{ accent }};font-size:9px;">●</span> {{ f }}</div>
@@ -227,11 +227,11 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           </sc-if>
           <sc-if value="{{ active.note }}" hint-placeholder-val="{{ false }}">
             <div style="background:#E4E1DC;border-radius:16px;padding:24px 28px;margin-top:28px;">
-              <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">Note</div>
+              <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:12px;">ՆՇՈՒՄ</div>
               <div style="font-size:14.5px;line-height:1.7;color:#3A3D42;">{{ active.note }}</div>
             </div>
           </sc-if>
-          <button onClick="{{ openFormFromApp }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:14px 26px;border-radius:999px;margin-top:32px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Describe the issue <span style="font-size:12px;">↗</span></button>
+          <button onClick="{{ openFormFromApp }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:14px 26px;border-radius:999px;margin-top:32px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Նկարագրել խնդիրը <span style="font-size:12px;">↗</span></button>
         </div>
       </div>
     </div>
@@ -239,29 +239,28 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
 
   <section id="services" style="scroll-margin-top:24px;background:linear-gradient(180deg,#EAE7E1 0%,#E4E1DC 38%,#DEDBD5 100%);border-radius:24px;padding:104px 88px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.5),0 20px 44px -20px rgba(16,18,22,0.20);display:grid;grid-template-columns:1fr 1.2fr;gap:80px;">
     <div data-reveal="1" style="position:relative;">
-      <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">Services</div>
-      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 14px;">Seven-day diagnostic monitoring</h2>
+      <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</div>
+      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 14px;">7-օրյա ախտորոշիչ մոնիթորինգ</h2>
       <div style="width:36px;height:2px;background:#1C1E22;margin-bottom:24px;"></div>
-      <p style="font-size:14px;line-height:1.8;color:#484B51;margin:0 0 16px;max-width:300px;">Power quality data is recorded during actual operation and interpreted in the context of the issue being investigated.</p>
-      <p style="font-size:14.5px;line-height:1.8;color:#484B51;margin:0 0 24px;max-width:300px;">The monitoring period is selected to obtain a representative record of operating conditions. A longer period may be recommended when the issue is intermittent or the operating cycle requires more time.</p>
-      <div style="display:flex;gap:36px;margin:4px 0 8px;">
+      <p style="font-size:14px;line-height:1.8;color:#484B51;margin:0 0 16px;max-width:300px;">Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։</p>
+      <p style="font-size:14.5px;line-height:1.8;color:#484B51;margin:0 0 24px;max-width:300px;">Մոնիթորինգի տևողությունն ընտրվում է աշխատանքային պայմանների բնորոշ պատկերը ստանալու համար։ Եթե խնդիրը պարբերաբար չի դրսևորվում կամ սարքավորման աշխատանքային ցիկլն ավելի երկար է, կարող է առաջարկվել ավելի երկար ժամանակահատված։</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:8px 0 8px;">
         <div>
           <div data-mono="1" style="font-size:24px;font-weight:600;color:#1C1E22;">7</div>
-          <div style="font-size:13px;color:#575B62;margin-top:5px;max-width:130px;line-height:1.6;">typical diagnostic period</div>
+          <div style="font-size:12px;color:#575B62;margin-top:6px;line-height:1.5;overflow-wrap:break-word;">սովորական ախտորոշման տևողություն</div>
         </div>
         <div>
           <div data-mono="1" style="font-size:24px;font-weight:600;color:#1C1E22;">24/7</div>
-          <div style="font-size:13px;color:#575B62;margin-top:5px;max-width:130px;line-height:1.6;">monitoring throughout the period</div>
+          <div style="font-size:12px;color:#575B62;margin-top:6px;line-height:1.5;overflow-wrap:break-word;">անընդհատ գրանցում ամբողջ ժամանակահատվածում</div>
         </div>
         <div>
           <div data-mono="1" style="font-size:24px;font-weight:600;color:#1C1E22;">1</div>
-          <div style="font-size:13px;color:#575B62;margin-top:5px;max-width:130px;line-height:1.6;">structured engineering report</div>
+          <div style="font-size:12px;color:#575B62;margin-top:6px;line-height:1.5;overflow-wrap:break-word;">կառուցվածքային ինժեներական հաշվետվություն</div>
         </div>
       </div>
-      <div style="position:relative;margin-top:56px;">
+      <div style="position:relative;margin-top:96px;">
         <div style="overflow:hidden;border-radius:18px;isolation:isolate;"><img src="uploads/img/07_power_transmission_lines.jpg" alt="Transmission towers at sunset" loading="lazy" decoding="async" data-plx="26" style="width:100%;aspect-ratio:1.15;object-fit:cover;display:block;"></div>
-        <div data-plx="-30" style="position:absolute;top:-52px;right:-8px;width:128px;height:128px;
-        border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:500;line-height:1.5;">Measured<br>under actual<br>load</div>
+        <div data-plx="-30" style="position:absolute;top:-62px;right:-14px;width:158px;height:158px;border-radius:50%;background:{{ accent }};color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:500;line-height:1.55;padding:14px;">Չափումներ՝<br>փաստացի<br>բեռնվածությամբ</div>
       </div>
     </div>
     <div data-reveal="1" style="display:flex;flex-direction:column;justify-content:center;">
@@ -274,31 +273,31 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           </div>
         </div>
       </sc-for>
-      <a href="#report" style="display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;border-bottom:1px solid #1C1E22;padding-bottom:3px;margin-top:32px;align-self:flex-start;">See what monitoring can reveal <span style="font-size:11px;">↗</span></a>
+      <a href="#report" style="display:inline;font-size:14.5px;font-weight:500;border-bottom:1px solid #1C1E22;padding-bottom:3px;margin-top:32px;align-self:flex-start;line-height:2;">Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը <span style="font-size:11px;">↗</span></a>
     </div>
   </section>
 
   <section id="report" style="scroll-margin-top:24px;margin-top:72px;background:radial-gradient(130% 100% at 18% 0%, #262A33 0%, #1C1E22 58%);border-radius:24px;padding:104px 88px;box-shadow:inset 0 1px 0 rgba(244,243,241,0.09),0 30px 60px -24px rgba(16,18,22,0.45);display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;">
     <div data-reveal="1">
-      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;color:#F4F3F1;margin:0 0 14px;">A report built for technical decisions</h2>
+      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;color:#F4F3F1;margin:0 0 14px;">Հաշվետվություն տեխնիկական որոշումների համար</h2>
       <div style="width:36px;height:2px;background:{{ accent }};margin-bottom:28px;"></div>
-      <p style="font-size:15px;line-height:1.75;color:rgba(244,243,241,0.9);margin:0 0 28px;max-width:420px;">The report separates measured facts from engineering interpretation and recommendations.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;">
+      <p style="font-size:15px;line-height:1.75;color:rgba(244,243,241,0.9);margin:0 0 28px;max-width:420px;">Հաշվետվությունում չափված փաստերը տարանջատվում են ինժեներական մեկնաբանությունից և առաջարկություններից։</p>
+      <div style="columns:2;column-gap:24px;">
         <sc-for list="{{ reportContents }}" as="rc" hint-placeholder-count="6">
-          <div style="display:flex;gap:10px;align-items:baseline;font-size:14.5px;line-height:1.65;color:rgba(244,243,241,0.82);"><span style="color:{{ accent }};font-size:8px;">●</span> {{ rc }}</div>
+          <div style="display:flex;gap:10px;align-items:baseline;font-size:14.5px;line-height:1.65;color:rgba(244,243,241,0.82);break-inside:avoid;margin-bottom:12px;"><span style="color:{{ accent }};font-size:8px;">●</span> {{ rc }}</div>
         </sc-for>
       </div>
-      <p style="font-size:14px;line-height:1.75;color:rgba(244,243,241,0.68);margin:24px 0 0;max-width:420px;">Power quality parameters are measured using IEC 61000-4-30 Class S methods. Harmonic and interharmonic measurements are evaluated using IEC 61000-4-7 where applicable.</p>
+      <p style="font-size:14px;line-height:1.75;color:rgba(244,243,241,0.68);margin:24px 0 0;max-width:420px;">Էլեկտրաէներգիայի որակի պարամետրերը չափվում են ԳՕՍՏ ԻԷԿ 61000-4-30-2017 ստանդարտով սահմանված S դասի մեթոդներով։ Հարմոնիկ և միջհարմոնիկ բաղադրիչները գնահատվում են ԻԷԿ 61000-4-7-ի համաձայն, երբ կիրառելի է։ Մատակարարման կետում արդյունքները կարող են համեմատվել Հայաստանում գործող ԳՕՍՏ 32144-2013-ի նորմերի հետ՝ չափման նպատակից և չափման կետից կախված։</p>
     </div>
     <div data-reveal="1" style="border-radius:18px;overflow:hidden;isolation:isolate;">
-      <img src="uploads/img/report_preview.jpg" data-plx="22" loading="lazy" decoding="async" alt="Power quality monitoring report with voltage event detail, event log and harmonics analysis" style="width:100%;display:block;border-radius:18px;">
+      <img src="uploads/img/report_preview_hy.jpg" data-plx="22" loading="lazy" decoding="async" alt="Power quality monitoring report with voltage event detail, event log and harmonics analysis" style="width:100%;display:block;border-radius:18px;">
     </div>
   </section>
 
   <section id="assignments" style="padding:120px 48px 40px;">
-    <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 14px;">Typical assignments</h2>
+    <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 14px;">Տիպային աշխատանքներ</h2>
     <div style="width:36px;height:2px;background:#1C1E22;margin-bottom:20px;"></div>
-    <p style="font-size:14px;line-height:1.75;color:#484B51;margin:0 0 48px;max-width:560px;">Each assignment is shaped by the technical question and the evidence required.</p>
+    <p style="font-size:14px;line-height:1.75;color:#484B51;margin:0 0 48px;max-width:560px;">Յուրաքանչյուր աշխատանք սահմանվում է տեխնիկական հարցով և անհրաժեշտ տվյալներով։</p>
     <div data-reveal="1" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
       <sc-for list="{{ assignments }}" as="a" hint-placeholder-count="4">
         <div style="border:1px solid #D8D5D0;border-radius:20px;padding:40px;display:flex;flex-direction:column;gap:18px;background:#F4F3F1;box-shadow:0 1px 2px rgba(16,18,22,0.05),0 10px 24px -8px rgba(16,18,22,0.09);" style-hover="border-color:#1C1E22;">
@@ -314,50 +313,50 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   </section>
 
   <section id="measure" style="padding:112px 8px 100px;">
-    <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 6px;">What we measure</h2>
+    <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;margin:0 0 6px;">Ինչ ենք չափում</h2>
     <div style="width:36px;height:2px;background:#1C1E22;margin-bottom:52px;"></div>
     <div data-reveal="stagger" style="display:grid;grid-template-columns:repeat(7,1fr);gap:20px;">
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="44" height="30" viewBox="0 0 44 30" fill="none"><path d="M2 15 C6 3,11 3,15 15 S24 27,28 15 S37 3,42 15" stroke="#1C1E22" stroke-width="1.6" stroke-linecap="round"/><path d="M2 21 C6 11,11 11,15 21 S24 30,28 21 S37 11,42 21" stroke="#E8622C" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Voltage &amp; Current</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Լարում և հոսանք</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="40" height="30" viewBox="0 0 40 30" fill="none"><g stroke="#1C1E22" stroke-width="2" stroke-linecap="round"><line x1="5" y1="27" x2="5" y2="16"/><line x1="12" y1="27" x2="12" y2="10"/><line x1="26" y1="27" x2="26" y2="13"/><line x1="33" y1="27" x2="33" y2="20"/></g><line x1="19" y1="27" x2="19" y2="4" stroke="#E8622C" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Harmonics &amp; Interharmonics</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Հարմոնիկներ և միջհարմոնիկներ</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="30" height="32" viewBox="0 0 30 32" fill="none"><path d="M15 4 C10 4,7 8,7 12 C7 15,9 17,11 19 L11 23 L19 23 L19 19 C21 17,23 15,23 12 C23 8,20 4,15 4Z" stroke="#1C1E22" stroke-width="1.5"/><line x1="12" y1="27" x2="18" y2="27" stroke="#1C1E22" stroke-width="1.5" stroke-linecap="round"/><g stroke="#E8622C" stroke-width="1.4" stroke-linecap="round"><line x1="4" y1="6" x2="1" y2="4"/><line x1="26" y1="6" x2="29" y2="4"/></g></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Flicker</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Ֆլիկեր</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="44" height="30" viewBox="0 0 44 30" fill="none"><path d="M2 11 H15 L19 11 L21 25 L25 25 L27 11 H42" stroke="#1C1E22" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="23" cy="25" r="2.6" fill="#E8622C"/></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Voltage Dips</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Լարման անկումներ</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="34" height="30" viewBox="0 0 34 30" fill="none"><g stroke-width="2" stroke-linecap="round"><line x1="5" y1="7" x2="29" y2="7" stroke="#1C1E22"/><line x1="5" y1="15" x2="20" y2="15" stroke="#E8622C"/><line x1="5" y1="23" x2="25" y2="23" stroke="#1C1E22"/></g></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Unbalance</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Լարման անհամաչափություն</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="34" height="30" viewBox="0 0 34 30" fill="none"><path d="M4 25 A13 13 0 0 1 30 25" stroke="#1C1E22" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="25" x2="25" y2="13" stroke="#E8622C" stroke-width="1.9" stroke-linecap="round"/><circle cx="17" cy="25" r="2.2" fill="#1C1E22"/></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Power &amp; Energy</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Հզորություն և էներգիա</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
         <div style="height:34px;display:flex;align-items:center;">
           <svg width="34" height="32" viewBox="0 0 34 32" fill="none"><rect x="5" y="4" width="16" height="23" rx="2" stroke="#1C1E22" stroke-width="1.5"/><line x1="9" y1="10" x2="17" y2="10" stroke="#1C1E22" stroke-width="1.4" stroke-linecap="round"/><line x1="9" y1="14" x2="17" y2="14" stroke="#1C1E22" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="21" r="5" stroke="#E8622C" stroke-width="1.6" fill="#EFEDEA"/><line x1="25" y1="25" x2="29" y2="29" stroke="#E8622C" stroke-width="1.7" stroke-linecap="round"/></svg>
         </div>
-        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Events</div>
+        <div style="font-size:14.5px;font-weight:500;line-height:1.35;color:#3A3D42;">Իրադարձություններ</div>
       </div>
     </div>
   </section>
@@ -365,17 +364,17 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   <section id="company" style="scroll-margin-top:24px;padding:40px 8px 0;">
     <div data-reveal="1" style="display:grid;grid-template-columns:1fr 1.4fr;gap:80px;margin-bottom:72px;align-items:start;">
       <div>
-        <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">Company</div>
-        <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:0;">Independent data <span style="color:{{ accent }};">Clear engineering judgment</span></h2>
+        <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};margin-bottom:16px;">ԸՆԿԵՐՈՒԹՅՈՒՆ</div>
+        <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:0;">Անկախ տվյալներ <span style="color:{{ accent }};">Հստակ ինժեներական գնահատում</span></h2>
       </div>
       <div>
-        <p style="font-size:15px;line-height:1.8;color:#484B51;margin:0 0 40px;max-width:560px;">PowerTech was created to make electrical problems measurable. We record how electrical systems behave during operation and provide independent engineering assessments based on the recorded data. PowerTech is based in Yerevan and works on-site across the region.</p>
+        <p style="font-size:15px;line-height:1.8;color:#484B51;margin:0 0 40px;max-width:560px;">PowerTech-ը ստեղծվել է էլեկտրական խնդիրները չափելի դարձնելու համար։ Մենք գրանցում ենք, թե ինչպես են էլեկտրական համակարգերն աշխատում շահագործման ընթացքում, և գրանցված տվյալների հիման վրա ներկայացնում ենք անկախ ինժեներական գնահատում։ PowerTech-ը հիմնված է Երևանում և տեղում աշխատանքներ է իրականացնում Հայաստանում։</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px 56px;">
           <sc-for list="{{ principles }}" as="p" hint-placeholder-count="4">
             <div style="display:flex;gap:18px;border-top:1px solid #D8D5D0;padding-top:22px;">
               <div data-mono="1" style="width:40px;height:40px;border:1px solid #D8D5D0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#71747B;flex-shrink:0;">{{ p.num }}</div>
               <div>
-                <div style="font-size:16px;font-weight:600;line-height:1.35;">{{ p.title }}</div>
+                <div style="font-size:16px;font-weight:600;letter-spacing:-0.01em;line-height:1.35;">{{ p.title }}</div>
                 <div style="font-size:14.5px;line-height:1.7;color:#575B62;margin-top:6px;">{{ p.desc }}</div>
               </div>
             </div>
@@ -384,8 +383,8 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
       </div>
     </div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:32px;margin-bottom:28px;padding:0 40px;">
-      <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.01em;margin:0;">From the site to the report</h3>
-      <p style="font-size:14.5px;line-height:1.7;color:#484B51;margin:0;max-width:380px;text-align:right;">Installation, recording and analysis are managed under one engineering lead.</p>
+      <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.01em;margin:0;">Չափման վայրից մինչև հաշվետվություն</h3>
+      <p style="font-size:14.5px;line-height:1.7;color:#484B51;margin:0;max-width:380px;text-align:right;">Տեղադրումը, գրանցումը և վերլուծությունն իրականացվում են մեկ պատասխանատու ինժեների ղեկավարությամբ։</p>
     </div>
     <div data-reveal="stagger" style="display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:14px;">
       <sc-for list="{{ stages }}" as="s" hint-placeholder-count="3">
@@ -395,7 +394,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           <div data-mono="1" style="position:absolute;top:16px;left:16px;width:34px;height:34px;border:2px solid rgba(244,243,241,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#F4F3F1;background:rgba(16,18,22,0.5);backdrop-filter:blur(6px);">{{ s.num }}</div>
           <div style="position:absolute;left:22px;bottom:22px;right:20px;color:#F4F3F1;">
             <div data-mono="1" style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:{{ accent }};margin-bottom:6px;">{{ s.tag }}</div>
-            <div style="font-size:14px;font-weight:500;line-height:1.5;">{{ s.title }}</div>
+            <div style="font-size:14px;font-weight:500;line-height:1.45;">{{ s.title }}</div>
           </div>
         </div>
       </sc-for>
@@ -404,9 +403,9 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
 
   <section id="contact" data-reveal="1" style="scroll-margin-top:24px;margin-top:120px;background:radial-gradient(130% 100% at 18% 0%, #262A33 0%, #1C1E22 58%);border-radius:24px;padding:88px 72px;box-shadow:inset 0 1px 0 rgba(244,243,241,0.09),0 30px 60px -24px rgba(16,18,22,0.45);display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;">
     <div>
-      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;color:#F4F3F1;margin:0 0 24px;">Start with <span style="color:{{ accent }};">what happened</span></h2>
-      <p style="font-size:14px;line-height:1.75;color:rgba(244,243,241,0.86);margin:0 0 32px;max-width:400px;">Describe the event, the affected equipment and when it occurred or tends to occur. We will assess whether monitoring can answer the question and what scope is required.</p>
-      <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:12px;background:#F4F3F1;color:#1C1E22;font-size:14px;font-weight:500;padding:15px 26px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Describe the issue <span style="font-size:12px;">↗</span></button>
+      <h2 style="font-size:34px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;color:#F4F3F1;margin:0 0 24px;">Նկարագրեք <span style="color:{{ accent }};">խնդիրը</span></h2>
+      <p style="font-size:14px;line-height:1.75;color:rgba(244,243,241,0.86);margin:0 0 32px;max-width:400px;">Նշեք՝ ինչ է տեղի ունեցել, որ սարքավորման վրա է դա ազդել, և երբ է խնդիրը դրսևորվել կամ սովորաբար կրկնվում։ Մենք կգնահատենք՝ կարող է արդյոք մոնիթորինգը պատասխանել հարցին և չափումների ինչ շրջանակ է անհրաժեշտ։</p>
+      <button onClick="{{ openForm }}" data-magnet="1" style="display:inline-flex;align-items:center;gap:12px;background:#F4F3F1;color:#1C1E22;font-size:14px;font-weight:500;padding:15px 26px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Նկարագրել խնդիրը <span style="font-size:12px;">↗</span></button>
     </div>
     <div>{{ waveChart }}</div>
   </section>
@@ -416,46 +415,46 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
       <div id="formModalBox" onClick="{{ stopClick }}" style="background:#F4F3F1;border:1px solid #D8D5D0;border-radius:24px;max-width:720px;width:100%;margin:auto;position:relative;padding:48px;animation:modalIn .35s cubic-bezier(0.22,1,0.36,1);">
         <button onClick="{{ closeForm }}" style="position:absolute;top:22px;right:22px;width:36px;height:36px;border-radius:50%;background:#E4E1DC;border:none;cursor:pointer;font-size:15px;color:#1C1E22;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
         <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-          <h3 style="font-size:28px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px;">Describe the <span style="color:{{ accent }};">electrical issue</span></h3>
-          <p style="font-size:14px;line-height:1.7;color:#484B51;margin:0 0 32px;max-width:520px;">Tell us what happened, when it occurred or tends to occur, and which equipment is affected. We will assess whether monitoring can answer the question and what information is needed.</p>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:18px;">Contact details</div>
+          <h3 style="font-size:28px;font-weight:600;letter-spacing:-0.01em;margin:0 0 10px;">Նկարագրեք <span style="color:{{ accent }};">էլեկտրական խնդիրը</span></h3>
+          <p style="font-size:14px;line-height:1.7;color:#484B51;margin:0 0 32px;max-width:520px;">Նշեք՝ ինչ է տեղի ունեցել, երբ է խնդիրը դրսևորվել կամ սովորաբար կրկնվում, և որ սարքավորման վրա է այն ազդել։ Մենք կգնահատենք՝ կարող է արդյոք մոնիթորինգը պատասխանել հարցին և ինչ տվյալներ են անհրաժեշտ։</p>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:18px;">ԿՈՆՏԱԿՏԱՅԻՆ ՏՎՅԱԼՆԵՐ</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Name</label>
-              <input id="ptfName" type="text" placeholder="Your name" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Անուն</label>
+              <input id="ptfName" type="text" placeholder="Ձեր անունը" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Company</label>
-              <input id="ptfCompany" type="text" placeholder="Company name" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Ընկերություն</label>
+              <input id="ptfCompany" type="text" placeholder="Ընկերության անվանումը" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Email</label>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Էլ. փոստ</label>
               <input id="ptfEmail" type="email" placeholder="name@company.com" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Phone</label>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Հեռախոս</label>
               <input id="ptfPhone" type="tel" placeholder="+374 ..." style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
           </div>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">Application</div>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">ՈԼՈՐՏ</div>
           <div id="ptfTypes" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
             <sc-for list="{{ appTypes }}" as="t" hint-placeholder-count="7">
               <button onClick="{{ t.pick }}" style="font-size:14.5px;font-weight:500;padding:10px 18px;border-radius:999px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};cursor:pointer;font-family:inherit;">{{ t.label }}</button>
             </sc-for>
           </div>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">What happened?</div>
-          <textarea id="ptfMsg" placeholder="Describe the trip, alarm, shutdown or recurring condition. Include approximate times, affected equipment and available error codes or logs." style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">Attachments <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#A8AAAE;">— optional</span></div>
-          <div style="border:1px dashed #C9C6C0;border-radius:12px;padding:18px 20px;font-size:14px;line-height:1.75;color:#71747B;margin-bottom:28px;">Single-line diagram, panel photo, alarm screenshot, inverter or UPS log, previous report.</div>
-          <button onClick="{{ submitForm }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Send the details <span style="font-size:12px;">↗</span></button>
-          <div style="font-size:14px;line-height:1.75;color:#71747B;margin-top:28px;border-top:1px solid #E4E1DC;padding-top:20px;">sales@powertech.am · +374 41 00 00 14 · Davtashen 1, 13-25, Yerevan 0058 · Mon–Fri 09:00–18:00 (UTC+4)</div>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">Ի՞ՆՉ Է ՏԵՂԻ ՈՒՆԵՑԵԼ</div>
+          <textarea id="ptfMsg" placeholder="Նկարագրեք անջատումը, ազդանշանը, աշխատանքի դադարեցումը կամ կրկնվող խնդիրը։ Նշեք մոտավոր ժամանակը, ազդված սարքավորումը և առկա սխալի կոդերը կամ համակարգի գրանցած իրադարձությունները։" style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">ԿՑՎՈՂ ՖԱՅԼԵՐ <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#A8AAAE;">— ըստ ցանկության</span></div>
+          <div style="border:1px dashed #C9C6C0;border-radius:12px;padding:18px 20px;font-size:14px;line-height:1.75;color:#71747B;margin-bottom:28px;">Միագիծ սխեմա, վահանակի լուսանկար, ազդանշանի էկրանի պատկեր, ինվերտորի կամ UPS-ի գրանցումների արտահանված ֆայլ, նախորդ հաշվետվություն։</div>
+          <button onClick="{{ submitForm }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Ուղարկել տվյալները <span style="font-size:12px;">↗</span></button>
+          <div style="font-size:14px;line-height:1.75;color:#71747B;margin-top:28px;border-top:1px solid #E4E1DC;padding-top:20px;">sales@powertech.am · +374 41 00 00 14 · Դավթաշեն 1, 13-25, Երևան 0058 · Երկ–Ուրբ 09:00–18:00 (UTC+4)</div>
         </sc-if>
         <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
           <div style="padding:40px 0;text-align:center;">
             <div style="width:52px;height:52px;border-radius:50%;background:{{ accent }};color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">✓</div>
-            <div style="font-size:22px;font-weight:600;margin-bottom:10px;">Thank you.</div>
-            <div style="font-size:14px;line-height:1.7;color:#484B51;max-width:400px;margin:0 auto 28px;">We will review the information and contact you to clarify the measurement scope.</div>
-            <button onClick="{{ closeForm }}" style="display:inline-flex;align-items:center;gap:10px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:14px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Close</button>
+            <div style="font-size:22px;font-weight:600;margin-bottom:10px;">Շնորհակալություն։</div>
+            <div style="font-size:14px;line-height:1.7;color:#484B51;max-width:400px;margin:0 auto 28px;">Մենք կուսումնասիրենք տրամադրված տեղեկատվությունը և կկապվենք ձեզ հետ՝ չափումների շրջանակը հստակեցնելու համար։</div>
+            <button onClick="{{ closeForm }}" style="display:inline-flex;align-items:center;gap:10px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:14px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Փակել</button>
           </div>
         </sc-if>
       </div>
@@ -463,7 +462,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   </sc-if>
 
   <div style="position:fixed;bottom:28px;right:28px;z-index:60;opacity:{{ btnOpacity }};transform:translateY({{ btnShift }});transition:opacity 0.3s ease, transform 0.3s ease;pointer-events:{{ btnEvents }};">
-    <button onClick="{{ toTop }}" title="Back to top" style="position:relative;width:56px;height:56px;border-radius:50%;background:linear-gradient(155deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.3) 100%);backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border:1px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;font-family:inherit;box-shadow:0 14px 34px rgba(16,18,22,0.16), inset 0 1px 1px rgba(255,255,255,0.8), inset 0 -8px 14px rgba(16,18,22,0.05);transition:transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s ease;" style-hover="transform:scale(1.06);box-shadow:0 18px 42px rgba(16,18,22,0.2), inset 0 1px 1px rgba(255,255,255,0.9), inset 0 -8px 14px rgba(16,18,22,0.05);">
+    <button onClick="{{ toTop }}" title="Վերև" style="position:relative;width:56px;height:56px;border-radius:50%;background:linear-gradient(155deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.3) 100%);backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border:1px solid rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;font-family:inherit;box-shadow:0 14px 34px rgba(16,18,22,0.16), inset 0 1px 1px rgba(255,255,255,0.8), inset 0 -8px 14px rgba(16,18,22,0.05);transition:transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s ease;" style-hover="transform:scale(1.06);box-shadow:0 18px 42px rgba(16,18,22,0.2), inset 0 1px 1px rgba(255,255,255,0.9), inset 0 -8px 14px rgba(16,18,22,0.05);">
       {{ ringEl }}
       <span style="position:relative;color:#1C1E22;font-size:17px;font-weight:600;line-height:1;">↑</span>
     </button>
@@ -485,7 +484,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
     <div style="display:flex;gap:48px;font-size:13px;color:#484B51;flex-wrap:wrap;">
       <span>sales@powertech.am</span>
       <span>+374 41 00 00 14</span>
-      <span>Davtashen 1, 13-25, Yerevan 0058, Armenia</span>
+      <span>Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան</span>
     </div>
     <div style="display:flex;gap:12px;">
       <sc-for list="{{ socials }}" as="s" hint-placeholder-count="3">
@@ -495,7 +494,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E8622C&quot;,&quot;options&quot;:[&quot;#E8622C&quot;,&quot;#D94F1E&quot;,&quot;#C97B2C&quot;,&quot;#3D6BE0&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;fontScheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Big Shoulders industrial&quot;,&quot;options&quot;:[&quot;Archivo + IBM Plex Mono&quot;,&quot;Space Grotesk + IBM Plex Mono&quot;,&quot;IBM Plex Sans + Mono&quot;,&quot;B612 cockpit (Airbus)&quot;,&quot;Saira engineering (DIN)&quot;,&quot;Big Shoulders industrial&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Typography&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#D94F1E&quot;,&quot;options&quot;:[&quot;#E8622C&quot;,&quot;#D94F1E&quot;,&quot;#C97B2C&quot;,&quot;#3D6BE0&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;}}">
 class Component extends DCLogic {
   state = { progress: 0, shown: false, activeIdx: null, formOpen: false, submitted: false, picked: 0 };
   componentDidMount() {
@@ -530,6 +529,7 @@ class Component extends DCLogic {
       }
     };
     window.addEventListener('scroll', this._bt, {passive: true}); this._bt();
+    document.documentElement.lang = 'hy';
     this._wireScroller();
     this._applyFonts();
     this._wireFx();
@@ -663,7 +663,7 @@ class Component extends DCLogic {
   }
   componentDidUpdate() { this._applyFonts(); }
   _applyFonts() {
-    const scheme = this.props.fontScheme ?? 'Big Shoulders industrial';
+    const scheme = this.props.fontScheme ?? 'Archivo + IBM Plex Mono';
     if (this._fontScheme === scheme) return;
     this._fontScheme = scheme;
     const map = {
@@ -674,12 +674,11 @@ class Component extends DCLogic {
       'Saira engineering (DIN)': {body: "'Saira'", head: "'Saira SemiCondensed'", mono: "'Overpass Mono'"},
       'Big Shoulders industrial': {body: "'Archivo'", head: "'Big Shoulders Display'", mono: "'Martian Mono'", headLs: '0.022em'},
     };
-    const f = map[scheme] || map['Archivo + IBM Plex Mono'];
     let st = document.getElementById('pt-fonts');
     if (!st) { st = document.createElement('style'); st.id = 'pt-fonts'; document.head.appendChild(st); }
-    st.textContent = 'body{font-family:' + f.body + ",'Helvetica Neue',Helvetica,Arial,sans-serif;}\n" +
-      'h1,h2,[data-head]{font-family:' + f.head + ',sans-serif;' + (f.headLs ? 'letter-spacing:' + f.headLs + ' !important;' : '') + '}\n' +
-      '[data-mono]{font-family:' + f.mono + ',monospace;}';
+    st.textContent = "body{font-family:'Mardoto','Roboto','Noto Sans Armenian','Helvetica Neue',sans-serif;}\n" +
+      "h1,h2,h3,[data-head]{font-family:'Noto Sans Armenian','Archivo',sans-serif;font-stretch:100%;font-weight:700;letter-spacing:0 !important;}\n" +
+      "[data-mono]{font-family:'Martian Mono','Mardoto','Noto Sans Armenian',monospace;letter-spacing:0.04em !important;text-transform:none !important;}";
   }
   _wireScroller() {
     const el = document.getElementById('appsScroller');
@@ -696,30 +695,30 @@ class Component extends DCLogic {
   appData() {
     const P = 'uploads/img/';
     return [
-      {num: '01', title: 'Manufacturing', img: P + '02_manufacturing_industrial_robot.jpg',
-       p1: 'Backup generation is designed for interruptions on a different time scale. A short voltage dip may affect equipment before transfer occurs, so the event must be recorded while it happens.',
-       findings: ['Timestamp, duration, minimum RMS voltage and affected phases of recorded dips.', 'Voltage unbalance and current loading relevant to motor operation.', 'Whether reactive power or harmonic distortion requires further engineering review.'],
-       statLabel: 'Technical note', statText: 'Voltage sags and momentary interruptions can trip electronic and electromechanical devices and stop production lines.', statSource: 'Source: EPRI'},
-      {num: '02', title: 'Solar PV', img: P + '03_solar_power_plant.jpg',
-       p1: 'Voltage rise can reflect the interaction of plant output, internal impedance and upstream network conditions. Measurements at relevant points can help distinguish plant-side from network-side factors.',
-       findings: ['Voltage conditions during inverter disconnection or active-power limitation.', 'Voltage and harmonic distortion against applicable connection requirements.', 'Independent measurement evidence for commissioning or EPC review.'],
-       note: 'Independent, time-aligned measurements give the owner, EPC contractor and network operator a common record of operating conditions.'},
-      {num: '03', title: 'Healthcare and Laboratories', img: P + '06_healthcare_laboratory.jpg',
-       p1: 'Warranty or service review may require evidence of the supply conditions present while the equipment was operating. A spot measurement may miss intermittent events.',
-       findings: ['Recorded supply conditions compared with manufacturer requirements.', 'Evidence relevant to distinguishing supply-related events from equipment faults.', 'Recommended next checks prioritized by technical criticality and operational impact.'],
-       statLabel: 'Technical note', statText: 'IEC 60601-1-2 includes immunity testing for voltage dips and short interruptions in medical electrical equipment.', statSource: 'Source: IEC'},
-      {num: '04', title: 'Data Centers and IT Infrastructure', img: P + '05_data_center.jpg',
-       p1: 'Generators start and transfer on a different time scale from millisecond-level disturbances. Time-stamped monitoring records can be compared with UPS and IT logs.',
-       findings: ['UPS input loading relative to rated capacity.', 'Correlation between restarts, battery operation and recorded supply disturbances.', 'Load profiles relevant to planned expansion.'],
-       stat: '57%', statLabel: 'Statistic', statText: "of respondents to Uptime's 2025 annual survey said their most recent major outage cost more than USD 100,000.", statSource: 'Source: Uptime Institute, Annual Outage Analysis 2026'},
-      {num: '05', title: 'Commercial Buildings', img: P + '04_commercial_building.jpg',
-       p1: 'Measurements can help distinguish upstream supply conditions from disturbances generated within the building or by tenant equipment.',
-       findings: ['Evidence relevant to the likely source of a disturbance.', 'Electrical conditions associated with overheating or protective-device operation.', 'Power factor, reactive power and load trends relevant to billing or capacity.'],
-       statLabel: 'Technical note', statText: 'Power-quality events can originate on either side of the customer meter.', statSource: 'Source: U.S. DOE / LBNL'},
-      {num: '06', title: 'Investment and Technical Review', img: P + '08_finance_investment.jpg',
-       p1: 'Diagnostic or continuous monitoring provides an independent record under actual operation. The findings can support technical due diligence, handover, warranty review or performance assessment.',
-       findings: ['Observed loading and power quality at relevant points.', 'Recorded conditions associated with interruptions or reduced output.', 'Limitations, risks and recommended further checks.'],
-       note: 'Reports can be prepared in Armenian, Russian or English.'},
+      {num: '01', title: 'Արտադրություն', img: P + '02_manufacturing_industrial_robot.jpg',
+       p1: 'Պահուստային գեներատորը նախատեսված է այլ տևողության ընդհատումների համար։ Լարման կարճատև անկումը կարող է ազդել սարքավորման վրա մինչև սնուցումը պահուստային աղբյուրին փոխանցելը, ուստի իրադարձությունը պետք է գրանցվի հենց տեղի ունենալու պահին։',
+       findings: ['Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։', 'Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու հոսանքային բեռնվածությունը։', 'Արդյոք ռեակտիվ հզորությունը կամ հարմոնիկ աղավաղումը պահանջում են լրացուցիչ ինժեներական ուսումնասիրություն։'],
+       statLabel: 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ', statText: 'Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։', statSource: 'Աղբյուր՝ EPRI'},
+      {num: '02', title: 'Արևային կայաններ', img: P + '03_solar_power_plant.jpg',
+       p1: 'Լարման բարձրացումը կարող է պայմանավորված լինել կայանի արտադրած հզորության, ներքին դիմադրության և արտաքին ցանցի պայմանների փոխազդեցությամբ։ Համապատասխան կետերում կատարված չափումները օգնում են տարբերակել կայանի ներսում և արտաքին ցանցում առաջացող գործոնները։',
+       findings: ['Լարման պայմանները ինվերտորի անջատման կամ ակտիվ հզորության սահմանափակման պահին։', 'Լարման և հարմոնիկ աղավաղման համապատասխանությունը միացման կիրառելի պահանջներին։', 'Անկախ չափման տվյալներ՝ գործարկման ընդունման կամ EPC աշխատանքների գնահատման համար։'],
+       note: 'Ժամանակային նշումներով անկախ չափումները հնարավորություն են տալիս սեփականատիրոջը, EPC կապալառուին և ցանցի օպերատորին կայանի և միացման կետի էլեկտրական պայմանները գնահատել նույն տվյալների հիման վրա։'},
+      {num: '03', title: 'Բժշկական կենտրոններ և լաբորատորիաներ', img: P + '06_healthcare_laboratory.jpg',
+       p1: 'Երաշխիքային կամ սպասարկման գնահատման համար կարող են պահանջվել տվյալներ այն էլեկտրասնուցման պայմանների մասին, որոնցում սարքավորումն աշխատել է։ Մեկանգամյա չափումը կարող է չգրանցել պարբերաբար ի հայտ եկող իրադարձությունները։',
+       findings: ['Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։', 'Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։', 'Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։'],
+       statLabel: 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ', statText: 'IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։', statSource: 'Աղբյուր՝ IEC'},
+      {num: '04', title: 'Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք', img: P + '05_data_center.jpg',
+       p1: 'Գեներատորի գործարկումն ու սնուցման փոխանցումը կատարվում են այլ ժամանակային մասշտաբով, քան միլիվայրկյան տևող խանգարումները։ Ժամանակային նշումներով մոնիթորինգի տվյալները կարելի է համադրել UPS-ի և ՏՏ համակարգերի գրանցած իրադարձությունների հետ։',
+       findings: ['UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։', 'Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։', 'Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։'],
+       stat: '57%', statLabel: 'ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ', statText: 'Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։', statSource: 'Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026'},
+      {num: '05', title: 'Կոմերցիոն տարածքներ', img: P + '04_commercial_building.jpg',
+       p1: 'Չափումները կարող են օգնել տարբերակել արտաքին մատակարարման ցանցի պայմանները շենքի ներքին ցանցում կամ վարձակալների սարքավորումներից առաջացող խանգարումներից։',
+       findings: ['Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։', 'Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։', 'Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։'],
+       statLabel: 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ', statText: 'Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։', statSource: 'Աղբյուր՝ U.S. DOE / LBNL'},
+      {num: '06', title: 'Ներդրումային և տեխնիկական գնահատում', img: P + '08_finance_investment.jpg',
+       p1: 'Ախտորոշիչ կամ շարունակական մոնիթորինգը համակարգի փաստացի աշխատանքի անկախ գրանցում է ապահովում։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։',
+       findings: ['Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։', 'Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։', 'Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։'],
+       note: 'Հաշվետվությունը կարող է պատրաստվել հայերեն, ռուսերեն կամ անգլերեն։'},
     ];
   }
   renderVals() {
@@ -728,7 +727,7 @@ class Component extends DCLogic {
     const rgba = (a) => 'rgba(' + parseInt(hx.slice(0,2),16) + ',' + parseInt(hx.slice(2,4),16) + ',' + parseInt(hx.slice(4,6),16) + ',' + a + ')';
     const appDataArr = this.appData();
     const imgStyle = {position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover'};
-    const apps = appDataArr.map((a, i) => ({...a, open: (e) => { this._flipFrom = e && e.currentTarget ? e.currentTarget.getBoundingClientRect() : null; this.setState({activeIdx: i}, () => requestAnimationFrame(() => this._flipModal())); }, gridImgEl: React.createElement('div', {style: {position: 'absolute', inset: 0, borderRadius: '16px', overflow: 'hidden', clipPath: 'inset(0 round 16px)'}}, React.createElement('img', {src: a.img, alt: a.title, draggable: false, loading: 'lazy', decoding: 'async', style: {...imgStyle, borderRadius: '16px'}}))}));
+    const apps = appDataArr.map((a, i) => ({...a, open: (e) => { this._flipFrom = e && e.currentTarget ? e.currentTarget.getBoundingClientRect() : null; this.setState({activeIdx: i}, () => requestAnimationFrame(() => this._flipModal())); }, gridImgEl: React.createElement('div', {style: {position: 'absolute', inset: 0, overflow: 'hidden'}}, React.createElement('img', {src: a.img, alt: a.title, draggable: false, loading: 'lazy', decoding: 'async', style: imgStyle}))}));
     const rawA = this.state.activeIdx == null ? false : appDataArr[this.state.activeIdx];
     const active = !rawA ? false : {...rawA, heroEl: React.createElement('img', {src: rawA.img, alt: rawA.title, style: imgStyle})};
     const btP = this.state.progress || 0, btShown = !!this.state.shown, btCirc = 2 * Math.PI * 26;
@@ -736,9 +735,9 @@ class Component extends DCLogic {
       React.createElement('circle', {cx: 28, cy: 28, r: 26, fill: 'none', stroke: 'rgba(28,30,34,0.12)', strokeWidth: 2}),
       React.createElement('circle', {cx: 28, cy: 28, r: 26, fill: 'none', stroke: accent, strokeWidth: 2, strokeLinecap: 'round', strokeDasharray: btCirc, strokeDashoffset: btCirc * (1 - btP), transform: 'rotate(-90 28 28)'}));
     const stageImgs = [
-      {num: '01', tag: 'On-site', title: 'Monitoring setup verified before recording', img: 'uploads/img/stage_onsite.jpg', alt: 'Engineer inspecting a distribution board with a thermal-imaging camera on-site'},
-      {num: '02', tag: 'Recording', title: 'Electrical conditions recorded for the agreed period', img: 'uploads/img/stage_recording.jpg', alt: 'Power quality analyzer connected in a distribution board, recording during operation'},
-      {num: '03', tag: 'Assessment', title: 'Findings interpreted in context and documented', img: 'uploads/img/stage_assessment.jpg', alt: 'Engineer reviewing recorded measurements and harmonics in analysis software'},
+      {num: '01', tag: 'ՏԵՂՈՒՄ', title: 'Չափման համակարգի տեղադրումն ու միացումը ստուգվում են նախքան գրանցումը։', img: 'uploads/img/stage_onsite.jpg', alt: 'Engineer inspecting a distribution board with a thermal-imaging camera on-site'},
+      {num: '02', tag: 'ԳՐԱՆՑՈՒՄ', title: 'Էլեկտրական պայմանները գրանցվում են համաձայնեցված ժամանակահատվածում։', img: 'uploads/img/stage_recording.jpg', alt: 'Power quality analyzer connected in a distribution board, recording during operation'},
+      {num: '03', tag: 'ԳՆԱՀԱՏՈՒՄ', title: 'Արդյունքները մեկնաբանվում են խնդրի համատեքստում և փաստաթղթավորվում։', img: 'uploads/img/stage_assessment.jpg', alt: 'Engineer reviewing recorded measurements and harmonics in analysis software'},
     ];
     const stages = stageImgs.map((s) => ({...s, imgEl: React.createElement('img', {src: s.img, alt: s.alt, 'data-plx': '20', loading: 'lazy', decoding: 'async', style: imgStyle})}));
     return {
@@ -769,7 +768,7 @@ class Component extends DCLogic {
             this.setState({submitted: true, sending: false});
           });
       },
-      appTypes: ['Manufacturing', 'Solar PV', 'Healthcare or laboratory', 'Data center or IT infrastructure', 'Commercial building', 'Investment and Technical Review', 'Other'].map((label, i) => ({
+      appTypes: ['Արտադրություն', 'Արևային կայան', 'Բժշկական կենտրոն կամ լաբորատորիա', 'Տվյալների կենտրոն կամ ՏՏ ենթակառուցվածք', 'Կոմերցիոն տարածք', 'Ներդրումային և տեխնիկական գնահատում', 'Այլ'].map((label, i) => ({
         label,
         pick: () => this.setState({picked: i}),
         bg: this.state.picked === i ? '#1C1E22' : 'transparent',
@@ -785,24 +784,24 @@ class Component extends DCLogic {
       btnShift: btShown ? '0px' : '12px',
       btnEvents: btShown ? 'auto' : 'none',
       ringEl,
-      timeline: ['Normal operation', 'Electrical event', 'Equipment trip or alarm', 'System returns to normal', 'The event record remains available for analysis'].map((label, i) => { const cur = (this.state.tlStage || 1) - 1; const reached = i < cur, current = i === cur; return {num: '0' + (i + 1), label, dotBg: current ? accent : (reached ? '#1C1E22' : '#EFEDEA'), dotBorder: current ? accent : (reached ? '#1C1E22' : '#8A8D93'), dotShadow: current ? '0 0 0 5px ' + rgba(0.25) : 'none', anim: current ? 'ptDot 2.6s ease-in-out infinite' : 'none', color: (reached || current) ? '#1C1E22' : '#71747B'}; }),
+      timeline: ['Բնականոն աշխատանք', 'Էլեկտրական իրադարձություն', 'Սարքավորման անջատում կամ ազդանշան', 'Համակարգի աշխատանքի վերականգնում', 'Գրանցումը պահպանվում է վերլուծության համար'].map((label, i) => { const cur = (this.state.tlStage || 1) - 1; const reached = i < cur, current = i === cur; return {num: '0' + (i + 1), label, dotBg: current ? accent : (reached ? '#1C1E22' : '#EFEDEA'), dotBorder: current ? accent : (reached ? '#1C1E22' : '#8A8D93'), dotShadow: current ? '0 0 0 5px ' + rgba(0.25) : 'none', anim: current ? 'ptDot 2.6s ease-in-out infinite' : 'none', color: (reached || current) ? '#1C1E22' : '#71747B'}; }),
       steps: [
-        {num: '01', title: 'Define the objective', desc: 'We clarify what needs to be verified, the equipment involved and the decision the findings should support.'},
-        {num: '02', title: 'Monitor in operation', desc: 'Measurements are carried out while the electrical system operates under representative operating conditions.'},
-        {num: '03', title: 'Deliver an engineering assessment', desc: 'The findings are assessed in context and presented in a clear technical report, with conclusions supported by the recorded data and recommended next steps.'},
+        {num: '01', title: 'Սահմանում ենք նպատակը', desc: 'Հստակեցնում ենք՝ ինչ պետք է ստուգվի, որ սարքավորումն է ներգրավված և ինչ որոշման պետք է աջակցեն արդյունքները։'},
+        {num: '02', title: 'Մոնիթորինգ՝ աշխատանքային ռեժիմում', desc: 'Չափումները կատարվում են էլեկտրական համակարգի աշխատանքի ընթացքում՝ բնորոշ աշխատանքային պայմաններում։'},
+        {num: '03', title: 'Ներկայացնում ենք ինժեներական գնահատում', desc: 'Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով և առաջարկվող հաջորդ քայլերով։'},
       ],
-      reportContents: ['Measurement scope and points', 'Monitoring period and operating context', 'Recorded events and trends', 'Engineering interpretation', 'Limitations of the available evidence', 'Recommended next steps'],
+      reportContents: ['Չափումների շրջանակն ու կետերը', 'Մոնիթորինգի ժամանակահատվածն ու աշխատանքային պայմանները', 'Գրանցված իրադարձություններն ու միտումները', 'Ինժեներական մեկնաբանություն', 'Առկա տվյալների սահմանափակումները', 'Առաջարկվող հաջորդ քայլերը'],
       assignments: [
-        {num: '01', tag: 'Incidents', title: 'Incident Investigation', desc: 'Assess whether equipment trips, alarms or process interruptions coincide with recorded electrical events.'},
-        {num: '02', tag: 'Handover', title: 'Commissioning and Handover Assessment', desc: 'Record electrical operating conditions to support acceptance, handover or end-of-warranty review.'},
-        {num: '03', tag: 'Solar', title: 'Solar PV Connection Assessment', desc: 'Assess voltage conditions and inverter events at relevant points within the plant and at the point of connection.'},
-        {num: '04', tag: 'Due diligence', title: 'Technical Due Diligence Measurements', desc: 'Provide independent measurements of loading, power quality and observed operating constraints to support technical due diligence.'},
+        {num: '01', tag: 'ԽԱՓԱՆՈՒՄՆԵՐ', title: 'Խափանումների ուսումնասիրություն', desc: 'Գնահատել՝ արդյոք սարքավորումների անջատումները, ազդանշանները կամ գործընթացի ընդհատումները համընկել են գրանցված էլեկտրական իրադարձությունների հետ։'},
+        {num: '02', tag: 'ՀԱՆՁՆՈՒՄ', title: 'Գործարկման և հանձնման գնահատում', desc: 'Գրանցել էլեկտրական համակարգի աշխատանքային պայմանները՝ ընդունման, հանձնման կամ երաշխիքային ժամկետի ավարտից առաջ կատարվող ստուգման համար։'},
+        {num: '03', tag: 'ԱՐԵՎԱՅԻՆ', title: 'Արևային կայանի միացման գնահատում', desc: 'Գնահատել լարման պայմաններն ու ինվերտորի իրադարձությունները կայանի համապատասխան կետերում և միացման կետում։'},
+        {num: '04', tag: 'ՏԵԽՆԻԿԱԿԱՆ ԳՆԱՀԱՏՈՒՄ', title: 'Չափումներ՝ տեխնիկական համալիր գնահատման համար', desc: 'Տրամադրել բեռնվածության, էլեկտրաէներգիայի որակի և դիտարկված աշխատանքային սահմանափակումների անկախ չափումներ՝ տեխնիկական համալիր գնահատման համար։'},
       ],
       principles: [
-        {num: '01', title: 'The objective defines the measurement', desc: 'We begin with the issue to investigate or the decision the data must support.'},
-        {num: '02', title: 'Evidence before conclusions', desc: 'Measured facts are separated from engineering interpretation and recommendations.'},
-        {num: '03', title: 'Recommendations follow the data', desc: 'We do not begin with a predefined technical solution.'},
-        {num: '04', title: 'Limitations are stated clearly', desc: 'The report explains what the measurements support and what requires further investigation.'},
+        {num: '01', title: 'Նպատակն է սահմանում չափումների շրջանակը', desc: 'Սկսում ենք ուսումնասիրվող խնդրից կամ այն որոշումից, որին պետք է աջակցեն տվյալները։'},
+        {num: '02', title: 'Նախ՝ տվյալները, ապա՝ եզրահանգումները', desc: 'Չափված փաստերը տարանջատվում են ինժեներական մեկնաբանությունից և առաջարկություններից։'},
+        {num: '03', title: 'Առաջարկությունները բխում են տվյալներից', desc: 'Մենք չենք սկսում նախապես ընտրված տեխնիկական լուծումից։'},
+        {num: '04', title: 'Սահմանափակումները նշվում են հստակ', desc: 'Հաշվետվությունը բացատրում է՝ ինչն են հիմնավորում գրանցված տվյալները, և ինչը պահանջում է լրացուցիչ ուսումնասիրություն։'},
       ],
       socials: ['in', 'f', 'yt'],
       waveChart: this.wave(accent),
@@ -817,12 +816,12 @@ class Component extends DCLogic {
     }
     return React.createElement('svg', {viewBox: '0 0 560 140', style: {width: '100%', display: 'block'}},
       React.createElement('line', {x1: 0, y1: 56, x2: 560, y2: 56, stroke: 'rgba(244,243,241,0.25)', strokeDasharray: '3 5'}),
-      React.createElement('text', {x: 0, y: 16, fontSize: 10, fill: 'rgba(244,243,241,0.55)', fontFamily: "'Martian Mono',monospace"}, 'RMS VOLTAGE · 10-MIN TREND'),
-      React.createElement('text', {x: 560, y: 46, fontSize: 9, fill: 'rgba(244,243,241,0.4)', fontFamily: "'Martian Mono',monospace", textAnchor: 'end'}, 'NOMINAL'),
+      React.createElement('text', {x: 0, y: 16, fontSize: 10, fill: 'rgba(244,243,241,0.55)', fontFamily: "'Martian Mono','Noto Sans Armenian',sans-serif"}, 'RMS ԼԱՐՈՒՄ · 10-ՐՈՊԵԱՆՈՑ ՄԻՏՈՒՄ'),
+      React.createElement('text', {x: 560, y: 46, fontSize: 9, fill: 'rgba(244,243,241,0.4)', fontFamily: "'Martian Mono','Noto Sans Armenian',sans-serif", textAnchor: 'end'}, 'ԱՆՎԱՆԱԿԱՆ'),
       React.createElement('path', {d: pts.join(' '), stroke: 'rgba(244,243,241,0.86)', strokeWidth: 1.4, fill: 'none'}),
       React.createElement('rect', {x: 200, y: 40, width: 64, height: 72, fill: 'none', stroke: 'rgba(244,243,241,0.35)', strokeDasharray: '4 4'}),
       React.createElement('circle', {cx: 232, cy: 102, r: 5, fill: accent}),
-      React.createElement('text', {x: 200, y: 128, fontSize: 9, fill: 'rgba(244,243,241,0.55)', fontFamily: "'Martian Mono',monospace"}, 'VOLTAGE DIP · 180 MS')
+      React.createElement('text', {x: 200, y: 128, fontSize: 9, fill: 'rgba(244,243,241,0.55)', fontFamily: "'Martian Mono','Noto Sans Armenian',sans-serif"}, 'ԼԱՐՄԱՆ ԱՆԿՈՒՄ · 180 ՄՎՐԿ')
     );
   }
 }
