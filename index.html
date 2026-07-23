@@ -51,7 +51,7 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/martian-mono-600-latin.woff2">
 <style>
   html,body{margin:0;padding:0;background:#EFEDEA;font-family:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1C1E22;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  body::after{content:"";position:fixed;inset:-8%;z-index:2147483000;pointer-events:none;opacity:0.06;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px 240px;}
+  /* grain overlay removed — a full-screen fixed mix-blend-mode:multiply layer caused intermittent white flashes on repaint (Chrome/Firefox) */
   a{color:#1C1E22;text-decoration:none;transition:color .2s ease,border-color .2s ease,background .25s ease,transform .35s cubic-bezier(0.22,1,0.36,1),box-shadow .35s ease;}
   a:hover{color:#E8622C;border-color:#E8622C;}
   *{box-sizing:border-box;}
