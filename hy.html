@@ -448,14 +448,23 @@ h1,h2,h3,[data-head]{font-family:'Noto Sans Armenian','Archivo',sans-serif;font-
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">Ի՞ՆՉ Է ՏԵՂԻ ՈՒՆԵՑԵԼ</div>
           <textarea id="ptfMsg" placeholder="Նկարագրեք անջատումը, ազդանշանը, աշխատանքի դադարեցումը կամ կրկնվող խնդիրը։ Նշեք մոտավոր ժամանակը, ազդված սարքավորումը և առկա սխալի կոդերը կամ համակարգի գրանցած իրադարձությունները։" style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">ԿՑՎՈՂ ՖԱՅԼԵՐ <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#A8AAAE;">— ըստ ցանկության</span></div>
-          <div style="border:1px dashed #C9C6C0;border-radius:12px;padding:18px 20px;margin-bottom:12px;">
-            <div style="font-size:14px;line-height:1.75;color:#71747B;margin-bottom:12px;">Միագիծ սխեմա, վահանակի լուսանկար, ազդանշանի էկրանի պատկեր, ինվերտորի կամ UPS-ի գրանցումների արտահանված ֆայլ, նախորդ հաշվետվություն։</div>
-            <input id="ptfFiles" type="file" multiple="multiple" accept="image/*,.pdf,.csv,.txt,.log,.xls,.xlsx,.doc,.docx,.zip" style="display:block;width:100%;font-size:13px;color:#484B51;font-family:inherit;">
+          <div id="ptfDrop" onClick="{{ pickFiles }}" onDragEnter="{{ dragOn }}" onDragOver="{{ dragOn }}" onDragLeave="{{ dragOff }}" style="border:1.5px dashed {{ dropBorder }};border-radius:12px;padding:22px 20px;margin-bottom:12px;cursor:pointer;background:{{ dropBg }};transition:border-color .2s ease,background .2s ease;text-align:center;">
+            <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#1C1E22;margin-bottom:6px;">Գցեք ֆայլերն այստեղ կամ սեղմեք ընտրելու համար</div>
+            <div style="font-size:13px;line-height:1.7;color:#71747B;">Միագիծ սխեմա, վահանակի լուսանկար, ազդանշանի էկրանի պատկեր, ինվերտորի կամ UPS-ի գրանցումների արտահանված ֆայլ, նախորդ հաշվետվություն։</div>
+            <input id="ptfInput" type="file" multiple="multiple" accept="image/*,.pdf,.csv,.txt,.log,.xls,.xlsx,.doc,.docx,.zip" onChange="{{ onFilesChange }}" style="display:none;">
           </div>
+          <sc-for list="{{ attachList }}" as="a" hint-placeholder-count="0">
+            <div style="display:flex;align-items:center;gap:10px;background:#EFEDEA;border:1px solid #E4E1DC;border-radius:10px;padding:9px 12px;margin-bottom:8px;">
+              <span style="font-size:15px;flex-shrink:0;">{{ a.icon }}</span>
+              <span style="flex:1;min-width:0;font-size:13px;color:#1C1E22;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ a.name }}</span>
+              <span data-mono="1" style="font-size:12px;color:#A8AAAE;flex-shrink:0;">{{ a.size }}</span>
+              <button onClick="{{ a.remove }}" title="Հեռացնել" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;border:none;background:#E4E1DC;color:#1C1E22;cursor:pointer;font-size:14px;line-height:1;font-family:inherit;padding:0;" style-hover="background:#C5280D;color:#fff;">×</button>
+            </div>
+          </sc-for>
           <sc-if value="{{ sizeErr }}" hint-placeholder-val="{{ false }}">
-            <div style="font-size:13px;color:#C5280D;margin-bottom:10px;">Կցված ֆայլերը գերազանցում են 10 ՄԲ սահմանը — հեռացրեք մի քանիսը։</div>
+            <div style="font-size:13px;color:#C5280D;margin-bottom:8px;">Կցված ֆայլերը գերազանցում են 10 ՄԲ սահմանը — հեռացրեք մի քանիսը։</div>
           </sc-if>
-          <div style="font-size:12px;color:#A8AAAE;margin-bottom:28px;">Առավելագույնը՝ 10 ՄԲ ընդհանուր։</div>
+          <div style="font-size:12px;color:{{ attachHint.color }};margin-bottom:28px;">{{ attachHint.text }}</div>
           <button onClick="{{ submitForm }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Ուղարկել տվյալները <span style="font-size:12px;">↗</span></button>
           <div style="font-size:14px;line-height:1.75;color:#71747B;margin-top:28px;border-top:1px solid #E4E1DC;padding-top:20px;">sales@powertech.am · +374 41 00 00 14 · Դավթաշեն 1, 13-25, Երևան 0058 · Երկ–Ուրբ 09:00–18:00 (UTC+4)</div>
         </sc-if>
@@ -745,6 +754,25 @@ class Component extends DCLogic {
       {num: '03', tag: 'ԳՆԱՀԱՏՈՒՄ', title: 'Արդյունքները մեկնաբանվում են խնդրի համատեքստում և փաստաթղթավորվում։', img: 'uploads/img/stage_assessment.jpg', alt: 'Engineer reviewing recorded measurements and harmonics in analysis software'},
     ];
     const stages = stageImgs.map((s) => ({...s, imgEl: React.createElement('img', {src: s.img, alt: s.alt, 'data-plx': '20', loading: 'lazy', decoding: 'async', style: imgStyle})}));
+    if (!this._files) this._files = [];
+    const fmtSize = (b) => b < 1024 ? b + ' Բ' : (b < 1048576 ? Math.round(b / 1024) + ' ԿԲ' : (b / 1048576).toFixed(1) + ' ՄԲ');
+    const addAttach = (list) => {
+      const arr = Array.prototype.slice.call(list || []);
+      arr.forEach((f) => { if (!this._files.some((g) => g.name === f.name && g.size === f.size)) this._files.push(f); });
+      const t = this._files.reduce((s, f) => s + f.size, 0);
+      this.setState({ sizeErr: t > 10485760, dragging: false });
+    };
+    const removeAttach = (i) => {
+      this._files.splice(i, 1);
+      const inp = document.getElementById('ptfInput'); if (inp) inp.value = '';
+      const t = this._files.reduce((s, f) => s + f.size, 0);
+      this.setState({ sizeErr: t > 10485760 });
+    };
+    if (!this._dndInit) {
+      this._dndInit = true;
+      document.addEventListener('dragover', (e) => { const dz = document.getElementById('ptfDrop'); if (dz && dz.contains(e.target)) e.preventDefault(); });
+      document.addEventListener('drop', (e) => { const dz = document.getElementById('ptfDrop'); if (dz && dz.contains(e.target)) { e.preventDefault(); addAttach(e.dataTransfer && e.dataTransfer.files); } });
+    }
     return {
       accent, accentGlow: rgba(0.3), apps, active,
       liveV: (this.state.liveV || '230.2') + ' V',
@@ -754,17 +782,24 @@ class Component extends DCLogic {
       scrollAppsPrev: () => { const el = document.getElementById('appsScroller'); if (el) el.scrollBy({left: -448, behavior: 'smooth'}); },
       scrollAppsNext: () => { const el = document.getElementById('appsScroller'); if (el) el.scrollBy({left: 448, behavior: 'smooth'}); },
       stopClick: (e) => e.stopPropagation(),
-      openForm: () => this.setState({formOpen: true, submitted: false}),
-      openFormOther: () => this.setState({formOpen: true, submitted: false, picked: 6}),
-      openFormFromApp: () => this.setState({formOpen: true, submitted: false, picked: this.state.activeIdx == null ? 0 : this.state.activeIdx, activeIdx: null}),
+      openForm: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false}); },
+      openFormOther: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, picked: 6}); },
+      openFormFromApp: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, picked: this.state.activeIdx == null ? 0 : this.state.activeIdx, activeIdx: null}); },
       closeForm: () => this.setState({formOpen: false}),
+      pickFiles: () => { const el = document.getElementById('ptfInput'); if (el) el.click(); },
+      onFilesChange: (e) => addAttach(e.target.files),
+      dragOn: (e) => { if (e && e.preventDefault) e.preventDefault(); if (!this.state.dragging) this.setState({dragging: true}); },
+      dragOff: () => { if (this.state.dragging) this.setState({dragging: false}); },
+      dropBorder: this.state.dragging ? '#E8622C' : '#C9C6C0',
+      dropBg: this.state.dragging ? 'rgba(232,98,44,0.06)' : 'transparent',
+      attachList: this._files.map((f, i) => ({ icon: (f.type && f.type.indexOf('image/') === 0) ? '🖼' : '📄', name: f.name, size: fmtSize(f.size), remove: () => removeAttach(i) })),
+      attachHint: (() => { const t = this._files.reduce((s, f) => s + f.size, 0); const n = this._files.length; return { text: n ? (n + ' ֆայլ · ' + fmtSize(t) + ' / 10 ՄԲ') : 'Առավելագույնը՝ 10 ՄԲ։', color: t > 10485760 ? '#C5280D' : '#A8AAAE' }; })(),
       submitForm: () => {
         if (this.state.sending) return;
         const gv = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
         const typesEl = document.getElementById('ptfTypes');
         const app = typesEl && typesEl.children[this.state.picked] ? typesEl.children[this.state.picked].textContent.trim() : '';
-        const fileEl = document.getElementById('ptfFiles');
-        const files = fileEl && fileEl.files ? Array.prototype.slice.call(fileEl.files) : [];
+        const files = this._files || [];
         const total = files.reduce((s, f) => s + f.size, 0);
         if (total > 10 * 1024 * 1024) { this.setState({sizeErr: true}); return; }
         const fields = {name: gv('ptfName'), company: gv('ptfCompany'), email: gv('ptfEmail'), phone: gv('ptfPhone'), application: app, message: gv('ptfMsg')};
