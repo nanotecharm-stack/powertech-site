@@ -58,6 +58,9 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
   header a:hover #ptLogoTile [data-wave]{animation:ptWaveMove 1.6s ease-in-out infinite;}
   @keyframes ptPulseBtn{0%{box-shadow:0 0 0 0 rgba(232,98,44,0.4);}70%{box-shadow:0 0 0 13px rgba(232,98,44,0);}100%{box-shadow:0 0 0 0 rgba(232,98,44,0);}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+  #why{height:auto !important;padding:100px 48px !important;}
+  #why > div{position:static !important;min-height:0 !important;}
+  #tlProgress{transition:width .45s ease;}
   @media (max-width: 1024px){
     section[id]{padding-left:32px !important;padding-right:32px !important;}
     [style*="grid-template-columns"] > *{min-width:0 !important;}
@@ -538,8 +541,8 @@ class Component extends DCLogic {
       const why = document.getElementById('why');
       if (why) {
         const vh = window.innerHeight;
-        const total = Math.max(1, why.offsetHeight - vh);
-        const p = Math.min(1, Math.max(0, -why.getBoundingClientRect().top / total));
+        const rect = why.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (vh * 0.8 - rect.top) / (vh * 0.55)));
         const stg = Math.min(5, 1 + Math.floor(p * 4.999));
         const pl = document.getElementById('tlProgress');
         if (pl) pl.style.width = Math.max(0, p * 96 - 2) + '%';
