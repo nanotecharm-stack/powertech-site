@@ -9,10 +9,6 @@
 <script defer src="./support.js"></script>
 </head>
 <body>
-<div id="ptfade" style="position:fixed;inset:0;background:#EFEDEA;z-index:2147483600;opacity:1;pointer-events:none;transition:opacity .35s ease;"></div>
-<script>
-(function(){var f=document.getElementById('ptfade');if(!f)return;var done=false;function out(){if(done)return;done=true;f.style.opacity='0';setTimeout(function(){f.style.display='none';},400);}var t0=Date.now();var iv=setInterval(function(){if(document.getElementById('top')||Date.now()-t0>4500){clearInterval(iv);setTimeout(out,120);}},60);document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a'):null;if(!a)return;var h=a.getAttribute('href');if(h==='hy.html'||h==='/'){e.preventDefault();done=true;f.style.display='block';f.style.transition='opacity .18s ease';f.style.pointerEvents='auto';f.style.opacity='1';setTimeout(function(){location.href=h;},200);}},true);})();
-</script>
 <x-dc>
 <helmet>
   <style>html{background:#EFEDEA;}</style>
