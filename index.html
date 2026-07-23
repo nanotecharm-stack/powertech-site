@@ -424,20 +424,20 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:18px;">Contact details</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Name</label>
-              <input id="ptfName" type="text" placeholder="Your name" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Name <span style="color:#E8622C;">*</span></label>
+              <input id="ptfName" type="text" placeholder="Your name" onInput="{{ clearErrs }}" style="width:100%;background:#EFEDEA;border:1px solid {{ nameBorder }};border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Company</label>
-              <input id="ptfCompany" type="text" placeholder="Company name" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Company <span style="color:#E8622C;">*</span></label>
+              <input id="ptfCompany" type="text" placeholder="Company name" onInput="{{ clearErrs }}" style="width:100%;background:#EFEDEA;border:1px solid {{ companyBorder }};border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Email</label>
-              <input id="ptfEmail" type="email" placeholder="name@company.com" style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Email <span style="color:#E8622C;">*</span></label>
+              <input id="ptfEmail" type="email" placeholder="name@company.com" onInput="{{ clearErrs }}" style="width:100%;background:#EFEDEA;border:1px solid {{ emailBorder }};border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
             <div>
-              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Phone</label>
-              <input id="ptfPhone" type="tel" placeholder="+374 ..." style="width:100%;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px;">Phone <span style="color:#E8622C;">*</span></label>
+              <input id="ptfPhone" type="tel" placeholder="+374 ..." onInput="{{ clearErrs }}" style="width:100%;background:#EFEDEA;border:1px solid {{ phoneBorder }};border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;color:#1C1E22;">
             </div>
           </div>
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">Application</div>
@@ -446,8 +446,8 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
               <button onClick="{{ t.pick }}" style="font-size:14.5px;font-weight:500;padding:10px 18px;border-radius:999px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};cursor:pointer;font-family:inherit;">{{ t.label }}</button>
             </sc-for>
           </div>
-          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">What happened?</div>
-          <textarea id="ptfMsg" placeholder="Describe the trip, alarm, shutdown or recurring condition. Include approximate times, affected equipment and available error codes or logs." style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid #D8D5D0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
+          <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin-bottom:12px;">What happened? <span style="color:#E8622C;">*</span></div>
+          <textarea id="ptfMsg" placeholder="Describe the trip, alarm, shutdown or recurring condition. Include approximate times, affected equipment and available error codes or logs." onInput="{{ clearErrs }}" style="width:100%;min-height:120px;background:#EFEDEA;border:1px solid {{ msgBorder }};border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;font-family:inherit;outline:none;resize:vertical;color:#1C1E22;"></textarea>
           <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#71747B;margin:24px 0 12px;">Attachments <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#A8AAAE;">— optional</span></div>
           <div id="ptfDrop" onClick="{{ pickFiles }}" onDragEnter="{{ dragOn }}" onDragOver="{{ dragOn }}" onDragLeave="{{ dragOff }}" style="border:1.5px dashed {{ dropBorder }};border-radius:12px;padding:22px 20px;margin-bottom:12px;cursor:pointer;background:{{ dropBg }};transition:border-color .2s ease,background .2s ease;text-align:center;">
             <div data-mono="1" style="font-size:11.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#1C1E22;margin-bottom:6px;">Drop files here or click to browse</div>
@@ -466,6 +466,9 @@ h1,h2,[data-head]{font-family:'Big Shoulders Display',sans-serif;letter-spacing:
             <div style="font-size:13px;color:#C5280D;margin-bottom:8px;">Attachments exceed the 10 MB limit — please remove some files.</div>
           </sc-if>
           <div style="font-size:12px;color:{{ attachHint.color }};margin-bottom:28px;">{{ attachHint.text }}</div>
+          <sc-if value="{{ formErr }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;color:#C5280D;margin-bottom:16px;">Please fill in all fields — name, company, a valid email, phone and a short description.</div>
+          </sc-if>
           <button onClick="{{ submitForm }}" style="display:inline-flex;align-items:center;gap:12px;background:#1C1E22;color:#F4F3F1;font-size:14px;font-weight:500;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;" style-hover="background:#E8622C;color:#fff;">Send the details <span style="font-size:12px;">↗</span></button>
           <div style="font-size:14px;line-height:1.75;color:#71747B;margin-top:28px;border-top:1px solid #E4E1DC;padding-top:20px;">sales@powertech.am · +374 41 00 00 14 · Davtashen 1, 13-25, Yerevan 0058 · Mon–Fri 09:00–18:00 (UTC+4)</div>
         </sc-if>
@@ -783,9 +786,9 @@ class Component extends DCLogic {
       scrollAppsPrev: () => { const el = document.getElementById('appsScroller'); if (el) el.scrollBy({left: -448, behavior: 'smooth'}); },
       scrollAppsNext: () => { const el = document.getElementById('appsScroller'); if (el) el.scrollBy({left: 448, behavior: 'smooth'}); },
       stopClick: (e) => e.stopPropagation(),
-      openForm: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false}); },
-      openFormOther: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, picked: 6}); },
-      openFormFromApp: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, picked: this.state.activeIdx == null ? 0 : this.state.activeIdx, activeIdx: null}); },
+      openForm: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, formErr: false, errs: {}}); },
+      openFormOther: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, formErr: false, errs: {}, picked: 6}); },
+      openFormFromApp: () => { this._files = []; this.setState({formOpen: true, submitted: false, sizeErr: false, dragging: false, formErr: false, errs: {}, picked: this.state.activeIdx == null ? 0 : this.state.activeIdx, activeIdx: null}); },
       closeForm: () => this.setState({formOpen: false}),
       pickFiles: () => { const el = document.getElementById('ptfInput'); if (el) el.click(); },
       onFilesChange: (e) => addAttach(e.target.files),
@@ -800,11 +803,15 @@ class Component extends DCLogic {
         const gv = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
         const typesEl = document.getElementById('ptfTypes');
         const app = typesEl && typesEl.children[this.state.picked] ? typesEl.children[this.state.picked].textContent.trim() : '';
+        const nm = gv('ptfName').trim(), co = gv('ptfCompany').trim(), em = gv('ptfEmail').trim(), ph = gv('ptfPhone').trim(), ms = gv('ptfMsg').trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+        const errs = {name: !nm, company: !co, email: !emailOk, phone: !ph, msg: !ms};
+        if (errs.name || errs.company || errs.email || errs.phone || errs.msg) { this.setState({errs: errs, formErr: true}); return; }
         const files = this._files || [];
         const total = files.reduce((s, f) => s + f.size, 0);
         if (total > 10 * 1024 * 1024) { this.setState({sizeErr: true}); return; }
         const fields = {name: gv('ptfName'), company: gv('ptfCompany'), email: gv('ptfEmail'), phone: gv('ptfPhone'), application: app, message: gv('ptfMsg')};
-        this.setState({sending: true, sizeErr: false});
+        this.setState({sending: true, sizeErr: false, formErr: false, errs: {}});
         if (files.length) {
           const fd = new FormData();
           Object.keys(fields).forEach((k) => fd.append(k, fields[k]));
@@ -837,6 +844,13 @@ class Component extends DCLogic {
       submitted: this.state.submitted,
       notSubmitted: !this.state.submitted,
       sizeErr: this.state.sizeErr,
+      formErr: this.state.formErr,
+      nameBorder: (this.state.errs && this.state.errs.name) ? '#C5280D' : '#D8D5D0',
+      companyBorder: (this.state.errs && this.state.errs.company) ? '#C5280D' : '#D8D5D0',
+      emailBorder: (this.state.errs && this.state.errs.email) ? '#C5280D' : '#D8D5D0',
+      phoneBorder: (this.state.errs && this.state.errs.phone) ? '#C5280D' : '#D8D5D0',
+      msgBorder: (this.state.errs && this.state.errs.msg) ? '#C5280D' : '#D8D5D0',
+      clearErrs: () => { if (this.state.formErr) this.setState({formErr: false, errs: {}}); },
       toTop: () => { if (this._lenis) this._lenis.scrollTo(0, {duration: 1.2}); else window.scrollTo({top: 0, behavior: 'smooth'}); },
       logoBeat: () => { const tile = document.getElementById('ptLogoTile'); if (tile) { tile.style.animation = 'none'; void tile.getBoundingClientRect(); tile.style.animation = 'ptLogoBeat .65s cubic-bezier(0.34,1.56,0.64,1)'; const p = tile.querySelector('path'); if (p && p.getTotalLength) { const len = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; void p.getBoundingClientRect(); p.style.transition = 'stroke-dashoffset .7s ease .12s'; p.style.strokeDashoffset = '0'; } } },
       btnOpacity: btShown ? 1 : 0,
