@@ -2546,10 +2546,11 @@ function rdTxt(){var K=EVKIND[evK];return K.harm?PT.rdThd:(K.dev<0?PT.rdDip:PT.r
    ЧИСЛОМ: она считается из геометрии — см. evDur(). */
 /* ИСКАЖЕНИЕ ФОРМЫ. Срисовано с экрана настоящего прибора: у выпрямительной
    нагрузки вершина синусоиды срезается и проседает в седло. В покое след
-   несёт фоновую третью гармонику H0 — 5.5 %, в пределах нормы; в окне события
-   к ней добавляются третья, пятая и седьмая. Подпись THD НЕ ПИШЕТСЯ РУКАМИ:
-   она считается из тех же коэффициентов, которые гнут волну, — thdEv() даёт
-   ровно 14.0 %. Разойтись картинке и числу негде. */
+   несёт фоновую третью гармонику H0 — 5.5 %, в пределах нормы; во время
+   события к ней добавляются третья, пятая и седьмая — ПО ВСЕМУ СЛЕДУ, потому
+   что искажение это режим, а не миг (см. шейдер). Подпись THD НЕ ПИШЕТСЯ
+   РУКАМИ: она считается из тех же коэффициентов, которые гнут волну, —
+   thdEv() даёт ровно 14.0 %. Разойтись картинке и числу негде. */
 var H0=0.055;
 var HEV={h3:0.12,h5:-0.06,h7:0.04};
 function thdEv(){return Math.sqrt(HEV.h3*HEV.h3+HEV.h5*HEV.h5+HEV.h7*HEV.h7);}
@@ -2628,11 +2629,14 @@ var SILK_VS=[
 '  float t1=x*k-uTime*uOmega+ph;',
 '  float yo=aYo*1.15;',                  /* тело следа, точки CSS */
 '  float y,dy;',
-/* ГАРМОНИКИ. Фоновая третья H0 есть всегда; в окне события искажения к ней
+/* ГАРМОНИКИ. Фоновая третья H0 есть всегда; во время события искажения к ней
    примешиваются третья, пятая и седьмая — вершина срезается и проседает в
-   седло, как у выпрямительной нагрузки на экране прибора. Коэффициенты
-   подставляются из JS: те же числа считают подпись THD, разойтись им негде. */
-'  float hh=uHarm*sagE;',
+   седло, как у выпрямительной нагрузки на экране прибора. Искажение — РЕЖИМ,
+   а не окно во времени, поэтому оно НЕ умножается на sagE: искажён каждый
+   гребень по всему следу, как на экране настоящего прибора. Локальное окно
+   владелец прочитал как тиски: слева чисто, справа чисто, в середине сжато.
+   Коэффициенты подставляются из JS: те же числа считают подпись THD. */
+'  float hh=uHarm;',
 '  float a3='+H0.toFixed(3)+'+hh*'+(HEV.h3-H0).toFixed(3)+';',
 '  float a5=hh*('+HEV.h5.toFixed(3)+');',
 '  float a7=hh*'+HEV.h7.toFixed(3)+';',
@@ -2757,26 +2761,29 @@ function placeBracket(){
   var dn=sigTop-4;
   /* ПОРОГ. Пара волосяных линий на 0.90 или 1.10 номинала — та самая мера, по
      которой событие и считается событием. Тянутся не через весь экран, а
-     немного шире самого события: это опорная линия обмера, а не сетка.
-     У ИСКАЖЕНИЯ порога-уровня нет: его мера — THD, линией её не проведёшь.
-     Опорой служат две подписи по концам размера: слева намеренное THD из
-     thdEv(), справа предел нормы 8 % по EN 50160. */
-  var hd,puTxt;
+     немного шире самого события: это опорная линия обмера, а не сетка. */
+  /* У ИСКАЖЕНИЯ обмера-окна НЕТ ВОВСЕ. Оно размазано по всему следу, мерить
+     его ширину нечем, а стойки по краям окна владелец прочитал как тиски,
+     сжимающие ткань. Остаётся тихая полка у точки фиксации: над ней THD из
+     thdEv(), под ней предел нормы 8 % по EN 50160, вниз уходит запись. */
+  var mid;
   if(K.harm){
-    hd='<text class="bn" id="bkthrl" x="'+(bb-2).toFixed(1)+'" y="'+(by+17).toFixed(1)+
+    var sa=sigX-64,sb=sigX+64;
+    mid=
+    '<path class="bk s" id="bkline" pathLength="1" d="M'+sa.toFixed(1)+','+by.toFixed(1)+
+      'H'+sb.toFixed(1)+'"/>'+
+    '<text class="bt" id="bklab" x="'+sigX.toFixed(1)+'" y="'+(by-9).toFixed(1)+
+      '">THD '+(thdEv()*100).toFixed(1)+'%</text>'+
+    '<text class="bn lft" id="bkpu" x="'+(sigX+8).toFixed(1)+'" y="'+(by+17).toFixed(1)+
       '">LIM 8.0%</text>';
-    puTxt='THD '+(thdEv()*100).toFixed(1)+'%';
   }else{
     var ty1=CYp-BHv*K.thr,ty2=CYp+BHv*K.thr;
     var tx0=Math.max(0,ba-W*0.05),tx1=Math.min(W,bb+W*0.05);
-    hd='<path class="bk th" id="bkthr" d="M'+tx0.toFixed(1)+','+ty1.toFixed(1)+'H'+tx1.toFixed(1)+
+    mid=
+    '<path class="bk th" id="bkthr" d="M'+tx0.toFixed(1)+','+ty1.toFixed(1)+'H'+tx1.toFixed(1)+
       'M'+tx0.toFixed(1)+','+ty2.toFixed(1)+'H'+tx1.toFixed(1)+'"/>'+
     '<text class="bn" id="bkthrl" x="'+tx1.toFixed(1)+'" y="'+(ty1-7).toFixed(1)+'">'+
-      K.thr.toFixed(2)+' Un</text>';
-    puTxt=K.pu+' p.u.';
-  }
-  svg.setAttribute('viewBox','0 0 '+Math.round(W)+' '+Math.round(H));
-  svg.innerHTML=hd+
+      K.thr.toFixed(2)+' Un</text>'+
     '<path class="bk d" d="M'+ba.toFixed(1)+','+top.toFixed(1)+'V'+by.toFixed(1)+
       'M'+bb.toFixed(1)+','+top.toFixed(1)+'V'+by.toFixed(1)+'"/>'+
     '<path class="bk t" d="M'+ba.toFixed(1)+','+(by-4).toFixed(1)+'v8'+
@@ -2786,7 +2793,10 @@ function placeBracket(){
     '<text class="bt" id="bklab" x="'+((ba+bb)/2).toFixed(1)+'" y="'+(by-9).toFixed(1)+
       '">'+evDur()+' MS</text>'+
     '<text class="bn lft" id="bkpu" x="'+(ba+4).toFixed(1)+'" y="'+(by+17).toFixed(1)+
-      '">'+puTxt+'</text>'+
+      '">'+K.pu+' p.u.</text>';
+  }
+  svg.setAttribute('viewBox','0 0 '+Math.round(W)+' '+Math.round(H));
+  svg.innerHTML=mid+
     '<path class="bh" d="M'+sigX.toFixed(1)+','+by.toFixed(1)+'V'+dn.toFixed(1)+'"/>'+
     '<path class="bw" id="bkdrop" pathLength="1" d="M'+sigX.toFixed(1)+','+by.toFixed(1)+
       'V'+dn.toFixed(1)+'"/>';
@@ -2972,7 +2982,9 @@ function silkDraw(){
   var u=SILK.mesh.material.uniforms;
   u.uTime.value=tt;
   u.uDev.value=evDev();
-  u.uEnvA.value=EV.env;
+  /* Огибающей у искажения нет: уровень стоит на месте, а две ровные линии
+     поверх приплюснутой волны читались бы прижимом. Форма говорит сама. */
+  u.uEnvA.value=EV.env*(EVKIND[evK].harm?0:1);
   /* Искажение ведёт тот же ход k, что и уровень у провала: один твин — одна
      мера проявленности события, какого бы рода оно ни было. */
   u.uHarm.value=(EVKIND[evK].harm||0)*EV.k;
