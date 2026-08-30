@@ -618,7 +618,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
    получалась другого размера, чем в английской. */
 .lang{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.12em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,14,19,.12);
-  background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:.4s var(--e);}
+  background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
 .btn i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:2px;
@@ -636,7 +636,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 .btn{transition:transform .16s var(--e);}
 .btn:active{transform:translateY(1px) scale(.995);}
 .lang:active,.alink:active,header nav a:active,.md .x:active,.ic-go:active{transform:translateY(1px);}
-.lang,.md .x{transition:transform .16s var(--e),background .35s var(--e),color .35s var(--e);}
+/* Кольцо кнопки при наведении раньше щёлкало: box-shadow не был в списке
+   перехода, и кромка менялась мгновенно, пока цвет плыл. Теперь всё вместе. */
+.lang,.md .x{transition:transform .16s var(--e),background .35s var(--e),color .35s var(--e),box-shadow .35s var(--e);}
 /* dark surfaces: the untinted brand is the one with contrast there */
 .plate,.plate2,.other,.chart,.ixp,.navr,.brand{--brand-ink:#D4714E;}
 .btn.gh{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--hair);}
@@ -1620,11 +1622,11 @@ footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:c
 footer .fbl{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;}
 footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0;
   color:rgba(239,237,234,.6);text-decoration:underline;text-underline-offset:4px;
-  text-decoration-color:rgba(239,237,234,.3);transition:.3s var(--e);}
+  text-decoration-color:rgba(239,237,234,.3);transition:color .3s var(--e),text-decoration-color .3s var(--e);}
 footer .fpp:hover{color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
 footer .fpp:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 footer .flang{color:rgba(239,237,234,.6);padding:7px 11px;border-radius:2px;
-  box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:.3s var(--e);}
+  box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:color .3s var(--e),background .3s var(--e);}
 footer .flang:hover{color:#0D0E13;background:#EFEDEA;}
 footer a:focus-visible,.flang:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 /* Появление с задержкой по колонкам — то же, что делает пример своим stagger. */
@@ -1647,6 +1649,16 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* modals */
 .ovl{position:fixed;inset:0;z-index:120;background:rgba(9,10,13,.66);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;justify-content:center;padding:34px 18px;overflow-y:auto;}
 .ovl.open{display:flex;}
+/* Появление диалога было выключателем display: коробка возникала рывком.
+   Вход мягкий — штора проявляется, коробка чуть приподнимается из 97 %;
+   закрытие остаётся мгновенным: это ответ на действие человека, он должен
+   быть быстрым. Браузеры без @starting-style открывают как раньше, рывком. */
+.ovl{opacity:1;transition:opacity .25s var(--e);}
+.ovl .md{transition:opacity .3s var(--e),transform .3s var(--e);}
+@starting-style{
+  .ovl.open{opacity:0;}
+  .ovl.open .md{opacity:0;transform:scale(.97) translateY(10px);}
+}
 .md{background:var(--bg);color:var(--fg);max-width:760px;width:100%;margin:auto;position:relative;border-radius:2px;overflow:hidden;box-shadow:0 24px 80px rgba(9,10,13,.4);}
 /* Коробку диалога и подтверждение фокусирует скрипт, а не человек клавишей:
    обводка здесь ничего не сообщила бы, а рамка вокруг всей накладки читалась
@@ -2026,7 +2038,7 @@ html[data-nav="5"] .wm{color:var(--hc);transition:color .4s var(--e);}
    Крупнее надо — идти к 22, а не к 12. */
 html[data-nav="5"] .ixb,html[data-nav="5"] .lang{background:none;box-shadow:none;
   backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--hc);
-  font-size:11px;transition:box-shadow .28s var(--e),color .4s var(--e);}
+  font-size:11px;transition:transform .16s var(--e),box-shadow .28s var(--e),color .4s var(--e);}
 html[data-nav="5"] .ixb{padding:7px 4px;margin-right:-4px;}
 html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;}
 html[data-nav="5"] .lang::after{content:"";position:absolute;left:-1px;top:50%;
