@@ -1520,7 +1520,7 @@ function pickEvX(){
   evX=ez[0]+Math.random()*(ez[1]-ez[0]);
   sigX=-4+(W+8)*evX;   
   if(SILK)SILK.mesh.material.uniforms.uSagX.value=evX;
-  buildSigRun();placeBracket();
+  placeBracket();
 }
 function buildEvTl(){
   if(!window.gsap)return;
@@ -1528,6 +1528,7 @@ function buildEvTl(){
   EV.k=0;EV.env=0;EV.br=0;EV.draw=0;EV.lab=0;EV.hold=0;
   var tl=window.gsap.timeline({repeat:-1,onRepeat:pickEvX});
   tl.to(EV,{k:0,duration:4.0});
+  tl.call(buildSigRun,null,2.0);
   tl.addLabel('ev');
   tl.to(EV,{hold:1,duration:0.50,ease:'power2.inOut'},'ev');       
   tl.to(EV,{k:1,duration:0.50,ease:'power2.inOut'},'ev');          

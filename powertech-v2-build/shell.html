@@ -2856,7 +2856,11 @@ function pickEvX(){
   evX=ez[0]+Math.random()*(ez[1]-ez[0]);
   sigX=-4+(W+8)*evX;   /* середина размера: оттуда и уходит запись */
   if(SILK)SILK.mesh.material.uniforms.uSagX.value=evX;
-  buildSigRun();placeBracket();
+  /* Жилу здесь НЕ перестраивать: onRepeat приходит на 10,4 с, а импульс горит
+     до 10,6 и дотлевает ещё 1,15 — видимая трасса прыгала на новое место и
+     только потом гасла. Пересборку делает таймлайн на 2-й секунде цикла, когда
+     от старой трассы ничего не осталось. Скобу двигать можно: она невидима. */
+  placeBracket();
 }
 
 /* ============ ВРЕМЕНА СОБЫТИЯ ============ */
@@ -2883,6 +2887,9 @@ function buildEvTl(){
      первый экран стоит меньше трети времени. */
   var tl=window.gsap.timeline({repeat:-1,onRepeat:pickEvX});
   tl.to(EV,{k:0,duration:4.0});
+  /* Пересборка жилы под новое место события — в тихой фазе: прошлая трасса
+     погасла к 1,35 с цикла, событию жила нужна не раньше 5,6 с. */
+  tl.call(buildSigRun,null,2.0);
   tl.addLabel('ev');
   tl.to(EV,{hold:1,duration:0.50,ease:'power2.inOut'},'ev');       /* запись замирает */
   tl.to(EV,{k:1,duration:0.50,ease:'power2.inOut'},'ev');          /* уровень ушёл */
