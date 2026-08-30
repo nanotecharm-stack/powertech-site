@@ -2432,22 +2432,42 @@ var PT=window.PT;
     });
   })(h1);
   if(!cells.length)return;
-  var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
-  var nextAt=cells.map(function(){return 0;});
-  var left=cells.length,t0=performance.now();
-  cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
-  function dtFrame(){
-    var now=performance.now()-t0;
-    for(var i=0;i<cells.length;i++){
-      var s=cells[i];
-      if(s.dataset.dt!=='s')continue;
-      if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
-      else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
+  /* Коробка каждой буквы замораживается на ширине НАСТОЯЩЕЙ буквы до начала
+     кипения: знаки пула другой ширины, и без этого раскладка дышала каждый
+     кадр — на армянской версии, где заголовок переносится по словам, строки
+     прыгали, а трасса, построенная во время кипения, вставала мимо места.
+     Ширину мерить можно только загруженным шрифтом, поэтому старт ждёт
+     document.fonts.ready (с потолком 1200 мс — на холодной сети эффект всё
+     равно идёт, дрейф запасного шрифта меньше прежних прыжков). */
+  function dtStart(){
+    cells.forEach(function(s){
+      s.style.display='inline-block';s.style.textAlign='center';
+      s.style.width=s.getBoundingClientRect().width+'px';});
+    var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
+    var nextAt=cells.map(function(){return 0;});
+    var left=cells.length,t0=performance.now();
+    cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
+    function dtFrame(){
+      var now=performance.now()-t0;
+      for(var i=0;i<cells.length;i++){
+        var s=cells[i];
+        if(s.dataset.dt!=='s')continue;
+        if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
+        else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
+      }
+      if(left>0)requestAnimationFrame(dtFrame);
+      else{
+        /* Показание и жила строились, пока заголовок кипел; теперь, когда
+           текст собран и раскладка окончательная, — перемерить и перестроить. */
+        remeasureMask();placeReadout();buildSigRun();
+      }
     }
-    if(left>0)requestAnimationFrame(dtFrame);
-    else remeasureMask();
+    requestAnimationFrame(dtFrame);
   }
-  requestAnimationFrame(dtFrame);
+  var dtGone=false;
+  function dtGo(){if(dtGone)return;dtGone=true;dtStart();}
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(dtGo);setTimeout(dtGo,1200);}
+  else dtGo();
 })();
 
 /* ============ PHASE SILK — поле героя ============ */

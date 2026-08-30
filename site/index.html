@@ -1269,22 +1269,33 @@ var PT=window.PT;
     });
   })(h1);
   if(!cells.length)return;
-  var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
-  var nextAt=cells.map(function(){return 0;});
-  var left=cells.length,t0=performance.now();
-  cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
-  function dtFrame(){
-    var now=performance.now()-t0;
-    for(var i=0;i<cells.length;i++){
-      var s=cells[i];
-      if(s.dataset.dt!=='s')continue;
-      if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
-      else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
+  function dtStart(){
+    cells.forEach(function(s){
+      s.style.display='inline-block';s.style.textAlign='center';
+      s.style.width=s.getBoundingClientRect().width+'px';});
+    var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
+    var nextAt=cells.map(function(){return 0;});
+    var left=cells.length,t0=performance.now();
+    cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
+    function dtFrame(){
+      var now=performance.now()-t0;
+      for(var i=0;i<cells.length;i++){
+        var s=cells[i];
+        if(s.dataset.dt!=='s')continue;
+        if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
+        else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
+      }
+      if(left>0)requestAnimationFrame(dtFrame);
+      else{
+        remeasureMask();placeReadout();buildSigRun();
+      }
     }
-    if(left>0)requestAnimationFrame(dtFrame);
-    else remeasureMask();
+    requestAnimationFrame(dtFrame);
   }
-  requestAnimationFrame(dtFrame);
+  var dtGone=false;
+  function dtGo(){if(dtGone)return;dtGone=true;dtStart();}
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(dtGo);setTimeout(dtGo,1200);}
+  else dtGo();
 })();
 var SEAM={pulse:null,halo:null,len:0,t:-1,box:null,rail:null};
 var cv=document.getElementById('star');
