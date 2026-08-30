@@ -763,6 +763,18 @@ h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
    три: кегль растёт с окном быстрее, чем колонка. Лишняя строка — это 63 px
    высоты блока, и именно её владелец увидел как нехватку воздуха. */
 .hero h1{color:var(--fg);width:max-content;max-width:calc(100% + 140px);}
+/* Расшифровка заголовка — один прогон при загрузке, повтора нет (решение
+   владельца, 2026-08-31; рисунок одобрен по пробе). Кипящие знаки приглушены
+   разбавлением чернил бумагой; замок вспыхивает маркой со свечением — жест
+   «показание зафиксировано». Слова в неразрывных коробках: на узких окнах
+   строка переносится по словам, а не посреди слова. При reduce эффект не
+   запускается вовсе — текст стоит готовым. */
+.hero h1 .dtw{display:inline-block;white-space:pre;}
+.hero h1 [data-dt="s"]{color:color-mix(in srgb,var(--fg) 42%,var(--bg));}
+.hero h1 [data-dt="l"]{animation:dtflash .42s cubic-bezier(.2,0,0,1);}
+@keyframes dtflash{
+  0%{color:var(--brand);text-shadow:0 0 24px color-mix(in srgb,var(--brand) 70%,transparent);}
+  100%{text-shadow:0 0 0 transparent;}}
 /* Акцентная часть заголовка. Раньше набиралась <em>/<i> ради цвета: разметка
    объявляла смысловое выделение там, где его нет, и экранный диктор менял на
    этом месте интонацию. Тег нейтральный, правило то же. */
@@ -2387,6 +2399,56 @@ window.PT=%%DATA%%;
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
+
+/* ============ DECRYPT H1 — заголовок расшифровывается при загрузке ============ */
+/* Настоящий текст возвращается посимвольно слева направо. Для диктора весь
+   заголовок лежит в aria-label, кипящие знаки от него скрыты. По окончании —
+   remeasureMask(): границу гашения ткань меряет по буквам, а кипящие знаки
+   другой ширины, и замер по ним был бы враньём. Библиотек не требует, на
+   телефонах работает так же. Параметры — из пробы Motiq: цикл 45–80 мс,
+   ступень 55 мс, разброс ±120 мс, вспышка 420 мс. */
+(function(){
+  var h1=document.querySelector('.hero h1');if(!h1||rm)return;
+  var POOL='#%&@$?!*+=/{}[]<>~^',SPEED=45,SPREAD=35,STAGGER=55,DELAY=350,JITTER=120;
+  /* innerText, не textContent: <br> должен дать пробел, иначе слова склеятся */
+  h1.setAttribute('aria-label',h1.innerText.replace(/\s+/g,' ').trim());
+  var cells=[];
+  (function wrap(node){
+    [].slice.call(node.childNodes).forEach(function(n){
+      if(n.nodeType===3){
+        var frag=document.createDocumentFragment();
+        n.nodeValue.split(/(\s+)/).forEach(function(t){
+          if(!t)return;
+          if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(t));return;}
+          var w=document.createElement('span');w.className='dtw';w.setAttribute('aria-hidden','true');
+          Array.from(t).forEach(function(ch){
+            var s=document.createElement('span');s.dataset.dt='p';s.dataset.ch=ch;s.textContent=ch;
+            w.appendChild(s);cells.push(s);
+          });
+          frag.appendChild(w);
+        });
+        node.replaceChild(frag,n);
+      }else if(n.nodeType===1&&n.tagName!=='BR')wrap(n);
+    });
+  })(h1);
+  if(!cells.length)return;
+  var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
+  var nextAt=cells.map(function(){return 0;});
+  var left=cells.length,t0=performance.now();
+  cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
+  function dtFrame(){
+    var now=performance.now()-t0;
+    for(var i=0;i<cells.length;i++){
+      var s=cells[i];
+      if(s.dataset.dt!=='s')continue;
+      if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
+      else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
+    }
+    if(left>0)requestAnimationFrame(dtFrame);
+    else remeasureMask();
+  }
+  requestAnimationFrame(dtFrame);
+})();
 
 /* ============ PHASE SILK — поле героя ============ */
 /* Три фазных потока со сдвигом 120°, взятые несколькими десятками линий, дают
