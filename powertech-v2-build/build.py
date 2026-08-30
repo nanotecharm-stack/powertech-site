@@ -541,6 +541,7 @@ EN = {
  'F_SIZE_ERR': 'Attachments exceed the 10 MB limit. Please remove some files.',
  'F_HINT0': 'Up to 10 MB',
  'F_FORM_ERR': 'Please fill in all fields: name, company, a valid email, phone and a short description.',
+ 'F_SEND_ERR': 'Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am',
  'F_SEND': 'Send',
  # Имя кнопки закрытия: символ «×» экранный диктор читает как знак умножения
  'A_CLOSE': 'Close',
@@ -855,6 +856,7 @@ HY = {
  'F_SIZE_ERR': 'Կցված ֆայլերը գերազանցում են 10 ՄԲ սահմանը։ Հեռացրեք մի քանիսը։',
  'F_HINT0': 'Մինչև 10 ՄԲ',
  'F_FORM_ERR': 'Լրացրեք բոլոր դաշտերը՝ անուն, ընկերություն, վավեր էլ. փոստ, հեռախոս և կարճ նկարագրություն։',
+ 'F_SEND_ERR': 'Ուղարկումը չհաջողվեց։ Ստուգեք կապը և փորձեք նորից, կամ գրեք մեզ ուղիղ՝ sales@gridec.am',
  'F_SEND': 'Ուղարկել տվյալները',
  'A_CLOSE': 'Փակել',
  'F_OK_T': 'Շնորհակալություն։',

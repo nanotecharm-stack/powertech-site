@@ -1207,9 +1207,12 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <button class="drop" id="ptfDrop" type="button"><b>Attach a file or drop it here</b><span>Photos, diagrams, reports, or equipment data</span></button>
     <input id="ptfInput" name="attachments" type="file" multiple accept="image/*,.pdf,.csv,.txt,.log,.xls,.xlsx,.doc,.docx,.zip" style="display:none">
     <div id="ptfList"></div>
-    <div class="errline" id="ptfSizeErr">Attachments exceed the 10 MB limit. Please remove some files.</div>
+    
+    <div class="errline" id="ptfSizeErr" role="alert">Attachments exceed the 10 MB limit. Please remove some files.</div>
     <div class="hint" id="ptfHint">Up to 10 MB</div>
-    <div class="errline" id="ptfFormErr">Please fill in all fields: name, company, a valid email, phone and a short description.</div>
+    <div class="errline" id="ptfFormErr" role="alert">Please fill in all fields: name, company, a valid email, phone and a short description.</div>
+    
+    <div class="errline" id="ptfSendErr" role="alert">Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am</div>
     <button class="btn" id="ptfSubmit" type="submit"><span>Send ↗</span></button>
     
     <p class="fpriv">We use these details only to answer your enquiry. The form is delivered through FormSubmit, a third-party service. <button type="button" data-open-privacy>Privacy Policy</button></p>
@@ -2465,10 +2468,12 @@ drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remov
 function gv(id){var el=document.getElementById(id);return el?el.value:'';}
 document.getElementById('ptfForm').addEventListener('submit',function(e){e.preventDefault();
   if(sending)return;
+  document.getElementById('ptfSendErr').style.display='none';
   var nm=gv('ptfName').trim(),co=gv('ptfCompany').trim(),em=gv('ptfEmail').trim(),ph=gv('ptfPhone').trim(),ms=gv('ptfMsg').trim();
   var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
   var errs={ptfName:!nm,ptfCompany:!co,ptfEmail:!emailOk,ptfPhone:!ph,ptfMsg:!ms};
-  var any=false;Object.keys(errs).forEach(function(k){document.getElementById(k).classList.toggle('err',errs[k]);if(errs[k])any=true;});
+  var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k);el.classList.toggle('err',errs[k]);
+    if(errs[k]){el.setAttribute('aria-invalid','true');any=true;}else{el.removeAttribute('aria-invalid');}});
   document.getElementById('ptfFormErr').style.display=any?'block':'none';
   if(any)return;
   var total=files.reduce(function(s,f){return s+f.size;},0);
@@ -2478,12 +2483,13 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   sending=true;
   function done(){document.getElementById('f_main').style.display='none';
     var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;}
+  function sendFail(){sending=false;document.getElementById('ptfSendErr').style.display='block';}
   if(files.length){
     var fd=new FormData();
     Object.keys(fields).forEach(function(k){fd.append(k,fields[k]);});
     fd.append('_subject','Gridec website request');fd.append('_captcha','false');fd.append('_template','table');
     files.forEach(function(f){fd.append('attachment',f,f.name);});
-    fetch('https://formsubmit.co/sales@gridec.am',{method:'POST',body:fd,mode:'no-cors'}).then(done).catch(done);
+    fetch('https://formsubmit.co/sales@gridec.am',{method:'POST',body:fd,mode:'no-cors'}).then(done).catch(sendFail);
   }else{
     var payload=Object.assign({},fields,{_subject:'Gridec website request'});
     fetch('https://formsubmit.co/ajax/sales@gridec.am',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
@@ -2496,7 +2502,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   }
 });
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
-  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');document.getElementById('ptfFormErr').style.display='none';});
+  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');document.getElementById('ptfFormErr').style.display='none';});
 });
 function focusables(root){
   return [].slice.call(root.querySelectorAll('a[href],button:not([disabled]),'+
