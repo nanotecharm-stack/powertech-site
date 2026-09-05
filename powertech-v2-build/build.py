@@ -427,9 +427,14 @@ EN = {
  'HERO_H1': 'See how your<br>electrical system<br><span class="ac">performs</span>',
  'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.',
  'HERO_CTA2': 'How monitoring works',
- # «TYPICAL» — то, чем в технической документации помечают показанное для примера.
- # Показание в герое рисует скрипт: числа синтетические и записью не являются.
- 'RD_CAP': 'RMS VOLTAGE · TYPICAL TRACE',
+ # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
+ 'PQ_CAP': 'Voltage waveform',
+ 'PQ_M_NORMAL': 'Normal', 'PQ_M_DIP': 'Voltage dip', 'PQ_M_HARM': 'Harmonics',
+ 'PQ_X_NORMAL': 'A regular sinusoidal waveform.',
+ 'PQ_X_DIP': 'Voltage briefly drops, then recovers.',
+ 'PQ_X_HARM': 'Harmonics distort the voltage waveform.',
+ 'PQ_NOTE': 'Illustrative simulation, not a live measurement.',
+ 'PQ_PAUSE': 'Pause animation', 'PQ_RESUME': 'Resume animation',
  'WHY_H2': 'The event may be over before anyone can inspect it',
  'WHY_P': 'A voltage event can last a few cycles. An hour later a spot check reads normal and there is nothing left on site to find. A continuous recording captures it, with a time stamp and the load conditions before and after.',
  'APP_H2': 'Where monitoring helps',
@@ -663,11 +668,6 @@ EN_DATA = {
              ['03', 'FLICKER', '', 0], ['04', 'DIPS', '& SWELLS', 0],
              ['05', 'UNBALANCE', '', 0], ['06', 'POWER', '& ENERGY', 0],
              ['07', 'EVENTS', '', 0], ['08', 'RISK', 'READ', 1]],
- 'rdDip': 'VOLTAGE DIP · 20 MS · 0.66 p.u.',
-        'rdSwell': 'VOLTAGE SWELL · 20 MS · 1.25 p.u.',
-        # 14.0 % = thdEv() в shell.html; числа в этих строках дублируются
-        # так же, как 0.66 p.u. выше
-        'rdThd': 'HARMONIC DISTORTION · THD 14.0%',
  # подпись на схеме стыка: рисунок строится скриптом, поэтому она живёт в данных,
  # а не в токенах разметки
  'incident': 'Incident',
@@ -754,7 +754,15 @@ HY = {
  'HERO_H1': 'Ստուգեք, թե ինչպես է աշխատում ձեր <span class="ac">էլեկտրացանցը</span>',
  'HERO_P': 'Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։',
  'HERO_CTA2': 'Ինչպես է իրականացվում մոնիթորինգը',
- 'RD_CAP': 'RMS ԼԱՐՈՒՄ · 10-ՐՈՊԵԱՆՈՑ ՄԻՏՈՒՄ',
+
+ # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
+ 'PQ_CAP': 'Լարման ալիքի ձևը',
+ 'PQ_M_NORMAL': 'Նորմալ', 'PQ_M_DIP': 'Լարման անկում', 'PQ_M_HARM': 'Հարմոնիկներ',
+ 'PQ_X_NORMAL': 'Կանոնավոր սինուսաձև ալիք։',
+ 'PQ_X_DIP': 'Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։',
+ 'PQ_X_HARM': 'Հարմոնիկները աղավաղում են լարման ալիքի ձևը։',
+ 'PQ_NOTE': 'Պատկերավոր օրինակ է, ոչ իրական չափում։',
+ 'PQ_PAUSE': 'Դադարեցնել անիմացիան', 'PQ_RESUME': 'Շարունակել անիմացիան',
  'WHY_H2': 'Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ',
  'WHY_P': 'Էլեկտրական համակարգում որոշ իրադարձություններ տևում են ընդամենը միլիվայրկյաններ կամ մի քանի ցիկլ։ Մեկանգամյա կարճատև ստուգման պահին չափվող արժեքները կարող են արդեն վերադարձած լինել բնականոն մակարդակի։ Մոնիթորինգը պահպանում է իրադարձության ժամանակային նշումը և դրա պահին գրանցված պայմանները։',
  'APP_H2': 'Որտեղ է օգնում մոնիթորինգը',
@@ -974,9 +982,6 @@ HY_DATA.update({
              ['03', 'ՖԼԻԿԵՐ', '', 0], ['04', 'ԼԱՐՄԱՆ', 'ԱՆԿՈՒՄՆԵՐ', 0],
              ['05', 'ԱՆՀԱՄԱՉԱՓՈՒԹՅՈՒՆ', '', 0], ['06', 'ՀԶՈՐՈՒԹՅՈՒՆ', 'ԷՆԵՐԳԻԱ', 0],
              ['07', 'ԴԵՊՔԵՐ', '', 0], ['08', 'ՌԻՍԿԻ', 'ԳՆԱՀԱՏՈՒՄ', 1]],
- 'rdDip': 'ԼԱՐՄԱՆ ԱՆԿՈՒՄ · 20 ՄՎՐԿ · 0.66 p.u.',
-        'rdSwell': 'ԼԱՐՄԱՆ ԲԱՐՁՐԱՑՈՒՄ · 20 ՄՎՐԿ · 1.25 p.u.',
-        'rdThd': 'ՀԱՐՄՈՆԻԿ ԱՂԱՎԱՂՈՒՄ · THD 14.0%',
  'incident': 'Միջադեպ',
  'seq': [['01', 'Բնականոն աշխատանք'], ['02', 'Էլեկտրական համակարգում իրադարձություն'],
          ['03', 'Սարքավորման անջատում կամ ազդանշան'], ['04', 'Համակարգի աշխատանքի վերականգնում'],
@@ -1611,13 +1616,6 @@ if os.path.exists(_stale):
 for fn in DEPLOY_FONTS:
     deploy_asset(os.path.join(FONTS, fn), os.path.join(DEPLOY, 'fonts', fn))
 
-# Библиотеки поля героя. Лежат в репозитории, а не тянутся с чужого сервера:
-# сайт статический, и внешний адрес добавил бы к первому экрану чужой домен,
-# чужой срок жизни кэша и чужую доступность. Грузятся ТОЛЬКО на десктопе и
-# ТОЛЬКО по требованию — на телефоне за ними никто не идёт.
-DEPLOY_VENDOR = ['three.module.min.js', 'gsap.min.js']
-for fn in DEPLOY_VENDOR:
-    deploy_asset(os.path.join(HERE, 'vendor', fn), os.path.join(DEPLOY, 'vendor', fn))
 make_small_images()
 for fn in IMG_FILES + IMG_SMALL:
     deploy_asset(os.path.join(IMGS_OUT, fn), os.path.join(DEPLOY, 'uploads', 'img', fn))

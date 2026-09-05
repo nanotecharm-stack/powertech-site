@@ -320,33 +320,20 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 .btn.gh{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--hair);}
 .hero{position:relative;min-height:100svh;overflow:hidden;color:var(--fg);
   background:none;}
-.sigrun .sheath,.joint .sheath{fill:none;stroke:currentColor;
-  stroke-width:3.4;stroke-opacity:.07;stroke-linecap:round;stroke-linejoin:round;}
-.sigrun .sig{fill:none;stroke:currentColor;stroke-width:1;
-  stroke-opacity:.22;stroke-linecap:round;stroke-linejoin:round;}
-.sigrun .sp{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-linecap:round;}
-.sigrun .sp.halo,.joint .pulse.halo{stroke-width:4.4;stroke-opacity:.22;}
-.sigrun{position:relative;z-index:1;pointer-events:none;height:120px;
-  margin-top:calc(-1 * clamp(120px,13vh,190px));
-  opacity:0;transition:opacity 1.15s var(--e);}
-.sigrun.lit{opacity:1;transition:opacity .3s var(--e);}
-.sigrun svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;
-  color:var(--fg);}
-@media (max-width:1099px){.sigrun{display:none;}}
-.srail{opacity:0;transition:opacity 1.15s var(--e);}
-.srail.lit{opacity:1;transition:opacity .3s var(--e);}
 .hgrid{position:relative;z-index:2;display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  align-items:center;gap:clamp(18px,3vw,52px);
+  grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  align-items:start;gap:clamp(18px,3vw,52px);
   min-height:100svh;max-width:none;margin:0;
-  padding:clamp(104px,12vh,132px) 0 clamp(44px,6vh,72px)
+  padding:clamp(104px,12vh,132px)
+          calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
+          clamp(44px,6vh,72px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:clamp(38px,4.75vw,77px);margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;}
 @media (min-width:961px) and (min-height:760px){
   .hgrid .hcol{top:0;}
 }
-.hero h1{color:var(--fg);width:max-content;max-width:calc(100% + 140px);}
+.hero h1{color:var(--fg);width:max-content;max-width:calc(100% + clamp(18px,3vw,52px) - 8px);}
 .hero h1 .dtw{display:inline-block;white-space:pre;}
 .hero h1 [data-dt="s"]{color:color-mix(in srgb,var(--fg) 42%,var(--bg));}
 .hero h1 [data-dt="l"]{animation:dtflash .42s cubic-bezier(.2,0,0,1);}
@@ -361,42 +348,62 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .hero .acts .btn{font-size:15px;}
 .hero .eyebrow{color:var(--brand-ink);}
 .hero .eyebrow::before{background:var(--brand-ink);}
-.stage{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;
-  --wv-line:13,36,64;--wv-glow:76,138,203;}
-#star{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;}
-.silkev{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;
-  pointer-events:none;opacity:0;}
-html.wipecover .stage{visibility:hidden;}
-.silkev .bk{fill:none;stroke:var(--brand-ink);}
-.silkev .bk.d{stroke-width:1;stroke-dasharray:3 4;opacity:.38;}   
-.silkev .bk.t{stroke-width:1.2;opacity:.7;}                       
-.silkev .bk.th{stroke-width:1;stroke-dasharray:1 5;opacity:.5;}
-.silkev .bn{fill:var(--fg-soft);opacity:0;font-family:'Departure Mono',monospace;
-  font-size:10px;letter-spacing:.06em;text-anchor:middle;}
-.silkev #bkthrl{text-anchor:end;}
-.silkev .bn.lft{text-anchor:start;}
-.silkev .bk.s{stroke-width:1.4;opacity:.8;stroke-dasharray:1;stroke-dashoffset:1;}
-.silkev .bt{fill:var(--brand-ink);opacity:0;font-family:'Departure Mono',monospace;
-  font-size:11px;letter-spacing:.08em;text-anchor:middle;}
-.silkev .bh{fill:none;stroke:var(--fg);stroke-width:3.4;opacity:.05;}
-.silkev .bw{fill:none;stroke:var(--fg);stroke-width:1;opacity:.22;
-  stroke-dasharray:1;stroke-dashoffset:1;}
-.rd{position:absolute;right:70px;top:60%;left:auto;bottom:auto;z-index:2;
-  font-family:'Arian AMU Serif',Georgia,serif;color:var(--fg-soft);line-height:1.4;}
-.rd>.cp:not(.st){display:block;font-size:11px;letter-spacing:.17em;}
-.rd .vl{display:flex;align-items:baseline;gap:7px;margin:var(--s3) 0 0;}
-.rd .vl b,.rd .vl i{font-family:'Departure Mono',monospace;}
-.rd .vl b{color:var(--fg);font-variant-numeric:tabular-nums;font-weight:400;}
-.rd .vl .hv{font-size:22px;line-height:1;letter-spacing:.02em;}
-.rd .vl .hz{font-size:11px;line-height:1;margin-left:10px;}
-.rd .vl i{font-style:normal;font-size:11px;letter-spacing:.08em;}
-.rd .sw{display:flex;align-items:center;gap:9px;margin-top:13px;min-height:14px;}
-.rd .ind{flex:none;width:5px;height:5px;background:var(--fg);opacity:.22;
-  transition:background-color .35s var(--e),opacity .35s var(--e);}
-.rd .sw.is-ev .ind{background:var(--brand-ink);opacity:1;}
-.rd .st{font-size:11px;letter-spacing:.17em;color:var(--brand-ink);}
-.rd .ts{display:block;margin-top:9px;font-family:'Departure Mono',monospace;
-  font-size:10px;letter-spacing:.14em;color:var(--fg-soft);opacity:.62;}
+.pq{position:relative;z-index:1;margin:0;min-width:0;
+  display:flex;flex-direction:column;gap:0;color:var(--fg);
+  --pq-trace:var(--brand);--pq-grid:var(--hair2);--pq-axis:var(--hair);
+  --pq-nom:rgba(13,36,64,.22);--pq-ref:rgba(13,36,64,.46);
+  opacity:0;transition:opacity .6s var(--e) .1s;}
+.pq.is-in{opacity:1;}
+.pq-cap{display:block;font-size:16px;line-height:normal;margin-bottom:var(--s3);}
+.pq-cap span{display:inline-flex;align-items:center;font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft);}
+.pq-chart{position:relative;height:clamp(220px,32vh,320px);}
+.pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.pq-ctl{display:flex;flex-wrap:wrap;align-items:center;margin-top:var(--s4);}
+.pq .pq-pause{position:absolute;right:0;top:-15px;padding-inline:var(--s2) 0;}
+@media (max-width:470px){.pq .pq-pause{position:static;padding-inline:var(--s2);}}
+.pq-modes{display:flex;flex-wrap:wrap;gap:0 var(--s2);}
+.pq-m,.pq-pause{display:inline-flex;align-items:center;gap:9px;min-height:44px;
+  padding:var(--s2) var(--s2);font-size:14px;line-height:1.3;color:var(--fg-mid);
+  position:relative;border-radius:2px;text-align:left;
+  transition:color .3s var(--e);}
+.pq-m i,.pq-pause i{flex:0 0 auto;display:block;box-sizing:border-box;}
+.pq-m i{width:9px;height:9px;border:1px solid var(--fg-soft);background:transparent;
+  transition:background-color .3s var(--e),border-color .3s var(--e);}
+.pq-m::after{content:"";position:absolute;left:var(--s2);right:var(--s2);bottom:4px;height:1px;
+  background:var(--brand);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--e);}
+.pq-m:hover{color:var(--fg);}
+.pq-m[aria-pressed="true"]{color:var(--fg);}
+.pq-m[aria-pressed="true"] i{background:var(--brand);border-color:var(--brand);}
+.pq-m[aria-pressed="true"]::after{transform:scaleX(1);}
+.pq-pause{color:var(--fg-soft);font-size:13px;}
+.pq-pause:hover{color:var(--fg);}
+.pq-pause i{width:9px;height:9px;position:relative;}
+.pq-pause i::before,.pq-pause i::after{content:"";position:absolute;top:0;bottom:0;width:2px;
+  background:currentColor;transition:opacity .2s var(--e);}
+.pq-pause i::before{left:1px;}.pq-pause i::after{right:1px;}
+.pq.is-paused .pq-pause i::after{opacity:0;}
+.pq.is-paused .pq-pause i::before{left:0;width:0;height:0;top:0;bottom:auto;background:none;
+  border-style:solid;border-width:4.5px 0 4.5px 8px;border-color:transparent transparent transparent currentColor;}
+.pq-pl{display:grid;}
+.pq-pl b{grid-area:1/1;font-weight:inherit;transition:opacity .2s var(--e);}
+.pq-pl b+b{visibility:hidden;opacity:0;}
+.pq.is-paused .pq-pl b:first-child{visibility:hidden;opacity:0;}
+.pq.is-paused .pq-pl b+b{visibility:visible;opacity:1;}
+.pq.is-static .pq-pause{display:none;}
+.pq button:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
+.pq-x{display:grid;margin-top:var(--s2);font-size:14px;line-height:1.6;color:var(--fg-mid);
+  max-width:46ch;}
+.pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
+.pq[data-mode="normal"] .pq-x [data-x="normal"],
+.pq[data-mode="dip"] .pq-x [data-x="dip"],
+.pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
+.pq-note{margin-top:var(--s3);font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;letter-spacing:.02em;
+  color:var(--fg-soft);}
+html[lang="hy"] .pq-cap span,html[lang="hy"] .pq-note{font-family:'Arian AMU','Helvetica Neue',sans-serif;
+  letter-spacing:0;text-transform:none;}
+html.wipecover .pq{visibility:hidden;}
 header.on-dark .brand{color:#F6F1E9;}
 header.on-dark nav{box-shadow:inset 0 0 0 1px rgba(253,250,244,.28);background:rgba(22,46,82,.42);}
 header.on-dark nav a{color:rgba(240,234,224,.88);}
@@ -700,7 +707,6 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 .chart{position:relative;}
 .chart svg{width:100%;height:auto;display:block;}
 .chart .cap{font-family:'Arian AMU Serif',Georgia,serif;font-size:11px;letter-spacing:.12em;color:rgba(246,241,233,.58);margin-bottom:var(--s3);}
-html[lang="hy"] .rd>.cp,html[lang="hy"] .rd .st,
 html[lang="hy"] .chart .cap{font-family:'Arian AMU','Helvetica Neue',sans-serif;}
 footer,.footrev{--foot-h:530px;}
 .footrev{position:relative;height:var(--foot-h,620px);
@@ -892,7 +898,9 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 @media (max-width:960px){
   .hgrid{grid-template-columns:1fr;padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
   .hero h1{width:auto;max-width:none;}
-  .stage,.rd{display:none;}
+  .hgrid{align-content:center;}   
+  .pq{margin-top:var(--s5);}
+  .pq-chart{height:clamp(220px,58vw,280px);}
   .two,.asg,.plate .wrap{grid-template-columns:1fr;}
   header nav{display:none;}
   .stats,.steps{grid-template-columns:1fr;gap:22px;}
@@ -1039,23 +1047,28 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <p class="hp">Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։</p>
       <div class="acts"><button class="btn" data-open-form><span>Նկարագրել խնդիրը</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>Ինչպես է իրականացվում մոնիթորինգը &darr;</span></a></div>
     </div>
-    <div class="stage">
-      <canvas id="star" aria-hidden="true"></canvas>
-      <svg class="silkev" id="silkev" aria-hidden="true" preserveAspectRatio="none"></svg>
-    </div>
-  </div>
-  <div class="rd">
-    <span class="cp">RMS ԼԱՐՈՒՄ · 10-ՐՈՊԵԱՆՈՑ ՄԻՏՈՒՄ</span>
-    <span class="vl"><b class="hv">230.1</b><i>V</i><b class="hz">50.00</b><i>Hz</i></span>
-    <span class="sw"><i class="ind"></i><span class="st" id="stt"></span></span>
-    <span class="ts" id="tscale"></span>
+    
+    <figure class="pq" id="pq" data-mode="normal">
+      <figcaption class="pq-cap"><span>Լարման ալիքի ձևը</span></figcaption>
+      <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
+      <div class="pq-ctl">
+        <div class="pq-modes" role="group" aria-label="Լարման ալիքի ձևը">
+          <button type="button" class="pq-m" data-mode="normal" aria-pressed="true"><i aria-hidden="true"></i><span>Նորմալ</span></button>
+          <button type="button" class="pq-m" data-mode="dip" aria-pressed="false"><i aria-hidden="true"></i><span>Լարման անկում</span></button>
+          <button type="button" class="pq-m" data-mode="harm" aria-pressed="false"><i aria-hidden="true"></i><span>Հարմոնիկներ</span></button>
+        </div>
+        <button type="button" class="pq-pause" data-pause="Դադարեցնել անիմացիան" data-resume="Շարունակել անիմացիան"><i aria-hidden="true"></i><span class="pq-pl"><b>Դադարեցնել անիմացիան</b><b aria-hidden="true">Շարունակել անիմացիան</b></span></button>
+      </div>
+      
+      <p class="pq-x" aria-live="polite"><span data-x="normal">Կանոնավոր սինուսաձև ալիք։</span><span data-x="dip">Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։</span><span data-x="harm">Հարմոնիկները աղավաղում են լարման ալիքի ձևը։</span></p>
+      <p class="pq-note">Պատկերավոր օրինակ է, ոչ իրական չափում։</p>
+    </figure>
   </div>
 </section>
 
-<div class="sigrun" id="sigrun" aria-hidden="true"></div>
 
 
-<section class="sec thesis" id="why" data-rail><div class="wrap">
+<section class="sec thesis" id="why"><div class="wrap">
   <div class="rv intro">
     <div class="cnt">01</div>
     <h2>Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ</h2>
@@ -1241,7 +1254,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div></div></div>
 
 <script>
-window.PT={"ring": [["01", "ԼԱՐՈՒՄ", "ՀՈՍԱՆՔ", 0], ["02", "ՀԱՐՄՈՆԻԿՆԵՐ", "", 0], ["03", "ՖԼԻԿԵՐ", "", 0], ["04", "ԼԱՐՄԱՆ", "ԱՆԿՈՒՄՆԵՐ", 0], ["05", "ԱՆՀԱՄԱՉԱՓՈՒԹՅՈՒՆ", "", 0], ["06", "ՀԶՈՐՈՒԹՅՈՒՆ", "ԷՆԵՐԳԻԱ", 0], ["07", "ԴԵՊՔԵՐ", "", 0], ["08", "ՌԻՍԿԻ", "ԳՆԱՀԱՏՈՒՄ", 1]], "rdDip": "ԼԱՐՄԱՆ ԱՆԿՈՒՄ · 20 ՄՎՐԿ · 0.66 p.u.", "rdSwell": "ԼԱՐՄԱՆ ԲԱՐՁՐԱՑՈՒՄ · 20 ՄՎՐԿ · 1.25 p.u.", "rdThd": "ՀԱՐՄՈՆԻԿ ԱՂԱՎԱՂՈՒՄ · THD 14.0%", "incident": "Միջադեպ", "seq": [["01", "Բնականոն աշխատանք"], ["02", "Էլեկտրական համակարգում իրադարձություն"], ["03", "Սարքավորման անջատում կամ ազդանշան"], ["04", "Համակարգի աշխատանքի վերականգնում"], ["05", "Գրանցումը պահպանվում է վերլուծության համար"]], "viewDetails": "Մանրամասներ", "hint1": " ֆայլ · ", "hintN": " ֆայլ · ", "hintSuf": " / 10 ՄԲ", "hint0": "Առավելագույնը՝ 10 ՄԲ։", "appTypes": ["Արտադրություն", "Արևային կայան", "Բուժհաստատություն / լաբորատորիա", "Տվյալների կենտրոն / IT", "Կոմերցիոն շենք", "Ներդրում / տեխնիկական գնահատում", "Այլ"], "cards": [{"title": "Արտադրություն", "img": "IMG0", "p1": "Լարման կարճատև անկումը կարող է ազդել սարքավորման վրա, ուստի իրադարձությունը պետք է գրանցվի հենց տեղի ունենալու պահին։", "findings": ["Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։", "Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։", "Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։", "statSource": "Աղբյուր՝ EPRI"}, {"title": "Արևային կայաններ", "img": "IMG1", "p1": "Համապատասխան կետերում կատարված չափումները օգնում են տարբերակել կայանի ներսում և արտաքին ցանցում առաջացող գործոնները։", "findings": ["Լարման պայմանները ինվերտորի անջատման կամ ակտիվ հզորության սահմանափակման պահին։", "Լարման և հարմոնիկ աղավաղման համապատասխանությունը միացման կիրառելի պահանջներին։", "Անկախ չափման տվյալներ՝ գործարկման ընդունման կամ EPC աշխատանքների գնահատման համար։"], "note": "Ժամանակային նշումներով անկախ չափումները հնարավորություն են տալիս սեփականատիրոջը, EPC կապալառուին և ցանցի օպերատորին կայանի և միացման կետի էլեկտրական պայմանները գնահատել նույն տվյալների հիման վրա։"}, {"title": "Բժշկական կենտրոններ և լաբորատորիաներ", "img": "IMG2", "p1": "Երաշխիքային կամ սպասարկման գնահատման համար կարող են պահանջվել տվյալներ այն էլեկտրասնուցման պայմանների մասին, որոնցում սարքավորումն աշխատել է։ Մեկանգամյա չափումը կարող է չգրանցել պարբերաբար ի հայտ եկող իրադարձությունները։", "findings": ["Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։", "Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։", "Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։", "statSource": "Աղբյուր՝ IEC"}, {"title": "Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք", "img": "IMG3", "p1": "Գեներատորի գործարկումն ու սնուցման փոխանցումը կատարվում են այլ ժամանակային մասշտաբով, քան միլիվայրկյան տևող խանգարումները։ Ժամանակային նշումներով մոնիթորինգի տվյալները կարելի է համադրել UPS-ի և ՏՏ համակարգերի գրանցած իրադարձությունների հետ։", "findings": ["UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։", "Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։", "Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։"], "stat": "57%", "statLabel": "ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ", "statText": "Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։", "statSource": "Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Կոմերցիոն տարածքներ", "img": "IMG4", "p1": "Չափումները կարող են օգնել տարբերակել արտաքին մատակարարման ցանցի պայմանները շենքի ներքին ցանցում կամ վարձակալների սարքավորումներից առաջացող խանգարումներից։", "findings": ["Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։", "Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։", "Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։", "statSource": "Աղբյուր՝ U.S. DOE / LBNL"}, {"title": "Ներդրումային և տեխնիկական գնահատում", "img": "IMG5", "p1": "Ժամանակավոր կամ շարունակական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։", "findings": ["Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։", "Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։", "Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։"], "note": "Հաշվետվությունը կարող է պատրաստվել հայերեն, ռուսերեն կամ անգլերեն։"}], "otherT": "Այլ կարևոր էլեկտրական համակարգեր", "otherP": "Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։", "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
+window.PT={"ring": [["01", "ԼԱՐՈՒՄ", "ՀՈՍԱՆՔ", 0], ["02", "ՀԱՐՄՈՆԻԿՆԵՐ", "", 0], ["03", "ՖԼԻԿԵՐ", "", 0], ["04", "ԼԱՐՄԱՆ", "ԱՆԿՈՒՄՆԵՐ", 0], ["05", "ԱՆՀԱՄԱՉԱՓՈՒԹՅՈՒՆ", "", 0], ["06", "ՀԶՈՐՈՒԹՅՈՒՆ", "ԷՆԵՐԳԻԱ", 0], ["07", "ԴԵՊՔԵՐ", "", 0], ["08", "ՌԻՍԿԻ", "ԳՆԱՀԱՏՈՒՄ", 1]], "incident": "Միջադեպ", "seq": [["01", "Բնականոն աշխատանք"], ["02", "Էլեկտրական համակարգում իրադարձություն"], ["03", "Սարքավորման անջատում կամ ազդանշան"], ["04", "Համակարգի աշխատանքի վերականգնում"], ["05", "Գրանցումը պահպանվում է վերլուծության համար"]], "viewDetails": "Մանրամասներ", "hint1": " ֆայլ · ", "hintN": " ֆայլ · ", "hintSuf": " / 10 ՄԲ", "hint0": "Առավելագույնը՝ 10 ՄԲ։", "appTypes": ["Արտադրություն", "Արևային կայան", "Բուժհաստատություն / լաբորատորիա", "Տվյալների կենտրոն / IT", "Կոմերցիոն շենք", "Ներդրում / տեխնիկական գնահատում", "Այլ"], "cards": [{"title": "Արտադրություն", "img": "IMG0", "p1": "Լարման կարճատև անկումը կարող է ազդել սարքավորման վրա, ուստի իրադարձությունը պետք է գրանցվի հենց տեղի ունենալու պահին։", "findings": ["Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։", "Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։", "Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։", "statSource": "Աղբյուր՝ EPRI"}, {"title": "Արևային կայաններ", "img": "IMG1", "p1": "Համապատասխան կետերում կատարված չափումները օգնում են տարբերակել կայանի ներսում և արտաքին ցանցում առաջացող գործոնները։", "findings": ["Լարման պայմանները ինվերտորի անջատման կամ ակտիվ հզորության սահմանափակման պահին։", "Լարման և հարմոնիկ աղավաղման համապատասխանությունը միացման կիրառելի պահանջներին։", "Անկախ չափման տվյալներ՝ գործարկման ընդունման կամ EPC աշխատանքների գնահատման համար։"], "note": "Ժամանակային նշումներով անկախ չափումները հնարավորություն են տալիս սեփականատիրոջը, EPC կապալառուին և ցանցի օպերատորին կայանի և միացման կետի էլեկտրական պայմանները գնահատել նույն տվյալների հիման վրա։"}, {"title": "Բժշկական կենտրոններ և լաբորատորիաներ", "img": "IMG2", "p1": "Երաշխիքային կամ սպասարկման գնահատման համար կարող են պահանջվել տվյալներ այն էլեկտրասնուցման պայմանների մասին, որոնցում սարքավորումն աշխատել է։ Մեկանգամյա չափումը կարող է չգրանցել պարբերաբար ի հայտ եկող իրադարձությունները։", "findings": ["Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։", "Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։", "Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։", "statSource": "Աղբյուր՝ IEC"}, {"title": "Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք", "img": "IMG3", "p1": "Գեներատորի գործարկումն ու սնուցման փոխանցումը կատարվում են այլ ժամանակային մասշտաբով, քան միլիվայրկյան տևող խանգարումները։ Ժամանակային նշումներով մոնիթորինգի տվյալները կարելի է համադրել UPS-ի և ՏՏ համակարգերի գրանցած իրադարձությունների հետ։", "findings": ["UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։", "Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։", "Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։"], "stat": "57%", "statLabel": "ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ", "statText": "Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։", "statSource": "Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Կոմերցիոն տարածքներ", "img": "IMG4", "p1": "Չափումները կարող են օգնել տարբերակել արտաքին մատակարարման ցանցի պայմանները շենքի ներքին ցանցում կամ վարձակալների սարքավորումներից առաջացող խանգարումներից։", "findings": ["Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։", "Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։", "Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։", "statSource": "Աղբյուր՝ U.S. DOE / LBNL"}, {"title": "Ներդրումային և տեխնիկական գնահատում", "img": "IMG5", "p1": "Ժամանակավոր կամ շարունակական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։", "findings": ["Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։", "Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։", "Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։"], "note": "Հաշվետվությունը կարող է պատրաստվել հայերեն, ռուսերեն կամ անգլերեն։"}], "otherT": "Այլ կարևոր էլեկտրական համակարգեր", "otherP": "Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։", "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
@@ -1287,7 +1300,7 @@ var PT=window.PT;
       }
       if(left>0)requestAnimationFrame(dtFrame);
       else{
-        remeasureMask();placeReadout();buildSigRun();
+        placeHeroCol();
       }
     }
     requestAnimationFrame(dtFrame);
@@ -1297,442 +1310,181 @@ var PT=window.PT;
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(dtGo);setTimeout(dtGo,1200);}
   else dtGo();
 })();
-var SEAM={pulse:null,halo:null,len:0,t:-1,box:null,rail:null};
-var cv=document.getElementById('star');
-var W=0,H=0,dpr=1,tt=0,CYp=0;
-var BHv=0,bracketY=0,sigTop=0,sigX=0;
-var PSMOVE=0;
-var BAND_MS=0,BAND_SLOW=64,BAND_MOVE=90;
-var wipeBox=null;
-var MASK=0.52,MASK1=0.82,TAILU=0.52,BTNU=0.42,BTNY=1e9;
-var TAILK=0.22;
-function measureMask(){
-  if(!W)return;
-  var r=cv.parentElement.getBoundingClientRect(),far=0;
-  function reach(el,text){
-    if(!el)return;
-    var list;
-    if(text){var rg=document.createRange();rg.selectNodeContents(el);list=rg.getClientRects();}
-    else list=[el.getBoundingClientRect()];
-    for(var i=0;i<list.length;i++)if(list[i].width&&list[i].right>far)far=list[i].right;
+(function(){
+  var fig=document.getElementById('pq');if(!fig)return;
+  var box=fig.querySelector('.pq-chart'),cv=fig.querySelector('.pq-cv');
+  var ctx=cv&&cv.getContext('2d');if(!ctx)return;
+  var mbs=[].slice.call(fig.querySelectorAll('.pq-m'));
+  var pbtn=fig.querySelector('.pq-pause');
+  var CYCLES=4;            
+  var SPEED=0.45;          
+  var H3=0.18,H5=0.09;     
+  var DIP={depth:0.40,len:2.0,edge:0.15,every:8,first:0.4};
+  var TWEEN=600;           
+  var TAU=Math.PI*2;
+  var W=0,Hc=0,dpr=1,T=0,last=0,raf=0;
+  var wd=0,wh=0,tw=null;   
+  var dipBase=0,mode='normal',playing=true,seen=true,alive=true;
+  var col={trace:'#2E5E99',grid:'rgba(13,36,64,.07)',axis:'rgba(13,36,64,.13)',nom:'rgba(13,36,64,.22)',ref:'rgba(13,36,64,.46)'};
+  function theme(){
+    var cs=getComputedStyle(fig);
+    function v(n,d){var s=cs.getPropertyValue(n).trim();return s||d;}
+    col.trace=v('--pq-trace',col.trace);col.grid=v('--pq-grid',col.grid);
+    col.axis=v('--pq-axis',col.axis);col.nom=v('--pq-nom',col.nom);col.ref=v('--pq-ref',col.ref);
   }
-  reach(document.querySelector('.hero h1'),true);
-  reach(document.querySelector('.hero .hp'),true);
-  document.querySelectorAll('.hero .acts .btn').forEach(function(e){reach(e,false);});
-  if(!far)return;
-  MASK=Math.min(0.66,Math.max(0.10,(far-r.left-380)/W));
-  TAILU=(far-r.left+8)/W;
-  var bx=0,byy=1e9;
-  document.querySelectorAll('.hero .acts .btn').forEach(function(e){
-    var q=e.getBoundingClientRect();
-    if(q.right>bx)bx=q.right;
-    if(q.top<byy)byy=q.top;
-  });
-  BTNU=bx?(bx-r.left+26)/W:0;
-  BTNY=byy<1e8?(byy-r.top-10):1e9;
-  MASK1=Math.min(0.94,MASK+0.18);
-}
-function remeasureMask(){
-  placeHeroCol();          
-  if(!SILK||!W)return;
-  measureMask();
-  var ez=evZone();
-  if(evX<ez[0]||evX>ez[1]){evX=(ez[0]+ez[1])/2;sigX=-4+(W+8)*evX;   }
-  silkResize();placeBracket();
-  if(rm)silkDraw();
-}
-var SLOWMO=300;
-var OMEGA=Math.PI*2/(0.02*SLOWMO);      
-var WAVE_K=0.24;               
-var EV_W=WAVE_K/2;             
-function evDur(){return Math.round(2*EV_W/WAVE_K*20);}   
-var evX=0.72;
-function evZone(){
-  var lo=Math.max(MASK1,TAILU+0.02)+EV_W,hi=0.96-EV_W;
-  if(innerWidth<=960||!W)return [lo,hi];
-  var rd=document.querySelector('.rd'),hero=document.querySelector('.hero');
-  if(!rd||!hero)return [lo,hi];
-  var lim=(rd.getBoundingClientRect().left-hero.getBoundingClientRect().left-28)/W;
-  hi=Math.min(hi,lim-EV_W);
-  return [lo,Math.max(lo,hi)];
-}
-var MILK='13,14,19',GLOW='200,96,61';
-function readWaveTheme(){
-  var cs=getComputedStyle(cv.parentElement);
-  var a=(cs.getPropertyValue('--wv-line')||'').trim(),b=(cs.getPropertyValue('--wv-glow')||'').trim();
-  if(a)MILK=a; if(b)GLOW=b;
-}
-function rgbArr(s){var p=s.split(',');return [(+p[0]||0)/255,(+p[1]||0)/255,(+p[2]||0)/255];}
-var EV={k:0,env:0,br:0,draw:0,lab:0,hold:0};
-function evDev(){return EVKIND[evK].dev*EV.k;}
-function rdTxt(){var K=EVKIND[evK];return K.harm?PT.rdThd:(K.dev<0?PT.rdDip:PT.rdSwell);}
-var H0=0.055;
-var HEV={h3:0.12,h5:-0.06,h7:0.04};
-function thdEv(){return Math.sqrt(HEV.h3*HEV.h3+HEV.h5*HEV.h5+HEV.h7*HEV.h7);}
-var EVKIND=[{dev:-0.34,thr:0.90,pu:'0.66'},
-            {dev:+0.25,thr:1.10,pu:'1.25'},
-            {dev:0,harm:1}];
-var evK=0;
-var evTl=null,SILK=null,silkPend=false;
-function silkLayout(n){
-  var L=[],i;
-  var per=Math.max(3,Math.round(n/3));          
-  for(i=0;i<per*3;i++){
-    var fam=i%3;                                 
-    var uin=(Math.floor(i/3))/(per-1);           
-    var c=uin-0.5;                               
-    var j=Math.floor(i/3);
-    var kind=(j%7===3)?2:((j%3===1)?1:0);
-    L.push({
-      u:uin,
-      fam:fam,
-      env:0,                                     
-      phase:fam*(Math.PI*2/3),                   
-      amp:1,                                     
-      yo:c*2,
-      depth:0.5+0.5*Math.sin(i*0.73),
-      kind:fam,                                  
-      alpha:(fam===0?0.22:fam===1?0.19:0.18)*(1-0.55*Math.abs(c)*2),
-      wide:0.52
+  function size(){
+    var r=box.getBoundingClientRect();
+    W=Math.max(1,Math.round(r.width));Hc=Math.max(1,Math.round(r.height));
+    dpr=Math.min(2,devicePixelRatio||1);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(Hc*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function win(u){
+    if(u<=0||u>=DIP.len)return 0;
+    var a=u<DIP.edge?u/DIP.edge:(u>DIP.len-DIP.edge?(DIP.len-u)/DIP.edge:1);
+    return a*a*(3-2*a);
+  }
+  function dipAt(tau){
+    if(wd<=0.001)return 0;
+    var u=tau-dipBase;
+    if(u<0)return 0;
+    if(!rm)u-=Math.floor(u/DIP.every)*DIP.every;   
+    return win(u);
+  }
+  function dipEvents(){
+    var out=[];if(wd<=0.001)return out;
+    if(rm){if(dipBase<T&&dipBase+DIP.len>T-CYCLES)out.push(dipBase);return out;}
+    var k0=Math.floor((T-CYCLES-DIP.len-dipBase)/DIP.every),k1=Math.floor((T-dipBase)/DIP.every);
+    for(var k=Math.max(0,k0);k<=k1;k++){var t0=dipBase+k*DIP.every;
+      if(t0<T&&t0+DIP.len>T-CYCLES)out.push(t0);}
+    return out;
+  }
+  function volt(tau){
+    var ph=tau*TAU;
+    var s=Math.sin(ph)+wh*(H3*Math.sin(3*ph)+H5*Math.sin(5*ph));
+    return (1-DIP.depth*wd*dipAt(tau))*s;
+  }
+  function draw(){
+    if(!W)return;
+    ctx.clearRect(0,0,W,Hc);
+    var cy=Hc/2,A=Hc*0.36,i,x,y;
+    ctx.lineWidth=1;
+    ctx.strokeStyle=col.grid;ctx.beginPath();
+    var cols=CYCLES*2;
+    for(i=1;i<cols;i++){x=Math.round(W*i/cols)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
+    for(i=-2;i<=2;i++){if(!i)continue;y=Math.round(cy-A*i*0.5)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);}
+    ctx.stroke();
+    ctx.strokeStyle=col.nom;ctx.setLineDash([2,5]);ctx.beginPath();
+    y=Math.round(cy-A)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);
+    y=Math.round(cy+A)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);
+    ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle=col.axis;ctx.beginPath();
+    y=Math.round(cy)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    var ev=dipEvents(),e;
+    for(e=0;e<ev.length;e++){
+      var x0=W*(1-(T-ev[e])/CYCLES),x1=W*(1-(T-ev[e]-DIP.len)/CYCLES);
+      x0=Math.max(0,x0);x1=Math.min(W,x1);if(x1<=x0)continue;
+      ctx.globalAlpha=0.06*wd;ctx.fillStyle=col.trace;ctx.fillRect(x0,0,x1-x0,Hc);
+      ctx.globalAlpha=0.35*wd;ctx.strokeStyle=col.trace;ctx.setLineDash([3,4]);ctx.beginPath();
+      if(x0>0){x=Math.round(x0)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
+      if(x1<W){x=Math.round(x1)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
+      ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+    }
+    var n=Math.max(120,Math.ceil(W/2)),dev=Math.max(wd,wh),open=false;
+    var xs=new Array(n+1),ys=new Array(n+1),yi=new Array(n+1);
+    for(i=0;i<=n;i++){
+      var u=i/n,tau=T-(1-u)*CYCLES;
+      xs[i]=u*W;ys[i]=cy-A*volt(tau);yi[i]=cy-A*Math.sin(tau*TAU);
+    }
+    if(dev>0.001){
+      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1;ctx.setLineDash([2,4]);
+      ctx.beginPath();
+      for(i=0;i<=n;i++){
+        if(Math.abs(ys[i]-yi[i])>0.6){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}
+        else open=false;
+      }
+      ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+    }
+    ctx.strokeStyle=col.trace;ctx.lineWidth=1.8;ctx.lineJoin='round';ctx.lineCap='round';
+    ctx.beginPath();
+    for(i=0;i<=n;i++){if(i)ctx.lineTo(xs[i],ys[i]);else ctx.moveTo(xs[i],ys[i]);}
+    ctx.stroke();
+  }
+  function ease(p){return p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;}
+  function tweenStep(now){
+    if(!tw)return;
+    var p=Math.min(1,(now-tw.t0)/TWEEN),e=ease(p);
+    wd=tw.d0+(tw.d1-tw.d0)*e;wh=tw.h0+(tw.h1-tw.h0)*e;
+    if(p>=1)tw=null;
+  }
+  function running(){return alive&&seen&&!document.hidden&&((playing&&!rm)||!!tw);}
+  function frame(now){
+    raf=0;
+    var dt=(now-last)/1000;last=now;
+    if(!(dt>0)||dt>.1)dt=.016;
+    if(playing&&!rm)T+=dt*SPEED;
+    tweenStep(now);
+    draw();
+    if(running())raf=requestAnimationFrame(frame);
+  }
+  function start(){
+    if(raf||!running())return;
+    last=performance.now();raf=requestAnimationFrame(frame);
+  }
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+  function setMode(m,init){
+    mode=m;fig.dataset.mode=m;
+    mbs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
+    var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
+    if(d1&&wd<0.001){
+      dipBase=rm?T-CYCLES*0.5-DIP.len/2:T+DIP.first;
+    }
+    if(rm||init){wd=d1;wh=h1;tw=null;draw();return;}
+    tw={t0:performance.now(),d0:wd,d1:d1,h0:wh,h1:h1};
+    start();
+  }
+  function setPaused(p){
+    playing=!p;fig.classList.toggle('is-paused',p);
+    pbtn.setAttribute('aria-label',p?pbtn.dataset.resume:pbtn.dataset.pause);
+    if(p)stop();else start();
+  }
+  mbs.forEach(function(b,i){
+    b.addEventListener('click',function(){if(b.dataset.mode!==mode)setMode(b.dataset.mode);});
+    b.addEventListener('keydown',function(e){
+      var k=e.key,j=-1;
+      if(k==='ArrowRight'||k==='ArrowDown')j=(i+1)%mbs.length;
+      else if(k==='ArrowLeft'||k==='ArrowUp')j=(i+mbs.length-1)%mbs.length;
+      else if(k==='Home')j=0;else if(k==='End')j=mbs.length-1;
+      if(j<0)return;e.preventDefault();mbs[j].focus();
     });
-  }
-  for(i=0;i<2;i++)L.push({u:0,fam:0,env:i?-1:1,phase:0,amp:1,yo:0,depth:0.5,
-    kind:0,alpha:0.40,wide:0.62});
-  return L;
-}
-var SILK_VS=[
-'precision highp float;',
-'uniform float uW,uH,uCY,uBH,uTime,uDev,uSagX,uSagW,uSpread,uWave,uOmega,uM0,uM1,uDPR,uTU,uTK,uBX,uBY,uEnvA,uHarm;',
-'uniform vec3 uC0,uC1,uC2;',
-'attribute float aU,aI,aPhase,aAmp,aYo,aDepth,aAlpha,aKind,aSide,aWide,aEnv;',
-'varying float vA,vS,vHW,vEdge;',
-'varying vec3 vC;',
-'void main(){',
-'  float x=aU*uW;',
-'  float ph=aPhase+aI*6.2831853*uSpread;',
-'  float env=smoothstep(0.0,0.40,aU);',
-'  float q=(aU-uSagX)/uSagW;',
-'  float sagE=smoothstep(-1.35,-1.0,q)*(1.0-smoothstep(1.0,1.35,q));',
-'  float lvl=1.0+uDev*sagE;',            
-'  float amp=uBH*env*lvl;',
-'  float k=6.2831853/uWave;',
-'  float t1=x*k-uTime*uOmega+ph;',
-'  float yo=aYo*1.15;',                  
-'  float y,dy;',
-'  float hh=uHarm;',
-'  float a3='+H0.toFixed(3)+'+hh*'+(HEV.h3-H0).toFixed(3)+';',
-'  float a5=hh*('+HEV.h5.toFixed(3)+');',
-'  float a7=hh*'+HEV.h7.toFixed(3)+';',
-'  if(aEnv==0.0){',
-'    y=uCY+yo+amp*(sin(t1)+a3*sin(3.0*t1)+a5*sin(5.0*t1)+a7*sin(7.0*t1));',
-'    dy=amp*k*(cos(t1)+3.0*a3*cos(3.0*t1)+5.0*a5*cos(5.0*t1)+7.0*a7*cos(7.0*t1));',
-'  }else{',
-'    float dq=(smoothstep(-1.35,-1.0,q+0.004)*(1.0-smoothstep(1.0,1.35,q+0.004))-sagE)/(0.004*uSagW*uW);',
-'    y=uCY+aEnv*amp;',
-'    dy=aEnv*uBH*env*uDev*dq;',
-'  }',
-'  vec2 nrm=normalize(vec2(-dy,1.0));',
-'  float hwDev=aWide*(0.90+0.20*(1.0-aDepth))*uDPR;',
-'  float useDev=max(hwDev,0.50);',
-'  float cov=hwDev/useDev;',   
-'  float geoDev=useDev+0.75;',  
-'  vec2 p=vec2(x,y)+nrm*aSide*(geoDev/uDPR);',
-'  vHW=useDev;vEdge=geoDev;',
-'  p.x+=(aDepth-0.5)*uW*0.010;',
-'  float cap=mix(uTK,1.0,smoothstep(uTU-0.05,uTU+0.06,aU));',
-'  float left=1.0-smoothstep(uBX-0.005,uBX+0.075,aU);',  
-'  float below=smoothstep(uBY-26.0,uBY+8.0,y);',        
-'  cap*=1.0-left*below;',
-'  float lay=aEnv==0.0?1.0:uEnvA;',
-'  vA=aAlpha*lay*cov*smoothstep(uM0,uM1,aU)*cap*(0.62+0.38*(1.0-aDepth));',
-'  vS=aSide;',
-'  vC=aKind<0.5?uC0:(aKind<1.5?uC1:uC2);',
-'  gl_Position=projectionMatrix*modelViewMatrix*vec4(p,0.0,1.0);',
-'}'].join('\n');
-var SILK_FS=[
-'precision highp float;',
-'varying float vA,vS,vHW,vEdge;',
-'varying vec3 vC;',
-'void main(){',
-'  float dpx=abs(vS)*vEdge;',            
-'  float e=clamp(vHW-dpx+0.5,0.0,1.0);', 
-'  gl_FragColor=vec4(vC,vA*e);',
-'}'].join('\n');
-function makeSilk(THREE,n,m){
-  var L=silkLayout(n),i,j,s;
-  n=L.length;                 
-  var vcount=n*m*2;
-  var aU=new Float32Array(vcount),aI=new Float32Array(vcount),
-      aPh=new Float32Array(vcount),aAm=new Float32Array(vcount),
-      aYo=new Float32Array(vcount),aDp=new Float32Array(vcount),
-      aAl=new Float32Array(vcount),aKd=new Float32Array(vcount),
-      aSd=new Float32Array(vcount),aWd=new Float32Array(vcount),
-      aEv=new Float32Array(vcount);
-  var idx=new Uint16Array(n*(m-1)*6),ii=0,v=0;
-  for(i=0;i<n;i++){
-    var ln=L[i];
-    for(j=0;j<m;j++){
-      var u=j/(m-1);
-      for(s=0;s<2;s++){
-        aU[v]=u;aI[v]=ln.u;aPh[v]=ln.phase;aAm[v]=ln.amp;aYo[v]=ln.yo;
-        aDp[v]=ln.depth;aAl[v]=ln.alpha;aKd[v]=ln.kind;
-        aSd[v]=s?1:-1;aWd[v]=ln.wide;aEv[v]=ln.env;v++;
-      }
-    }
-    var base=i*m*2;
-    for(j=0;j<m-1;j++){
-      var a=base+j*2;
-      idx[ii++]=a;idx[ii++]=a+1;idx[ii++]=a+2;
-      idx[ii++]=a+1;idx[ii++]=a+3;idx[ii++]=a+2;
-    }
-  }
-  var g=new THREE.BufferGeometry();
-  function at(name,arr){g.setAttribute(name,new THREE.BufferAttribute(arr,1));}
-  at('aU',aU);at('aI',aI);at('aPhase',aPh);at('aAmp',aAm);at('aYo',aYo);
-  at('aDepth',aDp);at('aAlpha',aAl);at('aKind',aKd);at('aSide',aSd);at('aWide',aWd);
-  at('aEnv',aEv);
-  g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(vcount*3),3));
-  g.setIndex(new THREE.BufferAttribute(idx,1));
-  g.boundingSphere=new THREE.Sphere(new THREE.Vector3(0,0,0),1e7);
-  var mat=new THREE.ShaderMaterial({
-    vertexShader:SILK_VS,fragmentShader:SILK_FS,
-    uniforms:{
-      uW:{value:1},uH:{value:1},uCY:{value:0},uBH:{value:1},uTime:{value:0},
-      uDev:{value:0},uSagX:{value:0.72},uSagW:{value:EV_W},uSpread:{value:1.2},
-      uEnvA:{value:0},uHarm:{value:0},
-      uWave:{value:640},uOmega:{value:OMEGA},uM0:{value:0.34},uM1:{value:0.66},
-      uDPR:{value:1},uTU:{value:0.5},uTK:{value:TAILK},
-      uBX:{value:0.42},uBY:{value:1e9},
-      uC0:{value:new THREE.Color()},uC1:{value:new THREE.Color()},uC2:{value:new THREE.Color()}
-    },
-    transparent:true,depthTest:false,depthWrite:false,
-    blending:THREE.NormalBlending
   });
-  return new THREE.Mesh(g,mat);
-}
-function placeBracket(){
-  var svg=document.getElementById('silkev');if(!svg||!W)return;
-  var K=EVKIND[evK];
-  var ba=(evX-EV_W)*W,bb=(evX+EV_W)*W,by=bracketY,top=CYp+BHv*1.34;
-  var dn=sigTop-4;
-  var mid;
-  if(K.harm){
-    var sa=sigX-64,sb=sigX+64;
-    mid=
-    '<path class="bk s" id="bkline" pathLength="1" d="M'+sa.toFixed(1)+','+by.toFixed(1)+
-      'H'+sb.toFixed(1)+'"/>'+
-    '<text class="bt" id="bklab" x="'+sigX.toFixed(1)+'" y="'+(by-9).toFixed(1)+
-      '">THD '+(thdEv()*100).toFixed(1)+'%</text>'+
-    '<text class="bn lft" id="bkpu" x="'+(sigX+8).toFixed(1)+'" y="'+(by+17).toFixed(1)+
-      '">LIM 8.0%</text>';
-  }else{
-    var ty1=CYp-BHv*K.thr,ty2=CYp+BHv*K.thr;
-    var tx0=Math.max(0,ba-W*0.05),tx1=Math.min(W,bb+W*0.05);
-    mid=
-    '<path class="bk th" id="bkthr" d="M'+tx0.toFixed(1)+','+ty1.toFixed(1)+'H'+tx1.toFixed(1)+
-      'M'+tx0.toFixed(1)+','+ty2.toFixed(1)+'H'+tx1.toFixed(1)+'"/>'+
-    '<text class="bn" id="bkthrl" x="'+tx1.toFixed(1)+'" y="'+(ty1-7).toFixed(1)+'">'+
-      K.thr.toFixed(2)+' Un</text>'+
-    '<path class="bk d" d="M'+ba.toFixed(1)+','+top.toFixed(1)+'V'+by.toFixed(1)+
-      'M'+bb.toFixed(1)+','+top.toFixed(1)+'V'+by.toFixed(1)+'"/>'+
-    '<path class="bk t" d="M'+ba.toFixed(1)+','+(by-4).toFixed(1)+'v8'+
-      'M'+bb.toFixed(1)+','+(by-4).toFixed(1)+'v8"/>'+
-    '<path class="bk s" id="bkline" pathLength="1" d="M'+ba.toFixed(1)+','+by.toFixed(1)+
-      'H'+bb.toFixed(1)+'"/>'+
-    '<text class="bt" id="bklab" x="'+((ba+bb)/2).toFixed(1)+'" y="'+(by-9).toFixed(1)+
-      '">'+evDur()+' MS</text>'+
-    '<text class="bn lft" id="bkpu" x="'+(ba+4).toFixed(1)+'" y="'+(by+17).toFixed(1)+
-      '">'+K.pu+' p.u.</text>';
+  pbtn.addEventListener('click',function(){setPaused(playing);});
+  pbtn.setAttribute('aria-label',pbtn.dataset.pause);
+  if(rm)fig.classList.add('is-static');
+  var ro=null,io=null;
+  if(window.ResizeObserver){
+    ro=new ResizeObserver(function(){size();draw();});ro.observe(box);
+  }else addEventListener('resize',function(){size();draw();});
+  if(window.IntersectionObserver){
+    io=new IntersectionObserver(function(es){
+      seen=es[es.length-1].isIntersecting;
+      if(seen)start();
+    },{rootMargin:'50% 0px 50% 0px'});
+    io.observe(box);
   }
-  svg.setAttribute('viewBox','0 0 '+Math.round(W)+' '+Math.round(H));
-  svg.innerHTML=mid+
-    '<path class="bh" d="M'+sigX.toFixed(1)+','+by.toFixed(1)+'V'+dn.toFixed(1)+'"/>'+
-    '<path class="bw" id="bkdrop" pathLength="1" d="M'+sigX.toFixed(1)+','+by.toFixed(1)+
-      'V'+dn.toFixed(1)+'"/>';
-  BR.thr=document.getElementById('bkthr');
-  BR.thrl=document.getElementById('bkthrl');
-  BR.pu=document.getElementById('bkpu');
-  BR.svg=svg;
-  BR.line=document.getElementById('bkline');
-  BR.drop=document.getElementById('bkdrop');
-  BR.lab=document.getElementById('bklab');
-  BR.d=BR.o=BR.l='';
-  brApply();
-}
-function brApply(){
-  if(!BR.svg)return;
-  var o=EV.br.toFixed(3),d=(1-EV.draw).toFixed(4),l=EV.lab.toFixed(3);
-  if(BR.o!==o){BR.o=o;BR.svg.style.opacity=o;}
-  if(BR.d!==d){BR.d=d;
-    if(BR.line)BR.line.style.strokeDashoffset=d;
-    if(BR.drop)BR.drop.style.strokeDashoffset=d;}
-  if(BR.l!==l){BR.l=l;
-    if(BR.lab)BR.lab.style.opacity=l;
-    if(BR.pu)BR.pu.style.opacity=l;
-    if(BR.thrl)BR.thrl.style.opacity=l;}
-}
-var BR={svg:null,line:null,drop:null,lab:null,thr:null,thrl:null,pu:null,d:'',o:'',l:''};
-function pickEvX(){
-  evK=(evK+1)%EVKIND.length;      
-  var ez=evZone();
-  evX=ez[0]+Math.random()*(ez[1]-ez[0]);
-  sigX=-4+(W+8)*evX;   
-  if(SILK)SILK.mesh.material.uniforms.uSagX.value=evX;
-  placeBracket();
-}
-function buildEvTl(){
-  if(!window.gsap)return;
-  if(evTl){evTl.kill();evTl=null;}
-  EV.k=0;EV.env=0;EV.br=0;EV.draw=0;EV.lab=0;EV.hold=0;
-  var tl=window.gsap.timeline({repeat:-1,onRepeat:pickEvX});
-  tl.to(EV,{k:0,duration:4.0});
-  tl.call(buildSigRun,null,2.0);
-  tl.addLabel('ev');
-  tl.to(EV,{hold:1,duration:0.50,ease:'power2.inOut'},'ev');       
-  tl.to(EV,{k:1,duration:0.50,ease:'power2.inOut'},'ev');          
-  tl.to(EV,{env:1,duration:0.45,ease:'power1.out'},'ev+=0.30');    
-  tl.to(EV,{br:1,duration:0.45,ease:'power1.out'},'ev+=0.60');     
-  tl.to(EV,{draw:1,duration:0.70,ease:'power1.inOut'},'ev+=0.85'); 
-  tl.to(EV,{lab:1,duration:0.40,ease:'power1.out'},'ev+=1.45');    
-  tl.call(seamFire,null,'ev+=1.60');
-  tl.addLabel('out','ev+=2.60');
-  tl.to(EV,{lab:0,duration:0.40,ease:'power1.inOut'},'out');
-  tl.to(EV,{draw:0,br:0,env:0,duration:0.70,ease:'power1.inOut'},'out+=0.15');
-  tl.to(EV,{k:0,duration:0.60,ease:'power2.inOut'},'out+=0.45');   
-  tl.to(EV,{hold:0,duration:0.60,ease:'power2.inOut'},'out+=0.45');
-  tl.to(EV,{k:0,duration:2.60},'out+=1.20');
-  evTl=tl;
-}
-function loadGsap(){
-  return new Promise(function(ok,no){
-    if(window.gsap)return ok();
-    var s=document.createElement('script');
-    s.src='/vendor/gsap.min.js';s.async=true;
-    s.onload=ok;s.onerror=no;document.head.appendChild(s);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)start();});
+  addEventListener('pagehide',function(){
+    alive=false;stop();
+    if(ro)ro.disconnect();if(io)io.disconnect();
   });
-}
-function silkLoad(){
-  if(SILK||silkPend||!heroFxOn())return;
-  silkPend=true;
-  Promise.all([import('/vendor/three.module.min.js'),loadGsap()]).then(function(r){
-    silkPend=false;
-    if(!heroFxOn())return;                 
-    silkInit(r[0]);
-  }).catch(function(){silkPend=false;silkFallback();});
-}
-function silkInit(THREE){
-  var rnd;
-  try{
-    rnd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:false,
-      powerPreference:'low-power'});
-  }catch(e){silkFallback();return;}
-  if(!rnd){silkFallback();return;}
-  rnd.setClearAlpha(0);
-  rnd.setPixelRatio(Math.min(1.5,devicePixelRatio||1));
-  var mesh=makeSilk(THREE,27,200);
-  var scene=new THREE.Scene();scene.add(mesh);
-  var cam=new THREE.OrthographicCamera(0,1,0,1,-10,10);
-  SILK={THREE:THREE,rnd:rnd,mesh:mesh,scene:scene,cam:cam};
-  silkTheme();
-  silkResize();
-  var ts=document.getElementById('tscale');
-  if(ts)ts.textContent='TIME x1/'+Math.round((Math.PI*2/OMEGA)/0.02);
-  if(rm){                       
-    evK=0;EV.k=1;EV.env=1;EV.br=1;EV.draw=1;EV.lab=1;EV.hold=1;
-    var ez=evZone();evX=(ez[0]+ez[1])/2;sigX=-4+(W+8)*evX;   
-    mesh.material.uniforms.uSagX.value=evX;
-    mesh.material.uniforms.uDev.value=evDev();
-    mesh.material.uniforms.uEnvA.value=1;
-    buildSigRun();placeBracket();   
-    silkDraw();
-    var hv=document.querySelector('.hv'),hz=document.querySelector('.hz'),
-        stt=document.getElementById('stt');
-    if(hv)hv.textContent=(230.0*(1+evDev())).toFixed(1);
-    if(hz)hz.textContent='50.00';
-    if(stt){stt.textContent=rdTxt();
-      if(stt.parentElement)stt.parentElement.classList.add('is-ev');}
-    return;
-  }
-  measureMask();silkResize();
-  buildEvTl();
-  pickEvX();
-  heroStart();
-}
-function silkTheme(){
-  if(!SILK)return;
-  var u=SILK.mesh.material.uniforms,a=rgbArr(MILK),b=rgbArr(GLOW);
-  var pg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
-  var pr=parseInt(pg.slice(1,3),16)/255,pgn=parseInt(pg.slice(3,5),16)/255,
-      pb=parseInt(pg.slice(5,7),16)/255;
-  if(isNaN(pr)){pr=pgn=pb=0.94;}
-  var m=0.42;
-  u.uC0.value.setRGB(a[0],a[1],a[2]);                                  
-  u.uC1.value.setRGB(a[0]+(pr-a[0])*m,a[1]+(pgn-a[1])*m,a[2]+(pb-a[2])*m); 
-  u.uC2.value.setRGB(b[0],b[1],b[2]);                                  
-}
-function silkResize(){
-  if(!SILK||!W)return;
-  SILK.rnd.setSize(W,H,false);
-  SILK.mesh.material.uniforms.uDPR.value=SILK.rnd.getPixelRatio();
-  var c=SILK.cam;c.left=0;c.right=W;c.top=0;c.bottom=H;c.updateProjectionMatrix();
-  var u=SILK.mesh.material.uniforms;
-  u.uW.value=W;u.uH.value=H;u.uCY.value=CYp;u.uBH.value=BHv;
-  u.uSagW.value=EV_W;u.uSagX.value=evX;u.uM0.value=MASK;u.uM1.value=MASK1;u.uTU.value=TAILU;u.uTK.value=TAILK;u.uBX.value=BTNU;u.uBY.value=BTNY;
-  u.uWave.value=Math.max(220,W*WAVE_K);
-}
-function silkDraw(){
-  if(!SILK)return;
-  var u=SILK.mesh.material.uniforms;
-  u.uTime.value=tt;
-  u.uDev.value=evDev();
-  u.uEnvA.value=EV.env*(EVKIND[evK].harm?0:1);
-  u.uHarm.value=(EVKIND[evK].harm||0)*EV.k;
-  u.uSpread.value=0.03;
-  SILK.rnd.render(SILK.scene,SILK.cam);
-}
-function silkDrop(){
-  if(evTl){evTl.kill();evTl=null;}
-  if(heroRaf){cancelAnimationFrame(heroRaf);heroRaf=0;}
-  if(SILK){
-    SILK.scene.remove(SILK.mesh);
-    SILK.mesh.geometry.dispose();
-    SILK.mesh.material.dispose();
-    SILK.rnd.dispose();
-    try{SILK.rnd.forceContextLoss();}catch(e){}
-    SILK=null;
-  }
-  EV.k=0;EV.env=0;EV.br=0;EV.draw=0;EV.lab=0;EV.hold=0;
-  BR={svg:null,line:null,drop:null,lab:null,thr:null,thrl:null,pu:null,d:'',o:'',l:''};
-  var sv=document.getElementById('silkev');if(sv){sv.innerHTML='';sv.style.opacity='0';}
-}
-function silkFallback(){
-  if(SILK||!heroFxOn()||!W)return;
-  var cx;try{cx=cv.getContext('2d');}catch(e){return;}
-  if(!cx)return;
-  var d=Math.min(1.5,devicePixelRatio||1);
-  cv.width=Math.round(W*d);cv.height=Math.round(H*d);
-  cx.setTransform(d,0,0,d,0,0);cx.clearRect(0,0,W,H);
-  var L=silkLayout(40),wave=Math.max(220,W*WAVE_K),k=Math.PI*2/wave,sp=0.15,i,j;
-  for(i=0;i<L.length;i++){
-    var ln=L[i];cx.beginPath();
-    for(j=0;j<=160;j++){
-      var u=j/160,x=u*W,ph=ln.phase+ln.u*Math.PI*2*sp;
-      var e=Math.max(0,Math.min(1,u/0.40));e=e*e*(3-2*e);
-      var amp=BHv*ln.amp*e;
-      var y=CYp+ln.yo*BHv*0.30+amp*(Math.sin(x*k+ph)+0.34*Math.sin(x*k*0.41+ph*0.62));
-      if(j)cx.lineTo(x,y);else cx.moveTo(x,y);
-      if(j===160){
-        var mm=Math.max(0,Math.min(1,(0.80-MASK)/(MASK1-MASK)));
-        if(0.80<TAILU)mm*=TAILK;
-        cx.strokeStyle='rgba('+(ln.kind===2?GLOW:MILK)+','+(ln.alpha*0.9*mm).toFixed(3)+')';
-        cx.lineWidth=ln.wide*2;cx.stroke();
-      }
-    }
-  }
-}
+  theme();size();setMode('normal',true);
+  requestAnimationFrame(function(){fig.classList.add('is-in');});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
+  start();
+})();
 function placeHeroCol(){
-  var col=document.querySelector('.hero .hcol');if(!col)return;
-  if(innerWidth<=960||innerHeight<760){col.style.top='';return;}
+  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');if(!col)return;
+  if(innerWidth<=960||innerHeight<760){col.style.top='';if(pq)pq.style.top='';return;}
   var hdr=document.querySelector('header .hin')||document.querySelector('header');
   var mark=col.querySelector('.eyebrow')||col;
   col.style.top='0px';                       
@@ -1740,76 +1492,9 @@ function placeHeroCol(){
   var air=Math.min(150,Math.max(80,innerHeight*0.11));
   var lift=Math.max(0,Math.min(88,gap-air));
   col.style.top=(-Math.round(lift))+'px';
+  if(pq)pq.style.top=col.style.top;   
 }
-function size(){
-  readWaveTheme();
-  placeHeroCol();
-  dpr=Math.min(1.5,devicePixelRatio||1);
-  var r=cv.parentElement.getBoundingClientRect();
-  W=r.width;H=r.height;
-  CYp=H*0.53;
-  BHv=H*0.095;
-  bracketY=CYp+BHv*1.62;  
-  sigTop=bracketY+28;     
-  measureMask();
-  var ez0=evZone();
-  if(evX<ez0[0]||evX>ez0[1])evX=(ez0[0]+ez0[1])/2;
-  sigX=-4+(W+8)*evX;   
-  placeReadout();buildSigRun();
-  if(!heroFxOn()){silkDrop();return;}
-  if(SILK){silkTheme();silkResize();placeBracket();
-    if(rm)silkDraw();else heroStart();return;}
-  silkLoad();
-}
-function frame(ts){
-  var dt=(ts-(frame.p||ts))/1000;if(!(dt>0)||dt>.05)dt=.016;frame.p=ts;
-  if(rm)dt=0;
-  var moving=PSMOVE&&(ts-PSMOVE)<=BAND_MOVE;
-  if(!wipeBox)wipeBox=document.getElementById('wipe');
-  if(wipeBox&&wipeBox.classList.contains('on')){heroRaf=0;return;}
-  var drawNow=canvasOn&&(rm||!frame.d||ts-frame.d>=(moving?BAND_SLOW:BAND_MS));
-  var wdt=0;
-  if(drawNow){wdt=frame.d?(ts-frame.d)/1000:.016;if(!(wdt>0)||wdt>.05)wdt=.016;if(rm)wdt=0;}
-  tt+=wdt*(1-EV.hold);
-  seamStep(dt);
-  if(SEAM.box){var seamOn=EV.br>0.02||SEAM.t>=0;
-    SEAM.box.classList.toggle('lit',seamOn);
-    if(SEAM.rail)SEAM.rail.classList.toggle('lit',seamOn);}
-  var evP=EV.k;
-  brApply();
-  if(drawNow){frame.d=ts;silkDraw();}
-  if(!frame.hm||ts-frame.hm>500){frame.hm=ts;
-    var vTxt=(230.0*(1+evDev())*Math.sqrt(1+Math.pow(thdEv()*(EVKIND[evK].harm||0)*EV.k,2))).toFixed(1),
-        fTxt='50.00',
-        sTxt=evP>.15?rdTxt():'';
-    var hv=document.querySelector('.hv'),hz=document.querySelector('.hz'),stt=document.getElementById('stt');
-    if(hv&&hv.textContent!==vTxt)hv.textContent=vTxt;
-    if(hz&&hz.textContent!==fTxt)hz.textContent=fTxt;
-    if(stt&&stt.textContent!==sTxt)stt.textContent=sTxt;
-    if(stt&&stt.parentElement)stt.parentElement.classList.toggle('is-ev',evP>.15);}
-  if(!rm&&heroFxOn()&&heroSeen&&SILK)heroRaf=requestAnimationFrame(frame);else heroRaf=0;
-}
-function heroFxOn(){return innerWidth>960;}
-var heroRaf=0,heroSeen=true,canvasOn=true;
-function heroStart(){
-  if(heroRaf||rm||!heroFxOn()||!heroSeen)return;
-  heroRaf=requestAnimationFrame(frame);
-}
-size();
-heroStart();
-if(window.ResizeObserver){
-  var stEl=cv&&cv.parentElement;
-  if(stEl)new ResizeObserver(function(){
-    if(!SILK)return;
-    var r=stEl.getBoundingClientRect();
-    if(Math.abs(r.width-W)<0.5&&Math.abs(r.height-H)<0.5)return;
-    W=r.width;H=r.height;CYp=H*0.53;BHv=H*0.135;
-    bracketY=CYp+BHv*1.10;sigTop=bracketY+28;sigX=-4+(W+8)*evX;   
-    silkResize();placeBracket();
-    if(rm)silkDraw();
-  }).observe(stEl);
-}
-var HERO_KEEP=600,DRAW_KEEP=200;
+placeHeroCol();
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
 function mBar(){var m=document.documentElement.scrollHeight-innerHeight;
   return {on:window.pageYOffset>60,p:m>0?Math.min(1,window.pageYOffset/m):0};}
@@ -1818,24 +1503,6 @@ function aBar(st){
   if(!hprog)return;
   var w=(st.p*100).toFixed(2)+'%';
   if(progWas!==w){progWas=w;hprog.style.width=w;}
-}
-function mHero(){
-  if(!cv)return null;
-  var a=cv.getBoundingClientRect(),top=a.top,bot=a.bottom;
-  if(SEAM.rail){
-    var b=SEAM.rail.getBoundingClientRect();
-    if(b.top<top)top=b.top;
-    if(b.bottom>bot)bot=b.bottom;
-  }
-  return {top:top,bottom:bot,cvTop:a.top,cvBottom:a.bottom};
-}
-function aHero(r){
-  if(!r)return;
-  canvasOn=r.cvBottom>-DRAW_KEEP&&r.cvTop<innerHeight+DRAW_KEEP;
-  var near=r.bottom>-HERO_KEEP&&r.top<innerHeight+HERO_KEEP;
-  if(near===heroSeen)return;
-  heroSeen=near;
-  if(near)heroStart();          
 }
 function route(pts,r){
   var d='M'+pts[0][0]+','+pts[0][1];
@@ -1922,75 +1589,9 @@ function aJoints(ps){
   }
 }
 function paintJoints(){aJoints(mJoints());}
-function buildSigRun(){
-  var box=document.getElementById('sigrun');if(!box)return;
-  SEAM.box=box;
-  box.innerHTML='';SEAM.pulse=null;SEAM.halo=null;SEAM.t=-1;
-  if(innerWidth<1100)return;
-  var st=document.querySelector('.stage');if(!st)return;
-  var b=box.getBoundingClientRect(),sb=st.getBoundingClientRect();
-  var W=Math.round(b.width),H=Math.round(b.height);
-  if(!(W>0))return;
-  var x=Math.round(sb.left-b.left+sigX),
-      y0=Math.round(sb.top-b.top+sigTop);   
-  var railX=Math.round(Math.min(18,Math.max(4,innerWidth*.014))+8);
-  var hero=document.querySelector('.hero');
-  var hbo=Math.round(hero.getBoundingClientRect().bottom-b.top);
-  var lane=hbo-96;
-  var y1=hbo+150;                                     
-  var ns='http://www.w3.org/2000/svg';
-  var svg=document.createElementNS(ns,'svg');
-  svg.setAttribute('viewBox','0 0 '+W+' '+H);
-  function P(cls,d,op){var p=document.createElementNS(ns,'path');
-    p.setAttribute('class',cls);p.setAttribute('d',d);
-    if(op!==undefined)p.setAttribute('opacity',op);svg.appendChild(p);return p;}
-  var pts=[[x,y0],[x,lane],[railX,lane]];
-  var rsec=document.querySelector('section[data-rail]');
-  var rail=rsec&&rsec.querySelector('.srail'),tick=rail&&rail.querySelector('rect');
-  if(rail&&tick&&rail.dataset.yh){
-    var cy=Math.round(rsec.getBoundingClientRect().top-b.top)+(+rail.dataset.yh);
-    var tb=tick.getBoundingClientRect();
-    pts.push([railX,cy],[Math.round(tb.left-b.left+tb.width/2),cy]);
-  }else pts.push([railX,y1]);
-  var d=route(pts,18);
-  P('sheath',d);P('sig',d);
-  var halo=P('sp halo',d,0),pulse=P('sp',d,0);
-  box.appendChild(svg);
-  SEAM.pulse=pulse;SEAM.halo=halo;SEAM.len=pulse.getTotalLength();
-  var dash=(SEAM.len*.30).toFixed(0)+' '+(SEAM.len*1.5).toFixed(0);
-  pulse.setAttribute('stroke-dasharray',dash);halo.setAttribute('stroke-dasharray',dash);
-}
-function placeReadout(){
-  var hero=document.querySelector('.hero'),st=document.querySelector('.stage');
-  if(!hero||!st)return;
-  var rd=document.querySelector('.rd'),stt=document.getElementById('stt');
-  if(!rd)return;
-  if(innerWidth<=960){rd.style.right='';rd.style.top='';rd.style.minWidth='';return;}
-  if(stt&&PT.rdDip){
-    var keep=stt.textContent;
-    rd.style.minWidth='0px';
-    stt.textContent=PT.rdDip;
-    rd.style.minWidth=Math.ceil(rd.getBoundingClientRect().width)+'px';
-    stt.textContent=keep;
-  }
-  var hb=hero.getBoundingClientRect(),sb=st.getBoundingClientRect();
-  rd.style.right='70px';
-  var top=Math.round(sb.bottom-hb.top)+10,
-      lim=Math.round(hb.height-rd.getBoundingClientRect().height)-34;
-  rd.style.top=Math.min(top,lim)+'px';
-}
-function seamFire(){if(SEAM.pulse)SEAM.t=0;}
-function seamStep(dt){
-  if(!SEAM.pulse||SEAM.t<0)return;
-  SEAM.t+=dt/5.0;
-  var lit=[SEAM.pulse,SEAM.halo].filter(Boolean);
-  if(SEAM.t>=1){SEAM.t=-1;lit.forEach(function(p){p.setAttribute('opacity','0');});return;}
-  var L=SEAM.len,off=(L*.16-SEAM.t*L*1.16).toFixed(1);
-  lit.forEach(function(p){p.setAttribute('stroke-dashoffset',off);p.setAttribute('opacity','1');});
-}
 function buildRails(){
   cacheBump();
-  if(innerWidth<1100){SEAM.rail=null;
+  if(innerWidth<1100){
     return document.querySelectorAll('.srail').forEach(function(s){s.remove();});}
   document.querySelectorAll('section[data-rail]').forEach(function(sec,si){
     var old=sec.querySelector('.srail');if(old)old.remove();
@@ -2003,7 +1604,6 @@ function buildRails(){
     svg.setAttribute('viewBox','0 0 '+W2+' '+H);
     svg.setAttribute('preserveAspectRatio','none');
     svg.style.cssText='position:absolute;top:0;left:clamp(4px,1.4vw,18px);width:'+W2+'px;height:'+H+'px;pointer-events:none;overflow:visible;';
-    if(si===0)SEAM.rail=svg;
     var top=si===0?0:Math.max(0,yh-46);
     var dEl=route([[8,top],[8,yh],[W2-14,yh]],16);
     var elbow=document.createElementNS(ns,'path');
@@ -2914,11 +2514,10 @@ function scrollPaint(){
   var y=window.pageYOffset;
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
-  PSMOVE=performance.now();   
   var d1=mSeq(),d2=mSuite(),d3=mJoints(),d4=mRails(),d5=mDither(),
-      d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d11=mHero(),d12=mBar();
+      d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
   aSeq(d1);aSuite(d2);aJoints(d3);aRails(d4);aDither(d5);
-  aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aHero(d11);aBar(d12);
+  aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
 function scrollRepaint(){FR.force=true;scrollPaint();}
@@ -2933,9 +2532,9 @@ cacheBump();scrollRepaint();
 (function(){var R=document.documentElement;
   function vwpx(){R.style.setProperty('--vwpx',R.clientWidth+'px');}
   vwpx();addEventListener('resize',vwpx);})();
-addEventListener('resize',function(){clearTimeout(size.t);size.t=setTimeout(function(){size();buildJoints();buildWipe();buildRails();buildDither();layoutSuite();buildSigRun();},220);});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){buildRails();placeReadout();buildSigRun();remeasureMask();scrollRepaint();});
-addEventListener('load',function(){buildRails();layoutSuite();placeReadout();buildSigRun();remeasureMask();scrollRepaint();});
+addEventListener('resize',function(){clearTimeout(placeHeroCol.t);placeHeroCol.t=setTimeout(function(){placeHeroCol();buildJoints();buildWipe();buildRails();buildDither();layoutSuite();},220);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){buildRails();placeHeroCol();scrollRepaint();});
+addEventListener('load',function(){buildRails();layoutSuite();placeHeroCol();scrollRepaint();});
 addEventListener('orientationchange',function(){
   setTimeout(function(){
     var y=window.pageYOffset;
