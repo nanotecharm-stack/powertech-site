@@ -684,7 +684,10 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      два блока читаются одной строкой разворота; подъём placeHeroCol
      ставится обоим. При center инструмент висел ниже текста на высоту
      подъёма. */
-  align-items:start;gap:clamp(18px,3vw,52px);
+  /* align-content:center ОБЯЗАТЕЛЕН вместе со start: ряд один, и без него
+     он растягивался на весь герой, а обе колонки прилипали к шапке —
+     владелец увидел «всё свалено в кучу» при пустой нижней половине. */
+  align-items:start;align-content:center;gap:clamp(18px,3vw,52px);
   min-height:100svh;max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
@@ -808,15 +811,17 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 /* Подпись устроена как надглавие слева: блок кеглем текста, внутри строчный
    flex-контейнер 12px. Так обе подписи ложатся на одну строку в обоих
    языках без подгонки числом — высота строки берётся у того же шрифта. */
-.pq-cap{display:block;font-size:16px;line-height:normal;margin-bottom:var(--s3);}
+.pq-cap{display:block;font-size:16px;line-height:normal;margin-bottom:var(--s4);}
 .pq-cap span{display:inline-flex;align-items:center;font-family:%%MONOFONT%%;font-size:12px;
   letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft);}
-.pq-chart{position:relative;height:clamp(220px,32vh,320px);}
+/* Высота поля подобрана под колонку текста: с абзацем и кнопками она 445-545,
+   и поле с подписями должно быть ей соразмерно, а не вдвое ниже. */
+.pq-chart{position:relative;height:clamp(240px,36vh,340px);}
 .pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
 /* Ряд управления — только состояния. Пауза стоит в правом верху, напротив
    подписи: так ряд кнопок не переносится под длинной армянской подписью
    паузы, а верхняя строка читается шапкой прибора. */
-.pq-ctl{display:flex;flex-wrap:wrap;align-items:center;margin-top:var(--s4);}
+.pq-ctl{display:flex;flex-wrap:wrap;align-items:center;margin-top:var(--s5);}
 /* Вес правила выше общего .pq-m,.pq-pause ниже, где стоит position:relative. */
 .pq .pq-pause{position:absolute;right:0;top:-15px;padding-inline:var(--s2) 0;}
 /* На узком телефоне подпись и армянская пауза в одну строку не помещаются
@@ -864,13 +869,13 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
    тёмного героя, на бумаге его не видно. Здесь кольцо фирменного цвета. */
 .pq button:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
 /* Пояснение: три строки в одной клетке, высота по самой длинной. */
-.pq-x{display:grid;margin-top:var(--s2);font-size:14px;line-height:1.6;color:var(--fg-mid);
+.pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
 .pq[data-mode="normal"] .pq-x [data-x="normal"],
 .pq[data-mode="dip"] .pq-x [data-x="dip"],
 .pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
-.pq-note{margin-top:var(--s3);font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
+.pq-note{margin-top:var(--s4);font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
   color:var(--fg-soft);}
 /* Армянская подпись: без прописных и разрядки — это правила латиницы; и тем
    же гротеском, что текст, — засечная гарнитура в 12 точек расплывается. */
