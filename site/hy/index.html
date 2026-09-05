@@ -352,7 +352,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq{position:relative;z-index:1;margin:0;min-width:0;
   display:flex;flex-direction:column;gap:0;color:var(--fg);
   --pq-trace:var(--brand);--pq-grid:var(--hair2);--pq-axis:var(--hair);
-  --pq-nom:rgba(13,36,64,.22);--pq-ref:rgba(13,36,64,.46);
+  --pq-nom:rgba(13,36,64,.22);--pq-ref:rgba(13,36,64,.66);
   opacity:0;transition:opacity .6s var(--e) .1s;}
 .pq.is-in{opacity:1;}
 .pq-cap{display:block;font-size:16px;line-height:normal;margin-bottom:var(--s4);}
@@ -1320,7 +1320,8 @@ var PT=window.PT;
   var pbtn=fig.querySelector('.pq-pause');
   var CYCLES=4;            
   var SPEED=0.45;          
-  var H3=0.18,H5=0.09;     
+  var HP=[[0.16,0.07,0.03],[-0.14,0.05,-0.03],[0.02,-0.12,-0.06]];
+  var HP_HOLD=2.4,HP_MORPH=0.9;   
   var DIP={depth:0.40,len:2.0,edge:0.15,every:8,first:0.4};
   var TWEEN=600;           
   var TAU=Math.PI*2;
@@ -1361,9 +1362,18 @@ var PT=window.PT;
       if(t0<T&&t0+DIP.len>T-CYCLES)out.push(t0);}
     return out;
   }
+  var hc=[0,0,0];
+  function harmAt(tau){
+    var n=HP.length,seg=HP_HOLD+HP_MORPH,u=tau-Math.floor(tau/(seg*n))*(seg*n);
+    var i=Math.floor(u/seg),a=HP[i],b=HP[(i+1)%n],v=u-i*seg,k=0;
+    if(v>HP_HOLD){k=(v-HP_HOLD)/HP_MORPH;k=k*k*(3-2*k);}
+    hc[0]=a[0]+(b[0]-a[0])*k;hc[1]=a[1]+(b[1]-a[1])*k;hc[2]=a[2]+(b[2]-a[2])*k;
+    return hc;
+  }
   function volt(tau){
-    var ph=tau*TAU;
-    var s=Math.sin(ph)+wh*(H3*Math.sin(3*ph)+H5*Math.sin(5*ph));
+    var ph=tau*TAU,s=Math.sin(ph);
+    if(wh>0.001){var h=rm?HP[0]:harmAt(tau);
+      s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));}
     return (1-DIP.depth*wd*dipAt(tau))*s;
   }
   function draw(){
@@ -1399,7 +1409,7 @@ var PT=window.PT;
       xs[i]=u*W;ys[i]=cy-A*volt(tau);yi[i]=cy-A*Math.sin(tau*TAU);
     }
     if(dev>0.001){
-      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1;ctx.setLineDash([2,4]);
+      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1.3;ctx.setLineDash([4,4]);
       ctx.beginPath();
       for(i=0;i<=n;i++){
         if(Math.abs(ys[i]-yi[i])>0.6){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}

@@ -809,7 +809,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
   /* Холст читает эти четыре переменные через getComputedStyle: переход
      палитры на них действует так же, как на всё остальное. */
   --pq-trace:var(--brand);--pq-grid:var(--hair2);--pq-axis:var(--hair);
-  --pq-nom:rgba(13,14,19,.22);--pq-ref:rgba(13,14,19,.46);
+  --pq-nom:rgba(13,14,19,.22);--pq-ref:rgba(13,14,19,.66);
   /* Появление — только прозрачностью. transform поднял бы блок в свой слой и
      мог вернуть замыленный текст, который владелец уже ловил. */
   opacity:0;transition:opacity .6s var(--e) .1s;}
@@ -2482,7 +2482,17 @@ var PT=window.PT;
 
   var CYCLES=4;            /* периодов в окне: глаз читает синусоиду с 4-6 гребней */
   var SPEED=0.45;          /* периодов в секунду: 50 Гц замедлены в ~110 раз */
-  var H3=0.18,H5=0.09;     /* доли третьей и пятой гармоник; THD ≈ 20 % */
+  /* Три формы искажения, как их знает инженер. Коэффициенты — доли 3-й, 5-й
+     и 7-й гармоник от ТОГО ЖЕ аргумента, знак = фаза 0 или 180°:
+     1) плоская вершина — однофазные выпрямители, компьютеры, LED-драйверы:
+        3-я и 5-я в фазе срезают гребень;
+     2) острая вершина — 3-я в противофазе, гребень выше номинала;
+     3) «плечи» шестипульсных приводов — 5-я и 7-я, 3-й почти нет.
+     Формы сменяют друг друга: сеть меняется с нагрузкой. Смена привязана к
+     времени СИГНАЛА, поэтому приходит справа и едет с волной, а на паузе
+     стоит. THD каждой 14–18 % — преувеличено ради читаемости. */
+  var HP=[[0.16,0.07,0.03],[-0.14,0.05,-0.03],[0.02,-0.12,-0.06]];
+  var HP_HOLD=2.4,HP_MORPH=0.9;   /* периодов: форма стоит ~5 с, переходит ~2 с */
   /* Провал: глубина 0.35 (остаточное 0.65 о.е.), длина два периода, края по
      0.15 периода, повтор каждые десять периодов — окно успевает целиком
      очиститься, и провал читается событием, а не режимом. */
@@ -2533,10 +2543,20 @@ var PT=window.PT;
       if(t0<T&&t0+DIP.len>T-CYCLES)out.push(t0);}
     return out;
   }
+  /* Коэффициенты гармоник в момент tau: ступень держится, переход сглажен. */
+  var hc=[0,0,0];
+  function harmAt(tau){
+    var n=HP.length,seg=HP_HOLD+HP_MORPH,u=tau-Math.floor(tau/(seg*n))*(seg*n);
+    var i=Math.floor(u/seg),a=HP[i],b=HP[(i+1)%n],v=u-i*seg,k=0;
+    if(v>HP_HOLD){k=(v-HP_HOLD)/HP_MORPH;k=k*k*(3-2*k);}
+    hc[0]=a[0]+(b[0]-a[0])*k;hc[1]=a[1]+(b[1]-a[1])*k;hc[2]=a[2]+(b[2]-a[2])*k;
+    return hc;
+  }
   /* Мгновенное напряжение в долях номинальной амплитуды. */
   function volt(tau){
-    var ph=tau*TAU;
-    var s=Math.sin(ph)+wh*(H3*Math.sin(3*ph)+H5*Math.sin(5*ph));
+    var ph=tau*TAU,s=Math.sin(ph);
+    if(wh>0.001){var h=rm?HP[0]:harmAt(tau);
+      s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));}
     return (1-DIP.depth*wd*dipAt(tau))*s;
   }
   function draw(){
@@ -2582,7 +2602,7 @@ var PT=window.PT;
       xs[i]=u*W;ys[i]=cy-A*volt(tau);yi[i]=cy-A*Math.sin(tau*TAU);
     }
     if(dev>0.001){
-      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1;ctx.setLineDash([2,4]);
+      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1.3;ctx.setLineDash([4,4]);
       ctx.beginPath();
       for(i=0;i<=n;i++){
         if(Math.abs(ys[i]-yi[i])>0.6){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}
