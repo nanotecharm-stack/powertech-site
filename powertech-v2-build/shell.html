@@ -786,28 +786,34 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 /* Подпись устроена как надглавие слева: блок кеглем текста, внутри строчный
    flex-контейнер 12px. Так обе подписи ложатся на одну строку в обоих
    языках без подгонки числом — высота строки берётся у того же шрифта. */
-/* Шапка поля: ‹ имя состояния › и значок паузы справа. Имя набрано как
-   надглавие слева (тот же кегль и разрядка) и стоит с ним на одной строке:
-   ряд высотой 44 под стрелки, поднят так, чтобы центр текста совпал с центром
-   строки надглавия (line-height normal у 16px ≈ 21px → 10-11 px).
-   Стрелки — единственный орган выбора: три подписи, сегменты и шкала владелец
-   отверг как перегруз; имя со стрелками читается перелистыванием. */
-/* -17 слева: кончик шеврона ложится на левую кромку графика, как квадрат
-   надглавия — на кромку колонки текста. */
-.pq-head{display:flex;align-items:center;gap:var(--s1);margin:-12px 0 var(--s3) -17px;}
-.pq-cap{display:grid;margin:0;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.2em;
+/* Шапка поля — счётчик в языке сайта: как «01 ■□□□» у разделов. Пиксельный
+   номер состояния, три квадрата (выбранный — фирменный, как у счётчика),
+   имя состояния тем же набором, что надглавие слева. Квадраты и есть
+   переключатель: у каждого цель 24×44, сам квадрат 6 px, при наведении
+   темнеет и растёт. Ряд высотой 44 поднят на 12, чтобы центр строки совпал с
+   центром надглавия (line-height normal у 16px ≈ 21px → 10-11 px).
+   История: три подписи, сегменты, шкала с ползунком и стрелки ‹ › —
+   владелец отверг как перегруз или чужой язык; счётчик — свой. */
+.pq-head{display:flex;align-items:center;gap:var(--s3);margin:-12px 0 var(--s3) 0;}
+.pq-no{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.11em;
+  font-feature-settings:'case' 1;color:var(--fg-soft);min-width:2.4ch;}
+.pq-dots{display:flex;margin-left:-9px;}
+.pq-dot{width:24px;height:44px;display:grid;place-items:center;border-radius:2px;}
+/* Под пальцем цель шире: 24 px — минимум нормы, для большого пальца мало. */
+@media (pointer:coarse){.pq-dot{width:32px;}}
+.pq-dot i{display:block;width:6px;height:6px;background:var(--hair);
+  transition:background-color .3s var(--e),transform .3s var(--e);}
+.pq-dot:hover i{background:var(--fg-soft);transform:scale(1.34);}
+.pq-dot[aria-pressed="true"] i{background:var(--brand);transform:none;}
+.pq-cap{display:grid;margin:0 0 0 -3px;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--fg);line-height:1.3;}
 .pq-cap span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);white-space:nowrap;}
 .pq[data-mode="normal"] .pq-cap [data-x="normal"],
 .pq[data-mode="dip"] .pq-cap [data-x="dip"],
 .pq[data-mode="harm"] .pq-cap [data-x="harm"]{visibility:visible;opacity:1;}
-/* Стрелка — шеврон из двух сторон квадрата, цель 44×44, сам знак 8 px. */
-.pq-step,.pq-pause{width:44px;height:44px;display:grid;place-items:center;border-radius:2px;
-  color:var(--fg-soft);transition:color .3s var(--e),background-color .3s var(--e);}
-.pq-step:hover,.pq-pause:hover{color:var(--fg);background:var(--hair2);}
-.pq-step i{display:block;width:8px;height:8px;border:solid currentColor;border-width:0 0 1.5px 1.5px;
-  transform:translateX(2px) rotate(45deg);}
-.pq-step[data-dir="1"] i{transform:translateX(-2px) rotate(-135deg);}
+.pq-pause{width:44px;height:44px;display:grid;place-items:center;border-radius:2px;
+  color:var(--fg-soft);transition:color .3s var(--e);}
+.pq-pause:hover{color:var(--fg);}
 .pq-pause{margin-left:auto;}
 .pq-pause i{position:relative;width:9px;height:9px;}
 .pq-pause i::before,.pq-pause i::after{content:"";position:absolute;top:0;bottom:0;width:2px;
@@ -2099,16 +2105,23 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- ПОЛЕ ГЕРОЯ: ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ. Одна кривая, три состояния по выбору
          читателя. Это иллюстрация мгновенного напряжения, а не запись прибора,
          и оговорка говорит это прямо. Надписей минимум — владелец снял всё
-         лишнее: имя состояния со стрелками (оно же подпись поля), одна фраза
-         пояснения, оговорка. Название поля живёт в aria-label группы. Сам холст
+         лишнее: счётчик состояния (номер, квадраты, имя), одна фраза
+         пояснения, оговорка. Название поля живёт в aria-label группы квадратов.
+         Сам холст
          для диктора скрыт — непрерывные обновления кривой объявлять нечего. -->
-    <div class="pq" id="pq" data-mode="normal" role="group" aria-label="%%PQ_CAP%%">
+    <div class="pq" id="pq" data-mode="normal">
+      <!-- Шапка поля устроена как счётчик разделов сайта («01 ■□□□»): пиксельный
+           номер состояния, три квадрата — они и есть переключатель, — имя
+           состояния. Квадраты — кнопки с aria-pressed и именем; три имени лежат
+           в одной клетке сетки, чтобы ширина строки не дышала. -->
       <div class="pq-head">
-        <button type="button" class="pq-step" data-dir="-1"><i aria-hidden="true"></i></button>
-        <!-- Три имени лежат в одной клетке сетки: место отведено под самое длинное,
-             стрелки при смене не двигаются. Скрытые — visibility:hidden. -->
+        <b class="pq-no" aria-hidden="true">01</b>
+        <div class="pq-dots" role="group" aria-label="%%PQ_CAP%%">
+          <button type="button" class="pq-dot" data-mode="normal" aria-pressed="true" aria-label="%%PQ_M_NORMAL%%"><i aria-hidden="true"></i></button>
+          <button type="button" class="pq-dot" data-mode="dip" aria-pressed="false" aria-label="%%PQ_M_DIP%%"><i aria-hidden="true"></i></button>
+          <button type="button" class="pq-dot" data-mode="harm" aria-pressed="false" aria-label="%%PQ_M_HARM%%"><i aria-hidden="true"></i></button>
+        </div>
         <p class="pq-cap"><span data-x="normal">%%PQ_M_NORMAL%%</span><span data-x="dip">%%PQ_M_DIP%%</span><span data-x="harm">%%PQ_M_HARM%%</span></p>
-        <button type="button" class="pq-step" data-dir="1"><i aria-hidden="true"></i></button>
         <button type="button" class="pq-pause" data-pause="%%PQ_PAUSE%%" data-resume="%%PQ_RESUME%%"><i aria-hidden="true"></i></button>
       </div>
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
@@ -2413,8 +2426,7 @@ var PT=window.PT;
   var fig=document.getElementById('pq');if(!fig)return;
   var box=fig.querySelector('.pq-chart'),cv=fig.querySelector('.pq-cv');
   var ctx=cv&&cv.getContext('2d');if(!ctx)return;
-  var MODES=['normal','dip','harm'],steps=[].slice.call(fig.querySelectorAll('.pq-step')),names={};
-  fig.querySelectorAll('.pq-cap span').forEach(function(sp){names[sp.dataset.x]=sp.textContent;});
+  var MODES=['normal','dip','harm'],dots=[].slice.call(fig.querySelectorAll('.pq-dot')),noEl=fig.querySelector('.pq-no');
   var pbtn=fig.querySelector('.pq-pause');
 
   var CYCLES=4;            /* периодов в окне: глаз читает синусоиду с 4-6 гребней */
@@ -2576,13 +2588,23 @@ var PT=window.PT;
     last=performance.now();raf=requestAnimationFrame(frame);
   }
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+  /* Номер состояния на миг рассыпается знаками и собирается — тот же приём,
+     что у заголовка при загрузке (decrypt), в масштабе двух знаков. Шрифт
+     моноширинный, поэтому строка не дышит. При reduce — просто смена. */
+  var POOL='#%&@$?!*+=/{}[]<>~^',scrT=0;
+  function setNo(k,init){
+    if(!noEl)return;var fin='0'+(k+1);
+    if(rm||init){noEl.textContent=fin;return;}
+    clearInterval(scrT);var t0=performance.now();
+    scrT=setInterval(function(){
+      if(performance.now()-t0>260){clearInterval(scrT);noEl.textContent=fin;return;}
+      noEl.textContent=POOL.charAt(Math.random()*POOL.length|0)+POOL.charAt(Math.random()*POOL.length|0);
+    },45);
+  }
   function setMode(m,init){
     mode=m;fig.dataset.mode=m;
-    /* Стрелки подписаны именем состояния, к которому ведут: диктор слышит
-       «Провал напряжения, кнопка», а не безымянное «дальше». */
-    var k=MODES.indexOf(m);
-    steps.forEach(function(b){var t=MODES[(k+(+b.dataset.dir)+MODES.length)%MODES.length];
-      b.dataset.to=t;b.setAttribute('aria-label',names[t]||t);});
+    dots.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
+    setNo(MODES.indexOf(m),init);
     var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
     if(d1&&wd<0.001){
       /* Провал заводится заново при каждом выборе: первый приходит справа
@@ -2599,7 +2621,17 @@ var PT=window.PT;
     pbtn.setAttribute('aria-label',p?pbtn.dataset.resume:pbtn.dataset.pause);
     if(p)stop();else start();
   }
-  steps.forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.to);});});
+  dots.forEach(function(b,i){
+    b.addEventListener('click',function(){if(b.dataset.mode!==mode)setMode(b.dataset.mode);});
+    /* Стрелки ходят по группе, как по вкладкам; Enter и пробел — у кнопки свои. */
+    b.addEventListener('keydown',function(e){
+      var k=e.key,j=-1;
+      if(k==='ArrowRight'||k==='ArrowDown')j=(i+1)%dots.length;
+      else if(k==='ArrowLeft'||k==='ArrowUp')j=(i+dots.length-1)%dots.length;
+      else if(k==='Home')j=0;else if(k==='End')j=dots.length-1;
+      if(j<0)return;e.preventDefault();dots[j].focus();
+    });
+  });
   pbtn.addEventListener('click',function(){setPaused(playing);});
   pbtn.setAttribute('aria-label',pbtn.dataset.pause);
   if(rm)fig.classList.add('is-static');
