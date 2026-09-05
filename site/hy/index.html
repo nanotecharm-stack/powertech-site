@@ -352,47 +352,30 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
   --pq-nom:rgba(13,36,64,.22);--pq-ref:rgba(13,36,64,.66);
   opacity:0;transition:opacity .6s var(--e) .1s;}
 .pq.is-in{opacity:1;}
-.pq-cap{display:block;font-size:16px;line-height:normal;margin-bottom:var(--s4);}
-.pq-cap span{display:inline-flex;align-items:center;font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft);}
-.pq-chart{position:relative;height:clamp(240px,36vh,340px);}
-.pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
-.pq-ctl{display:flex;flex-wrap:wrap;align-items:center;margin-top:var(--s5);}
-.pq .pq-pause{position:absolute;right:0;top:-15px;padding-inline:var(--s2) 0;}
-@media (max-width:470px){
-  .pq .pq-pause{position:static;padding-inline:var(--s2);}
-}
-.pq-modes{position:relative;display:flex;justify-content:space-between;gap:var(--s4);flex:1 1 100%;
-  padding-top:18px;--kx:0px;--tx0:0px;--tx1:0px;}
-.pq-track{position:absolute;top:8px;height:1px;left:var(--tx0);width:calc(var(--tx1) - var(--tx0));
-  background:var(--hair);}
-.pq-knob{position:absolute;top:3px;left:var(--kx);width:11px;height:11px;border-radius:50%;
-  background:var(--brand);transform:translateX(-50%);transition:left .45s var(--e);}
-.pq-m,.pq-pause{display:inline-flex;align-items:center;gap:9px;min-height:44px;
-  font-size:14px;line-height:1.3;color:var(--fg-mid);position:relative;border-radius:2px;
-  text-align:left;transition:color .3s var(--e);}
-.pq-m{padding:0;}
-.pq-m::before{content:"";position:absolute;left:50%;top:-10px;width:1px;height:8px;
-  background:var(--pq-nom);}
-.pq-pause{padding:var(--s2);}
-.pq-m:hover{color:var(--fg);}
-.pq-m[aria-pressed="true"]{color:var(--fg);}
-.pq-pause i{flex:0 0 auto;display:block;box-sizing:border-box;}
-.pq-pause{color:var(--fg-soft);font-size:13px;}
-.pq-pause:hover{color:var(--fg);}
-.pq-pause i{width:9px;height:9px;position:relative;}
+.pq-head{display:flex;align-items:center;gap:var(--s1);margin:-12px 0 var(--s3) -17px;}
+.pq-cap{display:grid;margin:0;font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--fg);line-height:1.3;}
+.pq-cap span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);white-space:nowrap;}
+.pq[data-mode="normal"] .pq-cap [data-x="normal"],
+.pq[data-mode="dip"] .pq-cap [data-x="dip"],
+.pq[data-mode="harm"] .pq-cap [data-x="harm"]{visibility:visible;opacity:1;}
+.pq-step,.pq-pause{width:44px;height:44px;display:grid;place-items:center;border-radius:2px;
+  color:var(--fg-soft);transition:color .3s var(--e),background-color .3s var(--e);}
+.pq-step:hover,.pq-pause:hover{color:var(--fg);background:var(--hair2);}
+.pq-step i{display:block;width:8px;height:8px;border:solid currentColor;border-width:0 0 1.5px 1.5px;
+  transform:translateX(2px) rotate(45deg);}
+.pq-step[data-dir="1"] i{transform:translateX(-2px) rotate(-135deg);}
+.pq-pause{margin-left:auto;}
+.pq-pause i{position:relative;width:9px;height:9px;}
 .pq-pause i::before,.pq-pause i::after{content:"";position:absolute;top:0;bottom:0;width:2px;
   background:currentColor;transition:opacity .2s var(--e);}
 .pq-pause i::before{left:1px;}.pq-pause i::after{right:1px;}
 .pq.is-paused .pq-pause i::after{opacity:0;}
 .pq.is-paused .pq-pause i::before{left:0;width:0;height:0;top:0;bottom:auto;background:none;
   border-style:solid;border-width:4.5px 0 4.5px 8px;border-color:transparent transparent transparent currentColor;}
-.pq-pl{display:grid;}
-.pq-pl b{grid-area:1/1;font-weight:inherit;transition:opacity .2s var(--e);}
-.pq-pl b+b{visibility:hidden;opacity:0;}
-.pq.is-paused .pq-pl b:first-child{visibility:hidden;opacity:0;}
-.pq.is-paused .pq-pl b+b{visibility:visible;opacity:1;}
 .pq.is-static .pq-pause{display:none;}
+.pq-chart{position:relative;height:clamp(240px,36vh,340px);}
+.pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
 .pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
@@ -401,7 +384,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
 .pq-note{margin-top:var(--s4);font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;letter-spacing:.02em;
   color:var(--fg-soft);}
-html[lang="hy"] .pq-cap span,html[lang="hy"] .pq-note{font-family:'Arian AMU','Helvetica Neue',sans-serif;
+html[lang="hy"] .pq-cap,html[lang="hy"] .pq-note{font-family:'Arian AMU','Helvetica Neue',sans-serif;
   letter-spacing:0;text-transform:none;}
 html.wipecover .pq{visibility:hidden;}
 header.on-dark .brand{color:#F6F1E9;}
@@ -1049,22 +1032,18 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <div class="acts"><button class="btn" data-open-form><span>Նկարագրել խնդիրը</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>Ինչպես է իրականացվում մոնիթորինգը &darr;</span></a></div>
     </div>
     
-    <figure class="pq" id="pq" data-mode="normal">
-      <figcaption class="pq-cap"><span>Լարման ալիքի ձևը</span></figcaption>
-      <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
-      <div class="pq-ctl">
-        <div class="pq-modes" role="group" aria-label="Լարման ալիքի ձևը">
-          <i class="pq-track" aria-hidden="true"></i><i class="pq-knob" aria-hidden="true"></i>
-          <button type="button" class="pq-m" data-mode="normal" aria-pressed="true"><span>Նորմալ</span></button>
-          <button type="button" class="pq-m" data-mode="dip" aria-pressed="false"><span>Լարման անկում</span></button>
-          <button type="button" class="pq-m" data-mode="harm" aria-pressed="false"><span>Հարմոնիկներ</span></button>
-        </div>
-        <button type="button" class="pq-pause" data-pause="Դադարեցնել անիմացիան" data-resume="Շարունակել անիմացիան"><i aria-hidden="true"></i><span class="pq-pl"><b>Դադարեցնել անիմացիան</b><b aria-hidden="true">Շարունակել անիմացիան</b></span></button>
+    <div class="pq" id="pq" data-mode="normal" role="group" aria-label="Լարման ալիքի ձևը">
+      <div class="pq-head">
+        <button type="button" class="pq-step" data-dir="-1"><i aria-hidden="true"></i></button>
+        
+        <p class="pq-cap"><span data-x="normal">Նորմալ</span><span data-x="dip">Լարման անկում</span><span data-x="harm">Հարմոնիկներ</span></p>
+        <button type="button" class="pq-step" data-dir="1"><i aria-hidden="true"></i></button>
+        <button type="button" class="pq-pause" data-pause="Դադարեցնել անիմացիան" data-resume="Շարունակել անիմացիան"><i aria-hidden="true"></i></button>
       </div>
-      
+      <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
       <p class="pq-x" aria-live="polite"><span data-x="normal">Կանոնավոր սինուսաձև ալիք։</span><span data-x="dip">Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։</span><span data-x="harm">Հարմոնիկները աղավաղում են լարման ալիքի ձևը։</span></p>
       <p class="pq-note">Պատկերավոր օրինակ է, ոչ իրական չափում։</p>
-    </figure>
+    </div>
   </div>
 </section>
 
@@ -1312,7 +1291,8 @@ var PT=window.PT;
   var fig=document.getElementById('pq');if(!fig)return;
   var box=fig.querySelector('.pq-chart'),cv=fig.querySelector('.pq-cv');
   var ctx=cv&&cv.getContext('2d');if(!ctx)return;
-  var mbs=[].slice.call(fig.querySelectorAll('.pq-m'));
+  var MODES=['normal','dip','harm'],steps=[].slice.call(fig.querySelectorAll('.pq-step')),names={};
+  fig.querySelectorAll('.pq-cap span').forEach(function(sp){names[sp.dataset.x]=sp.textContent;});
   var pbtn=fig.querySelector('.pq-pause');
   var CYCLES=4;            
   var SPEED=0.45;          
@@ -1440,19 +1420,11 @@ var PT=window.PT;
     last=performance.now();raf=requestAnimationFrame(frame);
   }
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
-  var modesEl=fig.querySelector('.pq-modes');
-  function placeKnob(){
-    if(!modesEl||!mbs.length)return;
-    var mr=modesEl.getBoundingClientRect(),cx=function(b){var r=b.getBoundingClientRect();return r.left-mr.left+r.width/2;};
-    modesEl.style.setProperty('--tx0',cx(mbs[0]).toFixed(1)+'px');
-    modesEl.style.setProperty('--tx1',cx(mbs[mbs.length-1]).toFixed(1)+'px');
-    var on=mbs.filter(function(b){return b.dataset.mode===mode;})[0]||mbs[0];
-    modesEl.style.setProperty('--kx',cx(on).toFixed(1)+'px');
-  }
   function setMode(m,init){
     mode=m;fig.dataset.mode=m;
-    mbs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
-    placeKnob();
+    var k=MODES.indexOf(m);
+    steps.forEach(function(b){var t=MODES[(k+(+b.dataset.dir)+MODES.length)%MODES.length];
+      b.dataset.to=t;b.setAttribute('aria-label',names[t]||t);});
     var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
     if(d1&&wd<0.001){
       dipBase=rm?T-CYCLES*0.5-DIP.len/2:T+DIP.first;
@@ -1466,22 +1438,13 @@ var PT=window.PT;
     pbtn.setAttribute('aria-label',p?pbtn.dataset.resume:pbtn.dataset.pause);
     if(p)stop();else start();
   }
-  mbs.forEach(function(b,i){
-    b.addEventListener('click',function(){if(b.dataset.mode!==mode)setMode(b.dataset.mode);});
-    b.addEventListener('keydown',function(e){
-      var k=e.key,j=-1;
-      if(k==='ArrowRight'||k==='ArrowDown')j=(i+1)%mbs.length;
-      else if(k==='ArrowLeft'||k==='ArrowUp')j=(i+mbs.length-1)%mbs.length;
-      else if(k==='Home')j=0;else if(k==='End')j=mbs.length-1;
-      if(j<0)return;e.preventDefault();mbs[j].focus();
-    });
-  });
+  steps.forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.to);});});
   pbtn.addEventListener('click',function(){setPaused(playing);});
   pbtn.setAttribute('aria-label',pbtn.dataset.pause);
   if(rm)fig.classList.add('is-static');
   var ro=null,io=null;
   if(window.ResizeObserver){
-    ro=new ResizeObserver(function(){size();draw();placeKnob();});ro.observe(box);ro.observe(modesEl);
+    ro=new ResizeObserver(function(){size();draw();});ro.observe(box);
   }else addEventListener('resize',function(){size();draw();});
   if(window.IntersectionObserver){
     io=new IntersectionObserver(function(es){
@@ -1497,7 +1460,7 @@ var PT=window.PT;
   });
   theme();size();setMode('normal',true);
   requestAnimationFrame(function(){fig.classList.add('is-in');});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();placeKnob();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
   start();
 })();
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
