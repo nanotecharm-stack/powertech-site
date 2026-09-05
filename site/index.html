@@ -356,17 +356,22 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq .pq-pause{position:absolute;right:0;top:-15px;padding-inline:var(--s2) 0;}
 @media (max-width:470px){
   .pq .pq-pause{position:static;padding-inline:var(--s2);}
-  .pq .pq-modes{display:flex;width:100%;}
-  .pq .pq-m{flex:1 1 auto;justify-content:center;padding:0 6px;}
 }
-.pq-modes{display:inline-flex;flex-wrap:wrap;box-shadow:inset 0 0 0 1px var(--hair);border-radius:2px;}
+.pq-modes{position:relative;display:flex;justify-content:space-between;gap:var(--s4);flex:1 1 100%;
+  padding-top:18px;--kx:0px;--tx0:0px;--tx1:0px;}
+.pq-track{position:absolute;top:8px;height:1px;left:var(--tx0);width:calc(var(--tx1) - var(--tx0));
+  background:var(--hair);}
+.pq-knob{position:absolute;top:3px;left:var(--kx);width:11px;height:11px;border-radius:50%;
+  background:var(--brand);transform:translateX(-50%);transition:left .45s var(--e);}
 .pq-m,.pq-pause{display:inline-flex;align-items:center;gap:9px;min-height:44px;
   font-size:14px;line-height:1.3;color:var(--fg-mid);position:relative;border-radius:2px;
-  text-align:left;transition:color .3s var(--e),background-color .3s var(--e);}
-.pq-m{padding:0 16px;}
+  text-align:left;transition:color .3s var(--e);}
+.pq-m{padding:0;}
+.pq-m::before{content:"";position:absolute;left:50%;top:-10px;width:1px;height:8px;
+  background:var(--pq-nom);}
 .pq-pause{padding:var(--s2);}
-.pq-m:hover{color:var(--fg);background:var(--hair2);}
-.pq-m[aria-pressed="true"]{background:var(--brand);color:var(--brand-on);}
+.pq-m:hover{color:var(--fg);}
+.pq-m[aria-pressed="true"]{color:var(--fg);}
 .pq-pause i{flex:0 0 auto;display:block;box-sizing:border-box;}
 .pq-pause{color:var(--fg-soft);font-size:13px;}
 .pq-pause:hover{color:var(--fg);}
@@ -1048,6 +1053,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
       <div class="pq-ctl">
         <div class="pq-modes" role="group" aria-label="Voltage waveform">
+          <i class="pq-track" aria-hidden="true"></i><i class="pq-knob" aria-hidden="true"></i>
           <button type="button" class="pq-m" data-mode="normal" aria-pressed="true"><span>Normal</span></button>
           <button type="button" class="pq-m" data-mode="dip" aria-pressed="false"><span>Voltage dip</span></button>
           <button type="button" class="pq-m" data-mode="harm" aria-pressed="false"><span>Harmonics</span></button>
@@ -1433,9 +1439,19 @@ var PT=window.PT;
     last=performance.now();raf=requestAnimationFrame(frame);
   }
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+  var modesEl=fig.querySelector('.pq-modes');
+  function placeKnob(){
+    if(!modesEl||!mbs.length)return;
+    var mr=modesEl.getBoundingClientRect(),cx=function(b){var r=b.getBoundingClientRect();return r.left-mr.left+r.width/2;};
+    modesEl.style.setProperty('--tx0',cx(mbs[0]).toFixed(1)+'px');
+    modesEl.style.setProperty('--tx1',cx(mbs[mbs.length-1]).toFixed(1)+'px');
+    var on=mbs.filter(function(b){return b.dataset.mode===mode;})[0]||mbs[0];
+    modesEl.style.setProperty('--kx',cx(on).toFixed(1)+'px');
+  }
   function setMode(m,init){
     mode=m;fig.dataset.mode=m;
     mbs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
+    placeKnob();
     var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
     if(d1&&wd<0.001){
       dipBase=rm?T-CYCLES*0.5-DIP.len/2:T+DIP.first;
@@ -1464,7 +1480,7 @@ var PT=window.PT;
   if(rm)fig.classList.add('is-static');
   var ro=null,io=null;
   if(window.ResizeObserver){
-    ro=new ResizeObserver(function(){size();draw();});ro.observe(box);
+    ro=new ResizeObserver(function(){size();draw();placeKnob();});ro.observe(box);ro.observe(modesEl);
   }else addEventListener('resize',function(){size();draw();});
   if(window.IntersectionObserver){
     io=new IntersectionObserver(function(es){
@@ -1480,7 +1496,7 @@ var PT=window.PT;
   });
   theme();size();setMode('normal',true);
   requestAnimationFrame(function(){fig.classList.add('is-in');});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();placeKnob();});
   start();
 })();
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;

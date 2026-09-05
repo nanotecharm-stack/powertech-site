@@ -803,25 +803,32 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
    (150 + 190 px при колонке 324) — пауза возвращается в поток, под ряд. */
 @media (max-width:470px){
   .pq .pq-pause{position:static;padding-inline:var(--s2);}
-  /* Армянские подписи в сумме шире узкой колонки (332 против 324) — сегменты
-     делят ширину поровну и ужимают поля, чтобы рамка не ломалась на две строки. */
-  .pq .pq-modes{display:flex;width:100%;}
-  .pq .pq-m{flex:1 1 auto;justify-content:center;padding:0 6px;}
 }
-/* Переключатель состояний — сегментный: общая рамка-волосок, выбранный
-   сегмент залит фирменным, тем же синим, что и след на графике. Прежний вид
-   (подписи с квадратиками и чертой) владелец прочёл как легенду, а не как
-   орган управления: «посетителю не понятно, что это переключатель».
-   Выбор читается заливкой и инверсией текста, для диктора — aria-pressed.
-   Высота 44 — цель для пальца; вес шрифта не меняется, ширина не дышит. */
-.pq-modes{display:inline-flex;flex-wrap:wrap;box-shadow:inset 0 0 0 1px var(--hair);border-radius:2px;}
+/* Переключатель состояний — как селектор на приборе: тонкая шкала с тремя
+   рисками, под рисками слова, по шкале скользит ползунок фирменного цвета.
+   Один орган управления, а не ряд кнопок: три залитые кнопки рядом с кнопками
+   призыва владелец назвал «слишком много кнопок»; подписи с квадратиками до
+   того он прочёл легендой. Ползунок и есть признак «это переключается».
+   Положение ползунка и концы шкалы пишет скрипт в --kx/--tx0/--tx1 (центры
+   подписей), переход 450 мс. Для диктора выбор — aria-pressed. */
+/* Шкала во всю ширину поля: первая подпись у левой кромки графика, последняя у
+   правой — селектор читается частью прибора, а не строкой ссылок. */
+.pq-modes{position:relative;display:flex;justify-content:space-between;gap:var(--s4);flex:1 1 100%;
+  padding-top:18px;--kx:0px;--tx0:0px;--tx1:0px;}
+.pq-track{position:absolute;top:8px;height:1px;left:var(--tx0);width:calc(var(--tx1) - var(--tx0));
+  background:var(--hair);}
+.pq-knob{position:absolute;top:3px;left:var(--kx);width:11px;height:11px;border-radius:50%;
+  background:var(--brand);transform:translateX(-50%);transition:left .45s var(--e);}
 .pq-m,.pq-pause{display:inline-flex;align-items:center;gap:9px;min-height:44px;
   font-size:14px;line-height:1.3;color:var(--fg-mid);position:relative;border-radius:2px;
-  text-align:left;transition:color .3s var(--e),background-color .3s var(--e);}
-.pq-m{padding:0 16px;}
+  text-align:left;transition:color .3s var(--e);}
+.pq-m{padding:0;}
+/* риска над каждой подписью: от шкалы вниз к слову */
+.pq-m::before{content:"";position:absolute;left:50%;top:-10px;width:1px;height:8px;
+  background:var(--pq-nom);}
 .pq-pause{padding:var(--s2);}
-.pq-m:hover{color:var(--fg);background:var(--hair2);}
-.pq-m[aria-pressed="true"]{background:var(--brand);color:#fff;}
+.pq-m:hover{color:var(--fg);}
+.pq-m[aria-pressed="true"]{color:var(--fg);}
 .pq-pause i{flex:0 0 auto;display:block;box-sizing:border-box;}
 /* Пауза: значок — две черты, при остановке одна стрелка; обе подписи лежат в
    одной клетке, чтобы ширина кнопки не менялась. */
@@ -2125,6 +2132,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
       <div class="pq-ctl">
         <div class="pq-modes" role="group" aria-label="%%PQ_CAP%%">
+          <i class="pq-track" aria-hidden="true"></i><i class="pq-knob" aria-hidden="true"></i>
           <button type="button" class="pq-m" data-mode="normal" aria-pressed="true"><span>%%PQ_M_NORMAL%%</span></button>
           <button type="button" class="pq-m" data-mode="dip" aria-pressed="false"><span>%%PQ_M_DIP%%</span></button>
           <button type="button" class="pq-m" data-mode="harm" aria-pressed="false"><span>%%PQ_M_HARM%%</span></button>
@@ -2597,9 +2605,20 @@ var PT=window.PT;
     last=performance.now();raf=requestAnimationFrame(frame);
   }
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
+  /* Шкала и ползунок стоят по центрам подписей — меряем, а не считаем. */
+  var modesEl=fig.querySelector('.pq-modes');
+  function placeKnob(){
+    if(!modesEl||!mbs.length)return;
+    var mr=modesEl.getBoundingClientRect(),cx=function(b){var r=b.getBoundingClientRect();return r.left-mr.left+r.width/2;};
+    modesEl.style.setProperty('--tx0',cx(mbs[0]).toFixed(1)+'px');
+    modesEl.style.setProperty('--tx1',cx(mbs[mbs.length-1]).toFixed(1)+'px');
+    var on=mbs.filter(function(b){return b.dataset.mode===mode;})[0]||mbs[0];
+    modesEl.style.setProperty('--kx',cx(on).toFixed(1)+'px');
+  }
   function setMode(m,init){
     mode=m;fig.dataset.mode=m;
     mbs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
+    placeKnob();
     var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
     if(d1&&wd<0.001){
       /* Провал заводится заново при каждом выборе: первый приходит справа
@@ -2633,7 +2652,7 @@ var PT=window.PT;
 
   var ro=null,io=null;
   if(window.ResizeObserver){
-    ro=new ResizeObserver(function(){size();draw();});ro.observe(box);
+    ro=new ResizeObserver(function(){size();draw();placeKnob();});ro.observe(box);ro.observe(modesEl);
   }else addEventListener('resize',function(){size();draw();});
   /* Запас в половину экрана: наблюдатель сообщает на границе кадра, и без
      запаса при быстром броске вверх кривая стояла бы, уже будучи видна. */
@@ -2652,7 +2671,7 @@ var PT=window.PT;
 
   theme();size();setMode('normal',true);
   requestAnimationFrame(function(){fig.classList.add('is-in');});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();placeKnob();});
   start();
 })();
 
