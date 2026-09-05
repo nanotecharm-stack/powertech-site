@@ -319,9 +319,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
   align-items:start;align-content:center;gap:clamp(18px,3vw,52px);
   min-height:100svh;max-width:none;margin:0;
-  padding:clamp(104px,12vh,132px)
+  padding:calc(clamp(104px,12vh,132px) + clamp(80px,12vh,140px)/2)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          clamp(44px,6vh,72px)
+          calc(clamp(104px,12vh,132px) - clamp(80px,12vh,140px)/2)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:clamp(38px,4.75vw,77px);margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;}
@@ -1495,16 +1495,8 @@ var PT=window.PT;
   start();
 })();
 function placeHeroCol(){
-  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');if(!col)return;
-  if(innerWidth<=960||innerHeight<760){col.style.top='';if(pq)pq.style.top='';return;}
-  var hdr=document.querySelector('header .hin')||document.querySelector('header');
-  var mark=col.querySelector('.eyebrow')||col;
-  col.style.top='0px';                       
-  var gap=mark.getBoundingClientRect().top-(hdr?hdr.getBoundingClientRect().bottom:0);
-  var air=Math.min(150,Math.max(80,innerHeight*0.11));
-  var lift=Math.max(0,Math.min(88,gap-air));
-  col.style.top=(-Math.round(lift))+'px';
-  if(pq)pq.style.top=col.style.top;   
+  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');
+  if(col)col.style.top='';if(pq)pq.style.top='';
 }
 placeHeroCol();
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;

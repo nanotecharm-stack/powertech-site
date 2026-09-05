@@ -694,9 +694,13 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      До 1280 поле в точности равно полю разделов, дальше растёт медленнее:
      коэффициент 0.42 от прироста центровки. На 1920 это 190 px против 376 у
      колонки, на 1600 — 123, на 1280 и уже — совпадение. */
-  padding:clamp(104px,12vh,132px)
+  /* Герой короче экрана на X (правило ниже), а блок должен стоять по центру
+     ЭКРАНА, не героя. Условие: верхнее поле минус нижнее = X. Поэтому к
+     верхнему прибавлена половина X, из нижнего она вычтена. Владелец:
+     «по вертикали не по центру всё стоит» — было выше центра на 50-70 px. */
+  padding:calc(clamp(104px,12vh,132px) + clamp(80px,12vh,140px)/2)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          clamp(44px,6vh,72px)
+          calc(clamp(104px,12vh,132px) - clamp(80px,12vh,140px)/2)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
 /* the headline keeps its full measure: it may reach past its column into the
@@ -2698,26 +2702,15 @@ var PT=window.PT;
   start();
 })();
 
-/* ВОЗДУХ ПЕРВОГО ЭКРАНА.
-   Порядок такой: сперва блок ставится на место без подъёма и меряется зазор
-   между низом шапки и надглавием. Из него вычитается воздух, который зазор
-   обязан сохранить, и остаток — но не больше 88 px — идёт на подъём.
-   Воздух: 11 % высоты окна, не меньше 80 и не больше 150 px. 11 % на 810 дают
-   89 px — примерно полторы строки заголовка, при которых блок перестаёт
-   казаться подвешенным к шапке.
-   Замер один, при пересчёте размеров, и после загрузки шрифтов ещё раз: до них
-   строки набраны подстановкой и высота блока другая. */
+/* ПОДЪЁМА БОЛЬШЕ НЕТ. Прежний «оптический подъём» до 88 px ставился, когда
+   герой был ровно в экран и блок — один столбец текста. С полем волны блок
+   стал вдвое шире, герой — короче экрана, и подъём читался как «не по центру»
+   (владелец, 2026-09-05). Центр теперь держит сетка: align-content:center и
+   асимметричные поля .hgrid. Функция оставлена как точка вызова из старых мест
+   и только снимает возможные остатки inline-стилей. */
 function placeHeroCol(){
-  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');if(!col)return;
-  if(innerWidth<=960||innerHeight<760){col.style.top='';if(pq)pq.style.top='';return;}
-  var hdr=document.querySelector('header .hin')||document.querySelector('header');
-  var mark=col.querySelector('.eyebrow')||col;
-  col.style.top='0px';                       /* мерим БЕЗ подъёма */
-  var gap=mark.getBoundingClientRect().top-(hdr?hdr.getBoundingClientRect().bottom:0);
-  var air=Math.min(150,Math.max(80,innerHeight*0.11));
-  var lift=Math.max(0,Math.min(88,gap-air));
-  col.style.top=(-Math.round(lift))+'px';
-  if(pq)pq.style.top=col.style.top;   /* поле поднимается вместе с текстом */
+  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');
+  if(col)col.style.top='';if(pq)pq.style.top='';
 }
 placeHeroCol();
 
