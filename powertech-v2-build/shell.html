@@ -34,8 +34,10 @@
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);
   outline-offset:3px;border-radius:2px;}
-.hero a:focus-visible,.hero button:focus-visible,.plate a:focus-visible,
-.plate button:focus-visible,.plate2 a:focus-visible,.plate2 button:focus-visible,
+/* Белое кольцо — только на тёмных плитах. Герой светлый, там кольцо общее,
+   фирменное: белое на бумаге было невидимым. */
+.plate a:focus-visible,.plate button:focus-visible,
+.plate2 a:focus-visible,.plate2 button:focus-visible,
 .ic:focus-visible{outline-color:#FFFBF9;}
 /* Safari на iPhone САМ увеличивает кегль в блоках, которые считает основным
    текстом: длинный абзац раздувает, короткий пункт списка оставляет как есть.
@@ -681,9 +683,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      английский заголовок 672 px на 1440 и 756 при потолке кегля. */
   grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
   /* start, а не center: подпись поля стоит на одной линии с надглавием, и
-     два блока читаются одной строкой разворота; подъём placeHeroCol
-     ставится обоим. При center инструмент висел ниже текста на высоту
-     подъёма. */
+     два блока читаются одной строкой разворота. */
   /* align-content:center ОБЯЗАТЕЛЕН вместе со start: ряд один, и без него
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
@@ -703,42 +703,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
           calc(clamp(104px,12vh,132px) - clamp(80px,12vh,140px)/2)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
-/* the headline keeps its full measure: it may reach past its column into the
-   quiet left part of the wave field rather than break into extra lines */
 .hcol{position:relative;z-index:3;}
-/* Оптический центр выше геометрического: ровно по середине блок читается
-   провисшим. Замер до правки — середина блока 390 при середине героя 360, то
-   есть на 30px НИЖЕ: сетка центрирует содержимое, верхнее поле героя больше
-   нижнего, и разница уходит вниз. Пустое поле снизу поднимает блок на половину
-   своей высоты — 150px дают 75px подъёма, середина встаёт на 315, это 6,25%
-   выше центра, внутри рабочей полосы 5-8%.
-   Границы: ниже 961px колонка одна и у неё своё поле, а на низком экране
-   подъём подвёл бы надглавие под шапку — там правило снимается. */
-@media (min-width:961px) and (min-height:760px){
-  /* ПОДЪЁМ СДВИГОМ, А НЕ ПОЛЕМ.
-     Раньше здесь стояло margin-bottom: пустое поле снизу поднимало блок на
-     половину своей высоты. Беда в том, что поле — это ВЫСОТА: она входит в
-     содержимое сетки, и на длинном тексте герой перерастал первый экран.
-     Замерено при поле 180: герой перерастал экран — на 1440 английский давал
-     839 px против 805. Сдвиг через top ничего не добавляет к высоте:
-     герой остаётся ровно в 100svh, а блок встаёт туда же, куда его ставило поле.
-     Взято top, а НЕ transform: transform поднял бы блок на свой слой и мог
-     вернуть замыленный текст, который владелец уже один раз поймал.
-     88 px даёт подъём 6-7 % от высоты героя — середина рабочей полосы 5-8 %.
-     Порог 760, а не 680: ниже подъём подвёл бы надглавие под шапку. Считано:
-     при высоте окна 749 и меньше между ними остаётся меньше 18 px. */
-  /* ПОДЪЁМ БОЛЬШЕ НЕ ЧИСЛО, А РАСЧЁТ — см. placeHeroCol в скрипте.
-     Постоянные 88 px ставились, когда блок был ниже: заголовок в три строки и
-     абзац 16,5. С абзацем 20 и заголовком в четыре строки блок вырос, и те же
-     88 стали загонять его ПОД ШАПКУ. Замерено на 1440x810: над блоком оставалось
-     33 px у английского и 16 у армянского, а под ним пустовало 211 и 194.
-     Владелец назвал это «мало воздуха, зажато, особенно в армянской версии».
-     Теперь подъём берётся из ИЗЛИШКА: сперва отмеряется воздух под шапкой, и
-     только то, что осталось сверх него, идёт на оптический подъём. На больших
-     экранах излишка хватает и подъём остаётся полным, на тесных он тает сам.
-     Значение пишет скрипт; ноль здесь — безопасный запасной ход. */
-  .hgrid .hcol{top:0;}
-}
 /* Армянская версия поднимается тем же правилом. Отдельное исключение здесь
    стояло по ошибочному замеру: блок мерился по file:// без шрифтов и выходил
    621 px вместо настоящих 519, из-за чего сдвиг будто бы заводил надглавие под
@@ -875,9 +840,6 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq.is-paused .pq-pl b+b{visibility:visible;opacity:1;}
 /* При reduce хода нет — и останавливать нечего. */
 .pq.is-static .pq-pause{display:none;}
-/* Кольцо фокуса: общее правило героя красит его белилом — оно осталось от
-   тёмного героя, на бумаге его не видно. Здесь кольцо фирменного цвета. */
-.pq button:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
 /* Пояснение: три строки в одной клетке, высота по самой длинной. */
 .pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
@@ -2194,8 +2156,6 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div></section>
 
 
-<!-- no data-rail here: the section runs full width, so a left-margin trace has no
-     copy to accompany and would cross the cards as they scroll past it -->
 <section class="sec suite" id="applications"><div class="spin"><div class="wrap">
   <div class="rail-head">
     <div><div class="cnt">02</div><h2>%%APP_H2%%</h2></div>
@@ -2389,9 +2349,7 @@ var PT=window.PT;
 
 /* ============ DECRYPT H1 — заголовок расшифровывается при загрузке ============ */
 /* Настоящий текст возвращается посимвольно слева направо. Для диктора весь
-   заголовок лежит в aria-label, кипящие знаки от него скрыты. По окончании —
-   placeHeroCol(): подъём блока меряется по готовой раскладке, а кипящие
-   знаки другой ширины, и замер по ним был бы враньём. Библиотек не требует, на
+   заголовок лежит в aria-label, кипящие знаки от него скрыты. Библиотек не требует, на
    телефонах работает так же. Параметры — из пробы Motiq: цикл 45–80 мс,
    ступень 55 мс, разброс ±120 мс, вспышка 420 мс. */
 (function(){
@@ -2443,11 +2401,6 @@ var PT=window.PT;
         else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
       }
       if(left>0)requestAnimationFrame(dtFrame);
-      else{
-        /* Показание и жила строились, пока заголовок кипел; теперь, когда
-           текст собран и раскладка окончательная, — перемерить и перестроить. */
-        placeHeroCol();
-      }
     }
     requestAnimationFrame(dtFrame);
   }
@@ -2702,18 +2655,6 @@ var PT=window.PT;
   start();
 })();
 
-/* ПОДЪЁМА БОЛЬШЕ НЕТ. Прежний «оптический подъём» до 88 px ставился, когда
-   герой был ровно в экран и блок — один столбец текста. С полем волны блок
-   стал вдвое шире, герой — короче экрана, и подъём читался как «не по центру»
-   (владелец, 2026-09-05). Центр теперь держит сетка: align-content:center и
-   асимметричные поля .hgrid. Функция оставлена как точка вызова из старых мест
-   и только снимает возможные остатки inline-стилей. */
-function placeHeroCol(){
-  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');
-  if(col)col.style.top='';if(pq)pq.style.top='';
-}
-placeHeroCol();
-
 /* Грунт шапки и шкала прочтения. Замеров страницы не требуют вовсе — только
    положение прокрутки, поэтому считаются даром. Порог 60 точек: линия должна
    чертиться осознанно, а не от дрожи колеса. */
@@ -2789,7 +2730,7 @@ function buildJoints(){
 }
 /* ============ СЧЁТЧИК СБОРКИ ДОКУМЕНТА ============
    Списки узлов теперь собираются один раз и живут между кадрами. Но при смене
-   размера окна часть узлов пересоздаётся (см. buildRails), и старый список
+   размера окна часть узлов пересоздаётся (стыки, кубики), и старый список
    указывал бы на выброшенные элементы. Счётчик растёт — все списки собираются
    заново при первом же обращении. */
 var DOMV={v:0};
@@ -2829,89 +2770,6 @@ function aJoints(ps){
 }
 function paintJoints(){aJoints(mJoints());}
 
-
-/* ============ TEXT RAILS — traces running alongside section copy ============ */
-function buildRails(){
-  /* То же и здесь, и это не теория: отводы к заголовкам пересобираются ещё раз
-     после загрузки шрифтов и ещё раз на load. Список, собранный до этого, вёл
-     на удалённые узлы, и импульс отвода не получал ни смещения, ни видимости —
-     поймано сверкой поведения со старой сборкой. */
-  cacheBump();
-  if(innerWidth<1100){
-    return document.querySelectorAll('.srail').forEach(function(s){s.remove();});}
-  /* Длинной вертикали через весь раздел больше нет. Остаётся короткий отвод к
-     заголовку с квадратной отметкой на конце, и синий доходит ровно до неё:
-     сигнал ведёт читателя от заголовка к заголовку, а не тянется полосой вдоль
-     всего текста. В первом разделе отвод начинается от самой кромки — туда
-     приходит жила из героя. */
-  document.querySelectorAll('section[data-rail]').forEach(function(sec,si){
-    var old=sec.querySelector('.srail');if(old)old.remove();
-    var h2=sec.querySelector('h2');if(!h2)return;
-    var H=sec.offsetHeight,W2=110;
-    var yh=h2.getBoundingClientRect().top-sec.getBoundingClientRect().top+h2.offsetHeight/2;
-    var ns='http://www.w3.org/2000/svg';
-    var svg=document.createElementNS(ns,'svg');
-    svg.setAttribute('class','srail');
-    svg.setAttribute('viewBox','0 0 '+W2+' '+H);
-    svg.setAttribute('preserveAspectRatio','none');
-    svg.style.cssText='position:absolute;top:0;left:clamp(4px,1.4vw,18px);width:'+W2+'px;height:'+H+'px;pointer-events:none;overflow:visible;';
-    var top=si===0?0:Math.max(0,yh-46);
-    var dEl=route([[8,top],[8,yh],[W2-14,yh]],16);
-    var elbow=document.createElementNS(ns,'path');
-    elbow.setAttribute('d',dEl);
-    elbow.setAttribute('fill','none');elbow.setAttribute('stroke','currentColor');
-    elbow.setAttribute('stroke-opacity','.22');elbow.setAttribute('stroke-width','1');
-    svg.appendChild(elbow);
-    var tick=document.createElementNS(ns,'rect');
-    tick.setAttribute('x',W2-14);tick.setAttribute('y',yh-2.5);
-    tick.setAttribute('width','5');tick.setAttribute('height','5');
-    tick.setAttribute('fill','#C8603D');
-    svg.appendChild(tick);
-    /* pulse rides the spine with scroll */
-    var pl=document.createElementNS(ns,'path');
-    pl.setAttribute('d',dEl);
-    pl.setAttribute('class','pulse');pl.setAttribute('fill','none');
-    pl.setAttribute('stroke','#C8603D');pl.setAttribute('stroke-width','1.6');
-    pl.setAttribute('stroke-linecap','round');
-    svg.appendChild(pl);
-    sec.style.position='relative';
-    sec.appendChild(svg);
-    /* длину берём у самого пути: отвод короткий и у каждого раздела свой */
-    var PL=pl.getTotalLength();
-    pl.setAttribute('stroke-dasharray',(PL*0.34).toFixed(1)+' '+(PL*1.4).toFixed(1));
-    pl.dataset.len=PL;
-    svg.dataset.yh=yh;
-  });
-  paintRails();
-}
-var RC=null,RCv=-1;
-function railCache(){
-  if(RC&&RCv===DOMV.v)return RC;
-  RC=[].slice.call(document.querySelectorAll('.srail')).map(function(svg){
-    var pl=svg.querySelector('.pulse');
-    return pl?{svg:svg,el:pl,L:+pl.dataset.len,yh:+svg.dataset.yh||0,o:null,p:null}:null;
-  }).filter(function(x){return x;});
-  RCv=DOMV.v;return RC;
-}
-function mRails(){
-  var c=railCache(),vh=innerHeight,out=[];
-  for(var i=0;i<c.length;i++){
-    /* Ход считаем по заголовку, а не по всей высоте раздела: путь стал коротким,
-       и на прежней шкале импульс полз бы через весь экран. */
-    var p=(vh*0.80-(c[i].svg.getBoundingClientRect().top+c[i].yh))/(vh*0.30);
-    out.push(p<0?0:(p>1?1:p));
-  }
-  return out;
-}
-function aRails(ps){
-  var c=RC;if(!c)return;
-  for(var i=0;i<c.length;i++){
-    var p=ps[i],off=(c[i].L*0.34-p*c[i].L*1.34).toFixed(1),op=(p>0.005&&p<0.999?1:0);
-    if(c[i].o!==off){c[i].o=off;c[i].el.setAttribute('stroke-dashoffset',off);}
-    if(c[i].p!==op){c[i].p=op;c[i].el.setAttribute('opacity',op);}
-  }
-}
-function paintRails(){aRails(mRails());}
 
 /* ============ EVENT CHAIN — one line, lit by scroll ============ */
 var STEPS=PT.seq;
@@ -4156,11 +4014,11 @@ function scrollPaint(){
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
   /* --- ЗАМЕР: ни одной записи в документ --- */
-  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d4=mRails(),d5=mDither(),
+  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
   /* --- ЗАПИСЬ: ни одного замера. Порядок тот же, что был у прежнего списка:
          toneUnderBar идёт после headerTheme и перекрывает его решение. --- */
-  aSeq(d1);aSuite(d2);aJoints(d3);aRails(d4);aDither(d5);
+  aSeq(d1);aSuite(d2);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
@@ -4176,7 +4034,7 @@ document.addEventListener('scroll',scrollSchedule,{passive:true,capture:true});
 /* Размер окна поменялся — списки узлов устарели, и перерисовать надо даже если
    прокрутка осталась на месте. */
 addEventListener('resize',function(){cacheBump();FR.force=true;scrollSchedule();},{passive:true});
-buildJoints();buildRails();
+buildJoints();
 cacheBump();scrollRepaint();
 /* Ширина страницы без полосы прокрутки — по ней шкала события выходит за поля.
    100vw считается ВМЕСТЕ с полосой, поэтому шкала промахивалась мимо края на её
@@ -4185,13 +4043,13 @@ cacheBump();scrollRepaint();
 (function(){var R=document.documentElement;
   function vwpx(){R.style.setProperty('--vwpx',R.clientWidth+'px');}
   vwpx();addEventListener('resize',vwpx);})();
-addEventListener('resize',function(){clearTimeout(placeHeroCol.t);placeHeroCol.t=setTimeout(function(){placeHeroCol();buildJoints();buildWipe();buildRails();buildDither();layoutSuite();},220);});
-/* rails depend on final layout (fonts) */
+var sizeT=0;
+addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();layoutSuite();},220);});
 /* После пересборки состояние надо нанести заново: списки только что сменились,
    а прокрутка осталась на месте, и обычная проверка «не сдвинулись — не рисуем»
    пропустила бы кадр. */
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){buildRails();placeHeroCol();scrollRepaint();});
-addEventListener('load',function(){buildRails();layoutSuite();placeHeroCol();scrollRepaint();});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){scrollRepaint();});
+addEventListener('load',function(){layoutSuite();scrollRepaint();});
 /* ============ ПОВОРОТ ТЕЛЕФОНА ============ */
 /* После поворота Safari на iPhone оставляет закреплённой шапке ПРЕЖНЕЕ место
    для нажатий: кнопка нарисована там, где нужно, а палец попадает мимо — по

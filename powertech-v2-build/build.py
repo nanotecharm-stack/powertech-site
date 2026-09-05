@@ -71,12 +71,12 @@ READOUT_EN = """
    Пиксельный шрифт достаётся только тому, что является показанием прибора: номерам,
    счётчику и значениям. Слова остаются на прежнем — на длинных строках пиксельная
    сетка бледнеет и теряет вес рядом с основным текстом. */
-.cnt,.ixb,.ixp a .no,.rd,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no{
+.cnt,.ixb,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no{
   font-family:'Departure Mono',monospace;font-size:11px;}
 /* Кейс-пунктуация. Строки показаний набраны прописными, а «·» и дефис по
    умолчанию выровнены по строчным и проседают. У пиксельного шрифта функция
    case есть — включаем; у текстовой гарнитуры её нет, там не лечится. */
-.cnt,.rd,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
+.cnt,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
   font-feature-settings:'case' 1;}
 .cnt{letter-spacing:.11em;}
 .ixb{letter-spacing:.05em;}
@@ -95,7 +95,6 @@ READOUT_EN = """
   letter-spacing:.12em;}
 /* число и слово лежат в одном элементе — слово возвращается прежнему шрифту */
 .ixb .sheet{font-family:%(mono)s;font-size:12px;letter-spacing:.1em;}
-.rd>span:not(.st){font-family:%(mono)s;font-size:12px;}
 """
 
 # На армянской странице — только цифровой слой: армянских букв у шрифта нет, поэтому
@@ -103,12 +102,12 @@ READOUT_EN = """
 READOUT_HY = """
 /* ============ ПОКАЗАНИЯ ============
    Только цифры: армянского у пиксельного шрифта нет, слова остаются прежними. */
-.cnt,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no,.rd b,.ixb b,.ixb em{
+.cnt,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no,.ixb b,.ixb em{
   font-family:'Departure Mono',monospace;font-size:11px;}
 /* Кейс-пунктуация. Строки показаний набраны прописными, а «·» и дефис по
    умолчанию выровнены по строчным и проседают. У пиксельного шрифта функция
    case есть — включаем; у текстовой гарнитуры её нет, там не лечится. */
-.cnt,.rd,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
+.cnt,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
   font-feature-settings:'case' 1;}
 .cnt{letter-spacing:.11em;}
 .ixp a .no,.mi .ix,.list .n,.asg .no{letter-spacing:.07em;}
@@ -661,13 +660,6 @@ EN = {
            '<button type="button" data-open-privacy>Privacy Policy</button>',
 }
 EN_DATA = {
-    # Кольцо величин в герое: номер, две строки названия, признак акцента.
-    # Восьмая позиция — заключение, а не измерение, поэтому помечена.
-    # Армянские термины взяты из словаря самой страницы, а не переведены заново.
-    'ring': [['01', 'VOLTAGE', '& CURRENT', 0], ['02', 'HARMONICS', '', 0],
-             ['03', 'FLICKER', '', 0], ['04', 'DIPS', '& SWELLS', 0],
-             ['05', 'UNBALANCE', '', 0], ['06', 'POWER', '& ENERGY', 0],
-             ['07', 'EVENTS', '', 0], ['08', 'RISK', 'READ', 1]],
  # подпись на схеме стыка: рисунок строится скриптом, поэтому она живёт в данных,
  # а не в токенах разметки
  'incident': 'Incident',
@@ -975,13 +967,6 @@ HY = {
 import copy
 HY_DATA = copy.deepcopy(EN_DATA)
 HY_DATA.update({
-    # Кольцо величин в герое: номер, две строки названия, признак акцента.
-    # Восьмая позиция — заключение, а не измерение, поэтому помечена.
-    # Армянские термины взяты из словаря самой страницы, а не переведены заново.
-    'ring': [['01', 'ԼԱՐՈՒՄ', 'ՀՈՍԱՆՔ', 0], ['02', 'ՀԱՐՄՈՆԻԿՆԵՐ', '', 0],
-             ['03', 'ՖԼԻԿԵՐ', '', 0], ['04', 'ԼԱՐՄԱՆ', 'ԱՆԿՈՒՄՆԵՐ', 0],
-             ['05', 'ԱՆՀԱՄԱՉԱՓՈՒԹՅՈՒՆ', '', 0], ['06', 'ՀԶՈՐՈՒԹՅՈՒՆ', 'ԷՆԵՐԳԻԱ', 0],
-             ['07', 'ԴԵՊՔԵՐ', '', 0], ['08', 'ՌԻՍԿԻ', 'ԳՆԱՀԱՏՈՒՄ', 1]],
  'incident': 'Միջադեպ',
  'seq': [['01', 'Բնականոն աշխատանք'], ['02', 'Էլեկտրական համակարգում իրադարձություն'],
          ['03', 'Սարքավորման անջատում կամ ազդանշան'], ['04', 'Համակարգի աշխատանքի վերականգնում'],
@@ -1346,9 +1331,6 @@ def palette_map(p):
          'background:var(--brand);color:var(--brand-on)'),
         # -- the browser chrome reads as the darkest brand surface
         ('content="#C8603D"', 'content="%s"' % p['ink']),
-        # -- the wave field: graphite structure, the travelling light stays chromatic
-        ('--wv-line:13,14,19', '--wv-line:%s' % _rgb(p['ink'])),
-        ('--wv-glow:200,96,61', '--wv-glow:%s' % _rgb(p['glow'])),
         # -- grounds
         ('#EFEDEA', p['paper']), ('rgba(239,237,234', 'rgba(%s' % _rgb(p['paper'])),
         ('#F4F3F1', p['tint']), ('rgba(244,243,241', 'rgba(%s' % _rgb(p['tint'])),

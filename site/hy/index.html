@@ -50,8 +50,8 @@
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);
   outline-offset:3px;border-radius:2px;}
-.hero a:focus-visible,.hero button:focus-visible,.plate a:focus-visible,
-.plate button:focus-visible,.plate2 a:focus-visible,.plate2 button:focus-visible,
+.plate a:focus-visible,.plate button:focus-visible,
+.plate2 a:focus-visible,.plate2 button:focus-visible,
 .ic:focus-visible{outline-color:#FDFAF4;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:'Arian AMU','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
@@ -330,9 +330,6 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:clamp(38px,4.75vw,77px);margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;}
-@media (min-width:961px) and (min-height:760px){
-  .hgrid .hcol{top:0;}
-}
 @media (min-width:961px){.hero,.hgrid{min-height:calc(100svh - clamp(80px,12vh,140px));}}
 .hero h1{color:var(--fg);width:max-content;max-width:calc(100% + clamp(18px,3vw,52px) - 8px);}
 .hero h1 .dtw{display:inline-block;white-space:pre;}
@@ -393,7 +390,6 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq.is-paused .pq-pl b:first-child{visibility:hidden;opacity:0;}
 .pq.is-paused .pq-pl b+b{visibility:visible;opacity:1;}
 .pq.is-static .pq-pause{display:none;}
-.pq button:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
 .pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
@@ -925,9 +921,9 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 :lang(hy) footer h3,:lang(hy) #imd .lb,:lang(hy) #fmd .ghd{font-weight:600;}
 :lang(hy) .tag,:lang(hy) .asg .tag{letter-spacing:.07em;}
 :lang(hy) .eyebrow{letter-spacing:.12em;}
-.cnt,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no,.rd b,.ixb b,.ixb em{
+.cnt,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no,.ixb b,.ixb em{
   font-family:'Departure Mono',monospace;font-size:11px;}
-.cnt,.rd,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
+.cnt,.chsteps .n,.step .no,.list .n,.asg .no,.mi .ix,.ixp a .no{
   font-feature-settings:'case' 1;}
 .cnt{letter-spacing:.11em;}
 .ixp a .no,.mi .ix,.list .n,.asg .no{letter-spacing:.07em;}
@@ -1081,7 +1077,6 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <ol class="chsteps" id="chsteps"></ol>
   </div>
 </div></section>
-
 
 
 <section class="sec suite" id="applications"><div class="spin"><div class="wrap">
@@ -1256,7 +1251,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div></div></div>
 
 <script>
-window.PT={"ring": [["01", "ԼԱՐՈՒՄ", "ՀՈՍԱՆՔ", 0], ["02", "ՀԱՐՄՈՆԻԿՆԵՐ", "", 0], ["03", "ՖԼԻԿԵՐ", "", 0], ["04", "ԼԱՐՄԱՆ", "ԱՆԿՈՒՄՆԵՐ", 0], ["05", "ԱՆՀԱՄԱՉԱՓՈՒԹՅՈՒՆ", "", 0], ["06", "ՀԶՈՐՈՒԹՅՈՒՆ", "ԷՆԵՐԳԻԱ", 0], ["07", "ԴԵՊՔԵՐ", "", 0], ["08", "ՌԻՍԿԻ", "ԳՆԱՀԱՏՈՒՄ", 1]], "incident": "Միջադեպ", "seq": [["01", "Բնականոն աշխատանք"], ["02", "Էլեկտրական համակարգում իրադարձություն"], ["03", "Սարքավորման անջատում կամ ազդանշան"], ["04", "Համակարգի աշխատանքի վերականգնում"], ["05", "Գրանցումը պահպանվում է վերլուծության համար"]], "viewDetails": "Մանրամասներ", "hint1": " ֆայլ · ", "hintN": " ֆայլ · ", "hintSuf": " / 10 ՄԲ", "hint0": "Առավելագույնը՝ 10 ՄԲ։", "appTypes": ["Արտադրություն", "Արևային կայան", "Բուժհաստատություն / լաբորատորիա", "Տվյալների կենտրոն / IT", "Կոմերցիոն շենք", "Ներդրում / տեխնիկական գնահատում", "Այլ"], "cards": [{"title": "Արտադրություն", "img": "IMG0", "p1": "Լարման կարճատև անկումը կարող է ազդել սարքավորման վրա, ուստի իրադարձությունը պետք է գրանցվի հենց տեղի ունենալու պահին։", "findings": ["Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։", "Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։", "Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։", "statSource": "Աղբյուր՝ EPRI"}, {"title": "Արևային կայաններ", "img": "IMG1", "p1": "Համապատասխան կետերում կատարված չափումները օգնում են տարբերակել կայանի ներսում և արտաքին ցանցում առաջացող գործոնները։", "findings": ["Լարման պայմանները ինվերտորի անջատման կամ ակտիվ հզորության սահմանափակման պահին։", "Լարման և հարմոնիկ աղավաղման համապատասխանությունը միացման կիրառելի պահանջներին։", "Անկախ չափման տվյալներ՝ գործարկման ընդունման կամ EPC աշխատանքների գնահատման համար։"], "note": "Ժամանակային նշումներով անկախ չափումները հնարավորություն են տալիս սեփականատիրոջը, EPC կապալառուին և ցանցի օպերատորին կայանի և միացման կետի էլեկտրական պայմանները գնահատել նույն տվյալների հիման վրա։"}, {"title": "Բժշկական կենտրոններ և լաբորատորիաներ", "img": "IMG2", "p1": "Երաշխիքային կամ սպասարկման գնահատման համար կարող են պահանջվել տվյալներ այն էլեկտրասնուցման պայմանների մասին, որոնցում սարքավորումն աշխատել է։ Մեկանգամյա չափումը կարող է չգրանցել պարբերաբար ի հայտ եկող իրադարձությունները։", "findings": ["Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։", "Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։", "Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։", "statSource": "Աղբյուր՝ IEC"}, {"title": "Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք", "img": "IMG3", "p1": "Գեներատորի գործարկումն ու սնուցման փոխանցումը կատարվում են այլ ժամանակային մասշտաբով, քան միլիվայրկյան տևող խանգարումները։ Ժամանակային նշումներով մոնիթորինգի տվյալները կարելի է համադրել UPS-ի և ՏՏ համակարգերի գրանցած իրադարձությունների հետ։", "findings": ["UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։", "Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։", "Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։"], "stat": "57%", "statLabel": "ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ", "statText": "Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։", "statSource": "Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Կոմերցիոն տարածքներ", "img": "IMG4", "p1": "Չափումները կարող են օգնել տարբերակել արտաքին մատակարարման ցանցի պայմանները շենքի ներքին ցանցում կամ վարձակալների սարքավորումներից առաջացող խանգարումներից։", "findings": ["Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։", "Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։", "Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։", "statSource": "Աղբյուր՝ U.S. DOE / LBNL"}, {"title": "Ներդրումային և տեխնիկական գնահատում", "img": "IMG5", "p1": "Ժամանակավոր կամ շարունակական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։", "findings": ["Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։", "Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։", "Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։"], "note": "Հաշվետվությունը կարող է պատրաստվել հայերեն, ռուսերեն կամ անգլերեն։"}], "otherT": "Այլ կարևոր էլեկտրական համակարգեր", "otherP": "Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։", "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
+window.PT={"incident": "Միջադեպ", "seq": [["01", "Բնականոն աշխատանք"], ["02", "Էլեկտրական համակարգում իրադարձություն"], ["03", "Սարքավորման անջատում կամ ազդանշան"], ["04", "Համակարգի աշխատանքի վերականգնում"], ["05", "Գրանցումը պահպանվում է վերլուծության համար"]], "viewDetails": "Մանրամասներ", "hint1": " ֆայլ · ", "hintN": " ֆայլ · ", "hintSuf": " / 10 ՄԲ", "hint0": "Առավելագույնը՝ 10 ՄԲ։", "appTypes": ["Արտադրություն", "Արևային կայան", "Բուժհաստատություն / լաբորատորիա", "Տվյալների կենտրոն / IT", "Կոմերցիոն շենք", "Ներդրում / տեխնիկական գնահատում", "Այլ"], "cards": [{"title": "Արտադրություն", "img": "IMG0", "p1": "Լարման կարճատև անկումը կարող է ազդել սարքավորման վրա, ուստի իրադարձությունը պետք է գրանցվի հենց տեղի ունենալու պահին։", "findings": ["Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։", "Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։", "Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։", "statSource": "Աղբյուր՝ EPRI"}, {"title": "Արևային կայաններ", "img": "IMG1", "p1": "Համապատասխան կետերում կատարված չափումները օգնում են տարբերակել կայանի ներսում և արտաքին ցանցում առաջացող գործոնները։", "findings": ["Լարման պայմանները ինվերտորի անջատման կամ ակտիվ հզորության սահմանափակման պահին։", "Լարման և հարմոնիկ աղավաղման համապատասխանությունը միացման կիրառելի պահանջներին։", "Անկախ չափման տվյալներ՝ գործարկման ընդունման կամ EPC աշխատանքների գնահատման համար։"], "note": "Ժամանակային նշումներով անկախ չափումները հնարավորություն են տալիս սեփականատիրոջը, EPC կապալառուին և ցանցի օպերատորին կայանի և միացման կետի էլեկտրական պայմանները գնահատել նույն տվյալների հիման վրա։"}, {"title": "Բժշկական կենտրոններ և լաբորատորիաներ", "img": "IMG2", "p1": "Երաշխիքային կամ սպասարկման գնահատման համար կարող են պահանջվել տվյալներ այն էլեկտրասնուցման պայմանների մասին, որոնցում սարքավորումն աշխատել է։ Մեկանգամյա չափումը կարող է չգրանցել պարբերաբար ի հայտ եկող իրադարձությունները։", "findings": ["Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։", "Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։", "Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։", "statSource": "Աղբյուր՝ IEC"}, {"title": "Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք", "img": "IMG3", "p1": "Գեներատորի գործարկումն ու սնուցման փոխանցումը կատարվում են այլ ժամանակային մասշտաբով, քան միլիվայրկյան տևող խանգարումները։ Ժամանակային նշումներով մոնիթորինգի տվյալները կարելի է համադրել UPS-ի և ՏՏ համակարգերի գրանցած իրադարձությունների հետ։", "findings": ["UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։", "Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։", "Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։"], "stat": "57%", "statLabel": "ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ", "statText": "Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։", "statSource": "Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Կոմերցիոն տարածքներ", "img": "IMG4", "p1": "Չափումները կարող են օգնել տարբերակել արտաքին մատակարարման ցանցի պայմանները շենքի ներքին ցանցում կամ վարձակալների սարքավորումներից առաջացող խանգարումներից։", "findings": ["Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։", "Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։", "Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։"], "statLabel": "ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ", "statText": "Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։", "statSource": "Աղբյուր՝ U.S. DOE / LBNL"}, {"title": "Ներդրումային և տեխնիկական գնահատում", "img": "IMG5", "p1": "Ժամանակավոր կամ շարունակական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։", "findings": ["Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։", "Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։", "Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։"], "note": "Հաշվետվությունը կարող է պատրաստվել հայերեն, ռուսերեն կամ անգլերեն։"}], "otherT": "Այլ կարևոր էլեկտրական համակարգեր", "otherP": "Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։", "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
@@ -1301,9 +1296,6 @@ var PT=window.PT;
         else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
       }
       if(left>0)requestAnimationFrame(dtFrame);
-      else{
-        placeHeroCol();
-      }
     }
     requestAnimationFrame(dtFrame);
   }
@@ -1494,11 +1486,6 @@ var PT=window.PT;
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
   start();
 })();
-function placeHeroCol(){
-  var col=document.querySelector('.hero .hcol'),pq=document.querySelector('.hero .pq');
-  if(col)col.style.top='';if(pq)pq.style.top='';
-}
-placeHeroCol();
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
 function mBar(){var m=document.documentElement.scrollHeight-innerHeight;
   return {on:window.pageYOffset>60,p:m>0?Math.min(1,window.pageYOffset/m):0};}
@@ -1593,74 +1580,6 @@ function aJoints(ps){
   }
 }
 function paintJoints(){aJoints(mJoints());}
-function buildRails(){
-  cacheBump();
-  if(innerWidth<1100){
-    return document.querySelectorAll('.srail').forEach(function(s){s.remove();});}
-  document.querySelectorAll('section[data-rail]').forEach(function(sec,si){
-    var old=sec.querySelector('.srail');if(old)old.remove();
-    var h2=sec.querySelector('h2');if(!h2)return;
-    var H=sec.offsetHeight,W2=110;
-    var yh=h2.getBoundingClientRect().top-sec.getBoundingClientRect().top+h2.offsetHeight/2;
-    var ns='http://www.w3.org/2000/svg';
-    var svg=document.createElementNS(ns,'svg');
-    svg.setAttribute('class','srail');
-    svg.setAttribute('viewBox','0 0 '+W2+' '+H);
-    svg.setAttribute('preserveAspectRatio','none');
-    svg.style.cssText='position:absolute;top:0;left:clamp(4px,1.4vw,18px);width:'+W2+'px;height:'+H+'px;pointer-events:none;overflow:visible;';
-    var top=si===0?0:Math.max(0,yh-46);
-    var dEl=route([[8,top],[8,yh],[W2-14,yh]],16);
-    var elbow=document.createElementNS(ns,'path');
-    elbow.setAttribute('d',dEl);
-    elbow.setAttribute('fill','none');elbow.setAttribute('stroke','currentColor');
-    elbow.setAttribute('stroke-opacity','.22');elbow.setAttribute('stroke-width','1');
-    svg.appendChild(elbow);
-    var tick=document.createElementNS(ns,'rect');
-    tick.setAttribute('x',W2-14);tick.setAttribute('y',yh-2.5);
-    tick.setAttribute('width','5');tick.setAttribute('height','5');
-    tick.style.fill='var(--brand-ink)';
-    svg.appendChild(tick);
-    var pl=document.createElementNS(ns,'path');
-    pl.setAttribute('d',dEl);
-    pl.setAttribute('class','pulse');pl.setAttribute('fill','none');
-    pl.style.stroke='var(--brand-ink)';pl.setAttribute('stroke-width','1.6');
-    pl.setAttribute('stroke-linecap','round');
-    svg.appendChild(pl);
-    sec.style.position='relative';
-    sec.appendChild(svg);
-    var PL=pl.getTotalLength();
-    pl.setAttribute('stroke-dasharray',(PL*0.34).toFixed(1)+' '+(PL*1.4).toFixed(1));
-    pl.dataset.len=PL;
-    svg.dataset.yh=yh;
-  });
-  paintRails();
-}
-var RC=null,RCv=-1;
-function railCache(){
-  if(RC&&RCv===DOMV.v)return RC;
-  RC=[].slice.call(document.querySelectorAll('.srail')).map(function(svg){
-    var pl=svg.querySelector('.pulse');
-    return pl?{svg:svg,el:pl,L:+pl.dataset.len,yh:+svg.dataset.yh||0,o:null,p:null}:null;
-  }).filter(function(x){return x;});
-  RCv=DOMV.v;return RC;
-}
-function mRails(){
-  var c=railCache(),vh=innerHeight,out=[];
-  for(var i=0;i<c.length;i++){
-    var p=(vh*0.80-(c[i].svg.getBoundingClientRect().top+c[i].yh))/(vh*0.30);
-    out.push(p<0?0:(p>1?1:p));
-  }
-  return out;
-}
-function aRails(ps){
-  var c=RC;if(!c)return;
-  for(var i=0;i<c.length;i++){
-    var p=ps[i],off=(c[i].L*0.34-p*c[i].L*1.34).toFixed(1),op=(p>0.005&&p<0.999?1:0);
-    if(c[i].o!==off){c[i].o=off;c[i].el.setAttribute('stroke-dashoffset',off);}
-    if(c[i].p!==op){c[i].p=op;c[i].el.setAttribute('opacity',op);}
-  }
-}
-function paintRails(){aRails(mRails());}
 var STEPS=PT.seq;
 var chsteps=document.getElementById('chsteps'),chainEl=document.getElementById('chain'),
     chainFill=document.getElementById('chainfill');
@@ -2518,9 +2437,9 @@ function scrollPaint(){
   var y=window.pageYOffset;
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
-  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d4=mRails(),d5=mDither(),
+  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
-  aSeq(d1);aSuite(d2);aJoints(d3);aRails(d4);aDither(d5);
+  aSeq(d1);aSuite(d2);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
@@ -2531,14 +2450,15 @@ function scrollSchedule(){
 }
 document.addEventListener('scroll',scrollSchedule,{passive:true,capture:true});
 addEventListener('resize',function(){cacheBump();FR.force=true;scrollSchedule();},{passive:true});
-buildJoints();buildRails();
+buildJoints();
 cacheBump();scrollRepaint();
 (function(){var R=document.documentElement;
   function vwpx(){R.style.setProperty('--vwpx',R.clientWidth+'px');}
   vwpx();addEventListener('resize',vwpx);})();
-addEventListener('resize',function(){clearTimeout(placeHeroCol.t);placeHeroCol.t=setTimeout(function(){placeHeroCol();buildJoints();buildWipe();buildRails();buildDither();layoutSuite();},220);});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){buildRails();placeHeroCol();scrollRepaint();});
-addEventListener('load',function(){buildRails();layoutSuite();placeHeroCol();scrollRepaint();});
+var sizeT=0;
+addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();layoutSuite();},220);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){scrollRepaint();});
+addEventListener('load',function(){layoutSuite();scrollRepaint();});
 addEventListener('orientationchange',function(){
   setTimeout(function(){
     var y=window.pageYOffset;
