@@ -1218,95 +1218,57 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 .alink:hover{text-decoration:underline;text-underline-offset:4px;}
 
 /* sticky sequence */
-/* Цепочка события читается слева направо по одной оси — и это единственное
-   место страницы, которое выходит из колонки на всю ширину.
-   Слом здесь смысловой, а не декоративный: это ОСЬ, а оси проходят насквозь.
-   Всё остальное на странице стоит на одном левом рельсе, поэтому один
-   осознанный выход за поля работает; второй такой же его бы обесценил.
-   Текст шагов при этом остаётся в колонке — за поля выходит только шкала.
-
-   --vwpx, а не 100vw: 100vw считается вместе с полосой прокрутки, и шкала
-   промахивалась мимо края на её толщину с каждой стороны. Значение ставит
-   скрипт от clientWidth; 100vw оставлен запасом на случай, если скрипт не
-   выполнился. */
-.chain{width:var(--vwpx,100vw);margin-left:calc(50% - var(--vwpx,100vw) / 2);
-  margin-top:clamp(var(--s7),6vw,88px);}
-/* ============ ОСЬ КАК ЗАПИСЬ (бриф 2, 2026-09-12) ============
-   На широком экране ось получает высоту провала: линия записи идёт по верху,
-   между станциями события и возврата проваливается на --dip и возвращается.
-   Заливка хода — тот же --p, что двигал черту: путь нормирован pathLength=1,
-   штрих 1/1, смещение (1 − p) открывает пройденную часть. Окно события —
-   прямоугольник от станции события до станции возврата: заливка марки 6 %,
-   штриховые кромки — знак тот же, что у окна провала в поле героя. */
-.chain{--dip:56px;}
-.chaxis{position:relative;height:calc(var(--dip) + 2px);}
-.chaxis i{display:none;}
-.chrec{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible;}
-.chrec .chbase{fill:none;stroke:var(--hair);stroke-width:2;stroke-linejoin:round;}
-.chrec .chfill{fill:none;stroke:var(--brand);stroke-width:2;stroke-linejoin:round;
-  stroke-dasharray:1 1;stroke-dashoffset:calc(1 - var(--p,0));}
-.chrec .chwin{fill:color-mix(in srgb,var(--brand) 6%,transparent);
-  stroke:color-mix(in srgb,var(--brand) 35%,transparent);stroke-dasharray:3 4;
-  opacity:0;transition:opacity .55s var(--e);}
-.chain.evt .chrec .chwin{opacity:1;}
-/* Шкала вышла за поля, подписи — нет: --inset возвращает их ровно в колонку,
-   к левому краю заголовка. Простого поля обёртки тут мало: на экране шире
-   1280 обёртка ещё и отходит от края, и подписи вставали бы на семьдесят
-   пикселей левее заголовка. */
-.chsteps{list-style:none;margin:0;padding:0 var(--inset);display:grid;grid-template-columns:repeat(5,1fr);}
-.chsteps li{position:relative;padding:20px clamp(var(--s3),1.4vw,22px) 0 0;opacity:.5;transition:opacity .55s var(--e);}
-.chsteps li::before{content:"";position:absolute;top:-5px;left:0;width:8px;height:8px;background:var(--hair);
-  transition:background .45s var(--e),transform .45s var(--e);}
-.chsteps li.on{opacity:1;}
-.chsteps li.on::before{background:var(--brand);transform:scale(1.35);}
-/* 02 is the event itself: a turned square, the way an event is marked on a chart,
-   so it cannot be mistaken for one of the plain stations */
-.chsteps li.inc::before{width:11px;height:11px;top:-6.5px;left:-1.5px;background:var(--brand);
-  transform:rotate(45deg);}
-.chsteps li.inc.on::before{transform:rotate(45deg) scale(1.12);}
-.chsteps li.inc{opacity:.62;}
-.chsteps li.inc.on{opacity:1;}
-/* Метки стоят на записи: 1, 2, 4, 5 — на номинале (верх оси), 3 (отключение)
-   — на дне провала. Подписи всех станций остаются в одной строке под осью. */
-.chsteps li::before{top:calc(var(--dip) * -1 - 5px);}
-.chsteps li.inc::before{top:calc(var(--dip) * -1 - 6.5px);}
-.chsteps li:nth-child(3)::before{top:-5px;}
-/* Подпись события — под заголовком станции, своей строкой. Точки-разделителя
-   перед ней больше нет: она ничего не отделяет, раз стоит первой в строке. */
-.chsteps .inc-tag{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--brand-ink);display:block;margin-top:7px;}
-.chsteps .t{display:block;font-size:16px;line-height:1.45;color:var(--fg);max-width:20ch;}
-/* Ниже 960 ось шкалы встаёт вертикально. Горизонтальная шкала с пятью точками
-   не сходится с списком в две колонки: отметки второго и третьего рядов
-   повисали в воздухе, не привязанные ни к чему. Последовательность и смысл те
-   же, читается сверху вниз, отметки снова стоят на оси. */
-@media (max-width:960px){
-  /* Вертикальная ось за поля не выходит: горизонтальная шкала пересекала
-     страницу поперёк и оправдывала слом, вертикальная лишь прижалась бы
-     к самому краю экрана и оторвалась бы от своих подписей. Возвращаем
-     цепочку в колонку целиком. */
-  .chain{width:auto;margin-left:0;margin-top:clamp(var(--s5),3vw,40px);
-    display:grid;grid-template-columns:2px 1fr;column-gap:18px;align-items:stretch;}
-  .chaxis{height:auto;width:2px;background:var(--hair);}
-  .chaxis i{display:block;position:absolute;inset:0;background:var(--brand);
-    transform:scaleY(var(--p,0));transform-origin:top;will-change:transform;}
-  .chrec{display:none;}
-  .chsteps{padding:0;grid-template-columns:1fr;row-gap:20px;}
-  .chsteps li{padding:0;}
-  .chsteps li::before,.chsteps li:nth-child(3)::before{top:5px;left:-23px;}
-  .chsteps li.inc::before{top:3.5px;left:-24.5px;}
-  /* Окно события на вертикальной оси: тот же знак, что окно провала в поле
-     героя и прямоугольник на записи широкого экрана — заливка 6 %, штриховые
-     кромки 35 %, — только ложится строкой. Появляется с состоянием .on. */
-  .chsteps li.inc::after{content:"";position:absolute;left:-30px;right:0;
-    top:calc(var(--s2) * -1);bottom:calc(var(--s2) * -1);
-    background:color-mix(in srgb,var(--brand) 6%,transparent);
-    border-top:1px dashed color-mix(in srgb,var(--brand) 35%,transparent);
-    border-bottom:1px dashed color-mix(in srgb,var(--brand) 35%,transparent);
-    opacity:0;transition:opacity .55s var(--e);}
-  .chsteps li.inc.on::after{opacity:1;}
-  .chsteps .t{max-width:none;}
-}
+/* ============ СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ ============
+   Реализация по референсу владельца (gridec-event-record-reference.html,
+   2026-09-12). Два связанных объекта: тонкая линия состояния с отклонением и
+   возвратом на исходный уровень — и тёмно-синий фрагмент записи ниже справа,
+   где форма события сохранена и стоит итоговая фраза. Отделение записи от
+   линии и объясняет пользу мониторинга. Координаты ставит скрипт по ширине
+   самого компонента; до его работы список стоит в потоке обычным текстом.
+   Цвета: линия и метки — марка; поле записи — #17375B из референса;
+   второстепенные деления — #B5C3D0. */
+.evs{position:relative;isolation:isolate;margin-top:clamp(var(--s6),5vw,72px);min-height:470px;
+  overflow:hidden;color:var(--fg);}
+.evs-d{position:absolute;inset:0;width:100%;height:100%;overflow:visible;display:block;}
+.evs-list{list-style:none;margin:0;padding:0;}
+.evs-list li{font-size:17px;line-height:1.3;font-weight:450;letter-spacing:-.015em;margin:0 0 var(--s4);}
+.evs.is-laid .evs-list li{position:absolute;margin:0;}
+.evs-list p{margin:0;font:inherit;}
+.ev-tag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brand-ink);margin-bottom:9px;}
+/* Армянская метка: у пиксельной гарнитуры нет армянских знаков — гротеск страницы. */
+html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-transform:none;}
+.ev-record{background:#17375B;color:var(--bg);padding:22px 24px 27px;box-sizing:border-box;transform-origin:50% 0;}
+.ev-record p{font-size:25px;line-height:1.15;font-weight:450;letter-spacing:-.02em;margin:17px 0 0;max-width:285px;}
+.ev-saved{display:block;width:100%;height:56px;overflow:visible;}
+.ev-saved path{fill:none;vector-effect:non-scaling-stroke;}
+.ev-ref{stroke:#A4BAD0;stroke-opacity:.35;stroke-width:1;stroke-dasharray:3 5;}
+.ev-sline{stroke:var(--bg);stroke-width:1.8;}
+.ev-meas{stroke:#A4BAD0;stroke-width:1;stroke-opacity:.5;}
+/* Перфорация нижней кромки — как у ленты самописца; не тень и не скругление. */
+.ev-perf{position:absolute;bottom:-4px;left:8px;right:8px;height:8px;
+  background:radial-gradient(circle at 4px 4px,var(--bg) 2px,transparent 2.5px) 0 0/14px 8px;}
+.evs-d .ev-base{fill:none;stroke:#B5C3D0;stroke-width:1;}
+.evs-d .ev-trace{fill:none;stroke:var(--brand);stroke-width:2;}
+.evs-d .ev-tick{fill:none;stroke:#B5C3D0;stroke-width:1;}
+.evs-d .ev-link{fill:none;stroke:var(--brand);stroke-opacity:.5;stroke-width:1;stroke-dasharray:2 5;}
+.evs-d .ev-node{fill:var(--brand);}
+.evs-d .ev-window{fill:var(--brand);fill-opacity:.045;}
+.evs-d .ev-bracket{fill:none;stroke:var(--brand);stroke-width:1;stroke-opacity:.5;}
+/* Состояния. До запуска (is-armed) линия не прорисована, запись скрыта — иначе
+   финал мелькал бы до старта. Запуск один раз, когда сцена в окне на четверть.
+   После is-playing классы снимаются — остаётся финал по умолчанию. При reduce
+   скрипт сразу ставит is-done, is-armed не ставит. */
+.evs.is-armed .ev-trace,.evs.is-armed .ev-sline{stroke-dasharray:1;stroke-dashoffset:1;}
+.evs.is-armed .ev-link,.evs.is-armed .ev-record{opacity:0;}
+.evs.is-playing .ev-trace{animation:evWrite 3.4s linear both;}
+.evs.is-playing .ev-link{animation:evLink 4.4s linear both;}
+.evs.is-playing .ev-record{animation:evFile 4.4s cubic-bezier(.2,.7,.2,1) both;}
+.evs.is-playing .ev-sline{animation:evSave 4.8s linear both;}
+@keyframes evWrite{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
+@keyframes evLink{0%,65%{opacity:0}80%,100%{opacity:1}}
+@keyframes evFile{0%,65%{opacity:0;transform:translateY(-24px)}85%,100%{opacity:1;transform:translateY(0)}}
+@keyframes evSave{0%,78%{stroke-dasharray:1;stroke-dashoffset:1}100%{stroke-dasharray:1;stroke-dashoffset:0}}
 
 
 /* industries grid */
@@ -2009,6 +1971,8 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* Снятые переходы не отменяют начальных состояний: без этих сбросов ряды
    списка остались бы прозрачными, а линейки — нулевой длины. */
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}
+  .evs .ev-trace,.evs .ev-sline{stroke-dasharray:none!important;stroke-dashoffset:0!important;}
+  .evs .ev-link,.evs .ev-record{opacity:1!important;}
   .rv{opacity:1;transform:none;}
   .list div>*{opacity:1;transform:none;}
   .list div::after{transform:scaleX(1);}
@@ -2321,21 +2285,16 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <h2>%%WHY_H2%%</h2>
     <p class="lede">%%WHY_P%%</p>
   </div>
-  <div class="chain rv" id="chain">
-    <!-- Ось шкалы — это сама запись: на широком экране линия идёт по номиналу,
-         на станции события проваливается, на станции возврата поднимается
-         обратно; на дне провала стоит станция отключения. Та же геометрия,
-         что у RMS-следа в разделе 08 и у окна провала в поле героя. Путь
-         строит скрипт по реальным положениям станций; на телефоне ось стоит
-         вертикально прежней чертой. -->
-    <div class="chaxis"><i id="chainfill"></i>
-      <svg class="chrec" aria-hidden="true" preserveAspectRatio="none">
-        <rect class="chwin" x="0" y="0" width="0" height="0"/>
-        <path class="chbase" d=""/>
-        <path class="chfill" d="" pathLength="1"/>
-      </svg>
-    </div>
-    <ol class="chsteps" id="chsteps"></ol>
+  <!-- СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ. Композиция и движение — по референсу
+       владельца gridec-event-record-reference.html (2026-09-12): линия текущего
+       состояния с отклонением и возвратом; ниже справа — отдельный тёмный
+       фрагмент сохранённой записи с той же формой события и итоговой фразой.
+       Пять этапов и метка события — из данных страницы (PT.seq, PT.incident),
+       порядок в DOM 1 → 5. Рисунок строит скрипт; без скрипта список читается
+       обычным текстом. -->
+  <div class="evs rv" id="evs">
+    <svg class="evs-d" aria-hidden="true"></svg>
+    <ol class="evs-list" id="evslist"></ol>
   </div>
 </div></section>
 
@@ -3021,123 +2980,102 @@ function aJoints(ps){
 function paintJoints(){aJoints(mJoints());}
 
 
-/* ============ EVENT CHAIN — one line, lit by scroll ============ */
-var STEPS=PT.seq;
-var chsteps=document.getElementById('chsteps'),chainEl=document.getElementById('chain'),
-    chainFill=document.getElementById('chainfill');
-STEPS.forEach(function(st,si){
-  var li=document.createElement('li');
-  /* Номера у станций больше нет: шкала читается слева направо, отметки стоят
-     на оси, и порядок виден без цифры (см. «одна нумерация» в DESIGN.md).
-     st[0] в данных остаётся — он задаёт последовательность. */
-  li.innerHTML='<span class="t"></span>';
-  li.querySelector('.t').textContent=st[1];
-  if(si===1&&PT.incident){                     /* 02 — the event on the timeline */
-    li.classList.add('inc');
-    var tag=document.createElement('span');tag.className='inc-tag';
-    tag.textContent=PT.incident;
-    /* Подпись события ушла ПОД заголовок станции. Над ним она осталась бы
-       единственной первой строкой в ряду из пяти: у остальных четырёх эта
-       строка исчезла вместе с номером, и заголовки разъехались бы по высоте. */
-    li.querySelector('.t').insertAdjacentElement('afterend',tag);
+/* ============ СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ ============
+   Код референса владельца, переложенный на данные страницы. Геометрия
+   настольной версии (ширина компонента ≥ 580): линия на y=128, дно на 206,
+   отклонение между 31 % и 67 % ширины, метки-этапы по референсу; фрагмент
+   записи справа внизу, не шире 326. Подпись отключения может быть длинной
+   (армянская) — запись отодвигается под неё по реальной высоте. Узкая
+   версия: линия вертикально слева, подписи справа, запись во всю ширину.
+   Пересчёт — по ResizeObserver и после загрузки шрифтов. Запуск — один раз,
+   при появлении на четверть, через 350 мс; при reduce — сразу финал. */
+(function(){
+  var scene=document.getElementById('evs');if(!scene)return;
+  var svg=scene.querySelector('.evs-d'),list=document.getElementById('evslist'),STEPS=PT.seq||[];
+  var cls=['ev-normal','ev-incident','ev-trip','ev-return','ev-record'],els={};
+  STEPS.forEach(function(st,i){
+    var li=document.createElement('li');li.className=cls[i]||'';
+    if(i===1&&PT.incident){var t=document.createElement('span');t.className='ev-tag';t.textContent=PT.incident;li.appendChild(t);}
+    if(i===4){li.innerHTML='<svg class="ev-saved" viewBox="0 0 300 60" aria-hidden="true">'
+      +'<path class="ev-ref" d="M0 18 H300"/>'
+      +'<path class="ev-sline" d="M0 18 H77 C90 18 91 44 105 44 H176 C190 44 190 18 204 18 H300" pathLength="1"/>'
+      +'<path class="ev-meas" d="M77 3 V56 M204 3 V56"/></svg>';}
+    var p=document.createElement('p');p.textContent=st[1];li.appendChild(p);
+    if(i===4){var pf=document.createElement('div');pf.className='ev-perf';pf.setAttribute('aria-hidden','true');li.appendChild(pf);}
+    list.appendChild(li);els[cls[i]]=li;
+  });
+  if(STEPS.length<5)return;
+  var rec=els['ev-record'];
+  function place(el,x,y,w){el.style.left=x+'px';el.style.top=y+'px';el.style.width=w+'px';}
+  function n(v){return Math.round(v*10)/10;}
+  function render(){
+    var w=scene.clientWidth;if(!w)return;
+    scene.classList.add('is-laid');
+    var d='',ay;
+    if(w>=580){
+      var x0=4,a=w*.31,b=w*.46,c=w*.67,end=w-4,y=128,low=206;
+      var aw=Math.min(326,w*.47),ax=w-aw;ay=308;
+      place(els['ev-normal'],x0,78,a-x0-30);
+      place(els['ev-incident'],a-3,32,c-a-22);
+      place(els['ev-trip'],b-25,225,c-b+28);
+      place(els['ev-return'],c+20,75,w-c-24);
+      var tripB=225+els['ev-trip'].offsetHeight+30;if(tripB>ay)ay=tripB;
+      place(rec,ax,ay,aw);
+      d='<rect class="ev-window" x="'+n(a)+'" y="111" width="'+n(c-a)+'" height="109"/>'
+       +'<path class="ev-base" d="M'+x0+' '+y+' H'+n(end)+'"/>'
+       +'<path class="ev-bracket" d="M'+n(a+14)+' 106 H'+n(a)+' V119 M'+n(c-14)+' 106 H'+n(c)+' V119 M'+n(a)+' 213 V226 H'+n(a+14)+' M'+n(c)+' 213 V226 H'+n(c-14)+'"/>'
+       +'<path class="ev-trace" pathLength="1" d="M'+x0+' '+y+' H'+n(a)+' C'+n(a+35)+' '+y+' '+n(a+25)+' '+low+' '+n(a+64)+' '+low+' H'+n(c-64)+' C'+n(c-25)+' '+low+' '+n(c-35)+' '+y+' '+n(c)+' '+y+' H'+n(end)+'"/>'
+       +'<rect class="ev-node" x="'+(x0-4)+'" y="'+(y-4)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+n(a-5)+'" y="'+(y-5)+'" width="10" height="10" transform="rotate(45 '+n(a)+' '+y+')"/>'
+       +'<rect class="ev-node" x="'+n(b-4)+'" y="'+(low-4)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+n(c-4)+'" y="'+(y-4)+'" width="8" height="8"/>'
+       +'<path class="ev-link" d="M'+n(c)+' 232 V'+n(ay-30)+' H'+n(ax+aw/2)+' V'+n(ay)+'"/>';
+      for(var x=x0;x<=end;x+=18)d+='<path class="ev-tick" d="M'+n(x)+' 153 v'+((Math.abs(x-a)<18||Math.abs(x-c)<18)?9:4)+'"/>';
+      scene.style.height=(ay+rec.offsetHeight+32)+'px';
+    }else{
+      var xv=12,dx=53,av=114,cv=286,lx=78;ay=355;
+      place(els['ev-normal'],lx,30,w-lx);
+      place(els['ev-incident'],lx,93,w-lx);
+      place(els['ev-trip'],lx,202,w-lx);
+      place(els['ev-return'],lx,277,w-lx);
+      var retB=277+els['ev-return'].offsetHeight+40;if(retB>ay)ay=retB;
+      place(rec,0,ay,w);
+      d='<rect class="ev-window" x="0" y="'+av+'" width="62" height="'+(cv-av)+'"/>'
+       +'<path class="ev-base" d="M'+xv+' 40 V313"/>'
+       +'<path class="ev-trace" pathLength="1" d="M'+xv+' 40 V'+av+' C'+xv+' 143 '+dx+' 140 '+dx+' 165 V238 C'+dx+' 267 '+xv+' 262 '+xv+' '+cv+' V316"/>'
+       +'<rect class="ev-node" x="'+(xv-4)+'" y="36" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+(xv-5)+'" y="'+(av-5)+'" width="10" height="10" transform="rotate(45 '+xv+' '+av+')"/>'
+       +'<rect class="ev-node" x="'+(dx-4)+'" y="212" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+(xv-4)+'" y="'+(cv-4)+'" width="8" height="8"/>'
+       +'<path class="ev-link" d="M'+xv+' 316 V'+n(ay-21)+' H'+n(w/2)+' V'+n(ay)+'"/>';
+      scene.style.height=(ay+rec.offsetHeight+28)+'px';
+    }
+    svg.setAttribute('viewBox','0 0 '+w+' '+scene.clientHeight);
+    svg.innerHTML=d;
   }
-  chsteps.appendChild(li);
-});
-/* Расстояние от верха заголовка раздела до оси. Меряется один раз и живёт до
-   пересборки — на каждом кадре его считать незачем. */
-var seqDist=null,seqDistV=-1;
-function seqHeadDist(){
-  if(seqDist!==null&&seqDistV===DOMV.v)return seqDist;
-  var sec=chainEl&&chainEl.closest?chainEl.closest('section'):null;
-  var h=sec?sec.querySelector('h2'):null;
-  seqDist=h?(chainEl.getBoundingClientRect().top-h.getBoundingClientRect().top):0;
-  seqDistV=DOMV.v;
-  return seqDist;
-}
-function mSeq(){
-  if(!chainEl)return null;
-  var r=chainEl.getBoundingClientRect(),vh=innerHeight;
-  /* ============ КОГДА ОСЬ СОБЫТИЯ ДОЗАПОЛНЯЕТСЯ ============
-     Владелец: «когда страница по центру, линия не заполнена, а когда дальше
-     прокручивается, заголовок уже исчезает — посетитель не понимает суть».
-
-     Прежде заполнение завершалось, когда верх оси поднимался до 66 % высоты
-     окна. Замерено на 1900x900: путь от верха заголовка раздела до оси на
-     английской странице 426 точек, на армянской 577 — армянский заголовок выше,
-     потому что длиннее (269 против 202). В тот миг, когда ось дозаполнялась,
-     английский заголовок был ещё виден целиком, а армянский уже уходил под
-     шапку на 59 точек. Читатель видел либо заголовок с недозаполненной осью,
-     либо полную ось без заголовка — и не связывал одно с другим.
-
-     Теперь заполнение начинается чуть раньше (ось только показалась снизу) и
-     завершается ВЫШЕ по экрану — на 78 % высоты окна вместо 66 %. На 900 точках
-     это даёт армянскому заголовку 63 точки запаса под шапкой, английскому —
-     с избытком. Ход стал короче на четверть, зато оба конца истории попадают
-     в один взгляд.
-
-     ⚠ На низких окнах (меньше примерно 770 точек) армянский заголовок и полная
-     ось физически не помещаются вместе: 577 точек пути плюс шапка плюс сама
-     ось уже больше высоты окна. Это не про сроки, а про то, что содержимое
-     выше окна; лечится только сжатием отступов раздела. */
-  /* Точка дозаполнения подстраивается под высоту заголовка, а не стоит на
-     одной доле окна. Путь от верха заголовка до оси у языков разный — 426 у
-     английского, 577 у армянского, — и на низком окне неподвижная доля опять
-     прятала бы армянский заголовок. Берём то, что ниже по экрану: обычные 78 %
-     или ровно столько, сколько нужно, чтобы заголовок остался под шапкой видимым.
-     Потолок 92 % — чтобы ось не дозаполнялась ещё до того, как её увидели. */
-  var need=seqHeadDist()+96;          /* 62 шапка + 34 запаса */
-  var end=Math.min(vh*0.92,Math.max(vh*0.78,need));
-  var start=vh*1.02,span=start-end;
-  if(span<60)span=60;
-  var p=(start-r.top)/span;
-  return p<0?0:(p>1?1:p);
-}
-/* ============ ПУТЬ ЗАПИСИ ПО СТАНЦИЯМ ============
-   Считается по реальным положениям меток: x каждой станции — левый край её
-   подписи плюс половина квадрата. Номинал — по верху оси (y=1, штрих 2),
-   провал — на --dip. Спуск начинается на станции события, дно держится через
-   станцию отключения, подъём заканчивается ровно на станции возврата. Ширина
-   обёртки меняется — путь пересчитывается; на телефоне svg скрыт и не считается. */
-var chAxis=chainFill?chainFill.parentNode:null,chRec=chAxis?chAxis.querySelector('.chrec'):null,
-    chRecW=-1;
-function buildRec(){
-  if(!chRec||!chsteps||chsteps.children.length<5)return;
-  if(getComputedStyle(chRec).display==='none'){chRecW=-1;return;}
-  var ar=chAxis.getBoundingClientRect(),W=ar.width;
-  if(Math.abs(W-chRecW)<0.5)return;chRecW=W;
-  var dip=parseFloat(getComputedStyle(chainEl).getPropertyValue('--dip'))||56;
-  var xs=[].map.call(chsteps.children,function(li){return li.getBoundingClientRect().left-ar.left+4;});
-  var x2=xs[1],x3=xs[2],x4=xs[3],a=Math.min(34,(x3-x2)/3),y0=1,yd=dip;
-  var f=function(v){return (+v).toFixed(1);};
-  var d='M0 '+y0+' H'+f(x2)+' C'+f(x2+a)+' '+y0+' '+f(x2+a)+' '+yd+' '+f(x2+2*a)+' '+yd
-    +' H'+f(x4-2*a)+' C'+f(x4-a)+' '+yd+' '+f(x4-a)+' '+y0+' '+f(x4)+' '+y0+' H'+f(W);
-  chRec.setAttribute('viewBox','0 0 '+f(W)+' '+(dip+2));
-  chRec.querySelector('.chbase').setAttribute('d',d);
-  chRec.querySelector('.chfill').setAttribute('d',d);
-  var win=chRec.querySelector('.chwin');
-  win.setAttribute('x',f(x2));win.setAttribute('width',f(x4-x2));
-  win.setAttribute('y',-14);win.setAttribute('height',dip+2+30);
-}
-buildRec();
-addEventListener('resize',function(){requestAnimationFrame(buildRec);});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildRec);
-var seqWas=null,seqPWas=null;
-function aSeq(p){
-  if(p===null)return;
-  /* Своё свойство --p писалось на КАЖДОМ кадре, даже когда ось стояла за краем
-     экрана и величина не менялась. Правка своего свойства заставляет браузер
-     пересчитать стиль всей ветки под этим узлом. Пишем только при перемене. */
-  var ps=p.toFixed(4);
-  if(seqPWas!==ps){seqPWas=ps;chAxis.style.setProperty('--p',ps);}
-  var lit=Math.ceil(p*STEPS.length-0.001);
-  if(seqWas===lit)return;
-  seqWas=lit;
-  for(var i=0;i<chsteps.children.length;i++)
-    chsteps.children[i].classList.toggle('on',i<lit);
-  chainEl.classList.toggle('evt',lit>=2);
-}
-function seqUpd(){aSeq(mSeq());}
-seqUpd();obsUpd();
+  var played=false;
+  function play(){
+    if(played)return;played=true;
+    scene.classList.remove('is-armed');
+    if(rm){scene.classList.add('is-done');return;}
+    void scene.offsetWidth;
+    scene.classList.add('is-playing');
+    setTimeout(function(){scene.classList.remove('is-playing');scene.classList.add('is-done');},4900);
+  }
+  if(rm)scene.classList.add('is-done');else scene.classList.add('is-armed');
+  render();
+  if(window.ResizeObserver)new ResizeObserver(function(){render();}).observe(scene);
+  else addEventListener('resize',function(){requestAnimationFrame(render);});
+  var ready=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+  ready.then(function(){
+    render();
+    if(!('IntersectionObserver' in window)){play();return;}
+    var io=new IntersectionObserver(function(es){
+      if(es.some(function(e){return e.isIntersecting;})){io.disconnect();setTimeout(play,350);}
+    },{threshold:0.25});
+    io.observe(scene);
+  });
+})();
 
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ: геометрия и головка записи ============
    Линейка: восемь делений на семь дней, крайние выше. Линия записи — ровная,
@@ -4345,11 +4283,11 @@ function scrollPaint(){
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
   /* --- ЗАМЕР: ни одной записи в документ --- */
-  var d1=mSeq(),dO=mObs(),d2=mSuite(),d3=mJoints(),d5=mDither(),
+  var dO=mObs(),d2=mSuite(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
   /* --- ЗАПИСЬ: ни одного замера. Порядок тот же, что был у прежнего списка:
          toneUnderBar идёт после headerTheme и перекрывает его решение. --- */
-  aSeq(d1);aObs(dO);aSuite(d2);aJoints(d3);aDither(d5);
+  aObs(dO);aSuite(d2);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
