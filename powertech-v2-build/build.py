@@ -306,9 +306,9 @@ def qa_html(items):
         out.append(
             '<li class="qa-item">'
             '<button class="qa-q" type="button" id="qa-b%d" aria-expanded="false" aria-controls="qa-a%d">'
-            '<span class="qa-n">%s</span><span class="qa-t">%s</span><span class="qa-pm" aria-hidden="true"></span></button>'
+            '<span class="qa-n tag">%s</span><span class="qa-t">%s</span><span class="qa-pm" aria-hidden="true"></span></button>'
             '<div class="qa-a" id="qa-a%d" role="region" aria-labelledby="qa-b%d" hidden><div>'
-            '<p>%s</p><span class="qa-svc">%s</span>'
+            '<p>%s</p><span class="qa-svc tag">%s</span>'
             '<div class="qa-pic-m"><img src="./uploads/qa/%s-724.webp" width="724" height="543" alt="%s" loading="lazy" decoding="async"></div>'
             '</div></div></li>' % (i, i, n, q, i, i, a, svc, img, alt))
     return ''.join(out)

@@ -1540,10 +1540,12 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .qa-item{border-bottom:1px solid var(--hair);}
 .qa-q{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;width:100%;text-align:left;cursor:pointer;color:var(--fg);
   display:grid;grid-template-columns:34px minmax(0,1fr) 24px;column-gap:14px;align-items:baseline;
-  padding:clamp(16px,1.6vw,22px) 0;font:inherit;font-size:clamp(17px,1.35vw,20px);line-height:1.35;font-weight:500;letter-spacing:-.01em;}
+  /* Те же ступени, что на остальных разделах: вопрос — текстовый кегль 16 с
+     весом 500 (как строки перечня 04), ответ — 16/1.75, ярлыки — роль .tag. */
+  padding:16px 0;font:inherit;font-size:16px;line-height:1.5;font-weight:500;letter-spacing:0;}
 .qa-q:hover .qa-t{color:var(--brand-ink);}
-.qa-n{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);
-  font-feature-settings:'case' 1;position:relative;top:-1px;}
+.qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
+.qa-n{position:relative;top:-1px;}
 .qa-t{transition:color .3s var(--e);}
 .qa-pm{position:relative;width:24px;height:24px;align-self:center;}
 .qa-pm::before,.qa-pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--fg);transform:translate(-50%,-50%);}
@@ -1553,10 +1555,8 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s var(--e);}
 .qa-a>div{overflow:hidden;min-height:0;}
 .qa-a.open{grid-template-rows:1fr;}
-.qa-a p{margin:0;padding-left:48px;font-size:16px;line-height:1.72;color:var(--fg-mid);max-width:58ch;}
-.qa-svc{display:block;margin:14px 0 0 48px;padding-bottom:clamp(18px,1.8vw,26px);
-  font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-ink);}
-html[lang="hy"] .qa-svc{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;text-transform:none;}
+.qa-a p{margin:0;padding-left:48px;font-size:16px;line-height:1.75;color:var(--fg-mid);max-width:58ch;}
+.qa-svc{display:block;margin:14px 0 0 48px;padding-bottom:clamp(18px,1.8vw,26px);}
 .qa-pic-m{display:none;}
 .qa-talk{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;cursor:pointer;padding-inline:0;}
 @media (max-width:960px){
@@ -1564,7 +1564,6 @@ html[lang="hy"] .qa-svc{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.
   .qa-pic{display:none;}
   .qa-pic-m{display:block;position:relative;aspect-ratio:4/3;margin:0 0 clamp(18px,3vw,26px) 48px;overflow:hidden;background:var(--hair2);}
   .qa-pic-m img{width:100%;height:100%;display:block;object-fit:cover;}
-  .qa-q{font-size:17px;}
 }
 @media (max-width:560px){
   .qa-a p,.qa-svc{padding-left:0;margin-left:0;}
