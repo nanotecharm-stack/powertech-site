@@ -681,13 +681,20 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   /* 1.25 к 1, а не поровну: заголовок героя шире половины, и при равных
      колонках он заходил бы на поле волны. Замер по настоящим шрифтам:
      английский заголовок 672 px на 1440 и 756 при потолке кегля. */
-  grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  /* БРИФ 2 (2026-09-12): сигнал — композиционный центр первого эпизода.
+     Верхняя полоса текста: заголовок в широкой части (7 из 12), пояснение с
+     кнопками — в своей узкой (5 из 12), верхние кромки согласованы. Под ней
+     поле сигнала на всю рабочую ширину — не иллюстрация в узкой колонке, а
+     измерительная сцена со своими полями. */
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  grid-template-areas:"head side" "field field";
   /* start, а не center: подпись поля стоит на одной линии с надглавием, и
      два блока читаются одной строкой разворота. */
   /* align-content:center ОБЯЗАТЕЛЕН вместе со start: ряд один, и без него
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
-  align-items:start;align-content:center;gap:clamp(18px,3vw,52px);
+  align-items:start;align-content:center;
+  column-gap:clamp(28px,4vw,72px);row-gap:clamp(28px,4.5vh,48px);
   min-height:100svh;max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
@@ -698,12 +705,22 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      ЭКРАНА, не героя. Условие: верхнее поле минус нижнее = X. Поэтому к
      верхнему прибавлена половина X, из нижнего она вычтена. Владелец:
      «по вертикали не по центру всё стоит» — было выше центра на 50-70 px. */
-  padding:calc(clamp(104px,12vh,132px) + clamp(80px,12vh,140px)/2)
+  /* Блок больше не центрируется по экрану: полоса текста сверху, поле под
+     ней. Верхнее поле — под шапку и воздух, нижнее короче: метка «01»
+     следующего раздела должна показаться у нижней кромки первого экрана. */
+  padding:clamp(96px,11vh,120px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          calc(clamp(104px,12vh,132px) - clamp(80px,12vh,140px)/2)
+          clamp(44px,6vh,64px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
-.hcol{position:relative;z-index:3;}
+.hcol{position:relative;z-index:3;grid-area:head;}
+/* Пояснение и кнопки — своя полоса справа от заголовка. Верх абзаца стоит на
+   уровне первой строки заголовка: надглавие (15) + его отбивка (20) + верхнее
+   поле h1 (20) + вынос кегля до верха букв ≈ 62–72. */
+.hside{position:relative;z-index:3;grid-area:side;padding-top:35px;}
+/* Три класса, а не два: правило .hero .hp с полем 30 стоит ниже по файлу и
+   при равном весе брало верх — абзац съезжал на 35 px ниже верха букв. */
+.hero .hside .hp{margin-top:0;max-width:44ch;}
 /* Армянская версия поднимается тем же правилом. Отдельное исключение здесь
    стояло по ошибочному замеру: блок мерился по file:// без шрифтов и выходил
    621 px вместо настоящих 519, из-за чего сдвиг будто бы заводил надглавие под
@@ -724,7 +741,7 @@ h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
 @media (min-width:961px){.hero,.hgrid{min-height:calc(100svh - clamp(80px,12vh,140px));}}
 /* Заголовку разрешено занять зазор между колонками, но не поле волны:
    кривая не должна пересекать текст. Потолок — колонка плюс зазор минус 8. */
-.hero h1{color:var(--fg);width:max-content;max-width:calc(100% + clamp(18px,3vw,52px) - 8px);}
+.hero h1{color:var(--fg);width:max-content;max-width:100%;}
 /* Расшифровка заголовка — один прогон при загрузке, повтора нет (решение
    владельца, 2026-08-31; рисунок одобрен по пробе). Кипящие знаки приглушены
    разбавлением чернил бумагой; замок вспыхивает маркой со свечением — жест
@@ -773,7 +790,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
    измерения, одна кривая, подписи. Все цвета — переменные страницы: след и
    выбранная кнопка фирменным, подписи чернилами, сетка волосяными линиями.
    Ширина колонки задана сеткой .hgrid; ничего здесь не выходит за её край. */
-.pq{position:relative;z-index:1;margin:0;min-width:0;
+.pq{position:relative;z-index:1;margin:0;min-width:0;grid-area:field;
   display:flex;flex-direction:column;gap:0;color:var(--fg);
   /* Холст читает эти четыре переменные через getComputedStyle: переход
      палитры на них действует так же, как на всё остальное. */
@@ -832,17 +849,29 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq.is-static .pq-pause{display:none;}
 /* Высота поля подобрана под колонку текста: с абзацем и кнопками она 445-545,
    и поле с подписями должно быть ей соразмерно, а не вдвое ниже. */
-.pq-chart{position:relative;height:clamp(240px,36vh,340px);}
+/* Поле во всю ширину ниже, чем было в колонке: широкий кадр при той же
+   высоте читается лентой самописца, а не квадратной карточкой. */
+.pq-chart{position:relative;height:clamp(200px,26vh,280px);}
+/* Армянское пояснение длиннее английского почти вдвое: в узкой колонке оно
+   давало семь строк и уводило поле сигнала за нижнюю кромку. Полоса делится
+   поровну, абзац — на всю колонку. Разная раскладка при общей системе. */
+@media (min-width:961px){
+  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
+  html[lang="hy"] .hero .hside .hp{max-width:none;}
+}
 .pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
 /* Пояснение: три строки в одной клетке, высота по самой длинной. */
-.pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
+/* Строка под полем: пояснение слева, оговорка о симуляции справа — подписи
+   под лентой прибора, а не два абзаца друг под другом. */
+.pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s3);}
+.pq-x{display:grid;margin-top:0;font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
 .pq[data-mode="normal"] .pq-x [data-x="normal"],
 .pq[data-mode="dip"] .pq-x [data-x="dip"],
 .pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
-.pq-note{margin-top:var(--s4);font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
-  color:var(--fg-soft);}
+.pq-note{margin:0;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
+  color:var(--fg-soft);text-align:right;flex:none;}
 /* Армянская подпись: без прописных и разрядки — это правила латиницы; и тем
    же гротеском, что текст, — засечная гарнитура в 12 точек расплывается. */
 html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:%%BODYFONT%%;
@@ -1172,8 +1201,8 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    от текста героя до «01» выходило 400 с лишком пикселей пустоты —
    владелец: «слишком большое расстояние, неправильно воспринимается». */
 #why{padding-top:clamp(48px,6vw,88px);}
-#report h2,#measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
-#report,#measure{padding-top:clamp(26px,3vw,46px);}
+#measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
+#measure{padding-top:clamp(26px,3vw,46px);}
 /* Раздел, к которому приложение относится, закрывается короче обычного —
    иначе укороченная пауза сверху съедалась длинной паузой снизу. */
 #services,#assignments{padding-bottom:clamp(30px,3.4vw,52px);}
@@ -1203,9 +1232,24 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    выполнился. */
 .chain{width:var(--vwpx,100vw);margin-left:calc(50% - var(--vwpx,100vw) / 2);
   margin-top:clamp(var(--s7),6vw,88px);}
-.chaxis{position:relative;height:2px;background:var(--hair);}
-.chaxis i{position:absolute;inset:0;background:var(--brand);
-  transform:scaleX(var(--p,0));transform-origin:left;will-change:transform;}
+/* ============ ОСЬ КАК ЗАПИСЬ (бриф 2, 2026-09-12) ============
+   На широком экране ось получает высоту провала: линия записи идёт по верху,
+   между станциями события и возврата проваливается на --dip и возвращается.
+   Заливка хода — тот же --p, что двигал черту: путь нормирован pathLength=1,
+   штрих 1/1, смещение (1 − p) открывает пройденную часть. Окно события —
+   прямоугольник от станции события до станции возврата: заливка марки 6 %,
+   штриховые кромки — знак тот же, что у окна провала в поле героя. */
+.chain{--dip:56px;}
+.chaxis{position:relative;height:calc(var(--dip) + 2px);}
+.chaxis i{display:none;}
+.chrec{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible;}
+.chrec .chbase{fill:none;stroke:var(--hair);stroke-width:2;stroke-linejoin:round;}
+.chrec .chfill{fill:none;stroke:var(--brand);stroke-width:2;stroke-linejoin:round;
+  stroke-dasharray:1 1;stroke-dashoffset:calc(1 - var(--p,0));}
+.chrec .chwin{fill:color-mix(in srgb,var(--brand) 6%,transparent);
+  stroke:color-mix(in srgb,var(--brand) 35%,transparent);stroke-dasharray:3 4;
+  opacity:0;transition:opacity .55s var(--e);}
+.chain.evt .chrec .chwin{opacity:1;}
 /* Шкала вышла за поля, подписи — нет: --inset возвращает их ровно в колонку,
    к левому краю заголовка. Простого поля обёртки тут мало: на экране шире
    1280 обёртка ещё и отходит от края, и подписи вставали бы на семьдесят
@@ -1223,6 +1267,11 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 .chsteps li.inc.on::before{transform:rotate(45deg) scale(1.12);}
 .chsteps li.inc{opacity:.62;}
 .chsteps li.inc.on{opacity:1;}
+/* Метки стоят на записи: 1, 2, 4, 5 — на номинале (верх оси), 3 (отключение)
+   — на дне провала. Подписи всех станций остаются в одной строке под осью. */
+.chsteps li::before{top:calc(var(--dip) * -1 - 5px);}
+.chsteps li.inc::before{top:calc(var(--dip) * -1 - 6.5px);}
+.chsteps li:nth-child(3)::before{top:-5px;}
 /* ============ МЕТКА СОБЫТИЯ — ОДНА НА ВСЁМ САЙТЕ ============
    В поле героя провал напряжения отмечен окном: слабая заливка цветом марки
    и штриховые кромки по границам участка (см. dipEvents в холсте). Здесь та
@@ -1232,7 +1281,7 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    Появляется вместе с состоянием .on: пока ось не дошла до станции, записи
    ещё нет. На узких окнах ось стоит вертикально, и окно ложится строкой —
    кромки переходят с боков на верх и низ. */
-.chsteps li.inc::after{content:"";position:absolute;
+.chsteps li.inc::after{content:"";position:absolute;display:none;
   left:calc(var(--s3) * -1);right:var(--s2);top:calc(var(--s5) * -1);bottom:calc(var(--s3) * -1);
   background:color-mix(in srgb,var(--brand) 6%,transparent);
   border-left:1px dashed color-mix(in srgb,var(--brand) 35%,transparent);
@@ -1255,11 +1304,14 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
      цепочку в колонку целиком. */
   .chain{width:auto;margin-left:0;margin-top:clamp(var(--s5),3vw,40px);
     display:grid;grid-template-columns:2px 1fr;column-gap:18px;align-items:stretch;}
-  .chaxis{height:auto;width:2px;}
-  .chaxis i{transform:scaleY(var(--p,0));transform-origin:top;}
+  .chaxis{height:auto;width:2px;background:var(--hair);}
+  .chaxis i{display:block;position:absolute;inset:0;background:var(--brand);
+    transform:scaleY(var(--p,0));transform-origin:top;will-change:transform;}
+  .chrec{display:none;}
+  .chsteps li.inc::after{display:block;}
   .chsteps{padding:0;grid-template-columns:1fr;row-gap:20px;}
   .chsteps li{padding:0;}
-  .chsteps li::before{top:5px;left:-23px;}
+  .chsteps li::before,.chsteps li:nth-child(3)::before{top:5px;left:-23px;}
   .chsteps li.inc::before{top:3.5px;left:-24.5px;}
   .chsteps li.inc::after{left:-30px;right:0;top:calc(var(--s2) * -1);bottom:calc(var(--s2) * -1);
     border-left:0;border-right:0;
@@ -1279,12 +1331,58 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 .other .btn:hover span{color:var(--fg);}
 
 /* services */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:40px 0 10px;}
-.stat{background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair2);padding:22px;border-radius:2px;}
-.stat b{display:block;font-family:%%HEADFONT%%;font-weight:700;font-size:clamp(36px,4.6vw,62px);line-height:1;}
-.stat span{display:block;margin-top:var(--s2);font-size:14px;color:var(--fg-mid);line-height:1.5;}
-.display{font-family:%%HEADFONT%%;font-weight:700;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0;}
+.display{font-family:%%HEADFONT%%;font-weight:700;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
+/* ============ ПОЛЕ НАБЛЮДЕНИЯ (бриф 2, 2026-09-12) ============
+   Одна сетка в двенадцать колонок на числа, поле и этапы — так этап стоит
+   ровно под своим местом на записи, а число — над своим. */
+.obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(40px,5.5vw,72px);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);}
+.obs .stats,.obs .steps,.obs-field{grid-column:1 / -1;}
+.obs .stats{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);margin:0;}
+.obs .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin:0;}
+.obs .step:nth-child(2){padding-right:var(--s4);}
+/* Числа — шкала, не карточки: без плашек, разного кегля, каждое над своим
+   участком поля. 7 — самое крупное: это ширина всего поля. 24/7 — подпись
+   линии, по центру и мельче. 1 — документ в конце, у правой кромки. */
+.obs .stat{background:none;box-shadow:none;padding:0;border-radius:0;align-self:end;}
+.obs .stat:nth-child(1){grid-column:1 / span 4;}
+.obs .stat:nth-child(2){grid-column:5 / span 4;text-align:center;}
+.obs .stat:nth-child(3){grid-column:9 / span 4;text-align:right;}
+.obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:700;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;}
+.obs .stat:nth-child(1) b{font-size:clamp(64px,9vw,128px);}
+.obs .stat:nth-child(2) b{font-size:clamp(30px,3.6vw,52px);}
+.obs .stat:nth-child(3) b{font-size:clamp(48px,6.4vw,92px);}
+.obs .stat span{display:block;margin-top:var(--s2);font-size:14px;line-height:1.5;color:rgba(239,237,234,.66);}
+/* Поле: линейка семи делений по низу, линия записи над ней. */
+.obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
+.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+.obs-ruler line{stroke:rgba(239,237,234,.22);stroke-width:1;}
+.obs-ruler .obs-day{stroke:rgba(239,237,234,.34);}
+.obs-base{fill:none;stroke:rgba(239,237,234,.2);stroke-width:1.6;}
+.obs-rec{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-dasharray:1 1;
+  stroke-dashoffset:calc(1 - var(--p,0));}
+.obs-head line{stroke:var(--brand);stroke-width:1;opacity:.55;}
+.obs-head rect{fill:var(--brand);}
+/* Этапы — на своих местах во времени: до записи, во время, после. Вертикальная
+   выноска связывает этап с делением линейки над ним. Текущий этап — тот, под
+   которым стоит головка записи; остальные тише, но читаемы. */
+.obs .steps{margin-top:var(--s6);border-top:0;}
+.obs .step{position:relative;padding:0 0 0 var(--s4);border-left:1px solid rgba(239,237,234,.22);
+  transition:border-color .5s var(--e);}
+.obs .step::before{content:"";position:absolute;left:-1px;bottom:100%;width:1px;height:calc(var(--s6) + var(--s4));
+  background:rgba(239,237,234,.22);transform:none;transition:background-color .5s var(--e);}
+.obs .step:nth-child(1){grid-column:1 / span 2;}
+.obs .step:nth-child(2){grid-column:3 / span 3;}
+/* Третий этап привязан к КОНЦУ записи: выноска справа, у деления «7». */
+.obs .step:nth-child(3){grid-column:6 / span 2;border-left:0;border-right:1px solid rgba(239,237,234,.22);
+  padding:0 var(--s4) 0 0;}
+.obs .step:nth-child(3)::before{left:auto;right:-1px;}
+.obs .step:nth-child(3).on{border-right-color:var(--brand);}
+.obs .step p{color:rgba(239,237,234,.62);transition:color .5s var(--e);}
+.obs .step.on{border-left-color:var(--brand);}
+.obs .step.on::before{background:var(--brand);}
+.obs .step.on p{color:rgba(239,237,234,.9);}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(var(--s4),2.4vw,30px);margin-top:10px;}
 /* ============ ТРИ ШАГА КАК ПОСЛЕДОВАТЕЛЬНОСТЬ ============
    Три абзаца стояли в ряд без единого знака порядка: ни линии, ни отметки —
@@ -1297,14 +1395,8 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    Загорание — раз, при появлении (.in от наблюдателя .rv), не по прокрутке:
    ряд горизонтальный, «текущий шаг» при вертикальном чтении не существует.
    При reduce отметки стоят готовыми. */
-.steps{position:relative;border-top:1px solid rgba(239,237,234,.13);}
-.step{position:relative;padding-top:clamp(var(--s4),2vw,var(--s5));}
-.step::before{content:"";position:absolute;top:-1px;left:0;width:26px;height:2px;background:var(--brand);
-  transform:scaleX(0);transform-origin:left;transition:transform .6s var(--e);}
-.steps.in .step:nth-child(1)::before{transform:scaleX(1);transition-delay:.25s;}
-.steps.in .step:nth-child(2)::before{transform:scaleX(1);transition-delay:.7s;}
-.steps.in .step:nth-child(3)::before{transform:scaleX(1);transition-delay:1.15s;}
-@media (prefers-reduced-motion:reduce){.step::before{transform:none;transition:none;}}
+@media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(239,237,234,.9);}
+  .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 /* У шагов больше нет названий, и промежуток от номера до текста,
    который держал заголовок, берёт на себя сам абзац. */
 /* Отступ сверху был зазором под номером шага; номера нет — нет и зазора */
@@ -1312,6 +1404,38 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 
 /* report */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;}
+/* ============ ГЛАВА ОТЧЁТА (бриф 2, 2026-09-12) ============
+   Шапка главы продолжает плиту 03 её же нижним тоном и уходит в самый тёмный
+   тон сайта; нижнее поле шапки — место, куда заходит лист. Лист — светлая
+   поверхность (--panel), волосяная кромка, свои поля; сверху двойная
+   линейка бланка. Состав отчёта — те же ряды с линейками, что были, плюс
+   поле слева с короткой отметкой у каждой строки. Штамп методики стоит на
+   бумаге справа от листа, в свободном поле, на одной высоте с ним. */
+.rep{padding:0;}
+.rep-head{--rep-over:clamp(96px,12vw,176px);background:linear-gradient(180deg,#14161C 0%,#0D0E13 100%);
+  color:#EFEDEA;padding:clamp(24px,3vw,48px) 0 var(--rep-over);}
+.rep-head h2{color:#F4F3F1;}
+.rep-head .cnt{color:rgba(239,237,234,.58);}
+.rep-head .lede{color:rgba(239,237,234,.66);}
+.rep-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.8vw,24px);
+  align-items:start;padding-bottom:clamp(64px,8vw,120px);}
+.doc{grid-column:1 / span 7;margin-top:calc(var(--rep-over) * -1 + clamp(28px,3.4vw,56px));
+  background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair);
+  padding:clamp(24px,3vw,44px) clamp(22px,2.8vw,44px) clamp(22px,2.6vw,36px);}
+.doc-rule{height:2px;background:var(--fg);position:relative;}
+.doc-rule::after{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--hair);}
+.doc .list{margin-top:clamp(20px,2.4vw,32px);border-top:0;}
+.doc .list div{grid-template-columns:22px 1fr;}
+.doc .list div::before{content:"";width:10px;height:1px;background:var(--brand-ink);align-self:center;}
+.doc .list div>*{grid-column:2;}
+.doc .list div::after{left:var(--pad);}
+.doc-foot .lnote{margin-top:clamp(20px,2.4vw,32px);}
+.rep-side{grid-column:9 / span 4;padding-top:clamp(28px,3.4vw,56px);}
+.rep-side .note{margin-top:0;}
+@media (max-width:960px){
+  .doc{grid-column:1 / -1;}
+  .rep-side{grid-column:1 / -1;padding-top:var(--s6);}
+}
 /* what the report contains, read as a numbered sheet rather than a panel */
 /* Перечень — это содержание самого отчёта, поэтому он и выглядит как лист,
    положенный на страницу: та же светлая поверхность и та же волосяная кромка,
@@ -1855,8 +1979,16 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .done p{font-size:14px;line-height:1.7;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 
 @media (max-width:960px){
-  .hgrid{grid-template-columns:1fr;padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
+  .hgrid{grid-template-columns:1fr;grid-template-areas:"head" "side" "field";padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
   .hero h1{width:auto;max-width:none;}
+  .hside{padding-top:0;}
+  .hside .hp{margin-top:0;}
+  .pq-foot{flex-direction:column;align-items:flex-start;gap:var(--s3);}
+  .pq-note{text-align:left;}
+  /* Подписи состояний на телефоне — своей строкой под номером и паузой:
+     в одну строку с ними три подписи ломались посреди ряда. */
+  .pq-head{flex-wrap:wrap;}
+  .pq-dots{order:3;flex-basis:100%;margin-left:-10px;}
   /* Поле героя на телефоне стоит ПОД текстом и кнопками — это законченный
      блок с собственной подписью, и связь с текстом ему не нужна. Высота
      холста не меньше 220, иначе разницу состояний не разобрать. */
@@ -1870,7 +2002,17 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
      Прячем только меню: его заменяет указатель разделов. Остальное встаёт
      в колонку. */
   header nav{display:none;}
-  .stats,.steps{grid-template-columns:1fr;gap:22px;}
+  .obs{display:block;}
+  .obs .stats{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s4);}
+  .obs .stat,.obs .stat:nth-child(1),.obs .stat:nth-child(2),.obs .stat:nth-child(3){grid-column:auto;text-align:left;align-self:start;}
+  .obs .stat:nth-child(1) b,.obs .stat:nth-child(3) b{font-size:clamp(40px,11vw,56px);}
+  .obs .stat:nth-child(2) b{font-size:clamp(22px,6vw,30px);}
+  .obs-field{height:56px;}
+  .obs .steps{display:grid;grid-template-columns:1fr;row-gap:22px;}
+  .obs .step,.obs .step:nth-child(1),.obs .step:nth-child(2),.obs .step:nth-child(3){grid-column:auto;
+    border-right:0;border-left:1px solid rgba(239,237,234,.22);padding:0 0 0 var(--s4);}
+  .obs .step.on,.obs .step:nth-child(3).on{border-left-color:var(--brand);}
+  .obs .step::before{display:none;}
   .navr{gap:var(--s2);}
   .btn{padding:11px 14px;font-size:12px;}
       #fmd .fr{grid-template-columns:1fr;}
@@ -2145,6 +2287,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="hcol">
       <div class="eyebrow">%%HERO_EYEBROW%%</div>
       <h1>%%HERO_H1%%</h1>
+    </div>
+    <div class="hside">
       <p class="hp">%%HERO_P%%</p>
       <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>%%HERO_CTA2%% &darr;</span></a></div>
     </div>
@@ -2170,8 +2314,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
         <button type="button" class="pq-pause" data-pause="%%PQ_PAUSE%%" data-resume="%%PQ_RESUME%%"><i aria-hidden="true"></i></button>
       </div>
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
+      <div class="pq-foot">
       <p class="pq-x" aria-live="polite"><span data-x="normal">%%PQ_X_NORMAL%%</span><span data-x="dip">%%PQ_X_DIP%%</span><span data-x="harm">%%PQ_X_HARM%%</span></p>
       <p class="pq-note">%%PQ_NOTE%%</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2187,7 +2333,19 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <p class="lede">%%WHY_P%%</p>
   </div>
   <div class="chain rv" id="chain">
-    <div class="chaxis"><i id="chainfill"></i></div>
+    <!-- Ось шкалы — это сама запись: на широком экране линия идёт по номиналу,
+         на станции события проваливается, на станции возврата поднимается
+         обратно; на дне провала стоит станция отключения. Та же геометрия,
+         что у RMS-следа в разделе 08 и у окна провала в поле героя. Путь
+         строит скрипт по реальным положениям станций; на телефоне ось стоит
+         вертикально прежней чертой. -->
+    <div class="chaxis"><i id="chainfill"></i>
+      <svg class="chrec" aria-hidden="true" preserveAspectRatio="none">
+        <rect class="chwin" x="0" y="0" width="0" height="0"/>
+        <path class="chbase" d=""/>
+        <path class="chfill" d="" pathLength="1"/>
+      </svg>
+    </div>
     <ol class="chsteps" id="chsteps"></ol>
   </div>
 </div></section>
@@ -2213,20 +2371,49 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <h2 class="h2gap">%%SVC_H2%%</h2>
   <p class="lede">%%SVC_P1%%</p>
   <p class="lede">%%SVC_P2%%</p></div>
-  <div class="stats rv">%%SVC_STATS%%</div>
   <div class="display rv">%%SVC_DISPLAY%%</div>
-  <div class="steps rv">%%SVC_STEPS%%</div>
+  <!-- ПОЛЕ НАБЛЮДЕНИЯ (бриф 2). Три числа — не три карточки, а шкала: 7 —
+       длительность, она же ширина поля; 24/7 — непрерывность, подпись самой
+       линии записи; 1 — документ в конце записи. Под полем три этапа стоят на
+       своих местах во времени: до подключения, в течение записи, после неё.
+       Линия записи заполняется ходом прокрутки, головка записи идёт по полю,
+       и этап под ней — текущий. Данных здесь нет: только линейка дней и
+       ровная линия. -->
+  <div class="obs rv" id="obs">
+    <div class="stats">%%SVC_STATS%%</div>
+    <div class="obs-field" aria-hidden="true">
+      <svg class="obs-svg" preserveAspectRatio="none">
+        <g class="obs-ruler"></g>
+        <path class="obs-base" d=""/>
+        <path class="obs-rec" d="" pathLength="1"/>
+        <g class="obs-head"><line x1="0" y1="0" x2="0" y2="0"/><rect x="-3" y="0" width="6" height="6"/></g>
+      </svg>
+    </div>
+    <div class="steps">%%SVC_STEPS%%</div>
+  </div>
   <a class="alink rv" href="#report">%%SVC_LINK%% ↗</a>
 </div></section>
 
-<div class="dith" data-dith="#14161C,#EFEDEA,#C8603D"></div>
-
-<section class="sec" id="report"><div class="wrap two">
-  <div class="rv"><div class="cnt">04</div><h2>%%REP_H2%%</h2>
-    <p class="lede">%%REP_P%%</p>
-    <p class="note">%%REP_NOTE%%</p></div>
-  <div><div class="list rv">%%REP_LIST%%</div>%%REP_NOTE2%%</div>
-</div></section>
+<!-- ОТЧЁТ КАК ДОКУМЕНТ (бриф 2). Тёмная плита мониторинга не обрывается
+     растром: глава отчёта начинается на той же плите — заголовок и пояснение
+     на тёмном, — а из плиты на бумагу выходит лист с составом отчёта. Переход
+     «от наблюдения к осмыслению» задан композицией и работает без анимации.
+     На листе только существующий состав и существующая оговорка; штамп
+     методики стоит рядом на свободном поле бумаги. -->
+<section class="sec rep" id="report">
+  <div class="rep-head" data-tone="ink"><div class="wrap">
+    <div class="rv"><div class="cnt">04</div><h2>%%REP_H2%%</h2>
+    <p class="lede">%%REP_P%%</p></div>
+  </div></div>
+  <div class="wrap rep-body">
+    <article class="doc rv">
+      <div class="doc-rule" aria-hidden="true"></div>
+      <div class="list rv">%%REP_LIST%%</div>
+      <div class="doc-foot">%%REP_NOTE2%%</div>
+    </article>
+    <aside class="rep-side rv"><p class="note">%%REP_NOTE%%</p></aside>
+  </div>
+</section>
 
 
 <section class="sec" id="assignments"><div class="wrap">
@@ -2916,6 +3103,35 @@ function mSeq(){
   var p=(start-r.top)/span;
   return p<0?0:(p>1?1:p);
 }
+/* ============ ПУТЬ ЗАПИСИ ПО СТАНЦИЯМ ============
+   Считается по реальным положениям меток: x каждой станции — левый край её
+   подписи плюс половина квадрата. Номинал — по верху оси (y=1, штрих 2),
+   провал — на --dip. Спуск начинается на станции события, дно держится через
+   станцию отключения, подъём заканчивается ровно на станции возврата. Ширина
+   обёртки меняется — путь пересчитывается; на телефоне svg скрыт и не считается. */
+var chAxis=chainFill?chainFill.parentNode:null,chRec=chAxis?chAxis.querySelector('.chrec'):null,
+    chRecW=-1;
+function buildRec(){
+  if(!chRec||!chsteps||chsteps.children.length<5)return;
+  if(getComputedStyle(chRec).display==='none'){chRecW=-1;return;}
+  var ar=chAxis.getBoundingClientRect(),W=ar.width;
+  if(Math.abs(W-chRecW)<0.5)return;chRecW=W;
+  var dip=parseFloat(getComputedStyle(chainEl).getPropertyValue('--dip'))||56;
+  var xs=[].map.call(chsteps.children,function(li){return li.getBoundingClientRect().left-ar.left+4;});
+  var x2=xs[1],x3=xs[2],x4=xs[3],a=Math.min(34,(x3-x2)/3),y0=1,yd=dip;
+  var f=function(v){return (+v).toFixed(1);};
+  var d='M0 '+y0+' H'+f(x2)+' C'+f(x2+a)+' '+y0+' '+f(x2+a)+' '+yd+' '+f(x2+2*a)+' '+yd
+    +' H'+f(x4-2*a)+' C'+f(x4-a)+' '+yd+' '+f(x4-a)+' '+y0+' '+f(x4)+' '+y0+' H'+f(W);
+  chRec.setAttribute('viewBox','0 0 '+f(W)+' '+(dip+2));
+  chRec.querySelector('.chbase').setAttribute('d',d);
+  chRec.querySelector('.chfill').setAttribute('d',d);
+  var win=chRec.querySelector('.chwin');
+  win.setAttribute('x',f(x2));win.setAttribute('width',f(x4-x2));
+  win.setAttribute('y',-14);win.setAttribute('height',dip+2+30);
+}
+buildRec();
+addEventListener('resize',function(){requestAnimationFrame(buildRec);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildRec);
 var seqWas=null,seqPWas=null;
 function aSeq(p){
   if(p===null)return;
@@ -2923,15 +3139,66 @@ function aSeq(p){
      экрана и величина не менялась. Правка своего свойства заставляет браузер
      пересчитать стиль всей ветки под этим узлом. Пишем только при перемене. */
   var ps=p.toFixed(4);
-  if(seqPWas!==ps){seqPWas=ps;chainFill.style.setProperty('--p',ps);}
+  if(seqPWas!==ps){seqPWas=ps;chAxis.style.setProperty('--p',ps);}
   var lit=Math.ceil(p*STEPS.length-0.001);
   if(seqWas===lit)return;
   seqWas=lit;
   for(var i=0;i<chsteps.children.length;i++)
     chsteps.children[i].classList.toggle('on',i<lit);
+  chainEl.classList.toggle('evt',lit>=2);
 }
 function seqUpd(){aSeq(mSeq());}
-seqUpd();
+seqUpd();obsUpd();
+
+/* ============ ПОЛЕ НАБЛЮДЕНИЯ: геометрия и головка записи ============
+   Линейка: восемь делений на семь дней, крайние выше. Линия записи — ровная,
+   на 42 % высоты; заполняется тем же приёмом, что ось события (pathLength=1,
+   смещение штриха). Головка записи стоит на фронте заполнения; этап под ней —
+   текущий: до 12 % пути — первый, до 90 % — второй, дальше — третий. Ход
+   считается от положения блока в окне: запись начинается, когда поле
+   показалось снизу, и заканчивается, когда его низ поднялся к трети экрана. */
+var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,
+    obsSteps=obsEl?[].slice.call(obsEl.querySelectorAll('.step')):[],obsW=-1,obsH=-1;
+function buildObs(){
+  if(!obsSvg)return;
+  var r=obsSvg.getBoundingClientRect(),W=r.width,H=r.height;
+  if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
+  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.42)+0.5,yb=H-0.5,i,x,g='';
+  obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
+  for(i=0;i<=7;i++){x=Math.round(W*i/7)+(i===7?-0.5:0.5);var h=(i===0||i===7)?16:9;
+    g+='<line class="'+((i===0||i===7)?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-h)+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
+  g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
+  obsSvg.querySelector('.obs-ruler').innerHTML=g;
+  var d='M0 '+f(yr)+' H'+f(W);
+  obsSvg.querySelector('.obs-base').setAttribute('d',d);
+  obsSvg.querySelector('.obs-rec').setAttribute('d',d);
+  var hd=obsSvg.querySelector('.obs-head');
+  hd.querySelector('line').setAttribute('y1','0');hd.querySelector('line').setAttribute('y2',f(yb));
+  hd.querySelector('rect').setAttribute('y',f(yr-3));
+}
+var obsPWas=null,obsStepWas=-1;
+function mObs(){
+  if(!obsEl)return null;
+  var r=obsEl.getBoundingClientRect(),vh=innerHeight;
+  var start=vh*0.88,end=vh*0.3-r.height,span=start-end;
+  if(span<60)span=60;
+  var p=(start-r.top)/span;
+  return p<0?0:(p>1?1:p);
+}
+function aObs(p){
+  if(p===null||!obsSvg)return;
+  buildObs();
+  var ps=p.toFixed(4);
+  if(obsPWas!==ps){obsPWas=ps;obsSvg.style.setProperty('--p',ps);
+    obsSvg.querySelector('.obs-head').setAttribute('transform','translate('+(p*obsW).toFixed(1)+' 0)');}
+  var k=p<0.12?0:(p<0.9?1:2);
+  if(rm)k=-1;
+  if(obsStepWas===k)return;obsStepWas=k;
+  for(var i=0;i<obsSteps.length;i++)obsSteps[i].classList.toggle('on',i===k);
+}
+function obsUpd(){aObs(mObs());}
+buildObs();obsUpd();
+addEventListener('resize',function(){requestAnimationFrame(function(){obsW=-1;buildObs();});});
 
 /* ============ INDUSTRIES — a stepped rail of card plates ============ */
 var irail=document.getElementById('irail');
@@ -3712,7 +3979,7 @@ revealPass();
 addEventListener('load',revealPass);
 var hdr=document.getElementById('hdr');
 /* which section sits under the header decides the groups' theme */
-var darkSecs=[].slice.call(document.querySelectorAll('.plate2,.plate'));
+var darkSecs=[].slice.call(document.querySelectorAll('.plate2,.plate,.rep-head'));
 function mHeaderTheme(){
   var y=38;
   for(var i=0;i<darkSecs.length;i++){
@@ -3898,7 +4165,8 @@ var bands=[].slice.call(document.querySelectorAll('.dith')).map(function(el){
 var toneSecs=null,toneSecsV=-1;
 function toneList(){
   if(toneSecs&&toneSecsV===DOMV.v)return toneSecs;
-  toneSecs=[].slice.call(document.querySelectorAll('section[data-tone]'));
+  /* Шапка главы отчёта — тёмная область внутри светлого раздела: тон читается с неё самой. */
+  toneSecs=[].slice.call(document.querySelectorAll('section[data-tone],.rep-head[data-tone]'));
   toneSecsV=DOMV.v;return toneSecs;
 }
 function mTone(){
@@ -4088,11 +4356,11 @@ function scrollPaint(){
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
   /* --- ЗАМЕР: ни одной записи в документ --- */
-  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d5=mDither(),
+  var d1=mSeq(),dO=mObs(),d2=mSuite(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
   /* --- ЗАПИСЬ: ни одного замера. Порядок тот же, что был у прежнего списка:
          toneUnderBar идёт после headerTheme и перекрывает его решение. --- */
-  aSeq(d1);aSuite(d2);aJoints(d3);aDither(d5);
+  aSeq(d1);aObs(dO);aSuite(d2);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};

@@ -321,17 +321,21 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 .hero{position:relative;min-height:100svh;overflow:hidden;color:var(--fg);
   background:none;}
 .hgrid{position:relative;z-index:2;display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
-  align-items:start;align-content:center;gap:clamp(18px,3vw,52px);
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  grid-template-areas:"head side" "field field";
+  align-items:start;align-content:center;
+  column-gap:clamp(28px,4vw,72px);row-gap:clamp(28px,4.5vh,48px);
   min-height:100svh;max-width:none;margin:0;
-  padding:calc(clamp(104px,12vh,132px) + clamp(80px,12vh,140px)/2)
+  padding:clamp(96px,11vh,120px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          calc(clamp(104px,12vh,132px) - clamp(80px,12vh,140px)/2)
+          clamp(44px,6vh,64px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:clamp(38px,4.75vw,77px);margin-top:20px;text-wrap:balance;}
-.hcol{position:relative;z-index:3;}
+.hcol{position:relative;z-index:3;grid-area:head;}
+.hside{position:relative;z-index:3;grid-area:side;padding-top:35px;}
+.hero .hside .hp{margin-top:0;max-width:44ch;}
 @media (min-width:961px){.hero,.hgrid{min-height:calc(100svh - clamp(80px,12vh,140px));}}
-.hero h1{color:var(--fg);width:max-content;max-width:calc(100% + clamp(18px,3vw,52px) - 8px);}
+.hero h1{color:var(--fg);width:max-content;max-width:100%;}
 .hero h1 .dtw{display:inline-block;white-space:pre;}
 .hero h1 [data-dt="s"]{color:color-mix(in srgb,var(--fg) 42%,var(--bg));}
 .hero h1 [data-dt="l"]{animation:dtflash .42s cubic-bezier(.2,0,0,1);}
@@ -346,7 +350,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .hero .acts .btn{font-size:15px;}
 .hero .eyebrow{color:var(--brand-ink);}
 .hero .eyebrow::before{background:var(--brand-ink);}
-.pq{position:relative;z-index:1;margin:0;min-width:0;
+.pq{position:relative;z-index:1;margin:0;min-width:0;grid-area:field;
   display:flex;flex-direction:column;gap:0;color:var(--fg);
   --pq-trace:var(--brand);--pq-grid:var(--hair2);--pq-axis:var(--hair);
   --pq-nom:rgba(13,36,64,.22);--pq-ref:rgba(13,36,64,.66);
@@ -383,16 +387,21 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq.is-paused .pq-pause i::before{left:0;width:0;height:0;top:0;bottom:auto;background:none;
   border-style:solid;border-width:4.5px 0 4.5px 8px;border-color:transparent transparent transparent currentColor;}
 .pq.is-static .pq-pause{display:none;}
-.pq-chart{position:relative;height:clamp(240px,36vh,340px);}
+.pq-chart{position:relative;height:clamp(200px,26vh,280px);}
+@media (min-width:961px){
+  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
+  html[lang="hy"] .hero .hside .hp{max-width:none;}
+}
 .pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
-.pq-x{display:grid;margin-top:var(--s3);font-size:14px;line-height:1.6;color:var(--fg-mid);
+.pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s3);}
+.pq-x{display:grid;margin-top:0;font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
 .pq[data-mode="normal"] .pq-x [data-x="normal"],
 .pq[data-mode="dip"] .pq-x [data-x="dip"],
 .pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
-.pq-note{margin-top:var(--s4);font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;letter-spacing:.02em;
-  color:var(--fg-soft);}
+.pq-note{margin:0;font-family:'Arian AMU Serif',Georgia,serif;font-size:12px;letter-spacing:.02em;
+  color:var(--fg-soft);text-align:right;flex:none;}
 html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:'Arian AMU','Helvetica Neue',sans-serif;
   letter-spacing:0;text-transform:none;}
 html[lang="hy"] .pq-dot{letter-spacing:0;text-transform:none;}
@@ -552,8 +561,8 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 #why h2,#company h2{font-size:clamp(28px,4.25vw,64px);letter-spacing:-.022em;line-height:1.05;}
 #company{padding-top:clamp(76px,10.5vw,158px);}
 #why{padding-top:clamp(48px,6vw,88px);}
-#report h2,#measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
-#report,#measure{padding-top:clamp(26px,3vw,46px);}
+#measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
+#measure{padding-top:clamp(26px,3vw,46px);}
 #services,#assignments{padding-bottom:clamp(30px,3.4vw,52px);}
 .alink{display:inline-flex;align-items:center;gap:9px;margin-top:34px;
   padding-block:9px;margin-bottom:-9px;font-family:'Arian AMU Serif',Georgia,serif;font-size:14px;
@@ -561,9 +570,17 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 .alink:hover{text-decoration:underline;text-underline-offset:4px;}
 .chain{width:var(--vwpx,100vw);margin-left:calc(50% - var(--vwpx,100vw) / 2);
   margin-top:clamp(var(--s7),6vw,88px);}
-.chaxis{position:relative;height:2px;background:var(--hair);}
-.chaxis i{position:absolute;inset:0;background:var(--brand);
-  transform:scaleX(var(--p,0));transform-origin:left;will-change:transform;}
+.chain{--dip:56px;}
+.chaxis{position:relative;height:calc(var(--dip) + 2px);}
+.chaxis i{display:none;}
+.chrec{position:absolute;left:0;top:0;width:100%;height:100%;display:block;overflow:visible;}
+.chrec .chbase{fill:none;stroke:var(--hair);stroke-width:2;stroke-linejoin:round;}
+.chrec .chfill{fill:none;stroke:var(--brand);stroke-width:2;stroke-linejoin:round;
+  stroke-dasharray:1 1;stroke-dashoffset:calc(1 - var(--p,0));}
+.chrec .chwin{fill:color-mix(in srgb,var(--brand) 6%,transparent);
+  stroke:color-mix(in srgb,var(--brand) 35%,transparent);stroke-dasharray:3 4;
+  opacity:0;transition:opacity .55s var(--e);}
+.chain.evt .chrec .chwin{opacity:1;}
 .chsteps{list-style:none;margin:0;padding:0 var(--inset);display:grid;grid-template-columns:repeat(5,1fr);}
 .chsteps li{position:relative;padding:20px clamp(var(--s3),1.4vw,22px) 0 0;opacity:.5;transition:opacity .55s var(--e);}
 .chsteps li::before{content:"";position:absolute;top:-5px;left:0;width:8px;height:8px;background:var(--hair);
@@ -575,7 +592,10 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 .chsteps li.inc.on::before{transform:rotate(45deg) scale(1.12);}
 .chsteps li.inc{opacity:.62;}
 .chsteps li.inc.on{opacity:1;}
-.chsteps li.inc::after{content:"";position:absolute;
+.chsteps li::before{top:calc(var(--dip) * -1 - 5px);}
+.chsteps li.inc::before{top:calc(var(--dip) * -1 - 6.5px);}
+.chsteps li:nth-child(3)::before{top:-5px;}
+.chsteps li.inc::after{content:"";position:absolute;display:none;
   left:calc(var(--s3) * -1);right:var(--s2);top:calc(var(--s5) * -1);bottom:calc(var(--s3) * -1);
   background:color-mix(in srgb,var(--brand) 6%,transparent);
   border-left:1px dashed color-mix(in srgb,var(--brand) 35%,transparent);
@@ -588,11 +608,14 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 @media (max-width:960px){
   .chain{width:auto;margin-left:0;margin-top:clamp(var(--s5),3vw,40px);
     display:grid;grid-template-columns:2px 1fr;column-gap:18px;align-items:stretch;}
-  .chaxis{height:auto;width:2px;}
-  .chaxis i{transform:scaleY(var(--p,0));transform-origin:top;}
+  .chaxis{height:auto;width:2px;background:var(--hair);}
+  .chaxis i{display:block;position:absolute;inset:0;background:var(--brand);
+    transform:scaleY(var(--p,0));transform-origin:top;will-change:transform;}
+  .chrec{display:none;}
+  .chsteps li.inc::after{display:block;}
   .chsteps{padding:0;grid-template-columns:1fr;row-gap:20px;}
   .chsteps li{padding:0;}
-  .chsteps li::before{top:5px;left:-23px;}
+  .chsteps li::before,.chsteps li:nth-child(3)::before{top:5px;left:-23px;}
   .chsteps li.inc::before{top:3.5px;left:-24.5px;}
   .chsteps li.inc::after{left:-30px;right:0;top:calc(var(--s2) * -1);bottom:calc(var(--s2) * -1);
     border-left:0;border-right:0;
@@ -607,23 +630,77 @@ h2{font-size:clamp(20px,3.17vw,48px);text-wrap:balance;}
 .other .btn{background:var(--brand);color:var(--brand-on);}
 .other .btn::before{background:var(--bg);}
 .other .btn:hover span{color:var(--fg);}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:40px 0 10px;}
-.stat{background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair2);padding:22px;border-radius:2px;}
-.stat b{display:block;font-family:'Arian AMU',sans-serif;font-weight:700;font-size:clamp(36px,4.6vw,62px);line-height:1;}
-.stat span{display:block;margin-top:var(--s2);font-size:14px;color:var(--fg-mid);line-height:1.5;}
-.display{font-family:'Arian AMU',sans-serif;font-weight:700;font-size:clamp(23px,3.96vw,55px);line-height:.96;color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0;}
+.display{font-family:'Arian AMU',sans-serif;font-weight:700;font-size:clamp(23px,3.96vw,55px);line-height:.96;color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
+.obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(40px,5.5vw,72px);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);}
+.obs .stats,.obs .steps,.obs-field{grid-column:1 / -1;}
+.obs .stats{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);margin:0;}
+.obs .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin:0;}
+.obs .step:nth-child(2){padding-right:var(--s4);}
+.obs .stat{background:none;box-shadow:none;padding:0;border-radius:0;align-self:end;}
+.obs .stat:nth-child(1){grid-column:1 / span 4;}
+.obs .stat:nth-child(2){grid-column:5 / span 4;text-align:center;}
+.obs .stat:nth-child(3){grid-column:9 / span 4;text-align:right;}
+.obs .stat b{display:block;font-family:'Arian AMU',sans-serif;font-weight:700;line-height:.92;letter-spacing:-.02em;color:#F0EAE0;}
+.obs .stat:nth-child(1) b{font-size:clamp(64px,9vw,128px);}
+.obs .stat:nth-child(2) b{font-size:clamp(30px,3.6vw,52px);}
+.obs .stat:nth-child(3) b{font-size:clamp(48px,6.4vw,92px);}
+.obs .stat span{display:block;margin-top:var(--s2);font-size:14px;line-height:1.5;color:rgba(246,241,233,.66);}
+.obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
+.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+.obs-ruler line{stroke:rgba(246,241,233,.22);stroke-width:1;}
+.obs-ruler .obs-day{stroke:rgba(246,241,233,.34);}
+.obs-base{fill:none;stroke:rgba(246,241,233,.2);stroke-width:1.6;}
+.obs-rec{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-dasharray:1 1;
+  stroke-dashoffset:calc(1 - var(--p,0));}
+.obs-head line{stroke:var(--brand);stroke-width:1;opacity:.55;}
+.obs-head rect{fill:var(--brand);}
+.obs .steps{margin-top:var(--s6);border-top:0;}
+.obs .step{position:relative;padding:0 0 0 var(--s4);border-left:1px solid rgba(246,241,233,.22);
+  transition:border-color .5s var(--e);}
+.obs .step::before{content:"";position:absolute;left:-1px;bottom:100%;width:1px;height:calc(var(--s6) + var(--s4));
+  background:rgba(246,241,233,.22);transform:none;transition:background-color .5s var(--e);}
+.obs .step:nth-child(1){grid-column:1 / span 2;}
+.obs .step:nth-child(2){grid-column:3 / span 3;}
+.obs .step:nth-child(3){grid-column:6 / span 2;border-left:0;border-right:1px solid rgba(246,241,233,.22);
+  padding:0 var(--s4) 0 0;}
+.obs .step:nth-child(3)::before{left:auto;right:-1px;}
+.obs .step:nth-child(3).on{border-right-color:var(--brand);}
+.obs .step p{color:rgba(246,241,233,.62);transition:color .5s var(--e);}
+.obs .step.on{border-left-color:var(--brand);}
+.obs .step.on::before{background:var(--brand);}
+.obs .step.on p{color:rgba(246,241,233,.9);}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(var(--s4),2.4vw,30px);margin-top:10px;}
-.steps{position:relative;border-top:1px solid rgba(246,241,233,.13);}
-.step{position:relative;padding-top:clamp(var(--s4),2vw,var(--s5));}
-.step::before{content:"";position:absolute;top:-1px;left:0;width:26px;height:2px;background:var(--brand);
-  transform:scaleX(0);transform-origin:left;transition:transform .6s var(--e);}
-.steps.in .step:nth-child(1)::before{transform:scaleX(1);transition-delay:.25s;}
-.steps.in .step:nth-child(2)::before{transform:scaleX(1);transition-delay:.7s;}
-.steps.in .step:nth-child(3)::before{transform:scaleX(1);transition-delay:1.15s;}
-@media (prefers-reduced-motion:reduce){.step::before{transform:none;transition:none;}}
+@media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
+  .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 .step p{font-size:16px;line-height:1.75;color:var(--fg-mid);}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;}
+.rep{padding:0;}
+.rep-head{--rep-over:clamp(96px,12vw,176px);background:linear-gradient(180deg,#162E52 0%,#0D2440 100%);
+  color:#F6F1E9;padding:clamp(24px,3vw,48px) 0 var(--rep-over);}
+.rep-head h2{color:#F0EAE0;}
+.rep-head .cnt{color:rgba(246,241,233,.58);}
+.rep-head .lede{color:rgba(246,241,233,.66);}
+.rep-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.8vw,24px);
+  align-items:start;padding-bottom:clamp(64px,8vw,120px);}
+.doc{grid-column:1 / span 7;margin-top:calc(var(--rep-over) * -1 + clamp(28px,3.4vw,56px));
+  background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair);
+  padding:clamp(24px,3vw,44px) clamp(22px,2.8vw,44px) clamp(22px,2.6vw,36px);}
+.doc-rule{height:2px;background:var(--fg);position:relative;}
+.doc-rule::after{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--hair);}
+.doc .list{margin-top:clamp(20px,2.4vw,32px);border-top:0;}
+.doc .list div{grid-template-columns:22px 1fr;}
+.doc .list div::before{content:"";width:10px;height:1px;background:var(--brand-ink);align-self:center;}
+.doc .list div>*{grid-column:2;}
+.doc .list div::after{left:var(--pad);}
+.doc-foot .lnote{margin-top:clamp(20px,2.4vw,32px);}
+.rep-side{grid-column:9 / span 4;padding-top:clamp(28px,3.4vw,56px);}
+.rep-side .note{margin-top:0;}
+@media (max-width:960px){
+  .doc{grid-column:1 / -1;}
+  .rep-side{grid-column:1 / -1;padding-top:var(--s6);}
+}
 .list{display:grid;grid-auto-rows:1fr;border-top:1px solid var(--hair2);}
 .list div{--row:56px;--i:0;position:relative;
   display:grid;grid-template-columns:1fr;gap:0;align-items:baseline;
@@ -909,14 +986,30 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .done b{display:block;font-size:21px;font-weight:600;margin-bottom:9px;}
 #fmd .done p{font-size:14px;line-height:1.7;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 @media (max-width:960px){
-  .hgrid{grid-template-columns:1fr;padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
+  .hgrid{grid-template-columns:1fr;grid-template-areas:"head" "side" "field";padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
   .hero h1{width:auto;max-width:none;}
+  .hside{padding-top:0;}
+  .hside .hp{margin-top:0;}
+  .pq-foot{flex-direction:column;align-items:flex-start;gap:var(--s3);}
+  .pq-note{text-align:left;}
+  .pq-head{flex-wrap:wrap;}
+  .pq-dots{order:3;flex-basis:100%;margin-left:-10px;}
   .hgrid{align-content:center;}   
   .pq{margin-top:var(--s5);}
   .pq-chart{height:clamp(220px,58vw,280px);}
   .two,.asg,.plate .wrap{grid-template-columns:1fr;}
   header nav{display:none;}
-  .stats,.steps{grid-template-columns:1fr;gap:22px;}
+  .obs{display:block;}
+  .obs .stats{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s4);}
+  .obs .stat,.obs .stat:nth-child(1),.obs .stat:nth-child(2),.obs .stat:nth-child(3){grid-column:auto;text-align:left;align-self:start;}
+  .obs .stat:nth-child(1) b,.obs .stat:nth-child(3) b{font-size:clamp(40px,11vw,56px);}
+  .obs .stat:nth-child(2) b{font-size:clamp(22px,6vw,30px);}
+  .obs-field{height:56px;}
+  .obs .steps{display:grid;grid-template-columns:1fr;row-gap:22px;}
+  .obs .step,.obs .step:nth-child(1),.obs .step:nth-child(2),.obs .step:nth-child(3){grid-column:auto;
+    border-right:0;border-left:1px solid rgba(246,241,233,.22);padding:0 0 0 var(--s4);}
+  .obs .step.on,.obs .step:nth-child(3).on{border-left-color:var(--brand);}
+  .obs .step::before{display:none;}
   .navr{gap:var(--s2);}
   .btn{padding:11px 14px;font-size:12px;}
       #fmd .fr{grid-template-columns:1fr;}
@@ -1057,6 +1150,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="hcol">
       <div class="eyebrow">ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՅԻ ՈՐԱԿԻ ՄՈՆԻԹՈՐԻՆԳ</div>
       <h1>Ստուգեք, թե ինչպես է աշխատում ձեր <span class="ac">էլեկտրացանցը</span></h1>
+    </div>
+    <div class="hside">
       <p class="hp">Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։</p>
       <div class="acts"><button class="btn" data-open-form><span>Նկարագրել խնդիրը</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>Ինչպես է իրականացվում մոնիթորինգը &darr;</span></a></div>
     </div>
@@ -1073,8 +1168,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
         <button type="button" class="pq-pause" data-pause="Դադարեցնել անիմացիան" data-resume="Շարունակել անիմացիան"><i aria-hidden="true"></i></button>
       </div>
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
+      <div class="pq-foot">
       <p class="pq-x" aria-live="polite"><span data-x="normal">Կանոնավոր սինուսաձև ալիք։</span><span data-x="dip">Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։</span><span data-x="harm">Հարմոնիկները աղավաղում են լարման ալիքի ձևը։</span></p>
       <p class="pq-note">Պատկերավոր օրինակ է, ոչ իրական չափում։</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1088,7 +1185,14 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <p class="lede">Էլեկտրական համակարգում որոշ իրադարձություններ տևում են ընդամենը միլիվայրկյաններ կամ մի քանի ցիկլ։ Մեկանգամյա կարճատև ստուգման պահին չափվող արժեքները կարող են արդեն վերադարձած լինել բնականոն մակարդակի։ Մոնիթորինգը պահպանում է իրադարձության ժամանակային նշումը և դրա պահին գրանցված պայմանները։</p>
   </div>
   <div class="chain rv" id="chain">
-    <div class="chaxis"><i id="chainfill"></i></div>
+    
+    <div class="chaxis"><i id="chainfill"></i>
+      <svg class="chrec" aria-hidden="true" preserveAspectRatio="none">
+        <rect class="chwin" x="0" y="0" width="0" height="0"/>
+        <path class="chbase" d=""/>
+        <path class="chfill" d="" pathLength="1"/>
+      </svg>
+    </div>
     <ol class="chsteps" id="chsteps"></ol>
   </div>
 </div></section>
@@ -1114,20 +1218,38 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <h2 class="h2gap">7-օրյա մոնիթորինգ</h2>
   <p class="lede">Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։</p>
   <p class="lede">Մոնիթորինգի տևողությունն ընտրվում է աշխատանքային պայմանների բնորոշ պատկերը ստանալու համար։ Եթե խնդիրը պարբերաբար չի դրսևորվում կամ սարքավորման աշխատանքային ցիկլն ավելի երկար է, կարող է առաջարկվել ավելի երկար ժամանակահատված։</p></div>
-  <div class="stats rv"><div class="stat"><b>7</b><span>մոնիթորինգի տևողություն</span></div><div class="stat"><b>24/7</b><span>անընդհատ տվյալների գրանցում</span></div><div class="stat"><b>1</b><span>ինժեներական հաշվետվություն</span></div></div>
   <div class="display rv">Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span></div>
-  <div class="steps rv"><div class="step"><p>Հստակեցնում ենք՝ ինչ պետք է ստուգվի, որ սարքավորումն է ներգրավված և ինչ որոշման պետք է աջակցեն արդյունքները։</p></div><div class="step"><p>Չափումները կատարվում են էլեկտրական համակարգի աշխատանքի ընթացքում՝ բնորոշ աշխատանքային պայմաններում։</p></div><div class="step"><p>Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով և առաջարկվող հաջորդ քայլերով։</p></div></div>
+  
+  <div class="obs rv" id="obs">
+    <div class="stats"><div class="stat"><b>7</b><span>մոնիթորինգի տևողություն</span></div><div class="stat"><b>24/7</b><span>անընդհատ տվյալների գրանցում</span></div><div class="stat"><b>1</b><span>ինժեներական հաշվետվություն</span></div></div>
+    <div class="obs-field" aria-hidden="true">
+      <svg class="obs-svg" preserveAspectRatio="none">
+        <g class="obs-ruler"></g>
+        <path class="obs-base" d=""/>
+        <path class="obs-rec" d="" pathLength="1"/>
+        <g class="obs-head"><line x1="0" y1="0" x2="0" y2="0"/><rect x="-3" y="0" width="6" height="6"/></g>
+      </svg>
+    </div>
+    <div class="steps"><div class="step"><p>Հստակեցնում ենք՝ ինչ պետք է ստուգվի, որ սարքավորումն է ներգրավված և ինչ որոշման պետք է աջակցեն արդյունքները։</p></div><div class="step"><p>Չափումները կատարվում են էլեկտրական համակարգի աշխատանքի ընթացքում՝ բնորոշ աշխատանքային պայմաններում։</p></div><div class="step"><p>Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով և առաջարկվող հաջորդ քայլերով։</p></div></div>
+  </div>
   <a class="alink rv" href="#report">Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը ↗</a>
 </div></section>
 
-<div class="dith" data-dith="#162E52,#F6F1E9,#7BA4D0"></div>
 
-<section class="sec" id="report"><div class="wrap two">
-  <div class="rv"><div class="cnt">04</div><h2>Հաշվետվություն</h2>
-    <p class="lede">Ներկայացնում է չափման արդյունքները, դրանց ինժեներական վերլուծությունն ու եզրակացությունները՝ հետագա տեխնիկական որոշումների համար։</p>
-    <p class="note">Էլեկտրաէներգիայի որակի պարամետրերը չափվում են ԳՕՍՏ ԻԷԿ <span class="std">61000-4-30-2017</span> ստանդարտով սահմանված S դասի մեթոդներով։ Հարմոնիկ և միջհարմոնիկ բաղադրիչները գնահատվում են ԻԷԿ <span class="std">61000-4-7</span>-ի համաձայն, երբ կիրառելի է։ Մատակարարման կետում արդյունքները կարող են համեմատվել Հայաստանում գործող ԳՕՍՏ <span class="std">32144-2013</span>-ի նորմերի հետ՝ չափման նպատակից և չափման կետից կախված։</p></div>
-  <div><div class="list rv"><div><span>Չափումների շրջանակն ու կետերը</span></div><div><span>Մոնիթորինգի ժամանակահատվածն ու աշխատանքային պայմանները</span></div><div><span>Գրանցված իրադարձություններն ու միտումները</span></div><div><span>Ինժեներական մեկնաբանություն</span></div><div><span>Առաջարկվող հաջորդ քայլերը</span></div></div><p class="lnote">Եթե գրանցված տվյալները եզրակացության համար բավարար չեն, հաշվետվությունը դա նշում է։</p></div>
-</div></section>
+<section class="sec rep" id="report">
+  <div class="rep-head" data-tone="ink"><div class="wrap">
+    <div class="rv"><div class="cnt">04</div><h2>Հաշվետվություն</h2>
+    <p class="lede">Ներկայացնում է չափման արդյունքները, դրանց ինժեներական վերլուծությունն ու եզրակացությունները՝ հետագա տեխնիկական որոշումների համար։</p></div>
+  </div></div>
+  <div class="wrap rep-body">
+    <article class="doc rv">
+      <div class="doc-rule" aria-hidden="true"></div>
+      <div class="list rv"><div><span>Չափումների շրջանակն ու կետերը</span></div><div><span>Մոնիթորինգի ժամանակահատվածն ու աշխատանքային պայմանները</span></div><div><span>Գրանցված իրադարձություններն ու միտումները</span></div><div><span>Ինժեներական մեկնաբանություն</span></div><div><span>Առաջարկվող հաջորդ քայլերը</span></div></div>
+      <div class="doc-foot"><p class="lnote">Եթե գրանցված տվյալները եզրակացության համար բավարար չեն, հաշվետվությունը դա նշում է։</p></div>
+    </article>
+    <aside class="rep-side rv"><p class="note">Էլեկտրաէներգիայի որակի պարամետրերը չափվում են ԳՕՍՏ ԻԷԿ <span class="std">61000-4-30-2017</span> ստանդարտով սահմանված S դասի մեթոդներով։ Հարմոնիկ և միջհարմոնիկ բաղադրիչները գնահատվում են ԻԷԿ <span class="std">61000-4-7</span>-ի համաձայն, երբ կիրառելի է։ Մատակարարման կետում արդյունքները կարող են համեմատվել Հայաստանում գործող ԳՕՍՏ <span class="std">32144-2013</span>-ի նորմերի հետ՝ չափման նպատակից և չափման կետից կախված։</p></aside>
+  </div>
+</section>
 
 
 <section class="sec" id="assignments"><div class="wrap">
@@ -1655,19 +1777,85 @@ function mSeq(){
   var p=(start-r.top)/span;
   return p<0?0:(p>1?1:p);
 }
+var chAxis=chainFill?chainFill.parentNode:null,chRec=chAxis?chAxis.querySelector('.chrec'):null,
+    chRecW=-1;
+function buildRec(){
+  if(!chRec||!chsteps||chsteps.children.length<5)return;
+  if(getComputedStyle(chRec).display==='none'){chRecW=-1;return;}
+  var ar=chAxis.getBoundingClientRect(),W=ar.width;
+  if(Math.abs(W-chRecW)<0.5)return;chRecW=W;
+  var dip=parseFloat(getComputedStyle(chainEl).getPropertyValue('--dip'))||56;
+  var xs=[].map.call(chsteps.children,function(li){return li.getBoundingClientRect().left-ar.left+4;});
+  var x2=xs[1],x3=xs[2],x4=xs[3],a=Math.min(34,(x3-x2)/3),y0=1,yd=dip;
+  var f=function(v){return (+v).toFixed(1);};
+  var d='M0 '+y0+' H'+f(x2)+' C'+f(x2+a)+' '+y0+' '+f(x2+a)+' '+yd+' '+f(x2+2*a)+' '+yd
+    +' H'+f(x4-2*a)+' C'+f(x4-a)+' '+yd+' '+f(x4-a)+' '+y0+' '+f(x4)+' '+y0+' H'+f(W);
+  chRec.setAttribute('viewBox','0 0 '+f(W)+' '+(dip+2));
+  chRec.querySelector('.chbase').setAttribute('d',d);
+  chRec.querySelector('.chfill').setAttribute('d',d);
+  var win=chRec.querySelector('.chwin');
+  win.setAttribute('x',f(x2));win.setAttribute('width',f(x4-x2));
+  win.setAttribute('y',-14);win.setAttribute('height',dip+2+30);
+}
+buildRec();
+addEventListener('resize',function(){requestAnimationFrame(buildRec);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(buildRec);
 var seqWas=null,seqPWas=null;
 function aSeq(p){
   if(p===null)return;
   var ps=p.toFixed(4);
-  if(seqPWas!==ps){seqPWas=ps;chainFill.style.setProperty('--p',ps);}
+  if(seqPWas!==ps){seqPWas=ps;chAxis.style.setProperty('--p',ps);}
   var lit=Math.ceil(p*STEPS.length-0.001);
   if(seqWas===lit)return;
   seqWas=lit;
   for(var i=0;i<chsteps.children.length;i++)
     chsteps.children[i].classList.toggle('on',i<lit);
+  chainEl.classList.toggle('evt',lit>=2);
 }
 function seqUpd(){aSeq(mSeq());}
-seqUpd();
+seqUpd();obsUpd();
+var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,
+    obsSteps=obsEl?[].slice.call(obsEl.querySelectorAll('.step')):[],obsW=-1,obsH=-1;
+function buildObs(){
+  if(!obsSvg)return;
+  var r=obsSvg.getBoundingClientRect(),W=r.width,H=r.height;
+  if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
+  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.42)+0.5,yb=H-0.5,i,x,g='';
+  obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
+  for(i=0;i<=7;i++){x=Math.round(W*i/7)+(i===7?-0.5:0.5);var h=(i===0||i===7)?16:9;
+    g+='<line class="'+((i===0||i===7)?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-h)+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
+  g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
+  obsSvg.querySelector('.obs-ruler').innerHTML=g;
+  var d='M0 '+f(yr)+' H'+f(W);
+  obsSvg.querySelector('.obs-base').setAttribute('d',d);
+  obsSvg.querySelector('.obs-rec').setAttribute('d',d);
+  var hd=obsSvg.querySelector('.obs-head');
+  hd.querySelector('line').setAttribute('y1','0');hd.querySelector('line').setAttribute('y2',f(yb));
+  hd.querySelector('rect').setAttribute('y',f(yr-3));
+}
+var obsPWas=null,obsStepWas=-1;
+function mObs(){
+  if(!obsEl)return null;
+  var r=obsEl.getBoundingClientRect(),vh=innerHeight;
+  var start=vh*0.88,end=vh*0.3-r.height,span=start-end;
+  if(span<60)span=60;
+  var p=(start-r.top)/span;
+  return p<0?0:(p>1?1:p);
+}
+function aObs(p){
+  if(p===null||!obsSvg)return;
+  buildObs();
+  var ps=p.toFixed(4);
+  if(obsPWas!==ps){obsPWas=ps;obsSvg.style.setProperty('--p',ps);
+    obsSvg.querySelector('.obs-head').setAttribute('transform','translate('+(p*obsW).toFixed(1)+' 0)');}
+  var k=p<0.12?0:(p<0.9?1:2);
+  if(rm)k=-1;
+  if(obsStepWas===k)return;obsStepWas=k;
+  for(var i=0;i<obsSteps.length;i++)obsSteps[i].classList.toggle('on',i===k);
+}
+function obsUpd(){aObs(mObs());}
+buildObs();obsUpd();
+addEventListener('resize',function(){requestAnimationFrame(function(){obsW=-1;buildObs();});});
 var irail=document.getElementById('irail');
 function cardArt(seed){
   function rnd(n){seed=(seed*1103515245+12345)&0x7fffffff;return seed%n;}
@@ -2207,7 +2395,7 @@ function revealPass(){aReveal(mReveal());}
 revealPass();
 addEventListener('load',revealPass);
 var hdr=document.getElementById('hdr');
-var darkSecs=[].slice.call(document.querySelectorAll('.plate2,.plate'));
+var darkSecs=[].slice.call(document.querySelectorAll('.plate2,.plate,.rep-head'));
 function mHeaderTheme(){
   var y=38;
   for(var i=0;i<darkSecs.length;i++){
@@ -2350,7 +2538,7 @@ var bands=[].slice.call(document.querySelectorAll('.dith')).map(function(el){
 var toneSecs=null,toneSecsV=-1;
 function toneList(){
   if(toneSecs&&toneSecsV===DOMV.v)return toneSecs;
-  toneSecs=[].slice.call(document.querySelectorAll('section[data-tone]'));
+  toneSecs=[].slice.call(document.querySelectorAll('section[data-tone],.rep-head[data-tone]'));
   toneSecsV=DOMV.v;return toneSecs;
 }
 function mTone(){
@@ -2478,9 +2666,9 @@ function scrollPaint(){
   var y=window.pageYOffset;
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
-  var d1=mSeq(),d2=mSuite(),d3=mJoints(),d5=mDither(),
+  var d1=mSeq(),dO=mObs(),d2=mSuite(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
-  aSeq(d1);aSuite(d2);aJoints(d3);aDither(d5);
+  aSeq(d1);aObs(dO);aSuite(d2);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
