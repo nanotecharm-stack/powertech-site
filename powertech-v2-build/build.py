@@ -458,7 +458,7 @@ EN = {
  'SVC_STEPS': steps_html([
     ('01', 'Before anything is connected, we agree what needs verifying, on which equipment, and what the answer is for.'),
     ('02', 'Measurements are carried out while the electrical system operates under representative operating conditions.'),
-    ('03', 'We read the record against the question we started with, and write up the conclusions and the recommended next steps.')]),
+    ('03', 'We read the record against the question we started with, and write up the conclusions.')]),
  'SVC_LINK': 'See what monitoring can reveal',
  'REP_H2': 'Report',
  'REP_P': 'Measurement results, engineering analysis and conclusions provide the basis for further technical decisions.',
@@ -771,7 +771,7 @@ HY = {
  'SVC_STEPS': steps_html([
     ('01', 'Հստակեցնում ենք՝ ինչ պետք է ստուգվի, որ սարքավորումն է ներգրավված և ինչ որոշման պետք է աջակցեն արդյունքները։'),
     ('02', 'Չափումները կատարվում են էլեկտրական համակարգի աշխատանքի ընթացքում՝ բնորոշ աշխատանքային պայմաններում։'),
-    ('03', 'Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով և առաջարկվող հաջորդ քայլերով։')]),
+    ('03', 'Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով։')]),
  'SVC_LINK': 'Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը',
  'REP_H2': 'Հաշվետվություն',
  'REP_P': 'Ներկայացնում է չափման արդյունքները, դրանց ինժեներական վերլուծությունն ու եզրակացությունները՝ հետագա տեխնիկական որոշումների համար։',
