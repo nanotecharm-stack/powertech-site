@@ -245,7 +245,7 @@ def nbsp(value, lang):
 NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT',
            'HEADFONT', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
            'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'REP_LIST',
-           'CO_STORY', 'ASG_CARDS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
+           'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA'}
 # PP_BODY намеренно НЕ здесь: nbsp разбирает строку по тегам и правит только
 # текст между ними, а числу с единицей («24 месяца», «30 дней») склейка нужна
@@ -292,18 +292,31 @@ def pp_html(items):
         % (head, ''.join('<p>%s</p>' % p for p in paras))
         for head, paras in items)
 
-def asg_html(items):
-    """Пустой заголовок карточки не печатается вовсе.
+# Раздел 05 — вопросы владельца (бриф 2026-09-12). Пять иллюстраций типовых
+# ситуаций — сгенерированные картинки, не фотографии выполненных проектов.
+QA_IMGS = ['01-generator-ups', '02-lift-hvac-pumps', '03-production-expansion',
+           '04-motor-monitoring', '05-baseline-measurements']
 
-    Пустой <h3> оставил бы после себя отступы и разнобой высот, поэтому карточка
-    без названия собирается из шапки и абзаца — так устроена армянская версия.
-    """
+def qa_html(items):
+    """Пять вопросов: кнопка (номер, вопрос, плюс) и ответ (абзац, подпись
+    услуги, на телефоне — картинка). Открытый по умолчанию задаёт скрипт (02)."""
     out = []
-    for _n, tg, t, p in items:
-        out.append('<div class="card"><div class="hd">'
-                   '<span class="tag">%s</span></div>%s<p>%s</p></div>'
-                   % (tg, ('<h3>%s</h3>' % t) if t else '', p))
+    for i, (q, a, svc, alt) in enumerate(items):
+        n = '%02d' % (i + 1); img = QA_IMGS[i]
+        out.append(
+            '<li class="qa-item">'
+            '<button class="qa-q" type="button" id="qa-b%d" aria-expanded="false" aria-controls="qa-a%d">'
+            '<span class="qa-n">%s</span><span class="qa-t">%s</span><span class="qa-pm" aria-hidden="true"></span></button>'
+            '<div class="qa-a" id="qa-a%d" role="region" aria-labelledby="qa-b%d" hidden><div>'
+            '<p>%s</p><span class="qa-svc">%s</span>'
+            '<div class="qa-pic-m"><img src="./uploads/qa/%s-724.webp" width="724" height="543" alt="%s" loading="lazy" decoding="async"></div>'
+            '</div></div></li>' % (i, i, n, q, i, i, a, svc, img, alt))
     return ''.join(out)
+
+def qa_pics(items):
+    """Стопка пяти картинок в левой колонке; видна одна — активная."""
+    return ''.join('<img src="./uploads/qa/%s.webp" width="1448" height="1086" alt="%s" decoding="async"%s>'
+                   % (QA_IMGS[k], it[3], ' fetchpriority="low"' if k != 1 else '') for k, it in enumerate(items))
 
 # Each parameter gets its own measurement signature. Drawn to the owner's sketches
 # (2026-07-28) in the site's own hairline language: one stroke weight, currentColor for
@@ -425,7 +438,7 @@ EN = {
  'HERO_EYEBROW': 'POWER QUALITY MONITORING',
  'HERO_H1': 'See how your<br>electrical system<br><span class="ac">performs</span>',
  'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.',
- 'HERO_CTA2': 'How monitoring works',
+ 'HERO_CTA2': 'When measurements help',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'PQ_CAP': 'Voltage waveform',
  'PQ_M_NORMAL': 'Normal', 'PQ_M_DIP': 'Voltage dip', 'PQ_M_HARM': 'Harmonics',
@@ -478,17 +491,11 @@ EN = {
  # момент меняет. Отсюда сквозное «Before you ...» — четыре точки перед тратой.
  # Границы ролей соблюдены: цифры отдаются проектировщику, ответственность —
  # подрядчику, стоимость работ мы не считаем.
- 'ASG_H2': 'Measure before you decide',
- 'ASG_P': 'Measurement changes a decision only while that decision is still open. Once the scope is signed and the price agreed, the same data just explains what went wrong.',
- 'ASG_CARDS': asg_html([
-    # названия карточек сняты и здесь: обе версии обходятся тегом и абзацем
-    # «may be» в первой карточке стоит намеренно: причина повторных отказов может
-    # оказаться и третьей — дефектом самого узла, — и утверждать «либо сеть, либо
-    # нагрузка» значит обещать то, чего запись не показывает.
-    ('01', 'RECURRENT FAILURES', '', 'Equipment that keeps failing may be damaged by the supply, or by the way it is loaded. The two need different fixes. Recording under load tells you which.'),
-    ('02', 'ACCEPTANCE &amp; WARRANTY', '', 'Before you sign off, measurements under representative load show how the installation behaves in normal operation. Anything found then is still the contractor&rsquo;s to fix, under the contract or the warranty.'),
-    ('03', 'EXPANSION', '', 'Solar PV, new machines or a second shift all land on whatever the existing installation is already doing. Monitoring gives the design a measured starting point instead of nameplate ratings.'),
-    ('04', 'ACQUISITION', '', 'You cannot see a building&rsquo;s electrical condition on a site visit. A week of measurement shows what the installation is carrying, and gives you something concrete when you negotiate the price.')]),
+ 'ASG_H2': 'What do you need to check?',
+ 'ASG_P': 'Electrical measurements before you buy, during commissioning and throughout operation.',
+ 'ASG_TALK': 'Talk to us',
+ 'ASG_CARDS': qa_html([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power. These measurements give your supplier a basis for selecting the right capacity.', 'Load study', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes while the systems start and run together under agreed test conditions. The results help assess whether the power supply or start-up sequence needs adjustment.', 'Commissioning measurements', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the current load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Load study', 'Illustration: a production hall with a new machine line'), ('Your supplier blames a failure on the power supply. How can you check?', 'Continuous monitoring keeps a record of electrical conditions before and during a failure. If monitoring was already in place, Gridec can analyse that record to help assess the supplier’s explanation.', 'Continuous monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Accepting new equipment? What should you record at start-up?', 'We measure the power supply and load under agreed operating conditions. The report provides a baseline for discussing acceptance with the supplier and investigating any changes or faults later.', 'Baseline measurements', 'Illustration: measurements at the switchboard during equipment start-up')]),
+ 'ASG_PICS': qa_pics([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power. These measurements give your supplier a basis for selecting the right capacity.', 'Load study', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes while the systems start and run together under agreed test conditions. The results help assess whether the power supply or start-up sequence needs adjustment.', 'Commissioning measurements', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the current load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Load study', 'Illustration: a production hall with a new machine line'), ('Your supplier blames a failure on the power supply. How can you check?', 'Continuous monitoring keeps a record of electrical conditions before and during a failure. If monitoring was already in place, Gridec can analyse that record to help assess the supplier’s explanation.', 'Continuous monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Accepting new equipment? What should you record at start-up?', 'We measure the power supply and load under agreed operating conditions. The report provides a baseline for discussing acceptance with the supplier and investigating any changes or faults later.', 'Baseline measurements', 'Illustration: measurements at the switchboard during equipment start-up')]),
  'MEA_H2': 'What we measure',
  # «Voltage Dips» → «Dips & Swells»: кольцо в герое обещало и перенапряжения, а
  # сетка их не называла, и объём измерений не сходился сам с собой.
@@ -745,7 +752,7 @@ HY = {
  'HERO_EYEBROW': 'ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՅԻ ՈՐԱԿԻ ՄՈՆԻԹՈՐԻՆԳ',
  'HERO_H1': 'Ստուգեք, թե ինչպես է աշխատում ձեր <span class="ac">էլեկտրացանցը</span>',
  'HERO_P': 'Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։',
- 'HERO_CTA2': 'Ինչպես է իրականացվում մոնիթորինգը',
+ 'HERO_CTA2': 'Ե՞րբ են պետք չափումները',
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'PQ_CAP': 'Լարման ալիքի ձևը',
@@ -798,22 +805,11 @@ HY = {
  # армянской страницы: HEADTT здесь пуст, h1—h3 не переводятся в капс стилями (в
  # отличие от английской страницы), и капс в тексте выделял бы раздел 05 из ряда.
  # Категории остаются в верхнем регистре: .tag поднимает их сам, независимо от языка.
- 'ASG_H2': 'Երբ է պետք չափել',
- 'ASG_P': 'Չափումները պետք է կատարել նախքան սարքավորում գնելը կամ փոխարինելը, վերանորոգման ծավալը որոշելը կամ աշխատանքներն ընդունելը։ Մոնիթորինգի արդյունքները կարող են փոխել տեխնիկական լուծումն ու նախատեսվող ծախսերը։',
- 'ASG_CARDS': asg_html([
-    # «ինչն օգնում է», а не «ինչը»: перед словом на настоящий гласный артикль ը
-    # переходит в ն. Оговорка «настоящий» существенна — «ո» и «ե» в начале слова
-    # звучат как во-/е-, то есть согласным, поэтому «ծավալը որոշելը» во вводке выше
-    # остаётся с ը. Facility везде называется «համակարգ» — слово страницы (14 раз);
-    # «օբյեկտ» из копии убран. Условия измерения — «բնորոշ», как в разделе 03 и в
-    # английской версии, а не «բարձր». ИСКЛЮЧЕНИЕ: в карточке 02 владелец
-    # поставил «տարբեր» — измерения при РАЗНЫХ режимах нагрузки; английская
-    # там по-прежнему говорит representative load. Расхождение авторское.
-    # названия карточек сняты: армянская версия обходится тегом и абзацем
-    ('01', 'ԿՐԿՆՎՈՂ ԽԱՓԱՆՈՒՄՆԵՐ', '', 'Մոնիթորինգը ցույց է տալիս՝ արդյոք սնուցման պարամետրերի կամ բեռնվածության շեղումները համընկնում են կրկնվող խափանումների հետ, ինչն օգնում է ընտրել համապատասխան շտկող միջոցը։'),
-    ('02', 'ԸՆԴՈՒՆՈՒՄ ԵՎ ԵՐԱՇԽԻՔ', '', 'Տարբեր բեռնվածության պայմաններում չափումները ցույց են տալիս, թե ինչպես է համակարգն իրականում աշխատում։ Սա հնարավորություն է տալիս խնդիրները հայտնաբերել այն փուլում, երբ դրանք դեռ հնարավոր է շտկել պայմանագրի կամ երաշխիքի շրջանակներում։'),
-    ('03', 'ԸՆԴԼԱՅՆՈՒՄ', '', 'Արևային կայանի, նոր սարքավորման կամ լրացուցիչ բեռի միացման դեպքում որոշ ռեժիմներում կարող են առաջանալ հզորության սահմանափակումներ կամ լարման շեղումներ։ Մոնիթորինգը տվյալներ է տրամադրում նախագծման և հզորության պաշարի գնահատման համար։'),
-    ('04', 'ՁԵՌՔԲԵՐՈՒՄ', '', 'Գույքի ձեռքբերումից առաջ չափումները և զննությունը թույլ են տալիս գնահատել էլեկտրական համակարգի փաստացի վիճակը։ Արդյունքները կարելի է հաշվի առնել գինն ու գործարքի պայմանները համաձայնեցնելիս։')]),
+ 'ASG_H2': 'Ի՞նչ եք ուզում ստուգել։',
+ 'ASG_P': 'Էլեկտրական չափումներ՝ սարքավորում գնելուց առաջ, գործարկման և շահագործման ընթացքում։',
+ 'ASG_TALK': 'Կապ մեզ հետ',
+ 'ASG_CARDS': qa_html([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ բեռնվածություն պետք է այն ապահովի։', 'Չափում ենք պահուստային սնուցման ենթակա սարքավորումների աշխատանքային բեռնվածությունն ու մեկնարկային հոսանքները։ Այս տվյալները մատակարարին օգնում են ընտրել անհրաժեշտ հզորությունը։', 'Բեռնվածության չափումներ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ համակարգերը գործարկվում և աշխատում են միասին՝ համաձայնեցված փորձարկման պայմաններում։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցումը կամ միացման հերթականությունը։', 'Չափումներ գործարկման ժամանակ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրական համակարգը կբավարարի՞։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պաշարը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Բեռնվածության չափումներ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե գրանցումն արդեն իրականացվում էր, Gridec-ը կարող է վերլուծել տվյալները և օգնել գնահատել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորումը։ Ի՞նչ արժե գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ համաձայնեցված աշխատանքային պայմաններում։ Հաշվետվությունը հիմք է տալիս մատակարարի հետ քննարկելու ընդունման հարցերը և հետագայում համեմատելու տվյալները, եթե փոփոխություններ կամ խափանումներ առաջանան։', 'Սկզբնական չափումներ', 'Սկզբնական չափումներ')]),
+ 'ASG_PICS': qa_pics([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ բեռնվածություն պետք է այն ապահովի։', 'Չափում ենք պահուստային սնուցման ենթակա սարքավորումների աշխատանքային բեռնվածությունն ու մեկնարկային հոսանքները։ Այս տվյալները մատակարարին օգնում են ընտրել անհրաժեշտ հզորությունը։', 'Բեռնվածության չափումներ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ համակարգերը գործարկվում և աշխատում են միասին՝ համաձայնեցված փորձարկման պայմաններում։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցումը կամ միացման հերթականությունը։', 'Չափումներ գործարկման ժամանակ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրական համակարգը կբավարարի՞։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պաշարը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Բեռնվածության չափումներ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե գրանցումն արդեն իրականացվում էր, Gridec-ը կարող է վերլուծել տվյալները և օգնել գնահատել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորումը։ Ի՞նչ արժե գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ համաձայնեցված աշխատանքային պայմաններում։ Հաշվետվությունը հիմք է տալիս մատակարարի հետ քննարկելու ընդունման հարցերը և հետագայում համեմատելու տվյալները, եթե փոփոխություններ կամ խափանումներ առաջանան։', 'Սկզբնական չափումներ', 'Սկզբնական չափումներ')]),
  'MEA_H2': 'Ինչ ենք չափում',
  'MEA_CHIPS': meas_html(['Լարում և հոսանք', 'Հարմոնիկներ և միջհարմոնիկներ', 'Ֆլիկեր',
                           'Լարման անկումներ', 'Լարման անհամաչափություն', 'Հզորություն և էներգիա',
@@ -1601,6 +1597,12 @@ for fn in DEPLOY_FONTS:
 make_small_images()
 for fn in IMG_FILES + IMG_SMALL:
     deploy_asset(os.path.join(IMGS_OUT, fn), os.path.join(DEPLOY, 'uploads', 'img', fn))
+# Иллюстрации раздела 05: WebP полного размера для настольной стопки и 724 px для
+# телефона. PNG-оригиналы остаются в img/qa и на сайт не идут.
+QA_DIR = os.path.join(IMGS, 'qa')
+for fn in sorted(os.listdir(QA_DIR)):
+    if fn.endswith('.webp'):
+        deploy_asset(os.path.join(QA_DIR, fn), os.path.join(DEPLOY, 'uploads', 'qa', fn))
 # Логотип картинкой — для почтовой подписи и для всех, кто попросит знак файлом.
 # Почтовые программы не знают ни наших шрифтов, ни нашей вёрстки: слово в подписи
 # может жить ТОЛЬКО картинкой. Кладём её на сайт, потому что подпись подставляет

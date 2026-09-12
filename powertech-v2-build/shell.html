@@ -91,7 +91,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
    веса — ровно тот приём, которым имитируют оптический размер, когда его нет
    в шрифте. Пиксельного шрифта это не касается: он одного начертания, и
    запрос жира браузер подделает, размазав штрихи. */
-.tag,.asg .tag,.chart .cap,footer h3,footer .fbrand p,footer .fbot,
+.tag,.chart .cap,footer h3,footer .fbrand p,footer .fbot,
 #fmd .ghd,#imd .lb,#imd .st .ss{font-weight:500;}
 .eyebrow{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand-ink);}
 /* Заголовки разделов 03 и 07 стоят на ступень ниже своего счётчика: у обоих
@@ -1524,26 +1524,52 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
   color:var(--brand-ink);white-space:nowrap;font-feature-settings:'tnum' 1;}
 
 /* assignments */
-.asg .card{transition:box-shadow .45s var(--e),transform .5s var(--e);}
-.asg .card:hover{transform:none;}
-.asg{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s7);}
-.asg .card{position:relative;background:none;box-shadow:none;border-top:1px solid var(--hair);
-  padding:clamp(var(--s4),2.4vw,var(--s6)) clamp(var(--s4),2vw,var(--s5)) clamp(var(--s5),2.6vw,var(--s6)) 0;border-radius:0;}
-.asg .card::before{content:"";position:absolute;top:-1px;left:0;width:100%;height:1px;background:var(--brand);
-  transform:scaleX(.09);transform-origin:left;transition:transform .55s var(--e);}
-.asg .card:hover::before{transform:scaleX(1);}
-.asg .hd{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);}
-/* Номер карточки — та же роль, что номер пункта в перечне 04 и номер шага:
-   счётчик, набранный технической подписью. Роль одна, значит и цвет один —
-   цвет марки. Здесь он был приглушёнными чернилами и выпадал из ряда. */
-.asg .tag{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
-/* карточка без названия: отступ, который держал заголовок, переходит абзацу */
-.asg .hd+p{margin-top:var(--s4);}
-/* Роль Body, а не Body Small. Здесь настоящий читаемый текст по три строки,
-   а он был набран кеглем подписи. Побочно это чинит и длину строки: в той же
-   колонке 16px дают около 68 знаков вместо 79 — крупнее и одновременно короче,
-   то есть легче вдвойне. */
-.asg p{font-size:16px;line-height:1.75;color:var(--fg-mid);}
+/* ============ 05 — ВОПРОСЫ ВЛАДЕЛЬЦА (2026-09-12) ============
+   Две колонки 5/12 и 7/12. Слева стопка пяти картинок 4:3 в одной области —
+   видна активная, смена прозрачностью за 220 мс, без масштаба и сдвига. Справа
+   список: кнопка-вопрос (номер приборной гарнитурой, текст, плюс/минус из двух
+   штрихов), ответ раскрывается сеткой 0fr→1fr за 220 мс. Открыт всегда один.
+   Подпись услуги — той же ролью, что ярлыки на сайте: 11px, разрядка, марка. */
+.qa .qa-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,88px);align-items:start;}
+.qa .lede{max-width:40ch;}
+.qa-pic{position:relative;aspect-ratio:4/3;margin-top:clamp(28px,3.4vw,48px);overflow:hidden;background:var(--hair2);}
+.qa-pic img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
+  opacity:0;transition:opacity .22s linear;}
+.qa-pic img.on{opacity:1;}
+.qa-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair);}
+.qa-item{border-bottom:1px solid var(--hair);}
+.qa-q{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;width:100%;text-align:left;cursor:pointer;color:var(--fg);
+  display:grid;grid-template-columns:34px minmax(0,1fr) 24px;column-gap:14px;align-items:baseline;
+  padding:clamp(16px,1.6vw,22px) 0;font:inherit;font-size:clamp(17px,1.35vw,20px);line-height:1.35;font-weight:500;letter-spacing:-.01em;}
+.qa-q:hover .qa-t{color:var(--brand-ink);}
+.qa-n{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);
+  font-feature-settings:'case' 1;position:relative;top:-1px;}
+.qa-t{transition:color .3s var(--e);}
+.qa-pm{position:relative;width:24px;height:24px;align-self:center;}
+.qa-pm::before,.qa-pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--fg);transform:translate(-50%,-50%);}
+.qa-pm::before{width:14px;height:1.5px;}
+.qa-pm::after{width:1.5px;height:14px;transition:transform .22s var(--e),opacity .22s var(--e);}
+.qa-q[aria-expanded="true"] .qa-pm::after{transform:translate(-50%,-50%) scaleY(0);opacity:0;}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s var(--e);}
+.qa-a>div{overflow:hidden;min-height:0;}
+.qa-a.open{grid-template-rows:1fr;}
+.qa-a p{margin:0;padding-left:48px;font-size:16px;line-height:1.72;color:var(--fg-mid);max-width:58ch;}
+.qa-svc{display:block;margin:14px 0 0 48px;padding-bottom:clamp(18px,1.8vw,26px);
+  font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-ink);}
+html[lang="hy"] .qa-svc{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;text-transform:none;}
+.qa-pic-m{display:none;}
+.qa-talk{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;cursor:pointer;padding-inline:0;}
+@media (max-width:960px){
+  .qa .qa-grid{grid-template-columns:1fr;row-gap:clamp(28px,5vw,40px);}
+  .qa-pic{display:none;}
+  .qa-pic-m{display:block;position:relative;aspect-ratio:4/3;margin:0 0 clamp(18px,3vw,26px) 48px;overflow:hidden;background:var(--hair2);}
+  .qa-pic-m img{width:100%;height:100%;display:block;object-fit:cover;}
+  .qa-q{font-size:17px;}
+}
+@media (max-width:560px){
+  .qa-a p,.qa-svc{padding-left:0;margin-left:0;}
+  .qa-pic-m{margin-left:0;}
+}
 
 /* measure chips */
 
@@ -1957,7 +1983,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   .pq{margin-top:var(--s5);}
   .pq-chart{height:clamp(220px,58vw,280px);}
 
-  .asg,.plate .wrap{grid-template-columns:1fr;}
+  .plate .wrap{grid-template-columns:1fr;}
   /* Раньше здесь пряталось и то и другое. Из-за этого на телефоне раздел 03
      оставался без показателей и без трёх шагов — то есть без своей сути.
      Прячем только меню: его заменяет указатель разделов. Остальное встаёт
@@ -2040,10 +2066,10 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    сложнее рисунком, и на .13em заглавная строка рассыпается на отдельные буквы
    вместо слова. Убираем до .07em у тегов и до .12em у надзаголовка — они
    остаются разряженными, но читаются словом. */
-:lang(hy) .tag,:lang(hy) .asg .tag,:lang(hy) .chart .cap,
+:lang(hy) .tag,:lang(hy) .chart .cap,
 :lang(hy) .story .lb span,:lang(hy) .eyebrow,
 :lang(hy) footer h3,:lang(hy) #imd .lb,:lang(hy) #fmd .ghd{font-weight:600;}
-:lang(hy) .tag,:lang(hy) .asg .tag{letter-spacing:.07em;}
+:lang(hy) .tag{letter-spacing:.07em;}
 :lang(hy) .eyebrow{letter-spacing:.12em;}
 
 %%READOUT%%
@@ -2251,7 +2277,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">%%HERO_P%%</p>
-      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>%%HERO_CTA2%% &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
     </div>
     <!-- ПОЛЕ ГЕРОЯ: ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ. Одна кривая, три состояния по выбору
          читателя. Это иллюстрация мгновенного напряжения, а не запись прибора,
@@ -2372,10 +2398,16 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </section>
 
 
-<section class="sec" id="assignments"><div class="wrap">
-  <div class="rv"><div class="cnt">05</div><h2>%%ASG_H2%%</h2>
-  <p class="lede">%%ASG_P%%</p></div>
-  <div class="asg rv">%%ASG_CARDS%%</div>
+<!-- 05 — ВОПРОСЫ ВЛАДЕЛЬЦА (бриф 2026-09-12). Слева номер, заголовок,
+     пояснение и иллюстрация активной ситуации; справа пять вопросов, открыт
+     один. Иллюстрации — сгенерированные типовые сцены, не фотографии
+     выполненных проектов. На телефоне картинка живёт внутри открытого ответа. -->
+<section class="sec qa" id="assignments"><div class="wrap qa-grid">
+  <div class="qa-left rv"><div class="cnt">05</div><h2>%%ASG_H2%%</h2>
+    <p class="lede">%%ASG_P%%</p>
+    <div class="qa-pic">%%ASG_PICS%%</div></div>
+  <div class="qa-right rv"><ol class="qa-list" id="qalist">%%ASG_CARDS%%</ol>
+    <button class="alink qa-talk" type="button" data-open-form>%%ASG_TALK%% ↗</button></div>
 </div></section>
 
 <div class="dith" data-dith="#EFEDEA,#0D0E13,#C8603D"></div>
@@ -3083,6 +3115,27 @@ function paintJoints(){aJoints(mJoints());}
     },{threshold:0.25});
     io.observe(scene);
   });
+})();
+
+/* ============ 05 — ВОПРОСЫ ВЛАДЕЛЬЦА ============
+   Один открытый ответ; нажатие открытого оставляет его открытым. Картинка в
+   левой стопке переключается классом .on. Закрытые ответы получают hidden
+   после окончания перехода, чтобы не ловить Tab. По умолчанию открыт 02. */
+(function(){
+  var list=document.getElementById('qalist');if(!list)return;
+  var sec=list.closest('section'),btns=[].slice.call(list.querySelectorAll('.qa-q')),pics=[].slice.call(sec.querySelectorAll('.qa-pic img'));
+  function open(i,first){
+    btns.forEach(function(b,k){
+      var a=document.getElementById(b.getAttribute('aria-controls')),on=k===i;
+      b.setAttribute('aria-expanded',on?'true':'false');
+      if(on){a.hidden=false;if(first||rm)a.classList.add('open');else requestAnimationFrame(function(){a.classList.add('open');});}
+      else{a.classList.remove('open');
+        if(first||rm)a.hidden=true;else setTimeout(function(){if(b.getAttribute('aria-expanded')==='false')a.hidden=true;},240);}
+    });
+    pics.forEach(function(p,k){p.classList.toggle('on',k===i);});
+  }
+  btns.forEach(function(b,i){b.addEventListener('click',function(){open(i);});});
+  open(1,true);
 })();
 
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ: геометрия и головка записи ============

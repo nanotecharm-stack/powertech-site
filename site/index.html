@@ -62,7 +62,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
 .cnt .cbs i.on{background:var(--brand);}
 .plate .cnt .cbs i,.plate2 .cnt .cbs i,.rep-head .cnt .cbs i{background:rgba(246,241,233,.22);}
 .plate .cnt .cbs i.on,.plate2 .cnt .cbs i.on,.rep-head .cnt .cbs i.on{background:var(--brand);}
-.tag,.asg .tag,.chart .cap,footer h3,footer .fbrand p,footer .fbot,
+.tag,.chart .cap,footer h3,footer .fbrand p,footer .fbot,
 #fmd .ghd,#imd .lb,#imd .st .ss{font-weight:500;}
 .eyebrow{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand-ink);}
 h2.h2gap{margin-top:var(--s4);}
@@ -710,18 +710,46 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 .plate2 .lnote::before{background:rgba(246,241,233,.18);}
 .note .std{font-family:inherit;font-size:inherit;letter-spacing:.02em;
   color:var(--brand-ink);white-space:nowrap;font-feature-settings:'tnum' 1;}
-.asg .card{transition:box-shadow .45s var(--e),transform .5s var(--e);}
-.asg .card:hover{transform:none;}
-.asg{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s7);}
-.asg .card{position:relative;background:none;box-shadow:none;border-top:1px solid var(--hair);
-  padding:clamp(var(--s4),2.4vw,var(--s6)) clamp(var(--s4),2vw,var(--s5)) clamp(var(--s5),2.6vw,var(--s6)) 0;border-radius:0;}
-.asg .card::before{content:"";position:absolute;top:-1px;left:0;width:100%;height:1px;background:var(--brand);
-  transform:scaleX(.09);transform-origin:left;transition:transform .55s var(--e);}
-.asg .card:hover::before{transform:scaleX(1);}
-.asg .hd{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s3);}
-.asg .tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
-.asg .hd+p{margin-top:var(--s4);}
-.asg p{font-size:16px;line-height:1.75;color:var(--fg-mid);}
+.qa .qa-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,88px);align-items:start;}
+.qa .lede{max-width:40ch;}
+.qa-pic{position:relative;aspect-ratio:4/3;margin-top:clamp(28px,3.4vw,48px);overflow:hidden;background:var(--hair2);}
+.qa-pic img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
+  opacity:0;transition:opacity .22s linear;}
+.qa-pic img.on{opacity:1;}
+.qa-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair);}
+.qa-item{border-bottom:1px solid var(--hair);}
+.qa-q{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;width:100%;text-align:left;cursor:pointer;color:var(--fg);
+  display:grid;grid-template-columns:34px minmax(0,1fr) 24px;column-gap:14px;align-items:baseline;
+  padding:clamp(16px,1.6vw,22px) 0;font:inherit;font-size:clamp(17px,1.35vw,20px);line-height:1.35;font-weight:500;letter-spacing:-.01em;}
+.qa-q:hover .qa-t{color:var(--brand-ink);}
+.qa-n{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);
+  font-feature-settings:'case' 1;position:relative;top:-1px;}
+.qa-t{transition:color .3s var(--e);}
+.qa-pm{position:relative;width:24px;height:24px;align-self:center;}
+.qa-pm::before,.qa-pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--fg);transform:translate(-50%,-50%);}
+.qa-pm::before{width:14px;height:1.5px;}
+.qa-pm::after{width:1.5px;height:14px;transition:transform .22s var(--e),opacity .22s var(--e);}
+.qa-q[aria-expanded="true"] .qa-pm::after{transform:translate(-50%,-50%) scaleY(0);opacity:0;}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s var(--e);}
+.qa-a>div{overflow:hidden;min-height:0;}
+.qa-a.open{grid-template-rows:1fr;}
+.qa-a p{margin:0;padding-left:48px;font-size:16px;line-height:1.72;color:var(--fg-mid);max-width:58ch;}
+.qa-svc{display:block;margin:14px 0 0 48px;padding-bottom:clamp(18px,1.8vw,26px);
+  font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-ink);}
+html[lang="hy"] .qa-svc{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
+.qa-pic-m{display:none;}
+.qa-talk{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;cursor:pointer;padding-inline:0;}
+@media (max-width:960px){
+  .qa .qa-grid{grid-template-columns:1fr;row-gap:clamp(28px,5vw,40px);}
+  .qa-pic{display:none;}
+  .qa-pic-m{display:block;position:relative;aspect-ratio:4/3;margin:0 0 clamp(18px,3vw,26px) 48px;overflow:hidden;background:var(--hair2);}
+  .qa-pic-m img{width:100%;height:100%;display:block;object-fit:cover;}
+  .qa-q{font-size:17px;}
+}
+@media (max-width:560px){
+  .qa-a p,.qa-svc{padding-left:0;margin-left:0;}
+  .qa-pic-m{margin-left:0;}
+}
 .story{margin-top:clamp(var(--s7),6vw,var(--s9));display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:clamp(var(--s4),1.8vw,var(--s5));row-gap:clamp(var(--s8),7vw,var(--s10));}
@@ -965,7 +993,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   .hgrid{align-content:center;}   
   .pq{margin-top:var(--s5);}
   .pq-chart{height:clamp(220px,58vw,280px);}
-  .asg,.plate .wrap{grid-template-columns:1fr;}
+  .plate .wrap{grid-template-columns:1fr;}
   header nav{display:none;}
   .obs{display:block;}
   .obs .stats{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s4);}
@@ -992,10 +1020,10 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   --fg-soft:color-mix(in srgb,var(--fg) 82%,transparent);
   --hair:color-mix(in srgb,var(--fg) 18%,transparent);
   --hair2:color-mix(in srgb,var(--fg) 10%,transparent);}
-:lang(hy) .tag,:lang(hy) .asg .tag,:lang(hy) .chart .cap,
+:lang(hy) .tag,:lang(hy) .chart .cap,
 :lang(hy) .story .lb span,:lang(hy) .eyebrow,
 :lang(hy) footer h3,:lang(hy) #imd .lb,:lang(hy) #fmd .ghd{font-weight:600;}
-:lang(hy) .tag,:lang(hy) .asg .tag{letter-spacing:.07em;}
+:lang(hy) .tag{letter-spacing:.07em;}
 :lang(hy) .eyebrow{letter-spacing:.12em;}
 .cnt,.ixb,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no{
   font-family:'Departure Mono',monospace;font-size:11px;}
@@ -1125,7 +1153,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.</p>
-      <div class="acts"><button class="btn" data-open-form><span>Describe the issue</span><i>&#8599;</i></button><a class="btn gh" href="#services"><span>How monitoring works &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>Describe the issue</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>When measurements help &darr;</span></a></div>
     </div>
     
     <div class="pq" id="pq" data-mode="normal">
@@ -1218,10 +1246,13 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </section>
 
 
-<section class="sec" id="assignments"><div class="wrap">
-  <div class="rv"><div class="cnt">05</div><h2>Measure before you decide</h2>
-  <p class="lede">Measurement changes a decision only while that decision is still open. Once the scope is signed and the price agreed, the same data just explains what went wrong.</p></div>
-  <div class="asg rv"><div class="card"><div class="hd"><span class="tag">RECURRENT FAILURES</span></div><p>Equipment that keeps failing may be damaged by the supply, or by the way it is loaded. The two need different fixes. Recording under load tells you which.</p></div><div class="card"><div class="hd"><span class="tag">ACCEPTANCE &amp; WARRANTY</span></div><p>Before you sign off, measurements under representative load show how the installation behaves in normal operation. Anything found then is still the contractor&rsquo;s to fix, under the contract or the warranty.</p></div><div class="card"><div class="hd"><span class="tag">EXPANSION</span></div><p>Solar PV, new machines or a second shift all land on whatever the existing installation is already doing. Monitoring gives the design a measured starting point instead of nameplate ratings.</p></div><div class="card"><div class="hd"><span class="tag">ACQUISITION</span></div><p>You cannot see a building&rsquo;s electrical condition on a site visit. A week of measurement shows what the installation is carrying, and gives you something concrete when you negotiate the price.</p></div></div>
+
+<section class="sec qa" id="assignments"><div class="wrap qa-grid">
+  <div class="qa-left rv"><div class="cnt">05</div><h2>What do you need to check?</h2>
+    <p class="lede">Electrical measurements before you buy, during commissioning and throughout operation.</p>
+    <div class="qa-pic"><img src="/uploads/qa/01-generator-ups.webp" width="1448" height="1086" alt="Illustration: a standby generator and UPS cabinets in a plant room" decoding="async" fetchpriority="low"><img src="/uploads/qa/02-lift-hvac-pumps.webp" width="1448" height="1086" alt="Illustration: a pump room with motors, pipework and control cabinets" decoding="async"><img src="/uploads/qa/03-production-expansion.webp" width="1448" height="1086" alt="Illustration: a production hall with a new machine line" decoding="async" fetchpriority="low"><img src="/uploads/qa/04-motor-monitoring.webp" width="1448" height="1086" alt="Illustration: an electric motor with a monitoring instrument connected" decoding="async" fetchpriority="low"><img src="/uploads/qa/05-baseline-measurements.webp" width="1448" height="1086" alt="Illustration: measurements at the switchboard during equipment start-up" decoding="async" fetchpriority="low"></div></div>
+  <div class="qa-right rv"><ol class="qa-list" id="qalist"><li class="qa-item"><button class="qa-q" type="button" id="qa-b0" aria-expanded="false" aria-controls="qa-a0"><span class="qa-n">01</span><span class="qa-t">Choosing a generator or UPS? What load will it need to support?</span><span class="qa-pm" aria-hidden="true"></span></button><div class="qa-a" id="qa-a0" role="region" aria-labelledby="qa-b0" hidden><div><p>We measure the operating load and starting currents of the equipment that needs backup power. These measurements give your supplier a basis for selecting the right capacity.</p><span class="qa-svc">Load study</span><div class="qa-pic-m"><img src="/uploads/qa/01-generator-ups-724.webp" width="724" height="543" alt="Illustration: a standby generator and UPS cabinets in a plant room" loading="lazy" decoding="async"></div></div></div></li><li class="qa-item"><button class="qa-q" type="button" id="qa-b1" aria-expanded="false" aria-controls="qa-a1"><span class="qa-n">02</span><span class="qa-t">Installing a lift, air conditioning and pumps? How will they work together?</span><span class="qa-pm" aria-hidden="true"></span></button><div class="qa-a" id="qa-a1" role="region" aria-labelledby="qa-b1" hidden><div><p>We record electrical loads and voltage changes while the systems start and run together under agreed test conditions. The results help assess whether the power supply or start-up sequence needs adjustment.</p><span class="qa-svc">Commissioning measurements</span><div class="qa-pic-m"><img src="/uploads/qa/02-lift-hvac-pumps-724.webp" width="724" height="543" alt="Illustration: a pump room with motors, pipework and control cabinets" loading="lazy" decoding="async"></div></div></div></li><li class="qa-item"><button class="qa-q" type="button" id="qa-b2" aria-expanded="false" aria-controls="qa-a2"><span class="qa-n">03</span><span class="qa-t">Adding a production line? Can your existing electrical system support it?</span><span class="qa-pm" aria-hidden="true"></span></button><div class="qa-a" id="qa-a2" role="region" aria-labelledby="qa-b2" hidden><div><p>We measure the current load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.</p><span class="qa-svc">Load study</span><div class="qa-pic-m"><img src="/uploads/qa/03-production-expansion-724.webp" width="724" height="543" alt="Illustration: a production hall with a new machine line" loading="lazy" decoding="async"></div></div></div></li><li class="qa-item"><button class="qa-q" type="button" id="qa-b3" aria-expanded="false" aria-controls="qa-a3"><span class="qa-n">04</span><span class="qa-t">Your supplier blames a failure on the power supply. How can you check?</span><span class="qa-pm" aria-hidden="true"></span></button><div class="qa-a" id="qa-a3" role="region" aria-labelledby="qa-b3" hidden><div><p>Continuous monitoring keeps a record of electrical conditions before and during a failure. If monitoring was already in place, Gridec can analyse that record to help assess the supplier’s explanation.</p><span class="qa-svc">Continuous monitoring</span><div class="qa-pic-m"><img src="/uploads/qa/04-motor-monitoring-724.webp" width="724" height="543" alt="Illustration: an electric motor with a monitoring instrument connected" loading="lazy" decoding="async"></div></div></div></li><li class="qa-item"><button class="qa-q" type="button" id="qa-b4" aria-expanded="false" aria-controls="qa-a4"><span class="qa-n">05</span><span class="qa-t">Accepting new equipment? What should you record at start-up?</span><span class="qa-pm" aria-hidden="true"></span></button><div class="qa-a" id="qa-a4" role="region" aria-labelledby="qa-b4" hidden><div><p>We measure the power supply and load under agreed operating conditions. The report provides a baseline for discussing acceptance with the supplier and investigating any changes or faults later.</p><span class="qa-svc">Baseline measurements</span><div class="qa-pic-m"><img src="/uploads/qa/05-baseline-measurements-724.webp" width="724" height="543" alt="Illustration: measurements at the switchboard during equipment start-up" loading="lazy" decoding="async"></div></div></div></li></ol>
+    <button class="alink qa-talk" type="button" data-open-form>Talk to us ↗</button></div>
 </div></section>
 
 <div class="dith" data-dith="#F6F1E9,#0D2440,#2E5E99"></div>
@@ -1276,7 +1307,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <nav class="fcol rv" style="--i:2" aria-label="Sections">
       <h3>Sections</h3>
-      <ul class="flist"><li><a href="#why"><span>The event may be over before anyone can inspect it</span></a></li><li><a href="#applications"><span>Where monitoring helps</span></a></li><li><a href="#services"><span>Seven-day monitoring</span></a></li><li><a href="#report"><span>Report</span></a></li><li><a href="#assignments"><span>Measure before you decide</span></a></li><li><a href="#measure"><span>What we measure</span></a></li><li><a href="#company"><span>About us</span></a></li><li><a href="#contact"><span>Start with what happened</span></a></li></ul>
+      <ul class="flist"><li><a href="#why"><span>The event may be over before anyone can inspect it</span></a></li><li><a href="#applications"><span>Where monitoring helps</span></a></li><li><a href="#services"><span>Seven-day monitoring</span></a></li><li><a href="#report"><span>Report</span></a></li><li><a href="#assignments"><span>What do you need to check?</span></a></li><li><a href="#measure"><span>What we measure</span></a></li><li><a href="#company"><span>About us</span></a></li><li><a href="#contact"><span>Start with what happened</span></a></li></ul>
     </nav>
   </div>
   <div class="wrap fbot rv" style="--i:3">
@@ -1795,6 +1826,22 @@ function paintJoints(){aJoints(mJoints());}
     },{threshold:0.25});
     io.observe(scene);
   });
+})();
+(function(){
+  var list=document.getElementById('qalist');if(!list)return;
+  var sec=list.closest('section'),btns=[].slice.call(list.querySelectorAll('.qa-q')),pics=[].slice.call(sec.querySelectorAll('.qa-pic img'));
+  function open(i,first){
+    btns.forEach(function(b,k){
+      var a=document.getElementById(b.getAttribute('aria-controls')),on=k===i;
+      b.setAttribute('aria-expanded',on?'true':'false');
+      if(on){a.hidden=false;if(first||rm)a.classList.add('open');else requestAnimationFrame(function(){a.classList.add('open');});}
+      else{a.classList.remove('open');
+        if(first||rm)a.hidden=true;else setTimeout(function(){if(b.getAttribute('aria-expanded')==='false')a.hidden=true;},240);}
+    });
+    pics.forEach(function(p,k){p.classList.toggle('on',k===i);});
+  }
+  btns.forEach(function(b,i){b.addEventListener('click',function(){open(i);});});
+  open(1,true);
 })();
 var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,
     obsSteps=obsEl?[].slice.call(obsEl.querySelectorAll('.step')):[],obsW=-1,obsH=-1;
