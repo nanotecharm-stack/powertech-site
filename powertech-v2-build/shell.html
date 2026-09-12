@@ -1,12 +1,7 @@
 <style>
 %%FONTFACES%%
 :root{--brand:#C8603D;--brand-ink:#AC4A29;/* small coral TEXT on light surfaces: 4.77:1 on milk */--e:cubic-bezier(.16,1,.3,1);
-  /* --inset — расстояние от края СТРАНИЦЫ до колонки: поле обёртки плюс то, что
-     обёртка недобирает до края, когда экран шире её предела. По нему возвращают
-     в колонку то, что вынесено за поля. Мерка идёт от --vwpx, а не от 100vw:
-     100vw считается вместе с полосой прокрутки и промахивается на её толщину. */
   --gut:clamp(18px,4vw,56px);
-  --inset:calc(max(0px,(var(--vwpx,100vw) - 1280px)/2) + clamp(18px,4vw,56px));
   /* Шкала отступов. Ряд удваивается; половинная ступень стоит там, где удвоение
      уже слишком грубо (16→24→32).
 
@@ -4314,13 +4309,6 @@ document.addEventListener('scroll',scrollSchedule,{passive:true,capture:true});
 addEventListener('resize',function(){cacheBump();FR.force=true;scrollSchedule();},{passive:true});
 buildJoints();
 cacheBump();scrollRepaint();
-/* Ширина страницы без полосы прокрутки — по ней шкала события выходит за поля.
-   100vw считается ВМЕСТЕ с полосой, поэтому шкала промахивалась мимо края на её
-   толщину с каждой стороны. Отдельным слушателем, без задержки в 220ms: полоса
-   появляется и исчезает мгновенно, и запаздывающая мерка была бы заметна. */
-(function(){var R=document.documentElement;
-  function vwpx(){R.style.setProperty('--vwpx',R.clientWidth+'px');}
-  vwpx();addEventListener('resize',vwpx);})();
 var sizeT=0;
 addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();layoutSuite();},220);});
 /* После пересборки состояние надо нанести заново: списки только что сменились,

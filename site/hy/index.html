@@ -42,7 +42,6 @@
 @font-face{font-family:'Departure Mono';font-weight:100 900;font-display:swap;src:url(/fonts/departure-mono.woff2) format('woff2');}
 :root{--brand:#2E5E99;--brand-ink:#2E5E99;--e:cubic-bezier(.16,1,.3,1);
   --gut:clamp(18px,4vw,56px);
-  --inset:calc(max(0px,(var(--vwpx,100vw) - 1280px)/2) + clamp(18px,4vw,56px));
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
   --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
 --bg:#F6F1E9;--panel:#FDFAF4;--fg:#0D2440;--fg-mid:rgba(13,36,64,.78);--fg-soft:rgba(13,36,64,.76);--hair:rgba(13,36,64,.13);--hair2:rgba(13,36,64,.07);--inv:#0D2440;--inv-fg:#F6F1E9;}
@@ -2664,9 +2663,6 @@ document.addEventListener('scroll',scrollSchedule,{passive:true,capture:true});
 addEventListener('resize',function(){cacheBump();FR.force=true;scrollSchedule();},{passive:true});
 buildJoints();
 cacheBump();scrollRepaint();
-(function(){var R=document.documentElement;
-  function vwpx(){R.style.setProperty('--vwpx',R.clientWidth+'px');}
-  vwpx();addEventListener('resize',vwpx);})();
 var sizeT=0;
 addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();layoutSuite();},220);});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){scrollRepaint();});
