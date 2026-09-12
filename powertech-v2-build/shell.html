@@ -1326,7 +1326,9 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .steps{margin-top:var(--s6);border-top:0;}
 .obs .step{position:relative;padding:0 0 0 var(--s4);border-left:1px solid rgba(239,237,234,.22);
   transition:border-color .5s var(--e);}
-.obs .step::before{content:"";position:absolute;left:-1px;bottom:100%;width:1px;height:calc(var(--s6) + var(--s4));
+/* Выноска доходит ровно до линейки и не заходит на деление: ниже
+   на пиксель — и деление с выноской читались двумя линиями. */
+.obs .step::before{content:"";position:absolute;left:-1px;bottom:100%;width:1px;height:calc(var(--s6) + 1px);
   background:rgba(239,237,234,.22);transform:none;transition:background-color .5s var(--e);}
 .obs .step:nth-child(1){grid-column:1 / span 2;}
 .obs .step:nth-child(2){grid-column:3 / span 3;}
@@ -3095,7 +3097,9 @@ function buildObs(){
   if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
   var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.42)+0.5,yb=H-0.5,i,x,g='';
   obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
-  for(i=0;i<=7;i++){x=Math.round(W*i/7)+(i===7?-0.5:0.5);var h=(i===0||i===7)?16:9;
+  /* Деление стоит слева от границы колонки, как border-left у этапа: x−0.5,
+     без округления — иначе выноска и деление расходились на пиксель. */
+  for(i=0;i<=7;i++){x=W*i/7-0.5;var h=(i===0||i===7)?16:9;
     g+='<line class="'+((i===0||i===7)?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-h)+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
   g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
   obsSvg.querySelector('.obs-ruler').innerHTML=g;
