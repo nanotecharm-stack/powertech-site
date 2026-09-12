@@ -1368,7 +1368,10 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    ровно на кромке плиты, и переход читался как две несвязанные страницы. */
 .rep{padding:0;--rep-over:clamp(120px,14vw,200px);}
 .rep-head{background:linear-gradient(180deg,#14161C 0%,#0D0E13 100%);
-  color:#EFEDEA;padding:clamp(24px,3vw,48px) 0 var(--rep-over);}
+  /* Верхнее поле — как у любого раздела: по ссылке «see what monitoring can
+     reveal» страница встаёт так, что раздел начинается на 26 px ниже верха
+     окна, и при малом поле «04 Report» уходил под шапку (владелец, телефон). */
+  color:#EFEDEA;padding:clamp(72px,7vw,104px) 0 var(--rep-over);}
 .rep-head h2{color:#F4F3F1;}
 .rep-head .cnt{color:rgba(239,237,234,.58);}
 .rep-head .lede{color:rgba(239,237,234,.66);}
@@ -1683,6 +1686,9 @@ footer .fcon a:hover{color:#fff;text-decoration:underline;text-underline-offset:
 /* В колоночном флексе поля auto ужимают полосу до содержимого и ставят её
    посередине — ширину задаём явно, иначе строка копирайта висит в центре. */
 footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s4);
+  /* Отбивка над линейкой: на телефоне последняя строка списка разделов стояла
+     вплотную к ней (владелец, 2026-09-12). */
+  margin-top:clamp(36px,5vw,56px);
   padding-top:22px;border-top:1px solid rgba(239,237,234,.14);
   font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(239,237,234,.42);}
