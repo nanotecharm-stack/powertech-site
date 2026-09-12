@@ -1297,7 +1297,6 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .stats,.obs .steps,.obs-field{grid-column:1 / -1;}
 .obs .stats{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);margin:0;}
 .obs .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin:0;}
-.obs .step:nth-child(2){padding-right:var(--s4);}
 /* Числа — шкала, не карточки: без плашек, разного кегля, каждое над своим
    участком поля. 7 — самое крупное: это ширина всего поля. 24/7 — подпись
    линии, по центру и мельче. 1 — документ в конце, у правой кромки. */
@@ -1324,7 +1323,10 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    выноска связывает этап с делением линейки над ним. Текущий этап — тот, под
    которым стоит головка записи; остальные тише, но читаемы. */
 .obs .steps{margin-top:var(--s6);border-top:0;}
-.obs .step{position:relative;padding:0 0 0 var(--s4);border-left:1px solid rgba(239,237,234,.22);
+/* Поля по обе стороны равные: абзац стоит посередине между своей выноской
+   и соседней, а не прижат к левой (владелец, 2026-09-12: «текст и линии
+   слишком близко, текст не по центру»). */
+.obs .step{position:relative;padding:var(--s1) clamp(var(--s5),2.4vw,var(--s6));border-left:1px solid rgba(239,237,234,.22);
   transition:border-color .5s var(--e);}
 /* Выноска доходит ровно до линейки и не заходит на деление: ниже
    на пиксель — и деление с выноской читались двумя линиями. */
