@@ -1368,7 +1368,7 @@ PAL_CSS = """
      просто не на самой границе. */
   --fg:%(inkw)s;--fg-mid:rgba(%(inkwrgb)s,.78);--fg-soft:rgba(%(inkwrgb)s,.76);
   --hair:rgba(%(inkwrgb)s,.13);--hair2:rgba(%(inkwrgb)s,.07);}
-.plate,.plate2,.other,.chart,.ic{--brand:%(dark)s;--brand-ink:%(dark)s;--brand-on:%(ink)s;}
+.plate,.plate2,.other,.chart,.ic,.rep-head{--brand:%(dark)s;--brand-ink:%(dark)s;--brand-on:%(ink)s;}
 /* Приглашение больше не фирменный блок. Прежде оно заливалось цветом марки
    и получало чернильный текст — в ряду из шести тёмных плит со светлым
    названием седьмая выпадала светлой с тёмным. Теперь она той же семьи,
