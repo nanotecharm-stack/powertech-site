@@ -2746,9 +2746,17 @@ var PT=window.PT;
   /* Мгновенное напряжение в долях номинальной амплитуды. */
   function volt(tau){
     var ph=tau*TAU,s=Math.sin(ph);
+    /* Живая сеть (владелец, 2026-09-13: «вариант 1»). Идеальной синусоиды в
+       розетке не бывает — всегда есть 2–3 % пятой и около 1 % третьей
+       гармоники, и амплитуда медленно дышит на ±1,5 %. Всё это в пределах
+       нормы, поэтому фактура лежит под всеми тремя состояниями; провал и
+       искажение накладываются сверху. Числа выбраны на глаз по типичным
+       записям, это по-прежнему иллюстрация, не измерение. */
+    s+=0.025*Math.sin(5*ph+0.6)+0.01*Math.sin(3*ph+2.1);
     if(wh>0.001){var h=rm?HP[0]:harmAt(tau);
       s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));}
-    return (1-DIP.depth*wd*dipAt(tau))*s;
+    var wander=1+0.015*Math.sin(tau*TAU*0.045);
+    return wander*(1-DIP.depth*wd*dipAt(tau))*s;
   }
   function draw(){
     if(!W)return;
@@ -2796,7 +2804,9 @@ var PT=window.PT;
       ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1.3;ctx.setLineDash([4,4]);
       ctx.beginPath();
       for(i=0;i<=n;i++){
-        if(Math.abs(ys[i]-yi[i])>0.6){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}
+        /* Порог — 6 % размаха: фактура нормальной сети (≈3 %) эталон не вызывает,
+           провал и искажение — вызывают. */
+        if(Math.abs(ys[i]-yi[i])>A*0.06){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}
         else open=false;
       }
       ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
