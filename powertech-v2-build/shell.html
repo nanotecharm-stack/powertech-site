@@ -694,7 +694,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
   align-items:start;align-content:center;
-  column-gap:clamp(28px,4vw,72px);row-gap:clamp(28px,4.5vh,48px);
+  column-gap:clamp(40px,6vw,120px);row-gap:clamp(48px,8vh,88px);
   min-height:100svh;max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
@@ -708,9 +708,11 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   /* Блок больше не центрируется по экрану: полоса текста сверху, поле под
      ней. Верхнее поле — под шапку и воздух, нижнее короче: метка «01»
      следующего раздела должна показаться у нижней кромки первого экрана. */
-  padding:clamp(96px,11vh,120px)
+  /* Владелец (2026-09-12): «добавь воздуха на герое». Верх — 15 % экрана,
+     низ — 9 %, между полосой текста и полем — 8 %. */
+  padding:clamp(120px,15vh,168px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          clamp(44px,6vh,64px)
+          clamp(64px,9vh,104px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
 h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;grid-area:head;}
@@ -811,7 +813,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
    центром надглавия (line-height normal у 16px ≈ 21px → 10-11 px).
    История: три подписи, сегменты, шкала с ползунком и стрелки ‹ › —
    владелец отверг как перегруз или чужой язык; счётчик — свой. */
-.pq-head{display:flex;align-items:center;gap:var(--s3);margin:-12px 0 var(--s3) 0;}
+.pq-head{display:flex;align-items:center;gap:var(--s3);margin:-12px 0 var(--s5) 0;}
 .pq-no{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.11em;
   font-feature-settings:'case' 1;color:var(--fg-soft);min-width:2.4ch;}
 /* Перенесено из живого репо (www 5f5e909, 2026-09-05): у квадратов появились
@@ -863,7 +865,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 /* Пояснение: три строки в одной клетке, высота по самой длинной. */
 /* Строка под полем: пояснение слева, оговорка о симуляции справа — подписи
    под лентой прибора, а не два абзаца друг под другом. */
-.pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s3);}
+.pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s5);}
 .pq-x{display:grid;margin-top:0;font-size:14px;line-height:1.6;color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
