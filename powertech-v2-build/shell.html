@@ -68,7 +68,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
 /* the grain motif — one tiny square, rhymed across the page */
 .eyebrow::before{content:"";width:5px;height:5px;background:var(--brand);flex:0 0 auto;}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;}
-h1,h2,h3{font-family:%%HEADFONT%%;font-weight:700;margin:0;line-height:%%HEADLH%%;%%HEADTT%%letter-spacing:%%HEADLS%%;}
+h1,h2,h3{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;margin:0;line-height:%%HEADLH%%;%%HEADTT%%letter-spacing:%%HEADLS%%;}
 p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px);}
 .plate .cnt,.plate2 .cnt{color:rgba(239,237,234,.58);}
@@ -1298,7 +1298,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .other .btn:hover span{color:var(--fg);}
 
 /* services */
-.display{font-family:%%HEADFONT%%;font-weight:700;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
+.display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ (бриф 2, 2026-09-12) ============
    Одна сетка в двенадцать колонок на числа, поле и этапы — так этап стоит
@@ -1315,7 +1315,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .stat:nth-child(1){grid-column:1 / span 4;}
 .obs .stat:nth-child(2){grid-column:5 / span 4;text-align:center;}
 .obs .stat:nth-child(3){grid-column:9 / span 4;text-align:right;}
-.obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:700;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;}
+.obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;}
 .obs .stat:nth-child(1) b{font-size:clamp(64px,9vw,128px);}
 .obs .stat:nth-child(2) b{font-size:clamp(30px,3.6vw,52px);}
 .obs .stat:nth-child(3) b{font-size:clamp(48px,6.4vw,92px);}
@@ -1824,7 +1824,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #imd .fi{display:flex;gap:var(--s3);align-items:baseline;font-size:14px;line-height:1.65;padding:11px 0;border-top:1px solid var(--hair2);}
 #imd .fi em{font-style:normal;width:6px;height:6px;background:var(--brand);flex:0 0 auto;transform:translateY(-1px);}
 #imd .st{margin-top:var(--s5);padding-top:18px;border-top:1px solid var(--hair2);display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;}
-#imd .st .big{font-family:%%HEADFONT%%;font-weight:700;font-size:clamp(32px,4vw,48px);line-height:1;}
+#imd .st .big{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:clamp(32px,4vw,48px);line-height:1;}
 #imd .st .sx{font-size:14px;line-height:1.62;color:var(--fg-mid);max-width:48ch;}
 #imd .st .ss{font-family:%%MONOFONT%%;font-size:11px;color:var(--fg-soft);margin-top:7px;}
 /* Строка о данных под кнопкой отправки: ступень примечания, не подписи поля. */

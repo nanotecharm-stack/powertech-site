@@ -123,6 +123,10 @@ FF_HY = '\n'.join([
     font_face('Arian AMU', '600 900', 'arian-amu-700.woff2'),
     font_face('Arian AMU Serif', '400 500', 'arian-amu-serif-400.woff2'),
     font_face('Arian AMU Serif', '600 900', 'arian-amu-serif-700.woff2'),
+    # Mardoto Medium (SIL OFL, github.com/vahanhovh/mardoto) — заголовки армянской
+    # страницы весом 500: владелец выбрал из проб 300/400/500 (2026-09-13). Подмножество:
+    # латиница, армянский, пунктуация. Один вес, поэтому объявлен точкой 500.
+    font_face('Mardoto', '500', 'mardoto-500.woff2'),
 ])
 
 IMG_FILES = ['02_manufacturing_industrial_robot.jpg', '03_solar_power_plant.jpg',
@@ -243,7 +247,7 @@ def nbsp(value, lang):
 
 # Технические строки: пути, размеры, гарнитуры, готовые блоки разметки.
 NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT',
-           'HEADFONT', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
+           'HEADFONT', 'HEADWT', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
            'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'REP_LIST',
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA'}
@@ -420,7 +424,7 @@ EN = {
  'FONTFACES': FF_EN + '\n' + FF_DEP,
  'READOUT': READOUT_EN % dict(mono=MONO_EN),
  'BODYFONT': "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif",
- 'HEADFONT': "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif",
+ 'HEADFONT': "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", 'HEADWT': '700',
  'MONOFONT': MONO_EN,
  'NAVFONT': 'inherit',
  'HEADTT': 'text-transform:uppercase;', 'HEADLH': '.92', 'HEADLS': '.006em',
@@ -731,7 +735,7 @@ HY = {
  'FONTFACES': FF_HY + '\n' + FF_DEP,
  'READOUT': READOUT_HY % dict(mono=MONO_HY),
  'BODYFONT': "'Arian AMU','Helvetica Neue',sans-serif",
- 'HEADFONT': "'Arian AMU',sans-serif",
+ 'HEADFONT': "'Mardoto','Arian AMU',sans-serif", 'HEADWT': '500',
  'MONOFONT': MONO_HY,
  'NAVFONT': "'Arian AMU Serif',Georgia,serif",
  'HEADTT': '', 'HEADLH': '1.0', 'HEADLS': '-.012em',
