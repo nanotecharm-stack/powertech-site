@@ -663,7 +663,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
    Everything reads light because there is no texture and no gradient to fight. */
 /* a sheet, not a poster: paper that darkens a touch towards the fold, with the
    faintest warm breath where the field lives on the right */
-.hero{position:relative;min-height:100svh;overflow:hidden;color:var(--fg);
+.hero{position:relative;overflow:hidden;color:var(--fg);
   /* Собственной заливки у героя больше нет, и это главное. Раньше он красился
      сам: свой градиент от подтона к бумаге и своё зерно в режиме soft-light.
      Страница под ним красится иначе — той же бумагой, но плюс косой свет,
@@ -700,16 +700,18 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      кнопками — в своей узкой (5 из 12), верхние кромки согласованы. Под ней
      поле сигнала на всю рабочую ширину — не иллюстрация в узкой колонке, а
      измерительная сцена со своими полями. */
-  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
-  grid-template-areas:"head side" "field field";
+  /* МАКЕТ ВЛАДЕЛЬЦА (2026-09-13): текстовая полоса на кремовом, слева заголовок ~60 %,
+     справа описание с кнопкой ~32 %, между ними 8 %; контейнер ~89 % экрана, поля 5,5 %.
+     Под полосой — фото во всю ширину (вне контейнера). Высота героя — по содержимому. */
+  grid-template-columns:minmax(0,60fr) minmax(0,32fr);
+  grid-template-areas:"head side";
   /* start, а не center: подпись поля стоит на одной линии с надглавием, и
      два блока читаются одной строкой разворота. */
   /* align-content:center ОБЯЗАТЕЛЕН вместе со start: ряд один, и без него
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
-  align-items:start;align-content:center;
-  column-gap:clamp(40px,6vw,120px);row-gap:clamp(48px,8vh,88px);
-  min-height:100svh;max-width:none;margin:0;
+  align-items:start;align-content:start;
+  column-gap:8%;max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
      До 1280 поле в точности равно полю разделов, дальше растёт медленнее:
@@ -724,16 +726,15 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      следующего раздела должна показаться у нижней кромки первого экрана. */
   /* Владелец (2026-09-12): «добавь воздуха на герое». Верх — 15 % экрана,
      низ — 9 %, между полосой текста и полем — 8 %. */
-  padding:clamp(120px,15vh,168px)
-          calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
-          clamp(64px,9vh,104px)
-          calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
+  padding:clamp(104px,13vh,150px) 5.5vw clamp(56px,7vw,96px);}
 h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;grid-area:head;}
 /* Пояснение и кнопки — своя полоса справа от заголовка. Верх абзаца стоит на
    уровне первой строки заголовка: надглавие (15) + его отбивка (20) + верхнее
    поле h1 (20) + вынос кегля до верха букв ≈ 62–72. */
-.hside{position:relative;z-index:3;grid-area:side;padding-top:35px;}
+/* Описание начинается НИЖЕ первой строки заголовка (макет): надглавие с отбивками ≈ 55 px
+   плюс строка h1 (кегль × 1.05) — на 1440 это ≈ 108, на 1280 ≈ 95. */
+.hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(64px,7.4vw,108px);}
 /* Три класса, а не два: правило .hero .hp с полем 30 стоит ниже по файлу и
    при равном весе брало верх — абзац съезжал на 35 px ниже верха букв. */
 .hero .hside .hp{margin-top:0;max-width:44ch;}
@@ -754,7 +755,6 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
    раздела 01 стык читался провалом. Теперь метка «01» подходит к нижней
    кромке первого экрана — видно, что страница продолжается. На телефоне
    герой и так выше экрана, правило не нужно. */
-@media (min-width:961px){.hero,.hgrid{min-height:calc(100svh - clamp(80px,12vh,140px));}}
 /* Заголовку разрешено занять зазор между колонками, но не поле волны:
    кривая не должна пересекать текст. Потолок — колонка плюс зазор минус 8. */
 .hero h1{color:var(--fg-head);width:max-content;max-width:100%;}
@@ -801,110 +801,20 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
    ⚠ Проверять первый экран ТОЛЬКО через локальный сервер. */
 .hero .eyebrow{color:var(--brand-ink);}
 .hero .eyebrow::before{background:var(--brand-ink);}
-/* ============ ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ — поле героя ============
-   Правая колонка героя. Открытая композиция: ни карточки, ни рамки — сетка
-   измерения, одна кривая, подписи. Все цвета — переменные страницы: след и
-   выбранная кнопка фирменным, подписи чернилами, сетка волосяными линиями.
-   Ширина колонки задана сеткой .hgrid; ничего здесь не выходит за её край. */
-.pq{position:relative;z-index:1;margin:0;min-width:0;grid-area:field;
-  display:flex;flex-direction:column;gap:0;color:var(--fg);
-  /* Холст читает эти четыре переменные через getComputedStyle: переход
-     палитры на них действует так же, как на всё остальное. */
-  --pq-trace:var(--brand);--pq-grid:var(--hair2);--pq-axis:var(--hair);
-  --pq-nom:rgba(13,14,19,.22);--pq-ref:rgba(13,14,19,.66);
-  /* Появление — только прозрачностью. transform поднял бы блок в свой слой и
-     мог вернуть замыленный текст, который владелец уже ловил. */
-  opacity:0;transition:opacity .6s var(--e) .1s;}
-.pq.is-in{opacity:1;}
-/* Подпись устроена как надглавие слева: блок кеглем текста, внутри строчный
-   flex-контейнер 12px. Так обе подписи ложатся на одну строку в обоих
-   языках без подгонки числом — высота строки берётся у того же шрифта. */
-/* Шапка поля — счётчик в языке сайта: как «01 ■□□□» у разделов. Пиксельный
-   номер состояния, три квадрата (выбранный — фирменный, как у счётчика),
-   имя состояния тем же набором, что надглавие слева. Квадраты и есть
-   переключатель: у каждого цель 24×44, сам квадрат 6 px, при наведении
-   темнеет и растёт. Ряд высотой 44 поднят на 12, чтобы центр строки совпал с
-   центром надглавия (line-height normal у 16px ≈ 21px → 10-11 px).
-   История: три подписи, сегменты, шкала с ползунком и стрелки ‹ › —
-   владелец отверг как перегруз или чужой язык; счётчик — свой. */
-.pq-head{display:flex;align-items:center;gap:var(--s3);margin:-12px 0 var(--s5) 0;}
-.pq-no{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.11em;
-  font-feature-settings:'case' 1;color:var(--fg-soft);min-width:2.4ch;}
-/* Перенесено из живого репо (www 5f5e909, 2026-09-05): у квадратов появились
-   подписи состояний, и состояния сменяются сами каждые 10 с, пока читатель не
-   выбрал сам; под выбранной подписью тонкая линия отмеряет время до смены. */
-.pq-dots{display:flex;flex-wrap:wrap;gap:2px;margin-left:-10px;}
-.pq-dot{position:relative;display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 10px;border-radius:2px;
-  font-family:%%BODYFONT%%;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--fg);cursor:pointer;transition:color .3s var(--e);}
-.pq-dot i{display:block;width:6px;height:6px;flex:none;background:var(--hair);
-  transition:background-color .3s var(--e),transform .3s var(--e);}
-.pq-dot:hover i{background:var(--fg-soft);transform:scale(1.34);}
-.pq-dot[aria-pressed="true"] i{background:var(--brand);transform:none;}
-.pq-dot:hover{color:var(--fg);}
-.pq-dot[aria-pressed="true"]{color:var(--brand-ink);}
-.pq-dot:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
-/* auto-advance timer: thin line fills under the active mode, then the next mode is shown */
-.pq-dot::after{content:"";position:absolute;left:10px;right:10px;bottom:7px;height:1px;background:var(--brand);
-  transform:scaleX(0);transform-origin:left;opacity:.55;}
-.pq-dot[aria-pressed="true"].pq-run::after{animation:pqAdv var(--pq-adv,10s) linear forwards;}
-@keyframes pqAdv{from{transform:scaleX(0);}to{transform:scaleX(1);}}
-.pq.is-manual .pq-dot::after,.pq.is-paused .pq-dot::after,.pq.is-static .pq-dot::after{animation:none;transform:scaleX(0);}
-.pq-pause{width:44px;height:44px;display:grid;place-items:center;border-radius:2px;
-  color:var(--fg-soft);transition:color .3s var(--e);}
-.pq-pause:hover{color:var(--fg);}
-.pq-pause{margin-left:auto;}
-.pq-pause i{position:relative;width:9px;height:9px;}
-.pq-pause i::before,.pq-pause i::after{content:"";position:absolute;top:0;bottom:0;width:2px;
-  background:currentColor;transition:opacity .2s var(--e);}
-.pq-pause i::before{left:1px;}.pq-pause i::after{right:1px;}
-.pq.is-paused .pq-pause i::after{opacity:0;}
-.pq.is-paused .pq-pause i::before{left:0;width:0;height:0;top:0;bottom:auto;background:none;
-  border-style:solid;border-width:4.5px 0 4.5px 8px;border-color:transparent transparent transparent currentColor;}
-/* При reduce хода нет — и останавливать нечего. */
-.pq.is-static .pq-pause{display:none;}
-/* Высота поля подобрана под колонку текста: с абзацем и кнопками она 445-545,
-   и поле с подписями должно быть ей соразмерно, а не вдвое ниже. */
-/* Поле во всю ширину ниже, чем было в колонке: широкий кадр при той же
-   высоте читается лентой самописца, а не квадратной карточкой. */
-.pq-chart{position:relative;height:clamp(200px,26vh,280px);}
-/* Армянское пояснение длиннее английского почти вдвое: в узкой колонке оно
-   давало семь строк и уводило поле сигнала за нижнюю кромку. Полоса делится
-   поровну, абзац — на всю колонку. Разная раскладка при общей системе. */
+/* ФОТО ГЕРОЯ: полновылетное, 3:1 как исходник, без рамки/тени/затемнения/движения.
+   Подложка --lo на время загрузки того же тона, что бумага. */
+.hphoto{margin:0;width:100%;aspect-ratio:3/1;overflow:hidden;background:var(--lo);}
+.hphoto img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;}
+/* Телефон: кадр выше (4:3); главный объект — синий датчик на среднем проводнике — в кадре
+   вместе с соединителем. Точка 70 % 40 % подобрана визуально (см. снимки 390). */
+/* Планшет: кадр 2:1, точка 64 % 45 %. */
+@media (min-width:601px) and (max-width:960px){.hphoto{aspect-ratio:2/1;}.hphoto img{object-position:64% 45%;}}
+@media (max-width:600px){.hphoto{aspect-ratio:4/3;}.hphoto img{object-position:70% 40%;}}
+/* Армянское описание длиннее почти вдвое: колонки 55/37 вместо 60/32. */
 @media (min-width:961px){
-  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
+  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,55fr) minmax(0,37fr);}
   html[lang="hy"] .hero .hside .hp{max-width:none;}
 }
-.pq-cv{position:absolute;inset:0;width:100%;height:100%;display:block;}
-/* Пояснение: три строки в одной клетке, высота по самой длинной. */
-/* Строка под полем: пояснение слева, оговорка о симуляции справа — подписи
-   под лентой прибора, а не два абзаца друг под другом. */
-.pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s5);}
-.pq-x{display:grid;margin-top:0;font-size:var(--t-small);line-height:var(--t-small-lh);color:var(--fg-mid);
-  max-width:46ch;}
-.pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
-.pq[data-mode="normal"] .pq-x [data-x="normal"],
-.pq[data-mode="dip"] .pq-x [data-x="dip"],
-.pq[data-mode="harm"] .pq-x [data-x="harm"],
-.pq[data-mode="trans"] .pq-x [data-x="trans"]{visibility:visible;opacity:1;}
-.pq-note{margin:0;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
-  color:var(--fg-soft);text-align:right;flex:none;}
-/* Армянская подпись: без прописных и разрядки — это правила латиницы; и тем
-   же гротеском, что текст, — засечная гарнитура в 12 точек расплывается. */
-html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:%%BODYFONT%%;
-  letter-spacing:0;text-transform:none;}
-html[lang="hy"] .pq-dot{letter-spacing:0;text-transform:none;}
-/* Четыре имени на узком экране: два ряда по два, а не три и одно сиротой. */
-@media (max-width:520px){
-  .pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;align-items:start;column-gap:6px;row-gap:0;}
-  /* Длинные имена («Լարման կարճատև անկում», «Harmonic distortion») в клетке
-     переносятся на вторую строку: текст слева, квадрат у первой строки,
-     цель остаётся не ниже 44. */
-  .pq-dot{height:auto;min-height:44px;align-items:flex-start;padding-top:12px;padding-bottom:12px;line-height:1.25;text-align:left;}
-  .pq-dot i{margin-top:5px;}
-}
-/* Под шторкой перехода поле прячется вместе с остальным героем. */
-html.wipecover .pq{visibility:hidden;}
 /* header over the dark hero: light chrome until scrolled */
 header.on-dark .brand{color:#EFEDEA;}
 header.on-dark nav{box-shadow:inset 0 0 0 1px rgba(255,251,249,.28);background:rgba(20,22,28,.42);}
@@ -1994,22 +1904,12 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .done p{font-size:14px;line-height:1.7;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 
 @media (max-width:960px){
-  .hgrid{grid-template-columns:1fr;grid-template-areas:"head" "side" "field";padding:92px clamp(18px,4vw,26px) 40px;gap:22px;}
+  /* Одна колонка: заголовок, описание, кнопки; боковые поля 20–24. Фото ниже — на всю ширину. */
+  .hgrid{grid-template-columns:1fr;grid-template-areas:"head" "side";padding:88px clamp(20px,4vw,24px) 36px;gap:22px;}
+
   .hero h1{width:auto;max-width:none;}
   .hside{padding-top:0;}
   .hside .hp{margin-top:0;}
-  .pq-foot{flex-direction:column;align-items:flex-start;gap:var(--s3);}
-  .pq-note{text-align:left;}
-  /* Подписи состояний на телефоне — своей строкой под номером и паузой:
-     в одну строку с ними три подписи ломались посреди ряда. */
-  .pq-head{flex-wrap:wrap;}
-  .pq-dots{order:3;flex-basis:100%;margin-left:-10px;}
-  /* Поле героя на телефоне стоит ПОД текстом и кнопками — это законченный
-     блок с собственной подписью, и связь с текстом ему не нужна. Высота
-     холста не меньше 220, иначе разницу состояний не разобрать. */
-  .hgrid{align-content:center;}   /* ряды не растягиваются — зазор между текстом и полем не пухнет на высоком экране */
-  .pq{margin-top:var(--s5);}
-  .pq-chart{height:clamp(220px,58vw,280px);}
 
   .plate .wrap{grid-template-columns:1fr;}
   /* Раньше здесь пряталось и то и другое. Из-за этого на телефоне раздел 03
@@ -2273,37 +2173,20 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="hside">
       <p class="hp">%%HERO_P%%</p>
       <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
-    </div>
-    <!-- ПОЛЕ ГЕРОЯ: ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ. Одна кривая, четыре состояния по выбору
-         читателя. Это иллюстрация мгновенного напряжения, а не запись прибора,
-         и оговорка говорит это прямо. Надписей минимум — владелец снял всё
-         лишнее: счётчик состояния (номер, квадраты, имя), одна фраза
-         пояснения, оговорка. Название поля живёт в aria-label группы квадратов.
-         Сам холст
-         для диктора скрыт — непрерывные обновления кривой объявлять нечего. -->
-    <div class="pq" id="pq" data-mode="normal">
-      <!-- Шапка поля устроена как счётчик разделов сайта («01 ■□□□»): пиксельный
-           номер состояния, три квадрата — они и есть переключатель, — имя
-           состояния. Квадраты — кнопки с aria-pressed и именем; три имени лежат
-           в одной клетке сетки, чтобы ширина строки не дышала. -->
-      <div class="pq-head">
-        <b class="pq-no" aria-hidden="true">01</b>
-        <div class="pq-dots" role="group" aria-label="%%PQ_CAP%%">
-          <button type="button" class="pq-dot" data-mode="normal" aria-pressed="true" aria-label="%%PQ_M_NORMAL%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_NORMAL%%</span></button>
-          <button type="button" class="pq-dot" data-mode="dip" aria-pressed="false" aria-label="%%PQ_M_DIP%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_DIP%%</span></button>
-          <button type="button" class="pq-dot" data-mode="harm" aria-pressed="false" aria-label="%%PQ_M_HARM%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_HARM%%</span></button>
-          <button type="button" class="pq-dot" data-mode="trans" aria-pressed="false" aria-label="%%PQ_M_TRANS%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_TRANS%%</span></button>
-        </div>
-        <button type="button" class="pq-pause" data-pause="%%PQ_PAUSE%%" data-resume="%%PQ_RESUME%%"><i aria-hidden="true"></i></button>
-      </div>
-      <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
-      <div class="pq-foot">
-      <p class="pq-x" aria-live="polite"><span data-x="normal">%%PQ_X_NORMAL%%</span><span data-x="dip">%%PQ_X_DIP%%</span><span data-x="harm">%%PQ_X_HARM%%</span><span data-x="trans">%%PQ_X_TRANS%%</span></p>
-      <p class="pq-note">%%PQ_NOTE%%</p>
-      </div>
-    </div>
   </div>
-</section>
+  </div>
+  <!-- ФОТО ГЕРОЯ (макет владельца, 2026-09-13): датчик тока вокруг изолированного
+       проводника. Полновылетное, вне текстового контейнера; без наложений, рамок,
+       затемнения и движения. 3:1 как у исходника (2172×724), на телефоне 4:3 через
+       object-fit с точкой 70 % 40 % — синий датчик со соединителем остаётся в кадре.
+       width/height + aspect-ratio исключают скачок вёрстки; приоритетная загрузка. -->
+  <figure class="hphoto">
+    <img src="./uploads/hero/measurement-2172.webp"
+         srcset="./uploads/hero/measurement-1086.webp 1086w, ./uploads/hero/measurement-2172.webp 2172w"
+         sizes="100vw" width="2172" height="724" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="async">
+  </figure>
+</section>    </div>
+
 
 
 <!-- Чертёжный след в левом поле остался только здесь: он продолжение полосы
@@ -2628,338 +2511,6 @@ var PT=window.PT;
   else dtGo();
 })();
 
-/* ============ ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ — поле героя ============
-   Одна кривая мгновенного напряжения на 2D-холсте, без библиотек. Три
-   состояния выбирает читатель: ровная синусоида, провал напряжения,
-   гармоническое искажение. Сам сигнал считается в единицах номинала и в
-   ПЕРИОДАХ, а не в пикселях: холст — только масштаб.
-
-   Ход: экранное время идёт по часам кадра (elapsed), поэтому скорость не
-   зависит от частоты обновления экрана. Настоящие 50 Гц показать нельзя —
-   период растянут до секунды, в окне пять периодов. Кривая едет справа
-   налево, как след на приборе: новое приходит справа.
-
-   Провал — конечный участок сниженной амплитуды со сглаженными краями, он
-   едет вместе с сигналом и возвращается после тихого промежутка. Искажение —
-   третья и пятая гармоники от ТОГО ЖЕ аргумента, что и основная: равенство
-   фазовых скоростей — условие того, что составная форма едет целиком.
-
-   Смена состояния — тween 500 мс по часам стены: работает и на паузе, чтобы
-   выбор был виден сразу. Холст рисует только когда его видно (наблюдатель
-   пересечения с запасом) и только на видимой вкладке. При reduce хода нет:
-   кадр статический, состояние переключается перерисовкой. */
-(function(){
-  var fig=document.getElementById('pq');if(!fig)return;
-  var box=fig.querySelector('.pq-chart'),cv=fig.querySelector('.pq-cv');
-  var ctx=cv&&cv.getContext('2d');if(!ctx)return;
-  var MODES=['normal','dip','harm','trans'],dots=[].slice.call(fig.querySelectorAll('.pq-dot')),noEl=fig.querySelector('.pq-no');
-  var pbtn=fig.querySelector('.pq-pause');
-
-  var CYCLES=6;            /* периодов в окне: на приборах в кадре 5–10, волна плотнее (владелец, 2026-09-13; было 4) */
-  var SPEED=0.35;          /* периодов в секунду: 50 Гц замедлены в ~140 раз; владелец просил ещё медленнее */
-  /* Три формы искажения, как их знает инженер. Первые три числа — доли 3-й,
-     5-й и 7-й гармоник от ТОГО ЖЕ аргумента, знак = фаза 0 или 180°:
-     1) плоская вершина — однофазные выпрямители, компьютеры, LED-драйверы;
-     2) острая вершина — 3-я в противофазе, гребень выше номинала;
-     3) «плечи» шестипульсного привода — 5-я и 7-я, и ВЫРЕЗЫ КОММУТАЦИИ
-        (четвёртое число — их вес): шесть острых зазубрин за период, у
-        30°+60°k, глубина 0.18, ширина ~0.3 мс — так сеть рядом с приводом
-        выглядит на любой реальной осциллограмме (2026-09-13, по записям).
-     Формы сменяют друг друга: сеть меняется с нагрузкой. Смена привязана к
-     времени СИГНАЛА, поэтому приходит справа и едет с волной, а на паузе
-     стоит. THD каждой 14–18 % — преувеличено ради читаемости. */
-  var HP=[[0.16,0.07,0.03,0],[-0.14,0.05,-0.03,0],[0.02,-0.09,-0.05,1]];
-  var HP_HOLD=2.4,HP_MORPH=0.9;   /* периодов: форма стоит ~5 с, переходит ~2 с */
-  var NOTCH={depth:0.18,sig:0.007,ring:0.05};
-  /* Провал — по реальным записям (2026-09-13): срез за ~1 мс (0.04 периода),
-     а не колокол — сеть меняется за миллисекунду. Две формы по очереди:
-     чётные события — КЗ в сети: прямоугольник, остаток 0.55, сдвиг фазы −15°
-     (излом волны у начала), 1.5 периода, возврат ступенькой; нечётные — пуск
-     двигателя: срез до 0.78 и возврат по экспоненте за ~3 периода. Начало
-     КЗ — на подъёме к пику (фаза 0.194 = 70°): гребень обрывается и не
-     доходит до пунктира; начало пуска — у отрицательного пика (0.694).
-     Повтор каждые 10 периодов (~29 с): окно 6 успевает очиститься целиком. */
-  var DIP={depth:0.45,len:1.5,edge:0.04,jump:15/180*Math.PI,mdepth:0.22,mtau:1.1,mlen:3.3,every:10,first:0.4,pow:0.194};
-  /* Переходный процесс — включение конденсаторной батареи: у пика напряжение
-     обваливается, затем выброс до ~1.35 о.е. и звон 9× основной (~450 Гц),
-     гаснет за полпериода. Повтор каждые 9 периодов. */
-  var TR={k:0.48,tau:0.26,f:9,every:9,first:0.4,pow:0.208};
-  var TWEEN=600;           /* мс, переход между состояниями */
-  var TAU=Math.PI*2;
-
-  var W=0,Hc=0,dpr=1,T=0,last=0,raf=0;
-  var wd=0,wh=0,wt=0,tw=null;   /* веса провала, искажения и переходного процесса; текущий tween */
-  var dipBase=0,trBase=0,mode='normal',playing=true,seen=true,alive=true;
-  var AUTO=10000,autoT=0,manual=false;   // auto-advance modes until the visitor clicks
-  function runAdv(){
-    dots.forEach(function(b){b.classList.remove('pq-run');});
-    if(manual||rm||!playing||!seen||document.hidden)return;
-    var a=dots[MODES.indexOf(mode)];if(!a)return;
-    void a.offsetWidth;a.style.setProperty('--pq-adv',AUTO+'ms');a.classList.add('pq-run');
-  }
-  function armAuto(){
-    clearTimeout(autoT);autoT=0;runAdv();
-    if(manual||rm||!playing||!seen||document.hidden)return;
-    autoT=setTimeout(function(){autoT=0;setMode(MODES[(MODES.indexOf(mode)+1)%MODES.length]);},AUTO);
-  }
-  function stopAuto(){clearTimeout(autoT);autoT=0;dots.forEach(function(b){b.classList.remove('pq-run');});}
-  var col={trace:'#2E5E99',grid:'rgba(13,36,64,.07)',axis:'rgba(13,36,64,.13)',nom:'rgba(13,36,64,.22)',ref:'rgba(13,36,64,.46)'};
-
-  function theme(){
-    var cs=getComputedStyle(fig);
-    function v(n,d){var s=cs.getPropertyValue(n).trim();return s||d;}
-    col.trace=v('--pq-trace',col.trace);col.grid=v('--pq-grid',col.grid);
-    col.axis=v('--pq-axis',col.axis);col.nom=v('--pq-nom',col.nom);col.ref=v('--pq-ref',col.ref);
-  }
-  function size(){
-    var r=box.getBoundingClientRect();
-    W=Math.max(1,Math.round(r.width));Hc=Math.max(1,Math.round(r.height));
-    /* На телефоне поле в 360 px: шесть периодов сливаются в гребёнку, а
-       вырезы коммутации теряются между отсчётами — там четыре периода. */
-    CYCLES=W<560?4:6;
-    dpr=Math.min(2,devicePixelRatio||1);
-    cv.width=Math.round(W*dpr);cv.height=Math.round(Hc*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  function sm(a){a=a<0?0:a>1?1:a;return a*a*(3-2*a);}
-  /* Провал в момент tau: g — доля снижения амплитуды, ph — сдвиг фазы.
-     Чётные события — КЗ (прямоугольник со срезом), нечётные — пуск двигателя
-     (срез и экспонента). При reduce — одно событие КЗ, стоит в середине. */
-  var DI={g:0,ph:0};
-  function dipAt(tau){
-    DI.g=0;DI.ph=0;if(wd<=0.001)return DI;
-    var u=tau-dipBase;if(u<0)return DI;
-    var k=0;if(!rm){k=Math.floor(u/DIP.every);u-=k*DIP.every;}
-    if(rm||!(k%2)){
-      var L=DIP.len,e=DIP.edge,w=0;
-      if(u>0&&u<L)w=u<e?sm(u/e):(u>L-e?sm((L-u)/e):1);
-      DI.g=DIP.depth*w;DI.ph=DIP.jump*w;
-    }else{u-=0.5;if(u>0)DI.g=sm(u/DIP.edge)*DIP.mdepth*Math.exp(-u/DIP.mtau);}
-    return DI;
-  }
-  /* События провала, попадающие в окно [T-CYCLES, T]: [начало, длина подсветки]. */
-  function dipEvents(){
-    var out=[];if(wd<=0.001)return out;
-    if(rm){if(dipBase<T&&dipBase+DIP.len>T-CYCLES)out.push([dipBase,DIP.len]);return out;}
-    var k0=Math.floor((T-CYCLES-DIP.mlen-1-dipBase)/DIP.every),k1=Math.floor((T-dipBase)/DIP.every);
-    for(var k=Math.max(0,k0);k<=k1;k++){var t0=dipBase+k*DIP.every,L=DIP.len;if(k%2){t0+=0.5;L=DIP.mlen;}
-      if(t0<T&&t0+L>T-CYCLES)out.push([t0,L]);}
-    return out;
-  }
-  /* Звон переходного процесса в момент tau: обвал от мгновенного значения в
-     момент включения, затухающий косинус вокруг основной. */
-  function trAt(tau){
-    if(wt<=0.001)return 0;
-    var u=tau-trBase;if(u<0)return 0;
-    if(!rm)u-=Math.floor(u/TR.every)*TR.every;
-    if(u>2)return 0;
-    var b0=Math.sin(trBase*TAU);
-    return -TR.k*b0*Math.exp(-u/TR.tau)*Math.cos(TAU*TR.f*u)*sm(u/0.004);
-  }
-  function trEvents(){
-    var out=[];if(wt<=0.001)return out;
-    if(rm){out.push(trBase);return out;}
-    var k0=Math.floor((T-CYCLES-trBase)/TR.every),k1=Math.floor((T-trBase)/TR.every);
-    for(var k=Math.max(0,k0);k<=k1;k++){var t0=trBase+k*TR.every;if(t0<T&&t0>T-CYCLES)out.push(t0);}
-    return out;
-  }
-  /* Коэффициенты гармоник в момент tau: ступень держится, переход сглажен. */
-  var hc=[0,0,0,0];
-  function harmAt(tau){
-    var n=HP.length,seg=HP_HOLD+HP_MORPH,u=tau-Math.floor(tau/(seg*n))*(seg*n);
-    var i=Math.floor(u/seg),a=HP[i],b=HP[(i+1)%n],v=u-i*seg,k=0;
-    if(v>HP_HOLD){k=(v-HP_HOLD)/HP_MORPH;k=k*k*(3-2*k);}
-    hc[0]=a[0]+(b[0]-a[0])*k;hc[1]=a[1]+(b[1]-a[1])*k;hc[2]=a[2]+(b[2]-a[2])*k;hc[3]=a[3]+(b[3]-a[3])*k;
-    return hc;
-  }
-  /* Мгновенное напряжение в долях номинальной амплитуды. */
-  function volt(tau){
-    var d=dipAt(tau),ph=tau*TAU-wd*d.ph,s=Math.sin(ph);
-    /* Живая сеть (владелец, 2026-09-13: «вариант 1»). Идеальной синусоиды в
-       розетке не бывает — всегда есть 2–3 % пятой и около 1 % третьей
-       гармоники, и амплитуда медленно дышит на ±1,5 %. Всё это в пределах
-       нормы, поэтому фактура лежит под всеми состояниями; события
-       накладываются сверху. Это по-прежнему иллюстрация, не измерение. */
-    s+=0.025*Math.sin(5*ph+0.6)+0.01*Math.sin(3*ph+2.1);
-    if(wh>0.001){var h=rm?HP[0]:harmAt(tau);
-      s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));
-      if(h[3]>0.001){
-        /* Вырезы коммутации: гауссов провал к нулю у каждой из шести точек и
-           короткий звон после него. Знак — сторона полуволны. */
-        var f=tau-Math.floor(tau),k,c,dd,nn,sg,nv=0;
-        for(k=0;k<6;k++){c=(30+60*k)/360;dd=f-c;dd-=Math.round(dd);
-          nn=Math.exp(-(dd*dd)/(2*NOTCH.sig*NOTCH.sig));sg=k<3?1:-1;
-          nv-=NOTCH.depth*sg*nn;if(dd>0)nv+=NOTCH.ring*sg*Math.exp(-dd/0.02)*Math.sin(dd/0.008*TAU)*(1-nn);}
-        s+=wh*h[3]*nv;}}
-    if(wt>0.001)s+=wt*trAt(tau);
-    var wander=1+0.015*Math.sin(tau*TAU*0.045);
-    return wander*(1-wd*d.g)*s;
-  }
-  /* Метка запуска записи: треугольник у верхней кромки над началом события —
-     один знак, без текста, как маркер триггера у прибора. */
-  function trig(x0,w){ctx.globalAlpha=0.7*w;ctx.fillStyle=col.trace;ctx.beginPath();
-    ctx.moveTo(x0-4,0);ctx.lineTo(x0+4,0);ctx.lineTo(x0,5);ctx.closePath();ctx.fill();ctx.globalAlpha=1;}
-  function draw(){
-    if(!W)return;
-    ctx.clearRect(0,0,W,Hc);
-    var cy=Hc/2,A=Hc*0.33,i,x,y;   /* 0.33: выброс переходного процесса 1.35 о.е. должен уместиться */
-    /* Сетка измерения: по вертикали — полпериода, по горизонтали — 0.5 о.е. */
-    ctx.lineWidth=1;
-    ctx.strokeStyle=col.grid;ctx.beginPath();
-    var cols=CYCLES*2;
-    for(i=1;i<cols;i++){x=Math.round(W*i/cols)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
-    for(i=-2;i<=2;i++){if(!i)continue;y=Math.round(cy-A*i*0.5)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);}
-    ctx.stroke();
-    /* Номинальный размах ±1.0 — пунктиром, чуть темнее сетки: мера, от
-       которой читают и провал, и приплюснутый гребень. */
-    ctx.strokeStyle=col.nom;ctx.setLineDash([2,5]);ctx.beginPath();
-    y=Math.round(cy-A)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);
-    y=Math.round(cy+A)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);
-    ctx.stroke();ctx.setLineDash([]);
-    /* Нулевая линия. */
-    ctx.strokeStyle=col.axis;ctx.beginPath();
-    y=Math.round(cy)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
-    /* Окно провала — подсветка участка, где напряжение отклонилось: тон
-       фирменного на бумаге. Левая кромка сплошная и с меткой запуска — так
-       прибор отмечает начало записи; правая штриховая. Едет вместе с сигналом. */
-    var ev=dipEvents(),e,x0,x1;
-    for(e=0;e<ev.length;e++){
-      x0=W*(1-(T-ev[e][0])/CYCLES);x1=W*(1-(T-ev[e][0]-ev[e][1])/CYCLES);
-      var xa=Math.max(0,x0),xb=Math.min(W,x1);if(xb<=xa)continue;
-      ctx.globalAlpha=0.06*wd;ctx.fillStyle=col.trace;ctx.fillRect(xa,0,xb-xa,Hc);
-      ctx.globalAlpha=0.35*wd;ctx.strokeStyle=col.trace;
-      if(x0>0){ctx.beginPath();x=Math.round(x0)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);ctx.stroke();trig(x0,wd);}
-      if(x1<W){ctx.setLineDash([3,4]);ctx.beginPath();x=Math.round(x1)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);ctx.stroke();ctx.setLineDash([]);}
-      ctx.globalAlpha=1;
-    }
-    /* Переходный процесс: только метка запуска над моментом включения. */
-    var tv=trEvents();
-    for(e=0;e<tv.length;e++){x0=W*(1-(T-tv[e])/CYCLES);if(x0>4&&x0<W-4)trig(x0,wt);}
-    /* Отсчёты: справа — текущее время T, слева — на CYCLES периодов раньше.
-       Рядом с настоящим следом считается идеальная синусоида — «как должно
-       быть». Пунктиром она рисуется только там, где расходится со следом:
-       на ровном участке две линии совпали бы и пунктир просвечивал бы. */
-    /* Шаг 2/3 px: вырезы коммутации шириной ~1 px иначе пропадают между отсчётами. */
-    var n=Math.max(240,Math.ceil(W*1.5)),dev=Math.max(wd,wh,wt),open=false;
-    var xs=new Array(n+1),ys=new Array(n+1),yi=new Array(n+1);
-    for(i=0;i<=n;i++){
-      var u=i/n,tau=T-(1-u)*CYCLES;
-      xs[i]=u*W;ys[i]=cy-A*volt(tau);yi[i]=cy-A*Math.sin(tau*TAU);
-    }
-    if(dev>0.001){
-      ctx.globalAlpha=dev;ctx.strokeStyle=col.ref;ctx.lineWidth=1.3;ctx.setLineDash([4,4]);
-      ctx.beginPath();
-      for(i=0;i<=n;i++){
-        /* Порог — 6 % размаха: фактура нормальной сети (≈3 %) эталон не вызывает,
-           провал и искажение — вызывают. */
-        if(Math.abs(ys[i]-yi[i])>A*0.06){if(open)ctx.lineTo(xs[i],yi[i]);else{ctx.moveTo(xs[i],yi[i]);open=true;}}
-        else open=false;
-      }
-      ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
-    }
-    ctx.strokeStyle=col.trace;ctx.lineWidth=1.8;ctx.lineJoin='round';ctx.lineCap='round';
-    ctx.beginPath();
-    for(i=0;i<=n;i++){if(i)ctx.lineTo(xs[i],ys[i]);else ctx.moveTo(xs[i],ys[i]);}
-    ctx.stroke();
-  }
-  function ease(p){return p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;}
-  function tweenStep(now){
-    if(!tw)return;
-    var p=Math.min(1,(now-tw.t0)/TWEEN),e=ease(p);
-    wd=tw.d0+(tw.d1-tw.d0)*e;wh=tw.h0+(tw.h1-tw.h0)*e;wt=tw.q0+(tw.q1-tw.q0)*e;
-    if(p>=1)tw=null;
-  }
-  function running(){return alive&&seen&&!document.hidden&&((playing&&!rm)||!!tw);}
-  function frame(now){
-    raf=0;
-    var dt=(now-last)/1000;last=now;
-    /* Пропустили кадры — сдвигаемся не дальше, чем на десятую секунды:
-       кривая остаётся на месте и едет дальше без рывка. */
-    if(!(dt>0)||dt>.1)dt=.016;
-    if(playing&&!rm)T+=dt*SPEED;
-    tweenStep(now);
-    draw();
-    if(running())raf=requestAnimationFrame(frame);
-  }
-  function start(){
-    if(raf||!running())return;
-    last=performance.now();raf=requestAnimationFrame(frame);
-  }
-  function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}}
-  /* Номер состояния на миг рассыпается знаками и собирается — тот же приём,
-     что у заголовка при загрузке (decrypt), в масштабе двух знаков. Шрифт
-     моноширинный, поэтому строка не дышит. При reduce — просто смена. */
-  var POOL='#%&@$?!*+=/{}[]<>~^',scrT=0;
-  function setNo(k,init){
-    if(!noEl)return;var fin='0'+(k+1);
-    if(rm||init){noEl.textContent=fin;return;}
-    clearInterval(scrT);var t0=performance.now();
-    scrT=setInterval(function(){
-      if(performance.now()-t0>260){clearInterval(scrT);noEl.textContent=fin;return;}
-      noEl.textContent=POOL.charAt(Math.random()*POOL.length|0)+POOL.charAt(Math.random()*POOL.length|0);
-    },45);
-  }
-  function setMode(m,init){
-    mode=m;fig.dataset.mode=m;
-    dots.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
-    setNo(MODES.indexOf(m),init);
-    var d1=m==='dip'?1:0,h1=m==='harm'?1:0,t1=m==='trans'?1:0;
-    if(d1&&wd<0.001){
-      /* Провал заводится заново при каждом выборе: первый приходит справа
-         через 0.4–1.4 периода, начало выровнено на фазу 70° (целое число
-         периодов + DIP.pow), дальше — по расписанию. При reduce он ставится
-         в середину окна и стоит. */
-      dipBase=rm?T-CYCLES*0.5-DIP.len/2:Math.ceil(T+DIP.first)+DIP.pow;
-    }
-    if(t1&&wt<0.001)trBase=rm?Math.floor(T-CYCLES*0.5)+TR.pow:Math.ceil(T+TR.first)+TR.pow;
-    if(rm||init){wd=d1;wh=h1;wt=t1;tw=null;draw();armAuto();return;}
-    tw={t0:performance.now(),d0:wd,d1:d1,h0:wh,h1:h1,q0:wt,q1:t1};
-    start();armAuto();
-  }
-  function setPaused(p){
-    playing=!p;fig.classList.toggle('is-paused',p);
-    pbtn.setAttribute('aria-label',p?pbtn.dataset.resume:pbtn.dataset.pause);
-    if(p){stop();stopAuto();}else{start();armAuto();}
-  }
-  dots.forEach(function(b,i){
-    b.addEventListener('click',function(){manual=true;fig.classList.add('is-manual');stopAuto();if(b.dataset.mode!==mode)setMode(b.dataset.mode);});
-    /* Стрелки ходят по группе, как по вкладкам; Enter и пробел — у кнопки свои. */
-    b.addEventListener('keydown',function(e){
-      var k=e.key,j=-1;
-      if(k==='ArrowRight'||k==='ArrowDown')j=(i+1)%dots.length;
-      else if(k==='ArrowLeft'||k==='ArrowUp')j=(i+dots.length-1)%dots.length;
-      else if(k==='Home')j=0;else if(k==='End')j=dots.length-1;
-      if(j<0)return;e.preventDefault();dots[j].focus();
-    });
-  });
-  pbtn.addEventListener('click',function(){setPaused(playing);});
-  pbtn.setAttribute('aria-label',pbtn.dataset.pause);
-  if(rm)fig.classList.add('is-static');
-
-  var ro=null,io=null;
-  if(window.ResizeObserver){
-    ro=new ResizeObserver(function(){size();draw();});ro.observe(box);
-  }else addEventListener('resize',function(){size();draw();});
-  /* Запас в половину экрана: наблюдатель сообщает на границе кадра, и без
-     запаса при быстром броске вверх кривая стояла бы, уже будучи видна. */
-  if(window.IntersectionObserver){
-    io=new IntersectionObserver(function(es){
-      seen=es[es.length-1].isIntersecting;
-      if(seen){start();armAuto();}else stopAuto();
-    },{rootMargin:'50% 0px 50% 0px'});
-    io.observe(box);
-  }
-  document.addEventListener('visibilitychange',function(){if(document.hidden)stopAuto();else{start();armAuto();}});
-  addEventListener('pagehide',function(){
-    alive=false;stop();stopAuto();
-    if(ro)ro.disconnect();if(io)io.disconnect();
-  });
-
-  theme();size();setMode('normal',true);
-  requestAnimationFrame(function(){fig.classList.add('is-in');});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){size();draw();});
-  start();
-})();
 
 /* Грунт шапки и шкала прочтения. Замеров страницы не требуют вовсе — только
    положение прокрутки, поэтому считаются даром. Порог 60 точек: линия должна

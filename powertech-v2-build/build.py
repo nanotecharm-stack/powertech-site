@@ -443,7 +443,7 @@ EN = {
  'HEADTT': TY['EN_TT'], 'HEADLH': TY['EN_LH'], 'HEADLS': TY['EN_LS'], 'H1WT': TY['EN_H1WT'], 'BIGLS': TY['EN_BIGLS'],
  # Шкала умножена на 0,66: узкий Big Shoulders сменился нормальным по ширине
  # гротеском, и при прежнем кегле строка героя выходила из колонки в полтора раза.
- 'H1SIZE': 'clamp(38px,4.75vw,77px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ 'H1SIZE': 'clamp(40px,5vw,84px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',
  # Латинский код, а не «ՀԱՅ»: в EN-сборку вшита только латинская подрезка Martian
  # Mono, армянские буквы падали в системную подмену и выглядели чужеродно. Пара
@@ -456,15 +456,8 @@ EN = {
  'HERO_H1': 'See how your<br>electrical system<br><span class="ac">performs</span>',
  'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.',
  'HERO_CTA2': 'When measurements help',
+ 'HERO_PHOTO_ALT': 'Current sensor around an insulated power conductor',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'PQ_CAP': 'Voltage waveform',
- 'PQ_M_NORMAL': 'Normal', 'PQ_M_DIP': 'Voltage dip', 'PQ_M_HARM': 'Harmonic distortion', 'PQ_M_TRANS': 'Transient',
- 'PQ_X_NORMAL': 'A regular sinusoidal waveform.',
- 'PQ_X_DIP': 'Voltage briefly drops, then recovers.',
- 'PQ_X_HARM': 'Harmonics distort the voltage waveform.',
- 'PQ_X_TRANS': 'A brief oscillation after switching.',
- 'PQ_NOTE': 'Illustrative simulation, not a live measurement.',
- 'PQ_PAUSE': 'Pause animation', 'PQ_RESUME': 'Resume animation',
  'WHY_H2': 'The event may be over before anyone can inspect it',
  'WHY_P': 'A voltage event can last a few cycles. An hour later a spot check reads normal and there is nothing left on site to find. A continuous recording captures it, with a time stamp and the load conditions before and after.',
  'APP_H2': 'Where monitoring helps',
@@ -759,7 +752,7 @@ HY = {
  # на треть: прописная 43 против 33 на ширине 1440. Число строк проверено на
  # 1440, 1280, 1024, 768 и 375 — нигде не выросло, у заголовка героя везде
  # те же три строки.
- 'H1SIZE': 'clamp(38px,4.75vw,77px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ 'H1SIZE': 'clamp(38px,4.6vw,78px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',   # та же шкала, что и в английской: прежние
  # 84 px давали блок выше английского в полтора раза
  'LANG_HREF': './index.html', 'LANG_LABEL': 'EN', 'LANG_ARIA': 'English · Անգլերեն',
@@ -770,16 +763,9 @@ HY = {
  'HERO_H1': 'Ստուգեք, թե ինչպես է աշխատում ձեր <span class="ac">էլեկտրացանցը</span>',
  'HERO_P': 'Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։',
  'HERO_CTA2': 'Ե՞րբ են պետք չափումները',
+ 'HERO_PHOTO_ALT': 'Հոսանքի սենսոր մեկուսացված ուժային հաղորդալարի շուրջ',  # черновик — проверить владельцу
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'PQ_CAP': 'Լարման ալիքի ձևը',
- 'PQ_M_NORMAL': 'Նորմալ', 'PQ_M_DIP': 'Լարման կարճատև անկում', 'PQ_M_HARM': 'Հարմոնիկ աղավաղում', 'PQ_M_TRANS': 'Անցումային գործընթաց',  # окончательные тексты владельца 2026-09-13
- 'PQ_X_NORMAL': 'Կանոնավոր սինուսաձև ալիք։',
- 'PQ_X_DIP': 'Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։',
- 'PQ_X_HARM': 'Հարմոնիկները աղավաղում են լարման ալիքի ձևը։',
- 'PQ_X_TRANS': 'Փոխանջատումից հետո կարճ տատանում։',
- 'PQ_NOTE': 'Պատկերավոր օրինակ է, ոչ իրական չափում։',
- 'PQ_PAUSE': 'Դադարեցնել անիմացիան', 'PQ_RESUME': 'Շարունակել անիմացիան',
  'WHY_H2': 'Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ',
  'WHY_P': 'Էլեկտրական համակարգում որոշ իրադարձություններ տևում են ընդամենը միլիվայրկյաններ կամ մի քանի ցիկլ։ Մեկանգամյա կարճատև ստուգման պահին չափվող արժեքները կարող են արդեն վերադարձած լինել բնականոն մակարդակի։ Մոնիթորինգը պահպանում է իրադարձության ժամանակային նշումը և դրա պահին գրանցված պայմանները։',
  'APP_H2': 'Որտեղ է օգնում մոնիթորինգը',
@@ -1631,6 +1617,11 @@ QA_DIR = os.path.join(IMGS, 'qa')
 for fn in sorted(os.listdir(QA_DIR)):
     if fn.endswith('.webp'):
         deploy_asset(os.path.join(QA_DIR, fn), os.path.join(DEPLOY, 'uploads', 'qa', fn))
+# Фото героя (2026-09-13): два WebP (2172 и 1086 по ширине, q84) из img/hero; PNG-исходник на сайт не идёт.
+HERO_DIR = os.path.join(IMGS, 'hero')
+for fn in sorted(os.listdir(HERO_DIR)):
+    if fn.endswith('.webp'):
+        deploy_asset(os.path.join(HERO_DIR, fn), os.path.join(DEPLOY, 'uploads', 'hero', fn))
 # Логотип картинкой — для почтовой подписи и для всех, кто попросит знак файлом.
 # Почтовые программы не знают ни наших шрифтов, ни нашей вёрстки: слово в подписи
 # может жить ТОЛЬКО картинкой. Кладём её на сайт, потому что подпись подставляет
