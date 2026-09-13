@@ -76,9 +76,10 @@ header a,header button,header nav,header .navr{pointer-events:auto;}
   width:100%;padding:0 clamp(14px,2.1vw,30px);}
 .brand{display:flex;align-items:center;gap:10px;
   --acc:#2E5E99;flex:0 0 auto;transition:color .5s var(--e);}
-.brand .wm{display:block;flex:0 0 auto;font-family:'Departure Mono',ui-monospace,monospace;
-  font-weight:400;font-size:22px;letter-spacing:3px;margin-right:-3px;
-  line-height:1;white-space:nowrap;}
+.brand .wm{display:block;flex:0 0 auto;height:32px;width:auto;margin:0 0 0 -7px;}
+.brand .lg-d{display:none;}
+header.on-dark .brand .lg-l{display:none;}
+header.on-dark .brand .lg-d{display:block;}
 header.on-dark .brand{--acc:currentColor;}
 header nav{justify-self:center;display:flex;align-items:center;gap:2px;padding:var(--s1);font-size:14px;
   border-radius:3px;box-shadow:inset 0 0 0 1px rgba(13,36,64,.12);background:rgba(253,250,244,.9);
@@ -800,6 +801,7 @@ footer,.footrev{--foot-h:530px;}
   box-shadow:inset 0 1px 0 rgba(246,241,233,.14);}
 footer .fgrid{display:grid;grid-template-columns:minmax(220px,1fr) 1.15fr .85fr;
   gap:clamp(28px,4vw,var(--s8));align-items:start;}
+footer .fbrand .flg{display:block;height:44px;width:auto;margin:0 0 20px -10px;}
 footer .fbrand .fname{margin:0;font-family:inherit;font-size:22px;font-weight:600;
   letter-spacing:-.01em;text-transform:none;color:#F6F1E9;line-height:1.2;}
 footer .fbrand .freg{margin-top:14px;letter-spacing:.14em;}
@@ -1125,7 +1127,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <div id="wipe"></div>
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
-  <a class="brand" href="#top" aria-label="Gridec"><span class="wm">GRIDEC</span></a>
+  <a class="brand" href="#top" aria-label="Gridec"><img class="wm lg-l" src="/brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="/brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
   <nav><a class="lk" href="#applications">Industries</a><a class="lk" href="#services">Services</a><a class="lk" href="#company">Company</a></nav>
   <div class="navr">
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="Section index"><span class="ixw">Index</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
@@ -1287,6 +1289,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <footer>
   <div class="wrap fgrid">
     <div class="fbrand rv">
+      <img class="flg" src="/brand/gridec-logo-dark.svg" alt="Gridec" width="325" height="92" loading="lazy" decoding="async">
       <p class="fname">Gridec LLC</p>
       <p>POWER QUALITY MONITORING</p>
       <p class="freg">TIN <b>08331059</b></p>

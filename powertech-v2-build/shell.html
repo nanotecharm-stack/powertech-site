@@ -137,9 +137,15 @@ header a,header button,header nav,header .navr{pointer-events:auto;}
    мельче, и промежуточного размера для телефона не существует. Запас в шапке
    это позволяет: без знака слово занимает 102px вместо 140, и справа остаётся
    43 пикселя на 375px и 39 на 320px. */
-.brand .wm{display:block;flex:0 0 auto;font-family:'Departure Mono',ui-monospace,monospace;
-  font-weight:400;font-size:22px;letter-spacing:3px;margin-right:-3px;
-  line-height:1;white-space:nowrap;}
+/* Логотип владельца (2026-09-13): знак из трёх плоскостей + строчное «gridec».
+   В шапке 32px на планке 62px. Для светлого фона — малый вариант: зазоры между
+   плоскостями шире (3.4 вместо 1.5) и задняя плоскость на шаг темнее, иначе при
+   32px зазоры пропадают и знак сливается в пятно. На тёмном — dark-версия.
+   Сдвиг −7px: оптическое выравнивание по средней плоскости (задняя висит в поле). */
+.brand .wm{display:block;flex:0 0 auto;height:32px;width:auto;margin:0 0 0 -7px;}
+.brand .lg-d{display:none;}
+header.on-dark .brand .lg-l{display:none;}
+header.on-dark .brand .lg-d{display:block;}
 header.on-dark .brand{--acc:currentColor;}
 /* centre group — the sections, enclosed like one control */
 header nav{justify-self:center;display:flex;align-items:center;gap:2px;padding:var(--s1);font-size:14px;
@@ -1675,6 +1681,7 @@ footer .fgrid{display:grid;grid-template-columns:minmax(220px,1fr) 1.15fr .85fr;
   gap:clamp(28px,4vw,var(--s8));align-items:start;}
 /* Не знак, а имя компании тем же начертанием, что весь набор: сюда придут
    реквизиты, и знак над ними читался бы вывеской, а не шапкой документа. */
+footer .fbrand .flg{display:block;height:44px;width:auto;margin:0 0 20px -10px;}
 footer .fbrand .fname{margin:0;font-family:inherit;font-size:22px;font-weight:600;
   letter-spacing:-.01em;text-transform:none;color:#EFEDEA;line-height:1.2;}
 /* Учётный номер компании. Он ярче описания над ним, потому что это
@@ -2247,7 +2254,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <div id="wipe"></div>
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
-  <a class="brand" href="#top" aria-label="Gridec"><span class="wm">GRIDEC</span></a>
+  <a class="brand" href="#top" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
   <nav><a class="lk" href="#applications">%%NAV_INDUSTRIES%%</a><a class="lk" href="#services">%%NAV_SERVICES%%</a><a class="lk" href="#company">%%NAV_COMPANY%%</a></nav>
   <div class="navr">
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="%%IX_ARIA%%"><span class="ixw">%%IX_LABEL%%</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
@@ -2446,6 +2453,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <footer>
   <div class="wrap fgrid">
     <div class="fbrand rv">
+      <img class="flg" src="./brand/gridec-logo-dark.svg" alt="Gridec" width="325" height="92" loading="lazy" decoding="async">
       <p class="fname">%%CO_LEGAL%%</p>
       <p>%%HERO_EYEBROW%%</p>
       <p class="freg">%%CO_TIN_LB%% <b>%%CO_TIN%%</b></p>

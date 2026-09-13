@@ -1443,7 +1443,7 @@ SITE_URL = 'https://gridec.am'
 # страницы на английскую. Замена адресов такого побочного действия не имеет.
 def deploy_urls(html):
     for a, b in (('"./hy.html"', '"/hy/"'), ('"./index.html"', '"/"'),
-                 ('./fonts/', '/fonts/'), ('./uploads/', '/uploads/'),
+                 ('./fonts/', '/fonts/'), ('./uploads/', '/uploads/'), ('./brand/', '/brand/'),
                  ('"./favicon', '"/favicon'), ('"./apple-touch-icon',
                                                '"/apple-touch-icon')):
         html = html.replace(a, b)
