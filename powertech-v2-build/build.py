@@ -11,6 +11,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # строке с FileNotFoundError. Прежний путь на соседний `assets` остаётся запасным.
 _LOCAL = HERE if os.path.isdir(os.path.join(HERE, 'fonts')) else None
 SITE = os.environ.get('PT_SITE') or _LOCAL or os.path.join(HERE, '..', 'assets')
+# Вариант типографики (2026-09-13): '' = как есть, 'A' = Overused Grotesk с исправленным
+# контрастом, кеглями и интервалами, 'B' = то же на Inter. Армянская страница в A и B
+# одинакова: Mardoto 500 в заголовках подключён и в деплойной сборке.
+TYPO = os.environ.get('PT_TYPO', '').upper()
 FONTS = os.path.join(SITE, 'fonts')
 IMGS = os.path.join(HERE, 'img')
 
@@ -56,6 +60,10 @@ def font_face(fam, weight, fn):
 # Archivo, Big Shoulders Display и Martian Mono больше не вшиваются: после замены на
 # них не ссылается ни одно правило. Файлы оставлены в fonts на случай возврата.
 FF_EN = font_face('Overused Grotesk', '300 900', 'overused-grotesk-latin.woff2')
+if TYPO == 'B':
+    # Inter Variable (SIL OFL, rsms/inter; файл — латинское подмножество с fonts.gstatic.com,
+    # ось веса 100–900). Overused Grotesk остаётся вшитым на случай запасного правила.
+    FF_EN += font_face('Inter', '100 900', 'inter-latin.woff2')
 # Departure Mono, пиксельный, SIL OFL — шрифт показаний. Вес объявлен диапазоном,
 # хотя начертание одно: иначе на элементах с 600 браузер подделает жир и размажет
 # пиксельные штрихи.
@@ -115,11 +123,38 @@ READOUT_HY = """
 .step .no{letter-spacing:.08em;}
 """
 
-MONO_EN = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
+MONO_EN = ("'Inter','Helvetica Neue',Helvetica,Arial,sans-serif" if os.environ.get('PT_TYPO', '').upper() == 'B'
+           else "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif")
 MONO_HY = "'Arian AMU Serif',Georgia,serif"
+# У Arian AMU есть только Regular и Bold. Прежняя запись «400 500» отдавала Regular и на
+# 500 — честнее объявить 400: запрос 500 всё равно берёт ближайший, 400, но без вида
+# отдельного Medium. В варианте «как есть» оставлено старое объявление для сравнения.
+ARIAN_REG = '400' if TYPO else '400 500'
+# ---------------------------------------------------------------- typography variants
+# Числа вариантов A/B (бриф владельца 2026-09-13, референс качества — metatech.am):
+# проза 17px/1.6 непрозрачным #343A40 (9,8:1 на бумаге), лид 19px/1.55, заголовки
+# тёмно-синим #0D2440, на тёмных плитах абзацы #E8E3DB (12:1), подписи 12–15px.
+# Английские заголовки в обычном регистре, лёгкое уплотнение −.015em; армянские без
+# отрицательного трекинга. «Как есть» — прежние числа, чтобы сравнение было честным.
+_OG = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
+_INTER = "'Inter','Helvetica Neue',Helvetica,Arial,sans-serif"
+_VARS_AB = ('--t-p:17px;--t-p-lh:1.6;--t-lede:19px;--t-lede-lh:1.55;--t-hp:clamp(17px,1.45vw,20px);--t-hp-lh:1.55;'
+            '--t-hp-hy:clamp(17px,1.45vw,20px);--t-small:15px;--t-small-lh:1.55;--t-tag:12px;--t-q:17px;'
+            '--fg-head:#0D2440;--on-dark:#E8E3DB;--on-dark-lede:#E8E3DB;--on-dark-small:#D9D3CA;'
+            '--on-dark-note:#D9D3CA;--on-dark-link:#E8E3DB;')
+TYPOS = {
+    # HYMIX — армянское усиление прозы через color-mix (84/82 %); в вариантах A/B проза и так
+    # непрозрачная, и это правило снято, иначе оно (специфичнее :root) перебивало бы палитру.
+    '':  dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='text-transform:uppercase;', EN_LH='.92', EN_LS='.006em', EN_H1WT='700', EN_BIGLS='-.022em', HY_LS='-.012em', VARS='',
+              HYMIX='--fg-mid:color-mix(in srgb,var(--fg) 84%,transparent); --fg-soft:color-mix(in srgb,var(--fg) 82%,transparent);'),
+    'A': dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.02', EN_LS='-.015em', EN_H1WT='700', EN_BIGLS='-.022em', HY_LS='0', VARS=_VARS_AB, HYMIX=''),
+    'B': dict(EN_BODY=_INTER, EN_HEAD=_INTER, EN_TT='', EN_LH='1.02', EN_LS='-.02em', EN_H1WT='800', EN_BIGLS='-.025em', HY_LS='0', VARS=_VARS_AB, HYMIX=''),
+}
+TY = TYPOS[TYPO]
+
 
 FF_HY = '\n'.join([
-    font_face('Arian AMU', '400 500', 'arian-amu-400.woff2'),
+    font_face('Arian AMU', ARIAN_REG, 'arian-amu-400.woff2'),
     font_face('Arian AMU', '600 900', 'arian-amu-700.woff2'),
     font_face('Arian AMU Serif', '400 500', 'arian-amu-serif-400.woff2'),
     font_face('Arian AMU Serif', '600 900', 'arian-amu-serif-700.woff2'),
@@ -247,7 +282,7 @@ def nbsp(value, lang):
 
 # Технические строки: пути, размеры, гарнитуры, готовые блоки разметки.
 NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT',
-           'HEADFONT', 'HEADWT', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
+           'HEADFONT', 'HEADWT', 'H1WT', 'TYPOVARS', 'HYMIX', 'BIGLS', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
            'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'REP_LIST',
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA'}
@@ -423,11 +458,11 @@ EN = {
  'META_DESC': 'Seven-day power quality monitoring in Armenia. We measure under representative load and report the findings.',
  'FONTFACES': FF_EN + '\n' + FF_DEP,
  'READOUT': READOUT_EN % dict(mono=MONO_EN),
- 'BODYFONT': "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif",
- 'HEADFONT': "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif", 'HEADWT': '700',
+ 'BODYFONT': TY['EN_BODY'],
+ 'HEADFONT': TY['EN_HEAD'], 'HEADWT': '700',
  'MONOFONT': MONO_EN,
  'NAVFONT': 'inherit',
- 'HEADTT': 'text-transform:uppercase;', 'HEADLH': '.92', 'HEADLS': '.006em',
+ 'HEADTT': TY['EN_TT'], 'HEADLH': TY['EN_LH'], 'HEADLS': TY['EN_LS'], 'H1WT': TY['EN_H1WT'], 'TYPOVARS': TY['VARS'], 'HYMIX': '', 'BIGLS': TY['EN_BIGLS'],
  # Шкала умножена на 0,66: узкий Big Shoulders сменился нормальным по ширине
  # гротеском, и при прежнем кегле строка героя выходила из колонки в полтора раза.
  'H1SIZE': 'clamp(38px,4.75vw,77px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
@@ -738,7 +773,7 @@ HY = {
  'HEADFONT': "'Mardoto','Arian AMU',sans-serif", 'HEADWT': '500',
  'MONOFONT': MONO_HY,
  'NAVFONT': "'Arian AMU Serif',Georgia,serif",
- 'HEADTT': '', 'HEADLH': '1.0', 'HEADLS': '-.012em',
+ 'HEADTT': '', 'HEADLH': '1.0', 'HEADLS': TY['HY_LS'], 'H1WT': '500', 'TYPOVARS': TY['VARS'], 'HYMIX': TY['HYMIX'], 'BIGLS': TY['HY_LS'],
  # Шкала та же, что в английской версии, буква в букву. Мерили не кегль, а
  # рост знака: у Arian AMU и Overused Grotesk доли прописной и строчной от
  # кегля совпадают (.72 и .53), поэтому одинаковые числа дают одинаковый
@@ -1050,20 +1085,23 @@ def font_face_url(fam, weight, fn):
 # Mono, которых в стилях уже нет, и не объявлял Overused Grotesk с Departure
 # Mono, на которых держится вся страница. В превью-сборке шрифты вшиты в base64,
 # поэтому на глаз это не ловилось — а выложенная страница уходила в системный.
-FF_EN_D = '\n'.join([
+FF_EN_D = '\n'.join(([font_face_url('Inter', '100 900', 'inter-latin.woff2')] if TYPO == 'B' else []) + [
     font_face_url('Overused Grotesk', '300 900', 'overused-grotesk-latin.woff2'),
     font_face_url('Departure Mono', '100 900', 'departure-mono.woff2'),
 ])
 
 FF_HY_D = '\n'.join([
-    font_face_url('Arian AMU', '400 500', 'arian-amu-400.woff2'),
+    font_face_url('Arian AMU', ARIAN_REG, 'arian-amu-400.woff2'),
     font_face_url('Arian AMU', '600 900', 'arian-amu-700.woff2'),
     font_face_url('Arian AMU Serif', '400 500', 'arian-amu-serif-400.woff2'),
     font_face_url('Arian AMU Serif', '600 900', 'arian-amu-serif-700.woff2'),
-    # Цифры показаний, счётчика и номеров разделов на армянской странице тоже
-    # пиксельные — без этой строки они падали в системный моноширинный.
+    # Пиксельная гарнитура показаний и счётчиков — та же, что на английской странице.
     font_face_url('Departure Mono', '100 900', 'departure-mono.woff2'),
-])
+] + ([
+    # Без этой строки выложенная страница не знала Mardoto и рисовала заголовки Arian AMU
+    # Regular (найдено аудитом отрисованных шрифтов 2026-09-13). В варианте «как есть»
+    # строка выключена намеренно: сравнение показывает живой сайт таким, какой он есть.
+    font_face_url('Mardoto', '500', 'mardoto-500.woff2')] if TYPO else []))
 IMGD_D = {'IMG%d' % i: './uploads/img/' + f for i, f in enumerate(IMG_FILES)}
 
 # ---------------------------------------------------------------- assemble
@@ -1366,7 +1404,7 @@ PAL_CSS = """
      зрением, и для вторичной прозы контраст значит не меньше кегля: .68
      давало 4,92:1 — норму AA, но впритык. Держим тот же приглушённый тон,
      просто не на самой границе. */
-  --fg:%(inkw)s;--fg-mid:rgba(%(inkwrgb)s,.78);--fg-soft:rgba(%(inkwrgb)s,.76);
+  --fg:%(inkw)s;--fg-mid:%(fgmid)s;--fg-soft:%(fgsoft)s;
   --hair:rgba(%(inkwrgb)s,.13);--hair2:rgba(%(inkwrgb)s,.07);}
 .plate,.plate2,.other,.chart,.ic,.rep-head{--brand:%(dark)s;--brand-ink:%(dark)s;--brand-on:%(ink)s;}
 /* Приглашение больше не фирменный блок. Прежде оно заливалось цветом марки
@@ -1391,6 +1429,10 @@ def palette_pass(name):
     p = dict(PALETTES[name])
     p['inkacc'] = _mix(p['light'], p['deep'], .6)
     inkw = p.get('inkwarm', p['ink'])
+    # Варианты типографики: проза и подписи непрозрачные (#343A40 = 9,8:1, #62676D = 5,0:1 на
+    # бумаге #F6F1E9) вместо чернил с прозрачностью .78/.76, которые читались тускло.
+    p['fgmid'] = '#343A40' if TYPO else 'rgba(%s,.78)' % _rgb(inkw)
+    p['fgsoft'] = '#62676D' if TYPO else 'rgba(%s,.76)' % _rgb(inkw)
     css = PAL_CSS % dict(p, name=name, inkrgb=_rgb(p['ink']),
                          inkw=inkw, inkwrgb=_rgb(inkw),
                          darkrgb=_rgb(p['dark']), glowrgb=_rgb(p['glow']))
@@ -1572,9 +1614,10 @@ DEPLOY = os.environ.get('PT_DEPLOY') or os.path.join(ROOT, 'site')
 
 # Ровно те начертания, которые объявлены в FF_EN_D и FF_HY_D. Лишние не кладём:
 # каждый файл в каталоге сайта — это то, что кто-то может скачать.
-DEPLOY_FONTS = ['overused-grotesk-latin.woff2', 'departure-mono.woff2',
-                'arian-amu-400.woff2', 'arian-amu-700.woff2',
-                'arian-amu-serif-400.woff2', 'arian-amu-serif-700.woff2']
+DEPLOY_FONTS = (['overused-grotesk-latin.woff2', 'departure-mono.woff2',
+                 'arian-amu-400.woff2', 'arian-amu-700.woff2',
+                 'arian-amu-serif-400.woff2', 'arian-amu-serif-700.woff2']
+                + (['mardoto-500.woff2'] if TYPO else []) + (['inter-latin.woff2'] if TYPO == 'B' else []))
 DEPLOY_ICONS = ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']
 
 def deploy_asset(src, dst):

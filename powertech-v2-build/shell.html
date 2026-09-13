@@ -62,13 +62,20 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;
 
    То есть выбор такой: либо ровное сглаживание, либо зерно поверх страницы.
    Зерно важнее — оно даёт бумаге фактуру. */
+/* ТИПОГРАФИЧЕСКИЕ ПЕРЕМЕННЫЕ (2026-09-13). Кегли, интерлиньяж и цвет прозы заданы в
+   одном месте; правила ниже ссылаются на них. Значения по умолчанию = прежние
+   числа страницы; вариант типографики подставляет свои через %%TYPOVARS%%. */
+:root{--t-p:16px;--t-p-lh:1.75;--t-lede:16px;--t-lede-lh:1.75;--t-hp:clamp(16px,1.5vw,20px);--t-hp-lh:1.76;
+  --t-hp-hy:clamp(17px,1.6vw,21px);--t-small:14px;--t-small-lh:1.6;--t-tag:11px;--t-q:16px;
+  --fg-head:var(--fg);--on-dark:rgba(239,237,234,.68);--on-dark-lede:rgba(239,237,234,.66);
+  --on-dark-small:rgba(239,237,234,.66);--on-dark-note:rgba(239,237,234,.70);--on-dark-link:rgba(239,237,234,.72);%%TYPOVARS%%}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:%%BODYFONT%%;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
 /* paper grain — one fixed layer, no blend mode, 3% */
 body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* the grain motif — one tiny square, rhymed across the page */
 .eyebrow::before{content:"";width:5px;height:5px;background:var(--brand);flex:0 0 auto;}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;}
-h1,h2,h3{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;margin:0;line-height:%%HEADLH%%;%%HEADTT%%letter-spacing:%%HEADLS%%;}
+h1,h2,h3{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;color:var(--fg-head);margin:0;line-height:%%HEADLH%%;%%HEADTT%%letter-spacing:%%HEADLS%%;}
 p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px);}
 .plate .cnt,.plate2 .cnt{color:rgba(239,237,234,.58);}
@@ -99,7 +106,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
    Значение то же, что стояло инлайном у этих двух h2. */
 h2.h2gap{margin-top:var(--s4);}
 
-.lede{max-width:46ch;font-size:16px;line-height:1.75;color:var(--fg-mid);margin-top:var(--s5);}
+.lede{max-width:46ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-mid);margin-top:var(--s5);}
 /* Два вводных абзаца подряд стояли теснее, чем абзац к своему заголовку, и
    читались одним куском. Разводим их на строку. */
 .lede + .lede{margin-top:34px;}
@@ -715,7 +722,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px))
           clamp(64px,9vh,104px)
           calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));}
-h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
+h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;grid-area:head;}
 /* Пояснение и кнопки — своя полоса справа от заголовка. Верх абзаца стоит на
    уровне первой строки заголовка: надглавие (15) + его отбивка (20) + верхнее
@@ -744,7 +751,7 @@ h1{font-size:%%H1SIZE%%;margin-top:20px;text-wrap:balance;}
 @media (min-width:961px){.hero,.hgrid{min-height:calc(100svh - clamp(80px,12vh,140px));}}
 /* Заголовку разрешено занять зазор между колонками, но не поле волны:
    кривая не должна пересекать текст. Потолок — колонка плюс зазор минус 8. */
-.hero h1{color:var(--fg);width:max-content;max-width:100%;}
+.hero h1{color:var(--fg-head);width:max-content;max-width:100%;}
 /* Расшифровка заголовка — один прогон при загрузке, повтора нет (решение
    владельца, 2026-08-31; рисунок одобрен по пробе). Кипящие знаки приглушены
    разбавлением чернил бумагой; замок вспыхивает маркой со свечением — жест
@@ -767,11 +774,11 @@ h1 .ac{font-style:normal;color:var(--brand-ink);}
    читался обычным текстом страницы, а не главной мыслью первого экрана.
    Нижняя граница 16, а не 14,5: 14,5 ниже порога спокойного чтения на телефоне.
    Армянский набирается на пункт крупнее — см. правило ниже. */
-.hero .hp{max-width:52ch;font-size:clamp(16px,1.5vw,20px);line-height:1.76;color:var(--fg-mid);margin-top:30px;}
+.hero .hp{max-width:52ch;font-size:var(--t-hp);line-height:var(--t-hp-lh);color:var(--fg-mid);margin-top:30px;}
 /* Arian AMU рисует букву мельче, чем Overused Grotesk, а армянское письмо
    сложнее по форме: при равных пикселях оно читается на ступень мельче.
    Отсюда +5 % кегля, а не другой шрифт и не другой интерлиньяж. */
-html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
+html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
 /* Отбивка 36, а не 26. Лестница отбивок в блоке идёт 20 -> 30 -> 36 и НЕ
    проваливается: на 26 кнопки прилипали к абзацу и читались его продолжением,
    а не отдельным действием. Кнопки — другой род вещи, им нужен самый большой
@@ -867,7 +874,7 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 /* Строка под полем: пояснение слева, оговорка о симуляции справа — подписи
    под лентой прибора, а не два абзаца друг под другом. */
 .pq-foot{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s6);margin-top:var(--s5);}
-.pq-x{display:grid;margin-top:0;font-size:14px;line-height:1.6;color:var(--fg-mid);
+.pq-x{display:grid;margin-top:0;font-size:var(--t-small);line-height:var(--t-small-lh);color:var(--fg-mid);
   max-width:46ch;}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
 .pq[data-mode="normal"] .pq-x [data-x="normal"],
@@ -930,11 +937,11 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .plate2{position:relative;overflow:hidden;background:linear-gradient(180deg,#0D0E13 0%,#111318 60%,#14161C 100%);color:#EFEDEA;}
 .plate2>.wrap{position:relative;z-index:1;}
 .plate2 h2,.plate2 h3{color:#F4F3F1;}
-.plate2 .lede{color:rgba(239,237,234,.66);}
+.plate2 .lede{color:var(--on-dark-lede);}
 .plate2 .cnt{color:rgba(239,237,234,.58);}
 .plate2 .alink:hover{color:#fff;}
 .plate2 .display{color:#F4F3F1;}
-.plate2 .note{color:rgba(239,237,234,.70);}
+.plate2 .note{color:var(--on-dark-note);}
 .plate2 h2 i,.plate2 .lede i{color:rgba(239,237,234,.4);}
 
 /* industries — horizontal rail, detail opens on click */
@@ -1082,7 +1089,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
      hard dark fill here hid its copy. */
   background-color:inherit;}
 .ic-foot h3{font-size:clamp(19px,1.9vw,26px);margin:0 0 var(--s2);}
-.ic-foot p{font-size:14px;line-height:1.6;color:rgba(239,237,234,.66);
+.ic-foot p{font-size:var(--t-small);line-height:var(--t-small-lh);color:var(--on-dark-small);
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 /* the invitation keeps the brand colour and its drawing */
 /* Последняя плита была залита цветом марки целиком, и её низ выпадал из ряда:
@@ -1210,7 +1217,7 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    #company держит ту же ступень: большое верхнее поле у него было и раньше
    (правило ниже), а размер заголовка оставался обычным — роль объявлялась
    наполовину. */
-#why h2,#company h2{font-size:clamp(28px,4.25vw,64px);letter-spacing:-.022em;line-height:1.05;}
+#why h2,#company h2{font-size:clamp(28px,4.25vw,64px);letter-spacing:%%BIGLS%%;line-height:1.05;}
 #company{padding-top:clamp(76px,10.5vw,158px);}
 /* Раздел 01 идёт сразу за героем, и большое поле «главного раздела» ему
    больше не нужно: прежде стык заполнял чертёж с жилой, теперь его нет, и
@@ -1292,7 +1299,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .other{margin-top:10px;background:var(--inv);color:var(--inv-fg);padding:clamp(26px,3.4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;border-radius:2px;}
 .other .no{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.14em;color:rgba(239,237,234,.58);}
 .other h3{font-size:clamp(21px,2.4vw,32px);margin:var(--s3) 0 10px;}
-.other p{color:rgba(239,237,234,.66);font-size:16px;line-height:1.7;max-width:52ch;}
+.other p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:52ch;}
 .other .btn{background:var(--brand);color:#fff;}
 .other .btn::before{background:var(--bg);}
 .other .btn:hover span{color:var(--fg);}
@@ -1319,7 +1326,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .stat:nth-child(1) b{font-size:clamp(64px,9vw,128px);}
 .obs .stat:nth-child(2) b{font-size:clamp(30px,3.6vw,52px);}
 .obs .stat:nth-child(3) b{font-size:clamp(48px,6.4vw,92px);}
-.obs .stat span{display:block;margin-top:var(--s2);font-size:14px;line-height:1.5;color:rgba(239,237,234,.66);}
+.obs .stat span{display:block;margin-top:var(--s2);font-size:14px;line-height:1.5;color:var(--on-dark-small);}
 /* Поле: линейка семи делений по низу, линия записи над ней. */
 .obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
 .obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
@@ -1369,7 +1376,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* У шагов больше нет названий, и промежуток от номера до текста,
    который держал заголовок, берёт на себя сам абзац. */
 /* Отступ сверху был зазором под номером шага; номера нет — нет и зазора */
-.step p{font-size:16px;line-height:1.75;color:var(--fg-mid);}
+.step p{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);}
 
 /* report */
 /* ============ ГЛАВА ОТЧЁТА (бриф 2, 2026-09-12) ============
@@ -1390,7 +1397,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
   color:#EFEDEA;padding:clamp(72px,7vw,104px) 0 var(--rep-over);}
 .rep-head h2{color:#F4F3F1;}
 .rep-head .cnt{color:rgba(239,237,234,.58);}
-.rep-head .lede{color:rgba(239,237,234,.66);}
+.rep-head .lede{color:var(--on-dark-lede);}
 .rep-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.8vw,24px);
   align-items:start;padding-bottom:clamp(64px,8vw,120px);}
 .doc{grid-column:1 / span 7;margin-top:calc(var(--rep-over) * -1 + clamp(28px,3.4vw,56px));
@@ -1522,7 +1529,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
   margin-top:var(--s5);padding-left:var(--s5);max-width:52ch;position:relative;}
 .lnote::before{content:"";position:absolute;left:0;top:.4em;bottom:.4em;
   width:1px;background:var(--hair);}
-.plate2 .lnote{color:rgba(239,237,234,.70);}
+.plate2 .lnote{color:var(--on-dark-note);}
 .plate2 .lnote::before{background:rgba(239,237,234,.18);}
 /* Обозначение нормы набрано гарнитурой самой фразы, а не пиксельной.
    Пиксельная тут стояла как «приборная», и высота цифры была подогнана под
@@ -1558,9 +1565,9 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
   display:grid;grid-template-columns:34px minmax(0,1fr) 24px;column-gap:14px;align-items:baseline;
   /* Те же ступени, что на остальных разделах: вопрос — текстовый кегль 16 с
      весом 500 (как строки перечня 04), ответ — 16/1.75, ярлыки — роль .tag. */
-  padding:16px 0;font:inherit;font-size:16px;line-height:1.5;font-weight:500;letter-spacing:0;}
+  padding:16px 0;font:inherit;font-size:var(--t-q);line-height:1.5;font-weight:500;letter-spacing:0;}
 .qa-q:hover .qa-t{color:var(--brand-ink);}
-.qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
+.qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
 .qa-t{transition:color .3s var(--e);}
 .qa-pm{position:relative;width:24px;height:24px;align-self:center;}
@@ -1571,7 +1578,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s var(--e);}
 .qa-a>div{overflow:hidden;min-height:0;}
 .qa-a.open{grid-template-rows:1fr;}
-.qa-a p{margin:0;padding-left:48px;font-size:16px;line-height:1.75;color:var(--fg-mid);max-width:58ch;}
+.qa-a p{margin:0;padding-left:48px;font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:58ch;}
 .qa-svc{display:block;margin:14px 0 0 48px;padding-bottom:clamp(18px,1.8vw,26px);}
 .qa-pic-m{display:none;}
 @media (max-width:960px){
@@ -1617,7 +1624,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* Ограничения измерения нет: переносы в утверждениях заданы разметкой, и лимит в
    22 знака ломал бы авторскую строку ещё раз, на третью. Ширину держит колонка. */
 .story p{/* было 17px при 16px у остальной прозы: та же роль, тот же шрифт,
-     разница в пиксель. */font-size:16px;line-height:1.7;color:var(--fg-mid);
+     разница в пиксель. */font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);
   max-width:46ch;margin:var(--s4) 0 0;}
 @media (max-width:860px){.story{grid-template-columns:1fr;row-gap:clamp(var(--s6),8vw,var(--s8));}
   .story .sb,.story .sb:nth-child(2),.story .sb:nth-child(3){grid-column:1 / -1;}
@@ -1628,7 +1635,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .plate{background:linear-gradient(180deg,#0D0E13 0%,#111318 58%,#15171E 100%);color:var(--inv-fg);}
 .plate .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,70px);align-items:center;padding-top:clamp(70px,9vw,130px);padding-bottom:clamp(70px,9vw,130px);}
 .plate h2{color:var(--inv-fg);}
-.plate p{color:rgba(239,237,234,.68);font-size:16px;line-height:1.75;max-width:46ch;margin-top:22px;}
+.plate p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:46ch;margin-top:22px;}
 .plate .btn{background:var(--brand);color:#fff;margin-top:30px;}
 /* heading and call to action are one element, so the phrase is said once */
 /* the CTA reads as a button, so it takes a step below the section titles —
@@ -1715,14 +1722,14 @@ footer h3::after{content:"";flex:1;height:1px;background:rgba(239,237,234,.14);}
 footer ul{list-style:none;margin:0;padding:0;}
 footer .flist li+li,footer .fcon li+li{margin-top:11px;}
 footer .flist a{display:block;
-  font-size:14px;line-height:1.5;color:rgba(239,237,234,.72);
+  font-size:14px;line-height:1.5;color:var(--on-dark-link);
   transition:color .3s var(--e);}
 footer .flist a:hover{color:#fff;}
 /* Роль Body: телефон и адрес — то, ради чего в футер и приходят, их читают,
    а не проглядывают. Тон поднят с .72 до .82: на чернильной плите это
    единственные строки, по которым будут звонить. */
 footer .fcon li{font-size:16px;line-height:1.65;color:rgba(239,237,234,.82);}
-footer .fcon a{color:rgba(239,237,234,.72);transition:color .3s var(--e);}
+footer .fcon a{color:var(--on-dark-link);transition:color .3s var(--e);}
 footer .fcon a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;}
 /* В колоночном флексе поля auto ужимают полосу до содержимого и ставят её
    посередине — ширину задаём явно, иначе строка копирайта висит в центре. */
@@ -1815,7 +1822,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    (#report, #measure). Было 38 у окна снимка и по 30 у двух остальных, при 26 у
    заголовка раздела: окно меньше раздела по смыслу, но объявляло себя крупнее. */
 #imd h3{font-size:clamp(19px,2vw,28px);margin:0 0 14px;}
-#imd .p1{font-size:16px;line-height:1.75;color:var(--fg-mid);max-width:62ch;}
+#imd .p1{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:62ch;}
 #imd .lb{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brand-ink);margin:26px 0 var(--s1);}
 /* Перечень выводов — настоящий список: он и выглядит перечнем, и читается
    вслух как перечень с числом пунктов. Маркер рисует .fi em, поэтому
@@ -2062,8 +2069,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    выводил вводный абзац на 10,6:1 — он сравнивался с основным, и различать
    главное от второстепенного становилось нечем. */
 :root:lang(hy){
-  --fg-mid:color-mix(in srgb,var(--fg) 84%,transparent);
-  --fg-soft:color-mix(in srgb,var(--fg) 82%,transparent);
+  %%HYMIX%%
   --hair:color-mix(in srgb,var(--fg) 18%,transparent);
   --hair2:color-mix(in srgb,var(--fg) 10%,transparent);}
 
