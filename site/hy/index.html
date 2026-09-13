@@ -360,14 +360,14 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
   font-feature-settings:'case' 1;color:var(--fg-soft);min-width:2.4ch;}
 .pq-dots{display:flex;flex-wrap:wrap;gap:2px;margin-left:-10px;}
 .pq-dot{position:relative;display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 10px;border-radius:2px;
-  font-family:'Arian AMU','Helvetica Neue',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--fg-soft);cursor:pointer;transition:color .3s var(--e);}
+  font-family:'Arian AMU','Helvetica Neue',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg);cursor:pointer;transition:color .3s var(--e);}
 .pq-dot i{display:block;width:6px;height:6px;flex:none;background:var(--hair);
   transition:background-color .3s var(--e),transform .3s var(--e);}
 .pq-dot:hover i{background:var(--fg-soft);transform:scale(1.34);}
 .pq-dot[aria-pressed="true"] i{background:var(--brand);transform:none;}
 .pq-dot:hover{color:var(--fg);}
-.pq-dot[aria-pressed="true"]{color:var(--brand);}
+.pq-dot[aria-pressed="true"]{color:var(--brand-ink);}
 .pq-dot:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
 .pq-dot::after{content:"";position:absolute;left:10px;right:10px;bottom:7px;height:1px;background:var(--brand);
   transform:scaleX(0);transform-origin:left;opacity:.55;}
