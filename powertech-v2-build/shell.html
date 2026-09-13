@@ -872,7 +872,8 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 .pq-x span{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .45s var(--e);}
 .pq[data-mode="normal"] .pq-x [data-x="normal"],
 .pq[data-mode="dip"] .pq-x [data-x="dip"],
-.pq[data-mode="harm"] .pq-x [data-x="harm"]{visibility:visible;opacity:1;}
+.pq[data-mode="harm"] .pq-x [data-x="harm"],
+.pq[data-mode="trans"] .pq-x [data-x="trans"]{visibility:visible;opacity:1;}
 .pq-note{margin:0;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.02em;
   color:var(--fg-soft);text-align:right;flex:none;}
 /* Армянская подпись: без прописных и разрядки — это правила латиницы; и тем
@@ -880,6 +881,8 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:%%BODYFONT%%;
   letter-spacing:0;text-transform:none;}
 html[lang="hy"] .pq-dot{letter-spacing:0;text-transform:none;}
+/* Четыре имени на узком экране: два ряда по два, а не три и одно сиротой. */
+@media (max-width:520px){.pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;column-gap:6px;row-gap:0;}}
 /* Под шторкой перехода поле прячется вместе с остальным героем. */
 html.wipecover .pq{visibility:hidden;}
 /* header over the dark hero: light chrome until scrolled */
@@ -2284,7 +2287,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <p class="hp">%%HERO_P%%</p>
       <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
     </div>
-    <!-- ПОЛЕ ГЕРОЯ: ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ. Одна кривая, три состояния по выбору
+    <!-- ПОЛЕ ГЕРОЯ: ФОРМА ВОЛНЫ НАПРЯЖЕНИЯ. Одна кривая, четыре состояния по выбору
          читателя. Это иллюстрация мгновенного напряжения, а не запись прибора,
          и оговорка говорит это прямо. Надписей минимум — владелец снял всё
          лишнее: счётчик состояния (номер, квадраты, имя), одна фраза
@@ -2302,12 +2305,13 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
           <button type="button" class="pq-dot" data-mode="normal" aria-pressed="true" aria-label="%%PQ_M_NORMAL%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_NORMAL%%</span></button>
           <button type="button" class="pq-dot" data-mode="dip" aria-pressed="false" aria-label="%%PQ_M_DIP%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_DIP%%</span></button>
           <button type="button" class="pq-dot" data-mode="harm" aria-pressed="false" aria-label="%%PQ_M_HARM%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_HARM%%</span></button>
+          <button type="button" class="pq-dot" data-mode="trans" aria-pressed="false" aria-label="%%PQ_M_TRANS%%"><i aria-hidden="true"></i><span class="pq-lbl">%%PQ_M_TRANS%%</span></button>
         </div>
         <button type="button" class="pq-pause" data-pause="%%PQ_PAUSE%%" data-resume="%%PQ_RESUME%%"><i aria-hidden="true"></i></button>
       </div>
       <div class="pq-chart"><canvas class="pq-cv" aria-hidden="true"></canvas></div>
       <div class="pq-foot">
-      <p class="pq-x" aria-live="polite"><span data-x="normal">%%PQ_X_NORMAL%%</span><span data-x="dip">%%PQ_X_DIP%%</span><span data-x="harm">%%PQ_X_HARM%%</span></p>
+      <p class="pq-x" aria-live="polite"><span data-x="normal">%%PQ_X_NORMAL%%</span><span data-x="dip">%%PQ_X_DIP%%</span><span data-x="harm">%%PQ_X_HARM%%</span><span data-x="trans">%%PQ_X_TRANS%%</span></p>
       <p class="pq-note">%%PQ_NOTE%%</p>
       </div>
     </div>
@@ -2661,32 +2665,44 @@ var PT=window.PT;
   var fig=document.getElementById('pq');if(!fig)return;
   var box=fig.querySelector('.pq-chart'),cv=fig.querySelector('.pq-cv');
   var ctx=cv&&cv.getContext('2d');if(!ctx)return;
-  var MODES=['normal','dip','harm'],dots=[].slice.call(fig.querySelectorAll('.pq-dot')),noEl=fig.querySelector('.pq-no');
+  var MODES=['normal','dip','harm','trans'],dots=[].slice.call(fig.querySelectorAll('.pq-dot')),noEl=fig.querySelector('.pq-no');
   var pbtn=fig.querySelector('.pq-pause');
 
-  var CYCLES=4;            /* периодов в окне: глаз читает синусоиду с 4-6 гребней */
+  var CYCLES=6;            /* периодов в окне: на приборах в кадре 5–10, волна плотнее (владелец, 2026-09-13; было 4) */
   var SPEED=0.35;          /* периодов в секунду: 50 Гц замедлены в ~140 раз; владелец просил ещё медленнее */
-  /* Три формы искажения, как их знает инженер. Коэффициенты — доли 3-й, 5-й
-     и 7-й гармоник от ТОГО ЖЕ аргумента, знак = фаза 0 или 180°:
-     1) плоская вершина — однофазные выпрямители, компьютеры, LED-драйверы:
-        3-я и 5-я в фазе срезают гребень;
+  /* Три формы искажения, как их знает инженер. Первые три числа — доли 3-й,
+     5-й и 7-й гармоник от ТОГО ЖЕ аргумента, знак = фаза 0 или 180°:
+     1) плоская вершина — однофазные выпрямители, компьютеры, LED-драйверы;
      2) острая вершина — 3-я в противофазе, гребень выше номинала;
-     3) «плечи» шестипульсных приводов — 5-я и 7-я, 3-й почти нет.
+     3) «плечи» шестипульсного привода — 5-я и 7-я, и ВЫРЕЗЫ КОММУТАЦИИ
+        (четвёртое число — их вес): шесть острых зазубрин за период, у
+        30°+60°k, глубина 0.18, ширина ~0.3 мс — так сеть рядом с приводом
+        выглядит на любой реальной осциллограмме (2026-09-13, по записям).
      Формы сменяют друг друга: сеть меняется с нагрузкой. Смена привязана к
      времени СИГНАЛА, поэтому приходит справа и едет с волной, а на паузе
      стоит. THD каждой 14–18 % — преувеличено ради читаемости. */
-  var HP=[[0.16,0.07,0.03],[-0.14,0.05,-0.03],[0.02,-0.12,-0.06]];
+  var HP=[[0.16,0.07,0.03,0],[-0.14,0.05,-0.03,0],[0.02,-0.09,-0.05,1]];
   var HP_HOLD=2.4,HP_MORPH=0.9;   /* периодов: форма стоит ~5 с, переходит ~2 с */
-  /* Провал: глубина 0.35 (остаточное 0.65 о.е.), длина два периода, края по
-     0.15 периода, повтор каждые десять периодов — окно успевает целиком
-     очиститься, и провал читается событием, а не режимом. */
-  var DIP={depth:0.40,len:2.0,edge:0.15,every:7,first:0.4};   /* every 7: окно 4 + провал 2, тишина 1 период ≈ 3 с */
+  var NOTCH={depth:0.18,sig:0.007,ring:0.05};
+  /* Провал — по реальным записям (2026-09-13): срез за ~1 мс (0.04 периода),
+     а не колокол — сеть меняется за миллисекунду. Две формы по очереди:
+     чётные события — КЗ в сети: прямоугольник, остаток 0.55, сдвиг фазы −15°
+     (излом волны у начала), 1.5 периода, возврат ступенькой; нечётные — пуск
+     двигателя: срез до 0.78 и возврат по экспоненте за ~3 периода. Начало
+     КЗ — на подъёме к пику (фаза 0.194 = 70°): гребень обрывается и не
+     доходит до пунктира; начало пуска — у отрицательного пика (0.694).
+     Повтор каждые 10 периодов (~29 с): окно 6 успевает очиститься целиком. */
+  var DIP={depth:0.45,len:1.5,edge:0.04,jump:15/180*Math.PI,mdepth:0.22,mtau:1.1,mlen:3.3,every:10,first:0.4,pow:0.194};
+  /* Переходный процесс — включение конденсаторной батареи: у пика напряжение
+     обваливается, затем выброс до ~1.35 о.е. и звон 9× основной (~450 Гц),
+     гаснет за полпериода. Повтор каждые 9 периодов. */
+  var TR={k:0.48,tau:0.26,f:9,every:9,first:0.4,pow:0.208};
   var TWEEN=600;           /* мс, переход между состояниями */
   var TAU=Math.PI*2;
 
   var W=0,Hc=0,dpr=1,T=0,last=0,raf=0;
-  var wd=0,wh=0,tw=null;   /* веса провала и искажения, текущий tween */
-  var dipBase=0,mode='normal',playing=true,seen=true,alive=true;
+  var wd=0,wh=0,wt=0,tw=null;   /* веса провала, искажения и переходного процесса; текущий tween */
+  var dipBase=0,trBase=0,mode='normal',playing=true,seen=true,alive=true;
   var AUTO=10000,autoT=0,manual=false;   // auto-advance modes until the visitor clicks
   function runAdv(){
     dots.forEach(function(b){b.classList.remove('pq-run');});
@@ -2711,63 +2727,95 @@ var PT=window.PT;
   function size(){
     var r=box.getBoundingClientRect();
     W=Math.max(1,Math.round(r.width));Hc=Math.max(1,Math.round(r.height));
+    /* На телефоне поле в 360 px: шесть периодов сливаются в гребёнку, а
+       вырезы коммутации теряются между отсчётами — там четыре периода. */
+    CYCLES=W<560?4:6;
     dpr=Math.min(2,devicePixelRatio||1);
     cv.width=Math.round(W*dpr);cv.height=Math.round(Hc*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-  /* Сглаженное прямоугольное окно: 0 вне [0,len], 1 в середине, края —
-     плавная ступень. У колокола дно в одной точке, и длительность по нему не
-     отмерить; у прямоугольника она видна. */
-  function win(u){
-    if(u<=0||u>=DIP.len)return 0;
-    var a=u<DIP.edge?u/DIP.edge:(u>DIP.len-DIP.edge?(DIP.len-u)/DIP.edge:1);
-    return a*a*(3-2*a);
-  }
+  function sm(a){a=a<0?0:a>1?1:a;return a*a*(3-2*a);}
+  /* Провал в момент tau: g — доля снижения амплитуды, ph — сдвиг фазы.
+     Чётные события — КЗ (прямоугольник со срезом), нечётные — пуск двигателя
+     (срез и экспонента). При reduce — одно событие КЗ, стоит в середине. */
+  var DI={g:0,ph:0};
   function dipAt(tau){
-    if(wd<=0.001)return 0;
-    var u=tau-dipBase;
-    if(u<0)return 0;
-    if(!rm)u-=Math.floor(u/DIP.every)*DIP.every;   /* повтор после тихого промежутка */
-    return win(u);
+    DI.g=0;DI.ph=0;if(wd<=0.001)return DI;
+    var u=tau-dipBase;if(u<0)return DI;
+    var k=0;if(!rm){k=Math.floor(u/DIP.every);u-=k*DIP.every;}
+    if(rm||!(k%2)){
+      var L=DIP.len,e=DIP.edge,w=0;
+      if(u>0&&u<L)w=u<e?sm(u/e):(u>L-e?sm((L-u)/e):1);
+      DI.g=DIP.depth*w;DI.ph=DIP.jump*w;
+    }else{u-=0.5;if(u>0)DI.g=sm(u/DIP.edge)*DIP.mdepth*Math.exp(-u/DIP.mtau);}
+    return DI;
   }
-  /* Начала провалов, попадающих в окно [T-CYCLES, T]. Повтор реже длины
-     окна плюс длины провала, поэтому событий здесь не больше одного. */
+  /* События провала, попадающие в окно [T-CYCLES, T]: [начало, длина подсветки]. */
   function dipEvents(){
     var out=[];if(wd<=0.001)return out;
-    if(rm){if(dipBase<T&&dipBase+DIP.len>T-CYCLES)out.push(dipBase);return out;}
-    var k0=Math.floor((T-CYCLES-DIP.len-dipBase)/DIP.every),k1=Math.floor((T-dipBase)/DIP.every);
-    for(var k=Math.max(0,k0);k<=k1;k++){var t0=dipBase+k*DIP.every;
-      if(t0<T&&t0+DIP.len>T-CYCLES)out.push(t0);}
+    if(rm){if(dipBase<T&&dipBase+DIP.len>T-CYCLES)out.push([dipBase,DIP.len]);return out;}
+    var k0=Math.floor((T-CYCLES-DIP.mlen-1-dipBase)/DIP.every),k1=Math.floor((T-dipBase)/DIP.every);
+    for(var k=Math.max(0,k0);k<=k1;k++){var t0=dipBase+k*DIP.every,L=DIP.len;if(k%2){t0+=0.5;L=DIP.mlen;}
+      if(t0<T&&t0+L>T-CYCLES)out.push([t0,L]);}
+    return out;
+  }
+  /* Звон переходного процесса в момент tau: обвал от мгновенного значения в
+     момент включения, затухающий косинус вокруг основной. */
+  function trAt(tau){
+    if(wt<=0.001)return 0;
+    var u=tau-trBase;if(u<0)return 0;
+    if(!rm)u-=Math.floor(u/TR.every)*TR.every;
+    if(u>2)return 0;
+    var b0=Math.sin(trBase*TAU);
+    return -TR.k*b0*Math.exp(-u/TR.tau)*Math.cos(TAU*TR.f*u)*sm(u/0.004);
+  }
+  function trEvents(){
+    var out=[];if(wt<=0.001)return out;
+    if(rm){out.push(trBase);return out;}
+    var k0=Math.floor((T-CYCLES-trBase)/TR.every),k1=Math.floor((T-trBase)/TR.every);
+    for(var k=Math.max(0,k0);k<=k1;k++){var t0=trBase+k*TR.every;if(t0<T&&t0>T-CYCLES)out.push(t0);}
     return out;
   }
   /* Коэффициенты гармоник в момент tau: ступень держится, переход сглажен. */
-  var hc=[0,0,0];
+  var hc=[0,0,0,0];
   function harmAt(tau){
     var n=HP.length,seg=HP_HOLD+HP_MORPH,u=tau-Math.floor(tau/(seg*n))*(seg*n);
     var i=Math.floor(u/seg),a=HP[i],b=HP[(i+1)%n],v=u-i*seg,k=0;
     if(v>HP_HOLD){k=(v-HP_HOLD)/HP_MORPH;k=k*k*(3-2*k);}
-    hc[0]=a[0]+(b[0]-a[0])*k;hc[1]=a[1]+(b[1]-a[1])*k;hc[2]=a[2]+(b[2]-a[2])*k;
+    hc[0]=a[0]+(b[0]-a[0])*k;hc[1]=a[1]+(b[1]-a[1])*k;hc[2]=a[2]+(b[2]-a[2])*k;hc[3]=a[3]+(b[3]-a[3])*k;
     return hc;
   }
   /* Мгновенное напряжение в долях номинальной амплитуды. */
   function volt(tau){
-    var ph=tau*TAU,s=Math.sin(ph);
+    var d=dipAt(tau),ph=tau*TAU-wd*d.ph,s=Math.sin(ph);
     /* Живая сеть (владелец, 2026-09-13: «вариант 1»). Идеальной синусоиды в
        розетке не бывает — всегда есть 2–3 % пятой и около 1 % третьей
        гармоники, и амплитуда медленно дышит на ±1,5 %. Всё это в пределах
-       нормы, поэтому фактура лежит под всеми тремя состояниями; провал и
-       искажение накладываются сверху. Числа выбраны на глаз по типичным
-       записям, это по-прежнему иллюстрация, не измерение. */
+       нормы, поэтому фактура лежит под всеми состояниями; события
+       накладываются сверху. Это по-прежнему иллюстрация, не измерение. */
     s+=0.025*Math.sin(5*ph+0.6)+0.01*Math.sin(3*ph+2.1);
     if(wh>0.001){var h=rm?HP[0]:harmAt(tau);
-      s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));}
+      s+=wh*(h[0]*Math.sin(3*ph)+h[1]*Math.sin(5*ph)+h[2]*Math.sin(7*ph));
+      if(h[3]>0.001){
+        /* Вырезы коммутации: гауссов провал к нулю у каждой из шести точек и
+           короткий звон после него. Знак — сторона полуволны. */
+        var f=tau-Math.floor(tau),k,c,dd,nn,sg,nv=0;
+        for(k=0;k<6;k++){c=(30+60*k)/360;dd=f-c;dd-=Math.round(dd);
+          nn=Math.exp(-(dd*dd)/(2*NOTCH.sig*NOTCH.sig));sg=k<3?1:-1;
+          nv-=NOTCH.depth*sg*nn;if(dd>0)nv+=NOTCH.ring*sg*Math.exp(-dd/0.02)*Math.sin(dd/0.008*TAU)*(1-nn);}
+        s+=wh*h[3]*nv;}}
+    if(wt>0.001)s+=wt*trAt(tau);
     var wander=1+0.015*Math.sin(tau*TAU*0.045);
-    return wander*(1-DIP.depth*wd*dipAt(tau))*s;
+    return wander*(1-wd*d.g)*s;
   }
+  /* Метка запуска записи: треугольник у верхней кромки над началом события —
+     один знак, без текста, как маркер триггера у прибора. */
+  function trig(x0,w){ctx.globalAlpha=0.7*w;ctx.fillStyle=col.trace;ctx.beginPath();
+    ctx.moveTo(x0-4,0);ctx.lineTo(x0+4,0);ctx.lineTo(x0,5);ctx.closePath();ctx.fill();ctx.globalAlpha=1;}
   function draw(){
     if(!W)return;
     ctx.clearRect(0,0,W,Hc);
-    var cy=Hc/2,A=Hc*0.36,i,x,y;
+    var cy=Hc/2,A=Hc*0.33,i,x,y;   /* 0.33: выброс переходного процесса 1.35 о.е. должен уместиться */
     /* Сетка измерения: по вертикали — полпериода, по горизонтали — 0.5 о.е. */
     ctx.lineWidth=1;
     ctx.strokeStyle=col.grid;ctx.beginPath();
@@ -2785,22 +2833,27 @@ var PT=window.PT;
     ctx.strokeStyle=col.axis;ctx.beginPath();
     y=Math.round(cy)+0.5;ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
     /* Окно провала — подсветка участка, где напряжение отклонилось: тон
-       фирменного на бумаге и штриховые кромки. Едет вместе с сигналом. */
-    var ev=dipEvents(),e;
+       фирменного на бумаге. Левая кромка сплошная и с меткой запуска — так
+       прибор отмечает начало записи; правая штриховая. Едет вместе с сигналом. */
+    var ev=dipEvents(),e,x0,x1;
     for(e=0;e<ev.length;e++){
-      var x0=W*(1-(T-ev[e])/CYCLES),x1=W*(1-(T-ev[e]-DIP.len)/CYCLES);
-      x0=Math.max(0,x0);x1=Math.min(W,x1);if(x1<=x0)continue;
-      ctx.globalAlpha=0.06*wd;ctx.fillStyle=col.trace;ctx.fillRect(x0,0,x1-x0,Hc);
-      ctx.globalAlpha=0.35*wd;ctx.strokeStyle=col.trace;ctx.setLineDash([3,4]);ctx.beginPath();
-      if(x0>0){x=Math.round(x0)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
-      if(x1<W){x=Math.round(x1)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);}
-      ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+      x0=W*(1-(T-ev[e][0])/CYCLES);x1=W*(1-(T-ev[e][0]-ev[e][1])/CYCLES);
+      var xa=Math.max(0,x0),xb=Math.min(W,x1);if(xb<=xa)continue;
+      ctx.globalAlpha=0.06*wd;ctx.fillStyle=col.trace;ctx.fillRect(xa,0,xb-xa,Hc);
+      ctx.globalAlpha=0.35*wd;ctx.strokeStyle=col.trace;
+      if(x0>0){ctx.beginPath();x=Math.round(x0)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);ctx.stroke();trig(x0,wd);}
+      if(x1<W){ctx.setLineDash([3,4]);ctx.beginPath();x=Math.round(x1)+0.5;ctx.moveTo(x,0);ctx.lineTo(x,Hc);ctx.stroke();ctx.setLineDash([]);}
+      ctx.globalAlpha=1;
     }
+    /* Переходный процесс: только метка запуска над моментом включения. */
+    var tv=trEvents();
+    for(e=0;e<tv.length;e++){x0=W*(1-(T-tv[e])/CYCLES);if(x0>4&&x0<W-4)trig(x0,wt);}
     /* Отсчёты: справа — текущее время T, слева — на CYCLES периодов раньше.
        Рядом с настоящим следом считается идеальная синусоида — «как должно
        быть». Пунктиром она рисуется только там, где расходится со следом:
        на ровном участке две линии совпали бы и пунктир просвечивал бы. */
-    var n=Math.max(120,Math.ceil(W/2)),dev=Math.max(wd,wh),open=false;
+    /* Шаг 2/3 px: вырезы коммутации шириной ~1 px иначе пропадают между отсчётами. */
+    var n=Math.max(240,Math.ceil(W*1.5)),dev=Math.max(wd,wh,wt),open=false;
     var xs=new Array(n+1),ys=new Array(n+1),yi=new Array(n+1);
     for(i=0;i<=n;i++){
       var u=i/n,tau=T-(1-u)*CYCLES;
@@ -2826,7 +2879,7 @@ var PT=window.PT;
   function tweenStep(now){
     if(!tw)return;
     var p=Math.min(1,(now-tw.t0)/TWEEN),e=ease(p);
-    wd=tw.d0+(tw.d1-tw.d0)*e;wh=tw.h0+(tw.h1-tw.h0)*e;
+    wd=tw.d0+(tw.d1-tw.d0)*e;wh=tw.h0+(tw.h1-tw.h0)*e;wt=tw.q0+(tw.q1-tw.q0)*e;
     if(p>=1)tw=null;
   }
   function running(){return alive&&seen&&!document.hidden&&((playing&&!rm)||!!tw);}
@@ -2863,15 +2916,17 @@ var PT=window.PT;
     mode=m;fig.dataset.mode=m;
     dots.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m?'true':'false');});
     setNo(MODES.indexOf(m),init);
-    var d1=m==='dip'?1:0,h1=m==='harm'?1:0;
+    var d1=m==='dip'?1:0,h1=m==='harm'?1:0,t1=m==='trans'?1:0;
     if(d1&&wd<0.001){
       /* Провал заводится заново при каждом выборе: первый приходит справа
-         почти сразу, чтобы выбор был понятен, дальше — по расписанию. При
-         reduce он ставится в середину окна и стоит. */
-      dipBase=rm?T-CYCLES*0.5-DIP.len/2:T+DIP.first;
+         через 0.4–1.4 периода, начало выровнено на фазу 70° (целое число
+         периодов + DIP.pow), дальше — по расписанию. При reduce он ставится
+         в середину окна и стоит. */
+      dipBase=rm?T-CYCLES*0.5-DIP.len/2:Math.ceil(T+DIP.first)+DIP.pow;
     }
-    if(rm||init){wd=d1;wh=h1;tw=null;draw();armAuto();return;}
-    tw={t0:performance.now(),d0:wd,d1:d1,h0:wh,h1:h1};
+    if(t1&&wt<0.001)trBase=rm?Math.floor(T-CYCLES*0.5)+TR.pow:Math.ceil(T+TR.first)+TR.pow;
+    if(rm||init){wd=d1;wh=h1;wt=t1;tw=null;draw();armAuto();return;}
+    tw={t0:performance.now(),d0:wd,d1:d1,h0:wh,h1:h1,q0:wt,q1:t1};
     start();armAuto();
   }
   function setPaused(p){
