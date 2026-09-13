@@ -703,7 +703,10 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   /* МАКЕТ ВЛАДЕЛЬЦА (2026-09-13): текстовая полоса на кремовом, слева заголовок ~60 %,
      справа описание с кнопкой ~32 %, между ними 8 %; контейнер ~89 % экрана, поля 5,5 %.
      Под полосой — фото во всю ширину (вне контейнера). Высота героя — по содержимому. */
-  grid-template-columns:minmax(0,60fr) minmax(0,32fr);
+  /* Правка (владелец: «не выглядит премиально»): колонки 7/5 с умеренным зазором вместо 60/32 —
+     описание стоит рядом с заголовком, а не у правого края; поля — ТА ЖЕ формула, что у шапки
+     (одна ось: логотип, надглавие, заголовок). */
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
   grid-template-areas:"head side";
   /* start, а не center: подпись поля стоит на одной линии с надглавием, и
      два блока читаются одной строкой разворота. */
@@ -711,7 +714,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
   align-items:start;align-content:start;
-  column-gap:8%;max-width:none;margin:0;
+  column-gap:clamp(48px,6vw,112px);max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
      До 1280 поле в точности равно полю разделов, дальше растёт медленнее:
@@ -726,7 +729,8 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      следующего раздела должна показаться у нижней кромки первого экрана. */
   /* Владелец (2026-09-12): «добавь воздуха на герое». Верх — 15 % экрана,
      низ — 9 %, между полосой текста и полем — 8 %. */
-  padding:clamp(104px,13vh,150px) 5.5vw clamp(56px,7vw,96px);}
+  --hx:calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));
+  padding:clamp(96px,11vh,136px) var(--hx) clamp(44px,5vw,72px);}
 h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;grid-area:head;}
 /* Пояснение и кнопки — своя полоса справа от заголовка. Верх абзаца стоит на
@@ -734,10 +738,13 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
    поле h1 (20) + вынос кегля до верха букв ≈ 62–72. */
 /* Описание начинается НИЖЕ первой строки заголовка (макет): надглавие с отбивками ≈ 55 px
    плюс строка h1 (кегль × 1.05) — на 1440 это ≈ 108, на 1280 ≈ 95. */
-.hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(64px,7.4vw,108px);}
+.hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(64px,7.4vw,108px);
+  /* Правая ось: блок описания прижат к правому краю колонки, его край совпадает с краем
+     шапки (кнопка «Get in touch»). Мера 46ch: абзац читается, две кнопки стоят в ряд. */
+  justify-self:end;width:min(100%,46ch);}
 /* Три класса, а не два: правило .hero .hp с полем 30 стоит ниже по файлу и
    при равном весе брало верх — абзац съезжал на 35 px ниже верха букв. */
-.hero .hside .hp{margin-top:0;max-width:44ch;}
+.hero .hside .hp{margin-top:0;max-width:none;}
 /* Армянская версия поднимается тем же правилом. Отдельное исключение здесь
    стояло по ошибочному замеру: блок мерился по file:// без шрифтов и выходил
    621 px вместо настоящих 519, из-за чего сдвиг будто бы заводил надглавие под
@@ -803,17 +810,20 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
 .hero .eyebrow::before{background:var(--brand-ink);}
 /* ФОТО ГЕРОЯ: полновылетное, 3:1 как исходник, без рамки/тени/затемнения/движения.
    Подложка --lo на время загрузки того же тона, что бумага. */
-.hphoto{margin:0;width:100%;aspect-ratio:3/1;overflow:hidden;background:var(--lo);}
-.hphoto img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;}
+/* Высота = ширина/3 (полный кадр), но не выше 58 % окна: на широком и невысоком экране
+   (1890×900) полный кадр 630 px уходил под нижнюю кромку, и датчика на первом экране не было.
+   На 1440×900 кадр остаётся полным (480 < 522). */
+.hphoto{margin:0;width:100%;height:min(33.333vw,58vh);overflow:hidden;background:var(--lo);}
+.hphoto img{display:block;width:100%;height:100%;object-fit:cover;object-position:56% 50%;}
 /* Телефон: кадр выше (4:3); главный объект — синий датчик на среднем проводнике — в кадре
    вместе с соединителем. Точка 70 % 40 % подобрана визуально (см. снимки 390). */
 /* Планшет: кадр 2:1, точка 64 % 45 %. */
-@media (min-width:601px) and (max-width:960px){.hphoto{aspect-ratio:2/1;}.hphoto img{object-position:64% 45%;}}
-@media (max-width:600px){.hphoto{aspect-ratio:4/3;}.hphoto img{object-position:70% 40%;}}
+@media (min-width:601px) and (max-width:960px){.hphoto{height:auto;aspect-ratio:2/1;}.hphoto img{object-position:64% 45%;}}
+@media (max-width:600px){.hphoto{height:auto;aspect-ratio:4/3;}.hphoto img{object-position:70% 40%;}}
 /* Армянское описание длиннее почти вдвое: колонки 55/37 вместо 60/32. */
 @media (min-width:961px){
-  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,55fr) minmax(0,37fr);}
-  html[lang="hy"] .hero .hside .hp{max-width:none;}
+  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
+  html[lang="hy"] .hside{width:min(100%,46ch);}
 }
 /* header over the dark hero: light chrome until scrolled */
 header.on-dark .brand{color:#EFEDEA;}
