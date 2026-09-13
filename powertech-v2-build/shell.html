@@ -741,7 +741,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(64px,7.4vw,108px);
   /* Правая ось: блок описания прижат к правому краю колонки, его край совпадает с краем
      шапки (кнопка «Get in touch»). Мера 46ch: абзац читается, две кнопки стоят в ряд. */
-  justify-self:end;width:min(100%,46ch);}
+  justify-self:end;width:min(100%,49ch);}
 /* Три класса, а не два: правило .hero .hp с полем 30 стоит ниже по файлу и
    при равном весе брало верх — абзац съезжал на 35 px ниже верха букв. */
 .hero .hside .hp{margin-top:0;max-width:none;}
@@ -823,7 +823,7 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
 /* Армянское описание длиннее почти вдвое: колонки 55/37 вместо 60/32. */
 @media (min-width:961px){
   html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
-  html[lang="hy"] .hside{width:min(100%,46ch);}
+  html[lang="hy"] .hside{width:min(100%,50ch);}
 }
 /* header over the dark hero: light chrome until scrolled */
 header.on-dark .brand{color:#EFEDEA;}
