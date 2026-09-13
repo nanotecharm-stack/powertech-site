@@ -1150,6 +1150,15 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    от текста героя до «01» выходило 400 с лишком пикселей пустоты —
    владелец: «слишком большое расстояние, неправильно воспринимается». */
 #why{padding-top:clamp(48px,6vw,88px);}
+/* Раздел 01 в один экран (владелец, 2026-09-13: «либо текст виден, либо график»): от 1200 px
+   текст слева (5/12), сцена с записью справа (7/12 ≥ 580 px — настольная раскладка сцены),
+   по вертикали по центру. Заголовок чуть меньше, чтобы колонка держала три-четыре строки. */
+@media (min-width:1200px){
+  #why .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,5vw,96px);align-items:center;}
+  #why .evs{margin-top:0;}
+  #why h2{font-size:clamp(28px,3.4vw,50px);}
+  #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(40px,5vw,72px);}
+}
 #measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
 #measure{padding-top:clamp(26px,3vw,46px);}
 /* Раздел, к которому приложение относится, закрывается короче обычного —
