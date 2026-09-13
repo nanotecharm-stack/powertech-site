@@ -549,7 +549,7 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 .evs.is-playing .ev-sline{animation:evSave 4.8s linear both;}
 @keyframes evWrite{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}
 @keyframes evLink{0%,65%{opacity:0}80%,100%{opacity:1}}
-@keyframes evFile{0%,65%{opacity:0;transform:translateY(-24px)}85%,100%{opacity:1;transform:translateY(0)}}
+@keyframes evFile{0%,65%{opacity:0;transform:translateY(16px)}85%,100%{opacity:1;transform:translateY(0)}}
 @keyframes evSave{0%,78%{stroke-dasharray:1;stroke-dashoffset:1}100%{stroke-dasharray:1;stroke-dashoffset:0}}
 .other{margin-top:10px;background:var(--inv);color:var(--inv-fg);padding:clamp(26px,3.4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;border-radius:2px;}
 .other .no{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.14em;color:rgba(246,241,233,.58);}
@@ -1491,42 +1491,43 @@ function paintJoints(){aJoints(mJoints());}
     scene.classList.add('is-laid');
     var d='',ay;
     if(w>=580){
-      var x0=4,a=w*.31,b=w*.46,c=w*.67,end=w-4,y=128,low=206;
-      var aw=Math.min(326,w*.47),ax=w-aw;ay=308;
-      place(els['ev-normal'],x0,78,a-x0-30);
-      place(els['ev-incident'],a-3,32,c-a-22);
-      place(els['ev-trip'],b-25,225,c-b+28);
-      place(els['ev-return'],c+20,75,w-c-24);
-      var tripB=225+els['ev-trip'].offsetHeight+30;if(tripB>ay)ay=tripB;
+      var x0=4,a=w*.31,b=w*.46,c=w*.67,end=w-4;
+      var aw=Math.min(326,w*.47),ax=w-aw;ay=0;
       place(rec,ax,ay,aw);
-      d='<rect class="ev-window" x="'+n(a)+'" y="111" width="'+n(c-a)+'" height="109"/>'
-       +'<path class="ev-base" d="M'+x0+' '+y+' H'+n(end)+'"/>'
-       +'<path class="ev-bracket" d="M'+n(a+14)+' 106 H'+n(a)+' V119 M'+n(c-14)+' 106 H'+n(c)+' V119 M'+n(a)+' 213 V226 H'+n(a+14)+' M'+n(c)+' 213 V226 H'+n(c-14)+'"/>'
-       +'<path class="ev-trace" pathLength="1" d="M'+x0+' '+y+' H'+n(a)+' C'+n(a+35)+' '+y+' '+n(a+25)+' '+low+' '+n(a+64)+' '+low+' H'+n(c-64)+' C'+n(c-25)+' '+low+' '+n(c-35)+' '+y+' '+n(c)+' '+y+' H'+n(end)+'"/>'
-       +'<rect class="ev-node" x="'+(x0-4)+'" y="'+(y-4)+'" width="8" height="8"/>'
-       +'<rect class="ev-node" x="'+n(a-5)+'" y="'+(y-5)+'" width="10" height="10" transform="rotate(45 '+n(a)+' '+y+')"/>'
-       +'<rect class="ev-node" x="'+n(b-4)+'" y="'+(low-4)+'" width="8" height="8"/>'
-       +'<rect class="ev-node" x="'+n(c-4)+'" y="'+(y-4)+'" width="8" height="8"/>'
-       +'<path class="ev-link" d="M'+n(c)+' 232 V'+n(ay-30)+' H'+n(ax+aw/2)+' V'+n(ay)+'"/>';
-      for(var x=x0;x<=end;x+=18)d+='<path class="ev-tick" d="M'+n(x)+' 153 v'+((Math.abs(x-a)<18||Math.abs(x-c)<18)?9:4)+'"/>';
-      scene.style.height=(ay+rec.offsetHeight+32)+'px';
+      var off=rec.offsetHeight+64,y=128+off,low=206+off;
+      place(els['ev-normal'],x0,78+off,a-x0-30);
+      place(els['ev-incident'],a-3,32+off,c-a-22);
+      place(els['ev-trip'],b-25,225+off,c-b+28);
+      place(els['ev-return'],c+20,170+off,w-c-24);
+      d='<rect class="ev-window" x="'+n(a)+'" y="'+n(111+off)+'" width="'+n(c-a)+'" height="109"/>'
+       +'<path class="ev-base" d="M'+x0+' '+n(y)+' H'+n(end)+'"/>'
+       +'<path class="ev-bracket" d="M'+n(a+14)+' '+n(106+off)+' H'+n(a)+' V'+n(119+off)+' M'+n(c-14)+' '+n(106+off)+' H'+n(c)+' V'+n(119+off)+' M'+n(a)+' '+n(213+off)+' V'+n(226+off)+' H'+n(a+14)+' M'+n(c)+' '+n(213+off)+' V'+n(226+off)+' H'+n(c-14)+'"/>'
+       +'<path class="ev-trace" pathLength="1" d="M'+x0+' '+n(y)+' H'+n(a)+' C'+n(a+35)+' '+n(y)+' '+n(a+25)+' '+n(low)+' '+n(a+64)+' '+n(low)+' H'+n(c-64)+' C'+n(c-25)+' '+n(low)+' '+n(c-35)+' '+n(y)+' '+n(c)+' '+n(y)+' H'+n(end)+'"/>'
+       +'<rect class="ev-node" x="'+(x0-4)+'" y="'+n(y-4)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+n(a-5)+'" y="'+n(y-5)+'" width="10" height="10" transform="rotate(45 '+n(a)+' '+n(y)+')"/>'
+       +'<rect class="ev-node" x="'+n(b-4)+'" y="'+n(low-4)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+n(c-4)+'" y="'+n(y-4)+'" width="8" height="8"/>'
+       +'<path class="ev-link" d="M'+n(c)+' '+n(y-6)+' V'+n(y-40)+' H'+n(ax+aw/2)+' V'+n(rec.offsetHeight+8)+'"/>';
+      for(var x=x0;x<=end;x+=18)d+='<path class="ev-tick" d="M'+n(x)+' '+n(153+off)+' v'+((Math.abs(x-a)<18||Math.abs(x-c)<18)?9:4)+'"/>';
+      scene.style.height=(225+off+els['ev-trip'].offsetHeight+30)+'px';
     }else{
-      var xv=12,dx=53,av=114,cv=286,lx=78;ay=355;
-      place(els['ev-normal'],lx,30,w-lx);
-      place(els['ev-incident'],lx,93,w-lx);
-      place(els['ev-trip'],lx,202,w-lx);
-      place(els['ev-return'],lx,277,w-lx);
-      var retB=277+els['ev-return'].offsetHeight+40;if(retB>ay)ay=retB;
+      var xv=12,dx=53,lx=78;ay=0;
       place(rec,0,ay,w);
-      d='<rect class="ev-window" x="0" y="'+av+'" width="62" height="'+(cv-av)+'"/>'
-       +'<path class="ev-base" d="M'+xv+' 40 V313"/>'
-       +'<path class="ev-trace" pathLength="1" d="M'+xv+' 40 V'+av+' C'+xv+' 143 '+dx+' 140 '+dx+' 165 V238 C'+dx+' 267 '+xv+' 262 '+xv+' '+cv+' V316"/>'
-       +'<rect class="ev-node" x="'+(xv-4)+'" y="36" width="8" height="8"/>'
-       +'<rect class="ev-node" x="'+(xv-5)+'" y="'+(av-5)+'" width="10" height="10" transform="rotate(45 '+xv+' '+av+')"/>'
-       +'<rect class="ev-node" x="'+(dx-4)+'" y="212" width="8" height="8"/>'
-       +'<rect class="ev-node" x="'+(xv-4)+'" y="'+(cv-4)+'" width="8" height="8"/>'
-       +'<path class="ev-link" d="M'+xv+' 316 V'+n(ay-21)+' H'+n(w/2)+' V'+n(ay)+'"/>';
-      scene.style.height=(ay+rec.offsetHeight+28)+'px';
+      var offv=rec.offsetHeight+44,av=114+offv,cv=286+offv;
+      place(els['ev-normal'],lx,30+offv,w-lx);
+      place(els['ev-incident'],lx,93+offv,w-lx);
+      place(els['ev-trip'],lx,202+offv,w-lx);
+      place(els['ev-return'],lx,277+offv,w-lx);
+      var retB=277+offv+els['ev-return'].offsetHeight+28;
+      d='<rect class="ev-window" x="0" y="'+n(av)+'" width="62" height="'+(cv-av)+'"/>'
+       +'<path class="ev-base" d="M'+xv+' '+n(40+offv)+' V'+n(313+offv)+'"/>'
+       +'<path class="ev-trace" pathLength="1" d="M'+xv+' '+n(40+offv)+' V'+n(av)+' C'+xv+' '+n(143+offv)+' '+dx+' '+n(140+offv)+' '+dx+' '+n(165+offv)+' V'+n(238+offv)+' C'+dx+' '+n(267+offv)+' '+xv+' '+n(262+offv)+' '+xv+' '+n(cv)+' V'+n(316+offv)+'"/>'
+       +'<rect class="ev-node" x="'+(xv-4)+'" y="'+n(36+offv)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+(xv-5)+'" y="'+n(av-5)+'" width="10" height="10" transform="rotate(45 '+xv+' '+n(av)+')"/>'
+       +'<rect class="ev-node" x="'+(dx-4)+'" y="'+n(212+offv)+'" width="8" height="8"/>'
+       +'<rect class="ev-node" x="'+(xv-4)+'" y="'+n(cv-4)+'" width="8" height="8"/>'
+       +'<path class="ev-link" d="M'+xv+' '+n(36+offv)+' V'+n(rec.offsetHeight+22)+' H'+n(w/2)+' V'+n(rec.offsetHeight+6)+'"/>';
+      scene.style.height=Math.max(316+offv+28,retB)+'px';
     }
     svg.setAttribute('viewBox','0 0 '+w+' '+scene.clientHeight);
     svg.innerHTML=d;
