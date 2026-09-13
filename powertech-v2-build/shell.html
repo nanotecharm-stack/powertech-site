@@ -730,7 +730,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   /* Владелец (2026-09-12): «добавь воздуха на герое». Верх — 15 % экрана,
      низ — 9 %, между полосой текста и полем — 8 %. */
   --hx:calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));
-  padding:clamp(96px,11vh,136px) var(--hx) clamp(44px,5vw,72px);}
+  padding:clamp(88px,10vh,124px) var(--hx) clamp(40px,4.4vw,64px);}
 h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{position:relative;z-index:3;grid-area:head;}
 /* Пояснение и кнопки — своя полоса справа от заголовка. Верх абзаца стоит на
@@ -738,7 +738,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
    поле h1 (20) + вынос кегля до верха букв ≈ 62–72. */
 /* Описание начинается НИЖЕ первой строки заголовка (макет): надглавие с отбивками ≈ 55 px
    плюс строка h1 (кегль × 1.05) — на 1440 это ≈ 108, на 1280 ≈ 95. */
-.hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(64px,7.4vw,108px);
+.hside{position:relative;z-index:3;grid-area:side;padding-top:clamp(72px,8.6vw,138px);
   /* Правая ось: блок описания прижат к правому краю колонки, его край совпадает с краем
      шапки (кнопка «Get in touch»). Мера 53ch (≈470 px при 16px): абзац читается, две кнопки стоят в ряд. */
   justify-self:end;width:min(100%,53ch);}
@@ -764,7 +764,11 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
    герой и так выше экрана, правило не нужно. */
 /* Заголовку разрешено занять зазор между колонками, но не поле волны:
    кривая не должна пересекать текст. Потолок — колонка плюс зазор минус 8. */
-.hero h1{color:var(--fg-head);width:max-content;max-width:100%;}
+/* РЕФЕРЕНС ВЛАДЕЛЬЦА (2026-09-13): заголовок ~6vw с плотным интерлиньяжем .94 — главный акцент
+   экрана; ему разрешено занять зазор между колонками (но не правую колонку). Акцентное слово
+   в референсе того же цвета, что заголовок. */
+.hero h1{color:var(--fg-head);width:max-content;max-width:calc(100% + clamp(48px,6vw,112px) - 20px);
+  line-height:.94;letter-spacing:-.01em;margin-top:14px;}
 /* Расшифровка заголовка — один прогон при загрузке, повтора нет (решение
    владельца, 2026-08-31; рисунок одобрен по пробе). Кипящие знаки приглушены
    разбавлением чернил бумагой; замок вспыхивает маркой со свечением — жест
@@ -781,7 +785,8 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
    объявляла смысловое выделение там, где его нет, и экранный диктор менял на
    этом месте интонацию. Тег нейтральный, правило то же. */
 h1 .ac{font-style:normal;color:var(--brand-ink);}
-.hero h1 .ac{color:var(--brand-ink);}
+/* Референс владельца (2026-09-13): заголовок героя целиком чернилами плашки, без синего слова. */
+.hero h1 .ac{color:var(--fg-head);}
 /* ПОДЗАГОЛОВОЧНЫЙ АБЗАЦ. Кегль поднят с 16,5 до 20: при заголовке 61-77 px
    разрыв был 3,7-кратным, и между ними не стояло ни одной ступени — абзац
    читался обычным текстом страницы, а не главной мыслью первого экрана.
@@ -796,11 +801,13 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
    проваливается: на 26 кнопки прилипали к абзацу и читались его продолжением,
    а не отдельным действием. Кнопки — другой род вещи, им нужен самый большой
    зазор в блоке. */
-.acts{display:flex;gap:11px;margin-top:36px;flex-wrap:wrap;}
+.acts{display:flex;gap:11px;margin-top:30px;flex-wrap:wrap;}
 /* 15, а не общие 14: главная кнопка страницы не должна набираться тем же
    кеглем, что кнопка в шапке. Правило только на герое — .btn носят все пять
    кнопок сайта. */
-.hero .acts .btn{font-size:15px;}
+.hero .acts .btn{font-size:15px;padding:15px 22px;}
+/* По референсу в герое одно действие; ссылка «When measurements help» осталась в указателе. */
+.hero .acts .btn.gh{display:none;}
 /* Армянская пара тоже на 15: замерено по HTTP с настоящими шрифтами — пара
    занимает 539 px при колонке 588 и в столбик не срывается. Первый замер дал
    592 и напугал: он делался по file:// , где шрифты не грузятся (адреса в
@@ -822,7 +829,6 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
 @media (max-width:600px){.hphoto{height:auto;aspect-ratio:4/3;}.hphoto img{object-position:70% 40%;}}
 /* Армянское описание длиннее почти вдвое: колонки 55/37 вместо 60/32. */
 @media (min-width:961px){
-  html[lang="hy"] .hgrid{grid-template-columns:minmax(0,6fr) minmax(0,6fr);}
   html[lang="hy"] .hside{width:min(100%,56ch);}
 }
 /* header over the dark hero: light chrome until scrolled */
