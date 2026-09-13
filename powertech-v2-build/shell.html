@@ -882,7 +882,14 @@ html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:%%BODYFONT%%;
   letter-spacing:0;text-transform:none;}
 html[lang="hy"] .pq-dot{letter-spacing:0;text-transform:none;}
 /* Четыре имени на узком экране: два ряда по два, а не три и одно сиротой. */
-@media (max-width:520px){.pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;column-gap:6px;row-gap:0;}}
+@media (max-width:520px){
+  .pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;align-items:start;column-gap:6px;row-gap:0;}
+  /* Длинные имена («Լարման կարճատև անկում», «Harmonic distortion») в клетке
+     переносятся на вторую строку: текст слева, квадрат у первой строки,
+     цель остаётся не ниже 44. */
+  .pq-dot{height:auto;min-height:44px;align-items:flex-start;padding-top:12px;padding-bottom:12px;line-height:1.25;text-align:left;}
+  .pq-dot i{margin-top:5px;}
+}
 /* Под шторкой перехода поле прячется вместе с остальным героем. */
 html.wipecover .pq{visibility:hidden;}
 /* header over the dark hero: light chrome until scrolled */

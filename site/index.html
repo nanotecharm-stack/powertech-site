@@ -401,7 +401,11 @@ html[lang="hy"] .hero .hp{font-size:clamp(17px,1.6vw,21px);}
 html[lang="hy"] .pq-lbl,html[lang="hy"] .pq-note{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;
   letter-spacing:0;text-transform:none;}
 html[lang="hy"] .pq-dot{letter-spacing:0;text-transform:none;}
-@media (max-width:520px){.pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;column-gap:6px;row-gap:0;}}
+@media (max-width:520px){
+  .pq-dots{display:grid;grid-template-columns:auto auto;justify-content:start;align-items:start;column-gap:6px;row-gap:0;}
+  .pq-dot{height:auto;min-height:44px;align-items:flex-start;padding-top:12px;padding-bottom:12px;line-height:1.25;text-align:left;}
+  .pq-dot i{margin-top:5px;}
+}
 html.wipecover .pq{visibility:hidden;}
 header.on-dark .brand{color:#F6F1E9;}
 header.on-dark nav{box-shadow:inset 0 0 0 1px rgba(253,250,244,.28);background:rgba(22,46,82,.42);}
@@ -1163,7 +1167,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
         <div class="pq-dots" role="group" aria-label="Voltage waveform">
           <button type="button" class="pq-dot" data-mode="normal" aria-pressed="true" aria-label="Normal"><i aria-hidden="true"></i><span class="pq-lbl">Normal</span></button>
           <button type="button" class="pq-dot" data-mode="dip" aria-pressed="false" aria-label="Voltage dip"><i aria-hidden="true"></i><span class="pq-lbl">Voltage dip</span></button>
-          <button type="button" class="pq-dot" data-mode="harm" aria-pressed="false" aria-label="Harmonics"><i aria-hidden="true"></i><span class="pq-lbl">Harmonics</span></button>
+          <button type="button" class="pq-dot" data-mode="harm" aria-pressed="false" aria-label="Harmonic distortion"><i aria-hidden="true"></i><span class="pq-lbl">Harmonic distortion</span></button>
           <button type="button" class="pq-dot" data-mode="trans" aria-pressed="false" aria-label="Transient"><i aria-hidden="true"></i><span class="pq-lbl">Transient</span></button>
         </div>
         <button type="button" class="pq-pause" data-pause="Pause animation" data-resume="Resume animation"><i aria-hidden="true"></i></button>

@@ -441,7 +441,7 @@ EN = {
  'HERO_CTA2': 'When measurements help',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'PQ_CAP': 'Voltage waveform',
- 'PQ_M_NORMAL': 'Normal', 'PQ_M_DIP': 'Voltage dip', 'PQ_M_HARM': 'Harmonics', 'PQ_M_TRANS': 'Transient',
+ 'PQ_M_NORMAL': 'Normal', 'PQ_M_DIP': 'Voltage dip', 'PQ_M_HARM': 'Harmonic distortion', 'PQ_M_TRANS': 'Transient',
  'PQ_X_NORMAL': 'A regular sinusoidal waveform.',
  'PQ_X_DIP': 'Voltage briefly drops, then recovers.',
  'PQ_X_HARM': 'Harmonics distort the voltage waveform.',
@@ -756,11 +756,11 @@ HY = {
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'PQ_CAP': 'Լարման ալիքի ձևը',
- 'PQ_M_NORMAL': 'Նորմալ', 'PQ_M_DIP': 'Լարման անկում', 'PQ_M_HARM': 'Հարմոնիկներ', 'PQ_M_TRANS': 'Անցումային երևույթ',  # ЧЕРНОВИК — проверить владельцу
+ 'PQ_M_NORMAL': 'Նորմալ', 'PQ_M_DIP': 'Լարման կարճատև անկում', 'PQ_M_HARM': 'Հարմոնիկ աղավաղում', 'PQ_M_TRANS': 'Անցումային գործընթաց',  # окончательные тексты владельца 2026-09-13
  'PQ_X_NORMAL': 'Կանոնավոր սինուսաձև ալիք։',
  'PQ_X_DIP': 'Լարումը կարճ ժամանակով նվազում է, ապա վերականգնվում։',
  'PQ_X_HARM': 'Հարմոնիկները աղավաղում են լարման ալիքի ձևը։',
- 'PQ_X_TRANS': 'Փոխանջատումից հետո կարճ տատանում։',  # ЧЕРНОВИК — проверить владельцу
+ 'PQ_X_TRANS': 'Փոխանջատումից հետո կարճ տատանում։',
  'PQ_NOTE': 'Պատկերավոր օրինակ է, ոչ իրական չափում։',
  'PQ_PAUSE': 'Դադարեցնել անիմացիան', 'PQ_RESUME': 'Շարունակել անիմացիան',
  'WHY_H2': 'Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ',
