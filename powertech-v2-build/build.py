@@ -127,7 +127,8 @@ ARIAN_REG = '400'
 # отрицательного трекинга. Числа прозы — в :root shell.html. Пробовался и Inter (вариант B);
 # владелец выбрал сохранить Overused Grotesk.
 _OG = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
-TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.02', EN_LS='-.015em', EN_H1WT='700', EN_BIGLS='-.022em', HY_LS='0')
+# Трекинг заголовков 0 (было −.015/−.022em: владелец — «слишком близко буквы»), интерлиньяж 1.05.
+TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='0', HY_LS='0')
 
 
 FF_HY = '\n'.join([

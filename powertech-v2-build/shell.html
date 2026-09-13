@@ -71,8 +71,11 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;
 :root{--t-p:17px;--t-p-lh:1.6;--t-lede:19px;--t-lede-lh:1.55;--t-hp:clamp(17px,1.45vw,20px);--t-hp-lh:1.55;
   --t-hp-hy:clamp(17px,1.45vw,20px);--t-small:15px;--t-small-lh:1.55;--t-tag:12px;--t-q:17px;
   --fg-head:#0D2440;--on-dark:#E8E3DB;--on-dark-lede:#E8E3DB;--on-dark-small:#D9D3CA;
-  --on-dark-note:#D9D3CA;--on-dark-link:#E8E3DB;}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:%%BODYFONT%%;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
+  --on-dark-note:#D9D3CA;--on-dark-link:#E8E3DB;
+  /* Лёгкий воздух между буквами прозы и кнопок (+.01em ≈ 0.17px при 17px): гротеск с
+     узкими апертурами при плотном наборе читался слипшимся (владелец, 2026-09-13). */
+  --t-ls:.01em;}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:%%BODYFONT%%;letter-spacing:var(--t-ls);-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
 /* paper grain — one fixed layer, no blend mode, 3% */
 body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* the grain motif — one tiny square, rhymed across the page */
