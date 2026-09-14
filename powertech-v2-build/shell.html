@@ -1787,10 +1787,12 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 :lang(hy) .ev-tag,:lang(hy) .hmark{text-transform:none;letter-spacing:.02em;font-weight:500;}
 :lang(hy) .eyebrow{letter-spacing:.04em;}
 :lang(hy) h1,:lang(hy) h2,:lang(hy) h3,:lang(hy) p,:lang(hy) li,:lang(hy) .mlb{overflow-wrap:break-word;}
-:lang(hy) p,:lang(hy) .mlb{hyphens:auto;-webkit-hyphens:auto;}
+/* Автопереносы на HY сняты целиком — владелец (2026-09-14): «убери все переносы».
+   Длинное слово, не влезающее в строку, по-прежнему ломается overflow-wrap выше. */
+:lang(hy) p,:lang(hy) .mlb{hyphens:manual;-webkit-hyphens:manual;}
 /* Три шага 03 на HY: без автопереносов и с уравненными строками — владелец
    (2026-09-14): «убери переносы, выровняй, чтобы визуально гармонично». */
-:lang(hy) .obs .step p{hyphens:manual;-webkit-hyphens:manual;text-wrap:balance;}
+:lang(hy) .obs .step p{text-wrap:balance;}
 :lang(hy) .mlb{overflow-wrap:anywhere;}
 
 %%READOUT%%
