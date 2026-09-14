@@ -1432,9 +1432,10 @@ footer .fgrid{display:grid;grid-template-columns:minmax(220px,1fr) 1.15fr .85fr;
   gap:clamp(28px,4vw,var(--s8));align-items:start;}
 /* Не знак, а имя компании тем же начертанием, что весь набор: сюда придут
    реквизиты, и знак над ними читался бы вывеской, а не шапкой документа. */
-footer .fbrand .flg{display:block;height:44px;width:auto;margin:0 0 20px -10px;}
-footer .fbrand .fname{margin:0;font-family:inherit;font-size:22px;font-weight:600;
-  letter-spacing:-.01em;text-transform:none;color:#EFEDEA;line-height:1.2;}
+/* Владелец (2026-09-14): знак и имя юрлица под ним спорили — два имени одного
+   веса подряд. Имя юрлица ушло в строку реквизитов к номеру: знак называет
+   компанию один раз, юрлицо читают вместе с номером. */
+footer .fbrand .flg{display:block;height:44px;width:auto;margin:0 0 22px -10px;}
 /* Учётный номер компании. Он ярче описания над ним, потому что это
    проверяемый факт, а не подпись: по этому номеру компанию находят в
    государственном реестре — ради чего он в футере и стоит. Обозначение
@@ -1444,7 +1445,9 @@ footer .fbrand .fname{margin:0;font-family:inherit;font-size:22px;font-weight:60
    и не участвует: %%MONOFONT%% в этом блоке разрешается в текстовую (Overused
    Grotesk на английской, Arian AMU Serif на армянской), поэтому «ՀՎՀՀ» не
    проваливается в системный шрифт, как провалилось бы в приборной. */
-footer .fbrand .freg{margin-top:14px;letter-spacing:.14em;}
+footer .fbrand .freg{margin-top:14px;text-transform:none;letter-spacing:.04em;white-space:nowrap;
+  max-width:none;color:rgba(239,237,234,.72);}
+footer .fbrand .freg .fsep{opacity:.5;margin:0 10px;}
 footer .fbrand .freg b{font-weight:400;color:rgba(239,237,234,.86);margin-left:10px;}
 footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:var(--t-aux);
   letter-spacing:.14em;text-transform:uppercase;color:rgba(239,237,234,.62);max-width:26ch;
@@ -2174,9 +2177,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="wrap fgrid">
     <div class="fbrand rv">
       <img class="flg" src="./brand/gridec-logo-dark.svg" alt="Gridec" width="325" height="92" loading="lazy" decoding="async">
-      <p class="fname">%%CO_LEGAL%%</p>
       <p>%%HERO_EYEBROW%%</p>
-      <p class="freg">%%CO_TIN_LB%% <b>%%CO_TIN%%</b></p>
+      <p class="freg">%%CO_LEGAL%%<span class="fsep">·</span>%%CO_TIN_LB%% <b>%%CO_TIN%%</b></p>
     </div>
     <div class="fcol rv" style="--i:1">
       <h3>%%FOOT_CONTACT%%</h3>
