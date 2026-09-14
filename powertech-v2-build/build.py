@@ -524,19 +524,18 @@ EN = {
  # оформление показывает.
  'MEA_NOTE': lnote_html('We assess potential equipment risks using the recorded data and operating conditions.'),
  'CO_H2': 'About us',
- 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We are a small team focused on specialised engineering work and long-term cooperation with our partners.',
+ 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We measure and analyse power quality, help identify the causes of electrical problems and advise on appropriate technical solutions.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
  # \u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0432\u043e\u043b\u044e \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f.
  # Номера «01 ·», «02 ·», «03 ·» с подписей сняты: на странице уже есть одна
  # система нумерации — счётчики разделов 01–08, — и вложенная вторая внутри
  # седьмого раздела читалась шаблоном, а не структурой.
  'CO_STORY': story_html([
+    # Тексты владельца (2026-09-15): два подблока вместо трёх.
     ('WHY WE STARTED',
-     'Specialist measurements and analysis should not require a permanent in-house team or equipment that spends most of its time unused. Gridec gives companies access to both when the need arises.'),
-    ('HOW WE WORK',
-     'A useful investigation starts with the question that needs answering. We measure the system under real operating conditions and base the conclusion on what the data shows, whether that points to a problem or confirms normal operation.'),
-    ('WHAT WE ARE BUILDING',
-     'We are building Gridec in Armenia as a small engineering firm whose conclusions hold up when someone checks them. We would rather grow slowly than lose that.')]),
+     'We founded the company to make modern measurement technology accessible in Armenia and promote working practices that meet international standards. We want taking measurements and documenting the results to become standard practice, so that causes can be identified and responsibility established on the basis of data.'),
+    ('WHAT MATTERS TO US',
+     'Our clients should understand what we measured, what we found and how we reached our conclusions. We present the results so they can be checked, discussed with other specialists and used to guide future decisions.')]),
  'CT_H2': 'Start with what happened',
  # Кривая провала нарисована руками, а не снята прибором. Под подписью «TYPICAL
  # TRACE» «180 MS» читается примером и вопроса «где запись» не вызывает.
@@ -838,7 +837,7 @@ HY = {
  'CO_STORY': story_html([
     # Тексты владельца (2026-09-15): два подблока вместо трёх.
     ('Ինչու սկսեցինք',
-     'Gridec-ը հիմնել ենք՝ Հայաստանում ժամանակակից չափման տեխնոլոգիաները հասանելի դարձնելու համար։ Ուզում ենք, որ չափելն ու արդյունքները գրանցելը դառնան սովորական գործելակերպ, որպեսզի խնդիրների պատճառներն ու պատասխանատվությունը պարզվեն տվյալների հիման վրա։'),
+     'Ընկերությունը հիմնել ենք՝ Հայաստանում չափման ժամանակակից տեխնոլոգիաները հասանելի դարձնելու և միջազգային չափանիշներին համապատասխան աշխատելու մշակույթ ձևավորելու համար։ Ուզում ենք, որ չափելն ու արդյունքները գրանցելը դառնան սովորական գործելակերպ, որպեսզի խնդիրների պատճառներն ու պատասխանատվությունը պարզվեն տվյալների հիման վրա։'),
     ('Ինչն ենք կարևորում',
      'Պատվիրատուն պետք է հասկանա՝ ինչ ենք չափել, ինչ ենք պարզել և ինչպես ենք հանգել մեր եզրակացություններին։ Արդյունքները ներկայացնում ենք այնպես, որ դրանք հնարավոր լինի ստուգել, քննարկել այլ մասնագետների հետ և օգտագործել հետագա որոշումների համար։')]),
  'CT_H2': 'Ներկայացրեք խնդիրը նախնական գնահատման համար',
