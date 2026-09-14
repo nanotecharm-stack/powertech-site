@@ -664,6 +664,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 /* a sheet, not a poster: paper that darkens a touch towards the fold, with the
    faintest warm breath where the field lives on the right */
 .hero{position:relative;overflow:hidden;color:var(--fg);
+  /* Одна ось: логотип, надглавие, заголовок и надпись на щите. Объявлено на .hero, чтобы
+     и .hgrid (поля), и .hphoto (left надписи) считали её от полной ширины экрана. */
+  --hx:calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));
   /* Собственной заливки у героя больше нет, и это главное. Раньше он красился
      сам: свой градиент от подтона к бумаге и своё зерно в режиме soft-light.
      Страница под ним красится иначе — той же бумагой, но плюс косой свет,
@@ -709,15 +712,17 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   /* Бриф владельца (2026-09-13, точечная правка): надглавие — свой ряд, поэтому описание
      выравнивается по верху ЗАГОЛОВКА, а не по надглавию; колонки 58 / 6 / 36 — заголовок и
      описание читаются одной композицией, без пустого разрыва. */
-  grid-template-columns:minmax(0,58fr) minmax(0,36fr);
-  grid-template-areas:"eye eye" "head side";
+  /* БРИФ (2026-09-14, zip GRIDEC-Hero-Claude): 12 колонок, зазор 24. Описания длинные (EN 3 фразы,
+     HY длиннее), поэтому разрешённый брифом вариант: слева 1–7, колонка 8 пустая, справа 9–12. */
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-areas:"eye eye eye eye eye eye eye eye eye eye eye eye" "head head head head head head head . side side side side";
   /* start, а не center: подпись поля стоит на одной линии с надглавием, и
      два блока читаются одной строкой разворота. */
   /* align-content:center ОБЯЗАТЕЛЕН вместе со start: ряд один, и без него
      он растягивался на весь герой, а обе колонки прилипали к шапке —
      владелец увидел «всё свалено в кучу» при пустой нижней половине. */
   align-items:start;align-content:start;
-  column-gap:6%;row-gap:0;max-width:none;margin:0;
+  column-gap:24px;row-gap:0;max-width:none;margin:0;
   /* Герой полновылетный, и его поле НЕ обязано совпадать с колонкой разделов
      на широких экранах — владелец выбрал более левое положение по снимку.
      До 1280 поле в точности равно полю разделов, дальше растёт медленнее:
@@ -732,9 +737,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
      следующего раздела должна показаться у нижней кромки первого экрана. */
   /* Владелец (2026-09-12): «добавь воздуха на герое». Верх — 15 % экрана,
      низ — 9 %, между полосой текста и полем — 8 %. */
-  --hx:calc(max(0px,(100% - 1280px)/2) * 0.42 + clamp(18px,4vw,56px));
   /* до фото 48–64 px от нижнего элемента композиции */
-  padding:clamp(88px,10vh,124px) var(--hx) clamp(48px,4vw,64px);}
+  /* Бриф: 40 сверху после шапки (шапка 62 по замеру), 40–46 снизу перед фото. */
+  padding:102px var(--hx) clamp(40px,3.2vw,46px);}
 h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{display:contents;}
 .hero .eyebrow{grid-area:eye;}
@@ -745,11 +750,12 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 /* Описание стоит у верха первой строки H1: 14 px — верхнее поле h1 в своём ряду; в английской
    версии +24 px (бриф: сдвиг 20–30), в армянской — ровно по верху, описание длиннее. Колонку
    занимает целиком (никаких вложенных узких max-width, иначе между блоками пустота). */
-.hside{position:relative;z-index:3;grid-area:side;padding-top:38px;}
-html[lang="hy"] .hside{padding-top:14px;}
+/* Бриф: описание совпадает с верхней строкой H1 (замер по DOM, см. hero-check). */
+.hside{position:relative;z-index:3;grid-area:side;padding-top:18px;}
+html[lang="hy"] .hside{padding-top:18px;}
 /* Три класса, а не два: правило .hero .hp с полем 30 стоит ниже по файлу и
    при равном весе брало верх — абзац съезжал на 35 px ниже верха букв. */
-.hero .hside .hp{margin-top:0;max-width:52ch;}
+.hero .hside .hp,html[lang="hy"] .hero .hside .hp{margin-top:0;max-width:none;font-size:18px;line-height:1.5;}
 /* Армянская версия поднимается тем же правилом. Отдельное исключение здесь
    стояло по ошибочному замеру: блок мерился по file:// без шрифтов и выходил
    621 px вместо настоящих 519, из-за чего сдвиг будто бы заводил надглавие под
@@ -773,9 +779,9 @@ html[lang="hy"] .hside{padding-top:14px;}
    экрана; ему разрешено занять зазор между колонками (но не правую колонку). Акцентное слово
    в референсе того же цвета, что заголовок. */
 .hero h1{color:var(--fg-head);width:max-content;max-width:100%;
-  line-height:.94;letter-spacing:-.01em;margin-top:14px;}
+  line-height:1.05;letter-spacing:0;margin-top:14px;}
 /* Армянские переносы на десктопе заданы <br class="d"> в тексте; ниже 960 они снимаются. */
-@media (max-width:960px){.hero h1 br.d{display:none;}}
+@media (max-width:1099px){.hero h1 br.d{display:none;}}
 /* «ինչպես է» не разрывается: «է» не должно стоять сиротой в начале строки. */
 .hero h1 .nb{white-space:nowrap;}
 /* Расшифровка заголовка — один прогон при загрузке, повтора нет (решение
@@ -810,13 +816,18 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
    проваливается: на 26 кнопки прилипали к абзацу и читались его продолжением,
    а не отдельным действием. Кнопки — другой род вещи, им нужен самый большой
    зазор в блоке. */
-.acts{display:flex;gap:11px;margin-top:28px;flex-wrap:wrap;}
+/* Бриф: одна главная кнопка, второе действие — небольшая текстовая ссылка под ней. */
+.acts{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px;}
 /* 15, а не общие 14: главная кнопка страницы не должна набираться тем же
    кеглем, что кнопка в шапке. Правило только на герое — .btn носят все пять
    кнопок сайта. */
 .hero .acts .btn{font-size:15px;padding:15px 22px;}
 /* По референсу в герое одно действие; ссылка «When measurements help» осталась в указателе. */
-.hero .acts .btn.gh{display:none;}
+.hero .acts .btn.gh{display:inline-block;background:none;box-shadow:none;padding:0;border-radius:0;
+  font-size:14px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
+  text-decoration-color:rgba(13,14,19,.3);}
+.hero .acts .btn.gh::before{display:none;}
+.hero .acts .btn.gh:hover span{color:var(--fg-head);}
 /* Армянская пара тоже на 15: замерено по HTTP с настоящими шрифтами — пара
    занимает 539 px при колонке 588 и в столбик не срывается. Первый замер дал
    592 и напугал: он делался по file:// , где шрифты не грузятся (адреса в
@@ -824,18 +835,37 @@ html[lang="hy"] .hero .hp{font-size:var(--t-hp-hy);}
    ⚠ Проверять первый экран ТОЛЬКО через локальный сервер. */
 .hero .eyebrow{color:var(--brand-ink);}
 .hero .eyebrow::before{background:var(--brand-ink);}
-/* ФОТО ГЕРОЯ: полновылетное, 3:1 как исходник, без рамки/тени/затемнения/движения.
-   Подложка --lo на время загрузки того же тона, что бумага. */
-/* Десктоп: полный кадр 3:1 (бриф: не уменьшать фото ради первого экрана). */
-.hphoto{margin:0;width:100%;aspect-ratio:3/1;overflow:hidden;background:var(--lo);}
-.hphoto img{display:block;width:100%;height:100%;object-fit:cover;object-position:56% 50%;}
-/* Телефон: кадр выше (4:3); главный объект — синий датчик на среднем проводнике — в кадре
-   вместе с соединителем. Точка 70 % 40 % подобрана визуально (см. снимки 390). */
-/* Планшет: кадр 2:1, точка 64 % 45 %. */
-@media (min-width:601px) and (max-width:960px){.hphoto{aspect-ratio:2/1;}.hphoto img{object-position:64% 45%;}}
-@media (max-width:600px){.hphoto{aspect-ratio:4/3;}.hphoto img{object-position:70% 40%;}}
-/* Армянское описание длиннее почти вдвое: колонки 55/37 вместо 60/32. */
-@media (min-width:961px){
+/* ФОТО ГЕРОЯ (бриф 2026-09-14): одна широкая иллюстрация 1942×809 (~2.4:1) от края до края,
+   целиком, в натуральной пропорции; без рамки, скругления, тени, фильтра, движения.
+   Подложка --lo того же тона, что бумага; width/height на <img> резервируют место. */
+.hphoto{position:relative;margin:0;width:100%;background:var(--lo);}
+.hphoto img{display:block;width:100%;height:auto;}
+/* НАДПИСЬ НА КОРПУСЕ ЩИТА — живой текст поверх фото, как маркировка на светлой панели.
+   Позиция — от геометрии фото (left = ось заголовка, top 20 %); ни карточки, ни рамки. */
+.hmark{position:absolute;left:var(--hx);top:20%;margin:0;width:max-content;max-width:20%;
+  font-family:%%MONOFONT%%;font-size:11px;line-height:2.1;letter-spacing:.15em;font-weight:500;
+  color:#17334A;opacity:.85;}
+.hmark span{display:block;}
+.hmark::after{content:"";display:block;width:18px;height:1px;background:currentColor;margin-top:20px;}
+:lang(hy) .hmark{letter-spacing:.01em;}
+/* 768–1099: две группы 58/42, H1 44–54, фото целиком, надпись остаётся на панели. */
+@media (min-width:768px) and (max-width:1099px){
+  .hgrid{grid-template-columns:minmax(0,58fr) minmax(0,42fr);grid-template-areas:"eye eye" "head side";column-gap:24px;}
+  .hero h1{font-size:clamp(44px,5.2vw,54px);}
+  .hmark{font-size:10px;}
+}
+/* До 767: одна колонка; фото 4:3 с точкой 60 % 50 % (главный датчик в кадре);
+   надпись — короткая подпись под фото в одну строку, без штриха. */
+@media (max-width:767px){
+  .hgrid{grid-template-columns:1fr;grid-template-areas:"eye" "head" "side";padding:104px clamp(20px,4vw,24px) 32px;gap:0;}
+  .hside,html[lang="hy"] .hside{padding-top:22px;}
+  .hero h1{width:auto;max-width:none;font-size:clamp(36px,10vw,44px);}
+  .hero .hside .hp,html[lang="hy"] .hero .hside .hp{font-size:16.5px;}
+  .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:60% 50%;}
+  .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:11px;line-height:1.7;letter-spacing:.12em;}
+  .hmark span{display:inline;}
+  .hmark span+span::before{content:"\00a0\00a0\00b7\00a0\00a0";}
+  .hmark::after{display:none;}
 }
 /* header over the dark hero: light chrome until scrolled */
 header.on-dark .brand{color:#EFEDEA;}
@@ -1935,12 +1965,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .done p{font-size:14px;line-height:1.7;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 
 @media (max-width:960px){
-  /* Одна колонка: заголовок, описание, кнопки; боковые поля 20–24. Фото ниже — на всю ширину. */
-  .hgrid{grid-template-columns:1fr;grid-template-areas:"eye" "head" "side";padding:88px clamp(20px,4vw,24px) 36px;gap:0;}
-  .hside,html[lang="hy"] .hside{padding-top:26px;}
-
-  .hero h1{width:auto;max-width:none;}
-  .hside .hp{margin-top:0;}
+  /* Герой: правила ≤767 и 768–1099 стоят в его блоке CSS. */
 
   .plate .wrap{grid-template-columns:1fr;}
   /* Раньше здесь пряталось и то и другое. Из-за этого на телефоне раздел 03
@@ -2206,15 +2231,15 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
   </div>
   </div>
-  <!-- ФОТО ГЕРОЯ (макет владельца, 2026-09-13): датчик тока вокруг изолированного
-       проводника. Полновылетное, вне текстового контейнера; без наложений, рамок,
-       затемнения и движения. 3:1 как у исходника (2172×724), на телефоне 4:3 через
-       object-fit с точкой 70 % 40 % — синий датчик со соединителем остаётся в кадре.
-       width/height + aspect-ratio исключают скачок вёрстки; приоритетная загрузка. -->
+  <!-- ФОТО ГЕРОЯ (бриф 2026-09-14): сгенерированная иллюстрация измерений у электрощита
+       (катушки Роговского, переносной анализатор), 1942×809. Не документальное фото и не
+       конкретный прибор. Полновылетное, целиком; надпись на светлой панели — живой текст,
+       на телефоне становится подписью под фото. Приоритетная загрузка, место зарезервировано. -->
   <figure class="hphoto">
-    <img src="./uploads/hero/measurement-2172.webp"
-         srcset="./uploads/hero/measurement-1086.webp 1086w, ./uploads/hero/measurement-2172.webp 2172w"
-         sizes="100vw" width="2172" height="724" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="async">
+    <img src="./uploads/hero/switchboard-1942.webp"
+         srcset="./uploads/hero/switchboard-971.webp 971w, ./uploads/hero/switchboard-1942.webp 1942w"
+         sizes="100vw" width="1942" height="809" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="async">
+    <figcaption class="hmark"><span>%%HERO_MARK1%%</span><span>%%HERO_MARK2%%</span><span>%%HERO_MARK3%%</span></figcaption>
   </figure>
 </section>    </div>
 

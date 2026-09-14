@@ -443,7 +443,7 @@ EN = {
  'HEADTT': TY['EN_TT'], 'HEADLH': TY['EN_LH'], 'HEADLS': TY['EN_LS'], 'H1WT': TY['EN_H1WT'], 'BIGLS': TY['EN_BIGLS'],
  # Шкала умножена на 0,66: узкий Big Shoulders сменился нормальным по ширине
  # гротеском, и при прежнем кегле строка героя выходила из колонки в полтора раза.
- 'H1SIZE': 'clamp(42px,6vw,100px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ 'H1SIZE': 'clamp(48px,4.6vw,74px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',
  # Латинский код, а не «ՀԱՅ»: в EN-сборку вшита только латинская подрезка Martian
  # Mono, армянские буквы падали в системную подмену и выглядели чужеродно. Пара
@@ -456,7 +456,9 @@ EN = {
  'HERO_H1': 'See how your<br>electrical system<br><span class="ac">performs</span>',
  'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.',
  'HERO_CTA2': 'When measurements help',
- 'HERO_PHOTO_ALT': 'Current sensor around an insulated power conductor',
+ 'HERO_PHOTO_ALT': 'Illustration of power quality monitoring with Rogowski coils and a portable analyzer at an electrical switchboard.',
+ # Надпись на панели щита (бриф 2026-09-14): описание услуги, по одной строке.
+ 'HERO_MARK1': 'MEASURE', 'HERO_MARK2': 'ANALYSE', 'HERO_MARK3': 'RECOMMEND',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'WHY_H2': 'The event may be over before anyone can inspect it',
  'WHY_P': 'A voltage event can last a few cycles. An hour later a spot check reads normal and there is nothing left on site to find. A continuous recording captures it, with a time stamp and the load conditions before and after.',
@@ -752,7 +754,7 @@ HY = {
  # на треть: прописная 43 против 33 на ширине 1440. Число строк проверено на
  # 1440, 1280, 1024, 768 и 375 — нигде не выросло, у заголовка героя везде
  # те же три строки.
- 'H1SIZE': 'clamp(40px,4.8vw,80px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ 'H1SIZE': 'clamp(44px,4.3vw,70px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',   # та же шкала, что и в английской: прежние
  # 84 px давали блок выше английского в полтора раза
  'LANG_HREF': './index.html', 'LANG_LABEL': 'EN', 'LANG_ARIA': 'English · Անգլերեն',
@@ -763,7 +765,8 @@ HY = {
  'HERO_H1': 'Ստուգեք, թե <span class="nb">ինչպես է</span> <br class="d">աշխատում ձեր <br class="d"><span class="ac">էլեկտրացանցը</span>',
  'HERO_P': 'Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։',
  'HERO_CTA2': 'Ե՞րբ են պետք չափումները',
- 'HERO_PHOTO_ALT': 'Հոսանքի սենսոր մեկուսացված ուժային հաղորդալարի շուրջ',  # черновик — проверить владельцу
+ 'HERO_PHOTO_ALT': 'Էլեկտրաէներգիայի որակի չափումների պատկերազարդում՝ Ռոգովսկու կոճեր և շարժական չափիչ սարք էլեկտրական բաշխիչ վահանակի մոտ։',  # черновик — проверить владельцу
+ 'HERO_MARK1': 'ՉԱՓՈՒՄ', 'HERO_MARK2': 'ՎԵՐԼՈՒԾՈՒԹՅՈՒՆ', 'HERO_MARK3': 'ԱՌԱՋԱՐԿՈՒԹՅՈՒՆՆԵՐ',
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'WHY_H2': 'Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ',
