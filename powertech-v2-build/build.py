@@ -1224,6 +1224,8 @@ def wrap(tokens, body, extra_head='', icons='../'):
         # по соглашению — и рисует в выдаче безликий глобус. В .ico есть кадр
         # 48×48, ровно тот размер, до которого Google всё приводит.
         '<link rel="icon" href="', icons, 'favicon.ico" sizes="48x48">\n',
+        # PNG кратный 48 — то, что рекомендует Google для значка в выдаче (2026-09-14, icons_mark.py).
+        '<link rel="icon" href="', icons, 'favicon-96.png" type="image/png" sizes="96x96">\n',
         '<link rel="icon" href="', icons, 'favicon.svg" type="image/svg+xml">\n',
         '<link rel="apple-touch-icon" href="', icons, 'apple-touch-icon.png">\n',
         '<meta property="og:type" content="website">\n',
@@ -1588,7 +1590,7 @@ DEPLOY_FONTS = (['overused-grotesk-latin.woff2', 'departure-mono.woff2',
                  'arian-amu-400.woff2', 'arian-amu-700.woff2',
                  'arian-amu-serif-400.woff2', 'arian-amu-serif-700.woff2']
                 + ['mardoto-500.woff2'])
-DEPLOY_ICONS = ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']
+DEPLOY_ICONS = ['favicon.svg', 'favicon.ico', 'favicon-96.png', 'apple-touch-icon.png']
 
 def deploy_asset(src, dst):
     os.makedirs(os.path.dirname(dst), exist_ok=True)
