@@ -117,7 +117,7 @@ READOUT_HY = """
 """
 
 MONO_EN = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
-MONO_HY = "'Arian AMU Serif',Georgia,serif"
+MONO_HY = "'Mardoto','Arian AMU','Helvetica Neue',sans-serif"
 # У Arian AMU есть только Regular и Bold. Прежняя запись «400 500» отдавала Regular и на
 # 500 под видом отдельного Medium; объявлено честно — 400. Запрос 500 берёт ближайший.
 ARIAN_REG = '400'
@@ -131,11 +131,15 @@ _OG = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
 TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='0', HY_LS='0')
 
 
+# Аудит 2026-09-14: армянская страница целиком на Mardoto — 400 для прозы, 500 для
+# заголовков и подписей, 700 для полужирного. Настоящие файлы (подмножества из
+# github.com/vahanhovh/mardoto), браузер жир не подделывает. Arian AMU остаётся запасным
+# семейством в стеке; Arian AMU Serif из интерфейсных подписей убран.
 FF_HY = '\n'.join([
+    font_face('Mardoto', '400', 'mardoto-400.woff2'),
+    font_face('Mardoto', '700', 'mardoto-700.woff2'),
     font_face('Arian AMU', ARIAN_REG, 'arian-amu-400.woff2'),
     font_face('Arian AMU', '600 900', 'arian-amu-700.woff2'),
-    font_face('Arian AMU Serif', '400 500', 'arian-amu-serif-400.woff2'),
-    font_face('Arian AMU Serif', '600 900', 'arian-amu-serif-700.woff2'),
     # Mardoto Medium (SIL OFL, github.com/vahanhovh/mardoto) — заголовки армянской
     # страницы весом 500: владелец выбрал из проб 300/400/500 (2026-09-13). Подмножество:
     # латиница, армянский, пунктуация. Один вес, поэтому объявлен точкой 500.
@@ -563,7 +567,9 @@ EN = {
  'F_DROP2': 'Photos, diagrams, reports, or equipment data',
  'F_SIZE_ERR': 'Attachments exceed the 10 MB limit. Please remove some files.',
  'F_HINT0': 'Up to 10 MB',
- 'F_FORM_ERR': 'Please fill in all fields: name, company, a valid email, phone and a short description.',
+ 'F_FORM_ERR': 'Please check the highlighted fields.',
+ # Аудит 2026-09-14: обязательны имя, описание и один контакт (почта ИЛИ телефон).
+ 'F_ONE_CONTACT': 'Email or phone — at least one, so that we can reply.',
  'F_SEND_ERR': 'Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am',
  'F_SEND': 'Send',
  # Имя кнопки закрытия: символ «×» экранный диктор читает как знак умножения
@@ -685,6 +691,9 @@ EN_DATA = {
  'seq': [['01', 'Normal operation'], ['02', 'Electrical event'], ['03', 'Equipment trip or alarm'],
          ['04', 'System returns to normal'], ['05', 'The event record remains available for analysis']],
  'viewDetails': 'View details',
+ 'errName': 'Please enter your name.', 'errMsg': 'Please describe what happened.',
+ 'errEmail': 'Please enter a valid email address.', 'errPhone': 'Please enter a valid phone number.',
+ 'errContact': 'Enter an email or a phone number.',
  'hint1': ' file · ', 'hintN': ' files · ', 'hintSuf': ' of 10 MB', 'hint0': 'Up to 10 MB total.',
  'appTypes': ['Manufacturing', 'Solar PV', 'Healthcare / Laboratory',
               'Data Centre / IT', 'Commercial Building',
@@ -742,10 +751,10 @@ HY = {
  'LANG': 'hy', 'TITLE': 'Gridec | Էլեկտրաէներգիայի որակի մոնիթորինգ',
  'FONTFACES': FF_HY + '\n' + FF_DEP,
  'READOUT': READOUT_HY % dict(mono=MONO_HY),
- 'BODYFONT': "'Arian AMU','Helvetica Neue',sans-serif",
+ 'BODYFONT': "'Mardoto','Arian AMU','Helvetica Neue',sans-serif",
  'HEADFONT': "'Mardoto','Arian AMU',sans-serif", 'HEADWT': '500',
  'MONOFONT': MONO_HY,
- 'NAVFONT': "'Arian AMU Serif',Georgia,serif",
+ 'NAVFONT': 'inherit',
  'HEADTT': '', 'HEADLH': '1.0', 'HEADLS': TY['HY_LS'], 'H1WT': '500', 'BIGLS': TY['HY_LS'],
  # Шкала та же, что в английской версии, буква в букву. Мерили не кегль, а
  # рост знака: у Arian AMU и Overused Grotesk доли прописной и строчной от
@@ -761,7 +770,7 @@ HY = {
  'NAV_SERVICES': 'Ծառայություններ', 'NAV_INDUSTRIES': 'Ոլորտներ', 'NAV_COMPANY': 'Ընկերություն',
  'IX_LABEL': 'Բաժիններ', 'IX_ARIA': 'Բաժինների ցանկ',
  'CTA': 'Նկարագրել խնդիրը', 'NAV_CTA': 'Կապ մեզ հետ',
- 'HERO_EYEBROW': 'ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՅԻ ՈՐԱԿԻ ՄՈՆԻԹՈՐԻՆԳ',
+ 'HERO_EYEBROW': 'Էլեկտրաէներգիայի որակի մոնիթորինգ',
  'HERO_H1': 'Ստուգեք, թե <span class="nb">ինչպես է</span> <br class="d">աշխատում ձեր <br class="d"><span class="ac">էլեկտրացանցը</span>',
  'HERO_P': 'Gridec-ը համակարգի աշխատանքի ընթացքում չափում և գրանցում է էլեկտրական պարամետրերը, ուսումնասիրում այն տեղում և վերլուծում ստացված տվյալները։ Չափումներն ու դիտարկումները համադրում ենք՝ հստակ ինժեներական գնահատական ներկայացնելու համար։',
  'HERO_CTA2': 'Ե՞րբ են պետք չափումները',
@@ -829,23 +838,23 @@ HY = {
  'CO_STORY': story_html([
     # неразрывный пробел перед последним словом: без него «լինի» повисало
     # на третьей строке в одиночестве (63 px при 1440)
-    ('01 · ԻՆՉՈՒ ՍԿՍԵՑԻՆՔ',
+    ('Ինչու սկսեցինք',
      'Ընկերության հիմքում պարզ գաղափար է․ մեր գործընկերները պետք է կարողանան հասկանալ, թե ինչ է կատարվում իրենց էլեկտրական համակարգում՝ առանց սեփական մասնագիտացված թիմ ունենալու կամ հատուկ չափիչ սարքավորումներ ձեռք բերելու։'),
-    ('02 · ԻՆՉՊԵՍ ԵՆՔ ՄՏԱԾՈՒՄ',
+    ('Ինչպես ենք մտածում',
      'Ինժեներական աշխատանքը սկսվում է ճիշտ հարցերից՝ հասկանալով, թե ինչպես է իրականում աշխատում համակարգը, և եզրակացությունները հիմնավորելով չափումների տվյալներով։ Նպատակը ամեն գնով խնդիր գտնելը չէ։ Երբեմն ամենաօգտակար արդյունքը հաստատելն է, որ համակարգն աշխատում է այնպես, ինչպես պետք է։'),
-    ('03 · ԻՆՉ ԵՆՔ ԿԱՌՈՒՑՈՒՄ',
+    ('Ինչ ենք կառուցում',
      'Gridec-ը ստեղծում ենք երկարաժամկետ նպատակով։ Ուզում ենք, որ մեր աշխատանքը ճանաչվի ճշգրտությամբ, հստակ հաղորդակցությամբ և տվյալներով հիմնավորված տեխնիկական եզրակացություններով։')]),
  'CT_H2': 'Ներկայացրեք խնդիրը նախնական գնահատման համար',
- 'CT_CAP': 'RMS ԼԱՐՈՒՄ · 10-ՐՈՊԵԱՆՈՑ ՄԻՏՈՒՄ', 'CT_NOM': 'ԱՆՎԱՆԱԿԱՆ', 'CT_DIP': 'ԼԱՐՄԱՆ ԱՆԿՈՒՄ · 180 ՄՎՐԿ',
+ 'CT_CAP': 'RMS լարում · 10-րոպեանոց միտում', 'CT_NOM': 'Անվանական', 'CT_DIP': 'Լարման անկում · 180 մվրկ',
  'CO_LEGAL': 'Գրիդեկ ՍՊԸ',
  'CO_TIN_LB': 'ՀՎՀՀ', 'CO_TIN': '08331059',
  'FOOT_ADDR': 'Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան',
  'FOOT_SECTIONS': 'Բաժիններ', 'FOOT_CONTACT': 'Կապ',
  'FOOT_HOURS': 'Երկ-Ուրբ 09:00-18:00 (UTC+4)',
- 'IM_FINDLB': 'ԻՆՉ ՀԱՐՑԵՐԻ ԿԱՐՈՂ Է ՊԱՏԱՍԽԱՆԵԼ ՀԱՇՎԵՏՎՈՒԹՅՈՒՆԸ',
+ 'IM_FINDLB': 'Ինչ հարցերի կարող է պատասխանել հաշվետվությունը',
  'F_H3': 'Նկարագրեք <span class="ac">խնդիրը</span>',
  'F_INTRO': intro_html('Նշեք՝ ինչ է տեղի ունեցել, երբ է դա նկատվել և ինչ սարքավորման վրա։'),
- 'F_CONTACT': 'ԿՈՆՏԱԿՏԱՅԻՆ ՏՎՅԱԼՆԵՐ',
+ 'F_CONTACT': 'Կոնտակտային տվյալներ',
  'F_NAME': 'Անուն', 'F_NAME_PH': 'Ձեր անունը',
  'F_COMPANY': 'Ընկերություն', 'F_COMPANY_PH': 'Ընկերության անվանումը',
  'F_EMAIL': 'Էլ. փոստ', 'F_PHONE': 'Հեռախոս',
@@ -857,7 +866,9 @@ HY = {
  'F_DROP2': 'Լուսանկարներ, սխեմաներ, հաշվետվություններ կամ սարքավորման տվյալներ',
  'F_SIZE_ERR': 'Կցված ֆայլերը գերազանցում են 10 ՄԲ սահմանը։ Հեռացրեք մի քանիսը։',
  'F_HINT0': 'Մինչև 10 ՄԲ',
- 'F_FORM_ERR': 'Լրացրեք բոլոր դաշտերը՝ անուն, ընկերություն, վավեր էլ. փոստ, հեռախոս և կարճ նկարագրություն։',
+ 'F_FORM_ERR': 'Ստուգեք նշված դաշտերը։',
+ # ⚠ ЧЕРНОВИК: армянские формулировки ошибок — на проверку владельцу.
+ 'F_ONE_CONTACT': 'Էլ. փոստ կամ հեռախոս՝ գոնե մեկը, որպեսզի կարողանանք պատասխանել։',
  'F_SEND_ERR': 'Հաղորդագրությունը չհաջողվեց ուղարկել։ Ստուգեք ինտերնետ կապը և փորձեք կրկին, կամ գրեք մեզ՝ sales@gridec.am հասցեով։',
  'F_SEND': 'Ուղարկել տվյալները',
  'A_CLOSE': 'Փակել',
@@ -974,6 +985,9 @@ HY_DATA.update({
          ['03', 'Սարքավորման անջատում կամ ազդանշան'], ['04', 'Համակարգի աշխատանքի վերականգնում'],
          ['05', 'Գրանցումը պահպանվում է վերլուծության համար']],
  'viewDetails': 'Մանրամասներ',
+ 'errName': 'Նշեք ձեր անունը։', 'errMsg': 'Նկարագրեք՝ ինչ է տեղի ունեցել։',
+ 'errEmail': 'Նշեք վավեր էլ. փոստի հասցե։', 'errPhone': 'Նշեք վավեր հեռախոսահամար։',
+ 'errContact': 'Նշեք էլ. փոստ կամ հեռախոսահամար։',
  'hint1': ' ֆայլ · ', 'hintN': ' ֆայլ · ', 'hintSuf': ' / 10 ՄԲ', 'hint0': 'Առավելագույնը՝ 10 ՄԲ։',
  'appTypes': ['Արտադրություն', 'Արևային կայան', 'Բուժհաստատություն / լաբորատորիա',
               'Տվյալների կենտրոն / IT', 'Կոմերցիոն շենք',
@@ -988,7 +1002,7 @@ HY_CARDS = [
   'findings': ['Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։',
                'Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։',
                'Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։'],
-  'statLabel': 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ',
+  'statLabel': 'Տեխնիկական նշում',
   'statText': 'Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։',
   'statSource': 'Աղբյուր՝ EPRI'},
  {'title': 'Արևային կայաններ', 'img': 'IMG1',
@@ -1002,7 +1016,7 @@ HY_CARDS = [
   'findings': ['Գրանցված էլեկտրասնուցման պայմանների համեմատությունն արտադրողի պահանջների հետ։',
                'Տվյալներ՝ էլեկտրասնուցմամբ պայմանավորված իրադարձությունները սարքավորման խափանումներից տարբերակելու համար։',
                'Հաջորդ ստուգումների առաջարկվող հերթականությունը՝ ըստ տեխնիկական կարևորության և աշխատանքի վրա ազդեցության։'],
-  'statLabel': 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ',
+  'statLabel': 'Տեխնիկական նշում',
   'statText': 'IEC 60601-1-2-ը ներառում է բժշկական էլեկտրասարքավորումների՝ լարման անկումների և կարճատև ընդհատումների նկատմամբ խանգարումակայունության փորձարկումներ։',
   'statSource': 'Աղբյուր՝ IEC'},
  {'title': 'Տվյալների կենտրոններ և ՏՏ ենթակառուցվածք', 'img': 'IMG3',
@@ -1010,7 +1024,7 @@ HY_CARDS = [
   'findings': ['UPS-ի մուտքային բեռնվածությունը՝ անվանական հզորության համեմատ։',
                'Վերագործարկումների, մարտկոցից սնուցման ռեժիմի և գրանցված էլեկտրասնուցման խանգարումների միջև կապը։',
                'Պլանավորվող ընդլայնման համար նշանակալի բեռնվածության գրաֆիկները։'],
-  'stat': '57%', 'statLabel': 'ՎԻՃԱԿԱԳՐՈՒԹՅՈՒՆ',
+  'stat': '57%', 'statLabel': 'Վիճակագրություն',
   'statText': 'Uptime Institute-ի 2025 թ. տարեկան հարցման մասնակիցների այն բաժինը, որոնք նշել են, որ իրենց վերջին խոշոր խափանման արժեքը գերազանցել է 100 000 ԱՄՆ դոլարը։',
   'statSource': 'Աղբյուր՝ Uptime Institute, Annual Outage Analysis 2026'},
  {'title': 'Կոմերցիոն տարածքներ', 'img': 'IMG4',
@@ -1018,7 +1032,7 @@ HY_CARDS = [
   'findings': ['Տվյալներ խանգարման հավանական աղբյուրը գնահատելու համար։',
                'Գերտաքացման կամ պաշտպանիչ սարքերի գործարկման հետ կապված էլեկտրական պայմանները։',
                'Հզորության գործակիցը, ռեակտիվ հզորությունը և բեռնվածության միտումները՝ վճարների կամ հասանելի հզորության գնահատման համար։'],
-  'statLabel': 'ՏԵԽՆԻԿԱԿԱՆ ՆՇՈՒՄ',
+  'statLabel': 'Տեխնիկական նշում',
   'statText': 'Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։',
   'statSource': 'Աղբյուր՝ U.S. DOE / LBNL'},
  {'title': 'Ներդրումային և տեխնիկական գնահատում', 'img': 'IMG5',
@@ -1058,10 +1072,10 @@ FF_EN_D = '\n'.join([
 ])
 
 FF_HY_D = '\n'.join([
+    font_face_url('Mardoto', '400', 'mardoto-400.woff2'),
+    font_face_url('Mardoto', '700', 'mardoto-700.woff2'),
     font_face_url('Arian AMU', ARIAN_REG, 'arian-amu-400.woff2'),
     font_face_url('Arian AMU', '600 900', 'arian-amu-700.woff2'),
-    font_face_url('Arian AMU Serif', '400 500', 'arian-amu-serif-400.woff2'),
-    font_face_url('Arian AMU Serif', '600 900', 'arian-amu-serif-700.woff2'),
     # Пиксельная гарнитура показаний и счётчиков — та же, что на английской странице.
     font_face_url('Departure Mono', '100 900', 'departure-mono.woff2'),
     # Без этой строки выложенная страница не знала Mardoto и рисовала заголовки Arian AMU
@@ -1375,24 +1389,10 @@ PAL_CSS = """
      просто не на самой границе. */
   --fg:%(inkw)s;--fg-mid:%(fgmid)s;--fg-soft:%(fgsoft)s;
   --hair:rgba(%(inkwrgb)s,.13);--hair2:rgba(%(inkwrgb)s,.07);}
-.plate,.plate2,.other,.chart,.ic,.rep-head{--brand:%(dark)s;--brand-ink:%(dark)s;--brand-on:%(ink)s;
+.plate,.plate2,.chart,.icard,.rep-head{--brand:%(dark)s;--brand-ink:%(dark)s;--brand-on:%(ink)s;
   /* Заголовки на тёмных поверхностях светлые: общее правило h1–h3 берёт --fg-head, и без
      этой переменной названия карточек отраслей рисовались чернилами по чернилам (2026-09-13). */
   --fg-head:#F4F3F1;}
-/* Приглашение больше не фирменный блок. Прежде оно заливалось цветом марки
-   и получало чернильный текст — в ряду из шести тёмных плит со светлым
-   названием седьмая выпадала светлой с тёмным. Теперь она той же семьи,
-   а отличается тем, чем и должна: на ней чертёж, а не фотография. */
-.ic.is-open-card{color:%(offwhite)s;box-shadow:0 0 0 1px rgba(%(inkrgb)s,.5);}
-.ic.is-open-card .ic-art{background:%(ink)s;}
-.ic.is-open-card .ic-art svg{color:rgba(%(darkrgb)s,.6);}
-/* Сплошные чернила, а не .78: на фирменном фоне карточки .78 давало 4,06:1 в
-   синей палитре и 3,54 в тёплой — ниже нормы для 14 пикселей. Приглушать
-   абзац теперь приходится кеглем, а не выцветанием: подходящей прозрачности,
-   которая проходит норму во всех трёх палитрах, попросту нет. */
-.ic.is-open-card .ic-art::after{
-  background:linear-gradient(180deg,rgba(%(inkrgb)s,.16) 0%%,rgba(%(inkrgb)s,.04) 46%%,
-    rgba(%(inkrgb)s,.9) 86%%,%(ink)s 100%%);}
 /* Заливки поверх бумаги героя нет ни в одной палитре: на светлом грунте она давала
    холодный налёт, и герой отличался цветом от панели указателя и от разделов. */
 """
@@ -1543,7 +1543,7 @@ def render_deploy(tokens, data, ff, out_path, post=None):
     # него ещё 20 КБ в высоком приоритете незачем.
     preload = {
         'en': ['overused-grotesk-latin.woff2'],
-        'hy': ['arian-amu-400.woff2', 'arian-amu-700.woff2', 'arian-amu-serif-400.woff2'],
+        'hy': ['mardoto-400.woff2', 'mardoto-500.woff2'],
     }.get(tokens['LANG'], [])
     for fn in ['departure-mono.woff2'] + preload:
         head += ('<link rel="preload" href="/fonts/%s" as="font" '
@@ -1587,9 +1587,8 @@ DEPLOY = os.environ.get('PT_DEPLOY') or os.path.join(ROOT, 'site')
 # Ровно те начертания, которые объявлены в FF_EN_D и FF_HY_D. Лишние не кладём:
 # каждый файл в каталоге сайта — это то, что кто-то может скачать.
 DEPLOY_FONTS = (['overused-grotesk-latin.woff2', 'departure-mono.woff2',
-                 'arian-amu-400.woff2', 'arian-amu-700.woff2',
-                 'arian-amu-serif-400.woff2', 'arian-amu-serif-700.woff2']
-                + ['mardoto-500.woff2'])
+                 'arian-amu-400.woff2', 'arian-amu-700.woff2']
+                + ['mardoto-400.woff2', 'mardoto-500.woff2', 'mardoto-700.woff2'])
 DEPLOY_ICONS = ['favicon.svg', 'favicon.ico', 'favicon-96.png', 'apple-touch-icon.png']
 
 def deploy_asset(src, dst):

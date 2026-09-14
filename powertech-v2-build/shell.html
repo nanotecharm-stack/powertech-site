@@ -32,8 +32,7 @@ select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);
 /* Белое кольцо — только на тёмных плитах. Герой светлый, там кольцо общее,
    фирменное: белое на бумаге было невидимым. */
 .plate a:focus-visible,.plate button:focus-visible,
-.plate2 a:focus-visible,.plate2 button:focus-visible,
-.ic:focus-visible{outline-color:#FFFBF9;}
+.plate2 a:focus-visible,.plate2 button:focus-visible{outline-color:#FFFBF9;}
 /* Safari на iPhone САМ увеличивает кегль в блоках, которые считает основным
    текстом: длинный абзац раздувает, короткий пункт списка оставляет как есть.
    Приём остался от времён, когда сайты верстали под настольный экран и читали
@@ -68,13 +67,20 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;
    19px/1.55, абзац героя до 20px/1.55, подписи 15px, теги 12px. Заголовки — чернила
    плашки #0D2440. На тёмном проза #E8E3DB (12:1), мелкое #D9D3CA. Прежние значения
    (16/1.75, rgba .78 и .66) читались тускло — референс качества metatech.am. */
-:root{--t-p:17px;--t-p-lh:1.6;--t-lede:19px;--t-lede-lh:1.55;--t-hp:clamp(17px,1.45vw,20px);--t-hp-lh:1.55;
-  --t-hp-hy:clamp(17px,1.45vw,20px);--t-small:15px;--t-small-lh:1.55;--t-tag:12px;--t-q:17px;
+:root{--t-p:18px;--t-p-lh:1.6;--t-lede:19px;--t-lede-lh:1.55;--t-hp:clamp(17px,1.45vw,20px);--t-hp-lh:1.55;
+  --t-hp-hy:clamp(17px,1.45vw,20px);--t-small:16px;--t-small-lh:1.55;--t-tag:13px;--t-q:18px;
+  /* Аудит 2026-09-14: единые роли. --t-note — технические примечания и названия величин (16),
+     --t-ui — навигация и кнопки (14–15), --t-aux — вспомогательные подписи (13). 11–12 px
+     остаются только у коротких приборных отметок (счётчик раздела, номера в указателе). */
+  --t-note:16px;--t-note-lh:1.6;--t-ui:14px;--t-aux:13px;
   --fg-head:#0D2440;--on-dark:#E8E3DB;--on-dark-lede:#E8E3DB;--on-dark-small:#D9D3CA;
   --on-dark-note:#D9D3CA;--on-dark-link:#E8E3DB;
   /* Лёгкий воздух между буквами прозы и кнопок (+.01em ≈ 0.17px при 17px): гротеск с
      узкими апертурами при плотном наборе читался слипшимся (владелец, 2026-09-13). */
   --t-ls:.01em;}
+@media (max-width:767px){:root{--t-p:17px;--t-lede:18px;--t-q:17px;}}
+/* Якоря учитывают закреплённую шапку (62 px): раздел встаёт под ней, а не за ней. */
+section[id],#end{scroll-margin-top:72px;}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:%%BODYFONT%%;letter-spacing:var(--t-ls);-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
 /* paper grain — one fixed layer, no blend mode, 3% */
 body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
@@ -106,7 +112,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
    запрос жира браузер подделает, размазав штрихи. */
 .tag,.chart .cap,footer h3,footer .fbrand p,footer .fbot,
 #fmd .ghd,#imd .lb,#imd .st .ss{font-weight:500;}
-.eyebrow{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brand-ink);}
+.eyebrow{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.16em;text-transform:uppercase;color:var(--brand-ink);}
 /* Заголовки разделов 03 и 07 стоят на ступень ниже своего счётчика: у обоих
    под заголовком идут два вводных абзаца, и без неё счётчик прилипал к строке.
    Значение то же, что стояло инлайном у этих двух h2. */
@@ -115,8 +121,8 @@ h2.h2gap{margin-top:var(--s4);}
 .lede{max-width:46ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-mid);margin-top:var(--s5);}
 /* Два вводных абзаца подряд стояли теснее, чем абзац к своему заголовку, и
    читались одним куском. Разводим их на строку. */
-.lede + .lede{margin-top:34px;}
-.rv{opacity:0;transform:translateY(20px);transition:opacity .9s var(--e),transform .9s var(--e);}
+.lede + .lede{margin-top:22px;}
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e);}
 .rv.in{opacity:1;transform:none;}
 
 /* header */
@@ -166,7 +172,7 @@ header nav{justify-self:center;display:flex;align-items:center;gap:2px;padding:v
   -webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);
   transition:box-shadow .5s var(--e),background .5s var(--e);}
 /* section names carry the label voice — the serif in Armenian, the body face in English */
-header nav a{font-family:%%NAVFONT%%;position:relative;padding:var(--s2) 15px;white-space:nowrap;border-radius:2px;color:rgba(13,14,19,.82);
+header nav a{font-family:%%BODYFONT%%;position:relative;padding:var(--s2) 15px;white-space:nowrap;border-radius:2px;color:rgba(13,14,19,.82);
   transition:color .35s var(--e),background .35s var(--e);}
 header nav a:hover{color:#0D0E13;background:rgba(13,14,19,.07);}
 header nav a.here{color:var(--inv-fg);background:var(--inv);}
@@ -256,20 +262,8 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
 .ixp a{display:grid;grid-template-columns:34px minmax(0,1fr);
   gap:14px;align-items:baseline;padding:13px 0;color:var(--inv-fg);}
 .ixp a .no{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);}
-.ixp a .tl{font-size:16px;line-height:1.35;color:rgba(239,237,234,.86);
-  display:inline-flex;flex-wrap:wrap;}
-.ixp .tl .wd{display:inline-flex;white-space:nowrap;}
-.ixp .tl .sp{display:inline-block;width:.31em;}
-.ixp .tl .lt{display:inline-block;overflow:hidden;height:1.35em;}
-/* Разбег стоит ТОЛЬКО на наведении. Когда он висел на самой букве, он
-   отрабатывал и на уходе курсора: строка возвращалась ещё треть секунды после
-   того, как указатель ушёл, и рядом уже начинала реагировать следующая — на
-   экране всегда было две живых строки вместо одной. Обратный ход короче и без
-   задержек: строка гаснет разом, как только курсор ушёл. */
-.ixp .tl .lt i{display:block;height:1.35em;font-style:normal;
-  transition:transform .3s var(--e);transition-delay:0s;}
-.ixp a:hover .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
-  transition:transform .6s var(--e);transition-delay:var(--d,0ms);}
+.ixp a .tl{font-size:17px;line-height:1.35;color:rgba(239,237,234,.88);transition:color .2s var(--e);}
+/* Посимвольный разбег названий снят (аудит 2026-09-14): спокойная смена цвета. */
 .ixp a:hover .tl{color:#F4F3F1;}
 /* Текущий раздел виден без чтения: линейка и название в цвете марки. */
 .ixp a.here .no{font-weight:600;}
@@ -326,9 +320,9 @@ body::before{opacity:1;z-index:-1;mix-blend-mode:soft-light;
    переполнении переехала на внутренний слой: у элемента сетки она бы конфликтовала
    с анимируемой дорожкой. */
 .ixp{display:grid;grid-template-rows:0fr;opacity:0;
-  transition:grid-template-rows .5s var(--e),opacity .34s var(--e);}
+  transition:grid-template-rows .3s var(--e),opacity .25s var(--e);}
 .ixp.on{grid-template-rows:1fr;opacity:1;
-  transition:grid-template-rows .5s var(--e),opacity .2s var(--e);}
+  transition:grid-template-rows .3s var(--e),opacity .2s var(--e);}
 .ixp>.ixin{min-height:0;overflow:hidden;}
 /* ============ ПОЛОСА ПРОКРУТКИ ПАНЕЛИ ============
    Владелец: «когда выпадает меню, в процессе справа появляется линия прокрутки,
@@ -358,17 +352,16 @@ body::before{opacity:1;z-index:-1;mix-blend-mode:soft-light;
   background:var(--brand);transform:scaleX(0);transform-origin:left;
   transition:transform .62s var(--e);}
 .ixp.on::before{transform:scaleX(1);}
-.ixp li{opacity:0;transform:translateY(-9px);
-  transition:opacity .4s var(--e),transform .4s var(--e);}
+.ixp li{opacity:0;transform:translateY(-6px);
+  transition:opacity .25s var(--e),transform .25s var(--e);}
 .ixp.on li{opacity:1;transform:none;
-  transition-delay:calc(var(--i,0) * 34ms + 90ms);}
+  transition-delay:calc(var(--i,0) * 18ms + 60ms);}
 .ixp a.picked .tl{color:#F4F3F1;}
 @media (prefers-reduced-motion:reduce){
   .ixp,.ixp.on,.ixsc,.ixp li,.ixp.on li,.ixp::before{transition:none;}
   .ixp li{opacity:1;transform:none;}
   .ixp::before{transform:scaleX(1);}
-  .ixp .tl .lt i{transition:none;}
-  .ixp a:hover .tl .lt i{transform:none;}}
+}
 
 /* ---- 1 titleblock: the bar is a real strip of paper -------------------- */
 html[data-nav="1"] header{background:var(--bg);box-shadow:0 1px 0 var(--hair);pointer-events:auto;}
@@ -634,21 +627,21 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
    получалась другого размера, чем в английской. */
 /* Владелец (2026-09-14): пиксельного Departure Mono в шапке больше нет — тот же гротеск, что у
    кнопки рядом; перед кодом языка — тонкий глобус, код трёхбуквенный (ARM / ENG). */
-.lang{display:inline-flex;align-items:center;gap:6px;font-family:%%BODYFONT%%;font-size:12px;font-weight:500;letter-spacing:.08em;padding:9px var(--s3);
+.lang{display:inline-flex;align-items:center;gap:6px;font-family:%%BODYFONT%%;font-size:var(--t-aux);font-weight:500;letter-spacing:.06em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,14,19,.12);
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
 .btn i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:2px;
   background:color-mix(in srgb,var(--inv-fg) 16%,transparent);font-style:normal;font-size:12px;
-  transition:transform .45s var(--e),background .4s var(--e);}
+  transition:transform .2s var(--e),background .2s var(--e);}
 /* Стрелка при наведении светлеет вместе с надписью. Прежде цвет ей задавала
    только кнопка в покое, и на залитой кнопке она оставалась тёмной: подпись
    белая, плитка светлая, а знак внутри — чернильный. */
 .btn:hover i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
 .btn{display:inline-flex;align-items:center;gap:9px;background:var(--inv);color:var(--inv-fg);font-size:14px;font-weight:600;padding:13px 20px;position:relative;overflow:hidden;isolation:isolate;border-radius:2px;}
-.btn span{position:relative;z-index:1;transition:color .4s var(--e);}
-.btn::before{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--e);}
+.btn span{position:relative;z-index:1;transition:color .2s var(--e);}
+.btn::before{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--e);}
 .btn:hover::before{transform:scaleX(1);}.btn:hover span{color:#fff;}
 /* the surface has to answer the press — nothing here had an :active state */
 .btn{transition:transform .16s var(--e);}
@@ -658,7 +651,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
    перехода, и кромка менялась мгновенно, пока цвет плыл. Теперь всё вместе. */
 .lang,.md .x{transition:transform .16s var(--e),background .35s var(--e),color .35s var(--e),box-shadow .35s var(--e);}
 /* dark surfaces: the untinted brand is the one with contrast there */
-.plate,.plate2,.other,.chart,.ixp,.navr,.brand{--brand-ink:#D4714E;}
+.plate,.plate2,.icard,.chart,.ixp,.navr,.brand{--brand-ink:#D4714E;}
 .btn.gh{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--hair);}
 
 /* ============ ГЕРОЙ (бриф владельца 2026-09-14, zip GRIDEC-Hero-Claude) ============
@@ -691,13 +684,6 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 /* Акцентное слово: по референсу владельца тем же цветом, что заголовок (вернуть синее —
    color:var(--brand-ink)). Тег нейтральный, не <em>. */
 .hero h1 .ac{font-style:normal;color:var(--fg-head);}
-/* Расшифровка заголовка при загрузке — один прогон; при reduce текст стоит готовым. */
-.hero h1 .dtw{display:inline-block;white-space:pre;}
-.hero h1 [data-dt="s"]{color:color-mix(in srgb,var(--fg) 42%,var(--bg));}
-.hero h1 [data-dt="l"]{animation:dtflash .42s cubic-bezier(.2,0,0,1);}
-@keyframes dtflash{
-  0%{color:var(--brand);text-shadow:0 0 24px color-mix(in srgb,var(--brand) 70%,transparent);}
-  100%{text-shadow:0 0 0 transparent;}}
 /* Правая группа: верх описания на первой строке H1 (18 = поле h1 14 + вынос кегля). */
 .hside{position:relative;z-index:3;grid-area:side;padding-top:18px;}
 .hero .hp{margin:0;max-width:none;font-size:18px;line-height:1.5;color:var(--fg-mid);}
@@ -705,7 +691,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .acts{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px;}
 .hero .acts .btn{font-size:15px;padding:15px 22px;}
 .hero .acts .btn.gh{display:inline-block;background:none;box-shadow:none;padding:0;border-radius:0;
-  font-size:14px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
+  font-size:15px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(13,14,19,.3);}
 .hero .acts .btn.gh::before{display:none;}
 .hero .acts .btn.gh:hover span{color:var(--fg-head);}
@@ -713,9 +699,9 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hphoto{position:relative;margin:0;width:100%;background:var(--lo);}
 .hphoto img{display:block;width:100%;height:auto;}
 /* НАДПИСЬ на светлой панели щита: маркировка на краске, ни карточки, ни рамки. */
-.hmark{position:absolute;left:var(--hx);top:20%;margin:0;width:max-content;max-width:20%;
-  font-family:%%MONOFONT%%;font-size:11px;line-height:2.1;letter-spacing:.15em;font-weight:500;
-  color:#17334A;opacity:.85;}
+.hmark{position:absolute;left:var(--hx);top:20%;margin:0;width:max-content;max-width:22%;
+  font-family:%%MONOFONT%%;font-size:var(--t-aux);line-height:2;letter-spacing:.12em;font-weight:500;
+  color:#17334A;}
 .hmark span{display:block;}
 .hmark::after{content:"";display:block;width:18px;height:1px;background:currentColor;margin-top:20px;}
 :lang(hy) .hmark{letter-spacing:.01em;}
@@ -723,7 +709,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 @media (min-width:768px) and (max-width:1099px){
   .hgrid{grid-template-columns:minmax(0,58fr) minmax(0,42fr);grid-template-areas:"eye eye" "head side";column-gap:24px;}
   .hero h1{font-size:clamp(44px,5.2vw,54px);}
-  .hmark{font-size:10px;}
+  .hmark{font-size:12px;}
 }
 /* До 767: одна колонка; фото 4:3 с точкой 60 % 50 % (главный датчик в кадре);
    надпись — подпись под фото в одну строку через «·». */
@@ -733,7 +719,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
   .hero h1{width:auto;max-width:none;font-size:clamp(36px,10vw,44px);}
   .hero .hp{font-size:16.5px;}
   .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:60% 50%;}
-  .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:11px;line-height:1.7;letter-spacing:.12em;}
+  .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:var(--t-aux);line-height:1.7;letter-spacing:.1em;}
   .hmark span{display:inline;}
   .hmark span+span::before{content:"\00a0\00a0\00b7\00a0\00a0";}
   .hmark::after{display:none;}
@@ -783,183 +769,63 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .plate2 .note{color:var(--on-dark-note);}
 .plate2 h2 i,.plate2 .lede i{color:rgba(239,237,234,.4);}
 
-/* industries — horizontal rail, detail opens on click */
-.suite .spin>.wrap{width:100%;}
-.railwrap{position:relative;width:100%;}
-/* pinned: the section is tall, the frame sticks, and the rail is paged by scroll */
-.suite{position:relative;}
-/* Владелец (2026-09-12): «между 01 и 02 странно большое расстояние». Причина —
-   центрирование содержимого в закреплённом экране: над заголовком 02 стояла
-   пустота в треть окна, и своё поле раздела к ней прибавлялось. Теперь
-   содержимое стоит от верха экрана, а поле раздела берёт на себя закреплённый
-   блок — раздел своего верхнего поля не имеет. */
-.suite .spin{position:sticky;top:0;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;
-  padding:clamp(84px,11vh,120px) 0 clamp(28px,4vh,52px);}
-.sec.suite{padding-top:0;}   /* два класса: правило .sec с полем стоит ниже по файлу */
-/* the zone runs the full width: the first card lines up with the heading above,
-   the rest carry on past the right edge */
-/* Horizontal applications scroll — focus-point model.
-   The viewport clips, the track carries translate3d, each shell carries its own
-   scale/lift from how close its centre is to the focus point. */
-.hrail{display:block;overflow:hidden;padding:6px 0 26px;
-  scrollbar-width:none;-ms-overflow-style:none;}
-.hrail::-webkit-scrollbar{display:none;}
-.sx-track{display:flex;align-items:flex-start;gap:clamp(18px,2vw,var(--s6));width:max-content;
-  transform:translate3d(0,0,0);will-change:transform;}
-.icard{flex:0 0 clamp(270px,28vw,420px);transform-origin:50% 50%;
-  /* Deliberately NOT promoted. The rail rescales this box every frame; as its own
-     layer it was rasterised once and then stretched, which frays a straight
-     vertical edge into a visible wave. Painted in the section's layer it is
-     re-rastered each frame, so the edges stay straight. The photograph inside
-     keeps its own layer and its own sharpness. */}
-/* touch and narrow: no pin, no transforms — a native horizontal list instead */
-@media (max-width:980px),(hover:none),(pointer:coarse){
-  .hrail{overflow-x:auto;scroll-snap-type:x proximity;padding-left:clamp(18px,4vw,56px);}
-  .sx-track{transform:none!important;width:max-content;}
-  .icard{scroll-snap-align:center;transform:none!important;opacity:1!important;}
-}
-@media (prefers-reduced-motion:reduce){
-  .sx-track{transform:none!important;}
-  .icard{transform:none!important;opacity:1!important;}
-}
-.icard:nth-child(7n+1){padding-top:0;}
-.icard:nth-child(7n+2){padding-top:clamp(18px,3vw,56px);}
-.icard:nth-child(7n+3){padding-top:clamp(var(--s2),1.4vw,26px);}
-.icard:nth-child(7n+4){padding-top:clamp(var(--s5),3.8vw,72px);}
-.icard:nth-child(7n+5){padding-top:clamp(var(--s1),.8vw,14px);}
-.icard:nth-child(7n+6){padding-top:clamp(var(--s4),2.6vw,var(--s7));}
-.icard:nth-child(7n+7){padding-top:clamp(10px,1.8vw,var(--s6));}
-/* height, а НЕ min-height. С минимумом карточка росла по своему тексту: заголовок
-   в одну строку или в две — и высоты разъезжались на полсотни пикселей, а ряд
-   выглядел случайным. Заодно это возвращало долг кадру: --cardh считается так,
-   чтобы карточка влезала в закреплённый экран, а с минимумом она его перерастала.
-   Разницу забирает .ic-art (flex:1 1 auto) — фотография, а не текст. */
-/* Слой здесь НУЖЕН — но только теперь, когда масштаба на карточке не осталось.
-   Раньше он был вреден: лента масштабировала слой каждый кадр, и растр вместо
-   перерисовки растягивался — отсюда зернистая фотография. Сейчас к карточке
-   применяются лишь сдвиг и прозрачность, а их компоновщик выполняет над готовым
-   слоем без пересчёта растра. Без слоя прозрачность заставляла перерисовывать
-   карточку целиком, вместе с набором: на латинице это проходило незаметно, а
-   армянский засечный шрифт растрируется дороже — и армянская версия шла рывками
-   там, где английская шла ровно. */
-/* Прозрачность у карточек больше не меняется — обещать её компоновщику незачем */
-.icard{will-change:transform;}
-.ic{position:relative;display:flex;flex-direction:column;overflow:hidden;
-  height:var(--cardh,clamp(300px,38vw,470px));
-  border:1px solid #101218;
-  /* A real border, not a spread shadow. The photograph is clipped at the border
-     box, so with the dark ring painted OUTSIDE it the outermost pixel was a blend
-     of picture and page - light wherever the picture is sky. A border paints over
-     that boundary, so the edge pixel is always the card colour. box-sizing is
-     border-box globally, so nothing moves. */
-  /* No backface hint: it promoted the card to its own layer, and the rail scales
-     that layer every frame, so the texture was stretched instead of repainted -
-     that is the wavy vertical edge. Nothing in these cards is composited now. */
-  background:#101218;color:#EFEDEA;border-radius:2px;overflow:hidden;cursor:pointer;
-  /* the card stays put on hover — only its mark answers */
-  transition:none;}
-.ic-top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:flex-start;
-  /* осталась одна стрелка: space-between увёл бы её к левому краю */
-  justify-content:flex-end;padding:15px;}
-/* Стрелка — вектор, а не знак шрифта: ↗ нет ни в одном из наших начертаний,
-   его подставляла система, и вид кнопки решала чужая машина. */
-.ic-go svg{width:19px;height:19px;display:block;}
-.ic-go{width:38px;height:38px;border-radius:2px;background:#EFEDEA;color:#101218;
-  display:grid;place-items:center;flex:0 0 auto;
-  transition:transform .18s var(--e),background .45s var(--e),color .45s var(--e);}
-/* Знак берёт цвет, назначенный палитрой для работы поверх фирменного:
-   белый по нему давал 2,60 при норме 3 для управляющего значка. */
-.ic:hover .ic-go,.ic:focus-visible .ic-go{background:var(--brand);color:var(--brand-on);}
-/* the sector photograph, easing in scale so the movement has weight */
-/* 110, а не 150: высота карточки теперь ЖЁСТКАЯ, и на коротком экране, где
-   --cardh опускается к 260, фотографии с минимумом 150 не хватало места вместе с
-   подвалом (до 141 при заголовке в две строки) — подрезался бы текст. */
-.ic-art{position:relative;flex:1 1 auto;min-height:110px;overflow:hidden;
-  /* Нижний конец дуотона. Не самая глубокая ступень плиты, а на две выше:
-     тени кадра приходят светлее, чем тёмный раздел под лентой, и он остаётся
-     первым по-настоящему тёмным местом страницы. */
-  background:#15171E;
-  /* No layer here either. That mattered only while .icard was promoted: the
-     photograph then landed in the parent texture and was stretched. With the
-     card unpromoted the whole thing repaints at the true scale every frame,
-     so neither the edge nor the image is ever resampled. */}
+/* ============ 02 — ОТРАСЛИ: СЕТКА (аудит 2026-09-14) ============
+   Прежняя закреплённая лента (4300 px прокрутки при 1363) снята. Шесть карточек —
+   сетка 3×2 на настольном, 2 колонки на планшете, 1 на телефоне (кадр шире и ниже).
+   Карточка — фотография с названием; действие — настоящая кнопка в заголовке с
+   растянутой зоной нажатия, кольцо фокуса рисуется на всей карточке.
+   «Другие критические электрические системы» — отдельная компактная строка под сеткой. */
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,22px);
+  margin-top:clamp(24px,3vw,40px);}
+.icard{position:relative;display:flex;flex-direction:column;overflow:hidden;
+  background:#101218;color:#EFEDEA;border:1px solid #101218;border-radius:2px;}
+.ic-art{position:relative;aspect-ratio:4/3;overflow:hidden;background:#15171E;}
 .ic-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
-  /* Постоянное увеличение. Задано стилем, а не скриптом: множитель не меняется,
-     поэтому растр считается один раз и дальше только показывается. */
-  transform:scale(1.06);transform-origin:52% 45%;
-  transition:transform 1.15s cubic-bezier(.16,1,.3,1),filter .7s var(--e);
-  /* Прежде было обесцвечивание на 15 % и контраст на 3 % — почти ничего:
-     шесть снимков оставались шестью снимками со своим светом и цветом.
-     Теперь цвет сведён почти полностью, а тональная шкала ложится между двумя
-     фирменными цветами: lighten поднимает тени до подложки, ::before опускает
-     света до бумаги. Ряд читается набором.
-
-     Диапазон при этом СЖАТ, и это главное. На полном диапазоне тени уходили
-     в самую глубокую плиту: карточки становились почти такими же тёмными, как
-     раздел под ними, обработка выпирала, а страница дважды подряд уходила
-     в темноту. Контраст 0,84 и яркость 1,08 сжимают шкалу перед наложением,
-     подложка взята не самой глубокой ступенью, и десятая доля цвета оставлена
-     живой — снимок читается тонированным, а не перекрашенным. */
-  /* Дуотон ЗАПЕЧЁН В ФАЙЛ, см. duotone.py. Прежде он собирался здесь: фильтр
-     на снимке, lighten над подложкой #15171E, darken слоем #EFEDEA сверху —
-     три действия на каждый снимок. Браузер повторял их НА КАЖДОМ КАДРЕ
-     прокрутки, шесть снимков по 90 тысяч пикселей, и страница лагала
-     (владелец, 20.08; выключатель ?scroll=native показал, что сглаживание
-     тут невиновно). Арифметика перенесена в сборку и сверена с браузером на
-     холсте тем же конвейером: расхождение 0,99 из 255, худшее 2. */}
-/* Верхний конец дуотона. Со своим слоем, потому что ::after занят шторкой
-   под подписью, а порядок важен: краска, потом бумага, потом шторка. */
-/* Слой darken снят: белая точка теперь в самом файле. */
-/* На карточке-приглашении фотографии нет — там чертёж, и сводить его не к чему */
-/* Правило про ::before на карточке-приглашении ушло вместе с самим слоем. */
-.ic-art::after{content:"";position:absolute;pointer-events:none;z-index:2;
-  /* One pixel past every edge, not flush with them. The art box is a fractional
-     height (271.469px here), so an overlay at inset:0 has a half-covered bottom
-     row, and the photograph shows through it as a light line right where the
-     title sits. overflow:hidden on the parent clips the overhang. */
-  inset:-1px;
-  background:linear-gradient(180deg,rgba(13,14,19,.5) 0%,rgba(13,14,19,.05) 42%,rgba(16,18,24,.92) 86%,#101218 100%);}
-.ic-art svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;color:rgba(255,251,249,.5);}
-.ic-foot{position:relative;z-index:2;padding:0 var(--s4) 18px;margin-top:-var(--s2);
-  /* Opaque, so the eight pixels it already overlaps are painted over rather
-     than blended: the photo-to-background boundary that flickered under the
-     title stops existing instead of being colour-matched. Inherited, not a fixed
-     colour: the invitation card carries the brand background and dark text, and a
-     hard dark fill here hid its copy. */
-  background-color:inherit;}
-.ic-foot h3{font-size:clamp(19px,1.9vw,26px);margin:0 0 var(--s2);letter-spacing:.01em;}   /* светлое по тёмному сидит плотнее — чуть воздуха (2026-09-13) */
-.ic-foot p{font-size:var(--t-small);line-height:var(--t-small-lh);color:var(--on-dark-small);
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-/* the invitation keeps the brand colour and its drawing */
-/* Последняя плита была залита цветом марки целиком, и её низ выпадал из ряда:
-   шесть карточек с тёмной подложкой и светлым названием, седьмая — светлая с
-   тёмным. Теперь она той же тёмной семьи, а отличается тем, чем и должна: на
-   ней не фотография, а чертёж. Марка осталась акцентом — линия по нижней
-   кромке и сам рисунок. */
-.ic.is-open-card{background:#101218;box-shadow:0 0 0 1px #101218;}
-.ic.is-open-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
-  background:var(--brand);z-index:4;}
-/* Тот же спуск в темноту, что и у фотографий, только чуть глубже сверху:
-   под ним не снимок, а линии, и им нужно больше воздуха. */
-.ic.is-open-card .ic-art::after{
-  background:linear-gradient(180deg,rgba(13,14,19,.18) 0%,rgba(13,14,19,.05) 46%,rgba(16,18,24,.9) 86%,#101218 100%);}
-/* Грунт под чертежом был вписан литералом мимо палитрового прохода — в мятной
-   и тёплой версиях он оставался синим. Берём чернила плиты. */
-.ic.is-open-card .ic-art{background:#0D0E13;}
-.ic.is-open-card .ic-art svg{color:rgba(200,96,61,.55);}
-.ic.is-open-card .ic-foot p{color:rgba(255,251,249,.86);}
-.suite .spin>.wrap{width:100%;}
-/* head of the card zone: heading left, intro right, in fixed columns. As a flex
-   row it used to wrap in Armenian — the longer heading pushed the intro onto its
-   own line and stole ~170px of card height. */
-.rail-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,34%);
-  align-items:end;gap:26px;margin-bottom:clamp(20px,2.6vw,34px);}
-.rail-head .lede{margin-top:0;max-width:none;}
-@media(max-width:900px){.rail-head{grid-template-columns:1fr;gap:14px;}}
-.icard .bd{will-change:auto;}
-@media (max-width:980px),(hover:none),(pointer:coarse){
-  .suite{height:auto!important;}
-  .suite .spin{position:static;min-height:0;padding:0;}}
+  transform:scale(1.04);transform-origin:52% 45%;transition:transform .3s var(--e);}
+.icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
+.ic-art::after{content:"";position:absolute;pointer-events:none;z-index:2;inset:-1px;
+  background:linear-gradient(180deg,rgba(13,14,19,.35) 0%,rgba(13,14,19,.04) 40%,rgba(16,18,24,.9) 82%,#101218 100%);}
+.ic-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;
+  justify-content:space-between;gap:14px;padding:0 18px 18px;}
+.ic-foot h3{margin:0;font-size:clamp(18px,1.55vw,23px);line-height:1.2;letter-spacing:.005em;}
+.ic-open{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
+  text-align:left;cursor:pointer;}
+/* растянутая зона: вся карточка нажимается, а семантика остаётся у кнопки */
+.ic-open::after{content:"";position:absolute;inset:0;z-index:4;}
+.ic-open:focus-visible{outline:none;}
+.icard:focus-within{outline:2px solid var(--brand-ink);outline-offset:3px;}
+.ic-go{width:40px;height:40px;border-radius:2px;background:#EFEDEA;color:#101218;flex:0 0 auto;
+  display:grid;place-items:center;transition:background .2s var(--e),color .2s var(--e);}
+.ic-go svg{width:19px;height:19px;display:block;}
+.icard:hover .ic-go,.icard:focus-within .ic-go{background:var(--brand);color:var(--brand-on);}
+/* строка «другие системы»: волосяные линии, без плашки и скруглений */
+.iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(20px,3vw,48px);align-items:center;}
+.iother h3{font-size:clamp(18px,1.6vw,22px);margin:0 0 6px;}
+.iother p{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-mid);max-width:62ch;}
+.iother .btn{white-space:nowrap;}
+.rail-head{display:block;}
+/* Владелец (2026-09-14): абзац справа от заголовка читался дырой под заголовком. Заголовок и
+   вводный абзац — одной колонкой, абзац до 62ch. */
+.rail-head .lede{margin-top:var(--s5);max-width:68ch;}
+/* Высота кадра от высоты окна: на низком ноутбуке (≈670 px) шесть карточек с пропорцией 4:3
+   не помещались в экран (владелец, 2026-09-14). 25vh: 168 px на 670, 225 на 900, 270 на 1080. */
+@media (min-width:1025px){.ic-art{aspect-ratio:auto;height:clamp(150px,24vh,290px);}}
+/* Низкое окно ноутбука (до 720 px): кадр ещё ниже и промежутки теснее — заголовок, абзац и все
+   шесть карточек встают в один экран под шапкой (замер 1343×671: 596 px при 599 доступных). */
+@media (min-width:1025px) and (max-height:720px){
+  .ic-art{height:clamp(136px,21vh,290px);}
+  .igrid{gap:14px;margin-top:20px;}
+  .rail-head .lede{margin-top:16px;}
+}
+@media (max-width:1024px){.igrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:600px){
+  .igrid{grid-template-columns:1fr;gap:12px;}
+  .ic-art{aspect-ratio:2/1;}
+  .ic-foot{padding:0 16px 14px;}
+  .iother{grid-template-columns:1fr;row-gap:16px;}
+}
 
 /* what we measure — signatures in a table of cells.
    Separators are drawn BY the cells, never by a gap showing the parent through:
@@ -967,16 +833,14 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
    slot must read as empty air rather than as a missing tile. */
 .meas{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:transparent;
   margin-top:clamp(28px,3.4vw,46px);border-top:1px solid var(--hair2);}
-.mi{position:relative;padding:clamp(20px,2.2vw,30px) clamp(var(--s4),1.8vw,26px);
+.mi{position:relative;min-width:0;padding:clamp(20px,2.2vw,30px) clamp(var(--s4),1.8vw,26px);
   display:flex;flex-direction:column;gap:var(--s4);
-  border-left:1px solid var(--hair2);transition:background .45s var(--e);}
+  border-left:1px solid var(--hair2);}
 .mi:nth-child(4n+1){border-left:none;}
 .mi:nth-child(n+5){border-top:1px solid var(--hair2);}
-.mi svg{width:52px;height:34px;display:block;overflow:visible;color:var(--fg);
-  transition:color .45s var(--e),transform .5s var(--e);}
-.mi .mlb{font-size:14px;line-height:1.42;color:var(--fg);}
-.mi:hover{background:rgba(13,14,19,.04);}
-.mi:hover svg{transform:translateY(-2px);}
+.mi svg{width:52px;height:34px;display:block;overflow:visible;color:var(--fg);}
+/* Плитки без действия — без отклика на наведение (аудит 2026-09-14). */
+.mi .mlb{font-size:var(--t-note);line-height:1.4;color:var(--fg);}
 /* the last cell is not an electrical parameter but a reading OF them, so it is set
    apart the way a drawing sheet sets apart a derived quantity: dashed separators,
    a corner tick and its index in the accent. No extra words. */
@@ -985,7 +849,6 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .mi-alt:nth-child(n+5){border-top-style:dashed;}
 .mi-alt::before{content:"";position:absolute;top:0;left:0;width:26px;height:2px;
   background:var(--brand);}
-.mi-alt:hover{background:var(--alt-wash-h);}
 /* on the dark plate the cells stay transparent, so the empty slot is just air */
 .plate2 .meas{border-top-color:rgba(239,237,234,.13);}
 .plate2 .mi{border-left-color:rgba(239,237,234,.13);}
@@ -994,7 +857,6 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .plate2 .mi .mlb{color:rgba(239,237,234,.84);}
 /* on the plate the accent tint has to come from the light side of the brand */
 .plate2{--alt-wash:rgba(239,237,234,.055);--alt-wash-h:rgba(239,237,234,.09);}
-.plate2 .mi:hover{background:rgba(239,237,234,.05);}
 @media (max-width:1100px){
   .meas{grid-template-columns:repeat(3,1fr);}
   .mi:nth-child(4n+1){border-left:1px solid var(--hair2);}
@@ -1015,7 +877,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 }
 
 /* sections */
-.sec{padding:clamp(56px,7vw,104px) 0 clamp(var(--s8),8vw,120px);}
+.sec{padding:clamp(52px,6.2vw,92px) 0 clamp(52px,6.2vw,92px);}
 h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 .thesis h2{max-width:19ch;}
 
@@ -1057,7 +919,7 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    (правило ниже), а размер заголовка оставался обычным — роль объявлялась
    наполовину. */
 #why h2,#company h2{font-size:clamp(28px,4.25vw,64px);letter-spacing:%%BIGLS%%;line-height:1.05;}
-#company{padding-top:clamp(76px,10.5vw,158px);}
+#company{padding-top:clamp(64px,7.5vw,112px);}
 /* Раздел 01 идёт сразу за героем, и большое поле «главного раздела» ему
    больше не нужно: прежде стык заполнял чертёж с жилой, теперь его нет, и
    от текста героя до «01» выходило 400 с лишком пикселей пустоты —
@@ -1083,7 +945,7 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 /* Ссылка — отдельное действие после блока, а не хвост последнего абзаца:
    семнадцати пикселей на это не хватало. */
 .alink{display:inline-flex;align-items:center;gap:9px;margin-top:34px;
-  padding-block:9px;margin-bottom:-9px;font-family:%%MONOFONT%%;font-size:14px;
+  padding-block:9px;margin-bottom:-9px;font-family:%%MONOFONT%%;font-size:var(--t-ui);
   /* 12px были ниже названной ступени Action (14). Трекинг ослаблен: на большем
      кегле прежний растягивал строку и мешал читать её как фразу. */
   letter-spacing:.11em;text-transform:uppercase;color:var(--brand-ink);}
@@ -1156,11 +1018,16 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 
 /* services */
 .display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
+/* Шапка раздела в две колонки (аудит 2026-09-14): слева номер, заголовок и два вводных
+   абзаца, справа крупный тезис по нижней линии текста. Пустое поле справа ушло. */
+.svc-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,5vw,96px);align-items:end;}
+.svc-head .display{margin:0;padding-bottom:4px;}
+@media (max-width:960px){.svc-head{grid-template-columns:1fr;row-gap:28px;}.svc-head .display{padding-bottom:0;}}
 .display .ac{font-style:normal;color:var(--brand-ink);}
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ (бриф 2, 2026-09-12) ============
    Одна сетка в двенадцать колонок на числа, поле и этапы — так этап стоит
    ровно под своим местом на записи, а число — над своим. */
-.obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(40px,5.5vw,72px);
+.obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(36px,4.5vw,60px);
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);}
 .obs .stats,.obs .steps,.obs-field{grid-column:1 / -1;}
 .obs .stats{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);margin:0;}
@@ -1169,14 +1036,13 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    участком поля. 7 — самое крупное: это ширина всего поля. 24/7 — подпись
    линии, по центру и мельче. 1 — документ в конце, у правой кромки. */
 .obs .stat{background:none;box-shadow:none;padding:0;border-radius:0;align-self:end;}
+/* Три показателя — один ряд одним кеглем, каждый над своей третью поля (аудит 2026-09-14). */
 .obs .stat:nth-child(1){grid-column:1 / span 4;}
-.obs .stat:nth-child(2){grid-column:5 / span 4;text-align:center;}
-.obs .stat:nth-child(3){grid-column:9 / span 4;text-align:right;}
-.obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;}
-.obs .stat:nth-child(1) b{font-size:clamp(64px,9vw,128px);}
-.obs .stat:nth-child(2) b{font-size:clamp(30px,3.6vw,52px);}
-.obs .stat:nth-child(3) b{font-size:clamp(48px,6.4vw,92px);}
-.obs .stat span{display:block;margin-top:var(--s2);font-size:14px;line-height:1.5;color:var(--on-dark-small);}
+.obs .stat:nth-child(2){grid-column:5 / span 4;}
+.obs .stat:nth-child(3){grid-column:9 / span 4;}
+.obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;
+  font-size:clamp(44px,5.2vw,76px);}
+.obs .stat span{display:block;margin-top:var(--s2);font-size:var(--t-note);line-height:1.5;color:var(--on-dark-small);}
 /* Поле: линейка семи делений по низу, линия записи над ней. */
 .obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
 .obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
@@ -1206,7 +1072,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    (2026-09-12): «надо выровнять по горизонтали». Правая выноска у конца
    записи оставляла абзац висеть в стороне от своей линии. */
 .obs .step:nth-child(3){grid-column:6 / span 2;}
-.obs .step p{color:rgba(239,237,234,.62);transition:color .5s var(--e);}
+.obs .step p{color:rgba(239,237,234,.78);transition:color .3s var(--e);}
 .obs .step.on{border-left-color:var(--brand);}
 .obs .step.on::before{background:var(--brand);}
 .obs .step.on p{color:rgba(239,237,234,.9);}
@@ -1244,12 +1110,12 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
   /* Верхнее поле — как у любого раздела: по ссылке «see what monitoring can
      reveal» страница встаёт так, что раздел начинается на 26 px ниже верха
      окна, и при малом поле «04 Report» уходил под шапку (владелец, телефон). */
-  color:#EFEDEA;padding:clamp(72px,7vw,104px) 0 var(--rep-over);}
+  color:#EFEDEA;padding:clamp(56px,6.2vw,92px) 0 var(--rep-over);}
 .rep-head h2{color:#F4F3F1;}
 .rep-head .cnt{color:rgba(239,237,234,.58);}
 .rep-head .lede{color:var(--on-dark-lede);}
 .rep-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.8vw,24px);
-  align-items:start;padding-bottom:clamp(64px,8vw,120px);}
+  align-items:start;padding-bottom:clamp(48px,6vw,96px);}
 .doc{grid-column:1 / span 7;margin-top:calc(var(--rep-over) * -1 + clamp(28px,3.4vw,56px));
   background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair);
   padding:clamp(24px,3vw,44px) clamp(22px,2.8vw,44px) clamp(22px,2.6vw,36px);}
@@ -1309,7 +1175,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
      страницы и подсветка подходила бы к кромке экрана на четыре. */
   --pad:clamp(8px,1.2vw,14px);
   padding:calc(var(--row) / 4) var(--pad);margin-inline:calc(-1 * var(--pad));
-  font-size:16px;line-height:calc(var(--row) / 2);
+  font-size:17px;line-height:calc(var(--row) / 2);
   color:var(--fg);
   transition:background-color .25s var(--e);}
 .list div:nth-child(2){--i:1;}
@@ -1325,16 +1191,16 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    и должны совпадать с кромкой листа сверху и с заголовком слева. */
 .list div::after{content:"";position:absolute;left:var(--pad);right:var(--pad);bottom:0;height:1px;
   background:var(--hair2);transform:scaleX(0);transform-origin:left;
-  transition:transform .8s var(--e),background-color .3s var(--e);
-  transition-delay:calc(var(--i) * 34ms);}
+  transition:transform .5s var(--e),background-color .2s var(--e);
+  transition-delay:calc(var(--i) * 25ms);}
 /* Линейка у последнего ряда ВОЗВРАЩЕНА. Её убирали, когда список лежал на
    своём листе: снизу его закрывала кромка карточки, и две линии рядом читались
    как сбой. Кромки больше нет — без этой линейки перечень не закрывался бы
    снизу и просто растворялся в бумаге. */
 .list.in div::after{transform:scaleX(1);}
-.list div>*{opacity:0;transform:translateY(5px);
-  transition:opacity .6s var(--e),transform .6s var(--e);
-  transition-delay:calc(var(--i) * 34ms);}
+.list div>*{opacity:0;transform:translateY(4px);
+  transition:opacity .35s var(--e),transform .35s var(--e);
+  transition-delay:calc(var(--i) * 25ms);}
 .list.in div>*{opacity:1;transform:none;}
 /* Наведение подсвечивает ряд, как строку в таблице, и не двигает его: сдвиг
    обещал переход, которого нет, — этот жест мы уже снимали. */
@@ -1359,7 +1225,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    чертёжной документации, — верхняя линейка читалась просто как разрыв абзаца
    и снята. Третье: кегль на ступень ниже вводного и тон приглушён. */
 /* 13px были дрейфом: названная ступень Body Small — 14 */
-.note{font-size:14px;line-height:1.75;color:var(--fg-soft);
+.note{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-soft);
   margin-top:var(--s7);padding-left:var(--s5);max-width:52ch;position:relative;}
 .note::before{content:"";position:absolute;left:0;top:.4em;bottom:.4em;width:1px;
   background:var(--hair);transform:scaleY(0);transform-origin:top;
@@ -1375,7 +1241,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    Проявления по прокрутке у неё нет намеренно: в разделе 04 строка лежит
    рядом с .list rv, а не внутри него, и .rv.in до неё не достаёт — линейка
    осталась бы сжатой в ноль. Статичная работает в обоих разделах одинаково. */
-.lnote{font-size:14px;line-height:1.75;color:var(--fg-soft);
+.lnote{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-soft);
   margin-top:var(--s5);padding-left:var(--s5);max-width:52ch;position:relative;}
 .lnote::before{content:"";position:absolute;left:0;top:.4em;bottom:.4em;
   width:1px;background:var(--hair);}
@@ -1409,23 +1275,30 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .qa-pic img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
   opacity:0;transition:opacity .22s linear;}
 .qa-pic img.on{opacity:1;}
-.qa-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair);}
+.qa-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair);
+  /* Положение заголовка при переключении держит скрипт; автопривязка прокрутки браузера
+     (scroll anchoring) здесь выключена, чтобы компенсация не удваивалась. */
+  overflow-anchor:none;}
 .qa-item{border-bottom:1px solid var(--hair);}
 .qa-q{appearance:none;background:none;border:0;border-radius:0;box-shadow:none;width:100%;text-align:left;cursor:pointer;color:var(--fg);
   display:grid;grid-template-columns:34px minmax(0,1fr) 24px;column-gap:14px;align-items:baseline;
   /* Те же ступени, что на остальных разделах: вопрос — текстовый кегль 16 с
      весом 500 (как строки перечня 04), ответ — 16/1.75, ярлыки — роль .tag. */
   padding:16px 0;font:inherit;font-size:var(--t-q);line-height:1.5;font-weight:500;letter-spacing:0;}
-.qa-q:hover .qa-t{color:var(--brand-ink);}
+.qa-q:hover .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
 .qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
-.qa-t{transition:color .3s var(--e);}
+.qa-t{transition:color .2s var(--e);}
 .qa-pm{position:relative;width:24px;height:24px;align-self:center;}
 .qa-pm::before,.qa-pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--fg);transform:translate(-50%,-50%);}
 .qa-pm::before{width:14px;height:1.5px;}
 .qa-pm::after{width:1.5px;height:14px;transition:transform .22s var(--e),opacity .22s var(--e);}
 .qa-q[aria-expanded="true"] .qa-pm::after{transform:translate(-50%,-50%) scaleY(0);opacity:0;}
 .qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s var(--e);}
+.qa-a.still{transition:none;}
+/* hidden — настоящее display:none: авторский display:grid перебивал правило браузера, и
+   «скрытый» ответ оставался в раскладке и анимировался. */
+.qa-a[hidden]{display:none;}
 .qa-a>div{overflow:hidden;min-height:0;}
 .qa-a.open{grid-template-rows:1fr;}
 .qa-a p{margin:0;padding-left:48px;font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:58ch;}
@@ -1455,18 +1328,18 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* Отбивка от заголовка и промежуток между главами теперь стоят в одном ряду и
    в отношении 3:4 — главы разведены шире, чем раздел отбит от своей шапки.
    Раньше это было 92 и 110: разница в восемнадцать пикселей ниоткуда. */
-.story{margin-top:clamp(var(--s7),6vw,var(--s9));display:grid;
-  grid-template-columns:repeat(12,minmax(0,1fr));
-  column-gap:clamp(var(--s4),1.8vw,var(--s5));row-gap:clamp(var(--s8),7vw,var(--s10));}
-.story .sb{position:relative;display:block;grid-column:1 / span 6;
+/* Аудит 2026-09-14: диагональ снята — три главы стоят в ряд, читаются слева направо,
+   подпись сидит на общей линейке. На телефоне — одна колонка. */
+.story{margin-top:clamp(40px,5vw,72px);display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(24px,3vw,48px);row-gap:clamp(32px,4vw,48px);}
+.story .sb{position:relative;display:block;grid-column:auto;
   border-top:1px solid var(--hair);}
-.story .sb:nth-child(2){grid-column:4 / span 6;}
-.story .sb:nth-child(3){grid-column:7 / span 6;}
 /* Штрих в двенадцать пикселей и смещение в шесть: теперь он сидит ровно
    посередине линии, а не на пиксель выше, как при 11 и −5. */
 .story .sb::before{content:"";position:absolute;left:0;top:calc(var(--s3) / -2);
   width:1px;height:var(--s3);background:var(--hair);}
-.story .lb{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.16em;
+.story .lb{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.14em;
   color:var(--brand-ink);line-height:1;transform:translateY(-50%);}
 /* Разрыв линии подписью остаётся несимметричным — справа шире, слева короткий
    заход, — но обе стороны теперь ступени ряда, а не 15 и 13. */
@@ -1476,14 +1349,13 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .story p{/* было 17px при 16px у остальной прозы: та же роль, тот же шрифт,
      разница в пиксель. */font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);
   max-width:46ch;margin:var(--s4) 0 0;}
-@media (max-width:860px){.story{grid-template-columns:1fr;row-gap:clamp(var(--s6),8vw,var(--s8));}
-  .story .sb,.story .sb:nth-child(2),.story .sb:nth-child(3){grid-column:1 / -1;}
+@media (max-width:860px){.story{grid-template-columns:1fr;row-gap:clamp(28px,6vw,40px);}
   .story p{max-width:none;}
 }
 
 /* contact plate */
 .plate{background:linear-gradient(180deg,#0D0E13 0%,#111318 58%,#15171E 100%);color:var(--inv-fg);}
-.plate .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,70px);align-items:center;padding-top:clamp(70px,9vw,130px);padding-bottom:clamp(70px,9vw,130px);}
+.plate .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,70px);align-items:center;padding-top:clamp(64px,7.5vw,108px);padding-bottom:clamp(64px,7.5vw,108px);}
 .plate h2{color:var(--inv-fg);}
 .plate p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:46ch;margin-top:22px;}
 .plate .btn{background:var(--brand);color:#fff;margin-top:30px;}
@@ -1510,8 +1382,20 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .plate .btn::before{background:var(--bg);}
 .plate .btn:hover span{color:var(--fg);}
 .chart{position:relative;}
-.chart svg{width:100%;height:auto;display:block;}
-.chart .cap{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;color:rgba(239,237,234,.58);margin-bottom:var(--s3);}
+/* Аудит 2026-09-14: линия — светлый акцент плиты (#7BA4D0, ≈6:1 на #0D2440), подписи —
+   HTML-текст 13 px поверх SVG, а не текст внутри viewBox (тот масштабировался до 8–10 px).
+   Пунктир номинала .44 — 3,4:1 на самом светлом тоне плиты. */
+.chart svg{width:100%;height:auto;display:block;overflow:visible;}
+.chart .cap{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;color:var(--on-dark-small);margin-bottom:var(--s4);}
+.chart-box{position:relative;}
+.chart .nom{stroke:rgba(239,237,234,.44);stroke-dasharray:3 5;}
+.chart .trace{stroke:var(--brand);stroke-width:2.2;stroke-linecap:round;fill:none;}
+.chart .dipm{stroke:rgba(239,237,234,.5);}
+.chart .lb{position:absolute;font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;
+  color:#E8E3DB;line-height:1.3;white-space:nowrap;}
+.chart .lb-nom{left:0;top:calc(40 / 200 * 100% - 24px);}
+.chart .lb-dip{left:calc(178 / 520 * 100%);top:calc(128 / 200 * 100% + 8px);}
+@media (max-width:420px){.chart .lb{font-size:12px;letter-spacing:.06em;}}
 /* ============ МЕЛКИЕ ТЕХНИЧЕСКИЕ ПОДПИСИ ПО-АРМЯНСКИ ============
    Владелец: «сделай чёткой эту надпись, она смазана».
 
@@ -1523,7 +1407,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    Перечислены именно подписи, а не весь блок показаний: правило на .rd имело
    бы тот же вес, что у цифр, и по порядку отобрало бы у них пиксельный
    шрифт. */
-html[lang="hy"] .chart .cap{font-family:%%BODYFONT%%;}
+html[lang="hy"] .chart .cap,html[lang="hy"] .chart .lb{font-family:%%BODYFONT%%;}
 /* ---- подвал: плита, которую открывает уходящая страница ---------------- */
 /* Обрезка обёртки делает её системой координат для закреплённого потомка —
    тот же приём, что в присланном примере, только без библиотеки. Высота обёртки
@@ -1562,19 +1446,19 @@ footer .fbrand .fname{margin:0;font-family:inherit;font-size:22px;font-weight:60
    проваливается в системный шрифт, как провалилось бы в приборной. */
 footer .fbrand .freg{margin-top:14px;letter-spacing:.14em;}
 footer .fbrand .freg b{font-weight:400;color:rgba(239,237,234,.86);margin-left:10px;}
-footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:11px;
-  letter-spacing:.2em;text-transform:uppercase;color:rgba(239,237,234,.5);max-width:24ch;
-  line-height:1.9;}
+footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:var(--t-aux);
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(239,237,234,.62);max-width:26ch;
+  line-height:1.8;}
 /* Армянские прописные шире: с разрядкой .2em слово «ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՍԻ» не помещалось в 24ch (замер 163 при 155). */
-:lang(hy) footer .fbrand p{letter-spacing:.1em;max-width:28ch;}
-footer h3{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.18em;font-weight:400;
-  text-transform:uppercase;color:rgba(239,237,234,.5);margin-bottom:20px;
+:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:30ch;text-transform:none;}
+footer h3{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.14em;font-weight:400;
+  text-transform:uppercase;color:rgba(239,237,234,.62);margin-bottom:20px;
   display:flex;align-items:center;gap:var(--s3);}
 footer h3::after{content:"";flex:1;height:1px;background:rgba(239,237,234,.14);}
 footer ul{list-style:none;margin:0;padding:0;}
 footer .flist li+li,footer .fcon li+li{margin-top:11px;}
 footer .flist a{display:block;
-  font-size:14px;line-height:1.5;color:var(--on-dark-link);
+  font-size:15px;line-height:1.5;color:var(--on-dark-link);
   transition:color .3s var(--e);}
 footer .flist a:hover{color:#fff;}
 /* Роль Body: телефон и адрес — то, ради чего в футер и приходят, их читают,
@@ -1590,17 +1474,17 @@ footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:c
      вплотную к ней (владелец, 2026-09-12). */
   margin-top:clamp(36px,5vw,56px);
   padding-top:22px;border-top:1px solid rgba(239,237,234,.14);
-  font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(239,237,234,.42);}
+  font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(239,237,234,.62);}
 /* Копирайт и ссылка на политику — одна группа слева, переключатель языка
    остаётся у правого края. Без обёртки space-between развёл бы их натрое. */
 footer .fbl{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;}
-footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0;
-  color:rgba(239,237,234,.6);text-decoration:underline;text-underline-offset:4px;
+footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:6px 0;
+  color:rgba(239,237,234,.7);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(239,237,234,.3);transition:color .3s var(--e),text-decoration-color .3s var(--e);}
 footer .fpp:hover{color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
 footer .fpp:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
-footer .flang{color:rgba(239,237,234,.6);padding:7px 11px;border-radius:2px;
+footer .flang{color:rgba(239,237,234,.75);padding:9px 13px;border-radius:2px;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:color .3s var(--e),background .3s var(--e);}
 footer .flang:hover{color:#0D0E13;background:#EFEDEA;}
 footer a:focus-visible,.flang:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
@@ -1643,8 +1527,8 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    an opaque chip reads on dark grounds, the hairline ring separates it on light
    ones. Same language as the card's corner mark. */
 /* Квадрат, а не круг: круглых элементов на сайте нет ни одного. */
-.md .x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:2px;
-  background:#14161C;color:#EFEDEA;z-index:5;font-size:15px;line-height:1;
+.md .x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:2px;
+  background:#14161C;color:#EFEDEA;z-index:5;font-size:18px;line-height:1;
   display:grid;place-items:center;
   box-shadow:0 0 0 1px rgba(239,237,234,.55);}
 .md .x:hover{background:var(--brand);color:#fff;
@@ -1675,19 +1559,19 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    заголовка раздела: окно меньше раздела по смыслу, но объявляло себя крупнее. */
 #imd h3{font-size:clamp(19px,2vw,28px);margin:0 0 14px;}
 #imd .p1{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:62ch;}
-#imd .lb{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brand-ink);margin:26px 0 var(--s1);}
+#imd .lb{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin:26px 0 var(--s1);}
 /* Перечень выводов — настоящий список: он и выглядит перечнем, и читается
    вслух как перечень с числом пунктов. Маркер рисует .fi em, поэтому
    собственный маркер списка снимается. */
 #imd .fil{list-style:none;margin:0;padding:0;}
-#imd .fi{display:flex;gap:var(--s3);align-items:baseline;font-size:14px;line-height:1.65;padding:11px 0;border-top:1px solid var(--hair2);}
+#imd .fi{display:flex;gap:var(--s3);align-items:baseline;font-size:var(--t-note);line-height:1.6;padding:11px 0;border-top:1px solid var(--hair2);}
 #imd .fi em{font-style:normal;width:6px;height:6px;background:var(--brand);flex:0 0 auto;transform:translateY(-1px);}
 #imd .st{margin-top:var(--s5);padding-top:18px;border-top:1px solid var(--hair2);display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;}
 #imd .st .big{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:clamp(32px,4vw,48px);line-height:1;}
-#imd .st .sx{font-size:14px;line-height:1.62;color:var(--fg-mid);max-width:48ch;}
-#imd .st .ss{font-family:%%MONOFONT%%;font-size:11px;color:var(--fg-soft);margin-top:7px;}
+#imd .st .sx{font-size:var(--t-note);line-height:1.6;color:var(--fg-mid);max-width:48ch;}
+#imd .st .ss{font-family:%%MONOFONT%%;font-size:var(--t-aux);color:var(--fg-soft);margin-top:7px;}
 /* Строка о данных под кнопкой отправки: ступень примечания, не подписи поля. */
-#fmd .fpriv{margin-top:16px;font-size:12px;line-height:1.65;max-width:56ch;
+#fmd .fpriv{margin-top:16px;font-size:14px;line-height:1.6;max-width:56ch;
   color:var(--fg-soft);}
 #fmd .fpriv button{font:inherit;padding:0;color:var(--brand-ink);
   text-decoration:underline;text-underline-offset:3px;}
@@ -1698,14 +1582,14 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #pmd{max-width:720px;}
 #pmd .in{padding:clamp(26px,4vw,46px);}
 #pmd h3{font-size:clamp(19px,2vw,28px);margin:0 0 12px;}
-#pmd .lede{font-size:14px;line-height:1.7;margin:0 0 var(--s4);max-width:56ch;
+#pmd .lede{font-size:var(--t-note);line-height:1.6;margin:0 0 var(--s4);max-width:56ch;
   color:color-mix(in srgb,var(--fg) 78%,transparent);}
 #pmd .pps{border-top:1px solid var(--hair2);padding:18px 0 4px;}
-#pmd .pps h4{font-family:%%MONOFONT%%;font-size:11px;font-weight:500;letter-spacing:.18em;
+#pmd .pps h4{font-family:%%MONOFONT%%;font-size:var(--t-aux);font-weight:500;letter-spacing:.14em;
   text-transform:uppercase;color:var(--brand-ink);margin:0 0 10px;}
-#pmd .pps p{font-size:14px;line-height:1.72;color:var(--fg-mid);max-width:62ch;margin:0 0 10px;}
+#pmd .pps p{font-size:var(--t-note);line-height:1.6;color:var(--fg-mid);max-width:62ch;margin:0 0 10px;}
 #pmd .ppu{margin-top:var(--s4);padding-top:16px;border-top:1px solid var(--hair2);
-  font-family:%%MONOFONT%%;font-size:11px;font-weight:500;letter-spacing:.13em;
+  font-family:%%MONOFONT%%;font-size:var(--t-aux);font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-soft);}
 #pmd a{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px;}
 /* form modal */
@@ -1717,7 +1601,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    значит читают первыми среди мелкого), подписи полей (4,9), пример в поле
    (5,0), примечания (4,9). Введённое значение остаётся чернилами (13,7) —
    разрыв с примером в два с половиной раза, спутать нельзя. */
-#fmd .intro{font-size:14px;line-height:1.7;margin-bottom:28px;max-width:56ch;
+#fmd .intro{font-size:var(--t-note);line-height:1.6;margin-bottom:28px;max-width:56ch;
   color:color-mix(in srgb,var(--fg) 78%,transparent);}
 /* Та же строка, что открывает раздел на странице: подпись в разрядку и
    волосяная линейка до края. Форма перестаёт быть отдельным островом. */
@@ -1727,25 +1611,25 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    не за что зацепиться, и форма читалась сплошным серым полем. Теперь роль
    одна — строка протокола: пиксельный номер и название обычным регистром.
    Номера ведёт счётчик, поэтому их нельзя рассинхронить руками. */
-#fmd form{counter-reset:fld;}
 /* Название секции — единственный капс в форме: это марка раздела,
    а не подпись строки, и номера он не получает. */
-#fmd .ghd{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.18em;
+#fmd .ghd{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.14em;
   text-transform:uppercase;color:color-mix(in srgb,var(--fg) 62%,transparent);
   margin:0 0 18px;display:flex;align-items:center;gap:14px;}
 #fmd .ghd::after{content:"";flex:1;height:1px;background:var(--hair2);max-width:190px;}
-#fmd .gl,#fmd label{display:flex;align-items:baseline;gap:var(--s3);
-  font-family:%%BODYFONT%%;font-size:13px;font-weight:500;letter-spacing:0;
-  text-transform:none;color:var(--fg);margin:0 0 10px;}
-#fmd .gl::before,#fmd label::before{counter-increment:fld;
-  content:counter(fld,decimal-leading-zero);
-  font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.1em;
-  color:var(--brand-ink);flex:0 0 auto;}
+/* Нумерация полей снята (аудит 2026-09-14): подпись 14 px, поле 46 px, текст ввода 16 px. */
+#fmd .gl,#fmd label{display:flex;align-items:baseline;gap:var(--s2);
+  font-family:%%BODYFONT%%;font-size:14px;font-weight:500;letter-spacing:0;
+  text-transform:none;color:var(--fg);margin:0 0 6px;}
+#fmd .fr .opt,#fmd .gl small{font-weight:400;color:var(--fg-soft);font-size:var(--t-aux);}
+#fmd .ghd-note{font-size:14px;line-height:1.5;color:var(--fg-soft);margin:-8px 0 18px;}
+/* Ошибка у своего поля: появляется только с текстом, читается диктором как alert. */
+#fmd .ferr{display:none;font-size:14px;line-height:1.45;color:#A8341F;margin-top:6px;}
+#fmd .ferr.on{display:block;}
 #fmd .gl{margin-top:38px;}
 #fmd .gl small{margin-left:2px;}
 #fmd .gl em{font-style:normal;color:var(--brand-ink);}
-#fmd .gl small{font-weight:400;text-transform:none;letter-spacing:0;color:var(--fg-soft);font-size:12px;}
-#fmd .fr{display:grid;grid-template-columns:1fr 1fr;gap:30px 40px;margin-top:6px;}
+#fmd .fr{display:grid;grid-template-columns:1fr 1fr;gap:22px 40px;margin-top:6px;}
 /* Полужирный текстовый набор был единственным местом на сайте, где мелкая
    служебная подпись выглядела так. Приводим к общему виду: разрядка,
    верхний регистр, тот же кегль, что у номеров и категорий. */
@@ -1759,14 +1643,14 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    рисовала ярлыки и зону файла. Линейка снимает десять прямоугольников из
    двенадцати и делает очевидным, где пишут. */
 #fmd input[type=text],#fmd input[type=email],#fmd input[type=tel]{
-  width:100%;background:none;border:0;border-radius:0;padding:9px 2px;
-  font-size:16px;font-family:inherit;color:var(--fg);outline:none;
+  width:100%;background:none;border:0;border-radius:0;padding:11px 2px;min-height:46px;
+  font-size:16px;line-height:1.5;font-family:inherit;color:var(--fg);outline:none;
   box-shadow:inset 0 -1px 0 var(--hair);
   transition:box-shadow .25s var(--e);}
 /* Единственная коробка формы — описание проблемы: это не строка, а область,
    и она же главное поле. */
 #fmd textarea{width:100%;background:#F7F5F4;border:0;border-radius:2px;
-  padding:14px 15px;font-size:15px;font-family:inherit;color:var(--fg);
+  padding:14px 15px;font-size:16px;font-family:inherit;color:var(--fg);
   box-shadow:inset 0 0 0 1px var(--hair);outline:none;
   transition:box-shadow .25s var(--e),background .25s var(--e);}
 /* Почта и телефон набираются той же гарнитурой, что остальные поля. Пиксельный
@@ -1795,8 +1679,8 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    самой формы. */
 /* Семь очерченных прямоугольников были второй половиной каши. Заливка вместо
    кромки: блоки те же, линий на семь меньше. */
-#fmd .tps button{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:0;
-  text-transform:none;padding:10px 14px;border:0;border-radius:2px;
+#fmd .tps button{font-family:%%BODYFONT%%;font-size:14px;letter-spacing:0;
+  text-transform:none;padding:12px 16px;min-height:44px;border:0;border-radius:2px;
   background:#F4F3F1;color:color-mix(in srgb,var(--fg) 85%,transparent);
   box-shadow:none;
   transition:background .25s var(--e),color .25s var(--e);}
@@ -1816,28 +1700,28 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .drop:hover{box-shadow:inset 0 -1px 0 rgba(13,14,19,.3);}
 #fmd .drop.on{background:rgba(200,96,61,.05);
   box-shadow:inset 0 0 0 1px var(--brand-ink);}
-#fmd .drop b{display:inline;font-family:%%BODYFONT%%;font-size:14px;letter-spacing:0;
+#fmd .drop b{display:inline;font-family:%%BODYFONT%%;font-size:15px;letter-spacing:0;
   text-transform:none;font-weight:500;color:var(--fg);}
 #fmd .drop b::before{content:"+";display:inline-block;width:1.1em;
   font-family:'Departure Mono',monospace;color:var(--brand-ink);}
-#fmd .drop span{display:block;margin-top:5px;font-size:13px;line-height:1.6;
+#fmd .drop span{display:block;margin-top:5px;font-size:14px;line-height:1.55;
   color:color-mix(in srgb,var(--fg) 60%,transparent);}
 #fmd .att{display:flex;align-items:center;gap:10px;background:#F7F5F4;border:0;
   box-shadow:inset 0 0 0 1px var(--hair2);border-radius:2px;padding:9px var(--s3);
   margin-top:var(--s2);font-size:14px;}
 #fmd .att b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;}
-#fmd .att .sz{font-family:%%MONOFONT%%;font-size:12px;color:var(--fg-soft);}
-#fmd .att button{width:22px;height:22px;border-radius:2px;background:var(--hair2);
-  font-size:14px;line-height:1;}
+#fmd .att .sz{font-family:%%MONOFONT%%;font-size:var(--t-aux);color:var(--fg-soft);}
+#fmd .att button{width:44px;height:44px;margin:-9px -10px -9px 0;border-radius:2px;background:transparent;
+  font-size:18px;line-height:1;color:var(--fg);transition:background .2s var(--e),color .2s var(--e);}
 #fmd .att button:hover{background:#A8341F;color:#fff;}
-#fmd .hint{font-size:12px;color:var(--fg-soft);margin:10px 0 var(--s5);}
+#fmd .hint{font-size:14px;color:var(--fg-soft);margin:10px 0 var(--s5);}
 #fmd .errline{font-size:14px;color:#A8341F;margin-bottom:14px;display:none;}
 #fmd .done{display:none;text-align:center;padding:36px 0;}
 #fmd .done .ok{width:46px;height:46px;border-radius:2px;background:var(--brand);
   color:var(--brand-on);font-size:20px;display:flex;align-items:center;
   justify-content:center;margin:0 auto 20px;}
 #fmd .done b{display:block;font-size:21px;font-weight:600;margin-bottom:9px;}
-#fmd .done p{font-size:14px;line-height:1.7;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
+#fmd .done p{font-size:var(--t-note);line-height:1.6;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 
 @media (max-width:960px){
   /* Герой: правила ≤767 и 768–1099 стоят в его блоке CSS. */
@@ -1858,8 +1742,9 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   .obs .step,.obs .step:nth-child(1),.obs .step:nth-child(2),.obs .step:nth-child(3){grid-column:auto;}
   .obs .step::before{display:none;}
   .navr{gap:var(--s2);}
-  .btn{padding:11px 14px;font-size:12px;}
-      #fmd .fr{grid-template-columns:1fr;}
+  .btn{padding:11px 14px;font-size:13px;}
+      #fmd .fr{grid-template-columns:1fr;gap:18px;}
+      .md .x{top:8px;right:8px;}
 }
 /* Снятые переходы не отменяют начальных состояний: без этих сбросов ряды
    списка остались бы прозрачными, а линейки — нулевой длины. */
@@ -1892,11 +1777,18 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    сложнее рисунком, и на .13em заглавная строка рассыпается на отдельные буквы
    вместо слова. Убираем до .07em у тегов и до .12em у надзаголовка — они
    остаются разряженными, но читаются словом. */
-:lang(hy) .tag,:lang(hy) .chart .cap,
-:lang(hy) .story .lb span,:lang(hy) .eyebrow,
-:lang(hy) footer h3,:lang(hy) #imd .lb,:lang(hy) #fmd .ghd{font-weight:600;}
-:lang(hy) .tag{letter-spacing:.07em;}
-:lang(hy) .eyebrow{letter-spacing:.12em;}
+/* Аудит 2026-09-14: подписи набраны Mardoto 500 (настоящий файл), сплошные прописные и
+   широкая разрядка сняты — армянские прописные строятся из одинаковых стоек и в мелком
+   кегле с разрядкой читаются частоколом. Длинные слова переносятся по слогам, где
+   браузер умеет, и ломаются по буквам только в крайнем случае. */
+:lang(hy) .tag,:lang(hy) .eyebrow,:lang(hy) .story .lb span,:lang(hy) footer h3,
+:lang(hy) #imd .lb,:lang(hy) #fmd .ghd,:lang(hy) .chart .cap,:lang(hy) .chart .lb,
+:lang(hy) footer .fbot,:lang(hy) .alink,:lang(hy) #pmd .pps h4,:lang(hy) #pmd .ppu,
+:lang(hy) .ev-tag,:lang(hy) .hmark{text-transform:none;letter-spacing:.02em;font-weight:500;}
+:lang(hy) .eyebrow{letter-spacing:.04em;}
+:lang(hy) h1,:lang(hy) h2,:lang(hy) h3,:lang(hy) p,:lang(hy) li,:lang(hy) .mlb{overflow-wrap:break-word;}
+:lang(hy) p,:lang(hy) .mlb{hyphens:auto;-webkit-hyphens:auto;}
+:lang(hy) .mlb{overflow-wrap:anywhere;}
 
 %%READOUT%%
 
@@ -1918,10 +1810,10 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
    направо, и при открытии линия просто переходит из шапки в панель.
 
    Наверху страницы грунта нет вовсе: там герой, и перекрывать его нечем. */
-html[data-nav="5"] header{--hc:var(--fg);--hh:rgba(13,14,19,.16);--hw:rgba(239,237,234,.82);
+html[data-nav="5"] header{--hc:var(--fg);--hh:rgba(13,14,19,.16);--hw:rgba(239,237,234,.94);
   isolation:isolate;}
 html[data-nav="5"] header[data-tone="ink"]{--hc:#EFEDEA;--hh:rgba(239,237,234,.24);
-  --hw:rgba(13,14,19,.66);}
+  --hw:rgba(13,14,19,.82);}
 /* сетка: крайние клетки по содержимому, середина — пустота */
 html[data-nav="5"] .hin{grid-template-columns:auto 1fr auto;height:62px;position:relative;}
 /* ОДНА ОСЬ НА ПЕРВОМ ЭКРАНЕ.
@@ -1957,7 +1849,7 @@ html[data-nav="5"] .ixb b,html[data-nav="5"] .ixb s,
 html[data-nav="5"] .ixb em{display:none;}
 /* Владелец (2026-09-14): «INDEX» капсом с разрядкой читался пиксельным шрифтом — теперь слово
    строчными, 13 px, как армянская подпись и кнопка рядом. */
-html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:13px;
+html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:var(--t-ui);
   letter-spacing:.01em;text-transform:none;font-weight:500;}
 /* Армянская подпись набирается иначе. Владелец: «плохо читается» — и это не
    вкус, а свойство письма: армянские прописные строятся из одинаковых стоек,
@@ -1966,7 +1858,7 @@ html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:13px;
    Латинское «INDEX» остаётся прописным: у латиницы прописные различимы и в
    этом кегле, и метка держит строй с «HY» и прочими подписями сайта. */
 html[data-nav="5"][lang="hy"] .ixw{font-family:%%BODYFONT%%;text-transform:none;
-  font-size:13px;letter-spacing:.01em;}
+  font-size:var(--t-ui);letter-spacing:.01em;}
 html[data-nav="5"] .wm{color:var(--hc);transition:color .4s var(--e);}
 
 /* приборы без плашек. Нажимаемость держит ПОЛЕ, а не кегль: отрицательный
@@ -1981,7 +1873,7 @@ html[data-nav="5"] .ixb,html[data-nav="5"] .lang{background:none;box-shadow:none
   backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--hc);
   font-size:11px;transition:transform .16s var(--e),box-shadow .28s var(--e),color .4s var(--e);}
 html[data-nav="5"] .ixb{padding:7px 4px;margin-right:-4px;}
-html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:12px;}
+html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:var(--t-aux);}
 .lang .gl{display:block;width:13px;height:13px;flex:none;opacity:.9;}
 html[data-nav="5"] .lang::after{content:"";position:absolute;left:-1px;top:50%;
   width:1px;height:12px;margin-top:-6px;background:var(--hh);}
@@ -2008,14 +1900,16 @@ html[data-nav="5"].hscr #hdr .btn{background:var(--inv);color:var(--inv-fg);box-
 html[data-nav="5"] header[data-tone="ink"] .btn{--inv:#EFEDEA;--inv-fg:#0D0E13;}
 
 /* линия чертит себя, лист догоняет её на 60 мс позже */
+/* Владелец (2026-09-14): «при прокрутке героя на шапке мелькает текст». Лист рисовался слева
+   направо за 0,62 с и начинался после 60 px прокрутки — заголовок героя успевал зайти под шапку
+   раньше листа. Теперь лист проявляется целиком за 0,18 с, а порог — 4 px. */
 html[data-nav="5"] #hdr::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
-  background:var(--hh);transform:scaleX(0);transform-origin:left center;
-  transition:transform .62s var(--e);}
-html[data-nav="5"].hscr #hdr::after{transform:scaleX(1);}
+  background:var(--hh);opacity:0;transition:opacity .25s var(--e);}
+html[data-nav="5"].hscr #hdr::after{opacity:1;}
 html[data-nav="5"] #hdr::before{content:"";position:absolute;inset:0;z-index:-1;
   background:var(--hw);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-  transform:scaleX(0);transform-origin:left center;transition:transform .62s var(--e) .06s;}
-html[data-nav="5"].hscr #hdr::before{transform:scaleX(1);}
+  opacity:0;transition:opacity .18s var(--e);}
+html[data-nav="5"].hscr #hdr::before{opacity:1;}
 
 /* та же линия — шкала прочтения, с иглой на конце */
 .hprog{position:absolute;left:0;bottom:0;height:1px;width:0;z-index:2;display:none;
@@ -2036,7 +1930,7 @@ html[data-nav="5"] header[data-tone="ink"] .hprog{background:#D4714E;}
    Кнопка приглушается ЦВЕТОМ, не геометрией: залитая светлым, она была самым
    ярким предметом на экране и тянула взгляд с восьми строк на себя. */
 html[data-nav="5"]:has(#ixp.on) #hdr::before{background:#0D0E13;
-  -webkit-backdrop-filter:none;backdrop-filter:none;transform:scaleX(1);}
+  -webkit-backdrop-filter:none;backdrop-filter:none;opacity:1;}
 html[data-nav="5"]:has(#ixp.on) #hdr::after{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) .hprog{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn{background:transparent;color:#EFEDEA;
@@ -2074,6 +1968,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 /* Владелец (2026-09-14): переключатель языка стал шире (глобус + ARM/ENG); слово указателя
    уходит ниже 420 на обеих страницах, иначе кнопка шапки выходит за край на 360–390. */
 @media(max-width:419px){ html[data-nav="5"] .ixw{display:none;} }
+/* Армянское «Բաժիններ» шире: с глобусом и «ENG» группа выходила за край на 430 (замер +9). Слово
+   уходит до 479, кнопка указателя остаётся стрелкой с aria-label; зона нажатия — не ниже 40 px. */
+@media(max-width:479px){ html[data-nav="5"][lang="hy"] .ixw{display:none;} html[data-nav="5"] .ixb{padding:12px 6px;margin-right:-6px;} }
 /* 360-й экран, армянская кнопка «Կապ մեզ հետ»: без глобуса и с узкими полями группа помещается (замер: было +16). */
 @media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
@@ -2150,15 +2047,17 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div></section>
 
 
-<section class="sec suite" id="applications"><div class="spin"><div class="wrap">
-  <div class="rail-head">
+<section class="sec suite" id="applications"><div class="wrap">
+  <div class="rail-head rv">
     <div><div class="cnt">02</div><h2>%%APP_H2%%</h2></div>
-    <div><p class="lede">%%APP_P%%</p>
-    </div>
+    <div><p class="lede">%%APP_P%%</p></div>
   </div>
-</div>
-  <div class="railwrap">
-    <div class="hrail" id="irail"></div>
+  <!-- Аудит 2026-09-14: сетка 3×2 вместо закреплённой ленты. Карточки строит скрипт из
+       PT.cards; без скрипта раздел остаётся с заголовком и строкой ниже. -->
+  <div class="igrid" id="irail"></div>
+  <div class="iother rv">
+    <div><h3>%%OTHER_T%%</h3><p>%%OTHER_P%%</p></div>
+    <button class="btn" type="button" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button>
   </div>
 </div></section>
 
@@ -2166,11 +2065,13 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <div class="dith" data-dith="#EFEDEA,#0D0E13,#C8603D"></div>
 
 <section class="sec plate2" id="services"><div class="wrap">
-  <div class="rv"><div class="cnt">03</div>
-  <h2 class="h2gap">%%SVC_H2%%</h2>
-  <p class="lede">%%SVC_P1%%</p>
-  <p class="lede">%%SVC_P2%%</p></div>
-  <div class="display rv">%%SVC_DISPLAY%%</div>
+  <div class="svc-head">
+    <div class="rv"><div class="cnt">03</div>
+    <h2 class="h2gap">%%SVC_H2%%</h2>
+    <p class="lede">%%SVC_P1%%</p>
+    <p class="lede">%%SVC_P2%%</p></div>
+    <div class="display rv">%%SVC_DISPLAY%%</div>
+  </div>
   <!-- ПОЛЕ НАБЛЮДЕНИЯ (бриф 2). Три числа — не три карточки, а шкала: 7 —
        длительность, она же ширина поля; 24/7 — непрерывность, подпись самой
        линии записи; 1 — документ в конце записи. Под полем три этапа стоят на
@@ -2247,13 +2148,15 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="rv"><div class="cnt">08</div>
   <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;</i></button></h2></div>
   <div class="chart rv"><div class="cap">%%CT_CAP%%</div>
-    <svg viewBox="0 0 520 240" fill="none">
-      <line x1="0" y1="60" x2="520" y2="60" stroke="rgba(239,237,234,.14)" stroke-dasharray="3 5"/>
-      <text x="0" y="50" fill="rgba(239,237,234,.45)" font-size="10" font-family="%%MONOFONT%%" letter-spacing="1.5">%%CT_NOM%%</text>
-      <path d="M0,62 L150,60 C168,60 172,64 178,96 C184,130 188,132 196,132 L236,132 C244,132 248,128 254,94 C260,64 264,61 282,61 L520,60" stroke="#C8603D" stroke-width="2" stroke-linecap="round"/>
-      <rect x="178" y="150" width="76" height="1" fill="rgba(239,237,234,.3)"/>
-      <text x="178" y="172" fill="rgba(239,237,234,.55)" font-size="10" font-family="%%MONOFONT%%" letter-spacing="1.2">%%CT_DIP%%</text>
+    <div class="chart-box">
+    <svg viewBox="0 0 520 200" fill="none" aria-hidden="true">
+      <line class="nom" x1="0" y1="40" x2="520" y2="40"/>
+      <path class="trace" d="M0,42 L150,40 C168,40 172,44 178,76 C184,110 188,112 196,112 L236,112 C244,112 248,108 254,74 C260,44 264,41 282,41 L520,40"/>
+      <line class="dipm" x1="178" y1="128" x2="254" y2="128"/>
     </svg>
+    <span class="lb lb-nom">%%CT_NOM%%</span>
+    <span class="lb lb-dip">%%CT_DIP%%</span>
+    </div>
   </div>
 </div></section>
 
@@ -2320,16 +2223,18 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Название секции: отдельный класс, а не .gl, иначе счётчик строк
          примет его за строку протокола и сдвинет всю нумерацию. -->
     <div class="ghd">%%F_CONTACT%%</div>
+    <p class="ghd-note" id="ghdNote">%%F_ONE_CONTACT%%</p>
     <div class="fr">
-      <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true"></div>
-      <div><label for="ptfCompany">%%F_COMPANY%% <em>*</em></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%" required aria-required="true"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" required aria-required="true"></div>
-      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true"></div>
+      <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
+      <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
+      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ghdNote ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ghdNote ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
     <label class="gl" id="glWhat" for="ptfMsg">%%F_WHAT%% <em>*</em></label>
-    <textarea id="ptfMsg" name="message" placeholder="%%F_MSG_PH%%" required aria-required="true"></textarea>
+    <textarea id="ptfMsg" name="message" placeholder="%%F_MSG_PH%%" required aria-required="true" aria-describedby="ptfMsgErr"></textarea>
+    <span class="ferr" id="ptfMsgErr" role="alert"></span>
     <label class="gl" id="glAtt" for="ptfInput">%%F_ATT%% <small>%%F_ATT_OPT%%</small></label>
     <!-- Кнопка, а не див: до вложений нужно доходить табом. Сам файловый вход
          скрыт и лежит СНАРУЖИ — интерактивный элемент внутри button недопустим. -->
@@ -2376,86 +2281,12 @@ window.PT=%%DATA%%;
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
 
-/* ============ DECRYPT H1 — заголовок расшифровывается при загрузке ============ */
-/* Настоящий текст возвращается посимвольно слева направо. Для диктора весь
-   заголовок лежит в aria-label, кипящие знаки от него скрыты. Библиотек не требует, на
-   телефонах работает так же. Параметры — из пробы Motiq: цикл 45–80 мс,
-   ступень 55 мс, разброс ±120 мс, вспышка 420 мс. */
-(function(){
-  var h1=document.querySelector('.hero h1');if(!h1||rm)return;
-  var POOL='#%&@$?!*+=/{}[]<>~^',SPEED=45,SPREAD=35,STAGGER=55,DELAY=350,JITTER=120;
-  /* innerText, не textContent: <br> должен дать пробел, иначе слова склеятся */
-  h1.setAttribute('aria-label',h1.innerText.replace(/\s+/g,' ').trim());
-  var cells=[];
-  (function wrap(node){
-    [].slice.call(node.childNodes).forEach(function(n){
-      if(n.nodeType===3){
-        var frag=document.createDocumentFragment();
-        n.nodeValue.split(/(\s+)/).forEach(function(t){
-          if(!t)return;
-          /* Пробел кладётся ВНУТРЬ предыдущей коробки слова, а не отдельным
-             узлом между коробками. Замерено 2026-09-12 на армянской странице
-             при 390px: с text-wrap:balance Chrome ставил голый пробел-узел в
-             НАЧАЛО следующей строки, и вторая строка заголовка начиналась с
-             отступа в десять точек. В коробке (white-space:pre) пробел висит
-             в конце своей строки и на следующую не переезжает; разрыв между
-             соседними inline-block остаётся разрешённым. Ведущий пробел, у
-             которого коробки-предшественника нет, идёт как раньше. */
-          if(/^\s+$/.test(t)){var pw=frag.lastChild;
-            if(pw&&pw.className==='dtw')pw.appendChild(document.createTextNode(t));
-            else frag.appendChild(document.createTextNode(t));return;}
-          var w=document.createElement('span');w.className='dtw';w.setAttribute('aria-hidden','true');
-          Array.from(t).forEach(function(ch){
-            var s=document.createElement('span');s.dataset.dt='p';s.dataset.ch=ch;s.textContent=ch;
-            w.appendChild(s);cells.push(s);
-          });
-          frag.appendChild(w);
-        });
-        node.replaceChild(frag,n);
-      }else if(n.nodeType===1&&n.tagName!=='BR')wrap(n);
-    });
-  })(h1);
-  if(!cells.length)return;
-  /* Коробка каждой буквы замораживается на ширине НАСТОЯЩЕЙ буквы до начала
-     кипения: знаки пула другой ширины, и без этого раскладка дышала каждый
-     кадр — на армянской версии, где заголовок переносится по словам, строки
-     прыгали, а трасса, построенная во время кипения, вставала мимо места.
-     Ширину мерить можно только загруженным шрифтом, поэтому старт ждёт
-     document.fonts.ready (с потолком 1200 мс — на холодной сети эффект всё
-     равно идёт, дрейф запасного шрифта меньше прежних прыжков). */
-  function dtStart(){
-    cells.forEach(function(s){
-      s.style.display='inline-block';s.style.textAlign='center';
-      s.style.width=s.getBoundingClientRect().width+'px';});
-    var lockAt=cells.map(function(_,i){return DELAY+i*STAGGER+(Math.random()*2-1)*JITTER;});
-    var nextAt=cells.map(function(){return 0;});
-    var left=cells.length,t0=performance.now();
-    cells.forEach(function(s){s.dataset.dt='s';s.textContent=POOL.charAt(Math.random()*POOL.length|0);});
-    function dtFrame(){
-      var now=performance.now()-t0;
-      for(var i=0;i<cells.length;i++){
-        var s=cells[i];
-        if(s.dataset.dt!=='s')continue;
-        if(now>=lockAt[i]){s.textContent=s.dataset.ch;s.dataset.dt='l';left--;}
-        else if(now>=nextAt[i]){s.textContent=POOL.charAt(Math.random()*POOL.length|0);nextAt[i]=now+SPEED+Math.random()*SPREAD;}
-      }
-      if(left>0)requestAnimationFrame(dtFrame);
-    }
-    requestAnimationFrame(dtFrame);
-  }
-  var dtGone=false;
-  function dtGo(){if(dtGone)return;dtGone=true;dtStart();}
-  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(dtGo);setTimeout(dtGo,1200);}
-  else dtGo();
-})();
-
-
 /* Грунт шапки и шкала прочтения. Замеров страницы не требуют вовсе — только
    положение прокрутки, поэтому считаются даром. Порог 60 точек: линия должна
    чертиться осознанно, а не от дрожи колеса. */
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
 function mBar(){var m=document.documentElement.scrollHeight-innerHeight;
-  return {on:window.pageYOffset>60,p:m>0?Math.min(1,window.pageYOffset/m):0};}
+  return {on:window.pageYOffset>4,p:m>0?Math.min(1,window.pageYOffset/m):0};}
 function aBar(st){
   if(barWas!==st.on){barWas=st.on;document.documentElement.classList.toggle('hscr',st.on);}
   if(!hprog)return;
@@ -2683,18 +2514,30 @@ function paintJoints(){aJoints(mJoints());}
 (function(){
   var list=document.getElementById('qalist');if(!list)return;
   var sec=list.closest('section'),btns=[].slice.call(list.querySelectorAll('.qa-q')),pics=[].slice.call(sec.querySelectorAll('.qa-pic img'));
-  function open(i,first){
-    btns.forEach(function(b,k){
-      var a=document.getElementById(b.getAttribute('aria-controls')),on=k===i;
-      b.setAttribute('aria-expanded',on?'true':'false');
-      if(on){a.hidden=false;if(first||rm)a.classList.add('open');else requestAnimationFrame(function(){a.classList.add('open');});}
-      else{a.classList.remove('open');
-        if(first||rm)a.hidden=true;else setTimeout(function(){if(b.getAttribute('aria-expanded')==='false')a.hidden=true;},240);}
-    });
-    pics.forEach(function(p,k){p.classList.toggle('on',k===i);});
+  /* Владелец (2026-09-14): «страница прыгает при раскрытии». Любой аккордеон «открыт один»
+     обязан что-то сдвинуть: либо заголовок уезжает вверх, когда закрывается ответ над ним,
+     либо страницу прокручивают вслед за заголовком — и тогда едет всё остальное. Оба варианта
+     читались скачком. Теперь каждый вопрос открывается и закрывается сам, ничего над нажатым
+     заголовком не меняется, прокрутка не трогается. Иллюстрация слева — последний открытый. */
+  function setOpen(i,on,first){
+    var b=btns[i],a=document.getElementById(b.getAttribute('aria-controls'));
+    /* Владелец (2026-09-14, второе решение): открыт один — новый вопрос закрывает прежний.
+       Закрытие и раскрытие идут одним переходом 220 мс; прокрутку скрипт не трогает. */
+    if(on)btns.forEach(function(o,k){if(k!==i&&o.getAttribute('aria-expanded')==='true')setOpen(k,false,first);});
+    b.setAttribute('aria-expanded',on?'true':'false');
+    if(on){a.hidden=false;if(first||rm)a.classList.add('open');else requestAnimationFrame(function(){a.classList.add('open');});
+      pics.forEach(function(p,k){p.classList.toggle('on',k===i);});}
+    else{a.classList.remove('open');
+      if(first||rm)a.hidden=true;else setTimeout(function(){if(b.getAttribute('aria-expanded')==='false')a.hidden=true;},240);}
   }
-  btns.forEach(function(b,i){b.addEventListener('click',function(){open(i);});});
-  open(1,true);
+  btns.forEach(function(b,i){
+    b.addEventListener('click',function(){setOpen(i,b.getAttribute('aria-expanded')!=='true');});
+    b.addEventListener('keydown',function(e){
+      var j=e.key==='ArrowDown'?i+1:e.key==='ArrowUp'?i-1:e.key==='Home'?0:e.key==='End'?btns.length-1:-1;
+      if(j<0||j>=btns.length)return;e.preventDefault();btns[j].focus();
+    });
+  });
+  btns.forEach(function(b,i){setOpen(i,i===1,true);});
 })();
 
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ: геометрия и головка записи ============
@@ -2749,57 +2592,15 @@ function obsUpd(){aObs(mObs());}
 buildObs();obsUpd();
 addEventListener('resize',function(){requestAnimationFrame(function(){obsW=-1;buildObs();});});
 
-/* ============ INDUSTRIES — a stepped rail of card plates ============ */
+/* ============ INDUSTRIES — сетка карточек (аудит 2026-09-14) ============ */
 var irail=document.getElementById('irail');
-
-/* Each card carries its own technical drawing: orthogonal runs leaving a core,
-   with pads along the way. Deterministic per card, so it never reshuffles. */
-function cardArt(seed){
-  function rnd(n){seed=(seed*1103515245+12345)&0x7fffffff;return seed%n;}
-  var W=100,H=100,parts=[];
-  var cw=20+rnd(10),ch=16+rnd(10),cx0=(W-cw)/2,cy0=(H-ch)/2;
-  parts.push('<rect x="'+cx0+'" y="'+cy0+'" width="'+cw+'" height="'+ch+'" fill="none" stroke="currentColor" stroke-width=".8"/>');
-  var runs=5+rnd(3);
-  for(var i=0;i<runs;i++){
-    var side=i%4,lane=6+rnd(16),reach=26+rnd(30),pad=rnd(2);
-    var d,px,py;
-    if(side===0){
-      var y0=cy0+2+rnd(Math.max(2,ch-4));
-      d='M'+(cx0+cw)+','+y0+' H'+(cx0+cw+lane)+' V'+(y0-reach/2)+' H'+(W+4);
-      px=cx0+cw+lane;py=y0-reach/2;
-    }else if(side===1){
-      var y1=cy0+2+rnd(Math.max(2,ch-4));
-      d='M'+cx0+','+y1+' H'+(cx0-lane)+' V'+(y1+reach/2)+' H-4';
-      px=cx0-lane;py=y1+reach/2;
-    }else if(side===2){
-      var x2=cx0+2+rnd(Math.max(2,cw-4));
-      d='M'+x2+','+cy0+' V'+(cy0-lane)+' H'+(x2+reach/2)+' V-4';
-      px=x2+reach/2;py=cy0-lane;
-    }else{
-      var x3=cx0+2+rnd(Math.max(2,cw-4));
-      d='M'+x3+','+(cy0+ch)+' V'+(cy0+ch+lane)+' H'+(x3-reach/2)+' V'+(H+4);
-      px=x3-reach/2;py=cy0+ch+lane;
-    }
-    parts.push('<path d="'+d+'" fill="none" stroke="currentColor" stroke-width=".8" stroke-opacity=".5"/>');
-    if(pad)parts.push('<rect x="'+(px-1.6)+'" y="'+(py-1.6)+'" width="3.2" height="3.2" fill="currentColor" fill-opacity=".55"/>');
-  }
-  return '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+parts.join('')+'</svg>';
-}
-
 var iovl=document.getElementById('iovl');
-function openInd(o){
+function openInd(o,trigger){
   var ph=document.getElementById('im_ph'),img=ph.firstElementChild;
   if(o.img!==undefined&&PT.imgs[o.img]){
     if(!img){img=document.createElement('img');ph.appendChild(img);}
-    /* Окно открывалось с ЧУЖИМ снимком: адрес полного файла ставился сразу, но
-       до его загрузки в окне оставался снимок предыдущей карточки. Заметно это
-       именно здесь, потому что карточка ленты показывает МАЛЫЙ файл, а окно —
-       полный: адреса разные, кеш не помогает, качать надо всегда.
-       Малый файл уже в кеше — он только что был на карточке. Ставим его первым,
-       и окно открывается с верным снимком мгновенно; полный подменяет его, когда
-       догрузится. Метка want нужна на случай, когда карточки листают быстро:
-       без неё догрузившийся полный снимок предыдущей карточки лёг бы в уже
-       открытое окно следующей — та же ошибка, только наоборот. */
+    /* Малый файл уже в кеше карточки — окно открывается с верным снимком сразу; полный
+       подменяет его, когда догрузится. Метка want — на случай быстрого перебора карточек. */
     var _full=PT.imgs[o.img],_small=_full.replace(/\.jpg$/,'-756.jpg');
     img.dataset.want=_full;img.alt=o.title;img.src=_small;
     img.onerror=function(){if(img.dataset.want===_full&&img.src!==_full)img.src=_full;};
@@ -2825,187 +2626,21 @@ function openInd(o){
     document.getElementById('im_sx').textContent=txt;
     document.getElementById('im_ss').textContent=o.note?'':(o.statSource||'');
   }else st.style.display='none';
-  openDialog(iovl,document.getElementById('imd'));
+  openDialog(iovl,document.getElementById('imd'),trigger);
 }
-
-/* the six sectors, then the open invitation as the seventh plate */
-var CARDS=PT.cards.concat([{title:PT.otherT,p1:PT.otherP,invite:true}]);
-var sxTrack=document.createElement('div');sxTrack.className='sx-track';
-irail.appendChild(sxTrack);
-CARDS.forEach(function(o,i){
-  var slide=document.createElement('div');slide.className='icard';
-  var visual=(o.img!==undefined&&PT.imgs[o.img])
-    ? '<img alt="'+o.title+'" src="'+PT.imgs[o.img]+'" srcset="'+
-        PT.imgs[o.img].replace(/\.jpg$/,'-756.jpg')+' 756w, '+PT.imgs[o.img]+' 1536w" sizes="378px">'
-    : cardArt(i*97+13);
-  slide.innerHTML='<article class="ic'+(o.invite?' is-open-card':'')+'" tabindex="0">'+
-    '<div class="ic-top"><span class="ic-go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.7 12.3 12.3 3.7"/><path d="M12.3 8.7V3.7H7.3"/></svg></span></div>'+
-    '<div class="ic-art">'+visual+'</div>'+
-    '<div class="ic-foot"><h3></h3></div></article>';
-  /* На карточке ленты остаётся только название: короткий текст повторял первый
-     абзац модалки слово в слово, и его место отдано фотографии. Сам текст никуда
-     не делся — p1 по-прежнему открывается в модалке. */
-  slide.querySelector('h3').textContent=o.title;
-  var card=slide.querySelector('.ic');
-  var act=function(){if(dragMoved)return;if(o.invite)openForm();else openInd(o);};
-  card.addEventListener('click',act);
-  card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
-  sxTrack.appendChild(slide);
+if(irail)PT.cards.forEach(function(o,i){
+  var card=document.createElement('article');card.className='icard rv';card.style.transitionDelay=(i%3)*60+'ms';
+  var src=PT.imgs[o.img]||'';
+  card.innerHTML='<div class="ic-art"><img alt="" loading="'+(i<3?'eager':'lazy')+'" decoding="async"></div>'+
+    '<div class="ic-foot"><h3><button type="button" class="ic-open"></button></h3>'+
+    '<span class="ic-go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.7 12.3 12.3 3.7"/><path d="M12.3 8.7V3.7H7.3"/></svg></span></div>';
+  var img=card.querySelector('img');
+  if(src){img.src=src;img.srcset=src.replace(/\.jpg$/,'-756.jpg')+' 756w, '+src+' 1536w';img.sizes='(max-width:600px) 100vw, (max-width:1024px) 50vw, 400px';}
+  var btn=card.querySelector('.ic-open');btn.textContent=o.title;
+  btn.addEventListener('click',function(){openInd(o,btn);});
+  irail.appendChild(card);
 });
 
-var dragMoved=false;
-/* The rail is paged by the page itself: the section is tall, its frame sticks,
-   and vertical progress maps onto horizontal travel — so every card is stepped
-   through on the way past. Arrows and dots move the page, not the rail. */
-var suiteSec=document.querySelector('.suite'),suitePinned=false;
-/* ---- focus-point card zone -------------------------------------------------
-   Measured once per layout: the shells' local centres, where the track starts so
-   the first card sits on the focus point, and where it ends so the last card has
-   passed it by the exit tail. Nothing here is read again during scrolling. */
-var SX={centres:[],startX:0,endX:0,travel:0,dist:0,railLeft:0,focus:0,
-        radius:0,lift:34,tail:0.22,window:0.88};
-function sxShells(){return [].slice.call(sxTrack.children);}
-/* Дробный сдвиг слоя заставляет компоновщик пересэмплировать текстуру — на
-   фотографии это читается как дрожание. Сажаем сдвиги на целый пиксель
-   устройства. Со ступенчатостью, из-за которой привязку когда-то сняли, это
-   не связано: её давал квантованный МАСШТАБ карточки, а его больше нет. */
-function sxSnap(v){var d=window.devicePixelRatio||1;return Math.round(v*d)/d;}
-/* ...НО САДИТСЯ ОН ТОЛЬКО КОГДА ЛЕНТА СТОИТ.
-   Округление и было причиной дрожания, о котором говорит владелец. Лента идёт
-   со скоростью около 0.81 пикселя вбок на пиксель прокрутки, а прокрутка сама
-   уже посажена на целый пиксель. Значит на каждый кадр приходится дробная
-   доля, и округление её то съедает, то отдаёт: кадр лента стоит, кадр прыгает
-   на пиксель. Ровного хода из такой последовательности не получается.
-   Пока лента движется, отдаём дробный сдвиг — компоновщик его сглаживает, а
-   пересэмплировка текстуры, ради которой ставилось округление, в движении и
-   так не видна. Как только лента остановилась, кадр садится на целый пиксель:
-   фотография замирает резкой. Порог в четверть пикселя — это заметно меньше
-   шага, который глаз различает, и заметно больше нуля, чтобы последний кадр
-   прокрутки считался остановкой. */
-var sxPrevX=null;
-function sxPlace(v){
-  var moving=sxPrevX!==null&&Math.abs(v-sxPrevX)>0.25;
-  sxPrevX=v;
-  return moving?v:sxSnap(v);
-}
-function sxCanPin(){
-  return innerWidth>=981 && matchMedia('(hover:hover)').matches
-      && matchMedia('(pointer:fine)').matches && !rm;
-}
-function sxMeasure(){
-  var shells=sxShells();if(!shells.length)return;
-  /* ⚠ ЭТА СТРОКА СДВИГАЕТ ДОРОЖКУ НАПРЯМУЮ, МИНУЯ СТОРОЖА ЗАПИСИ.
-     Сторож (sxTrackWas) хранит последнее ЗАПИСАННОЕ им значение и молчит, когда
-     новое совпадает. Пока он не знал про эту строку, выходило так: при разборе
-     страницы дорожка ставилась в 738, потом на событии load layoutSuite мерил
-     заново, эта строка ставила её в 0 — и следующий проход, посчитав ту же
-     738, решал «значение не менялось» и НЕ писал. Дорожка оставалась в нуле, и
-     карточки стояли прижатыми к левому краю, пока читатель не доезжал до самого
-     раздела: там число наконец менялось, запись проходила, и карточки отскакивали
-     на место. Владелец это и увидел. Сбрасываем память сторожа. */
-  sxTrack.style.transform='translate3d(0,0,0)';sxTrackWas=null;   /* measure unshifted */
-  SX.centres=shells.map(function(el){return el.offsetLeft+el.offsetWidth/2;});
-  SX.railLeft=irail.getBoundingClientRect().left;
-  SX.focus=innerWidth*0.5;
-  SX.radius=innerWidth*0.58;
-  var first=SX.centres[0],last=SX.centres[SX.centres.length-1];
-  SX.startX=SX.focus-SX.railLeft-first;
-  SX.endX=SX.focus-SX.railLeft-last-innerWidth*SX.tail;
-  SX.travel=Math.abs(SX.endX-SX.startX);
-  SX.dist=SX.travel*1.12+innerHeight*0.35;
-}
-function layoutSuite(){
-  if(!suiteSec)return;
-  suitePinned=sxCanPin();
-  if(!suitePinned){
-    /* Здесь сдвиги тоже снимаются напрямую — та же причина сбросить память
-       сторожей, и у дорожки, и у каждой карточки. */
-    suiteSec.style.height='';sxTrack.style.transform='';sxTrackWas=null;
-    sxShells().forEach(function(el){el.style.transform='';el.__tr=null;});
-    return;
-  }
-  /* the card has to fit the pinned frame — measure once, then correct against it */
-  var head=suiteSec.querySelector('.rail-head'),spin=suiteSec.querySelector('.spin');
-  var hs=getComputedStyle(head),spins=getComputedStyle(spin);
-  var chrome=head.offsetHeight+parseFloat(hs.marginBottom||0)
-            +parseFloat(spins.paddingTop||0)+parseFloat(spins.paddingBottom||0)
-            +32;   /* полоски под лентой больше нет — запас под неё снят */
-  /* Потолок 470, а не 520. Владелец заметил, что карточки отраслей на английской
-     странице крупнее, чем на армянской, и попросил сравнять по армянской.
-     Причина была в том, что высота карточки считалась от ОСТАТКА места, а
-     остаток зависит от длины заголовка раздела: на 1896x948 английский заголовок
-     занимал 112 точек, армянский — 196, потому что переносится на больше строк.
-     Английской странице оставалось 608 точек и она упиралась в прежний потолок
-     520; армянской оставалось 524, и поправка на переполнение сажала её на 470.
-     Выходило, что размер карточки зависит от длины перевода — чего быть не
-     должно. Потолок 470 обе страницы берут одинаково.
-     Поправка на переполнение ниже остаётся: это страховка, если содержимое всё
-     же не влезает в закреплённый кадр (низкое окно, крупный шрифт). */
-  var est=Math.max(260,Math.min(470,Math.round(innerHeight-chrome)));
-  irail.style.setProperty('--cardh',est+'px');
-  var over=spin.offsetHeight-innerHeight;
-  if(over>0)irail.style.setProperty('--cardh',Math.max(260,est-over)+'px');
-  sxMeasure();
-  suiteSec.style.height=(innerHeight+SX.dist)+'px';
-  suiteUpd();
-}
-function suiteProgress(){
-  var r=suiteSec.getBoundingClientRect();
-  var span=suiteSec.offsetHeight-innerHeight;
-  if(span<=0)return 0;
-  return Math.max(0,Math.min(1,-r.top/span));
-}
-/* smoothstep — the card grows long before the centre and never snaps */
-function sxEase(t){return t*t*(3-2*t);}
-function sxRender(x){
-  var shells=sxShells();
-  for(var i=0;i<shells.length;i++){
-    var centre=SX.railLeft+x+SX.centres[i];
-    var d=Math.abs(centre-SX.focus);
-    var prox=1-d/SX.radius; prox=prox<0?0:prox>1?1:prox;
-    var e=sxEase(prox);
-    var y=SX.lift-SX.lift*e;
-    /* Ни одного масштаба на карточке. Трансформация scale заставляет браузер
-       растрировать содержимое один раз и дальше пересэмплировать текстуру под
-       каждый новый множитель — фотография сыплется зерном и дрожит на ходу.
-       Снэп по целым пикселям это глушил, но давал ступенчатый рост. Фокус
-       показывает подъём: сдвиг компоновщик применяет к готовому слою, не
-       трогая растр.
-
-       Прозрачности здесь больше нет. На светлой бумаге приглушить тёмную
-       карточку прозрачностью нельзя: сквозь неё просвечивает грунт, и вместо
-       приглушения выходит белёсый налёт — тем сильнее, чем дальше карточка
-       от середины. */
-    /* Единственное, что меняется на кадре, — сдвиг карточки. Он идёт по слою,
-       который компоновщик уже держит готовым, и растр не трогает.
-
-       Внутреннего параллакса у снимка больше нет. Он писал снимку свой transform
-       на каждом кадре, а снимок с появлением дуотона несёт фильтр и режим
-       наложения: любое его изменение заставляет перерисовать весь слой карточки
-       вместе с наложением и заголовком. На армянской странице это било сильнее —
-       засечный набор дороже в растеризации, и карточки дёргались. Двенадцать
-       пикселей сноса не стоят кадра. */
-    var st='translate3d(0,'+sxSnap(y)+'px,0)';
-    if(shells[i].__tr!==st){shells[i].__tr=st;shells[i].style.transform=st;}
-  }
-}
-function mSuite(){
-  if(!suiteSec||!suitePinned)return null;
-  return suiteProgress();
-}
-function aSuite(p){
-  if(p===null)return;
-  var tp=p/SX.window; tp=tp<0?0:tp>1?1:tp;      /* the last stretch is the hold */
-  var x=SX.startX+(SX.endX-SX.startX)*tp;
-  /* Без округления до целого пикселя. Оно ставилось против дрожания кромки, но
-     при медленной прокрутке лента шла ступеньками: кадр стоит, кадр прыгает на
-     пиксель. Композитор сам сглаживает дробный сдвиг. */
-  var tr='translate3d('+sxPlace(x)+'px,0,0)';
-  if(sxTrackWas!==tr){sxTrackWas=tr;sxTrack.style.transform=tr;}
-  sxRender(x);
-}
-var sxTrackWas=null;
-function suiteUpd(){aSuite(mSuite());}
 var navLinks=[].slice.call(document.querySelectorAll('nav a.lk')).map(function(a){
   return {a:a,sec:document.querySelector(a.getAttribute('href'))};
 }).filter(function(x){return x.sec;});
@@ -3044,8 +2679,9 @@ function buildDither(){
        экране это 78 точек, и полоса читалась не растворением, а россыпью
        случайных прямоугольников. Число рядов подбирается так, чтобы общая
        высота полосы осталась прежней (около 312 точек). */
+    /* Аудит 2026-09-14: полоса ниже (≈180 вместо 312) и без вспышек акцента. */
     var cell=Math.max(30,Math.min(46,Math.round(innerWidth/42)));
-    var cols=Math.ceil(innerWidth/cell),rows=Math.max(4,Math.round(312/cell));
+    var cols=Math.ceil(innerWidth/cell),rows=Math.max(3,Math.round(180/cell));
     band.style.height=(rows*cell)+'px';
     band.style.gridTemplateColumns='repeat('+cols+',1fr)';
     band.style.gridTemplateRows='repeat('+rows+',1fr)';
@@ -3061,7 +2697,7 @@ function buildDither(){
          пустом месте — и висели, потому что при пройденной полосе меняться
          уже нечему. Теперь цель у всех одна, а акцент живёт позади фронта
          ограниченным хвостом и гаснет вслед за ним. */
-      cells.push({el:i,to:bot,acc:(acc&&Math.random()<0.07)?acc:null,now:top});
+      cells.push({el:i,to:bot,acc:null,now:top});
       order.push(cells.length-1);
       band.appendChild(i);
     }
@@ -3236,82 +2872,17 @@ function wipeToTop(){
   h.style.scrollBehavior=prev;
   setUrlHash('top');
 }
-/* ЯКОРЬ ЧЕРЕЗ ЗАКРЕПЛЁННУЮ ЛЕНТУ.
-   Между героем и разделом услуг лежит лента отраслей: раздел высокий, его кадр
-   залипает, а прокрутка внутри него листает карточки. Плавный переход по якорю
-   честно проматывал всю эту длину, и карточки отыгрывали анимацию на скорости —
-   мельтешение. Такой перелёт прячем под плашками тем же переходом, что и логотип:
-   плашки сходятся, страница встаёт на месте, плашки расходятся.
-   Обработчик стоит на перехвате и выше по документу, чем плавная прокрутка,
-   поэтому работает и там, где своя прокрутка выключена (тач, reduce-motion). */
-function hashJump(y,id){
-  /* Координату считаем ЗАНОВО в момент посадки. Прежде она бралась в клике, а
-     между кликом и прыжком проходит перекрытие: закрепляемая лента и блоки,
-     которые ещё не проявились, успевают пересчитать высоты, и страница
-     приезжала мимо раздела. Вторая и третья посадка добирают то, что
-     пересчиталось уже после прыжка. */
-  var el=document.getElementById(id);
-  function land(){
-    var yy=el?el.getBoundingClientRect().top+window.pageYOffset-(id==='top'?0:26):y;
-    var h=document.documentElement,prev=h.style.scrollBehavior;
-    h.style.scrollBehavior='auto';
-    window.scrollTo(0,yy);
-    if(typeof PS!=='undefined'){PS.t=PS.c=yy;}
-    h.style.scrollBehavior=prev;
-  }
-  land();
-  requestAnimationFrame(land);
-  setTimeout(land,150);
-  setUrlHash(id);
-}
-function crossesRail(from,to){
-  var sec=document.querySelector('.suite');if(!sec)return false;
-  var top=sec.getBoundingClientRect().top+window.pageYOffset,bot=top+sec.offsetHeight;
-  var a=Math.min(from,to),b=Math.max(from,to);
-  /* сорок пикселей допуска, чтобы прыжок К САМОЙ ленте не считался пролётом сквозь */
-  return b-a>innerHeight*0.6&&b>top+40&&a<bot-40;
-}
-document.addEventListener('click',function(e){
-  if(e.metaKey||e.ctrlKey||e.shiftKey)return;
-  var a=e.target.closest&&e.target.closest('a[href^="#"]');
-  if(!a||a.classList.contains('brand'))return;
-  var id=a.getAttribute('href').slice(1);if(!id)return;
-  var el=document.getElementById(id);if(!el)return;
-  var y=el.getBoundingClientRect().top+window.pageYOffset-(id==='top'?0:26);
-  /* Из выпадающего списка — ВСЕГДА через перекрытие, независимо от расстояния.
-     Прежде короткий ход шёл плавной прокруткой, и одно и то же действие вело
-     себя по-разному: то плашки, то прокрутка. Ссылки внутри текста остаются
-     как были — там перекрытие оправдано только на длинном перелёте. */
-  var fromIx=a.closest('#ixp');
-  if(!fromIx&&!crossesRail(window.pageYOffset,y))return;
-  e.preventDefault();
-  e.stopPropagation();                               /* иначе плавная прокрутка тоже стартует */
-  /* Клик остановлен на перехвате, и до собственного обработчика панели он не
-     доходил — на длинных прыжках список разделов оставался открытым поверх
-     нового раздела. Закрываем его здесь, и в правильном порядке: отклик на
-     строке, лист уходит, потом перекрытие. */
-  var run=function(){
-    if(rm||document.visibilityState!=='visible'){hashJump(y,id);return;}
-    wipeCoverThen(function(){hashJump(y,id);wipeReveal();});
-  };
-  if(fromIx){
-    a.classList.add('picked');
-    setTimeout(function(){
-      ixOpen(false);a.classList.remove('picked');run();
-    },170);
-    return;
-  }
-  run();
-},true);
-
+/* Аудит 2026-09-14: закреплённой ленты нет — якоря идут обычной (плавной) прокруткой,
+   без перекрытия плашками. Смещение под шапку — scroll-margin-top на разделах и HDR_OFF
+   в собственной плавной прокрутке ниже. */
+var HDR_OFF=72;
 var brandA=document.querySelector('.brand');
 if(brandA)brandA.addEventListener('click',function(e){
   if(e.metaKey||e.ctrlKey||e.shiftKey)return;
-  e.preventDefault();
-  e.stopPropagation();          /* иначе общий обработчик якорей начнёт прокрутку */
-  if(rm||document.visibilityState!=='visible'||window.pageYOffset<4){wipeToTop();return;}
-  wipeCoverThen(function(){wipeToTop();wipeReveal();});
-},true);                        /* перехват: опережаем делегированный обработчик */
+  e.preventDefault();e.stopPropagation();
+  if(typeof PS!=='undefined'&&PS.on){psTo(0);}else{window.scrollTo({top:0,behavior:rm?'auto':'smooth'});}
+  setUrlHash('top');
+},true);
 
 /* Переход навешивается на ССЫЛКИ ЯЗЫКА, а не на «всё, что кончается на .html».
    Прежний отбор держался за расширение файла, и когда армянская страница
@@ -3384,12 +2955,21 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   if(sending)return;
   document.getElementById('ptfSendErr').style.display='none';
   var nm=gv('ptfName').trim(),co=gv('ptfCompany').trim(),em=gv('ptfEmail').trim(),ph=gv('ptfPhone').trim(),ms=gv('ptfMsg').trim();
-  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
-  var errs={ptfName:!nm,ptfCompany:!co,ptfEmail:!emailOk,ptfPhone:!ph,ptfMsg:!ms};
-  var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k);el.classList.toggle('err',errs[k]);
-    if(errs[k]){el.setAttribute('aria-invalid','true');any=true;}else{el.removeAttribute('aria-invalid');}});
+  /* Аудит 2026-09-14: обязательны имя, описание и ХОТЯ БЫ ОДИН контакт. Компания и второй
+     контакт — по желанию. Ошибка стоит у своего поля; общая строка — только сводка. */
+  var emailOk=!em||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  var phoneOk=!ph||(ph.replace(/\D/g,'').length>=6);
+  var noContact=!em&&!ph;
+  var errs={ptfName:nm?'':PT.errName,ptfMsg:ms?'':PT.errMsg,
+            ptfEmail:noContact?PT.errContact:(emailOk?'':PT.errEmail),
+            ptfPhone:noContact?PT.errContact:(phoneOk?'':PT.errPhone)};
+  var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k),fe=document.getElementById(k+'Err'),bad=!!errs[k];
+    el.classList.toggle('err',bad);
+    if(fe){fe.textContent=errs[k]||'';fe.classList.toggle('on',bad);}
+    if(bad){el.setAttribute('aria-invalid','true');any=true;}else{el.removeAttribute('aria-invalid');}});
   document.getElementById('ptfFormErr').style.display=any?'block':'none';
-  if(any)return;
+  if(any){var firstBad=Object.keys(errs).filter(function(k){return errs[k];})[0];
+    if(firstBad)document.getElementById(firstBad).focus();return;}
   var total=files.reduce(function(s,f){return s+f.size;},0);
   if(total>10485760){document.getElementById('ptfSizeErr').style.display='block';return;}
   var app=picked>=0?PT.appTypes[picked]:'';
@@ -3419,7 +2999,12 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   }
 });
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
-  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');document.getElementById('ptfFormErr').style.display='none';});
+  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
+    var fe=document.getElementById(id+'Err');if(fe){fe.textContent='';fe.classList.remove('on');}
+    /* контакт один на два поля: ввод в одно снимает ошибку и с другого */
+    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err');
+      if(oe&&oe.textContent===PT.errContact){o.classList.remove('err');o.removeAttribute('aria-invalid');oe.textContent='';oe.classList.remove('on');}}
+    document.getElementById('ptfFormErr').style.display='none';});
 });
 
 /* ============ MODAL PLUMBING ============ */
@@ -3434,21 +3019,25 @@ function focusables(root){
 /* Кто открыл накладку — чтобы вернуть ему фокус при закрытии. Иначе человека
    выбрасывает в начало документа, и место, где он читал, теряется. */
 var lastFocus=null;
-function openDialog(ovl,dlg){
-  lastFocus=document.activeElement;
+function openDialog(ovl,dlg,trigger){
+  lastFocus=trigger||document.activeElement;
   ovl.classList.add('open');document.body.style.overflow='hidden';
   /* Фокус на саму коробку диалога, а не на первый её элемент: диктор прочтёт
-     заголовок прежде, чем человек окажется в полях. Дальше Tab ведёт внутрь. */
-  dlg.focus();
+     заголовок прежде, чем человек окажется в полях. Дальше Tab ведёт внутрь.
+     preventScroll: на телефоне окно выше экрана, и фокус прокручивал накладку на 66 px —
+     заголовок открывался срезанным (аудит 2026-09-14). */
+  try{dlg.focus({preventScroll:true});}catch(e){dlg.focus();}
+  ovl.scrollTop=0;
 }
 /* Политика лежит поверх остальных накладок и уходит первой: под ней может
    стоять наполовину заполненная форма, и закрывать её вместе с документом
    значило бы стереть введённое. Свой возврат фокуса — по той же причине. */
 var povl=document.getElementById('povl'),ppFocus=null;
-function openPrivacy(){
-  ppFocus=document.activeElement;
+function openPrivacy(trigger){
+  ppFocus=trigger||document.activeElement;
   povl.classList.add('open');document.body.style.overflow='hidden';
-  document.getElementById('pmd').focus();
+  try{document.getElementById('pmd').focus({preventScroll:true});}catch(e){document.getElementById('pmd').focus();}
+  povl.scrollTop=0;
 }
 function closePrivacy(){
   povl.classList.remove('open');
@@ -3466,7 +3055,7 @@ function closeAll(){
 }
 document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeAll);});
 document.querySelectorAll('[data-open-privacy]').forEach(function(b){
-  b.addEventListener('click',function(e){e.preventDefault();openPrivacy();});});
+  b.addEventListener('click',function(e){e.preventDefault();openPrivacy(b);});});
 fovl.addEventListener('click',function(e){if(e.target===fovl)closeAll();});
 iovl.addEventListener('click',function(e){if(e.target===iovl)closeAll();});
 povl.addEventListener('click',function(e){if(e.target===povl)closeAll();});
@@ -3488,11 +3077,11 @@ addEventListener('keydown',function(e){
   if(e.shiftKey&&(cur===first||!inside)){e.preventDefault();last.focus();}
   else if(!e.shiftKey&&(cur===last||!inside)){e.preventDefault();first.focus();}
 });
-function openForm(){
+function openForm(trigger){
   document.getElementById('f_main').style.display='';document.getElementById('f_done').style.display='none';
-  openDialog(fovl,document.getElementById('fmd'));
+  openDialog(fovl,document.getElementById('fmd'),trigger&&trigger.nodeType===1?trigger:null);
 }
-document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',openForm);});
+document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',function(){openForm(b);});});
 
 /* ============ REVEALS / SCROLL ============ */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
@@ -3569,8 +3158,7 @@ ixItems.forEach(function(it){
   var li=document.createElement('li');
   li.innerHTML='<a href="#'+it.id+'"><span class="no"></span><span class="tl"></span></a>';
   li.querySelector('.no').textContent=it.no;
-  letterize(li.querySelector('.tl'),it.title);
-  li.querySelector('a').setAttribute('aria-label',it.no+' '+it.title);
+  li.querySelector('.tl').textContent=it.title;
   li.style.setProperty('--i',ixlist.children.length);
   ixlist.appendChild(li);
 });
@@ -3629,39 +3217,6 @@ document.addEventListener('click',function(e){
   if(e.target.closest('#ixp')||e.target.closest('#ixb'))return;
   ixOpen(false);
 });
-/* Название раскладывается на буквы: при наведении каждая уезжает вверх, а
-   снизу встаёт её двойник. Порядок срыва перемешан, а не слева направо, —
-   отсюда ощущение живого набора, а не бегущей строки. Буквы держатся словами,
-   иначе длинное название рвалось бы посередине слова.
-   Для чтения с экрана всё это скрыто: доступное имя ссылки задано отдельно. */
-function letterize(el,text){
-  el.textContent='';el.setAttribute('aria-hidden','true');
-  var n=text.length,order=[],i,j,tmp;
-  for(i=0;i<n;i++)order.push(i);
-  for(i=n-1;i>0;i--){j=Math.floor(Math.random()*(i+1));tmp=order[i];order[i]=order[j];order[j]=tmp;}
-  var rank=[];for(i=0;i<n;i++)rank[order[i]]=i;
-  /* Шаг 25 мс хорош на коротком слове, но названия здесь до сорока знаков, и
-     весь пробег растягивался на полторы секунды. Держим сам пробег около 300 мс
-     и не превышаем 25 мс на букву: короткие названия идут как в оригинале,
-     длинные не тянут. */
-  var step=Math.min(25,300/Math.max(1,n-1));
-  var word=null;
-  for(i=0;i<n;i++){
-    var ch=text.charAt(i);
-    if(ch===' '){
-      word=null;
-      var sp=document.createElement('span');sp.className='sp';sp.textContent=' ';
-      el.appendChild(sp);continue;
-    }
-    if(!word){word=document.createElement('span');word.className='wd';el.appendChild(word);}
-    var lt=document.createElement('span');lt.className='lt';
-    lt.style.setProperty('--d',(rank[i]*step).toFixed(1)+'ms');
-    var a=document.createElement('i'),b=document.createElement('i');
-    a.textContent=ch;b.textContent=ch;
-    lt.appendChild(a);lt.appendChild(b);word.appendChild(lt);
-  }
-}
-
 /* which sheet are we on, and what tone is under the bar */
 function mIx(){
   /* Один замер на раздел вместо двух. Запасной ход раньше мерил те же разделы
@@ -3763,14 +3318,13 @@ function toneUnderBar(){aTone(mTone());}
    две непрозрачные плашки по углам; владелец их забраковал. Правила вариантов
    0..3 оставлены в наборе и не применяются ни к чему — вычистить отдельно. */
 document.documentElement.setAttribute('data-nav','5');
-layoutSuite&&layoutSuite();
 /* ============ PREMIUM SCROLL — eased wheel, native everywhere else ============ */
 /* Lenis-style: accumulate wheel delta into a target, ease the real scroll toward it
    with scrollTo (NOT a transformed wrapper — that would kill position:sticky, and
    the pinned chain and card zone both rely on it). */
 /* vmax — потолок скорости, экранов в секунду. vmin — пол, им закрывается хвост.
    Оба в экранах, а не в точках: на большом мониторе ход должен быть шире. */
-var PS={t:0,c:0,raf:0,last:0,self:false,lerp:0.085,mult:0.9,vmax:9,vmin:0.5};
+var PS={t:0,c:0,raf:0,last:0,self:false,lerp:0.085,mult:0.9,vmax:9,vmin:0.5,on:false};
 function psActive(){
   return !rm && matchMedia('(pointer:fine)').matches && innerWidth>=900
       && !matchMedia('(hover:none)').matches;
@@ -3835,7 +3389,7 @@ function psStart(){
   if(/[?&]scroll=native/.test(location.search))return;   /* ?scroll=native to compare */
   if(!psActive())return;
   document.documentElement.style.scrollBehavior='auto';   /* we do the easing now */
-  PS.t=PS.c=window.pageYOffset;
+  PS.on=true;PS.t=PS.c=window.pageYOffset;
   addEventListener('wheel',function(e){
     if(e.ctrlKey||e.defaultPrevented)return;              /* pinch-zoom stays native */
     if(!psActive()){document.documentElement.style.scrollBehavior='';return;}
@@ -3851,6 +3405,9 @@ function psStart(){
     if(e.ctrlKey||e.metaKey||e.altKey||e.defaultPrevented)return;
     var el=document.activeElement;
     if(el&&/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))return;
+    /* Пробел и стрелки на кнопке или ссылке — их действие (аудит 2026-09-14: пробел на
+       вопросе раздела 05 листал страницу на экран вместо открытия ответа). */
+    if(el&&/^(BUTTON|A|SUMMARY)$/.test(el.tagName))return;
     if(el&&el.isContentEditable)return;
     if(psInner(el||document.body))return;
     var page=innerHeight*0.86,step=innerHeight*0.16,d=null;
@@ -3879,7 +3436,7 @@ function psStart(){
     if(!id){e.preventDefault();psTo(0);return;}
     var el=document.getElementById(id);if(!el)return;
     e.preventDefault();
-    psTo(el.getBoundingClientRect().top+window.pageYOffset-(id==='top'?0:26));
+    psTo(el.getBoundingClientRect().top+window.pageYOffset-(id==='top'?0:HDR_OFF));
     setUrlHash(id);
   });
   addEventListener('resize',function(){PS.t=PS.c=window.pageYOffset;});
@@ -3905,11 +3462,11 @@ function scrollPaint(){
   if(!FR.force&&y===FR.y)return;
   FR.y=y;FR.force=false;
   /* --- ЗАМЕР: ни одной записи в документ --- */
-  var dO=mObs(),d2=mSuite(),d3=mJoints(),d5=mDither(),
+  var dO=mObs(),d3=mJoints(),d5=mDither(),
       d6=mNav(),d7=mReveal(),d8=mHeaderTheme(),d9=mTone(),d10=mIx(),d12=mBar();
   /* --- ЗАПИСЬ: ни одного замера. Порядок тот же, что был у прежнего списка:
          toneUnderBar идёт после headerTheme и перекрывает его решение. --- */
-  aObs(dO);aSuite(d2);aJoints(d3);aDither(d5);
+  aObs(dO);aJoints(d3);aDither(d5);
   aNav(d6);aReveal(d7);aHeaderTheme(d8);aTone(d9);aIx(d10);aBar(d12);
 }
 var FR={q:0,y:-1,force:true};
@@ -3928,12 +3485,12 @@ addEventListener('resize',function(){cacheBump();FR.force=true;scrollSchedule();
 buildJoints();
 cacheBump();scrollRepaint();
 var sizeT=0;
-addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();layoutSuite();},220);});
+addEventListener('resize',function(){clearTimeout(sizeT);sizeT=setTimeout(function(){buildJoints();buildWipe();buildDither();scrollRepaint();},220);});
 /* После пересборки состояние надо нанести заново: списки только что сменились,
    а прокрутка осталась на месте, и обычная проверка «не сдвинулись — не рисуем»
    пропустила бы кадр. */
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){scrollRepaint();});
-addEventListener('load',function(){layoutSuite();scrollRepaint();});
+addEventListener('load',function(){scrollRepaint();});
 /* ============ ПОВОРОТ ТЕЛЕФОНА ============ */
 /* После поворота Safari на iPhone оставляет закреплённой шапке ПРЕЖНЕЕ место
    для нажатий: кнопка нарисована там, где нужно, а палец попадает мимо — по
