@@ -219,7 +219,7 @@ def stats_html(items):
 # разделах: копия не разъедется с страницей и переводится сама.
 FOOT_IDS = [('why', 'WHY_H2'), ('applications', 'APP_H2'), ('services', 'SVC_H2'),
             ('report', 'REP_H2'), ('assignments', 'ASG_H2'), ('measure', 'MEA_H2'),
-            ('company', 'CO_H2'), ('contact', 'CT_H2')]
+            ('company', 'CO_H2')]  # 'contact' снят из списка разделов подвала — владелец (2026-09-14)
 
 def foot_links(d):
     out = []
