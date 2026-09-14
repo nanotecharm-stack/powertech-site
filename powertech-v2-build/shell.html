@@ -1349,6 +1349,8 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .story p{/* было 17px при 16px у остальной прозы: та же роль, тот же шрифт,
      разница в пиксель. */font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);
   max-width:46ch;margin:var(--s4) 0 0;}
+/* На HY два подблока (тексты владельца 2026-09-15): две колонки, а не две из трёх. */
+@media (min-width:861px){:lang(hy) .story{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:860px){.story{grid-template-columns:1fr;row-gap:clamp(28px,6vw,40px);}
   .story p{max-width:none;}
 }
