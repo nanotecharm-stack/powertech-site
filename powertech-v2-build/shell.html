@@ -632,7 +632,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 /* «EN» и «HY» — латиница на обеих страницах, поэтому гарнитура задана явно:
    через %%MONOFONT%% армянская версия рисовала их своим шрифтом, и кнопка
    получалась другого размера, чем в английской. */
-.lang{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.12em;padding:9px var(--s3);
+/* Владелец (2026-09-14): пиксельного Departure Mono в шапке больше нет — тот же гротеск, что у
+   кнопки рядом; перед кодом языка — тонкий глобус, код трёхбуквенный (ARM / ENG). */
+.lang{display:inline-flex;align-items:center;gap:6px;font-family:%%BODYFONT%%;font-size:12px;font-weight:500;letter-spacing:.08em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,14,19,.12);
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
@@ -2082,8 +2084,10 @@ html[data-nav="5"] .ixb .sheet{display:none;}
    место: там она читается как список листов, а не как метка. */
 html[data-nav="5"] .ixb b,html[data-nav="5"] .ixb s,
 html[data-nav="5"] .ixb em{display:none;}
-html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:11px;
-  letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+/* Владелец (2026-09-14): «INDEX» капсом с разрядкой читался пиксельным шрифтом — теперь слово
+   строчными, 13 px, как армянская подпись и кнопка рядом. */
+html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:13px;
+  letter-spacing:.01em;text-transform:none;font-weight:500;}
 /* Армянская подпись набирается иначе. Владелец: «плохо читается» — и это не
    вкус, а свойство письма: армянские прописные строятся из одинаковых стоек,
    и в 11 точек с разрядкой .15em слово превращается в частокол. Здесь идут
@@ -2106,7 +2110,8 @@ html[data-nav="5"] .ixb,html[data-nav="5"] .lang{background:none;box-shadow:none
   backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--hc);
   font-size:11px;transition:transform .16s var(--e),box-shadow .28s var(--e),color .4s var(--e);}
 html[data-nav="5"] .ixb{padding:7px 4px;margin-right:-4px;}
-html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;}
+html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:12px;}
+.lang .gl{display:block;width:13px;height:13px;flex:none;opacity:.9;}
 html[data-nav="5"] .lang::after{content:"";position:absolute;left:-1px;top:50%;
   width:1px;height:12px;margin-top:-6px;background:var(--hh);}
 /* подсказка «сюда можно нажать» — только на наведении и на фокусе, покой не
@@ -2195,7 +2200,11 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
    английского «Index» — 63 точки против 43, — и ломает строку на 360, тогда как
    английское там ещё держится. Отсюда два разных порога, 389 и 359. Кнопка при
    этом не немеет: её название дано в aria-label. */
-@media(max-width:389px){ html[data-nav="5"][lang="hy"] .ixw{display:none;} }
+/* Владелец (2026-09-14): переключатель языка стал шире (глобус + ARM/ENG); слово указателя
+   уходит ниже 420 на обеих страницах, иначе кнопка шапки выходит за край на 360–390. */
+@media(max-width:419px){ html[data-nav="5"] .ixw{display:none;} }
+/* 360-й экран, армянская кнопка «Կապ մեզ հետ»: без глобуса и с узкими полями группа помещается (замер: было +16). */
+@media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
 </style>
 
@@ -2209,7 +2218,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Подпись «EN»/«HY» понятна на глаз, но экранному читателю она ничего не
          говорит: две буквы без контекста. Полное название языка идёт в
          aria-label и в title. -->
-    <a class="lang" href="%%LANG_HREF%%" aria-label="%%LANG_ARIA%%" title="%%LANG_ARIA%%">%%LANG_LABEL%%</a>
+    <a class="lang" href="%%LANG_HREF%%" aria-label="%%LANG_ARIA%%" title="%%LANG_ARIA%%"><svg class="gl" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="7" cy="7" r="5.6"/><ellipse cx="7" cy="7" rx="2.4" ry="5.6"/><path d="M1.4 7h11.2M2.5 4.1h9M2.5 9.9h9"/></svg><span>%%LANG_LABEL%%</span></a>
     <!-- Ведёт к разделу контактов, а не открывает окно: форма остаётся на кнопке
          героя и на заголовке восьмого раздела. Стрелка та же, что у ссылок
          внутри страницы. -->

@@ -306,7 +306,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   html[data-nav="3"] header .btn{white-space:normal;}
 }
 .navr{justify-self:end;display:flex;align-items:center;gap:var(--s3);}
-.lang{font-family:'Departure Mono',monospace;font-size:11px;letter-spacing:.12em;padding:9px var(--s3);
+.lang{display:inline-flex;align-items:center;gap:6px;font-family:'Arian AMU','Helvetica Neue',sans-serif;font-size:12px;font-weight:500;letter-spacing:.08em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,36,64,.12);
   background:rgba(253,250,244,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D2440;box-shadow:inset 0 0 0 1px rgba(13,36,64,.26);}
@@ -1028,8 +1028,8 @@ html[data-nav="5"] header nav{display:none;}
 html[data-nav="5"] .ixb .sheet{display:none;}
 html[data-nav="5"] .ixb b,html[data-nav="5"] .ixb s,
 html[data-nav="5"] .ixb em{display:none;}
-html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:11px;
-  letter-spacing:.15em;text-transform:uppercase;font-weight:500;}
+html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:13px;
+  letter-spacing:.01em;text-transform:none;font-weight:500;}
 html[data-nav="5"][lang="hy"] .ixw{font-family:'Arian AMU','Helvetica Neue',sans-serif;text-transform:none;
   font-size:13px;letter-spacing:.01em;}
 html[data-nav="5"] .wm{color:var(--hc);transition:color .4s var(--e);}
@@ -1037,7 +1037,8 @@ html[data-nav="5"] .ixb,html[data-nav="5"] .lang{background:none;box-shadow:none
   backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--hc);
   font-size:11px;transition:transform .16s var(--e),box-shadow .28s var(--e),color .4s var(--e);}
 html[data-nav="5"] .ixb{padding:7px 4px;margin-right:-4px;}
-html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;}
+html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:12px;}
+.lang .gl{display:block;width:13px;height:13px;flex:none;opacity:.9;}
 html[data-nav="5"] .lang::after{content:"";position:absolute;left:-1px;top:50%;
   width:1px;height:12px;margin-top:-6px;background:var(--hh);}
 html[data-nav="5"] .ixb .cv::before{border-right-color:currentColor;
@@ -1086,7 +1087,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 @media(max-width:337px){
   html[data-nav="5"] #hdr .btn{white-space:normal;}
 }
-@media(max-width:389px){ html[data-nav="5"][lang="hy"] .ixw{display:none;} }
+@media(max-width:419px){ html[data-nav="5"] .ixw{display:none;} }
+@media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
 :root{--brand:#2E5E99;--brand-ink:#20436E;--brand-on:#F6F1E9;
   --fg:#2B2722;--fg-mid:#343A40;--fg-soft:#62676D;
@@ -1109,7 +1111,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="navr">
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="Բաժինների ցանկ"><span class="ixw">Բաժիններ</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     
-    <a class="lang" href="/" aria-label="English · Անգլերեն" title="English · Անգլերեն">EN</a>
+    <a class="lang" href="/" aria-label="English · Անգլերեն" title="English · Անգլերեն"><svg class="gl" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="7" cy="7" r="5.6"/><ellipse cx="7" cy="7" rx="2.4" ry="5.6"/><path d="M1.4 7h11.2M2.5 4.1h9M2.5 9.9h9"/></svg><span>ENG</span></a>
     
     <a class="btn" href="#end"><span>Կապ մեզ հետ</span><i>&#8599;</i></a>
   </div>
@@ -1277,7 +1279,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   </div>
   <div class="wrap fbot rv" style="--i:3">
     <span class="fbl"><span>&copy; 2026 Gridec</span><button class="fpp" data-open-privacy>Գաղտնիություն</button></span>
-    <a class="flang" href="/">EN</a>
+    <a class="flang" href="/">ENG</a>
   </div>
 </footer>
 </div></div>

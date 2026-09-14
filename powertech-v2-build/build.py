@@ -72,7 +72,7 @@ READOUT_EN = """
    Пиксельный шрифт достаётся только тому, что является показанием прибора: номерам,
    счётчику и значениям. Слова остаются на прежнем — на длинных строках пиксельная
    сетка бледнеет и теряет вес рядом с основным текстом. */
-.cnt,.ixb,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no{
+.cnt,.ixp a .no,.mi .ix,.chsteps .n,.step .no,.list .n,.asg .no{
   font-family:'Departure Mono',monospace;font-size:11px;}
 /* Кейс-пунктуация. Строки показаний набраны прописными, а «·» и дефис по
    умолчанию выровнены по строчным и проседают. У пиксельного шрифта функция
@@ -448,7 +448,7 @@ EN = {
  # Латинский код, а не «ՀԱՅ»: в EN-сборку вшита только латинская подрезка Martian
  # Mono, армянские буквы падали в системную подмену и выглядели чужеродно. Пара
  # переключателя заодно стала симметричной — на HY-странице стоит «EN».
- 'LANG_HREF': './hy.html', 'LANG_LABEL': 'HY', 'LANG_ARIA': 'Հայերեն · Armenian',
+ 'LANG_HREF': './hy.html', 'LANG_LABEL': 'ARM', 'LANG_ARIA': 'Հայերեն · Armenian',
  'NAV_SERVICES': 'Services', 'NAV_INDUSTRIES': 'Industries', 'NAV_COMPANY': 'Company',
  'IX_LABEL': 'Index', 'IX_ARIA': 'Section index',
  'CTA': 'Describe the issue', 'NAV_CTA': 'Get in touch',
@@ -757,7 +757,7 @@ HY = {
  'H1SIZE': 'clamp(44px,4.3vw,70px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',   # та же шкала, что и в английской: прежние
  # 84 px давали блок выше английского в полтора раза
- 'LANG_HREF': './index.html', 'LANG_LABEL': 'EN', 'LANG_ARIA': 'English · Անգլերեն',
+ 'LANG_HREF': './index.html', 'LANG_LABEL': 'ENG', 'LANG_ARIA': 'English · Անգլերեն',
  'NAV_SERVICES': 'Ծառայություններ', 'NAV_INDUSTRIES': 'Ոլորտներ', 'NAV_COMPANY': 'Ընկերություն',
  'IX_LABEL': 'Բաժիններ', 'IX_ARIA': 'Բաժինների ցանկ',
  'CTA': 'Նկարագրել խնդիրը', 'NAV_CTA': 'Կապ մեզ հետ',
