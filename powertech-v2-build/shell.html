@@ -1636,7 +1636,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* Полужирный текстовый набор был единственным местом на сайте, где мелкая
    служебная подпись выглядела так. Приводим к общему виду: разрядка,
    верхний регистр, тот же кегль, что у номеров и категорий. */
-#fmd label em{font-style:normal;color:var(--brand-ink);}
+#fmd label em,#fmd .ghd em{font-style:normal;color:var(--brand-ink);}
 /* Кромка ушла в тень внутрь, как у всех плашек сайта: рамка снаружи меняла
    высоту поля при фокусе, а тень — нет. Заливка не белая, а на ступень выше
    бумаги: чистый белый на тёплом грунте читался вставкой из другого набора. */
@@ -2229,13 +2229,13 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <form id="ptfForm" novalidate>
     <!-- Название секции: отдельный класс, а не .gl, иначе счётчик строк
          примет его за строку протокола и сдвинет всю нумерацию. -->
-    <div class="ghd">%%F_CONTACT%%</div>
+    <div class="ghd">%%F_CONTACT%% <em>*</em></div>
     <p class="ghd-note" id="ghdNote">%%F_ONE_CONTACT%%</p>
     <div class="fr">
       <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ghdNote ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ghdNote ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ghdNote ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ghdNote ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>

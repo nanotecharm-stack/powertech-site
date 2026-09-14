@@ -458,16 +458,16 @@ EN = {
  'CTA': 'Describe the issue', 'NAV_CTA': 'Get in touch',
  'HERO_EYEBROW': 'POWER QUALITY MONITORING',
  'HERO_H1': 'See how your<br>electrical system<br><span class="ac">performs</span>',
- 'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report gives you the findings and our recommendation.',
+ 'HERO_P': 'Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report presents our findings and recommended next steps.',
  'HERO_CTA2': 'When measurements help',
  'HERO_PHOTO_ALT': 'Illustration of power quality monitoring with Rogowski coils and a portable analyzer at an electrical switchboard.',
  # Надпись на панели щита (бриф 2026-09-14): описание услуги, по одной строке.
  'HERO_MARK1': 'MEASURE', 'HERO_MARK2': 'ANALYSE', 'HERO_MARK3': 'RECOMMEND',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'WHY_H2': 'The event may be over before anyone can inspect it',
- 'WHY_P': 'A voltage event can last a few cycles. An hour later a spot check reads normal and there is nothing left on site to find. A continuous recording captures it, with a time stamp and the load conditions before and after.',
+ 'WHY_H2': 'A brief voltage dip can be missed during an inspection',
+ 'WHY_P': 'A voltage dip can last only a few cycles. A later spot check may show normal readings. Continuous monitoring records the event and when it occurred, allowing us to analyse the measured conditions.',
  'APP_H2': 'Where monitoring helps',
- 'APP_P': 'The sector matters less than the question. Monitoring is worth doing when supply conditions are affecting equipment or output, or when a decision has to rest on measurements.',
+ 'APP_P': 'Monitoring helps when power quality affects equipment or operations, or when you need measurements to make a technical decision.',
  'OTHER_T': 'Other Critical Electrical Systems',
  'OTHER_P': 'Do not see your sector here? Describe the issue and the equipment affected. Monitoring is defined by the technical question, not by the sector alone.',
  'SVC_H2': 'Seven-day monitoring',
@@ -486,9 +486,9 @@ EN = {
                           ('1', 'Engineering report')]),
  'SVC_DISPLAY': 'Measured<br>under actual<br><span class="ac">load</span>',
  'SVC_STEPS': steps_html([
-    ('01', 'Before anything is connected, we agree what needs verifying, on which equipment, and what the answer is for.'),
-    ('02', 'Measurements are carried out while the electrical system operates under representative operating conditions.'),
-    ('03', 'We read the record against the question we started with, and write up the conclusions.')]),
+    ('01', 'Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.'),
+    ('02', 'We take measurements during the agreed operating conditions.'),
+    ('03', 'We analyse the recorded data and present our conclusions and recommended next steps in the report.')]),
  'SVC_LINK': 'See what monitoring can reveal',
  'REP_H2': 'Report',
  'REP_P': 'Measurement results, engineering analysis and conclusions provide the basis for further technical decisions.',
@@ -497,7 +497,7 @@ EN = {
  # пунктом среди состава отчёта, читается страховкой. Тот же смысл строкой под
  # списком читается позицией — и заодно ломает ряд из шести одинаковых по длине
  # именных групп.
- 'REP_LIST': list_html(['Measurement scope and points', 'Monitoring period and operating context',
+ 'REP_LIST': list_html(['Measurement scope and points', 'Monitoring period and operating conditions',
                         'Recorded events and trends', 'Engineering interpretation',
                         'Recommended next steps']),
  'REP_NOTE2': lnote_html('Where the record does not support a conclusion, the report says so.'),
@@ -510,8 +510,8 @@ EN = {
  # подрядчику, стоимость работ мы не считаем.
  'ASG_H2': 'Engineering challenges',
  'ASG_P': 'From capacity assessment to fault investigation.',
- 'ASG_CARDS': qa_html([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power. These measurements help your supplier select the right capacity.', 'Temporary monitoring', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes as the systems start up and operate together under agreed test conditions. The results help assess whether changes are needed to the electrical system or start-up sequence.', 'Temporary monitoring', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the existing load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Temporary monitoring', 'Illustration: a production hall with a new machine line'), ('Your supplier says a power supply issue caused the failure. How can you check?', 'Permanent monitoring records electrical conditions before and during a failure. If monitoring was already in place when the failure occurred, Gridec can analyse the recorded data to help assess your supplier’s explanation.', 'Permanent monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Signing off on new equipment? What should you record at start-up?', 'We measure electrical parameters and load under agreed operating conditions. The report helps you review the results with your supplier before acceptance and provides a baseline for investigating future changes or faults.', 'Temporary monitoring', 'Illustration: measurements at the switchboard during equipment start-up')]),
- 'ASG_PICS': qa_pics([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power. These measurements help your supplier select the right capacity.', 'Temporary monitoring', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes as the systems start up and operate together under agreed test conditions. The results help assess whether changes are needed to the electrical system or start-up sequence.', 'Temporary monitoring', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the existing load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Temporary monitoring', 'Illustration: a production hall with a new machine line'), ('Your supplier says a power supply issue caused the failure. How can you check?', 'Permanent monitoring records electrical conditions before and during a failure. If monitoring was already in place when the failure occurred, Gridec can analyse the recorded data to help assess your supplier’s explanation.', 'Permanent monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Signing off on new equipment? What should you record at start-up?', 'We measure electrical parameters and load under agreed operating conditions. The report helps you review the results with your supplier before acceptance and provides a baseline for investigating future changes or faults.', 'Temporary monitoring', 'Illustration: measurements at the switchboard during equipment start-up')]),
+ 'ASG_CARDS': qa_html([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power under agreed operating conditions. These measurements help your supplier select the required capacity.', 'Temporary monitoring', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes as the systems start up and operate together under agreed test conditions. The results help assess whether changes are needed to the electrical system or start-up sequence.', 'Temporary monitoring', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the existing load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Temporary monitoring', 'Illustration: a production hall with a new machine line'), ('Your supplier says a power supply issue caused the failure. How can you check?', 'Permanent monitoring records electrical conditions before and during a failure. If monitoring was already in place when the failure occurred, Gridec can analyse the recorded data to help assess your supplier’s explanation.', 'Permanent monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Signing off on new equipment? What should you record at start-up?', 'We measure electrical parameters and load under agreed operating conditions. The report helps you review the results with your supplier before acceptance and provides a baseline for investigating future changes or faults.', 'Temporary monitoring', 'Illustration: measurements at the switchboard during equipment start-up')]),
+ 'ASG_PICS': qa_pics([('Choosing a generator or UPS? What load will it need to support?', 'We measure the operating load and starting currents of the equipment that needs backup power under agreed operating conditions. These measurements help your supplier select the required capacity.', 'Temporary monitoring', 'Illustration: a standby generator and UPS cabinets in a plant room'), ('Installing a lift, air conditioning and pumps? How will they work together?', 'We record electrical loads and voltage changes as the systems start up and operate together under agreed test conditions. The results help assess whether changes are needed to the electrical system or start-up sequence.', 'Temporary monitoring', 'Illustration: a pump room with motors, pipework and control cabinets'), ('Adding a production line? Can your existing electrical system support it?', 'We measure the existing load and peak demand. Your electrical designer can use these findings alongside the new equipment’s requirements to assess available capacity and plan any necessary upgrades.', 'Temporary monitoring', 'Illustration: a production hall with a new machine line'), ('Your supplier says a power supply issue caused the failure. How can you check?', 'Permanent monitoring records electrical conditions before and during a failure. If monitoring was already in place when the failure occurred, Gridec can analyse the recorded data to help assess your supplier’s explanation.', 'Permanent monitoring', 'Illustration: an electric motor with a monitoring instrument connected'), ('Signing off on new equipment? What should you record at start-up?', 'We measure electrical parameters and load under agreed operating conditions. The report helps you review the results with your supplier before acceptance and provides a baseline for investigating future changes or faults.', 'Temporary monitoring', 'Illustration: measurements at the switchboard during equipment start-up')]),
  'MEA_H2': 'What we measure',
  # «Voltage Dips» → «Dips & Swells»: кольцо в герое обещало и перенапряжения, а
  # сетка их не называла, и объём измерений не сходился сам с собой.
@@ -522,7 +522,7 @@ EN = {
  # в углу) — но подпись всё равно стоит в том же типографском гнезде, что и семь
  # величин, и читается восьмой измеряемой. Строка под сеткой договаривает то, что
  # оформление показывает.
- 'MEA_NOTE': lnote_html('The last cell is not a measurement: risk is what we read from the other seven.'),
+ 'MEA_NOTE': lnote_html('We assess potential equipment risks using the recorded data and operating conditions.'),
  'CO_H2': 'About us',
  'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We are a small team focused on specialised engineering work and long-term cooperation with our partners.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
@@ -534,13 +534,13 @@ EN = {
     ('WHY WE STARTED',
      'Specialist measurements and analysis should not require a permanent in-house team or equipment that spends most of its time unused. Gridec gives companies access to both when the need arises.'),
     ('HOW WE WORK',
-     'A useful investigation starts with the question that needs answering. We measure the system under real operating conditions and base the conclusion on what the data shows, whether that points to a problem or confirms normal operation.'),
-    ('WHAT WE ARE BUILDING',
-     'We are building Gridec in Armenia as a small engineering firm whose conclusions hold up when someone checks them. We would rather grow slowly than lose that.')]),
- 'CT_H2': 'Start with what happened',
+     'We first agree on what needs to be established. We then measure the electrical parameters and analyse the data alongside the system’s operating conditions. Our conclusions also explain the limitations of the measurements.'),
+    ('HOW WE SUPPORT OUR CONCLUSIONS',
+     'Our reports present the recorded data, measurement conditions and analysis behind our conclusions, so you can review the findings with your engineer or equipment supplier.')]),
+ 'CT_H2': 'Tell us what you need to assess',
  # Кривая провала нарисована руками, а не снята прибором. Под подписью «TYPICAL
  # TRACE» «180 MS» читается примером и вопроса «где запись» не вызывает.
- 'CT_CAP': 'RMS VOLTAGE · TYPICAL TRACE', 'CT_NOM': 'NOMINAL', 'CT_DIP': 'VOLTAGE DIP · 180 MS',
+ 'CT_CAP': 'RMS voltage · illustrative example', 'CT_NOM': 'NOMINAL', 'CT_DIP': 'VOLTAGE DIP · 180 MS',
  'CO_LEGAL': 'Gridec LLC',
  # ՀՎՀՀ — армянский учётный номер налогоплательщика. По-английски он
  # передаётся как TIN (Taxpayer Identification Number): именно так его
@@ -569,13 +569,13 @@ EN = {
  'F_HINT0': 'Up to 10 MB',
  'F_FORM_ERR': 'Please check the highlighted fields.',
  # Аудит 2026-09-14: обязательны имя, описание и один контакт (почта ИЛИ телефон).
- 'F_ONE_CONTACT': 'Email or phone — at least one, so that we can reply.',
+ 'F_ONE_CONTACT': 'Email or phone: at least one, so that we can reply.',
  'F_SEND_ERR': 'Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am',
  'F_SEND': 'Send',
  # Имя кнопки закрытия: символ «×» экранный диктор читает как знак умножения
  'A_CLOSE': 'Close',
  'F_OK_T': 'Thank you.',
- 'F_OK_P': 'We will review the information and contact you to clarify the measurement scope.',
+ 'F_OK_P': 'We will review your enquiry and contact you to clarify the details.',
  'F_CLOSE': 'Close',
  # ---- политика конфиденциальности ----
  # Разделы взяты по образцу, который прислал владелец (earlyone.com/privacy-policy):
@@ -591,7 +591,7 @@ EN = {
  'PP_H3': 'Privacy Policy',
  'PP_LEDE': 'This policy explains what happens to information you send us through this '
             'website. It covers this site only, and it describes what the site actually '
-            'does — nothing beyond that.',
+            'does.',
  'PP_BODY': pp_html([
   ('Who we are', [
    'Gridec LLC, Davtashen 1, 13-25, Yerevan 0058, Armenia. Taxpayer identification '
@@ -638,7 +638,7 @@ EN = {
    'The site is served over an encrypted connection, so what you type into the form is '
    'encrypted in transit. Enquiries are held in a mailbox whose access is limited to the '
    'people who answer them.',
-   'We do not claim protection beyond that. Ordinary email should not be treated as a '
+   'Ordinary email should not be treated as a '
    'confidential or end-to-end encrypted channel: if what you need to send is sensitive, '
    'say so first and we will agree a different way to receive it.']),
   ('Cookies and similar technologies', [
@@ -655,10 +655,9 @@ EN = {
    'We are located and operate in Armenia. We receive and handle enquiries from Armenia, '
    'but the technical services used to transmit or store them may operate in other '
    'countries.',
-   'The form service is a third-party service, so the contents of the form may cross a '
-   'border when you send it. If you would rather they did not, email us directly '
-   'at <a href="mailto:sales@gridec.am">sales@gridec.am</a> instead of using the '
-   'form.']),
+   'The form service is a third-party service, so the data may be transferred outside '
+   'Armenia when you send the form. You can also contact us directly '
+   'at <a href="mailto:sales@gridec.am">sales@gridec.am</a>.']),
   ('Your rights', [
    'Where the law of the Republic of Armenia provides for it, you can obtain information '
    'about the processing of your data, access that data, and ask us to correct, block or '
@@ -673,13 +672,13 @@ EN = {
    'European Union, you may also complain to the supervisory authority of your country.']),
   ('Changes to this policy', [
    'If we change how enquiries are handled, we will update this page and the revision '
-   'date below. A material change will be described here rather than made quietly.']),
+   'date below. We will describe any material changes on this page.']),
   ('Contact', [
    'Questions about this policy, or about the data we hold on you: '
    '<a href="mailto:sales@gridec.am">sales@gridec.am</a>, or by post to Gridec LLC, '
    'Davtashen 1, 13-25, Yerevan 0058, Armenia.']),
  ]),
- 'PP_UPD': 'Last updated 17 August 2026',
+ 'PP_UPD': 'Last updated 14 September 2026',
  'F_PRIV': 'We use these details only to answer your enquiry. The form is delivered through '
            'FormSubmit, a third-party service. '
            '<button type="button" data-open-privacy>Privacy Policy</button>',
@@ -703,7 +702,7 @@ EN_DATA = {
    'p1': 'Backup generation is designed for interruptions on a different time scale. A short voltage dip may affect equipment before transfer occurs, so the event must be recorded while it happens.',
    'findings': ['Timestamp, duration, minimum RMS voltage and affected phases of recorded dips.',
                 'Voltage unbalance and current loading relevant to motor operation.',
-                'Whether reactive power or harmonic distortion requires further engineering review.'],
+                'Assessment of reactive power and harmonic distortion to determine whether further engineering investigation is needed.'],
    'statLabel': 'Technical note',
    'statText': 'Voltage sags and momentary interruptions can trip electronic and electromechanical devices and stop production lines.',
    'statSource': 'Source: EPRI'},
@@ -778,23 +777,23 @@ HY = {
  'HERO_MARK1': 'Չափումներ', 'HERO_MARK2': 'Վերլուծություն', 'HERO_MARK3': 'Առաջարկություններ',
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'WHY_H2': 'Իրադարձությունը կարող է ավարտվել դեռևս ստուգումը սկսելուց առաջ',
- 'WHY_P': 'Էլեկտրական համակարգում որոշ իրադարձություններ տևում են ընդամենը միլիվայրկյաններ կամ մի քանի ցիկլ։ Մեկանգամյա կարճատև ստուգման պահին չափվող արժեքները կարող են արդեն վերադարձած լինել բնականոն մակարդակի։ Մոնիթորինգը պահպանում է իրադարձության ժամանակային նշումը և դրա պահին գրանցված պայմանները։',
+ 'WHY_H2': 'Լարման կարճատև անկումը կարող է չերևալ ստուգման պահին',
+ 'WHY_P': 'Լարման անկումը կարող է տևել ընդամենը մի քանի պարբերություն։ Հետագա ստուգման պահին լարումն արդեն կարող է բնականոն լինել։ Անընդհատ մոնիթորինգը գրանցում է իրադարձությունը, դրա ժամանակը և չափված պարամետրերը՝ հետագա վերլուծության համար։',
  'APP_H2': 'Որտեղ է օգնում մոնիթորինգը',
- 'APP_P': 'Էլեկտրաէներգիայի որակի խնդիրները չեն սահմանափակվում մեկ ոլորտով։ Մոնիթորինգը կիրառելի է, երբ էլեկտրաէներգիայի որակն ազդում է սարքավորումների կամ աշխատանքային գործընթացների վրա, կամ երբ ինժեներական որոշման համար անհրաժեշտ են չափված և գրանցված տվյալներ։',
+ 'APP_P': 'Մոնիթորինգն օգնում է, երբ էլեկտրաէներգիայի որակն ազդում է սարքավորումների կամ աշխատանքային գործընթացների վրա, կամ երբ տեխնիկական որոշում կայացնելու համար անհրաժեշտ են չափումների տվյալներ։',
  'OTHER_T': 'Այլ կարևոր էլեկտրական համակարգեր',
  'OTHER_P': 'Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։',
  'SVC_H2': '7-օրյա մոնիթորինգ',
  'SVC_P1': 'Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։',
- 'SVC_P2': 'Մոնիթորինգի տևողությունն ընտրվում է աշխատանքային պայմանների բնորոշ պատկերը ստանալու համար։ Եթե խնդիրը պարբերաբար չի դրսևորվում կամ սարքավորման աշխատանքային ցիկլն ավելի երկար է, կարող է առաջարկվել ավելի երկար ժամանակահատված։',
- 'SVC_STATS': stats_html([('7', 'մոնիթորինգի տևողություն'),
+ 'SVC_P2': 'Մոնիթորինգի տևողությունն ընտրում ենք այնպես, որ գրանցենք համակարգի բնորոշ աշխատանքային ռեժիմները։ Եթե խնդիրը հազվադեպ կամ անկանոն է դրսևորվում, կամ աշխատանքային ցիկլն ավելի երկար է, առաջարկում ենք երկարացնել չափումների ժամանակահատվածը։',
+ 'SVC_STATS': stats_html([('7', 'օր մոնիթորինգ'),
                           ('24/7', 'անընդհատ տվյալների գրանցում'),
                           ('1', 'ինժեներական հաշվետվություն')]),
  'SVC_DISPLAY': 'Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span>',
  'SVC_STEPS': steps_html([
-    ('01', 'Հստակեցնում ենք՝ ինչ պետք է ստուգվի, որ սարքավորումն է ներգրավված և ինչ որոշման պետք է աջակցեն արդյունքները։'),
-    ('02', 'Չափումները կատարվում են էլեկտրական համակարգի աշխատանքի ընթացքում՝ բնորոշ աշխատանքային պայմաններում։'),
-    ('03', 'Արդյունքները գնահատվում են խնդրի համատեքստում և ներկայացվում տեխնիկական հաշվետվությամբ՝ գրանցված տվյալներով հիմնավորված եզրահանգումներով։')]),
+    ('01', 'Նախ հստակեցնում ենք՝ ինչ ենք ստուգելու, որ սարքավորումների վրա և ինչ որոշում եք կայացնելու արդյունքների հիման վրա։'),
+    ('02', 'Չափումները կատարում ենք համակարգի աշխատանքի ընթացքում՝ ընդգրկելով համաձայնեցված աշխատանքային ռեժիմները։'),
+    ('03', 'Վերլուծում ենք գրանցված տվյալները և հաշվետվության մեջ ներկայացնում եզրակացություններն ու առաջարկվող քայլերը։')]),
  'SVC_LINK': 'Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը',
  'REP_H2': 'Հաշվետվություն',
  'REP_P': 'Ներկայացնում է չափման արդյունքները, դրանց ինժեներական վերլուծությունն ու եզրակացությունները՝ հետագա տեխնիկական որոշումների համար։',
@@ -824,13 +823,13 @@ HY = {
  # Категории остаются в верхнем регистре: .tag поднимает их сам, независимо от языка.
  'ASG_H2': 'Ինժեներական խնդիրներ',
  'ASG_P': 'Հզորության գնահատումից մինչև խափանումների պատճառների վերլուծություն։',
- 'ASG_CARDS': qa_html([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ հզորություն է անհրաժեշտ։', 'Չափում ենք սարքավորումների փաստացի բեռնվածությունն ու մեկնարկային հոսանքները՝ աշխատանքային ամբողջ ցիկլի ընթացքում։ Այս տվյալներն օգնում են մատակարարին որոշել անհրաժեշտ հզորությունը։', 'Ժամանակավոր մոնիթորինգ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Համաձայնեցված փորձարկումների ընթացքում գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ սարքավորումները գործարկվում և աշխատում են միաժամանակ։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցման համակարգը կամ սարքավորումների գործարկման հերթականությունը։', 'Ժամանակավոր մոնիթորինգ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրասնուցման համակարգը կդիմանա՞ լրացուցիչ բեռնվածությանը։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պահուստը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Ժամանակավոր մոնիթորինգ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը գրանցում և պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե այդ պահին մոնիթորինգն արդեն գործել է, Gridec-ը կարող է վերլուծել գրանցված տվյալներն ու օգնել ստուգել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորում։ Ի՞նչ է պետք գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ սարքավորումների միաժամանակյա աշխատանքի ընթացքում։ Հաշվետվությունն օգնում է մատակարարի հետ քննարկել սարքավորման ընդունման հարցերը։ Գրանցված տվյալները հետագայում ծառայում են որպես համեմատության հիմք, եթե փոփոխություններ կամ խափանումներ առաջանան։', 'Ժամանակավոր մոնիթորինգ', 'Նոր սարքավորման ընդունում')]),
- 'ASG_PICS': qa_pics([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ հզորություն է անհրաժեշտ։', 'Չափում ենք սարքավորումների փաստացի բեռնվածությունն ու մեկնարկային հոսանքները՝ աշխատանքային ամբողջ ցիկլի ընթացքում։ Այս տվյալներն օգնում են մատակարարին որոշել անհրաժեշտ հզորությունը։', 'Ժամանակավոր մոնիթորինգ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Համաձայնեցված փորձարկումների ընթացքում գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ սարքավորումները գործարկվում և աշխատում են միաժամանակ։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցման համակարգը կամ սարքավորումների գործարկման հերթականությունը։', 'Ժամանակավոր մոնիթորինգ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրասնուցման համակարգը կդիմանա՞ լրացուցիչ բեռնվածությանը։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պահուստը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Ժամանակավոր մոնիթորինգ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը գրանցում և պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե այդ պահին մոնիթորինգն արդեն գործել է, Gridec-ը կարող է վերլուծել գրանցված տվյալներն ու օգնել ստուգել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորում։ Ի՞նչ է պետք գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ սարքավորումների միաժամանակյա աշխատանքի ընթացքում։ Հաշվետվությունն օգնում է մատակարարի հետ քննարկել սարքավորման ընդունման հարցերը։ Գրանցված տվյալները հետագայում ծառայում են որպես համեմատության հիմք, եթե փոփոխություններ կամ խափանումներ առաջանան։', 'Ժամանակավոր մոնիթորինգ', 'Նոր սարքավորման ընդունում')]),
+ 'ASG_CARDS': qa_html([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ հզորություն է անհրաժեշտ։', 'Չափում ենք պահուստային սնուցման ենթակա սարքավորումների բեռնվածությունն ու մեկնարկային հոսանքները՝ համաձայնեցված աշխատանքային ռեժիմներում։ Այս տվյալներն օգնում են մատակարարին ընտրել անհրաժեշտ հզորությունը։', 'Ժամանակավոր մոնիթորինգ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Համաձայնեցված փորձարկումների ընթացքում գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ սարքավորումները գործարկվում և աշխատում են միաժամանակ։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցման համակարգը կամ սարքավորումների գործարկման հերթականությունը։', 'Ժամանակավոր մոնիթորինգ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրասնուցման համակարգը կդիմանա՞ լրացուցիչ բեռնվածությանը։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պահուստը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Ժամանակավոր մոնիթորինգ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը գրանցում և պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե այդ պահին մոնիթորինգն արդեն գործել է, Gridec-ը կարող է վերլուծել գրանցված տվյալներն ու օգնել ստուգել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորում։ Ի՞նչ է պետք գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ համաձայնեցված աշխատանքային ռեժիմներում։ Հաշվետվությունն օգնում է մինչև սարքավորման ընդունումը մատակարարի հետ քննարկել չափումների արդյունքները։ Գրանցված տվյալները հետագայում ծառայում են որպես համեմատության հիմք՝ փոփոխությունների կամ խափանումների պատճառները պարզելիս։', 'Ժամանակավոր մոնիթորինգ', 'Նոր սարքավորման ընդունում')]),
+ 'ASG_PICS': qa_pics([('Գեներատոր կամ UPS եք ընտրում։ Ի՞նչ հզորություն է անհրաժեշտ։', 'Չափում ենք պահուստային սնուցման ենթակա սարքավորումների բեռնվածությունն ու մեկնարկային հոսանքները՝ համաձայնեցված աշխատանքային ռեժիմներում։ Այս տվյալներն օգնում են մատակարարին ընտրել անհրաժեշտ հզորությունը։', 'Ժամանակավոր մոնիթորինգ', 'Գեներատոր և UPS'), ('Տեղադրում եք վերելակ, օդորակիչներ և պոմպեր։ Ինչպե՞ս կաշխատեն դրանք միասին։', 'Համաձայնեցված փորձարկումների ընթացքում գրանցում ենք էլեկտրական բեռնվածությունն ու լարման փոփոխությունները, երբ սարքավորումները գործարկվում և աշխատում են միաժամանակ։ Արդյունքներն օգնում են գնահատել՝ արդյոք պետք է փոփոխել էլեկտրասնուցման համակարգը կամ սարքավորումների գործարկման հերթականությունը։', 'Ժամանակավոր մոնիթորինգ', 'Վերելակ, օդորակիչներ և պոմպեր'), ('Նոր արտադրական գիծ եք ավելացնում։ Առկա էլեկտրասնուցման համակարգը կդիմանա՞ լրացուցիչ բեռնվածությանը։', 'Չափում ենք առկա բեռնվածությունն ու դրա առավելագույն արժեքները։ Նախագծողը կարող է այս տվյալները համադրել նոր սարքավորումների պահանջների հետ՝ գնահատելու հզորության պահուստը և նախատեսելու անհրաժեշտ փոփոխությունները։', 'Ժամանակավոր մոնիթորինգ', 'Նոր արտադրական գիծ'), ('Մատակարարը խափանումը կապում է էլեկտրասնուցման հետ։ Ինչպե՞ս ստուգել այդ վարկածը։', 'Մշտական մոնիթորինգը գրանցում և պահպանում է էլեկտրասնուցման տվյալները՝ խափանումից առաջ և դրա պահին։ Եթե այդ պահին մոնիթորինգն արդեն գործել է, Gridec-ը կարող է վերլուծել գրանցված տվյալներն ու օգնել ստուգել մատակարարի բացատրությունը։', 'Մշտական մոնիթորինգ', 'Մշտական մոնիթորինգ'), ('Ընդունում եք նոր սարքավորում։ Ի՞նչ է պետք գրանցել գործարկման պահին։', 'Չափում ենք էլեկտրասնուցման պարամետրերն ու բեռնվածությունը՝ համաձայնեցված աշխատանքային ռեժիմներում։ Հաշվետվությունն օգնում է մինչև սարքավորման ընդունումը մատակարարի հետ քննարկել չափումների արդյունքները։ Գրանցված տվյալները հետագայում ծառայում են որպես համեմատության հիմք՝ փոփոխությունների կամ խափանումների պատճառները պարզելիս։', 'Ժամանակավոր մոնիթորինգ', 'Նոր սարքավորման ընդունում')]),
  'MEA_H2': 'Ինչ ենք չափում',
  'MEA_CHIPS': meas_html(['Լարում և հոսանք', 'Հարմոնիկներ և միջհարմոնիկներ', 'Ֆլիկեր',
-                          'Լարման անկումներ', 'Լարման անհամաչափություն', 'Հզորություն և էներգիա',
+                          'Լարման կարճատև անկումներ և բարձրացումներ', 'Լարման անհամաչափություն', 'Հզորություն և էներգիա',
                           'Իրադարձություններ', 'Ռիսկի ցուցանիշներ'], alt=1),
- 'MEA_NOTE': lnote_html(''),
+ 'MEA_NOTE': lnote_html('Գրանցված տվյալների և աշխատանքային պայմանների հիման վրա գնահատում ենք սարքավորումների հնարավոր ռիսկերը։'),
  # Заголовки обычным регистром: на армянской странице стили не поднимают h1—h3 в
  # капс. Принудительных переносов нет — в этой редакции их не задавали, строки
  # раскладывает колонка.
@@ -841,12 +840,12 @@ HY = {
     # на третьей строке в одиночестве (63 px при 1440)
     ('Ինչու սկսեցինք',
      'Ընկերության հիմքում պարզ գաղափար է․ մեր գործընկերները պետք է կարողանան հասկանալ, թե ինչ է կատարվում իրենց էլեկտրական համակարգում՝ առանց սեփական մասնագիտացված թիմ ունենալու կամ հատուկ չափիչ սարքավորումներ ձեռք բերելու։'),
-    ('Ինչպես ենք մտածում',
-     'Ինժեներական աշխատանքը սկսվում է ճիշտ հարցերից՝ հասկանալով, թե ինչպես է իրականում աշխատում համակարգը, և եզրակացությունները հիմնավորելով չափումների տվյալներով։ Նպատակը ամեն գնով խնդիր գտնելը չէ։ Երբեմն ամենաօգտակար արդյունքը հաստատելն է, որ համակարգն աշխատում է այնպես, ինչպես պետք է։'),
-    ('Ինչ ենք կառուցում',
-     'Gridec-ը ստեղծում ենք երկարաժամկետ նպատակով։ Ուզում ենք, որ մեր աշխատանքը ճանաչվի ճշգրտությամբ, հստակ հաղորդակցությամբ և տվյալներով հիմնավորված տեխնիկական եզրակացություններով։')]),
- 'CT_H2': 'Ներկայացրեք խնդիրը նախնական գնահատման համար',
- 'CT_CAP': 'RMS լարում · 10-րոպեանոց միտում', 'CT_NOM': 'Անվանական', 'CT_DIP': 'Լարման անկում · 180 մվրկ',
+    ('Ինչպես ենք աշխատում',
+     'Նախ հստակեցնում ենք՝ ինչ պետք է պարզել։ Այնուհետև չափում ենք էլեկտրական պարամետրերը և վերլուծում տվյալները՝ հաշվի առնելով համակարգի աշխատանքային ռեժիմները։ Եզրակացություններում նշում ենք նաև չափումների սահմանափակումները։'),
+    ('Ինչով ենք հիմնավորում եզրակացությունները',
+     'Հաշվետվություններում ներկայացնում ենք գրանցված տվյալները, չափումների պայմաններն ու վերլուծությունը, որոնց վրա հիմնված են եզրակացությունները։ Այս տեղեկություններով կարող եք արդյունքները քննարկել ձեր ինժեների կամ սարքավորումների մատակարարի հետ։')]),
+ 'CT_H2': 'Նկարագրեք ձեր խնդիրը',
+ 'CT_CAP': 'RMS լարում · պատկերային օրինակ', 'CT_NOM': 'Անվանական լարում', 'CT_DIP': 'Լարման անկում · 180 մվրկ',
  'CO_LEGAL': 'Գրիդեկ ՍՊԸ',
  'CO_TIN_LB': 'ՀՎՀՀ', 'CO_TIN': '08331059',
  'FOOT_ADDR': 'Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան',
@@ -854,14 +853,14 @@ HY = {
  'FOOT_HOURS': 'Երկ-Ուրբ 09:00-18:00 (UTC+4)',
  'IM_FINDLB': 'Ինչ հարցերի կարող է պատասխանել հաշվետվությունը',
  'F_H3': 'Նկարագրեք <span class="ac">խնդիրը</span>',
- 'F_INTRO': intro_html('Նշեք՝ ինչ է տեղի ունեցել, երբ է դա նկատվել և ինչ սարքավորման վրա։'),
- 'F_CONTACT': 'Կոնտակտային տվյալներ',
+ 'F_INTRO': intro_html(''),
+ 'F_CONTACT': 'Կապի տվյալներ',
  'F_NAME': 'Անուն', 'F_NAME_PH': 'Ձեր անունը',
  'F_COMPANY': 'Ընկերություն', 'F_COMPANY_PH': 'Ընկերության անվանումը',
  'F_EMAIL': 'Էլ. փոստ', 'F_PHONE': 'Հեռախոս',
  'F_APP': 'Ոլորտ',
  'F_WHAT': 'Ի՞նչ է տեղի ունեցել',
- 'F_MSG_PH': 'Կարճ նկարագրեք՝ ինչ է տեղի ունեցել, երբ եք դա նկատել և ինչ սարքավորման վրա։',
+ 'F_MSG_PH': 'Նշեք՝ ինչ է տեղի ունեցել, երբ եք դա նկատել և որ սարքավորման աշխատանքում։',
  'F_ATT': 'Կցվող ֆայլեր', 'F_ATT_OPT': 'ըստ ցանկության',
  'F_DROP1': 'Կցեք ֆայլ կամ քաշեք այստեղ',
  'F_DROP2': 'Լուսանկարներ, սխեմաներ, հաշվետվություններ կամ սարքավորման տվյալներ',
@@ -871,10 +870,10 @@ HY = {
  # ⚠ ЧЕРНОВИК: армянские формулировки ошибок — на проверку владельцу.
  'F_ONE_CONTACT': 'Էլ. փոստ կամ հեռախոս՝ գոնե մեկը, որպեսզի կարողանանք պատասխանել։',
  'F_SEND_ERR': 'Հաղորդագրությունը չհաջողվեց ուղարկել։ Ստուգեք ինտերնետ կապը և փորձեք կրկին, կամ գրեք մեզ՝ sales@gridec.am հասցեով։',
- 'F_SEND': 'Ուղարկել տվյալները',
+ 'F_SEND': 'Ուղարկել',
  'A_CLOSE': 'Փակել',
  'F_OK_T': 'Շնորհակալություն։',
- 'F_OK_P': 'Մենք կուսումնասիրենք տրամադրված տեղեկատվությունը և կկապվենք ձեզ հետ՝ չափումների շրջանակը հստակեցնելու համար։',
+ 'F_OK_P': 'Կուսումնասիրենք ձեր հարցումը և կկապվենք ձեզ հետ՝ մանրամասները ճշտելու համար։',
  'F_CLOSE': 'Փակել',
  # ---- политика конфиденциальности ----
  # Перевод английского документа по смыслу, раздел в раздел. Юридические формулы
@@ -883,7 +882,7 @@ HY = {
  'PP_H3': 'Գաղտնիության քաղաքականություն',
  'PP_LEDE': 'Այս քաղաքականությունը բացատրում է, թե ինչ է կատարվում կայքի միջոցով ձեր '
             'ուղարկած տեղեկատվության հետ։ Այն վերաբերում է միայն այս կայքին և '
-            'նկարագրում է կայքի իրական աշխատանքը՝ ոչ ավելին։',
+            'նկարագրում է կայքի իրական աշխատանքը։',
  'PP_BODY': pp_html([
   ('Ովքեր ենք մենք', [
    '«Գրիդեկ» ՍՊԸ, Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան։ ՀՎՀՀ 08331059։',
@@ -932,7 +931,7 @@ HY = {
    'Կայքը սպասարկվում է գաղտնագրված կապով, ուստի ձևում մուտքագրվածը փոխանցման '
    'ընթացքում գաղտնագրված է։ Հարցումները պահվում են փոստարկղում, որին հասանելիություն '
    'ունեն միայն դրանց պատասխանող աշխատակիցները։',
-   'Դրանից ավելին չենք հավաստիացնում։ Սովորական էլեկտրոնային փոստը չպետք է դիտարկել '
+   'Սովորական էլեկտրոնային փոստը չպետք է դիտարկել '
    'որպես գաղտնի կամ վերջից վերջ գաղտնագրված կապուղի. եթե ուղարկելիքը զգայուն է, '
    'նախապես տեղեկացրեք, և կպայմանավորվենք ստանալու այլ եղանակի շուրջ։']),
   ('Cookie և նմանատիպ տեխնոլոգիաներ', [
@@ -942,17 +941,16 @@ HY = {
   ('Որքան ենք պահում', [
    'Եթե հարցումը չի հանգեցնում պայմանագրային հարաբերությունների, այն պահում ենք '
    'ձեզ հետ վերջին կապից մինչև 24 ամիս, ապա ջնջում ենք։',
-   'Եթե հարցումը վերածվում է պայմանագրի, առնչվող փաստաթղթերը պահում ենք այնքան, '
+   'Եթե հարցման արդյունքում պայմանագիր է կնքվում, առնչվող փաստաթղթերը պահում ենք այնքան, '
    'որքան պահանջում է կիրառելի հաշվապահական, հարկային կամ այլ օրենսդրությունը։ '
    'Կարող եք խնդրել ջնջել ձեր հարցումն ավելի շուտ։']),
   ('Տվյալների միջսահմանային փոխանցում', [
    'Մենք գտնվում և գործում ենք Հայաստանում։ Հարցումները ստանում և մշակում ենք '
    'Հայաստանից, սակայն դրանց փոխանցման կամ պահպանման համար օգտագործվող տեխնիկական '
    'ծառայությունները կարող են գործել նաև այլ երկրներում։',
-   'Ձևի ծառայությունը երրորդ կողմի ծառայություն է, ուստի ձևն ուղարկելիս դրա '
-   'պարունակությունը կարող է հատել սահմանը։ Եթե նախընտրում եք դրանից '
-   'խուսափել, ձևի փոխարեն գրեք ուղիղ '
-   '<a href="mailto:sales@gridec.am">sales@gridec.am</a> հասցեին։']),
+   'Ձևի ծառայությունը երրորդ կողմի ծառայություն է, ուստի ձևն ուղարկելիս տվյալները '
+   'կարող են փոխանցվել Հայաստանից դուրս։ Մեզ կարող եք դիմել նաև ուղիղ՝ '
+   '<a href="mailto:sales@gridec.am">sales@gridec.am</a> հասցեով։']),
   ('Ձեր իրավունքները', [
    'ՀՀ օրենսդրությամբ նախատեսված դեպքերում դուք կարող եք տեղեկություն ստանալ ձեր '
    'տվյալների մշակման մասին, ծանոթանալ դրանց և պահանջել ուղղել, ուղեփակել կամ '
@@ -967,15 +965,15 @@ HY = {
    'միությունում գտնվելու դեպքում կարող եք դիմել նաև ձեր երկրի վերահսկող մարմնին։']),
   ('Այս էջի փոփոխությունները', [
    'Եթե հարցումների մշակման կարգը փոխվի, կթարմացնենք այս էջը և ներքևի ամսաթիվը։ '
-   'Էական փոփոխությունն այստեղ կնկարագրվի, այլ ոչ թե կկատարվի լուռ։']),
+   'Էական փոփոխությունները կներկայացնենք այս էջում։']),
   ('Կապ', [
    'Այս քաղաքականության կամ ձեր տվյալների վերաբերյալ հարցերով՝ '
    '<a href="mailto:sales@gridec.am">sales@gridec.am</a>, կամ փոստով՝ '
    '«Գրիդեկ» ՍՊԸ, Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան։']),
  ]),
- 'PP_UPD': 'Թարմացվել է՝ 2026 թ. օգոստոսի 17',
+ 'PP_UPD': 'Թարմացվել է՝ 2026 թ. սեպտեմբերի 14',
  'F_PRIV': 'Այս տվյալներն օգտագործում ենք միայն ձեր հարցմանը պատասխանելու համար։ '
-           'Ձևն առաքվում է FormSubmit երրորդ կողմի ծառայության միջոցով։ '
+           'Ձեր հաղորդագրությունն ուղարկվում է FormSubmit ծառայության միջոցով։ '
            '<button type="button" data-open-privacy>Գաղտնիության քաղաքականություն</button>',
 }
 import copy
@@ -1002,7 +1000,7 @@ HY_CARDS = [
   # тексте стояли латинские знаки, а остальные пункты заканчиваются армянской.
   'findings': ['Գրանցված լարման անկումների ժամանակը, տևողությունը, նվազագույն RMS լարումը և այն ֆազերը, որոնցում դրանք գրանցվել են։',
                'Շարժիչների աշխատանքի համար նշանակալի լարման անհամաչափությունն ու բեռնվածության կորերը։',
-               'Հարմոնիկայի չափում։ Դրա առկայության հնարավոր ազդեցությունները։'],
+               'Ռեակտիվ հզորության և հարմոնիկ աղավաղման գնահատում՝ պարզելու համար, թե արդյոք լրացուցիչ ինժեներական ուսումնասիրություն է անհրաժեշտ։'],
   'statLabel': 'Տեխնիկական նշում',
   'statText': 'Լարման անկումներն ու կարճատև ընդհատումները կարող են անջատել էլեկտրոնային և էլեկտրամեխանիկական սարքերը և կանգնեցնել արտադրական գծերը։',
   'statSource': 'Աղբյուր՝ EPRI'},
@@ -1037,7 +1035,7 @@ HY_CARDS = [
   'statText': 'Էլեկտրաէներգիայի որակի իրադարձությունները կարող են առաջանալ սպառողի հաշվիչի երկու կողմում՝ մատակարարման կամ ներքին ցանցում։',
   'statSource': 'Աղբյուր՝ U.S. DOE / LBNL'},
  {'title': 'Ներդրումային և տեխնիկական գնահատում', 'img': 'IMG5',
-  'p1': 'Ժամանակավոր կամ շարունակական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։',
+  'p1': 'Ժամանակավոր կամ մշտական մոնիթորինգը հնարավորություն է տալիս անկախ կերպով գրանցել համակարգի փաստացի աշխատանքը։ Արդյունքները կարող են օգտագործվել տեխնիկական համալիր գնահատման, հանձնման, երաշխիքային ստուգման կամ աշխատանքի արդյունավետության գնահատման համար։',
   'findings': ['Համապատասխան կետերում դիտարկված բեռնվածությունն ու էլեկտրաէներգիայի որակը։',
                'Ընդհատումների կամ արտադրողականության նվազման հետ կապված գրանցված պայմանները։',
                'Սահմանափակումները, ռիսկերը և առաջարկվող լրացուցիչ ստուգումները։'],
