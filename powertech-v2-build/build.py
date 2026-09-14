@@ -128,7 +128,7 @@ ARIAN_REG = '400'
 # владелец выбрал сохранить Overused Grotesk.
 _OG = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
 # Трекинг заголовков 0 (было −.015/−.022em: владелец — «слишком близко буквы»), интерлиньяж 1.05.
-TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='0', HY_LS='0')
+TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='-.01em', HY_LS='0')
 
 
 # Аудит 2026-09-14: армянская страница целиком на Mardoto — 400 для прозы, 500 для

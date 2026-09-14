@@ -678,7 +678,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 /* Заголовок тянется по содержимому, но не шире своей области; HY переносы — <br class="d">
    (сняты ниже 1100), «ինչպես է» не разрывается. */
 .hero h1{grid-area:head;position:relative;z-index:3;color:var(--fg-head);width:max-content;max-width:100%;
-  line-height:1.05;letter-spacing:0;margin-top:14px;}
+  line-height:1.05;letter-spacing:%%BIGLS%%;margin-top:14px;}
 @media (max-width:1099px){.hero h1 br.d{display:none;}}
 .hero h1 .nb{white-space:nowrap;}
 /* Акцентное слово: по референсу владельца тем же цветом, что заголовок (вернуть синее —
