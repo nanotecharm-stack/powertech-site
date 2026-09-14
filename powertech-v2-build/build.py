@@ -464,7 +464,7 @@ EN = {
  # Надпись на панели щита (бриф 2026-09-14): описание услуги, по одной строке.
  'HERO_MARK1': 'MEASURE', 'HERO_MARK2': 'ANALYSE', 'HERO_MARK3': 'RECOMMEND',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'WHY_H2': 'A brief voltage dip can be missed during an inspection',
+ 'WHY_H2': 'Power supply problems are not always obvious',
  'WHY_P': 'A voltage dip can last only a few cycles. A later spot check may show normal readings. Continuous monitoring records the event and when it occurred, allowing us to analyse the measured conditions.',
  'APP_H2': 'Where monitoring helps',
  'APP_P': 'Monitoring helps when power quality affects equipment or operations, or when you need measurements to make a technical decision.',
@@ -534,10 +534,10 @@ EN = {
     ('WHY WE STARTED',
      'Specialist measurements and analysis should not require a permanent in-house team or equipment that spends most of its time unused. Gridec gives companies access to both when the need arises.'),
     ('HOW WE WORK',
-     'We first agree on what needs to be established. We then measure the electrical parameters and analyse the data alongside the system’s operating conditions. Our conclusions also explain the limitations of the measurements.'),
-    ('HOW WE SUPPORT OUR CONCLUSIONS',
-     'Our reports present the recorded data, measurement conditions and analysis behind our conclusions, so you can review the findings with your engineer or equipment supplier.')]),
- 'CT_H2': 'Tell us what you need to assess',
+     'A useful investigation starts with the question that needs answering. We measure the system under real operating conditions and base the conclusion on what the data shows, whether that points to a problem or confirms normal operation.'),
+    ('WHAT WE ARE BUILDING',
+     'We are building Gridec in Armenia as a small engineering firm whose conclusions hold up when someone checks them. We would rather grow slowly than lose that.')]),
+ 'CT_H2': 'Start with what happened',
  # Кривая провала нарисована руками, а не снята прибором. Под подписью «TYPICAL
  # TRACE» «180 MS» читается примером и вопроса «где запись» не вызывает.
  'CT_CAP': 'RMS voltage · illustrative example', 'CT_NOM': 'NOMINAL', 'CT_DIP': 'VOLTAGE DIP · 180 MS',
@@ -777,7 +777,7 @@ HY = {
  'HERO_MARK1': 'Չափումներ', 'HERO_MARK2': 'Վերլուծություն', 'HERO_MARK3': 'Առաջարկություններ',
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
- 'WHY_H2': 'Լարման կարճատև անկումը կարող է չերևալ ստուգման պահին',
+ 'WHY_H2': 'Էլեկտրասնուցման խնդիրները միշտ չէ, որ նկատելի են',
  'WHY_P': 'Լարման անկումը կարող է տևել ընդամենը մի քանի պարբերություն։ Հետագա ստուգման պահին լարումն արդեն կարող է բնականոն լինել։ Անընդհատ մոնիթորինգը գրանցում է իրադարձությունը, դրա ժամանակը և չափված պարամետրերը՝ հետագա վերլուծության համար։',
  'APP_H2': 'Որտեղ է օգնում մոնիթորինգը',
  'APP_P': 'Մոնիթորինգն օգնում է, երբ էլեկտրաէներգիայի որակն ազդում է սարքավորումների կամ աշխատանքային գործընթացների վրա, կամ երբ տեխնիկական որոշում կայացնելու համար անհրաժեշտ են չափումների տվյալներ։',
@@ -840,11 +840,11 @@ HY = {
     # на третьей строке в одиночестве (63 px при 1440)
     ('Ինչու սկսեցինք',
      'Ընկերության հիմքում պարզ գաղափար է․ մեր գործընկերները պետք է կարողանան հասկանալ, թե ինչ է կատարվում իրենց էլեկտրական համակարգում՝ առանց սեփական մասնագիտացված թիմ ունենալու կամ հատուկ չափիչ սարքավորումներ ձեռք բերելու։'),
-    ('Ինչպես ենք աշխատում',
-     'Նախ հստակեցնում ենք՝ ինչ պետք է պարզել։ Այնուհետև չափում ենք էլեկտրական պարամետրերը և վերլուծում տվյալները՝ հաշվի առնելով համակարգի աշխատանքային ռեժիմները։ Եզրակացություններում նշում ենք նաև չափումների սահմանափակումները։'),
-    ('Ինչով ենք հիմնավորում եզրակացությունները',
-     'Հաշվետվություններում ներկայացնում ենք գրանցված տվյալները, չափումների պայմաններն ու վերլուծությունը, որոնց վրա հիմնված են եզրակացությունները։ Այս տեղեկություններով կարող եք արդյունքները քննարկել ձեր ինժեների կամ սարքավորումների մատակարարի հետ։')]),
- 'CT_H2': 'Նկարագրեք ձեր խնդիրը',
+    ('Ինչպես ենք մտածում',
+     'Ինժեներական աշխատանքը սկսվում է ճիշտ հարցերից՝ հասկանալով, թե ինչպես է իրականում աշխատում համակարգը, և եզրակացությունները հիմնավորելով չափումների տվյալներով։ Նպատակը ամեն գնով խնդիր գտնելը չէ։ Երբեմն ամենաօգտակար արդյունքը հաստատելն է, որ համակարգն աշխատում է այնպես, ինչպես պետք է։'),
+    ('Ինչ ենք կառուցում',
+     'Gridec-ը ստեղծում ենք երկարաժամկետ նպատակով։ Ուզում ենք, որ մեր աշխատանքը ճանաչվի ճշգրտությամբ, հստակ հաղորդակցությամբ և տվյալներով հիմնավորված տեխնիկական եզրակացություններով։')]),
+ 'CT_H2': 'Ներկայացրեք խնդիրը նախնական գնահատման համար',
  'CT_CAP': 'RMS լարում · պատկերային օրինակ', 'CT_NOM': 'Անվանական լարում', 'CT_DIP': 'Լարման անկում · 180 մվրկ',
  'CO_LEGAL': 'Գրիդեկ ՍՊԸ',
  'CO_TIN_LB': 'ՀՎՀՀ', 'CO_TIN': '08331059',
