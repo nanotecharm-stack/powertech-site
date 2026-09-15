@@ -524,18 +524,18 @@ EN = {
  # оформление показывает.
  'MEA_NOTE': lnote_html('We assess potential equipment risks using the recorded data and operating conditions.'),
  'CO_H2': 'About us',
- 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We measure and analyse power quality, help identify the causes of electrical problems and advise on appropriate technical solutions.',
+ 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We solve problems in electrical power systems, combining our team’s hands-on engineering experience with high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
  # \u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0432\u043e\u043b\u044e \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f.
  # Номера «01 ·», «02 ·», «03 ·» с подписей сняты: на странице уже есть одна
  # система нумерации — счётчики разделов 01–08, — и вложенная вторая внутри
  # седьмого раздела читалась шаблоном, а не структурой.
  'CO_STORY': story_html([
-    # Тексты владельца (2026-09-15): два подблока вместо трёх.
+    # Тексты владельца (2026-09-15, вторая редакция того же дня): лид и два подблока.
     ('WHY WE STARTED',
-     'We founded the company to make modern measurement technology accessible in Armenia and promote working practices that meet international standards. We want taking measurements and documenting the results to become standard practice, so that causes can be identified and responsibility established on the basis of data.'),
+     'We started Gridec to make modern electrical engineering tools and practices more accessible in Armenia. We want technical decisions to be based on documented findings and careful analysis. When problems arise or opinions differ, there should be a clear basis for establishing what happened and deciding what to do next.'),
     ('WHAT MATTERS TO US',
-     'Our clients should understand what we measured, what we found and how we reached our conclusions. We present the results so they can be checked, discussed with other specialists and used to guide future decisions.')]),
+     'Our recommendations must be technically sound and practical to implement. We explain the reasoning behind each proposed solution, the expected results and any limitations. If the evidence is insufficient or further investigation is needed, we say so.')]),
  'CT_H2': 'Start with what happened',
  # Кривая провала нарисована руками, а не снята прибором. Под подписью «TYPICAL
  # TRACE» «180 MS» читается примером и вопроса «где запись» не вызывает.
