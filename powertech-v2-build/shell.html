@@ -761,7 +761,9 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 #wipe.instant i{transition:none;transition-delay:0ms;}
 /* dithered pixel boundary: a band of squares that dissolves one section colour
    into the next — cantor8's actual device (static dither, not an animation) */
-.dith{position:relative;display:grid;width:100%;line-height:0;}
+/* Свой слой на полосу (их три), а не на ячейку: перекраска ячеек при прокрутке остаётся
+   внутри полосы и не тянет за собой плитки с текстом соседних разделов. */
+.dith{position:relative;display:grid;width:100%;line-height:0;will-change:transform;contain:paint;}
 .dith i{display:block;}
 
 /* dark plate section (services) */
@@ -1051,7 +1053,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .stat span{display:block;margin-top:var(--s2);font-size:var(--t-note);line-height:1.5;color:var(--on-dark-small);}
 /* Поле: линейка семи делений по низу, линия записи над ней. */
 .obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
-.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;will-change:transform;}
 .obs-ruler line{stroke:rgba(239,237,234,.22);stroke-width:1;}
 .obs-ruler .obs-day{stroke:rgba(239,237,234,.34);}
 .obs-base{fill:none;stroke:rgba(239,237,234,.2);stroke-width:1.6;}
@@ -1916,8 +1918,19 @@ html[data-nav="5"] #hdr::before{content:"";position:absolute;inset:0;z-index:-1;
 html[data-nav="5"].hscr #hdr::before{opacity:1;}
 
 /* та же линия — шкала прочтения, с иглой на конце */
-.hprog{position:absolute;left:0;bottom:0;height:1px;width:0;z-index:2;display:none;
-  background:var(--brand-ink);overflow:visible;}
+/* Линия прогресса (2026-09-15, «мыло при прокрутке»). Прежде скрипт писал ей width на
+   КАЖДОМ кадре прокрутки — единственная запись в документ, которая шла на всей странице
+   без исключения, и шла в шапку с размытием. Теперь линия во всю ширину сдвинута влево
+   на 100 % и выезжает transform'ом по scroll-timeline браузера: ни скрипта, ни раскладки,
+   ни перерисовки — только композитор. Обёртка .hprog-clip обрезает выехавшую часть.
+   Где scroll-timeline нет, скрипт ставит тот же transform сам (aBar). */
+.hprog-clip{position:absolute;left:0;right:0;bottom:0;height:4px;overflow:hidden;pointer-events:none;z-index:2;}
+.hprog{position:absolute;left:0;bottom:0;height:1px;width:100%;display:none;
+  background:var(--brand-ink);overflow:visible;transform:translateX(-100%);will-change:transform;}
+@supports (animation-timeline:scroll()){
+  .hprog{animation:hprog-fill linear both;animation-timeline:scroll(root);}
+  @keyframes hprog-fill{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+}
 html[data-nav="5"] .hprog{display:block;opacity:0;transition:opacity .35s var(--e) .5s;}
 html[data-nav="5"].hscr .hprog{opacity:1;}
 html[data-nav="5"] .hprog::after{content:"";position:absolute;right:0;bottom:0;
@@ -1997,7 +2010,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <a class="btn" href="#end"><span>%%NAV_CTA%%</span><i>&#8599;</i></a>
   </div>
 </div>
-<i class="hprog" id="hprog" aria-hidden="true"></i>
+<span class="hprog-clip" aria-hidden="true"><i class="hprog" id="hprog"></i></span>
 <div class="ixsc" id="ixsc"></div>
 <div class="ixp" id="ixp" hidden><div class="ixin"><ol id="ixlist"></ol></div></div>
 </header>
@@ -2278,13 +2291,15 @@ var PT=window.PT;
    положение прокрутки, поэтому считаются даром. Порог 60 точек: линия должна
    чертиться осознанно, а не от дрожи колеса. */
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
+/* Линию ведёт CSS scroll-timeline; скрипт трогает её только там, где таймлайна нет. */
+var hprogCSS=!!(window.CSS&&CSS.supports&&CSS.supports('animation-timeline','scroll()'));
 function mBar(){var m=document.documentElement.scrollHeight-innerHeight;
   return {on:window.pageYOffset>4,p:m>0?Math.min(1,window.pageYOffset/m):0};}
 function aBar(st){
   if(barWas!==st.on){barWas=st.on;document.documentElement.classList.toggle('hscr',st.on);}
-  if(!hprog)return;
-  var w=(st.p*100).toFixed(2)+'%';
-  if(progWas!==w){progWas=w;hprog.style.width=w;}
+  if(!hprog||hprogCSS)return;
+  var w=(-(1-st.p)*100).toFixed(2)+'%';
+  if(progWas!==w){progWas=w;hprog.style.transform='translateX('+w+')';}
 }
 
 /* ============ JOINT TRACES ============ */

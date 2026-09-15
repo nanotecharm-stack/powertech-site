@@ -380,7 +380,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
   transition:transform .32s cubic-bezier(.4,0,.2,1);transition-delay:var(--wu,0ms);}
 #wipe.go i{transform:scale(1.06);transition-delay:var(--wd,0ms);}
 #wipe.instant i{transition:none;transition-delay:0ms;}
-.dith{position:relative;display:grid;width:100%;line-height:0;}
+.dith{position:relative;display:grid;width:100%;line-height:0;will-change:transform;contain:paint;}
 .dith i{display:block;}
 .plate2{position:relative;overflow:hidden;background:linear-gradient(180deg,#0D2440 0%,#12294A 60%,#162E52 100%);color:#F6F1E9;}
 .plate2>.wrap{position:relative;z-index:1;}
@@ -553,7 +553,7 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
   font-size:clamp(44px,5.2vw,76px);}
 .obs .stat span{display:block;margin-top:var(--s2);font-size:var(--t-note);line-height:1.5;color:var(--on-dark-small);}
 .obs-field{position:relative;height:clamp(84px,11vw,140px);margin-top:var(--s4);}
-.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+.obs-svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;will-change:transform;}
 .obs-ruler line{stroke:rgba(246,241,233,.22);stroke-width:1;}
 .obs-ruler .obs-day{stroke:rgba(246,241,233,.34);}
 .obs-base{fill:none;stroke:rgba(246,241,233,.2);stroke-width:1.6;}
@@ -1008,8 +1008,13 @@ html[data-nav="5"] #hdr::before{content:"";position:absolute;inset:0;z-index:-1;
   background:var(--hw);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   opacity:0;transition:opacity .18s var(--e);}
 html[data-nav="5"].hscr #hdr::before{opacity:1;}
-.hprog{position:absolute;left:0;bottom:0;height:1px;width:0;z-index:2;display:none;
-  background:var(--brand-ink);overflow:visible;}
+.hprog-clip{position:absolute;left:0;right:0;bottom:0;height:4px;overflow:hidden;pointer-events:none;z-index:2;}
+.hprog{position:absolute;left:0;bottom:0;height:1px;width:100%;display:none;
+  background:var(--brand-ink);overflow:visible;transform:translateX(-100%);will-change:transform;}
+@supports (animation-timeline:scroll()){
+  .hprog{animation:hprog-fill linear both;animation-timeline:scroll(root);}
+  @keyframes hprog-fill{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+}
 html[data-nav="5"] .hprog{display:block;opacity:0;transition:opacity .35s var(--e) .5s;}
 html[data-nav="5"].hscr .hprog{opacity:1;}
 html[data-nav="5"] .hprog::after{content:"";position:absolute;right:0;bottom:0;
@@ -1060,7 +1065,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <a class="btn" href="#end"><span>Get in touch</span><i>&#8599;</i></a>
   </div>
 </div>
-<i class="hprog" id="hprog" aria-hidden="true"></i>
+<span class="hprog-clip" aria-hidden="true"><i class="hprog" id="hprog"></i></span>
 <div class="ixsc" id="ixsc"></div>
 <div class="ixp" id="ixp" hidden><div class="ixin"><ol id="ixlist"></ol></div></div>
 </header>
@@ -1297,13 +1302,14 @@ window.PT={"incident": "Incident", "seq": [["01", "Normal operation"], ["02", "E
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
 var hprog=document.getElementById('hprog'),barWas=null,progWas=null;
+var hprogCSS=!!(window.CSS&&CSS.supports&&CSS.supports('animation-timeline','scroll()'));
 function mBar(){var m=document.documentElement.scrollHeight-innerHeight;
   return {on:window.pageYOffset>4,p:m>0?Math.min(1,window.pageYOffset/m):0};}
 function aBar(st){
   if(barWas!==st.on){barWas=st.on;document.documentElement.classList.toggle('hscr',st.on);}
-  if(!hprog)return;
-  var w=(st.p*100).toFixed(2)+'%';
-  if(progWas!==w){progWas=w;hprog.style.width=w;}
+  if(!hprog||hprogCSS)return;
+  var w=(-(1-st.p)*100).toFixed(2)+'%';
+  if(progWas!==w){progWas=w;hprog.style.transform='translateX('+w+')';}
 }
 function route(pts,r){
   var d='M'+pts[0][0]+','+pts[0][1];
