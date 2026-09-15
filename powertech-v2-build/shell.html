@@ -988,8 +988,9 @@ h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
 .evs-d{position:absolute;inset:0;width:100%;height:100%;overflow:visible;display:block;}
 .evs-list{list-style:none;margin:0;padding:0;}
 .evs-list li{font-size:17px;line-height:1.3;font-weight:450;letter-spacing:-.015em;margin:0 0 var(--s4);}
-/* Arian AMU шире гротеска: на 17 px армянские подписи сцены не укладывались в две строки. */
-html[lang="hy"] .evs-list li{font-size:16px;letter-spacing:0;}
+/* Mardoto шире гротеска: на 17 px армянские подписи сцены не укладывались в две строки.
+   15 px = кегль армянской прозы (2026-09-15); на 16 правая подпись возврата шла в три строки. */
+html[lang="hy"] .evs-list li{font-size:15px;letter-spacing:0;}
 .evs.is-laid .evs-list li{position:absolute;margin:0;}
 .evs-list p{margin:0;font:inherit;}
 .ev-tag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
@@ -2473,8 +2474,10 @@ function paintJoints(){aJoints(mJoints());}
       place(els['ev-normal'],x0,y-28-els['ev-normal'].offsetHeight,a-x0-30);
       place(els['ev-incident'],a-3,32+off,c-a-22);
       place(els['ev-incident'],a-3,106+off-30-els['ev-incident'].offsetHeight,c-a-22);
-      place(els['ev-trip'],b-25,225+off,c-b+28);
-      if(els['ev-trip'].offsetHeight>30)place(els['ev-trip'],a+20,225+off,c-a-17);
+      /* Подпись отключения — под окном события, по его левой кромке, как подпись события над
+         окном (владелец, 2026-09-15: «текст смещён, неаккуратно» — двухстрочная стояла на 20 px
+         правее скобки, однострочная — от точки провала). 10 px от нижней скобки. */
+      place(els['ev-trip'],a-3,236+off,c-a+6);
       place(els['ev-return'],c+8,170+off,w-c-4);
       d='<rect class="ev-window" x="'+n(a)+'" y="'+n(111+off)+'" width="'+n(c-a)+'" height="109"/>'
        +'<path class="ev-base" d="M'+x0+' '+n(y)+' H'+n(end)+'"/>'
@@ -2486,7 +2489,7 @@ function paintJoints(){aJoints(mJoints());}
        +'<rect class="ev-node" x="'+n(c-4)+'" y="'+n(y-4)+'" width="8" height="8"/>'
        +'<path class="ev-link" d="M'+n(c)+' '+n(y-6)+' V'+n(y-40)+' H'+n(ax+aw/2)+' V'+n(rec.offsetHeight+8)+'"/>';
       for(var x=x0;x<=end;x+=18)d+='<path class="ev-tick" d="M'+n(x)+' '+n(153+off)+' v'+((Math.abs(x-a)<18||Math.abs(x-c)<18)?9:4)+'"/>';
-      scene.style.height=(225+off+els['ev-trip'].offsetHeight+30)+'px';
+      scene.style.height=(236+off+els['ev-trip'].offsetHeight+30)+'px';
     }else{
       var xv=12,dx=53,lx=78;ay=0;
       place(rec,0,ay,w);
