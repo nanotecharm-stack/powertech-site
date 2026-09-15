@@ -132,7 +132,11 @@ h2.h2gap{margin-top:var(--s4);}
 /* Лид один: второй вводный абзац стоит на ступень ниже, размером прозы, цвет наследует. */
 .lede + .lede{margin-top:18px;font-size:var(--t-p);line-height:var(--t-p-lh);max-width:46ch;}
 /* Армянский текст длиннее на треть: тот же лид на ступень ниже, иначе десять строк. */
-html[lang="hy"]{--t-lede:clamp(20px,1.5vw,22px);--t-lbl:15px;}
+/* Проза HY (2026-09-15, владелец выбрал пробу B из двух): Mardoto при том же кегле выше
+   Overused Grotesk на 15 % по прописным, а армянские строчные почти в рост прописных —
+   одинаковый кегль давал на глаз более крупный текст. Лид 17–18, проза 15/1.7,
+   примечания и мелкое 14; подписи разделов остаются 15 (владелец просил читаемые). */
+html[lang="hy"]{--t-lede:clamp(17px,1.25vw,18px);--t-lede-lh:1.5;--t-p:15px;--t-p-lh:1.7;--t-note:14px;--t-small:14px;--t-lbl:15px;}
 .rv{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e);}
 .rv.in{opacity:1;transform:none;}
 
@@ -698,6 +702,8 @@ h1{font-size:calc(%%H1SIZE%% * var(--hs));font-weight:%%H1WT%%;margin-top:20px;t
 /* Правая группа: верх описания на первой строке H1 (18 = поле h1 14 + вынос кегля). */
 .hside{position:relative;z-index:3;grid-area:side;padding-top:18px;}
 .hero .hp{margin:0;max-width:none;font-size:18px;line-height:1.5;color:var(--fg-mid);}
+/* HY: та же ступень вниз, что у лида и прозы (проба B). */
+html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
 /* Одна главная кнопка; второе действие — текстовая ссылка под ней. */
 .acts{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px;}
 .hero .acts .btn{font-size:15px;padding:15px 22px;}
