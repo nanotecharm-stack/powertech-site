@@ -576,6 +576,7 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 #obs.wk{display:block;}
+#obs.wk .wk-note{max-width:58ch;font-size:var(--t-note);line-height:1.6;color:rgba(246,241,233,.78);margin:clamp(28px,3vw,40px) 0 0;}
 #obs.wk .wk-cap{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
 html[lang="hy"] #obs.wk .wk-cap{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
@@ -1166,8 +1167,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
     <h2 class="h2gap">Seven-day monitoring</h2>
-    <p class="lede">Power quality data is recorded during actual operation and interpreted in the context of the issue being investigated.</p>
-    <p class="lede">The monitoring period is selected to obtain a representative record of operating conditions. We recommend a longer period when the issue is intermittent or the operating cycle needs more time.</p></div>
+    <p class="lede">Power quality data is recorded during actual operation and interpreted in the context of the issue being investigated.</p></div>
   </div>
   
   <div class="obs wk rv" id="obs">
@@ -1181,6 +1181,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       </svg>
     </div>
     <div class="stats"><div class="stat"><b>7</b><span>Days of monitoring</span></div><div class="stat"><b>24/7</b><span>Continuous data recording</span></div><div class="stat"><b>1</b><span>Engineering report</span></div></div>
+    
+    <p class="wk-note">The monitoring period is selected to obtain a representative record of operating conditions. We recommend a longer period when the issue is intermittent or the operating cycle needs more time.</p>
     <div class="steps"><div class="step"><span class="stag">Before recording</span><p>Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.</p></div><div class="step"><span class="stag">During recording</span><p>We take measurements during the agreed operating conditions.</p></div><div class="step"><span class="stag">After recording</span><p>We analyse the recorded data and present our conclusions and recommended next steps in the report.</p></div></div>
   </div>
   <a class="alink rv" href="#report">See what monitoring can reveal ↗</a>

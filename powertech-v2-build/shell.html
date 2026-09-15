@@ -1115,6 +1115,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* ---- Неделя записи (2026-09-15) — правила с #obs.wk перекрывают прежнюю шкалу
    с крупными числами и головкой записи, включая её мобильные правила ниже. ---- */
 #obs.wk{display:block;}
+#obs.wk .wk-note{max-width:58ch;font-size:var(--t-note);line-height:1.6;color:rgba(239,237,234,.78);margin:clamp(28px,3vw,40px) 0 0;}
 #obs.wk .wk-cap{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
 html[lang="hy"] #obs.wk .wk-cap{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
@@ -2145,8 +2146,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
     <h2 class="h2gap">%%SVC_H2%%</h2>
-    <p class="lede">%%SVC_P1%%</p>
-    <p class="lede">%%SVC_P2%%</p></div>
+    <p class="lede">%%SVC_P1%%</p></div>
   </div>
   <!-- НЕДЕЛЯ ЗАПИСИ (2026-09-15, владелец: «цифры и анимация задачу не решают»).
        Поле — семь суток по 24 деления: 7 — это семь колонок, 24/7 — 168 часовых
@@ -2164,6 +2164,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       </svg>
     </div>
     <div class="stats">%%SVC_STATS%%</div>
+    <!-- Абзац о выборе длительности стоит под полем, к которому относится, а не в шапке
+         (владелец, 2026-09-15: «весь экран перегружен»). -->
+    <p class="wk-note">%%SVC_P2%%</p>
     <div class="steps">%%SVC_STEPS%%</div>
   </div>
   <a class="alink rv" href="#report">%%SVC_LINK%% ↗</a>

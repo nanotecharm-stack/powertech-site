@@ -581,6 +581,7 @@ html[lang="hy"] .ev-tag{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 #obs.wk{display:block;}
+#obs.wk .wk-note{max-width:58ch;font-size:var(--t-note);line-height:1.6;color:rgba(246,241,233,.78);margin:clamp(28px,3vw,40px) 0 0;}
 #obs.wk .wk-cap{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
 html[lang="hy"] #obs.wk .wk-cap{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
@@ -1167,8 +1168,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
     <h2 class="h2gap">7-օրյա մոնիթորինգ</h2>
-    <p class="lede">Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։</p>
-    <p class="lede">Մոնիթորինգի տևողությունն ընտրում ենք այնպես, որ գրանցենք համակարգի բնորոշ աշխատանքային ռեժիմները։ Եթե խնդիրը հազվադեպ կամ անկանոն է դրսևորվում, կամ աշխատանքային ցիկլն ավելի երկար է, առաջարկում ենք երկարացնել չափումների ժամանակահատվածը։</p></div>
+    <p class="lede">Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։</p></div>
   </div>
   
   <div class="obs wk rv" id="obs">
@@ -1182,6 +1182,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
       </svg>
     </div>
     <div class="stats"><div class="stat"><b>7</b><span>օր մոնիթորինգ</span></div><div class="stat"><b>24/7</b><span>անընդհատ տվյալների գրանցում</span></div><div class="stat"><b>1</b><span>ինժեներական հաշվետվություն</span></div></div>
+    
+    <p class="wk-note">Մոնիթորինգի տևողությունն ընտրում ենք այնպես, որ գրանցենք համակարգի բնորոշ աշխատանքային ռեժիմները։ Եթե խնդիրը հազվադեպ կամ անկանոն է դրսևորվում, կամ աշխատանքային ցիկլն ավելի երկար է, առաջարկում ենք երկարացնել չափումների ժամանակահատվածը։</p>
     <div class="steps"><div class="step"><span class="stag">Գրանցումից առաջ</span><p>Նախ հստակեցնում ենք՝ ինչ ենք ստուգելու, որ սարքավորումների վրա և ինչ որոշում եք կայացնելու արդյունքների հիման վրա։</p></div><div class="step"><span class="stag">Գրանցման ընթացքում</span><p>Չափումները կատարում ենք համակարգի աշխատանքի ընթացքում՝ ընդգրկելով համաձայնեցված աշխատանքային ռեժիմները։</p></div><div class="step"><span class="stag">Գրանցումից հետո</span><p>Վերլուծում ենք գրանցված տվյալները և հաշվետվության մեջ ներկայացնում եզրակացություններն ու առաջարկվող քայլերը։</p></div></div>
   </div>
   <a class="alink rv" href="#report">Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը ↗</a>
