@@ -543,9 +543,7 @@ html[lang="hy"] .ev-tag{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-
 .other .btn::before{background:var(--bg);}
 .other .btn:hover span{color:var(--fg);}
 .display{font-family:'Mardoto','Arian AMU',sans-serif;font-weight:500;font-size:calc(clamp(23px,3.96vw,55px) * var(--hs));line-height:.96;color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
-.svc-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,5vw,96px);align-items:end;}
-.svc-head .display{margin:0;padding-bottom:4px;}
-@media (max-width:960px){.svc-head{grid-template-columns:1fr;row-gap:28px;}.svc-head .display{padding-bottom:0;}}
+.svc-head{display:block;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
 .obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(36px,4.5vw,60px);
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);}
@@ -583,6 +581,8 @@ html[lang="hy"] .ev-tag{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 #obs.wk{display:block;}
+#obs.wk .wk-cap{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
+html[lang="hy"] #obs.wk .wk-cap{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
   font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
 html[lang="hy"] #obs.wk .wk-days{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:13px;letter-spacing:.02em;}
@@ -1169,10 +1169,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <h2 class="h2gap">7-օրյա մոնիթորինգ</h2>
     <p class="lede">Էլեկտրաէներգիայի որակի տվյալները գրանցվում են համակարգի փաստացի աշխատանքի ընթացքում և վերլուծվում՝ ուսումնասիրվող խնդրի համատեքստում։</p>
     <p class="lede">Մոնիթորինգի տևողությունն ընտրում ենք այնպես, որ գրանցենք համակարգի բնորոշ աշխատանքային ռեժիմները։ Եթե խնդիրը հազվադեպ կամ անկանոն է դրսևորվում, կամ աշխատանքային ցիկլն ավելի երկար է, առաջարկում ենք երկարացնել չափումների ժամանակահատվածը։</p></div>
-    <div class="display rv">Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span></div>
   </div>
   
   <div class="obs wk rv" id="obs">
+    <div class="wk-cap">Չափումներ՝ փաստացի բեռնվածությամբ</div>
     <div class="wk-days" aria-hidden="true"><span>Օր 1</span><span>Օր 2</span><span>Օր 3</span><span>Օր 4</span><span>Օր 5</span><span>Օր 6</span><span>Օր 7</span></div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">

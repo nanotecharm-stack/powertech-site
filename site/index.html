@@ -538,9 +538,7 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 .other .btn::before{background:var(--bg);}
 .other .btn:hover span{color:var(--fg);}
 .display{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:calc(clamp(23px,3.96vw,55px) * var(--hs));line-height:.96;color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
-.svc-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,5vw,96px);align-items:end;}
-.svc-head .display{margin:0;padding-bottom:4px;}
-@media (max-width:960px){.svc-head{grid-template-columns:1fr;row-gap:28px;}.svc-head .display{padding-bottom:0;}}
+.svc-head{display:block;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
 .obs{--ocol:clamp(16px,1.8vw,24px);margin-top:clamp(36px,4.5vw,60px);
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--ocol);}
@@ -578,6 +576,8 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 #obs.wk{display:block;}
+#obs.wk .wk-cap{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
+html[lang="hy"] #obs.wk .wk-cap{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
   font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
 html[lang="hy"] #obs.wk .wk-days{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;}
@@ -1168,10 +1168,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <h2 class="h2gap">Seven-day monitoring</h2>
     <p class="lede">Power quality data is recorded during actual operation and interpreted in the context of the issue being investigated.</p>
     <p class="lede">The monitoring period is selected to obtain a representative record of operating conditions. We recommend a longer period when the issue is intermittent or the operating cycle needs more time.</p></div>
-    <div class="display rv">Measured<br>under actual<br><span class="ac">load</span></div>
   </div>
   
   <div class="obs wk rv" id="obs">
+    <div class="wk-cap">Measured under actual load</div>
     <div class="wk-days" aria-hidden="true"><span>Day 1</span><span>Day 2</span><span>Day 3</span><span>Day 4</span><span>Day 5</span><span>Day 6</span><span>Day 7</span></div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">

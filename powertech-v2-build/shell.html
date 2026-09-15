@@ -1043,9 +1043,9 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(%%DISPSIZE%% * var(--hs));line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
 /* Шапка раздела в две колонки (аудит 2026-09-14): слева номер, заголовок и два вводных
    абзаца, справа крупный тезис по нижней линии текста. Пустое поле справа ушло. */
-.svc-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,5vw,96px);align-items:end;}
-.svc-head .display{margin:0;padding-bottom:4px;}
-@media (max-width:960px){.svc-head{grid-template-columns:1fr;row-gap:28px;}.svc-head .display{padding-bottom:0;}}
+/* Лозунг .display снят (владелец, 2026-09-15: «слишком кричит»); шапка раздела —
+   одна колонка, как в остальных разделах. Его слова — подписью .wk-cap над полем. */
+.svc-head{display:block;}
 .display .ac{font-style:normal;color:var(--brand-ink);}
 /* ============ ПОЛЕ НАБЛЮДЕНИЯ (бриф 2, 2026-09-12) ============
    Одна сетка в двенадцать колонок на числа, поле и этапы — так этап стоит
@@ -1115,6 +1115,8 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* ---- Неделя записи (2026-09-15) — правила с #obs.wk перекрывают прежнюю шкалу
    с крупными числами и головкой записи, включая её мобильные правила ниже. ---- */
 #obs.wk{display:block;}
+#obs.wk .wk-cap{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:22px;}
+html[lang="hy"] #obs.wk .wk-cap{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;text-transform:none;}
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
   font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
 html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;}
@@ -2145,7 +2147,6 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <h2 class="h2gap">%%SVC_H2%%</h2>
     <p class="lede">%%SVC_P1%%</p>
     <p class="lede">%%SVC_P2%%</p></div>
-    <div class="display rv">%%SVC_DISPLAY%%</div>
   </div>
   <!-- НЕДЕЛЯ ЗАПИСИ (2026-09-15, владелец: «цифры и анимация задачу не решают»).
        Поле — семь суток по 24 деления: 7 — это семь колонок, 24/7 — 168 часовых
@@ -2153,6 +2154,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
        подписями к частям поля, три шага — под ним с метками «до / во время / после».
        Ничего не движется по прокрутке: поле статично, как чертёж. -->
   <div class="obs wk rv" id="obs">
+    <div class="wk-cap">%%SVC_CAP%%</div>
     <div class="wk-days" aria-hidden="true">%%SVC_DAYS%%</div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">

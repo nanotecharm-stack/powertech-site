@@ -495,6 +495,7 @@ EN = {
                           ('24/7', 'Continuous data recording'),
                           ('1', 'Engineering report')]),
  'SVC_DISPLAY': 'Measured<br>under actual<br><span class="ac">load</span>',
+ 'SVC_CAP': 'Measured under actual load',
  'SVC_DAYS': days_html('Day'),
  'SVC_STEPS': steps_tagged_html([
     ('01', 'Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.'),
@@ -803,6 +804,7 @@ HY = {
                           ('24/7', 'անընդհատ տվյալների գրանցում'),
                           ('1', 'ինժեներական հաշվետվություն')]),
  'SVC_DISPLAY': 'Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span>',
+ 'SVC_CAP': 'Չափումներ՝ փաստացի բեռնվածությամբ',
  'SVC_DAYS': days_html('Օր'),
  'SVC_STEPS': steps_tagged_html([
     ('01', 'Նախ հստակեցնում ենք՝ ինչ ենք ստուգելու, որ սարքավորումների վրա և ինչ որոշում եք կայացնելու արդյունքների հիման վրա։'),
