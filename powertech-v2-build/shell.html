@@ -80,7 +80,7 @@ html{--hs:1;}html[lang="hy"]{--hs:.86;}
   /* Аудит 2026-09-14: единые роли. --t-note — технические примечания и названия величин (16),
      --t-ui — навигация и кнопки (14–15), --t-aux — вспомогательные подписи (13). 11–12 px
      остаются только у коротких приборных отметок (счётчик раздела, номера в указателе). */
-  --t-note:16px;--t-note-lh:1.6;--t-ui:14px;--t-aux:13px;
+  --t-note:16px;--t-note-lh:1.6;--t-ui:14px;--t-aux:13px;--t-hdr:15px;--t-hdr-aux:14px;
   --fg-head:#0D2440;--on-dark:#E8E3DB;--on-dark-lede:#E8E3DB;--on-dark-small:#D9D3CA;
   --on-dark-note:#D9D3CA;--on-dark-link:#E8E3DB;
   /* Лёгкий воздух между буквами прозы и кнопок (+.01em ≈ 0.17px при 17px): гротеск с
@@ -136,7 +136,10 @@ h2.h2gap{margin-top:var(--s4);}
    Overused Grotesk на 15 % по прописным, а армянские строчные почти в рост прописных —
    одинаковый кегль давал на глаз более крупный текст. Лид 17–18, проза 15/1.7,
    примечания и мелкое 14; подписи разделов остаются 15 (владелец просил читаемые). */
-html[lang="hy"]{--t-lede:clamp(17px,1.25vw,18px);--t-lede-lh:1.5;--t-p:15px;--t-p-lh:1.7;--t-note:14px;--t-small:14px;--t-lbl:15px;}
+html[lang="hy"]{--t-lede:clamp(17px,1.25vw,18px);--t-lede-lh:1.5;--t-p:15px;--t-p-lh:1.7;--t-note:14px;--t-small:14px;--t-lbl:15px;--t-hdr:13px;--t-hdr-aux:12px;}
+/* Шапка (2026-09-15, владелец: «в англ. версии значительно меньше буквы»): при одном кегле
+   прописные Mardoto 75/100 против 65/100 у Overused Grotesk. EN 15/14 и HY 13/12 дают
+   равную высоту прописных: 9,75 px у кнопки и подписи «Index», 9,1/9,0 у переключателя языка. */
 .rv{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e);}
 .rv.in{opacity:1;transform:none;}
 
@@ -1870,7 +1873,7 @@ html[data-nav="5"] .ixb b,html[data-nav="5"] .ixb s,
 html[data-nav="5"] .ixb em{display:none;}
 /* Владелец (2026-09-14): «INDEX» капсом с разрядкой читался пиксельным шрифтом — теперь слово
    строчными, 13 px, как армянская подпись и кнопка рядом. */
-html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:var(--t-ui);
+html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:var(--t-hdr);
   letter-spacing:.01em;text-transform:none;font-weight:500;}
 /* Армянская подпись набирается иначе. Владелец: «плохо читается» — и это не
    вкус, а свойство письма: армянские прописные строятся из одинаковых стоек,
@@ -1879,7 +1882,7 @@ html[data-nav="5"] .ixw{display:inline;align-self:center;font-size:var(--t-ui);
    Латинское «INDEX» остаётся прописным: у латиницы прописные различимы и в
    этом кегле, и метка держит строй с «HY» и прочими подписями сайта. */
 html[data-nav="5"][lang="hy"] .ixw{font-family:%%BODYFONT%%;text-transform:none;
-  font-size:var(--t-ui);letter-spacing:.01em;}
+  font-size:var(--t-hdr);letter-spacing:.01em;}
 html[data-nav="5"] .wm{color:var(--hc);transition:color .4s var(--e);}
 
 /* приборы без плашек. Нажимаемость держит ПОЛЕ, а не кегль: отрицательный
@@ -1894,7 +1897,7 @@ html[data-nav="5"] .ixb,html[data-nav="5"] .lang{background:none;box-shadow:none
   backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--hc);
   font-size:11px;transition:transform .16s var(--e),box-shadow .28s var(--e),color .4s var(--e);}
 html[data-nav="5"] .ixb{padding:7px 4px;margin-right:-4px;}
-html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:var(--t-aux);}
+html[data-nav="5"] .lang{padding:7px 9px;margin-right:-9px;position:relative;font-size:var(--t-hdr-aux);}
 .lang .gl{display:block;width:13px;height:13px;flex:none;opacity:.9;}
 html[data-nav="5"] .lang::after{content:"";position:absolute;left:-1px;top:50%;
   width:1px;height:12px;margin-top:-6px;background:var(--hh);}
@@ -1914,7 +1917,7 @@ html[data-nav="5"] .ixb:focus-visible,html[data-nav="5"] .lang:focus-visible{
 /* ⚠ ТОЛЬКО кнопка в шапке. Класс .btn носят ВСЕ кнопки сайта — их пять, в шапке
    одна. Без #hdr эти правила снимали заливку и с главной кнопки героя, и с кнопок
    в окнах: владелец сразу увидел «кнопки слишком незаметные». */
-html[data-nav="5"] #hdr .btn{padding:10px 16px;font-size:14px;background:transparent;
+html[data-nav="5"] #hdr .btn{padding:10px 16px;font-size:var(--t-hdr);background:transparent;
   color:var(--hc);box-shadow:inset 0 0 0 1px var(--hh);
   transition:background .5s var(--e),color .5s var(--e),box-shadow .5s var(--e);}
 html[data-nav="5"].hscr #hdr .btn{background:var(--inv);color:var(--inv-fg);box-shadow:none;}
