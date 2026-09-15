@@ -577,6 +577,41 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 .obs .step.on p{color:rgba(246,241,233,.9);}
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(246,241,233,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
+#obs.wk{display:block;}
+#obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
+html[lang="hy"] #obs.wk .wk-days{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;}
+#obs.wk .wk-days span{display:block;padding-left:10px;border-left:1px solid rgba(246,241,233,.22);line-height:1;padding-bottom:12px;}
+#obs.wk .obs-field{height:clamp(72px,8vw,104px);margin-top:0;}
+#obs.wk .obs-ruler line{stroke:rgba(246,241,233,.2);stroke-width:1;}
+#obs.wk .obs-ruler .obs-day{stroke:rgba(246,241,233,.38);}
+#obs.wk .obs-rec{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-dasharray:none;}
+#obs.wk .obs-marks path{fill:none;stroke:var(--brand);stroke-width:1.4;}
+#obs.wk .obs-marks .obs-dot{fill:var(--brand);stroke:none;}
+#obs.wk .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s5);margin-top:var(--s4);}
+#obs.wk .stat,#obs.wk .stat:nth-child(1),#obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){grid-column:auto;display:flex;align-items:baseline;gap:10px;align-self:start;text-align:left;}
+#obs.wk .stat:nth-child(2){justify-content:center;}
+#obs.wk .stat:nth-child(3){justify-content:flex-end;text-align:right;}
+#obs.wk .stat b,#obs.wk .stat:nth-child(1) b,#obs.wk .stat:nth-child(2) b,#obs.wk .stat:nth-child(3) b{display:inline;font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:calc(26px * var(--hs));line-height:1;letter-spacing:0;color:#F0EAE0;}
+#obs.wk .stat span{display:inline;margin:0;font-size:var(--t-note);line-height:1.4;color:var(--on-dark-small);}
+#obs.wk .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin-top:clamp(40px,4.5vw,64px);}
+#obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){border-left:1px solid rgba(246,241,233,.22);padding:2px clamp(var(--s4),2vw,var(--s6)) 0 clamp(var(--s4),2vw,var(--s6));}
+#obs.wk .step:nth-child(1){grid-column:1 / span 2;}
+#obs.wk .step:nth-child(2){grid-column:3 / span 3;}
+#obs.wk .step:nth-child(3){grid-column:6 / span 2;}
+#obs.wk .step::before{display:none;}
+#obs.wk .step .stag{display:block;font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
+html[lang="hy"] #obs.wk .step .stag{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.02em;text-transform:none;}
+#obs.wk .step p{color:rgba(246,241,233,.88);}
+@media (max-width:767px){
+  #obs.wk .wk-days span:nth-child(n+2){visibility:hidden;}
+  #obs.wk .wk-days span:nth-child(7){visibility:visible;}
+  #obs.wk .obs-field{height:56px;}
+  #obs.wk .stats{grid-template-columns:1fr;row-gap:10px;}
+  #obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){justify-content:flex-start;text-align:left;}
+  #obs.wk .steps{grid-template-columns:1fr;row-gap:24px;}
+  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){grid-column:auto;}
+}
 .step p{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);}
 .rep{padding:0;--rep-over:clamp(120px,14vw,200px);}
 .rep-head{background:linear-gradient(180deg,#162E52 0%,#0D2440 100%);
@@ -1136,17 +1171,17 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="display rv">Measured<br>under actual<br><span class="ac">load</span></div>
   </div>
   
-  <div class="obs rv" id="obs">
-    <div class="stats"><div class="stat"><b>7</b><span>Days of monitoring</span></div><div class="stat"><b>24/7</b><span>Continuous data recording</span></div><div class="stat"><b>1</b><span>Engineering report</span></div></div>
+  <div class="obs wk rv" id="obs">
+    <div class="wk-days" aria-hidden="true"><span>Day 1</span><span>Day 2</span><span>Day 3</span><span>Day 4</span><span>Day 5</span><span>Day 6</span><span>Day 7</span></div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">
         <g class="obs-ruler"></g>
-        <path class="obs-base" d=""/>
-        <path class="obs-rec" d="" pathLength="1"/>
-        <g class="obs-head"><line x1="0" y1="0" x2="0" y2="0"/><rect x="-3" y="0" width="6" height="6"/></g>
+        <path class="obs-rec" d=""/>
+        <g class="obs-marks"></g>
       </svg>
     </div>
-    <div class="steps"><div class="step"><p>Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.</p></div><div class="step"><p>We take measurements during the agreed operating conditions.</p></div><div class="step"><p>We analyse the recorded data and present our conclusions and recommended next steps in the report.</p></div></div>
+    <div class="stats"><div class="stat"><b>7</b><span>Days of monitoring</span></div><div class="stat"><b>24/7</b><span>Continuous data recording</span></div><div class="stat"><b>1</b><span>Engineering report</span></div></div>
+    <div class="steps"><div class="step"><span class="stag">Before recording</span><p>Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.</p></div><div class="step"><span class="stag">During recording</span><p>We take measurements during the agreed operating conditions.</p></div><div class="step"><span class="stag">After recording</span><p>We analyse the recorded data and present our conclusions and recommended next steps in the report.</p></div></div>
   </div>
   <a class="alink rv" href="#report">See what monitoring can reveal ↗</a>
 </div></section>
@@ -1510,47 +1545,27 @@ function paintJoints(){aJoints(mJoints());}
   });
   btns.forEach(function(b,i){setOpen(i,i===1,true);});
 })();
-var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,
-    obsSteps=obsEl?[].slice.call(obsEl.querySelectorAll('.step')):[],obsW=-1,obsH=-1;
+var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,obsW=-1,obsH=-1;
 function buildObs(){
   if(!obsSvg)return;
   var r=obsSvg.getBoundingClientRect(),W=r.width,H=r.height;
   if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
-  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.42)+0.5,yb=H-0.5,i,x,g='';
+  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.46)+0.5,yb=H-0.5,i,x,g='';
   obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
-  for(i=0;i<=7;i++){x=W*i/7-0.5;var h=(i===0||i===7)?16:9;
-    g+='<line class="'+((i===0||i===7)?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-h)+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
+  for(i=0;i<=168;i++){x=W*i/168-0.5;var day=(i%24===0);if(i===0)x=0.5;if(i===168)x=W-0.5;
+    g+='<line class="'+(day?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-(day?16:5))+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
   g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
   obsSvg.querySelector('.obs-ruler').innerHTML=g;
-  var d='M0 '+f(yr)+' H'+f(W);
-  obsSvg.querySelector('.obs-base').setAttribute('d',d);
-  obsSvg.querySelector('.obs-rec').setAttribute('d',d);
-  var hd=obsSvg.querySelector('.obs-head');
-  hd.querySelector('line').setAttribute('y1','0');hd.querySelector('line').setAttribute('y2',f(yb));
-  hd.querySelector('rect').setAttribute('y',f(yr-3));
+  var xe=W-14;
+  obsSvg.querySelector('.obs-rec').setAttribute('d','M0 '+f(yr)+' H'+f(xe-2));
+  var m='<rect class="obs-dot" x="-3.5" y="'+f(yr-3.5)+'" width="7" height="7"/>'
+       +'<path d="M'+f(xe)+' '+f(yr-9)+' h9 l5 5 v13 h-14 z M'+f(xe+9)+' '+f(yr-9)+' v5 h5"/>';
+  obsSvg.querySelector('.obs-marks').innerHTML=m;
 }
-var obsPWas=null,obsStepWas=-1;
-function mObs(){
-  if(!obsEl)return null;
-  var r=obsEl.getBoundingClientRect(),vh=innerHeight;
-  var start=vh*0.88,end=vh*0.3-r.height,span=start-end;
-  if(span<60)span=60;
-  var p=(start-r.top)/span;
-  return p<0?0:(p>1?1:p);
-}
-function aObs(p){
-  if(p===null||!obsSvg)return;
-  buildObs();
-  var ps=p.toFixed(4);
-  if(obsPWas!==ps){obsPWas=ps;obsSvg.style.setProperty('--p',ps);
-    obsSvg.querySelector('.obs-head').setAttribute('transform','translate('+(p*obsW).toFixed(1)+' 0)');}
-  var k=p<0.12?0:(p<0.9?1:2);
-  if(rm)k=-1;
-  if(obsStepWas===k)return;obsStepWas=k;
-  for(var i=0;i<obsSteps.length;i++)obsSteps[i].classList.toggle('on',i===k);
-}
-function obsUpd(){aObs(mObs());}
-buildObs();obsUpd();
+function mObs(){return null;}
+function aObs(){}
+function obsUpd(){buildObs();}
+buildObs();
 addEventListener('resize',function(){requestAnimationFrame(function(){obsW=-1;buildObs();});});
 var irail=document.getElementById('irail');
 var iovl=document.getElementById('iovl');

@@ -1112,6 +1112,45 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    При reduce отметки стоят готовыми. */
 @media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(239,237,234,.9);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
+/* ---- Неделя записи (2026-09-15) — правила с #obs.wk перекрывают прежнюю шкалу
+   с крупными числами и головкой записи, включая её мобильные правила ниже. ---- */
+#obs.wk{display:block;}
+#obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
+html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;}
+#obs.wk .wk-days span{display:block;padding-left:10px;border-left:1px solid rgba(239,237,234,.22);line-height:1;padding-bottom:12px;}
+#obs.wk .obs-field{height:clamp(72px,8vw,104px);margin-top:0;}
+#obs.wk .obs-ruler line{stroke:rgba(239,237,234,.2);stroke-width:1;}
+#obs.wk .obs-ruler .obs-day{stroke:rgba(239,237,234,.38);}
+#obs.wk .obs-rec{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-dasharray:none;}
+#obs.wk .obs-marks path{fill:none;stroke:var(--brand);stroke-width:1.4;}
+#obs.wk .obs-marks .obs-dot{fill:var(--brand);stroke:none;}
+/* Три факта — подписи к полю: число в строку с подписью, не витрина. */
+#obs.wk .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s5);margin-top:var(--s4);}
+#obs.wk .stat,#obs.wk .stat:nth-child(1),#obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){grid-column:auto;display:flex;align-items:baseline;gap:10px;align-self:start;text-align:left;}
+#obs.wk .stat:nth-child(2){justify-content:center;}
+#obs.wk .stat:nth-child(3){justify-content:flex-end;text-align:right;}
+#obs.wk .stat b,#obs.wk .stat:nth-child(1) b,#obs.wk .stat:nth-child(2) b,#obs.wk .stat:nth-child(3) b{display:inline;font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(26px * var(--hs));line-height:1;letter-spacing:0;color:#F4F3F1;}
+#obs.wk .stat span{display:inline;margin:0;font-size:var(--t-note);line-height:1.4;color:var(--on-dark-small);}
+/* Шаги — ряд под неделей, статичный. Метка места во времени вместо номера. */
+#obs.wk .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin-top:clamp(40px,4.5vw,64px);}
+#obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){border-left:1px solid rgba(239,237,234,.22);padding:2px clamp(var(--s4),2vw,var(--s6)) 0 clamp(var(--s4),2vw,var(--s6));}
+#obs.wk .step:nth-child(1){grid-column:1 / span 2;}
+#obs.wk .step:nth-child(2){grid-column:3 / span 3;}
+#obs.wk .step:nth-child(3){grid-column:6 / span 2;}
+#obs.wk .step::before{display:none;}
+#obs.wk .step .stag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
+html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:13px;letter-spacing:.02em;text-transform:none;}
+#obs.wk .step p{color:rgba(239,237,234,.88);}
+@media (max-width:767px){
+  #obs.wk .wk-days span:nth-child(n+2){visibility:hidden;}
+  #obs.wk .wk-days span:nth-child(7){visibility:visible;}
+  #obs.wk .obs-field{height:56px;}
+  #obs.wk .stats{grid-template-columns:1fr;row-gap:10px;}
+  #obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){justify-content:flex-start;text-align:left;}
+  #obs.wk .steps{grid-template-columns:1fr;row-gap:24px;}
+  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){grid-column:auto;}
+}
 /* У шагов больше нет названий, и промежуток от номера до текста,
    который держал заголовок, берёт на себя сам абзац. */
 /* Отступ сверху был зазором под номером шага; номера нет — нет и зазора */
@@ -2108,23 +2147,21 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <p class="lede">%%SVC_P2%%</p></div>
     <div class="display rv">%%SVC_DISPLAY%%</div>
   </div>
-  <!-- ПОЛЕ НАБЛЮДЕНИЯ (бриф 2). Три числа — не три карточки, а шкала: 7 —
-       длительность, она же ширина поля; 24/7 — непрерывность, подпись самой
-       линии записи; 1 — документ в конце записи. Под полем три этапа стоят на
-       своих местах во времени: до подключения, в течение записи, после неё.
-       Линия записи заполняется ходом прокрутки, головка записи идёт по полю,
-       и этап под ней — текущий. Данных здесь нет: только линейка дней и
-       ровная линия. -->
-  <div class="obs rv" id="obs">
-    <div class="stats">%%SVC_STATS%%</div>
+  <!-- НЕДЕЛЯ ЗАПИСИ (2026-09-15, владелец: «цифры и анимация задачу не решают»).
+       Поле — семь суток по 24 деления: 7 — это семь колонок, 24/7 — 168 часовых
+       делений и непрерывная линия, 1 — документ в конце линии. Три факта стоят
+       подписями к частям поля, три шага — под ним с метками «до / во время / после».
+       Ничего не движется по прокрутке: поле статично, как чертёж. -->
+  <div class="obs wk rv" id="obs">
+    <div class="wk-days" aria-hidden="true">%%SVC_DAYS%%</div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">
         <g class="obs-ruler"></g>
-        <path class="obs-base" d=""/>
-        <path class="obs-rec" d="" pathLength="1"/>
-        <g class="obs-head"><line x1="0" y1="0" x2="0" y2="0"/><rect x="-3" y="0" width="6" height="6"/></g>
+        <path class="obs-rec" d=""/>
+        <g class="obs-marks"></g>
       </svg>
     </div>
+    <div class="stats">%%SVC_STATS%%</div>
     <div class="steps">%%SVC_STEPS%%</div>
   </div>
   <a class="alink rv" href="#report">%%SVC_LINK%% ↗</a>
@@ -2576,49 +2613,30 @@ function paintJoints(){aJoints(mJoints());}
    текущий: до 12 % пути — первый, до 90 % — второй, дальше — третий. Ход
    считается от положения блока в окне: запись начинается, когда поле
    показалось снизу, и заканчивается, когда его низ поднялся к трети экрана. */
-var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,
-    obsSteps=obsEl?[].slice.call(obsEl.querySelectorAll('.step')):[],obsW=-1,obsH=-1;
+var obsEl=document.getElementById('obs'),obsSvg=obsEl?obsEl.querySelector('.obs-svg'):null,obsW=-1,obsH=-1;
+/* Неделя записи: 7 суток × 24 часовых деления, непрерывная линия от точки
+   включения до документа. Строится один раз и на resize; по прокрутке — ничего. */
 function buildObs(){
   if(!obsSvg)return;
   var r=obsSvg.getBoundingClientRect(),W=r.width,H=r.height;
   if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
-  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.42)+0.5,yb=H-0.5,i,x,g='';
+  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.46)+0.5,yb=H-0.5,i,x,g='';
   obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
-  /* Деление стоит слева от границы колонки, как border-left у этапа: x−0.5,
-     без округления — иначе выноска и деление расходились на пиксель. */
-  for(i=0;i<=7;i++){x=W*i/7-0.5;var h=(i===0||i===7)?16:9;
-    g+='<line class="'+((i===0||i===7)?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-h)+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
+  for(i=0;i<=168;i++){x=W*i/168-0.5;var day=(i%24===0);if(i===0)x=0.5;if(i===168)x=W-0.5;
+    g+='<line class="'+(day?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-(day?16:5))+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
   g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
   obsSvg.querySelector('.obs-ruler').innerHTML=g;
-  var d='M0 '+f(yr)+' H'+f(W);
-  obsSvg.querySelector('.obs-base').setAttribute('d',d);
-  obsSvg.querySelector('.obs-rec').setAttribute('d',d);
-  var hd=obsSvg.querySelector('.obs-head');
-  hd.querySelector('line').setAttribute('y1','0');hd.querySelector('line').setAttribute('y2',f(yb));
-  hd.querySelector('rect').setAttribute('y',f(yr-3));
+  var xe=W-14;
+  obsSvg.querySelector('.obs-rec').setAttribute('d','M0 '+f(yr)+' H'+f(xe-2));
+  /* включение — точка; конец — лист документа с загнутым углом */
+  var m='<rect class="obs-dot" x="-3.5" y="'+f(yr-3.5)+'" width="7" height="7"/>'
+       +'<path d="M'+f(xe)+' '+f(yr-9)+' h9 l5 5 v13 h-14 z M'+f(xe+9)+' '+f(yr-9)+' v5 h5"/>';
+  obsSvg.querySelector('.obs-marks').innerHTML=m;
 }
-var obsPWas=null,obsStepWas=-1;
-function mObs(){
-  if(!obsEl)return null;
-  var r=obsEl.getBoundingClientRect(),vh=innerHeight;
-  var start=vh*0.88,end=vh*0.3-r.height,span=start-end;
-  if(span<60)span=60;
-  var p=(start-r.top)/span;
-  return p<0?0:(p>1?1:p);
-}
-function aObs(p){
-  if(p===null||!obsSvg)return;
-  buildObs();
-  var ps=p.toFixed(4);
-  if(obsPWas!==ps){obsPWas=ps;obsSvg.style.setProperty('--p',ps);
-    obsSvg.querySelector('.obs-head').setAttribute('transform','translate('+(p*obsW).toFixed(1)+' 0)');}
-  var k=p<0.12?0:(p<0.9?1:2);
-  if(rm)k=-1;
-  if(obsStepWas===k)return;obsStepWas=k;
-  for(var i=0;i<obsSteps.length;i++)obsSteps[i].classList.toggle('on',i===k);
-}
-function obsUpd(){aObs(mObs());}
-buildObs();obsUpd();
+function mObs(){return null;}
+function aObs(){}
+function obsUpd(){buildObs();}
+buildObs();
 addEventListener('resize',function(){requestAnimationFrame(function(){obsW=-1;buildObs();});});
 
 /* ============ INDUSTRIES — сетка карточек (аудит 2026-09-14) ============ */

@@ -265,7 +265,7 @@ def nbsp(value, lang):
 # Технические строки: пути, размеры, гарнитуры, готовые блоки разметки.
 NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT',
            'HEADFONT', 'HEADWT', 'H1WT', 'BIGLS', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
-           'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'REP_LIST',
+           'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'SVC_DAYS', 'REP_LIST',
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA'}
 # PP_BODY намеренно НЕ здесь: nbsp разбирает строку по тегам и правит только
@@ -283,6 +283,16 @@ def steps_html(items):
     он документирует последовательность, и решение обратимо одной строкой.
     """
     return ''.join('<div class="step"><p>%s</p></div>' % p for _n, p in items)
+
+def steps_tagged_html(items, tags):
+    """Шаги с меткой места во времени (до записи / во время / после) — метка
+    не номер, а привязка к неделе записи над рядом (2026-09-15)."""
+    return ''.join('<div class="step"><span class="stag">%s</span><p>%s</p></div>' % (t, p)
+                   for (_n, p), t in zip(items, tags))
+
+def days_html(word):
+    """Семь подписей над полем записи: «Day 1 … Day 7» / «Օր 1 … Օր 7»."""
+    return ''.join('<span>%s %d</span>' % (word, i) for i in range(1, 8))
 
 def list_html(items):
     return ''.join('<div><span>%s</span></div>' % x for x in items)
@@ -485,10 +495,12 @@ EN = {
                           ('24/7', 'Continuous data recording'),
                           ('1', 'Engineering report')]),
  'SVC_DISPLAY': 'Measured<br>under actual<br><span class="ac">load</span>',
- 'SVC_STEPS': steps_html([
+ 'SVC_DAYS': days_html('Day'),
+ 'SVC_STEPS': steps_tagged_html([
     ('01', 'Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.'),
     ('02', 'We take measurements during the agreed operating conditions.'),
-    ('03', 'We analyse the recorded data and present our conclusions and recommended next steps in the report.')]),
+    ('03', 'We analyse the recorded data and present our conclusions and recommended next steps in the report.')],
+    ['Before recording', 'During recording', 'After recording']),
  'SVC_LINK': 'See what monitoring can reveal',
  'REP_H2': 'Report',
  'REP_P': 'Measurement results, engineering analysis and conclusions provide the basis for further technical decisions.',
@@ -791,10 +803,12 @@ HY = {
                           ('24/7', 'անընդհատ տվյալների գրանցում'),
                           ('1', 'ինժեներական հաշվետվություն')]),
  'SVC_DISPLAY': 'Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span>',
- 'SVC_STEPS': steps_html([
+ 'SVC_DAYS': days_html('Օր'),
+ 'SVC_STEPS': steps_tagged_html([
     ('01', 'Նախ հստակեցնում ենք՝ ինչ ենք ստուգելու, որ սարքավորումների վրա և ինչ որոշում եք կայացնելու արդյունքների հիման վրա։'),
     ('02', 'Չափումները կատարում ենք համակարգի աշխատանքի ընթացքում՝ ընդգրկելով համաձայնեցված աշխատանքային ռեժիմները։'),
-    ('03', 'Վերլուծում ենք գրանցված տվյալները և հաշվետվության մեջ ներկայացնում եզրակացություններն ու առաջարկվող քայլերը։')]),
+    ('03', 'Վերլուծում ենք գրանցված տվյալները և հաշվետվության մեջ ներկայացնում եզրակացություններն ու առաջարկվող քայլերը։')],
+    ['Գրանցումից առաջ', 'Գրանցման ընթացքում', 'Գրանցումից հետո']),
  'SVC_LINK': 'Տեսնել, թե ինչ կարող է բացահայտել մոնիթորինգը',
  'REP_H2': 'Հաշվետվություն',
  'REP_P': 'Ներկայացնում է չափման արդյունքները, դրանց ինժեներական վերլուծությունն ու եզրակացությունները՝ հետագա տեխնիկական որոշումների համար։',
