@@ -1383,33 +1383,12 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .ct-act button:hover i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
 .plate .btn:hover span{color:var(--fg);}
-.chart{position:relative;}
-/* Аудит 2026-09-14: линия — светлый акцент плиты (#7BA4D0, ≈6:1 на #0D2440), подписи —
-   HTML-текст 13 px поверх SVG, а не текст внутри viewBox (тот масштабировался до 8–10 px).
-   Пунктир номинала .44 — 3,4:1 на самом светлом тоне плиты. */
-.chart svg{width:100%;height:auto;display:block;overflow:visible;}
-.chart .cap{font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;color:var(--on-dark-small);margin-bottom:var(--s4);}
-.chart-box{position:relative;}
-.chart .nom{stroke:rgba(239,237,234,.44);stroke-dasharray:3 5;}
-.chart .trace{stroke:var(--brand);stroke-width:2.2;stroke-linecap:round;fill:none;}
-.chart .dipm{stroke:rgba(239,237,234,.5);}
-.chart .lb{position:absolute;font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;
-  color:#E8E3DB;line-height:1.3;white-space:nowrap;}
-.chart .lb-nom{left:0;top:calc(40 / 200 * 100% - 24px);}
-.chart .lb-dip{left:calc(178 / 520 * 100%);top:calc(128 / 200 * 100% + 8px);}
-@media (max-width:420px){.chart .lb{font-size:12px;letter-spacing:.06em;}}
-/* ============ МЕЛКИЕ ТЕХНИЧЕСКИЕ ПОДПИСИ ПО-АРМЯНСКИ ============
-   Владелец: «сделай чёткой эту надпись, она смазана».
-
-   Английская страница набирает такие подписи гротеском, армянская — засечным:
-   в обеих %%MONOFONT%% разный. В 11 точек засечная гарнитура держится на
-   волосяных линиях, и они на экране расплываются. Здесь тот же гротеск, что
-   и в тексте страницы.
-
-   Перечислены именно подписи, а не весь блок показаний: правило на .rd имело
-   бы тот же вес, что у цифр, и по порядку отобрало бы у них пиксельный
-   шрифт. */
-html[lang="hy"] .chart .cap,html[lang="hy"] .chart .lb{font-family:%%BODYFONT%%;}
+.ct-sub{margin-top:22px;max-width:52ch;}
+.plate .wrap.ct-one{grid-template-columns:1fr;padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px);}
+.ct-one .ct-act{max-width:26ch;}
+/* График «провал напряжения» снят 2026-09-15 по слову владельца: блок 08 —
+   призыв заполнить форму, а рисованная кривая к нему не относилась. Контакты
+   живут в подвале, здесь только заголовок-кнопка и одна строка. */
 /* ---- подвал: плита, которую открывает уходящая страница ---------------- */
 /* Обрезка обёртки делает её системой координат для закреплённого потомка —
    тот же приём, что в присланном примере, только без библиотеки. Высота обёртки
@@ -2154,20 +2133,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="story">%%CO_STORY%%</div>
 </div></section>
 
-<section class="plate" id="contact"><div class="wrap">
+<section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
-  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;</i></button></h2></div>
-  <div class="chart rv"><div class="cap">%%CT_CAP%%</div>
-    <div class="chart-box">
-    <svg viewBox="0 0 520 200" fill="none" aria-hidden="true">
-      <line class="nom" x1="0" y1="40" x2="520" y2="40"/>
-      <path class="trace" d="M0,42 L150,40 C168,40 172,44 178,76 C184,110 188,112 196,112 L236,112 C244,112 248,108 254,74 C260,44 264,41 282,41 L520,40"/>
-      <line class="dipm" x1="178" y1="128" x2="254" y2="128"/>
-    </svg>
-    <span class="lb lb-nom">%%CT_NOM%%</span>
-    <span class="lb lb-dip">%%CT_DIP%%</span>
-    </div>
-  </div>
+  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;</i></button></h2>
+  <p class="ct-sub">%%CT_SUB%%</p></div>
 </div></section>
 
 </main>

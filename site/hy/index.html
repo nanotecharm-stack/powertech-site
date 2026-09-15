@@ -720,19 +720,9 @@ html[lang="hy"] .ev-tag{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-
 .ct-act button:hover i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
 .plate .btn:hover span{color:var(--fg);}
-.chart{position:relative;}
-.chart svg{width:100%;height:auto;display:block;overflow:visible;}
-.chart .cap{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:var(--t-aux);letter-spacing:.1em;color:var(--on-dark-small);margin-bottom:var(--s4);}
-.chart-box{position:relative;}
-.chart .nom{stroke:rgba(246,241,233,.44);stroke-dasharray:3 5;}
-.chart .trace{stroke:var(--brand);stroke-width:2.2;stroke-linecap:round;fill:none;}
-.chart .dipm{stroke:rgba(246,241,233,.5);}
-.chart .lb{position:absolute;font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:var(--t-aux);letter-spacing:.1em;
-  color:#E8E3DB;line-height:1.3;white-space:nowrap;}
-.chart .lb-nom{left:0;top:calc(40 / 200 * 100% - 24px);}
-.chart .lb-dip{left:calc(178 / 520 * 100%);top:calc(128 / 200 * 100% + 8px);}
-@media (max-width:420px){.chart .lb{font-size:12px;letter-spacing:.06em;}}
-html[lang="hy"] .chart .cap,html[lang="hy"] .chart .lb{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;}
+.ct-sub{margin-top:22px;max-width:52ch;}
+.plate .wrap.ct-one{grid-template-columns:1fr;padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px);}
+.ct-one .ct-act{max-width:26ch;}
 footer,.footrev{--foot-h:530px;}
 .footrev{position:relative;height:var(--foot-h,620px);
   clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}
@@ -1189,20 +1179,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="story"><div class="sb rv"><div class="lb"><span>Ինչու սկսեցինք</span></div><p>Հայաստանում ժամանակակից ինժեներական տեխնոլոգիաներն ավելի հասանելի դարձնելու նպատակով ենք հիմնել ընկերությունը։ Ուզում ենք, որ տեխնիկական որոշումները հիմնավորելը և աշխատանքի արդյունքները փաստագրելը դառնան սովորական գործելակերպ։ Այդպես ավելի հեշտ է պարզել խնդիրների պատճառները և լուծել տարաձայնությունները՝ ստուգելի տվյալների հիման վրա։</p></div><div class="sb rv"><div class="lb"><span>Ինչն ենք կարևորում</span></div><p>Մեր առաջարկությունները պետք է լինեն տեխնիկապես հիմնավորված և գործնականում կիրառելի։ Մենք բացատրում ենք՝ ինչու ենք առաջարկում տվյալ լուծումը, ինչ արդյունք ենք ակնկալում և ինչ սահմանափակումներ պետք է հաշվի առնել։ Եթե հստակ եզրակացության համար լրացուցիչ ստուգում է անհրաժեշտ, այդ մասին ասում ենք։</p></div></div>
 </div></section>
 
-<section class="plate" id="contact"><div class="wrap">
+<section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
-  <h2 class="ct-act"><button data-open-form><span>Ներկայացրեք խնդիրը նախնական գնահատման համար</span><i>&#8599;</i></button></h2></div>
-  <div class="chart rv"><div class="cap">RMS լարում · պատկերային օրինակ</div>
-    <div class="chart-box">
-    <svg viewBox="0 0 520 200" fill="none" aria-hidden="true">
-      <line class="nom" x1="0" y1="40" x2="520" y2="40"/>
-      <path class="trace" d="M0,42 L150,40 C168,40 172,44 178,76 C184,110 188,112 196,112 L236,112 C244,112 248,108 254,74 C260,44 264,41 282,41 L520,40"/>
-      <line class="dipm" x1="178" y1="128" x2="254" y2="128"/>
-    </svg>
-    <span class="lb lb-nom">Անվանական լարում</span>
-    <span class="lb lb-dip">Լարման անկում · 180 մվրկ</span>
-    </div>
-  </div>
+  <h2 class="ct-act"><button data-open-form><span>Ներկայացրեք խնդիրը նախնական գնահատման համար</span><i>&#8599;</i></button></h2>
+  <p class="ct-sub">Մենք կուսումնասիրենք և կկապվենք ձեզ հետ՝ առաջարկելով հաջորդ քայլերը։</p></div>
 </div></section>
 
 </main>

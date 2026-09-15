@@ -537,9 +537,7 @@ EN = {
     ('WHAT MATTERS TO US',
      'Our recommendations must be technically sound and practical to implement. We explain the reasoning behind each proposed solution, the expected results and any limitations. If the evidence is insufficient or further investigation is needed, we say so.')]),
  'CT_H2': 'Start with what happened',
- # Кривая провала нарисована руками, а не снята прибором. Под подписью «TYPICAL
- # TRACE» «180 MS» читается примером и вопроса «где запись» не вызывает.
- 'CT_CAP': 'RMS voltage · illustrative example', 'CT_NOM': 'NOMINAL', 'CT_DIP': 'VOLTAGE DIP · 180 MS',
+ 'CT_SUB': 'We will review it and get back to you with the next steps.',
  'CO_LEGAL': 'Gridec LLC',
  # ՀՎՀՀ — армянский учётный номер налогоплательщика. По-английски он
  # передаётся как TIN (Taxpayer Identification Number): именно так его
@@ -841,7 +839,7 @@ HY = {
     ('Ինչն ենք կարևորում',
      'Մեր առաջարկությունները պետք է լինեն տեխնիկապես հիմնավորված և գործնականում կիրառելի։ Մենք բացատրում ենք՝ ինչու ենք առաջարկում տվյալ լուծումը, ինչ արդյունք ենք ակնկալում և ինչ սահմանափակումներ պետք է հաշվի առնել։ Եթե հստակ եզրակացության համար լրացուցիչ ստուգում է անհրաժեշտ, այդ մասին ասում ենք։')]),
  'CT_H2': 'Ներկայացրեք խնդիրը նախնական գնահատման համար',
- 'CT_CAP': 'RMS լարում · պատկերային օրինակ', 'CT_NOM': 'Անվանական լարում', 'CT_DIP': 'Լարման անկում · 180 մվրկ',
+ 'CT_SUB': 'Մենք կուսումնասիրենք և կկապվենք ձեզ հետ՝ առաջարկելով հաջորդ քայլերը։',
  'CO_LEGAL': 'Գրիդեկ ՍՊԸ',
  'CO_TIN_LB': 'ՀՎՀՀ', 'CO_TIN': '08331059',
  'FOOT_ADDR': 'Դավթաշեն 1, 13-25, Երևան 0058, Հայաստան',

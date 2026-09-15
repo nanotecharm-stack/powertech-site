@@ -715,19 +715,9 @@ html[lang="hy"] .ev-tag{font-family:'Overused Grotesk','Helvetica Neue',Helvetic
 .ct-act button:hover i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
 .plate .btn:hover span{color:var(--fg);}
-.chart{position:relative;}
-.chart svg{width:100%;height:auto;display:block;overflow:visible;}
-.chart .cap{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:var(--t-aux);letter-spacing:.1em;color:var(--on-dark-small);margin-bottom:var(--s4);}
-.chart-box{position:relative;}
-.chart .nom{stroke:rgba(246,241,233,.44);stroke-dasharray:3 5;}
-.chart .trace{stroke:var(--brand);stroke-width:2.2;stroke-linecap:round;fill:none;}
-.chart .dipm{stroke:rgba(246,241,233,.5);}
-.chart .lb{position:absolute;font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:var(--t-aux);letter-spacing:.1em;
-  color:#E8E3DB;line-height:1.3;white-space:nowrap;}
-.chart .lb-nom{left:0;top:calc(40 / 200 * 100% - 24px);}
-.chart .lb-dip{left:calc(178 / 520 * 100%);top:calc(128 / 200 * 100% + 8px);}
-@media (max-width:420px){.chart .lb{font-size:12px;letter-spacing:.06em;}}
-html[lang="hy"] .chart .cap,html[lang="hy"] .chart .lb{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;}
+.ct-sub{margin-top:22px;max-width:52ch;}
+.plate .wrap.ct-one{grid-template-columns:1fr;padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px);}
+.ct-one .ct-act{max-width:26ch;}
 footer,.footrev{--foot-h:530px;}
 .footrev{position:relative;height:var(--foot-h,620px);
   clip-path:polygon(0 0,100% 0,100% 100%,0 100%);}
@@ -1188,20 +1178,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="story"><div class="sb rv"><div class="lb"><span>WHY WE STARTED</span></div><p>We started Gridec to make modern electrical engineering tools and practices more accessible in Armenia. We want technical decisions to be based on documented findings and careful analysis. When problems arise or opinions differ, there should be a clear basis for establishing what happened and deciding what to do next.</p></div><div class="sb rv"><div class="lb"><span>WHAT MATTERS TO US</span></div><p>Our recommendations must be technically sound and practical to implement. We explain the reasoning behind each proposed solution, the expected results and any limitations. If the evidence is insufficient or further investigation is needed, we say so.</p></div></div>
 </div></section>
 
-<section class="plate" id="contact"><div class="wrap">
+<section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
-  <h2 class="ct-act"><button data-open-form><span>Start with what happened</span><i>&#8599;</i></button></h2></div>
-  <div class="chart rv"><div class="cap">RMS voltage · illustrative example</div>
-    <div class="chart-box">
-    <svg viewBox="0 0 520 200" fill="none" aria-hidden="true">
-      <line class="nom" x1="0" y1="40" x2="520" y2="40"/>
-      <path class="trace" d="M0,42 L150,40 C168,40 172,44 178,76 C184,110 188,112 196,112 L236,112 C244,112 248,108 254,74 C260,44 264,41 282,41 L520,40"/>
-      <line class="dipm" x1="178" y1="128" x2="254" y2="128"/>
-    </svg>
-    <span class="lb lb-nom">NOMINAL</span>
-    <span class="lb lb-dip">VOLTAGE DIP · 180 MS</span>
-    </div>
-  </div>
+  <h2 class="ct-act"><button data-open-form><span>Start with what happened</span><i>&#8599;</i></button></h2>
+  <p class="ct-sub">We will review it and get back to you with the next steps.</p></div>
 </div></section>
 
 </main>
