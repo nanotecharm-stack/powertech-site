@@ -1349,13 +1349,16 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    Раньше это было 92 и 110: разница в восемнадцать пикселей ниоткуда. */
 /* Аудит 2026-09-14: диагональ снята — три главы стоят в ряд, читаются слева направо,
    подпись сидит на общей линейке. На телефоне — одна колонка. */
-/* Разворот: заголовок слева, лид справа на одной верхней линии — правая половина
-   строки больше не пустует. */
+/* Разворот (владелец выбрал вариант C, 2026-09-15): слева заголовок и лид под ним,
+   справа два подблока .story один под другим, их верх на уровне заголовка. Прежний
+   «заголовок слева, лид справа» владелец отверг: лид рядом с одной строкой заголовка
+   вырастал в столбик (HY 12 строк), справа оставалась пустая треть. */
 @media (min-width:861px){
-#company .wrap>.rv:first-child{display:grid;grid-template-columns:5fr 7fr;column-gap:clamp(32px,5vw,80px);align-items:start;}
-#company .cnt{grid-column:1/-1;}
-#company h2.h2gap{margin-top:0;}
-#company .lede{margin-top:.18em;}
+#company .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,5vw,96px);align-items:start;}
+#company .lede{max-width:none;}
+/* 44px — высота счётчика с его отступом: линия первого подблока ложится на верх h2. */
+#company .story{grid-template-columns:1fr;margin-top:44px;row-gap:clamp(36px,4vw,48px);}
+#company .story p{max-width:52ch;}
 }
 .story{margin-top:clamp(56px,7vw,96px);display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -1377,7 +1380,8 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
      разница в пиксель. */font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);
   max-width:44ch;margin:var(--s5) 0 0;}
 /* Два подблока (тексты владельца 2026-09-15, EN и HY): две колонки, а не две из трёх. */
-@media (min-width:861px){.story{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (min-width:861px){.story{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #company .story{grid-template-columns:1fr;}}
 @media (max-width:860px){.story{grid-template-columns:1fr;row-gap:clamp(28px,6vw,40px);}
   .story p{max-width:none;}
 }
