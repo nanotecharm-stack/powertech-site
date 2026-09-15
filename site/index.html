@@ -2122,16 +2122,26 @@ function psFrame(ts){
 }
 function psPush(dy){
   PS.t=Math.max(0,Math.min(psMax(),PS.t+dy));
-  if(!PS.raf){PS.last=0;PS.raf=requestAnimationFrame(psFrame);}
+  psGo();
 }
 function psTo(y){
   PS.t=Math.max(0,Math.min(psMax(),y));
+  psGo();
+}
+function psGo(){
+  if(PS.cs){
+    PS.lastPush=performance.now();
+    if(PS.csHold){if(PS.csT)return;PS.csT=setTimeout(function(){PS.csT=0;window.scrollTo({top:PS.t,behavior:'smooth'});},PS.csHold);return;}
+    window.scrollTo({top:PS.t,behavior:'smooth'});return;}
   if(!PS.raf){PS.last=0;PS.raf=requestAnimationFrame(psFrame);}
 }
 function psStart(){
   if(/[?&]scroll=native/.test(location.search))return;   
   if(!psActive())return;
-  document.documentElement.style.scrollBehavior='auto';   
+  PS.cs=/[?&]scroll=cs/.test(location.search);
+  var vm=/[?&]vmax=(\d+(?:\.\d+)?)/.exec(location.search);if(vm)PS.vmax=+vm[1];
+  var csm=/[?&]scroll=cs(\d+)/.exec(location.search);PS.csHold=csm?+csm[1]:0;
+  if(!PS.cs)document.documentElement.style.scrollBehavior='auto';   
   PS.on=true;PS.t=PS.c=window.pageYOffset;
   addEventListener('wheel',function(e){
     if(e.ctrlKey||e.defaultPrevented)return;              
@@ -2162,6 +2172,7 @@ function psStart(){
     e.preventDefault();psPush(d);
   },{passive:false});
   addEventListener('scroll',function(){
+    if(PS.cs){if(performance.now()-(PS.lastPush||0)>400)PS.t=PS.c=window.pageYOffset;return;}
     if(PS.self||PS.raf)return;
     PS.t=PS.c=window.pageYOffset;
   },{passive:true});

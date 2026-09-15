@@ -3387,16 +3387,32 @@ function psPush(dy){
      бы ни накопилось в цели, страница не поедет быстрее заданного числа экранов
      в секунду. Подробности — там же. */
   PS.t=Math.max(0,Math.min(psMax(),PS.t+dy));
-  if(!PS.raf){PS.last=0;PS.raf=requestAnimationFrame(psFrame);}
+  psGo();
 }
 function psTo(y){
   PS.t=Math.max(0,Math.min(psMax(),y));
+  psGo();
+}
+/* Режим ?scroll=cs (проба 2026-09-15, «мыло при прокрутке»): скрипт только назначает
+   цель, а везёт страницу сам браузер своей плавной прокруткой в потоке композитора.
+   Страница не пишется скриптом каждый кадр, и плитки текста остаются готовыми. */
+function psGo(){
+  if(PS.cs){
+    PS.lastPush=performance.now();
+    /* cs2: щелчки собираются в пачку и назначаются одной целью раз в PS.csHold мс —
+       реже перезапусков анимации, длиннее и ровнее её ход. */
+    if(PS.csHold){if(PS.csT)return;PS.csT=setTimeout(function(){PS.csT=0;window.scrollTo({top:PS.t,behavior:'smooth'});},PS.csHold);return;}
+    window.scrollTo({top:PS.t,behavior:'smooth'});return;}
   if(!PS.raf){PS.last=0;PS.raf=requestAnimationFrame(psFrame);}
 }
 function psStart(){
   if(/[?&]scroll=native/.test(location.search))return;   /* ?scroll=native to compare */
   if(!psActive())return;
-  document.documentElement.style.scrollBehavior='auto';   /* we do the easing now */
+  PS.cs=/[?&]scroll=cs/.test(location.search);
+  /* ?vmax=N — потолок скорости в экранах/с для пробы (по умолчанию 9). */
+  var vm=/[?&]vmax=(\d+(?:\.\d+)?)/.exec(location.search);if(vm)PS.vmax=+vm[1];
+  var csm=/[?&]scroll=cs(\d+)/.exec(location.search);PS.csHold=csm?+csm[1]:0;
+  if(!PS.cs)document.documentElement.style.scrollBehavior='auto';   /* we do the easing now */
   PS.on=true;PS.t=PS.c=window.pageYOffset;
   addEventListener('wheel',function(e){
     if(e.ctrlKey||e.defaultPrevented)return;              /* pinch-zoom stays native */
@@ -3433,6 +3449,7 @@ function psStart(){
   },{passive:false});
   /* scrollbar drags and hash jumps move the page without us — resync */
   addEventListener('scroll',function(){
+    if(PS.cs){if(performance.now()-(PS.lastPush||0)>400)PS.t=PS.c=window.pageYOffset;return;}
     if(PS.self||PS.raf)return;
     PS.t=PS.c=window.pageYOffset;
   },{passive:true});
