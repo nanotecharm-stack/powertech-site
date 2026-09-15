@@ -517,12 +517,14 @@ EN = {
  # сетка их не называла, и объём измерений не сходился сам с собой.
  'MEA_CHIPS': meas_html(['Voltage & Current', 'Harmonics & Interharmonics', 'Flicker',
                           'Dips & Swells', 'Unbalance', 'Power & Energy', 'Events',
-                          'Risk Indicators'], alt=1),
+                          'Risk Indicators*'], alt=1),
  # Восьмая ячейка уже отделена начертанием (.mi-alt: штриховые линейки, засечка
  # в углу) — но подпись всё равно стоит в том же типографском гнезде, что и семь
  # величин, и читается восьмой измеряемой. Строка под сеткой договаривает то, что
  # оформление показывает.
- 'MEA_NOTE': lnote_html('We assess potential equipment risks using the recorded data and operating conditions.'),
+ # Звёздочка у названия карточки рисков и перед сноской — по слову владельца 2026-09-15:
+ # пояснение относится именно к этой карточке.
+ 'MEA_NOTE': lnote_html('* We use measurement data to assess the risk of equipment damage, downtime and electrical fires.'),
  'CO_H2': 'About us',
  'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We solve problems in electrical power systems, combining our team’s hands-on engineering experience with high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
@@ -825,8 +827,8 @@ HY = {
  'MEA_H2': 'Ինչ ենք չափում',
  'MEA_CHIPS': meas_html(['Լարում և հոսանք', 'Հարմոնիկներ և միջհարմոնիկներ', 'Ֆլիկեր',
                           'Լարման կարճատև անկումներ և բարձրացումներ', 'Լարման անհամաչափություն', 'Հզորություն և էներգիա',
-                          'Իրադարձություններ', 'Ռիսկի ցուցանիշներ'], alt=1),
- 'MEA_NOTE': lnote_html('Գրանցված տվյալների և աշխատանքային պայմանների հիման վրա գնահատում ենք սարքավորումների հնարավոր ռիսկերը։'),
+                          'Իրադարձություններ', 'Ռիսկի ցուցանիշներ*'], alt=1),
+ 'MEA_NOTE': lnote_html('* Չափումների հիման վրա գնահատում ենք սարքավորումների վնասման, աշխատանքի ընդհատման և հրդեհի տեխնիկական ռիսկերը։'),
  # Заголовки обычным регистром: на армянской странице стили не поднимают h1—h3 в
  # капс. Принудительных переносов нет — в этой редакции их не задавали, строки
  # раскладывает колонка.
