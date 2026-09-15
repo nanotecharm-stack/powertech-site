@@ -43,6 +43,11 @@ select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--brand);
    Ровно 100%, а не none: none отнял бы у читателя и его собственную настройку
    размера текста в Safari, а она нужна. */
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+/* Коэффициент кегля заголовков. Mardoto при том же em выше Overused Grotesk: прописные 76
+   против 66 на 100 px, слово целиком 96 против 72 (замер 2026-09-15, владелец: «армянские
+   заголовки сильно больше»). 0,86 уравнивает прописные. Все заголовочные кегли ниже
+   умножены на него; для EN он равен единице и ничего не меняет. */
+html{--hs:1;}html[lang="hy"]{--hs:.86;}
 /* overflow-x:clip, NOT hidden — hidden turns body into a scroll container and kills position:sticky */
 /* ⛔ НЕ СНИМАТЬ -webkit-font-smoothing:antialiased. Пробовали 2026-08-26:
    без него Windows включает ClearType, и владелец сразу увидел «при
@@ -677,7 +682,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   grid-template-areas:"eye eye eye eye eye eye eye eye eye eye eye eye" "head head head head head head head . side side side side";
   align-items:start;align-content:start;column-gap:24px;row-gap:0;max-width:none;margin:0;
   padding:102px var(--hx) clamp(40px,3.2vw,46px);}
-h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
+h1{font-size:calc(%%H1SIZE%% * var(--hs));font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 .hcol{display:contents;}
 .hero .eyebrow{grid-area:eye;color:var(--brand-ink);}
 .hero .eyebrow::before{background:var(--brand-ink);}
@@ -714,7 +719,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 /* 768–1099: две группы 58/42, H1 44–54, фото целиком, надпись на панели. */
 @media (min-width:768px) and (max-width:1099px){
   .hgrid{grid-template-columns:minmax(0,58fr) minmax(0,42fr);grid-template-areas:"eye eye" "head side";column-gap:24px;}
-  .hero h1{font-size:clamp(44px,5.2vw,54px);}
+  .hero h1{font-size:calc(clamp(44px,5.2vw,54px) * var(--hs));}
   .hmark{font-size:12px;}
 }
 /* До 767: одна колонка; фото 4:3 с точкой 60 % 50 % (главный датчик в кадре);
@@ -722,7 +727,7 @@ h1{font-size:%%H1SIZE%%;font-weight:%%H1WT%%;margin-top:20px;text-wrap:balance;}
 @media (max-width:767px){
   .hgrid{grid-template-columns:1fr;grid-template-areas:"eye" "head" "side";padding:104px clamp(20px,4vw,24px) 32px;gap:0;}
   .hside{padding-top:22px;}
-  .hero h1{width:auto;max-width:none;font-size:clamp(36px,10vw,44px);}
+  .hero h1{width:auto;max-width:none;font-size:calc(clamp(36px,10vw,44px) * var(--hs));}
   .hero .hp{font-size:16.5px;}
   .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:60% 50%;}
   .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:var(--t-aux);line-height:1.7;letter-spacing:.1em;}
@@ -795,7 +800,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
   background:linear-gradient(180deg,rgba(13,14,19,.35) 0%,rgba(13,14,19,.04) 40%,rgba(16,18,24,.9) 82%,#101218 100%);}
 .ic-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;
   justify-content:space-between;gap:14px;padding:0 18px 18px;}
-.ic-foot h3{margin:0;font-size:clamp(18px,1.55vw,23px);line-height:1.2;letter-spacing:.005em;}
+.ic-foot h3{margin:0;font-size:calc(clamp(18px,1.55vw,23px) * var(--hs));line-height:1.2;letter-spacing:.005em;}
 .ic-open{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
   text-align:left;cursor:pointer;}
 /* растянутая зона: вся карточка нажимается, а семантика остаётся у кнопки */
@@ -810,7 +815,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
   border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
   display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(20px,3vw,48px);align-items:center;}
-.iother h3{font-size:clamp(18px,1.6vw,22px);margin:0 0 6px;}
+.iother h3{font-size:calc(clamp(18px,1.6vw,22px) * var(--hs));margin:0 0 6px;}
 .iother p{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-mid);max-width:62ch;}
 .iother .btn{white-space:nowrap;}
 .rail-head{display:block;}
@@ -886,7 +891,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 
 /* sections */
 .sec{padding:clamp(52px,6.2vw,92px) 0 clamp(52px,6.2vw,92px);}
-h2{font-size:%%H2SIZE%%;text-wrap:balance;}
+h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
 .thesis h2{max-width:19ch;}
 
 /* Три роли раздела вместо одного уровня.
@@ -926,7 +931,7 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
    #company держит ту же ступень: большое верхнее поле у него было и раньше
    (правило ниже), а размер заголовка оставался обычным — роль объявлялась
    наполовину. */
-#why h2,#company h2{font-size:clamp(28px,4.25vw,64px);letter-spacing:%%BIGLS%%;line-height:1.05;}
+#why h2,#company h2{font-size:calc(clamp(28px,4.25vw,64px) * var(--hs));letter-spacing:%%BIGLS%%;line-height:1.05;}
 #company{padding-top:clamp(64px,7.5vw,112px);}
 /* Раздел 01 идёт сразу за героем, и большое поле «главного раздела» ему
    больше не нужно: прежде стык заполнял чертёж с жилой, теперь его нет, и
@@ -939,10 +944,10 @@ h2{font-size:%%H2SIZE%%;text-wrap:balance;}
 @media (min-width:1200px){
   #why .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,5vw,96px);align-items:center;}
   #why .evs{margin-top:0;}
-  #why h2{font-size:clamp(28px,3.4vw,50px);}
+  #why h2{font-size:calc(clamp(28px,3.4vw,50px) * var(--hs));}
   #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(40px,5vw,72px);}
 }
-#measure h2{font-size:clamp(19px,2vw,28px);letter-spacing:0;}
+#measure h2{font-size:calc(clamp(19px,2vw,28px) * var(--hs));letter-spacing:0;}
 #measure{padding-top:clamp(26px,3vw,46px);}
 /* Раздел, к которому приложение относится, закрывается короче обычного —
    иначе укороченная пауза сверху съедалась длинной паузой снизу. */
@@ -1018,14 +1023,14 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* industries grid */
 .other{margin-top:10px;background:var(--inv);color:var(--inv-fg);padding:clamp(26px,3.4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;border-radius:2px;}
 .other .no{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.14em;color:rgba(239,237,234,.58);}
-.other h3{font-size:clamp(21px,2.4vw,32px);margin:var(--s3) 0 10px;letter-spacing:.01em;}
+.other h3{font-size:calc(clamp(21px,2.4vw,32px) * var(--hs));margin:var(--s3) 0 10px;letter-spacing:.01em;}
 .other p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:52ch;}
 .other .btn{background:var(--brand);color:#fff;}
 .other .btn::before{background:var(--bg);}
 .other .btn:hover span{color:var(--fg);}
 
 /* services */
-.display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:%%DISPSIZE%%;line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
+.display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(%%DISPSIZE%% * var(--hs));line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
 /* Шапка раздела в две колонки (аудит 2026-09-14): слева номер, заголовок и два вводных
    абзаца, справа крупный тезис по нижней линии текста. Пустое поле справа ушло. */
 .svc-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(32px,5vw,96px);align-items:end;}
@@ -1383,7 +1388,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* Своя формула давала на 1280 сорок пикселей против сорока одного у остальных
    заголовков разделов — разницу в один пиксель не видит никто, а в шкале это
    лишняя ступень. Берём ту же ступень, что и все h2. */
-.ct-act{margin:0;font-size:%%H2SIZE%%;line-height:1.06;max-width:22ch;}
+.ct-act{margin:0;font-size:calc(%%H2SIZE%% * var(--hs));line-height:1.06;max-width:22ch;}
 .ct-act button{display:inline-flex;align-items:flex-start;gap:clamp(14px,1.6vw,26px);
   font:inherit;color:inherit;text-align:left;padding:0;background:none;cursor:pointer;}
 .ct-act button span{position:relative;display:inline-block;}
@@ -1558,7 +1563,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* Все три окна получают одну ступень, и это ступень «малого раздела»
    (#report, #measure). Было 38 у окна снимка и по 30 у двух остальных, при 26 у
    заголовка раздела: окно меньше раздела по смыслу, но объявляло себя крупнее. */
-#imd h3{font-size:clamp(19px,2vw,28px);margin:0 0 14px;}
+#imd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin:0 0 14px;}
 #imd .p1{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:62ch;}
 #imd .lb{font-family:%%MONOFONT%%;font-size:var(--t-lbl);letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin:26px 0 var(--s1);}
 /* Перечень выводов — настоящий список: он и выглядит перечнем, и читается
@@ -1568,7 +1573,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #imd .fi{display:flex;gap:var(--s3);align-items:baseline;font-size:var(--t-note);line-height:1.6;padding:11px 0;border-top:1px solid var(--hair2);}
 #imd .fi em{font-style:normal;width:6px;height:6px;background:var(--brand);flex:0 0 auto;transform:translateY(-1px);}
 #imd .st{margin-top:var(--s5);padding-top:18px;border-top:1px solid var(--hair2);display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;}
-#imd .st .big{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:clamp(32px,4vw,48px);line-height:1;}
+#imd .st .big{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(clamp(32px,4vw,48px) * var(--hs));line-height:1;}
 #imd .st .sx{font-size:var(--t-note);line-height:1.6;color:var(--fg-mid);max-width:48ch;}
 #imd .st .ss{font-family:%%MONOFONT%%;font-size:var(--t-aux);color:var(--fg-soft);margin-top:7px;}
 /* Строка о данных под кнопкой отправки: ступень примечания, не подписи поля. */
@@ -1582,7 +1587,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #povl{z-index:130;}   /* стоит поверх формы, из которой её открывают */
 #pmd{max-width:720px;}
 #pmd .in{padding:clamp(26px,4vw,46px);}
-#pmd h3{font-size:clamp(19px,2vw,28px);margin:0 0 12px;}
+#pmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin:0 0 12px;}
 #pmd .lede{font-size:var(--t-note);line-height:1.6;margin:0 0 var(--s4);max-width:56ch;
   color:color-mix(in srgb,var(--fg) 78%,transparent);}
 #pmd .pps{border-top:1px solid var(--hair2);padding:18px 0 4px;}
@@ -1595,7 +1600,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #pmd a{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px;}
 /* form modal */
 #fmd .in{padding:clamp(26px,4vw,46px);}
-#fmd h3{font-size:clamp(19px,2vw,28px);margin-bottom:10px;}
+#fmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin-bottom:10px;}
 #fmd h3 .ac{font-style:normal;color:var(--brand-ink);}
 /* Ступени мелкого набора в окне. Порядок силы сверху вниз: заголовок (13,2),
    вводный абзац и заголовки групп (6,7), ярлыки категорий (8,4 — их выбирают,
