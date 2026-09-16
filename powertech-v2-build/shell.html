@@ -2055,12 +2055,21 @@ html[data-nav="5"]:has(#ixp.on) .hin::after{opacity:1;transform:scaleX(1);
 html[data-nav="5"]:has(#ixp.on) #hdr::before{-webkit-backdrop-filter:none;backdrop-filter:none;}
 html[data-nav="5"]:has(#ixp.on) #hdr::after{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) .wm{transition:color .18s var(--e);}
-html[data-nav="5"]:has(#ixp.on) .ixb,html[data-nav="5"]:has(#ixp.on) .lang{
-  transition:transform .16s var(--e),box-shadow .28s var(--e),color .2s var(--e) .4s;}
+/* Задержки цвета — по расчёту кривой --e (cubic-bezier(.16,1,.3,1), лист 620 мс): кромка на 70 %
+   ширины через ~107 мс, на 76 % — 126, на 82 % — 152 (владелец 2026-09-16: «тексты в шапке не
+   успевают сработать и мигают» — при задержке .4 с они 300 мс стояли тёмными на тёмном). Переход
+   .14 с начинается чуть раньше прихода кромки и заканчивается сразу после. На телефоне приборы
+   начинаются от 40 % ширины — кромка там через 45–85 мс, задержек нет. */
+html[data-nav="5"]:has(#ixp.on) .ixb{transition:transform .16s var(--e),box-shadow .28s var(--e),color .14s var(--e) .06s;}
+html[data-nav="5"]:has(#ixp.on) .lang{transition:transform .16s var(--e),box-shadow .28s var(--e),color .14s var(--e) .08s;}
+@media(max-width:960px){
+  html[data-nav="5"]:has(#ixp.on) .ixb,html[data-nav="5"]:has(#ixp.on) .lang{transition:transform .16s var(--e),box-shadow .28s var(--e),color .12s var(--e) 0s;}
+  html[data-nav="5"]:has(#ixp.on) #hdr .btn{transition:background .12s var(--e) .02s,color .12s var(--e) .02s,box-shadow .12s var(--e) .02s;}
+}
 html[data-nav="5"]:has(#ixp.on) .hprog{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn{background:transparent;color:#EFEDEA;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.32);
-  transition:background .2s var(--e) .4s,color .2s var(--e) .4s,box-shadow .2s var(--e) .4s;}
+  transition:background .14s var(--e) .1s,color .14s var(--e) .1s,box-shadow .14s var(--e) .1s;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover{background:#EFEDEA;color:#0D0E13;}
 /* Без :has() (старые браузеры) шапка просто остаётся на своей пелене — шов
    вернётся, но ничего не сломается и всё читается. */
