@@ -769,19 +769,17 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .joint .base{fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;}
 .joint .pulse{fill:none;stroke:var(--brand);stroke-width:1.6;stroke-linecap:round;}
 
-/* cantor8-style pixel wipe — a grid of brand squares sweeps the screen at section changes */
-#wipe{position:fixed;inset:0;z-index:110;pointer-events:none;display:none;}
-#wipe.on{display:grid;}
-/* БЕЗ will-change. Ячеек шестьсот, и повышение каждой в свой слой давало ровно то,
-   с чем в этом файле уже дважды разбирались на карточке и на фотографии: соседние
-   слои при дробных координатах не сшиваются, и между ними просвечивает страница —
-   белые нити по всему полю в момент полного перекрытия.
-   Перекрытие поднято с 2 до 6 %: даже без слоёв дорожки грида дробные, и двух
-   процентов не хватало, чтобы закрыть шов. */
-#wipe i{background:var(--brand);transform:scale(0);transform-origin:center;
-  transition:transform .32s cubic-bezier(.4,0,.2,1);transition-delay:var(--wu,0ms);}
-#wipe.go i{transform:scale(1.06);transition-delay:var(--wd,0ms);}
-#wipe.instant i{transition:none;transition-delay:0ms;}
+/* cantor8-style pixel wipe — a grid of brand squares sweeps the screen at section changes.
+   С 2026-09-16 плашки рисуются на ОДНОМ холсте, а не 630 элементами <i> (владелец:
+   «кубики рывками»): каждый кадр роспуска перерисовывал 630 узлов в главном потоке,
+   и на 1440 за 770 мс перехода успевало отрисоваться 9–16 кадров; на 171 ячейке (телефон)
+   было гладко. Холст рисует те же квадраты за доли миллисекунды и живёт одним слоем. */
+#wipe{position:fixed;inset:0;z-index:110;pointer-events:none;display:none;contain:strict;}
+#wipe.on{display:block;}
+#wipe canvas{display:block;width:100%;height:100%;}
+/* Пока плашки закрывают экран, появления .rv не анимируются: элементы встают сразу,
+   и роспуск открывает уже готовую страницу, а не полсотни одновременных переходов. */
+html.wipecover .rv{transition:none;}
 /* dithered pixel boundary: a band of squares that dissolves one section colour
    into the next — cantor8's actual device (static dither, not an animation) */
 /* Свой слой на полосу (их три), а не на ячейку: перекраска ячеек при прокрутке остаётся
@@ -2088,7 +2086,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
 </style>
 
-<div id="wipe"></div>
+<div id="wipe"><canvas aria-hidden="true"></canvas></div>
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
   <a class="brand" href="#top" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
@@ -2863,37 +2861,65 @@ buildDither();
 /* ============ PIXEL TRANSITION — a real page transition ============ */
 /* Covers the viewport with brand squares, then navigates; the incoming page
    reveals from the covered state. Only for cross-document links (language). */
-var wipeEl=document.getElementById('wipe'),wCells=[],wipeW=0,wipeH=0;
+var wipeEl=document.getElementById('wipe'),wCells=[],wipeW=0,wipeH=0,
+    wipeCv=wipeEl.querySelector('canvas'),wipeCtx=wipeCv.getContext('2d'),wipeRaf=0,
+    WIPE_CELL_MS=320,WIPE_OVER=1.06;
 function buildWipe(){
   /* Ниже одной строки и одного столбца не опускаемся. При нулевой высоте окна
      округление вверх даёт ноль строк, цикл не выполняется ни разу, и покрытия
      нет вовсе — вместо перехода пустой экран. */
   wipeW=innerWidth;wipeH=innerHeight;
   var cs=Math.max(46,Math.round(innerWidth/30)),
-      cols=Math.max(1,Math.ceil(innerWidth/cs)),rows=Math.max(1,Math.ceil(innerHeight/cs));
-  wipeEl.style.gridTemplateColumns='repeat('+cols+',1fr)';
-  wipeEl.style.gridTemplateRows='repeat('+rows+',1fr)';
-  wipeEl.innerHTML='';wCells=[];
+      cols=Math.max(1,Math.ceil(innerWidth/cs)),rows=Math.max(1,Math.ceil(innerHeight/cs)),
+      cw=wipeW/cols,ch=wipeH/rows;
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  wipeCv.width=Math.round(wipeW*dpr);wipeCv.height=Math.round(wipeH*dpr);
+  wipeCtx.setTransform(dpr,0,0,dpr,0,0);
+  wCells=[];
   var cx0=(cols-1)/2,cy0=(rows-1)/2,maxD=Math.hypot(cx0,cy0)||1;
   for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){
-    var i=document.createElement('i');
     /* order: radial from the centre + a touch of jitter, so it reads organic */
     var d=Math.hypot(c-cx0,r-cy0)/maxD;
     var n=Math.min(1,d*0.86+Math.random()*0.14);
-    i.dataset.n=n.toFixed(4);
-    i.style.setProperty('--wd',(n*380).toFixed(0)+'ms');        /* накрытие */
     /* РОСПУСК ТОЖЕ ОТ СЕРЕДИНЫ, а не от краёв. Прежде задержка шла обратной,
        (1-n), и середина экрана — та, куда смотрит читатель, — освобождалась
        ПОСЛЕДНЕЙ: она стояла сплошь синей 810 мс. Владелец это и назвал «синее
        держится дольше, чем должно». Теперь середина уходит первой, и синее в
        ней стоит 390 мс при той же общей длине перехода. */
-    i.style.setProperty('--wu',(n*420).toFixed(0)+'ms');          /* роспуск */
-    wipeEl.appendChild(i);wCells.push(i);
+    wCells.push({x:(c+.5)*cw,y:(r+.5)*ch,w:cw*WIPE_OVER,h:ch*WIPE_OVER,wd:n*380,wu:n*420});
   }
+}
+function wipeColor(){
+  var c=getComputedStyle(document.documentElement).getPropertyValue('--brand').trim();
+  return c||'#0D2440';
+}
+/* Кривая та же, что была у CSS-перехода (cubic-bezier(.4,0,.2,1)): мягкий разгон, мягкий выбег. */
+function wipeEase(t){return t<=0?0:t>=1?1:t*t*(3-2*t);}
+/* Один кадр: covered=true — плашки растут (задержка wd), false — уходят (задержка wu);
+   now — время от начала фазы; Infinity рисует всё покрытие разом. */
+function wipeFrame(covered,now){
+  var ctx=wipeCtx;ctx.clearRect(0,0,wipeW,wipeH);ctx.fillStyle=wipeColor();
+  var done=true;
+  for(var i=0;i<wCells.length;i++){
+    var k=wCells[i],p=(now-(covered?k.wd:k.wu))/WIPE_CELL_MS;
+    if(p<1)done=false;
+    var sc=covered?wipeEase(p):1-wipeEase(p);
+    if(sc<=0)continue;
+    var w=k.w*sc,h=k.h*sc;
+    ctx.fillRect(k.x-w/2,k.y-h/2,w,h);
+  }
+  return done;
 }
 function wipeSet(covered,dur,cb){
   if(!wCells.length){if(cb)cb();return;}
   wipeEl.classList.toggle('go',covered);
+  if(wipeRaf)cancelAnimationFrame(wipeRaf);
+  var t0=0;
+  (function loop(ts){
+    if(!t0)t0=ts;
+    var done=wipeFrame(covered,ts-t0);
+    wipeRaf=done?0:requestAnimationFrame(loop);
+  })(performance.now());
   if(cb)setTimeout(cb,dur+330);
 }
 buildWipe();
@@ -2912,6 +2938,8 @@ function ensureWipe(){
    and a failsafe always tears it down. */
 var WIPE_MS=420;
 function wipeHide(){wipeEl.classList.remove('on','go','instant');
+  if(wipeRaf){cancelAnimationFrame(wipeRaf);wipeRaf=0;}
+  try{wipeCtx.clearRect(0,0,wipeW,wipeH);}catch(e){}
   document.documentElement.classList.remove('wiping','wipecover');
   /* сетка ушла — герою снова есть что показывать */
   if(typeof heroStart==='function')heroStart();}
@@ -2919,21 +2947,27 @@ function wipeReveal(){
   if(rm||document.visibilityState!=='visible'){wipeHide();return;}
   ensureWipe();
   wipeEl.classList.add('on','go','instant');
+  wipeFrame(true,Infinity);                   /* сразу сплошное покрытие */
   document.documentElement.classList.add('wipecover');
-  /* Встроенной записи нуля здесь больше нет. Задержки теперь живут в
-     переменных плашки, а встроенный стиль их перебивает — и перебивал
-     НАСОВСЕМ, потому что снимать его стало некому: прежде его затирал
-     следующий проход wipeSet, а тот теперь только меняет класс. Ступенчатость
-     от этого пропадала целиком, все плашки расходились разом. Ноль на время
-     мгновенной посадки даёт сам класс instant. */
-  /* маскировка снимается в том же кадре, в котором встали плашки: экран уже
-     покрыт, поэтому непокрытой страницы не видно ни одного кадра */
+  /* Маскировка снимается в том же кадре, в котором встал холст: экран уже покрыт,
+     поэтому непокрытой страницы не видно ни одного кадра. */
   document.documentElement.classList.remove('wiping');
-  requestAnimationFrame(function(){
-    wipeEl.classList.remove('instant');
-    requestAnimationFrame(function(){wipeSet(false,WIPE_MS,wipeHide);});
-  });
-  setTimeout(wipeHide,WIPE_MS+1200);          /* failsafe */
+  /* Роспуск стартует, когда (а) шрифты подставлены — иначе замена шрифта посреди перехода
+     перевёрстывает всю страницу под плашками, и (б) главный поток свободен от остатка
+     стартового скрипта. Ожидание ограничено: шрифты не дольше 200 мс, простой не дольше 150. */
+  var start=function(){
+    requestAnimationFrame(function(){
+      wipeEl.classList.remove('instant');
+      requestAnimationFrame(function(){wipeSet(false,WIPE_MS,wipeHide);});
+    });
+  };
+  var idle=function(){
+    if(window.requestIdleCallback)requestIdleCallback(start,{timeout:150});
+    else setTimeout(start,0);
+  };
+  var fontsReady=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+  Promise.race([fontsReady,new Promise(function(r){setTimeout(r,200);})]).then(idle,idle);
+  setTimeout(wipeHide,WIPE_MS+1600);          /* failsafe */
 }
 function wipeCoverThen(go){
   if(rm||document.visibilityState!=='visible'){go();return;}
