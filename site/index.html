@@ -913,7 +913,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   text-transform:uppercase;color:var(--fg-soft);}
 #pmd a{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px;}
 #fmd .in{padding:clamp(26px,4vw,46px);}
-#fmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin-bottom:10px;}
+#fmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin-bottom:26px;}   
 #fmd h3 .ac{font-style:normal;color:var(--brand-ink);}
 #fmd .intro{font-size:var(--t-note);line-height:1.6;margin-bottom:28px;max-width:56ch;
   color:color-mix(in srgb,var(--fg) 78%,transparent);}
@@ -1342,13 +1342,12 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     
     <form id="ptfForm" novalidate>
     
-    <div class="ghd">Contact details <em>*</em></div>
-    <p class="ghd-note" id="ghdNote">Email or phone: at least one, so that we can reply.</p>
+    
     <div class="fr">
       <div><label for="ptfName">Name <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="Your name" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">Company <span class="opt">optional</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="Company name"></div>
-      <div><label for="ptfEmail">Email</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ghdNote ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">Phone</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ghdNote ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">Email</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">Phone</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">Sector</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>

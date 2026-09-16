@@ -1720,7 +1720,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #pmd a{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px;}
 /* form modal */
 #fmd .in{padding:clamp(26px,4vw,46px);}
-#fmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin-bottom:10px;}
+#fmd h3{font-size:calc(clamp(19px,2vw,28px) * var(--hs));margin-bottom:26px;}   /* 10 → 26: под заголовком больше нет строки «Контактные данные» (2026-09-16) */
 #fmd h3 .ac{font-style:normal;color:var(--brand-ink);}
 /* Ступени мелкого набора в окне. Порядок силы сверху вниз: заголовок (13,2),
    вводный абзац и заголовки групп (6,7), ярлыки категорий (8,4 — их выбирают,
@@ -2378,13 +2378,13 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <form id="ptfForm" novalidate>
     <!-- Название секции: отдельный класс, а не .gl, иначе счётчик строк
          примет его за строку протокола и сдвинет всю нумерацию. -->
-    <div class="ghd">%%F_CONTACT%% <em>*</em></div>
-    <p class="ghd-note" id="ghdNote">%%F_ONE_CONTACT%%</p>
+    <!-- Заголовок «Контактные данные *» и подсказка «почта или телефон» сняты (2026-09-16,
+         владелец: без почты или телефона форма всё равно не отправится — правило живёт в проверке). -->
     <div class="fr">
       <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ghdNote ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ghdNote ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
