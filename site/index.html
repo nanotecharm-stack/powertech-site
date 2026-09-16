@@ -830,11 +830,24 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 }
 .ovl{position:fixed;inset:0;z-index:120;background:rgba(8,26,49,.66);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;justify-content:center;padding:34px 18px;overflow-y:auto;}
 .ovl.open{display:flex;}
-.ovl{opacity:1;transition:opacity .25s var(--e);}
+.ovl{opacity:1;transition:opacity .3s var(--e);}
 .ovl .md{transition:opacity .3s var(--e),transform .3s var(--e);}
+#iovl .md{transition:opacity .4s var(--e),transform .6s cubic-bezier(.2,.75,.15,1);}
+#imd .ph img{transition:transform 1.1s cubic-bezier(.2,.7,.15,1),opacity .55s var(--e);}
+#imd .bd>*{transition:opacity .5s var(--e),transform .6s cubic-bezier(.2,.7,.15,1);}
+#imd .bd>:nth-child(1){transition-delay:.12s;}
+#imd .bd>:nth-child(2){transition-delay:.18s;}
+#imd .bd>:nth-child(3){transition-delay:.24s;}
+#imd .bd>:nth-child(4){transition-delay:.3s;}
+#imd .bd>:nth-child(5){transition-delay:.36s;}
+#imd .x{transition:transform .16s var(--e),background .35s var(--e),color .35s var(--e),box-shadow .35s var(--e),opacity .35s var(--e) .4s;}
 @starting-style{
   .ovl.open{opacity:0;}
   .ovl.open .md{opacity:0;transform:scale(.97) translateY(10px);}
+  #iovl.open .md{transform:translate(var(--ox,0px),var(--oy,0px)) scale(.92);}
+  #iovl.open #imd .ph img{transform:scale(1.06);opacity:.35;}
+  #iovl.open #imd .bd>*{opacity:0;transform:translateY(14px);}
+  #iovl.open #imd .x{opacity:0;}
 }
 .md{background:var(--bg);color:var(--fg);max-width:760px;width:100%;margin:auto;position:relative;border-radius:2px;overflow:hidden;box-shadow:0 24px 80px rgba(8,26,49,.4);}
 .md:focus,.md .done:focus{outline:none;}
@@ -1608,6 +1621,12 @@ function openInd(o,trigger){
     document.getElementById('im_sx').textContent=txt;
     document.getElementById('im_ss').textContent=o.note?'':(o.statSource||'');
   }else st.style.display='none';
+  var card=trigger&&trigger.closest?trigger.closest('.icard'):null;
+  var ox=0,oy=0;
+  if(card){var r=card.getBoundingClientRect();
+    ox=Math.max(-innerWidth/4,Math.min(innerWidth/4,(r.left+r.width/2-innerWidth/2)*.5));
+    oy=Math.max(-innerHeight/4,Math.min(innerHeight/4,(r.top+r.height/2-innerHeight/2)*.5));}
+  iovl.style.setProperty('--ox',Math.round(ox)+'px');iovl.style.setProperty('--oy',Math.round(oy)+'px');
   openDialog(iovl,document.getElementById('imd'),trigger);
 }
 if(irail)PT.cards.forEach(function(o,i){
