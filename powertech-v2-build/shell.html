@@ -808,7 +808,7 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
    «Другие критические электрические системы» — отдельная компактная строка под сеткой. */
 .igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,22px);
   margin-top:clamp(24px,3vw,40px);}
-.icard{position:relative;display:flex;flex-direction:column;overflow:hidden;
+.icard{position:relative;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;
   background:#101218;color:#EFEDEA;border:1px solid #101218;border-radius:2px;}
 .ic-art{position:relative;aspect-ratio:4/3;overflow:hidden;background:#15171E;}
 .ic-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
@@ -821,7 +821,8 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 .ic-foot h3{margin:0;font-size:calc(clamp(18px,1.55vw,23px) * var(--hs));line-height:1.2;letter-spacing:.005em;}
 .ic-open{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
   text-align:left;cursor:pointer;}
-/* растянутая зона: вся карточка нажимается, а семантика остаётся у кнопки */
+/* растянутая зона накрывает только подпись (.ic-foot — её containing block); клик по картинке
+   ловит скрипт на самой карточке (2026-09-16, владелец: «при нажатии на картинку окно не открывалось») */
 .ic-open::after{content:"";position:absolute;inset:0;z-index:4;}
 .ic-open:focus-visible{outline:none;}
 .icard:focus-within{outline:2px solid var(--brand-ink);outline-offset:3px;}
@@ -852,8 +853,16 @@ header.on-dark .btn i{background:rgba(255,255,255,.22);}
 }
 @media (max-width:1024px){.igrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:600px){
-  .igrid{grid-template-columns:1fr;gap:12px;}
-  .ic-art{aspect-ratio:2/1;}
+  /* Лента с ручной прокруткой вместо столбика (2026-09-16, владелец: «слишком длинно приходится
+     листать»): шесть карточек в ряд, свайп с прилипанием, следующая карточка выглядывает справа.
+     Полосы прокрутки нет; края ленты выходят на поля .wrap, чтобы первая карточка стояла по оси текста. */
+  .igrid{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    margin-left:calc(-1 * clamp(18px,4vw,56px));margin-right:calc(-1 * clamp(18px,4vw,56px));
+    padding:0 clamp(18px,4vw,56px) 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .igrid::-webkit-scrollbar{display:none;}
+  .icard{flex:0 0 76vw;max-width:360px;scroll-snap-align:start;scroll-margin-left:clamp(18px,4vw,56px);}
+  .igrid .icard.rv{opacity:1;transform:none;transition:none;}
+  .ic-art{aspect-ratio:4/3;}
   .ic-foot{padding:0 16px 14px;}
   .iother{grid-template-columns:1fr;row-gap:16px;}
 }
@@ -2699,6 +2708,8 @@ if(irail)PT.cards.forEach(function(o,i){
   if(src){img.src=src;img.srcset=src.replace(/\.jpg$/,'-756.jpg')+' 756w, '+src+' 1536w';img.sizes='(max-width:600px) 100vw, (max-width:1024px) 50vw, 400px';}
   var btn=card.querySelector('.ic-open');btn.textContent=o.title;
   btn.addEventListener('click',function(){openInd(o,btn);});
+  /* Картинка и вся карточка тоже открывают окно; клик по самой кнопке уже обработан выше. */
+  card.addEventListener('click',function(e){if(e.target.closest('.ic-open'))return;openInd(o,btn);});
   irail.appendChild(card);
 });
 
