@@ -1646,12 +1646,9 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
      тут невиновно). Арифметика перенесена в сборку и сверена с браузером на
      холсте тем же конвейером: расхождение 0,99 из 255, худшее 2. */}
 /* Слой darken снят и здесь — тот же запечённый файл. */
-/* the index sat in difference blend mode, which inverts against the photograph —
-   on mid-tone frames it landed within a hair of the backdrop. It now reads on its
-   own corner scrim, which is a photographic device rather than a box. */
-#imd .ph::after{content:"";position:absolute;left:0;bottom:0;width:62%;height:58%;
-  pointer-events:none;z-index:1;
-  background:linear-gradient(to top right,rgba(13,14,19,.72),rgba(13,14,19,.28) 42%,rgba(13,14,19,0) 78%);}
+/* Угловая тень .ph::after снята (2026-09-16, владелец: «на фото какой-то синий артефакт»):
+   она подкладывалась под индекс, который давно ушёл с фотографии; на светлых снимках
+   её обрезанный градиент читался как синий прямоугольник 62×58 %. */
 #imd .bd{padding:clamp(22px,3vw,38px);}
 /* Все три окна получают одну ступень, и это ступень «малого раздела»
    (#report, #measure). Было 38 у окна снимка и по 30 у двух остальных, при 26 у
