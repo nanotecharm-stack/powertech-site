@@ -289,8 +289,22 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
 .ixp a{display:grid;grid-template-columns:34px minmax(0,1fr);
   gap:14px;align-items:baseline;padding:13px 0;color:var(--inv-fg);}
 .ixp a .no{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);}
-.ixp a .tl{font-size:17px;line-height:1.35;color:rgba(239,237,234,.88);transition:color .2s var(--e);}
-/* Посимвольный разбег названий снят (аудит 2026-09-14): спокойная смена цвета. */
+.ixp a .tl{font-size:17px;line-height:1.35;color:rgba(239,237,234,.88);transition:color .2s var(--e);
+  display:inline-flex;flex-wrap:wrap;}
+/* Побуквенный разбег названий ВОЗВРАЩЁН (2026-09-16, владелец: «надо вернуть анимацию букв»);
+   снимался аудитом 2026-09-14. Кегль и цвет — аудита (17 px, .88). */
+.ixp .tl .wd{display:inline-flex;white-space:nowrap;}
+.ixp .tl .sp{display:inline-block;width:.31em;}
+.ixp .tl .lt{display:inline-block;overflow:hidden;height:1.35em;}
+/* Разбег стоит ТОЛЬКО на наведении. Когда он висел на самой букве, он
+   отрабатывал и на уходе курсора: строка возвращалась ещё треть секунды после
+   того, как указатель ушёл, и рядом уже начинала реагировать следующая — на
+   экране всегда было две живых строки вместо одной. Обратный ход короче и без
+   задержек: строка гаснет разом, как только курсор ушёл. */
+.ixp .tl .lt i{display:block;height:1.35em;font-style:normal;
+  transition:transform .3s var(--e);transition-delay:0s;}
+.ixp a:hover .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
+  transition:transform .6s var(--e);transition-delay:var(--d,0ms);}
 .ixp a:hover .tl{color:#F4F3F1;}
 /* Текущий раздел виден без чтения: линейка и название в цвете марки. */
 .ixp a.here .no{font-weight:600;}
@@ -388,6 +402,8 @@ body::before{opacity:1;z-index:-1;mix-blend-mode:soft-light;
   .ixp,.ixp.on,.ixsc,.ixp li,.ixp.on li,.ixp::before{transition:none;}
   .ixp li{opacity:1;transform:none;}
   .ixp::before{transform:scaleX(1);}
+  .ixp .tl .lt i{transition:none;}
+  .ixp a:hover .tl .lt i{transform:none;}
 }
 
 /* ---- 1 titleblock: the bar is a real strip of paper -------------------- */
@@ -3305,7 +3321,8 @@ ixItems.forEach(function(it){
   var li=document.createElement('li');
   li.innerHTML='<a href="#'+it.id+'"><span class="no"></span><span class="tl"></span></a>';
   li.querySelector('.no').textContent=it.no;
-  li.querySelector('.tl').textContent=it.title;
+  letterize(li.querySelector('.tl'),it.title);
+  li.querySelector('a').setAttribute('aria-label',it.no+' '+it.title);
   li.style.setProperty('--i',ixlist.children.length);
   ixlist.appendChild(li);
 });
@@ -3373,6 +3390,40 @@ document.addEventListener('click',function(e){
   if(e.target.closest('#ixp')||e.target.closest('#ixb'))return;
   ixOpen(false);
 });
+/* Название раскладывается на буквы: при наведении каждая уезжает вверх, а
+   снизу встаёт её двойник. Порядок срыва перемешан, а не слева направо, —
+   отсюда ощущение живого набора, а не бегущей строки. Буквы держатся словами,
+   иначе длинное название рвалось бы посередине слова.
+   Для чтения с экрана всё это скрыто: доступное имя ссылки задано отдельно.
+   (Снято аудитом 2026-09-14, возвращено по слову владельца 2026-09-16.) */
+function letterize(el,text){
+  el.textContent='';el.setAttribute('aria-hidden','true');
+  var n=text.length,order=[],i,j,tmp;
+  for(i=0;i<n;i++)order.push(i);
+  for(i=n-1;i>0;i--){j=Math.floor(Math.random()*(i+1));tmp=order[i];order[i]=order[j];order[j]=tmp;}
+  var rank=[];for(i=0;i<n;i++)rank[order[i]]=i;
+  /* Шаг 25 мс хорош на коротком слове, но названия здесь до сорока знаков, и
+     весь пробег растягивался на полторы секунды. Держим сам пробег около 300 мс
+     и не превышаем 25 мс на букву: короткие названия идут как в оригинале,
+     длинные не тянут. */
+  var step=Math.min(25,300/Math.max(1,n-1));
+  var word=null;
+  for(i=0;i<n;i++){
+    var ch=text.charAt(i);
+    if(ch===' '){
+      word=null;
+      var sp=document.createElement('span');sp.className='sp';sp.textContent=' ';
+      el.appendChild(sp);continue;
+    }
+    if(!word){word=document.createElement('span');word.className='wd';el.appendChild(word);}
+    var lt=document.createElement('span');lt.className='lt';
+    lt.style.setProperty('--d',(rank[i]*step).toFixed(1)+'ms');
+    var a=document.createElement('i'),b=document.createElement('i');
+    a.textContent=ch;b.textContent=ch;
+    lt.appendChild(a);lt.appendChild(b);word.appendChild(lt);
+  }
+}
+
 /* which sheet are we on, and what tone is under the bar */
 function mIx(){
   /* Один замер на раздел вместо двух. Запасной ход раньше мерил те же разделы
