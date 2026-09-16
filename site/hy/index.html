@@ -1076,12 +1076,20 @@ html[data-nav="5"].hscr .hprog{opacity:1;}
 html[data-nav="5"] .hprog::after{content:"";position:absolute;right:0;bottom:0;
   width:1px;height:4px;background:inherit;}
 html[data-nav="5"] header[data-tone="ink"] .hprog{background:#7BA4D0;}
-html[data-nav="5"]:has(#ixp.on) #hdr::before{background:#0D2440;
-  -webkit-backdrop-filter:none;backdrop-filter:none;opacity:1;}
+html[data-nav="5"] .hin::after{content:"";position:absolute;inset:0;z-index:-1;background:#0D2440;
+  transform:scaleX(0);transform-origin:left;opacity:0;pointer-events:none;
+  transition:opacity .25s var(--e),transform 0s linear .25s;}
+html[data-nav="5"]:has(#ixp.on) .hin::after{opacity:1;transform:scaleX(1);
+  transition:transform .62s var(--e),opacity 0s;}
+html[data-nav="5"]:has(#ixp.on) #hdr::before{-webkit-backdrop-filter:none;backdrop-filter:none;}
 html[data-nav="5"]:has(#ixp.on) #hdr::after{opacity:0;}
+html[data-nav="5"]:has(#ixp.on) .wm{transition:color .18s var(--e);}
+html[data-nav="5"]:has(#ixp.on) .ixb,html[data-nav="5"]:has(#ixp.on) .lang{
+  transition:transform .16s var(--e),box-shadow .28s var(--e),color .2s var(--e) .4s;}
 html[data-nav="5"]:has(#ixp.on) .hprog{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn{background:transparent;color:#F6F1E9;
-  box-shadow:inset 0 0 0 1px rgba(246,241,233,.32);}
+  box-shadow:inset 0 0 0 1px rgba(246,241,233,.32);
+  transition:background .2s var(--e) .4s,color .2s var(--e) .4s,box-shadow .2s var(--e) .4s;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover{background:#F6F1E9;color:#0D2440;}
 html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 @media(max-width:960px){
@@ -2061,7 +2069,8 @@ if(ixsc)ixsc.addEventListener('click',function(){ixOpen(false);});
 function ixOpen(on){
   if(on){ixp.hidden=false;
     void ixp.offsetHeight;
-    requestAnimationFrame(function(){ixp.classList.add('on');});
+    requestAnimationFrame(function(){ixp.classList.add('on');
+      if(typeof toneUnderBar==='function')toneUnderBar();});
     clearTimeout(ixOpen.rdy);
     ixOpen.rdy=setTimeout(function(){
       if(ixp.classList.contains('on'))ixp.classList.add('rdy');
@@ -2146,7 +2155,7 @@ function mTone(){
       overBand=true;break;
     }
   }
-  if(!ixp.hidden){tone='ink';overBand=false;}
+  if(ixp.classList.contains('on')){tone='ink';overBand=false;}   
   return {tone:tone,band:overBand};
 }
 var toneWas=null,scrimWas=null;
