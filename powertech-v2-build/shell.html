@@ -3301,7 +3301,14 @@ var sheet=document.createElement('span');sheet.className='sheet';ixb.appendChild
 var ixsc=document.getElementById('ixsc');
 if(ixsc)ixsc.addEventListener('click',function(){ixOpen(false);});
 function ixOpen(on){
-  if(on){ixp.hidden=false;setTimeout(function(){ixp.classList.add('on');},16);
+  if(on){ixp.hidden=false;
+    /* Стартовое состояние панели (0fr, opacity 0) должно быть ВЫЧИСЛЕНО до класса on, иначе
+       переходу нечего анимировать и панель встаёт рывком. Таймер в 16 мс этого не гарантировал
+       (владелец 2026-09-16: «пропала анимация при открытии меню»): при занятом потоке или редком
+       кадре оба изменения попадали в один пересчёт стилей. Принудительный пересчёт + следующий
+       кадр — гарантия. */
+    void ixp.offsetHeight;
+    requestAnimationFrame(function(){ixp.classList.add('on');});
     /* Прокрутку разрешаем только когда раскрытие закончилось: переход ряда
        сетки идёт 0.5 с, берём с запасом. Сторож на случай, если за это время
        панель успели закрыть. */

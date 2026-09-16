@@ -2059,7 +2059,9 @@ var sheet=document.createElement('span');sheet.className='sheet';ixb.appendChild
 var ixsc=document.getElementById('ixsc');
 if(ixsc)ixsc.addEventListener('click',function(){ixOpen(false);});
 function ixOpen(on){
-  if(on){ixp.hidden=false;setTimeout(function(){ixp.classList.add('on');},16);
+  if(on){ixp.hidden=false;
+    void ixp.offsetHeight;
+    requestAnimationFrame(function(){ixp.classList.add('on');});
     clearTimeout(ixOpen.rdy);
     ixOpen.rdy=setTimeout(function(){
       if(ixp.classList.contains('on'))ixp.classList.add('rdy');
