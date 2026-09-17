@@ -1625,13 +1625,19 @@ var iovl=document.getElementById('iovl');
 function openInd(o,trigger){
   var ph=document.getElementById('im_ph'),img=ph.firstElementChild;
   if(o.img!==undefined&&PT.imgs[o.img]){
-    if(!img){img=document.createElement('img');ph.appendChild(img);}
+    if(img)ph.removeChild(img);
+    img=document.createElement('img');img.decoding='sync';
     var _full=PT.imgs[o.img],_small=_full.replace(/\.jpg$/,'-756.jpg');
-    img.dataset.want=_full;img.alt=o.title;img.src=_small;
+    var _card=trigger&&trigger.closest?trigger.closest('.icard'):null;
+    var _cimg=_card&&_card.querySelector('.ic-art img');
+    var _start=(_cimg&&_cimg.currentSrc&&_cimg.complete&&_cimg.naturalWidth)?_cimg.currentSrc:_small;
+    img.dataset.want=_full;img.alt=o.title;img.src=_start;
+    ph.appendChild(img);
     img.onerror=function(){if(img.dataset.want===_full&&img.src!==_full)img.src=_full;};
-    var _up=new Image();
-    _up.onload=function(){if(img.dataset.want===_full)img.src=_full;};
-    _up.src=_full;
+    if(_start!==_full){
+      var _up=new Image();
+      _up.onload=function(){if(img.dataset.want===_full)img.src=_full;};
+      _up.src=_full;}
     ph.style.display='';}
   else ph.style.display='none';
   document.getElementById('im_t').textContent=o.title;
