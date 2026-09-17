@@ -826,15 +826,19 @@ html.wipecover .rv{transition:none;}
   margin-top:clamp(24px,3vw,40px);}
 .icard{position:relative;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;
   background:#101218;color:#EFEDEA;border:1px solid #101218;border-radius:2px;}
-.ic-art{position:relative;aspect-ratio:4/3;overflow:hidden;background:#15171E;}
+/* Подпись карточки — на своей плашке под фотографией, а не поверх неё (2026-09-17, владелец:
+   «сделай эти надписи на карточках более органичными и чистыми»; выбран вариант A из двух).
+   Прежде подпись стояла на градиенте, уходящем в сплошной цвет, и читалась мутно; теперь фото 3:2
+   целиком, под ним полоса с волосяной линией сверху; стрелка — контур вместо белого квадрата. */
+.ic-art{position:relative;aspect-ratio:3/2;overflow:hidden;background:#15171E;}
 .ic-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
   transform:scale(1.04);transform-origin:52% 45%;transition:transform .3s var(--e);}
 .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
 .ic-art::after{content:"";position:absolute;pointer-events:none;z-index:2;inset:-1px;
-  background:linear-gradient(180deg,rgba(13,14,19,.35) 0%,rgba(13,14,19,.04) 40%,rgba(16,18,24,.9) 82%,#101218 100%);}
-.ic-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;
-  justify-content:space-between;gap:14px;padding:0 18px 18px;}
-.ic-foot h3{margin:0;font-size:calc(clamp(18px,1.55vw,23px) * var(--hs));line-height:1.2;letter-spacing:.005em;}
+  background:linear-gradient(180deg,rgba(13,14,19,.28) 0%,rgba(13,14,19,.06) 45%,rgba(13,14,19,.24) 100%);}
+.ic-foot{position:relative;z-index:3;display:flex;align-items:center;min-height:62px;
+  justify-content:space-between;gap:14px;padding:13px 14px 13px 18px;border-top:1px solid rgba(239,237,234,.16);}
+.ic-foot h3{margin:0;font-size:calc(clamp(17px,1.3vw,19px) * var(--hs));line-height:1.25;letter-spacing:0;}
 .ic-open{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
   text-align:left;cursor:pointer;}
 /* растянутая зона накрывает только подпись (.ic-foot — её containing block); клик по картинке
@@ -842,10 +846,10 @@ html.wipecover .rv{transition:none;}
 .ic-open::after{content:"";position:absolute;inset:0;z-index:4;}
 .ic-open:focus-visible{outline:none;}
 .icard:focus-within{outline:2px solid var(--brand-ink);outline-offset:3px;}
-.ic-go{width:40px;height:40px;border-radius:2px;background:#EFEDEA;color:#101218;flex:0 0 auto;
-  display:grid;place-items:center;transition:background .2s var(--e),color .2s var(--e);}
-.ic-go svg{width:19px;height:19px;display:block;}
-.icard:hover .ic-go,.icard:focus-within .ic-go{background:var(--brand);color:var(--brand-on);}
+.ic-go{width:34px;height:34px;border-radius:2px;background:transparent;color:#EFEDEA;flex:0 0 auto;border:1px solid rgba(239,237,234,.38);
+  display:grid;place-items:center;transition:background .2s var(--e),color .2s var(--e),border-color .2s var(--e);}
+.ic-go svg{width:16px;height:16px;display:block;}
+.icard:hover .ic-go,.icard:focus-within .ic-go{background:var(--brand);color:var(--brand-on);border-color:var(--brand);}
 /* строка «другие системы»: волосяные линии, без плашки и скруглений */
 .iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
   border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
@@ -879,7 +883,7 @@ html.wipecover .rv{transition:none;}
   .icard{flex:0 0 76vw;max-width:360px;scroll-snap-align:start;scroll-margin-left:clamp(18px,4vw,56px);}
   .igrid .icard.rv{opacity:1;transform:none;transition:none;}
   .ic-art{aspect-ratio:4/3;}
-  .ic-foot{padding:0 16px 14px;}
+  .ic-foot{padding:12px 12px 12px 16px;}
   .iother{grid-template-columns:1fr;row-gap:16px;}
 }
 
