@@ -345,9 +345,15 @@ def qa_html(items):
     return ''.join(out)
 
 def qa_pics(items):
-    """Стопка пяти картинок в левой колонке; видна одна — активная."""
-    return ''.join('<img src="./uploads/qa/%s.webp" width="1448" height="1086" alt="%s" decoding="async"%s>'
-                   % (QA_IMGS[k], it[3], ' fetchpriority="low"' if k != 1 else '') for k, it in enumerate(items))
+    """Стопка пяти картинок в левой колонке; видна одна — активная.
+
+    srcset (2026-09-17): коробка картинки на десктопе 450–464 px при 1280–2560, а файл
+    1448 px нужен только экрану с плотностью 2. Обычный экран берёт готовый 724 px (тот
+    же, что у телефона) — вчетверо меньше пикселей на раскодирование при прокрутке.
+    До 960 px стопка скрыта (display:none), там картинка идёт в ответе, см. qa_html."""
+    return ''.join('<img src="./uploads/qa/%s.webp" srcset="./uploads/qa/%s-724.webp 724w, ./uploads/qa/%s.webp 1448w" '
+                   'sizes="(max-width:960px) 100vw, 464px" width="1448" height="1086" alt="%s" decoding="async"%s>'
+                   % (QA_IMGS[k], QA_IMGS[k], QA_IMGS[k], it[3], ' fetchpriority="low"' if k != 1 else '') for k, it in enumerate(items))
 
 # Each parameter gets its own measurement signature. Drawn to the owner's sketches
 # (2026-07-28) in the site's own hairline language: one stroke weight, currentColor for

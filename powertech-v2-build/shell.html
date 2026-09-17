@@ -1375,9 +1375,15 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .qa .qa-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,88px);align-items:start;}
 .qa .lede{max-width:40ch;}
 .qa-pic{position:relative;aspect-ratio:4/3;margin-top:clamp(28px,3.4vw,48px);overflow:hidden;background:var(--hair2);}
+/* Стопка из пяти картинок, видна одна. Прозрачная (opacity 0) картинка для браузера
+   всё ещё «рисуется»: он её раскодирует и растрит, все пять сразу — 7,9 Мпкс ради одной.
+   Замер 2026-09-17 на 144 Гц: при входе раздела в экран кадр 33–63 мс вместо 7 — рывок
+   прокрутки. visibility:hidden снимает картинку с отрисовки совсем; переход visibility
+   с задержкой .22s даёт уходящей картинке дорисовать своё затухание, входящая
+   проявляется сразу тем же ходом .22s. */
 .qa-pic img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
-  opacity:0;transition:opacity .22s linear;}
-.qa-pic img.on{opacity:1;}
+  opacity:0;visibility:hidden;transition:opacity .22s linear,visibility 0s linear .22s;}
+.qa-pic img.on{opacity:1;visibility:visible;transition:opacity .22s linear,visibility 0s;}
 .qa-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair);
   /* Положение заголовка при переключении держит скрипт; автопривязка прокрутки браузера
      (scroll anchoring) здесь выключена, чтобы компенсация не удваивалась. */
