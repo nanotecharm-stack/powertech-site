@@ -743,7 +743,11 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
 .hero .acts .btn.gh::before{display:none;}
 .hero .acts .btn.gh:hover span{color:var(--fg-head);}
 /* ФОТО: целиком, натуральная пропорция; width/height на <img> резервируют место. */
-.hphoto{position:relative;margin:0;width:100%;background:var(--lo);}
+/* Подложка под фото на время загрузки. Прежний var(--lo) нигде не объявлен —
+   подложки не было вовсе, и до прихода файла в окне лежала бумага. Тон #7F7E7E —
+   средний по самому снимку (замер 2026-09-17), чтобы смена «подложка → фото»
+   была шагом тона, а не вспышкой. */
+.hphoto{position:relative;margin:0;width:100%;background:#7F7E7E;}
 .hphoto img{display:block;width:100%;height:auto;}
 /* НАДПИСЬ на светлой панели щита: маркировка на краске, ни карточки, ни рамки. */
 .hmark{position:absolute;left:var(--hx);top:20%;margin:0;width:max-content;max-width:22%;
@@ -2197,7 +2201,11 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <figure class="hphoto">
     <img src="./uploads/hero/switchboard-1942.webp"
          srcset="./uploads/hero/switchboard-971.webp 971w, ./uploads/hero/switchboard-1942.webp 1942w"
-         sizes="100vw" width="1942" height="809" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="async">
+         sizes="100vw" width="1942" height="809" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="sync">
+    <!-- decoding="sync" (2026-09-17, владелец: «в самой верхней позиции при обновлении картинка
+         героя моргает»): с async Chrome рисовал первый кадр без фото даже из кеша — на 10–16 мс
+         в окне была бумага, потом фото. sync включает уже скачанный файл в первый же кадр;
+         на сеть не влияет: пока файла нет, страница рисуется без него как и раньше. -->
     <figcaption class="hmark"><span>%%HERO_MARK1%%</span><span>%%HERO_MARK2%%</span><span>%%HERO_MARK3%%</span></figcaption>
   </figure>
 </section>    </div>
