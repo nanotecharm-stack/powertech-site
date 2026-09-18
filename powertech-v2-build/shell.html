@@ -3673,6 +3673,8 @@ function psStart(){
   /* ?lerp=N — доля остатка за кадр для пробы (по умолчанию .085): больше — короче ход,
      меньше времени страница в движении (проба «мыло при прокрутке», 2026-09-18). */
   var lp=/[?&]lerp=(0?\.\d+)/.exec(location.search);if(lp)PS.lerp=+lp[1];
+  /* ?vmin=N — пол скорости хвоста, экранов/с (по умолчанию .5): выше — хвост короче. */
+  var vn=/[?&]vmin=(\d*\.?\d+)/.exec(location.search);if(vn)PS.vmin=+vn[1];
   var csm=/[?&]scroll=cs(\d+)/.exec(location.search);PS.csHold=csm?+csm[1]:0;
   if(!PS.cs)document.documentElement.style.scrollBehavior='auto';   /* we do the easing now */
   PS.on=true;PS.t=PS.c=window.pageYOffset;
