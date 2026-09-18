@@ -151,6 +151,17 @@ html[lang="hy"] .alink{font-size:13px;}
    равную высоту прописных: 9,75 px у кнопки и подписи «Index», 9,1/9,0 у переключателя языка. */
 .rv{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e);}
 .rv.in{opacity:1;transform:none;}
+/* Тёмные плиты (2026-09-18, владелец: «на синем фоне белые буквы сильно мылятся при
+   прокрутке»): появление БЕЗ подъёма. Пока .rv едет свои 12 px (полсекунды, ровно когда
+   раздел въезжает в экран), браузер держит его отдельным слоем и двигает уже готовый растр
+   на дробные доли пикселя — светлые буквы на тёмном размазываются на весь ход. Только
+   прозрачность: буквы стоят на целом пикселе и остаются резкими. На светлой бумаге графит
+   тем же размытием страдает меньше, там подъём оставлен. ?rise=old возвращает подъём на
+   тёмных для сравнения глазом. */
+.plate2 .rv,.plate .rv,.rep-head .rv{transform:none;transition:opacity .5s var(--e);}
+html[data-rise="old"] .plate2 .rv,html[data-rise="old"] .plate .rv,html[data-rise="old"] .rep-head .rv{
+  transform:translateY(12px);transition:opacity .5s var(--e),transform .5s var(--e);}
+html[data-rise="old"] .plate2 .rv.in,html[data-rise="old"] .plate .rv.in,html[data-rise="old"] .rep-head .rv.in{transform:none;}
 
 /* header */
 /* the header itself never has a background — cantor8 keeps it fully transparent
@@ -3572,6 +3583,8 @@ function toneUnderBar(){aTone(mTone());}
    две непрозрачные плашки по углам; владелец их забраковал. Правила вариантов
    0..3 оставлены в наборе и не применяются ни к чему — вычистить отдельно. */
 document.documentElement.setAttribute('data-nav','5');
+/* ?rise=old — подъём .rv на тёмных плитах для сравнения (см. стили .plate2 .rv). */
+if(/[?&]rise=old/.test(location.search))document.documentElement.setAttribute('data-rise','old');
 /* ============ PREMIUM SCROLL — eased wheel, native everywhere else ============ */
 /* Lenis-style: accumulate wheel delta into a target, ease the real scroll toward it
    with scrollTo (NOT a transformed wrapper — that would kill position:sticky, and
@@ -3657,6 +3670,9 @@ function psStart(){
   PS.cs=/[?&]scroll=cs/.test(location.search);
   /* ?vmax=N — потолок скорости в экранах/с для пробы (по умолчанию 9). */
   var vm=/[?&]vmax=(\d+(?:\.\d+)?)/.exec(location.search);if(vm)PS.vmax=+vm[1];
+  /* ?lerp=N — доля остатка за кадр для пробы (по умолчанию .085): больше — короче ход,
+     меньше времени страница в движении (проба «мыло при прокрутке», 2026-09-18). */
+  var lp=/[?&]lerp=(0?\.\d+)/.exec(location.search);if(lp)PS.lerp=+lp[1];
   var csm=/[?&]scroll=cs(\d+)/.exec(location.search);PS.csHold=csm?+csm[1]:0;
   if(!PS.cs)document.documentElement.style.scrollBehavior='auto';   /* we do the easing now */
   PS.on=true;PS.t=PS.c=window.pageYOffset;
