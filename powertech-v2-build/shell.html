@@ -98,6 +98,9 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .eyebrow{display:inline-flex;align-items:center;gap:9px;}
 h1,h2,h3{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;color:var(--fg-head);margin:0;line-height:%%HEADLH%%;%%HEADTT%%letter-spacing:%%HEADLS%%;}
 p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+/* Оптический вынос (2026-09-20, референс владельца «grid → visual balance»): штрих первой буквы
+   крупного кегля встаёт на ось счётчика и линеек, а не боковой свес глифа. −3 px при 66, −2 при 46. */
+h1,h2{margin-left:-.05em;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px);}
 .plate .cnt,.plate2 .cnt{color:rgba(239,237,234,.58);}
 .cnt{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.22em;color:var(--fg-soft);display:flex;align-items:center;gap:14px;margin-bottom:20px;}
@@ -109,7 +112,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
    поэтому это не новый элемент, а уже существующий мотив на новом месте.
    Прогон рисует скрипт: порядок разделов он и так знает — по нему собирается
    панель. Без скрипта остаётся чистый номер, и это рабочее состояние. */
-.cnt .cbs{display:flex;align-items:center;gap:8px;}
+.cnt .cbs{display:flex;align-items:center;gap:8px;transform:translateY(-2px);/* оптика: середина квадратов = середина цифр пиксельного шрифта */}
 .cnt .cbs i{width:6px;height:6px;background:var(--hair);}
 .cnt .cbs i.on{background:var(--brand);}
 .plate .cnt .cbs i,.plate2 .cnt .cbs i,.rep-head .cnt .cbs i{background:rgba(239,237,234,.22);}
@@ -695,7 +698,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
    только кнопка в покое, и на залитой кнопке она оставалась тёмной: подпись
    белая, плитка светлая, а знак внутри — чернильный. */
 .btn:hover i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
-.btn{display:inline-flex;align-items:center;gap:9px;background:var(--inv);color:var(--inv-fg);font-size:14px;font-weight:600;padding:13px 20px;position:relative;overflow:hidden;isolation:isolate;border-radius:2px;}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--inv);color:var(--inv-fg);font-size:14px;font-weight:600;padding:13px 14px 13px 20px;/* оптика 2026-09-20: плитка стрелки — блок, ей нужно меньше поля, чем тексту; зазор 9→12 */position:relative;overflow:hidden;isolation:isolate;border-radius:2px;}
 .btn span{position:relative;z-index:1;transition:color .2s var(--e);}
 .btn::before{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--e);}
 .btn:hover::before{transform:scaleX(1);}.btn:hover span{color:#fff;}
@@ -747,7 +750,7 @@ h1{font-size:calc(%%H1SIZE%% * var(--hs));font-weight:%%H1WT%%;margin-top:20px;t
 html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
 /* Одна главная кнопка; второе действие — текстовая ссылка под ней. */
 .acts{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px;}
-.hero .acts .btn{font-size:15px;padding:15px 22px;}
+.hero .acts .btn{font-size:15px;padding:15px 16px 15px 22px;gap:14px;}
 .hero .acts .btn.gh{display:inline-block;background:none;box-shadow:none;padding:0;border-radius:0;margin-left:8px;/* небольшой оптический отступ от края плашки; 22 (край надписи) владелец счёл «слишком вправо» */
   font-size:15px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(13,14,19,.3);}
@@ -913,7 +916,9 @@ html.wipecover .rv{transition:none;}
   border-left:1px solid var(--hair2);}
 .mi:nth-child(4n+1){border-left:none;}
 .mi:nth-child(n+5){border-top:1px solid var(--hair2);}
-.mi svg{width:52px;height:34px;display:block;overflow:visible;color:var(--fg);}
+.mi svg{width:52px;height:34px;display:block;overflow:visible;color:var(--fg);transform:translateY(var(--dy,0));}
+/* Оптика: иконки разной массы — лёгкие (петли, фликер, Y) на пиксель ниже, к общей визуальной базе. */
+.mi:nth-child(1) svg,.mi:nth-child(3) svg,.mi:nth-child(5) svg{--dy:1px;}
 /* Плитки без действия — без отклика на наведение (аудит 2026-09-14). */
 .mi .mlb{font-size:var(--t-note);line-height:1.4;color:var(--fg);}
 /* the last cell is not an electrical parameter but a reading OF them, so it is set
@@ -1010,7 +1015,7 @@ h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
   #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(40px,5vw,72px);}
 }
 #measure h2{font-size:calc(clamp(19px,2vw,28px) * var(--hs));letter-spacing:0;}
-#measure{padding-top:clamp(26px,3vw,46px);}
+#measure{padding-top:clamp(26px,3vw,46px);padding-bottom:clamp(36px,4.2vw,60px);/* оптика: было 43 сверху / 83 снизу */}
 /* Раздел, к которому приложение относится, закрывается короче обычного —
    иначе укороченная пауза сверху съедалась длинной паузой снизу. */
 #services,#assignments{padding-bottom:clamp(30px,3.4vw,52px);}
@@ -1114,7 +1119,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .stat{background:none;box-shadow:none;padding:0;border-radius:0;align-self:end;}
 /* Три показателя — один ряд одним кеглем, каждый над своей третью поля (аудит 2026-09-14). */
 .obs .stat:nth-child(1){grid-column:1 / span 4;}
-.obs .stat:nth-child(2){grid-column:5 / span 4;}
+.obs .stat:nth-child(2){grid-column:5 / span 4;text-align:center;/* оптика: 24/7 под серединой поля, 7 и 1 — под краями */}
 .obs .stat:nth-child(3){grid-column:9 / span 4;}
 .obs .stat b{display:block;font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;line-height:.92;letter-spacing:-.02em;color:#F4F3F1;
   font-size:clamp(44px,5.2vw,76px);}
@@ -1245,7 +1250,10 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
    идут от левой кромки листа, вровень с линейкой бланка. */
 .doc .list div::after{left:var(--pad);}
 .doc-foot .lnote{margin-top:clamp(20px,2.4vw,32px);}
-.rep-side{grid-column:9 / span 4;padding-top:clamp(28px,3.4vw,56px);}
+/* Оптика 2026-09-20: первая строка примечания — на базовой третьей строки листа. Слагаемые те же,
+   что у листа: сдвиг вверх, поле листа, линейка 2, поле перечня, поле ряда 14, два ряда по 56, +2 на разницу кеглей 17/16.
+   Прежде 4440 против 4443 — «почти», читалось ошибкой. Ниже 960 перекрывается правилом ниже. */
+.rep-side{grid-column:9 / span 4;padding-top:calc(clamp(28px,3.4vw,56px) + clamp(24px,3vw,44px) + 2px + clamp(20px,2.4vw,32px) + 14px + 112px + 2px - var(--rep-over));}
 .rep-side .note{margin-top:0;}
 @media (max-width:960px){
   .doc{grid-column:1 / -1;}
@@ -1388,6 +1396,9 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
    штрихов), ответ раскрывается сеткой 0fr→1fr за 220 мс. Открыт всегда один.
    Подпись услуги — той же ролью, что ярлыки на сайте: 11px, разрядка, марка. */
 .qa .qa-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(32px,5vw,88px);align-items:start;}
+/* Оптика 2026-09-20: базовая первого вопроса на базовой H2 (36 = счётчик 14 + поле 20 + 2). Прежде список
+   начинался от верха счётчика, и первый вопрос висел между счётчиком и заголовком. Только на двух колонках. */
+@media (min-width:961px){.qa-right{padding-top:36px;}}
 .qa .lede{max-width:40ch;}
 .qa-pic{position:relative;aspect-ratio:4/3;margin-top:clamp(28px,3.4vw,48px);overflow:hidden;background:var(--hair2);}
 /* Стопка из пяти картинок, видна одна. Прозрачная (opacity 0) картинка для браузера
@@ -1413,7 +1424,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
 .qa-t{transition:color .2s var(--e);}
-.qa-pm{position:relative;width:24px;height:24px;align-self:center;}
+.qa-pm{position:relative;width:24px;height:24px;align-self:start;margin-top:1.5px;/* оптика: плюс на первой строке вопроса, а не между двумя строками */}
 .qa-pm::before,.qa-pm::after{content:"";position:absolute;left:50%;top:50%;background:var(--fg);transform:translate(-50%,-50%);}
 .qa-pm::before{width:14px;height:1.5px;}
 .qa-pm::after{width:1.5px;height:14px;transition:transform .22s var(--e),opacity .22s var(--e);}
@@ -1503,18 +1514,18 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 /* Своя формула давала на 1280 сорок пикселей против сорока одного у остальных
    заголовков разделов — разницу в один пиксель не видит никто, а в шкале это
    лишняя ступень. Берём ту же ступень, что и все h2. */
-.ct-act{margin:0;font-size:calc(%%H2SIZE%% * var(--hs));line-height:1.06;max-width:22ch;}
-.ct-act button{display:inline-flex;align-items:flex-start;gap:clamp(14px,1.6vw,26px);
+.ct-act{margin:0 0 0 -.05em;font-size:calc(%%H2SIZE%% * var(--hs));line-height:1.06;max-width:22ch;}
+.ct-act button{display:inline-flex;align-items:flex-start;gap:clamp(14px,1.4vw,20px);
   font:inherit;color:inherit;text-align:left;padding:0;background:none;cursor:pointer;}
 .ct-act button span{position:relative;display:inline-block;}
 .ct-act button span::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:2px;
   background:var(--brand);transform:scaleX(0);transform-origin:left;
   transition:transform .6s var(--e);}
 .ct-act button:hover span::after,.ct-act button:focus-visible span::after{transform:scaleX(1);}
-.ct-act button i{flex:0 0 auto;align-self:flex-end;display:grid;place-items:center;
-  width:clamp(44px,4.4vw,64px);height:clamp(44px,4.4vw,64px);border-radius:2px;
+.ct-act button i{flex:0 0 auto;align-self:flex-start;display:grid;place-items:center;/* оптика 2026-09-20: квадрат высотой в строку и на верху текста; 64 свисал на 25 px под базовую */
+  width:clamp(40px,3.4vw,48px);height:clamp(40px,3.4vw,48px);border-radius:2px;
   background:var(--brand);color:#fff;font-style:normal;font-family:%%BODYFONT%%;
-  font-size:clamp(16px,1.6vw,22px);
+  font-size:clamp(15px,1.4vw,20px);
   transition:transform .5s var(--e),background .4s var(--e);}
 .ct-act button:hover i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
