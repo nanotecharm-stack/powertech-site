@@ -1504,6 +1504,22 @@ def render_deploy(tokens, data, ff, out_path, post=None):
             '<link rel="alternate" hreflang="hy" href="%s">\n'
             '<link rel="alternate" hreflang="x-default" href="%s">\n'
             % ((en if tokens['LANG'] == 'en' else hy,) * 2 + (en, hy, en)))
+    # Гость из Армении, пришедший на главную снаружи, сразу получает армянскую
+    # версию (2026-09-25, владелец). Страна берётся из часового пояса браузера:
+    # у Pages нет сервера, а сторонний сервис по IP — это запрос с адресом
+    # посетителя чужой конторе и задержка перед первым кадром. Пояса хватает:
+    # решение принимается до отрисовки, без сети и без хранения чего-либо.
+    # Не уводим, если человек пришёл с самого сайта (нажал ENG), обновил
+    # страницу или вернулся назад — иначе английскую из Армении не открыть.
+    # Поисковые роботы живут в UTC и видят английскую, как и прежде.
+    if tokens['LANG'] == 'en':
+        head = ('<script>try{var _n=performance.getEntriesByType("navigation")[0];'
+                'if(location.pathname==="/"&&!/[?&]lang=en/.test(location.search)'
+                '&&(!_n||_n.type==="navigate")'
+                '&&document.referrer.indexOf(location.origin+"/")!==0'
+                '&&Intl.DateTimeFormat().resolvedOptions().timeZone==="Asia/Yerevan")'
+                'location.replace("/hy/"+location.search+location.hash);}catch(e){}'
+                '</script>\n') + head
     # Ссылка без картинки разворачивается серой пустой строкой. Для конторы, к
     # которой приходят по рекомендации, это дороже позиций в поиске: рекомендация
     # и есть ссылка, отправленная в мессенджере.
