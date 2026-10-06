@@ -1,7 +1,7 @@
 # Собирает страницу просмотра: 11 слайдов + шрифты сайта, всё внутри файла.
 import base64, io, os
 
-FONTS = r'C:\Users\user\Desktop\CharGPT cloude\powertech-v2-build\fonts'
+FONTS = r'D:\Gridec\Site\source\powertech-v2-build\fonts'
 HI = 'hi'
 OUT = 'view.html'
 
