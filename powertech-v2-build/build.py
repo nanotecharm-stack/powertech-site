@@ -274,7 +274,7 @@ NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT'
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA',
            'HOME', 'BRAND_HREF', 'PARTNERS_HREF', 'PARTNERS_CUR',
-           'PAR1_ART', 'PAR2_ART', 'PAR3_ART'}
+           'PAR1_ART', 'PAR2_ART', 'PAR3_ART', 'HPL_HREF'}
 # PP_BODY намеренно НЕ здесь: nbsp разбирает строку по тегам и правит только
 # текст между ними, а числу с единицей («24 месяца», «30 дней») склейка нужна
 # ровно так же, как в остальном наборе.
@@ -479,6 +479,8 @@ EN = {
  'NAV_SERVICES': 'Services', 'NAV_INDUSTRIES': 'Industries', 'NAV_COMPANY': 'Company',
  # Страница «Партнёрам» (2026-11-11). HOME пуст на главной; адреса сразу деплойные.
  'NAV_PARTNERS': 'For Partners', 'PARTNERS_HREF': '/partners/', 'PARTNERS_CUR': '',
+ # Ссылка в шапке: с главной — к партнёрам, со страницы партнёров — на главную.
+ 'HPL_HREF': '/partners/', 'HPL_LABEL': 'For Partners',
  'HOME': '', 'BRAND_HREF': '#top',
  'IX_LABEL': 'Index', 'IX_ARIA': 'Section index',
  'CTA': 'Describe the issue', 'NAV_CTA': 'Get in touch',
@@ -798,6 +800,7 @@ HY = {
  'LANG_HREF': './index.html', 'LANG_LABEL': 'ENG', 'LANG_ARIA': 'English · Անգլերեն',
  'NAV_SERVICES': 'Ծառայություններ', 'NAV_INDUSTRIES': 'Ոլորտներ', 'NAV_COMPANY': 'Ընկերություն',
  'NAV_PARTNERS': 'Գործընկերների համար', 'PARTNERS_HREF': '/hy/partners/', 'PARTNERS_CUR': '',
+ 'HPL_HREF': '/hy/partners/', 'HPL_LABEL': 'Գործընկերների համար',
  'HOME': '', 'BRAND_HREF': '#top',
  'IX_LABEL': 'Բաժիններ', 'IX_ARIA': 'Բաժինների ցանկ',
  'CTA': 'Նկարագրել խնդիրը', 'NAV_CTA': 'Կապ մեզ հետ',
@@ -1136,6 +1139,7 @@ PAR_EN = {
  'META_DESC': 'For engineering firms, system integrators, leasing and insurance companies: '
               'Gridec measures power quality and identifies the source of problems.',
  'LANG_HREF': '/hy/partners/', 'HOME': '/', 'BRAND_HREF': '/',
+ 'HOME_LABEL': 'Home', 'HPL_HREF': '/', 'HPL_LABEL': 'Home',
  'PARTNERS_CUR': ' aria-current="page"',
  'PAR_H1': 'For Partners',
  'PAR1_T': 'Engineering Firms &amp; System Integrators',
@@ -1173,6 +1177,7 @@ PAR_HY = {
  'META_DESC': 'Նախագծող, ինժեներական, լիզինգային և ապահովագրական ընկերությունների համար։ '
               'Gridec-ը չափում է էլեկտրաէներգիայի որակը և օգնում գտնել խնդիրների աղբյուրը։',
  'LANG_HREF': '/partners/', 'HOME': '/hy/', 'BRAND_HREF': '/hy/',
+ 'HOME_LABEL': 'Գլխավոր էջ', 'HPL_HREF': '/hy/', 'HPL_LABEL': 'Գլխավոր էջ',
  'PARTNERS_CUR': ' aria-current="page"',
  'PAR_H1': 'Գործընկերների համար',
  'PAR1_T': 'Նախագծող և ինժեներական ընկերություններ, համակարգային ինտեգրատորներ',

@@ -5,9 +5,18 @@
      У каждого блока — лист с чертежом (build.py, PAR_ART): схема щита, единица
      оборудования на сроке, контур защиты с записью события. Строка оглавления под
      заголовком снята: она повторяла названия, стоящие сразу под ней. -->
-<section class="par-head" id="top"><div class="wrap">
-  <div class="eyebrow">%%HERO_EYEBROW%%</div>
+<!-- Строка «мониторинг качества…» над заголовком снята (владелец, 2026-11-11).
+     Возврат на главную — карточка с её первым экраном: фото щита из героя, адрес и
+     слово «Главная». Строчная ссылка «← Home» владельцу показалась слабой («нужен более
+     креативный подход»): картинка главной узнаётся без чтения. Фото то же, что в герое,
+     и у пришедшего с главной уже лежит в кэше. -->
+<section class="par-head" id="top"><div class="wrap par-top">
   <h1>%%PAR_H1%%</h1>
+  <a class="par-home" href="%%HOME%%" aria-label="%%HOME_LABEL%% — gridec.am">
+    <span class="ph-pic"><img src="./uploads/hero/switchboard-971.webp" alt="" width="971" height="405" decoding="async"></span>
+    <span class="ph-tx"><small>gridec.am</small><b>%%HOME_LABEL%%</b></span>
+    <i aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i>
+  </a>
 </div></section>
 
 <section class="par" id="integrators"><div class="wrap par-grid">
@@ -41,5 +50,17 @@
 <section class="plate par-ct" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">04</div>
   <h2 class="ct-act"><button data-open-form><span>%%PAR_CTA%%</span><i>&#8599;</i></button></h2></div>
+  <!-- Та же карточка «на главную» в конце страницы: дочитавшему не нужно мотать вверх
+       (владелец, 2026-11-11: «надо скроллить наверх, если ты в нижней части»). -->
+  <a class="par-home" href="%%HOME%%" aria-label="%%HOME_LABEL%% — gridec.am">
+    <span class="ph-pic"><img src="./uploads/hero/switchboard-971.webp" alt="" width="971" height="405" loading="lazy" decoding="async"></span>
+    <span class="ph-tx"><small>gridec.am</small><b>%%HOME_LABEL%%</b></span>
+    <i aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i>
+  </a>
 </div></section>
+
+<!-- Плавающая метка «на главную» для узкого экрана: в шапке телефона ссылке нет места.
+     Появляется, когда верхняя карточка ушла из вида, и уходит у нижней — там стоит
+     сама карточка. На широком экране её нет: «Home» всегда в закреплённой шапке. -->
+<a class="par-chip" id="parChip" href="%%HOME%%" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>%%HOME_LABEL%%</span></a>
 

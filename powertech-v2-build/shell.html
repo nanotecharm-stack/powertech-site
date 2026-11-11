@@ -2190,7 +2190,47 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
    названиям», «усилить разделы»): мелкий значок-осциллограмма заменён листом с
    чертежом в пять колонок, оглавление под заголовком снято. */
 .par-head{padding:calc(76px + clamp(28px,4vw,60px)) 0 clamp(28px,3.4vw,48px);}
-.par-head h1{margin-top:16px;}
+.par-head h1{margin-top:0;}
+/* Возврат на главную — карточка с первым экраном главной. На широком экране стоит
+   справа на линии заголовка, на телефоне — под ним во всю ширину. */
+.par-top{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s5) var(--s7);flex-wrap:wrap;}
+.par-home{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--s4);
+  padding:var(--s2) var(--s3) var(--s2) var(--s2);background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair);
+  color:var(--fg);transition:box-shadow .25s var(--e);}
+.ph-pic{display:block;width:132px;aspect-ratio:16/9;overflow:hidden;background:var(--inv);}
+.ph-pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:62% 50%;
+  transition:transform .5s var(--e);}
+.ph-tx{display:grid;gap:2px;min-width:0;padding-right:var(--s3);}
+.ph-tx small{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.1em;color:var(--fg-soft);}
+.ph-tx b{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(20px * var(--hs));line-height:1.2;
+  color:var(--fg-head);white-space:nowrap;}
+.par-home i{display:grid;place-items:center;width:30px;height:30px;border-radius:2px;background:var(--inv);
+  color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
+.par-home i svg{display:block;width:14px;height:12px;}
+@media (hover:hover){
+  .par-home:hover{box-shadow:inset 0 0 0 1px var(--brand-ink);}
+  .par-home:hover .ph-pic img{transform:scale(1.06);}
+  .par-home:hover i{transform:translateX(-3px);background:var(--brand);color:#fff;}
+}
+@media (max-width:700px){.par-home{width:100%;}.ph-pic{width:112px;}}
+/* Карточка в конце страницы — справа от призыва, на телефоне под ним. */
+.plate.par-ct .wrap.ct-one{grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--s6) var(--s7);}
+.par-ct .par-home{box-shadow:none;}
+/* Плита перекрашивает заголовочный цвет в светлый — на светлой карточке слово пропадало. */
+.par-ct .par-home .ph-tx b{color:#0D2440;}
+.par-ct .par-home .ph-tx small{color:rgba(13,14,19,.76);}
+@media (max-width:860px){.plate.par-ct .wrap.ct-one{grid-template-columns:1fr;}}
+/* Плавающая метка: только узкий экран. */
+.par-chip{display:none;}
+@media (max-width:900px){
+  .par-chip{position:fixed;left:clamp(18px,4vw,56px);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:55;
+    display:inline-flex;align-items:center;gap:10px;padding:11px 15px 11px 13px;border-radius:2px;
+    background:var(--inv);color:var(--inv-fg);box-shadow:inset 0 0 0 1px rgba(239,237,234,.28);
+    font-size:14px;font-weight:600;opacity:0;transform:translateY(8px);pointer-events:none;
+    transition:opacity .25s var(--e),transform .25s var(--e);}
+  .par-chip svg{display:block;width:14px;height:12px;flex:none;}
+  .par-chip.on{opacity:1;transform:none;pointer-events:auto;}
+}
 .par{padding:clamp(40px,4.6vw,68px) 0;}
 .par:not(.plate2){border-top:1px solid var(--hair);}
 .par-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
@@ -2278,7 +2318,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="navr">
     <!-- Ссылка на страницу партнёров стоит в шапке открыто (2026-11-11, владелец: «только
          в указателе — этого мало»). На узком экране её нет: там она строкой указателя. -->
-    <a class="hpl" href="%%PARTNERS_HREF%%"%%PARTNERS_CUR%%>%%NAV_PARTNERS%%</a>
+    <a class="hpl" href="%%HPL_HREF%%">%%HPL_LABEL%%</a>
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="%%IX_ARIA%%"><span class="ixw">%%IX_LABEL%%</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     <!-- Подпись «EN»/«HY» понятна на глаз, но экранному читателю она ничего не
          говорит: две буквы без контекста. Полное название языка идёт в
@@ -3424,6 +3464,22 @@ function openForm(trigger){
   openDialog(fovl,document.getElementById('fmd'),trigger&&trigger.nodeType===1?trigger:null);
 }
 document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',function(){openForm(b);});});
+
+/* ============ ПАРТНЁРАМ: плавающая метка «на главную» ============
+   Видна, пока на экране нет ни одной карточки возврата (верхней или нижней). */
+(function(){
+  var chip=document.getElementById('parChip');
+  if(!chip||!('IntersectionObserver' in window))return;
+  var cards=[].slice.call(document.querySelectorAll('.par-home')),seen=[];
+  var o=new IntersectionObserver(function(es){
+    es.forEach(function(e){var i=cards.indexOf(e.target);seen[i]=e.isIntersecting;});
+    var on=!seen.some(Boolean);
+    chip.classList.toggle('on',on);
+    if(on){chip.removeAttribute('tabindex');chip.removeAttribute('aria-hidden');}
+    else{chip.setAttribute('tabindex','-1');chip.setAttribute('aria-hidden','true');}
+  });
+  cards.forEach(function(c,i){seen[i]=true;o.observe(c);});
+})();
 
 /* ============ REVEALS / SCROLL ============ */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});

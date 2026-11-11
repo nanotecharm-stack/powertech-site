@@ -1142,7 +1142,42 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 @media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
 .par-head{padding:calc(76px + clamp(28px,4vw,60px)) 0 clamp(28px,3.4vw,48px);}
-.par-head h1{margin-top:16px;}
+.par-head h1{margin-top:0;}
+.par-top{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s5) var(--s7);flex-wrap:wrap;}
+.par-home{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--s4);
+  padding:var(--s2) var(--s3) var(--s2) var(--s2);background:var(--panel);box-shadow:inset 0 0 0 1px var(--hair);
+  color:var(--fg);transition:box-shadow .25s var(--e);}
+.ph-pic{display:block;width:132px;aspect-ratio:16/9;overflow:hidden;background:var(--inv);}
+.ph-pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:62% 50%;
+  transition:transform .5s var(--e);}
+.ph-tx{display:grid;gap:2px;min-width:0;padding-right:var(--s3);}
+.ph-tx small{font-family:'Mardoto','Arian AMU','Helvetica Neue',sans-serif;font-size:11px;letter-spacing:.1em;color:var(--fg-soft);}
+.ph-tx b{font-family:'Mardoto','Arian AMU',sans-serif;font-weight:500;font-size:calc(20px * var(--hs));line-height:1.2;
+  color:var(--fg-head);white-space:nowrap;}
+.par-home i{display:grid;place-items:center;width:30px;height:30px;border-radius:2px;background:var(--inv);
+  color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
+.par-home i svg{display:block;width:14px;height:12px;}
+@media (hover:hover){
+  .par-home:hover{box-shadow:inset 0 0 0 1px var(--brand-ink);}
+  .par-home:hover .ph-pic img{transform:scale(1.06);}
+  .par-home:hover i{transform:translateX(-3px);background:var(--brand);color:var(--brand-on);}
+}
+@media (max-width:700px){.par-home{width:100%;}.ph-pic{width:112px;}}
+.plate.par-ct .wrap.ct-one{grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--s6) var(--s7);}
+.par-ct .par-home{box-shadow:none;}
+.par-ct .par-home .ph-tx b{color:#0D2440;}
+.par-ct .par-home .ph-tx small{color:rgba(13,36,64,.76);}
+@media (max-width:860px){.plate.par-ct .wrap.ct-one{grid-template-columns:1fr;}}
+.par-chip{display:none;}
+@media (max-width:900px){
+  .par-chip{position:fixed;left:clamp(18px,4vw,56px);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:55;
+    display:inline-flex;align-items:center;gap:10px;padding:11px 15px 11px 13px;border-radius:2px;
+    background:var(--inv);color:var(--inv-fg);box-shadow:inset 0 0 0 1px rgba(246,241,233,.28);
+    font-size:14px;font-weight:600;opacity:0;transform:translateY(8px);pointer-events:none;
+    transition:opacity .25s var(--e),transform .25s var(--e);}
+  .par-chip svg{display:block;width:14px;height:12px;flex:none;}
+  .par-chip.on{opacity:1;transform:none;pointer-events:auto;}
+}
 .par{padding:clamp(40px,4.6vw,68px) 0;}
 .par:not(.plate2){border-top:1px solid var(--hair);}
 .par-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
@@ -1227,7 +1262,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <nav><a class="lk" href="/hy/#applications">Ոլորտներ</a><a class="lk" href="/hy/#services">Ծառայություններ</a><a class="lk" href="/hy/#company">Ընկերություն</a><a class="lk" href="/hy/partners/" aria-current="page">Գործընկերների համար</a></nav>
   <div class="navr">
     
-    <a class="hpl" href="/hy/partners/" aria-current="page">Գործընկերների համար</a>
+    <a class="hpl" href="/hy/">Գլխավոր էջ</a>
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="Բաժինների ցանկ"><span class="ixw">Բաժիններ</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     
     <a class="lang" href="/partners/" aria-label="English · Անգլերեն" title="English · Անգլերեն"><svg class="gl" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="7" cy="7" r="5.6"/><ellipse cx="7" cy="7" rx="2.4" ry="5.6"/><path d="M1.4 7h11.2M2.5 4.1h9M2.5 9.9h9"/></svg><span>ENG</span></a>
@@ -1241,9 +1276,14 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </header>
 <main>
 
-<section class="par-head" id="top"><div class="wrap">
-  <div class="eyebrow">Էլեկտրաէներգիայի որակի մոնիթորինգ</div>
+
+<section class="par-head" id="top"><div class="wrap par-top">
   <h1>Գործընկերների համար</h1>
+  <a class="par-home" href="/hy/" aria-label="Գլխավոր էջ — gridec.am">
+    <span class="ph-pic"><img src="/uploads/hero/switchboard-971.webp" alt="" width="971" height="405" decoding="async"></span>
+    <span class="ph-tx"><small>gridec.am</small><b>Գլխավոր էջ</b></span>
+    <i aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i>
+  </a>
 </div></section>
 
 <section class="par" id="integrators"><div class="wrap par-grid">
@@ -1277,7 +1317,16 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <section class="plate par-ct" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">04</div>
   <h2 class="ct-act"><button data-open-form><span>Քննարկել համագործակցությունը</span><i>&#8599;</i></button></h2></div>
+  
+  <a class="par-home" href="/hy/" aria-label="Գլխավոր էջ — gridec.am">
+    <span class="ph-pic"><img src="/uploads/hero/switchboard-971.webp" alt="" width="971" height="405" loading="lazy" decoding="async"></span>
+    <span class="ph-tx"><small>gridec.am</small><b>Գլխավոր էջ</b></span>
+    <i aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i>
+  </a>
 </div></section>
+
+
+<a class="par-chip" id="parChip" href="/hy/" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 14 12"><path d="M13 6H1.5M6 1.5 1.5 6 6 10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Գլխավոր էջ</span></a>
 
 </main>
 
@@ -2016,6 +2065,19 @@ function openForm(trigger){
   openDialog(fovl,document.getElementById('fmd'),trigger&&trigger.nodeType===1?trigger:null);
 }
 document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',function(){openForm(b);});});
+(function(){
+  var chip=document.getElementById('parChip');
+  if(!chip||!('IntersectionObserver' in window))return;
+  var cards=[].slice.call(document.querySelectorAll('.par-home')),seen=[];
+  var o=new IntersectionObserver(function(es){
+    es.forEach(function(e){var i=cards.indexOf(e.target);seen[i]=e.isIntersecting;});
+    var on=!seen.some(Boolean);
+    chip.classList.toggle('on',on);
+    if(on){chip.removeAttribute('tabindex');chip.removeAttribute('aria-hidden');}
+    else{chip.setAttribute('tabindex','-1');chip.setAttribute('aria-hidden','true');}
+  });
+  cards.forEach(function(c,i){seen[i]=true;o.observe(c);});
+})();
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
 var rvLeft=[].slice.call(document.querySelectorAll('.rv'));
