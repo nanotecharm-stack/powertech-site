@@ -1141,6 +1141,77 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 @media(max-width:479px){ html[data-nav="5"][lang="hy"] .ixw{display:none;} html[data-nav="5"] .ixb{padding:12px 6px;margin-right:-6px;} }
 @media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
+.par-head{padding:calc(76px + clamp(28px,4vw,60px)) 0 clamp(28px,3.4vw,48px);}
+.par-head h1{margin-top:16px;}
+.par{padding:clamp(40px,4.6vw,68px) 0;}
+.par:not(.plate2){border-top:1px solid var(--hair);}
+.par-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:var(--s5) clamp(28px,5vw,80px);align-items:center;}
+.par-art{--par-ground:var(--panel);position:relative;background:var(--panel);
+  box-shadow:inset 0 0 0 1px var(--hair);padding:clamp(18px,2.6vw,36px);color:var(--fg);
+  background-image:linear-gradient(var(--hair2) 1px,transparent 1px),
+    linear-gradient(90deg,var(--hair2) 1px,transparent 1px);
+  background-size:24px 24px;background-position:-1px -1px;}
+.par-art svg,.pb-list svg{display:block;width:100%;height:auto;overflow:visible;}
+.plate2 .par-art{--par-ground:#162E52;background-color:rgba(246,241,233,.04);color:#F6F1E9;
+  box-shadow:inset 0 0 0 1px rgba(246,241,233,.16);
+  background-image:linear-gradient(rgba(246,241,233,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(246,241,233,.06) 1px,transparent 1px);}
+.par h2{font-size:calc(clamp(26px,2.9vw,42px) * var(--hs));line-height:1.08;max-width:none;}
+.par-body .par-tag{font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-head);
+  max-width:44ch;margin:var(--s4) 0 var(--s5);text-wrap:balance;}
+.par-body p{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:62ch;}
+.par-body p+p{margin-top:var(--s3);}
+.plate2 .par-body .par-tag{color:#F0EAE0;}
+.plate2 .par-body p{color:var(--on-dark);}
+.plate.par-ct .wrap.ct-one{padding-top:clamp(52px,6vw,88px);padding-bottom:clamp(52px,6vw,88px);}
+.par-ct .cnt{margin-bottom:var(--s4);}
+@media (max-width:860px){
+  .par-grid{grid-template-columns:1fr;}
+  .par-art{max-width:420px;}
+  .par h2,.par-body .par-tag{max-width:none;}
+}
+@media (max-width:700px){.par-head{padding-top:calc(62px + 28px);}}
+.pband{padding:0 0 clamp(52px,6.2vw,92px);}
+.pband .wrap::before{content:"";display:block;height:1px;background:var(--hair);
+  margin-bottom:clamp(40px,4.6vw,68px);}
+.pb-list{list-style:none;margin:clamp(24px,3vw,40px) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));background:var(--panel);
+  box-shadow:inset 0 0 0 1px var(--hair);}
+.pb-list li+li{border-left:1px solid var(--hair);}
+.pb-list a{--par-ground:var(--panel);position:relative;display:flex;flex-direction:column;height:100%;
+  padding:clamp(18px,2vw,28px);color:var(--fg);transition:background .25s var(--e);}
+.pb-list svg{max-width:210px;margin-bottom:clamp(18px,2vw,26px);}
+.pb-list b{font-family:'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;color:var(--fg-head);
+  font-size:calc(clamp(19px,1.7vw,24px) * var(--hs));line-height:1.18;padding-right:34px;}
+.pb-list span{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-mid);margin-top:var(--s2);
+  max-width:34ch;}
+.pb-list i{position:absolute;top:clamp(18px,2vw,28px);right:clamp(18px,2vw,28px);display:grid;
+  place-items:center;width:26px;height:26px;border-radius:2px;font-style:normal;font-size:14px;
+  background:var(--inv);color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
+@media (hover:hover){
+  .pb-list a:hover{background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
+  .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:var(--brand-on);}
+}
+@media (max-width:860px){
+  .pb-list{grid-template-columns:1fr;}
+  .pb-list li+li{border-left:none;border-top:1px solid var(--hair);}
+  .pb-list a{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:var(--s4);align-items:start;}
+  .pb-list svg{grid-row:1 / span 2;margin:0;}
+  .pb-list span{grid-column:2;}
+}
+.hpl{display:none;}
+@media (min-width:901px){
+  html[data-nav="5"] .hpl{display:inline-block;padding:7px 4px;font-size:var(--t-hdr);font-weight:500;
+    letter-spacing:.01em;color:var(--hc);white-space:nowrap;
+    transition:box-shadow .28s var(--e),color .4s var(--e);}
+  html[data-nav="5"] .hpl:hover,html[data-nav="5"] .hpl:focus-visible,
+  html[data-nav="5"] .hpl[aria-current]{box-shadow:inset 0 -1px 0 currentColor;}
+  html[data-nav="5"]:has(#ixp.on) .hpl{color:#F6F1E9;}
+}
+.ixp li.ixx{grid-column:1 / -1;}
+.ixp li.ixx a{padding-left:0;padding-right:0;}
+.ixp li.ixx .no svg{display:block;width:12px;height:12px;transform:translateY(1px);}
 :root{--brand:#2E5E99;--brand-ink:#20436E;--brand-on:#F6F1E9;
   --fg:#2B2722;--fg-mid:#343A40;--fg-soft:#62676D;
   --hair:rgba(43,39,34,.13);--hair2:rgba(43,39,34,.07);}
@@ -1152,8 +1223,11 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
   <a class="brand" href="#top" aria-label="Gridec"><img class="wm lg-l" src="/brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="/brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
-  <nav><a class="lk" href="#applications">Industries</a><a class="lk" href="#services">Services</a><a class="lk" href="#company">Company</a></nav>
+  
+  <nav><a class="lk" href="#applications">Industries</a><a class="lk" href="#services">Services</a><a class="lk" href="#company">Company</a><a class="lk" href="/partners/">For Partners</a></nav>
   <div class="navr">
+    
+    <a class="hpl" href="/partners/">For Partners</a>
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="Section index"><span class="ixw">Index</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     
     <a class="lang" href="/hy/" aria-label="Հայերեն · Armenian" title="Հայերեն · Armenian"><svg class="gl" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="7" cy="7" r="5.6"/><ellipse cx="7" cy="7" rx="2.4" ry="5.6"/><path d="M1.4 7h11.2M2.5 4.1h9M2.5 9.9h9"/></svg><span>ARM</span></a>
@@ -1288,6 +1362,16 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="story"><div class="sb rv"><div class="lb"><span>WHY WE STARTED</span></div><p>We started Gridec to make modern electrical engineering tools and practices more accessible in Armenia. We want technical decisions to be based on documented findings and careful analysis. When problems arise or opinions differ, there should be a clear basis for establishing what happened and deciding what to do next.</p></div><div class="sb rv"><div class="lb"><span>WHAT MATTERS TO US</span></div><p>Our recommendations must be technically sound and practical to implement. We explain the reasoning behind each proposed solution, the expected results and any limitations. If the evidence is insufficient or further investigation is needed, we say so.</p></div></div>
 </div></section>
 
+
+<section class="pband" id="partners" aria-labelledby="pb_h"><div class="wrap">
+  <h2 id="pb_h" class="rv">For Partners</h2>
+  <ul class="pb-list rv">
+    <li><a href="/partners/#integrators"><svg viewBox="0 0 240 150" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M120 4v4M120 35v11"/><circle cx="120" cy="16" r="8"/><circle cx="120" cy="27" r="8"/><path d="M56 46v16M56 72v33M120 46v16M120 72v33M184 46v16M184 72v34"/><rect x="51" y="62" width="10" height="10"/><rect x="115" y="62" width="10" height="10"/><rect x="179" y="62" width="10" height="10"/><circle cx="56" cy="120" r="15"/><circle cx="120" cy="120" r="15"/><rect x="170" y="106" width="28" height="28"/><path d="M176 115h16M176 120h16M176 125h16" opacity=".55"/></g><path d="M24 46h192" stroke="currentColor" stroke-width="2.6"/><g fill="currentColor" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="middle"><text x="56" y="124.6">M</text><text x="120" y="124.6">G</text></g><g fill="none" stroke="var(--brand)" stroke-width="1.6"><ellipse cx="56" cy="88" rx="9" ry="4.6"/><path d="M65 88h17"/><rect x="82" y="79" width="24" height="18" rx="1.5"/><path d="M86 88q2-6 4 0t4 0 4 0 4 0" stroke-width="1.1"/></g></svg><b>Engineering Firms &amp; System Integrators</b><span>Make sure electrical systems work as intended.</span><i aria-hidden="true">&#8599;</i></a></li>
+    <li><a href="/partners/#leasing"><svg viewBox="0 0 240 150" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><rect x="96" y="20" width="104" height="62" rx="2"/><rect x="106" y="30" width="48" height="34"/><rect x="164" y="30" width="26" height="16"/><path d="M164 54h26M164 60h26" opacity=".55"/><path d="M104 82v8h88v-8"/><path d="M20 50v24M20 62h76"/><path d="M20 120h200"/><path d="M40 120v5M60 120v5M80 120v5M100 120v5M120 120v5M140 120v5M160 120v5M180 120v5M200 120v5" opacity=".55"/><circle cx="220" cy="120" r="3.4" fill="var(--par-ground,#F6F1E9)"/></g><circle cx="20" cy="120" r="3.4" fill="currentColor"/><g fill="none" stroke="var(--brand)" stroke-width="1.6"><ellipse cx="56" cy="62" rx="4.6" ry="9"/></g><g stroke="var(--brand)" stroke-width="2.2" stroke-linecap="round"><path d="M70 120v-10M110 120v-10M170 120v-10"/></g></svg><b>Leasing Companies</b><span>Check electrical conditions before installing expensive equipment.</span><i aria-hidden="true">&#8599;</i></a></li>
+    <li><a href="/partners/#insurance"><svg viewBox="0 0 240 150" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M120 10 166 26v42c0 30-20 52-46 66-26-14-46-36-46-66V26z"/><path d="M28 62h184" stroke-dasharray="3 3" opacity=".45" stroke-width=".9"/><path d="M28 84h72l6-36 8 60 6-24h92" stroke-linejoin="round"/></g><circle cx="106" cy="48" r="5" fill="none" stroke="var(--brand)" stroke-width="1.6"/><path d="M106 39v-9" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round"/></svg><b>Insurance Companies</b><span>Identify electrical risks before equipment fails.</span><i aria-hidden="true">&#8599;</i></a></li>
+  </ul>
+</div></section>
+
 <section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
   <h2 class="ct-act"><button data-open-form><span>Start with what happened</span><i>&#8599;</i></button></h2>
@@ -1315,7 +1399,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <nav class="fcol rv" style="--i:2" aria-label="Sections">
       <h3>Sections</h3>
-      <ul class="flist"><li><a href="#why"><span>Power supply problems are not always obvious</span></a></li><li><a href="#applications"><span>Where monitoring helps</span></a></li><li><a href="#services"><span>Seven-day monitoring</span></a></li><li><a href="#report"><span>Report</span></a></li><li><a href="#assignments"><span>Engineering challenges</span></a></li><li><a href="#measure"><span>What we measure</span></a></li><li><a href="#company"><span>About us</span></a></li></ul>
+      <ul class="flist"><li><a href="#why"><span>Power supply problems are not always obvious</span></a></li><li><a href="#applications"><span>Where monitoring helps</span></a></li><li><a href="#services"><span>Seven-day monitoring</span></a></li><li><a href="#report"><span>Report</span></a></li><li><a href="#assignments"><span>Engineering challenges</span></a></li><li><a href="#measure"><span>What we measure</span></a></li><li><a href="#company"><span>About us</span></a></li><li><a href="/partners/"><span>For Partners</span></a></li></ul>
     </nav>
   </div>
   <div class="wrap fbot rv" style="--i:3">
@@ -1394,7 +1478,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div></div></div>
 
 <script>
-window.PT={"incident": "Incident", "seq": [["01", "Normal operation"], ["02", "Electrical event"], ["03", "Equipment trip or alarm"], ["04", "System returns to normal"], ["05", "The event record remains available for analysis"]], "viewDetails": "View details", "errName": "Please enter your name.", "errMsg": "Please describe what happened.", "errEmail": "Please enter a valid email address.", "errPhone": "Please enter a valid phone number.", "errContact": "Enter an email or a phone number.", "hint1": " file · ", "hintN": " files · ", "hintSuf": " of 10 MB", "hint0": "Up to 10 MB total.", "appTypes": ["Manufacturing", "Solar PV", "Healthcare / Laboratory", "Data Centre / IT", "Commercial Building", "Investment / Technical Review", "Other"], "cards": [{"title": "Manufacturing", "img": "IMG0", "p1": "Backup generation is designed for interruptions on a different time scale. A short voltage dip may affect equipment before transfer occurs, so the event must be recorded while it happens.", "findings": ["Timestamp, duration, minimum RMS voltage and affected phases of recorded dips.", "Voltage unbalance and current loading relevant to motor operation.", "Assessment of reactive power and harmonic distortion to determine whether further engineering investigation is needed."], "statLabel": "Technical note", "statText": "Voltage sags and momentary interruptions can trip electronic and electromechanical devices and stop production lines.", "statSource": "Source: EPRI"}, {"title": "Solar PV", "img": "IMG1", "p1": "Measurements at relevant points can help distinguish plant-side from network-side factors.", "findings": ["Voltage conditions during inverter disconnection or active-power limitation.", "Voltage and harmonic distortion against applicable connection requirements.", "Independent measurement evidence for commissioning or EPC review."], "note": "Independent, time-aligned measurements give the owner, EPC contractor and network operator a common record of operating conditions."}, {"title": "Healthcare and Laboratories", "img": "IMG2", "p1": "Warranty or service review may require evidence of the supply conditions present while the equipment was operating. A spot measurement may miss intermittent events.", "findings": ["Recorded supply conditions compared with manufacturer requirements.", "Evidence relevant to distinguishing supply-related events from equipment faults.", "Recommended next checks prioritised by technical criticality and operational impact."], "statLabel": "Technical note", "statText": "IEC 60601-1-2 includes immunity testing for voltage dips and short interruptions in medical electrical equipment.", "statSource": "Source: IEC"}, {"title": "Data Centres and IT Infrastructure", "img": "IMG3", "p1": "Generators start and transfer on a different time scale from millisecond-level disturbances. Time-stamped monitoring records can be compared with UPS and IT logs.", "findings": ["UPS input loading relative to rated capacity.", "Correlation between restarts, battery operation and recorded supply disturbances.", "Load profiles relevant to planned expansion."], "stat": "57%", "statLabel": "Statistic", "statText": "of respondents to Uptime&rsquo;s 2025 annual survey said their most recent major outage cost more than USD 100,000.", "statSource": "Source: Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Commercial Buildings", "img": "IMG4", "p1": "Measurements can help distinguish upstream supply conditions from disturbances generated within the building or by tenant equipment.", "findings": ["Evidence relevant to the likely source of a disturbance.", "Electrical conditions associated with overheating or protective-device operation.", "Power factor, reactive power and load trends relevant to billing or capacity."], "statLabel": "Technical note", "statText": "Power-quality events can originate on either side of the customer meter.", "statSource": "Source: U.S. DOE / LBNL"}, {"title": "Investment and Technical Review", "img": "IMG5", "p1": "Diagnostic or continuous monitoring provides an independent record under actual operation. The findings can support technical due diligence, handover, warranty review or performance assessment.", "findings": ["Observed loading and power quality at relevant points.", "Recorded conditions associated with interruptions or reduced output.", "Limitations, risks and recommended further checks."], "note": "Reports can be prepared in Armenian, Russian or English."}], "otherT": "Other Critical Electrical Systems", "otherP": "Do not see your sector here? Describe the issue and the equipment affected. Monitoring is defined by the technical question, not by the sector alone.", "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
+window.PT={"incident": "Incident", "seq": [["01", "Normal operation"], ["02", "Electrical event"], ["03", "Equipment trip or alarm"], ["04", "System returns to normal"], ["05", "The event record remains available for analysis"]], "viewDetails": "View details", "errName": "Please enter your name.", "errMsg": "Please describe what happened.", "errEmail": "Please enter a valid email address.", "errPhone": "Please enter a valid phone number.", "errContact": "Enter an email or a phone number.", "hint1": " file · ", "hintN": " files · ", "hintSuf": " of 10 MB", "hint0": "Up to 10 MB total.", "appTypes": ["Manufacturing", "Solar PV", "Healthcare / Laboratory", "Data Centre / IT", "Commercial Building", "Investment / Technical Review", "Other"], "cards": [{"title": "Manufacturing", "img": "IMG0", "p1": "Backup generation is designed for interruptions on a different time scale. A short voltage dip may affect equipment before transfer occurs, so the event must be recorded while it happens.", "findings": ["Timestamp, duration, minimum RMS voltage and affected phases of recorded dips.", "Voltage unbalance and current loading relevant to motor operation.", "Assessment of reactive power and harmonic distortion to determine whether further engineering investigation is needed."], "statLabel": "Technical note", "statText": "Voltage sags and momentary interruptions can trip electronic and electromechanical devices and stop production lines.", "statSource": "Source: EPRI"}, {"title": "Solar PV", "img": "IMG1", "p1": "Measurements at relevant points can help distinguish plant-side from network-side factors.", "findings": ["Voltage conditions during inverter disconnection or active-power limitation.", "Voltage and harmonic distortion against applicable connection requirements.", "Independent measurement evidence for commissioning or EPC review."], "note": "Independent, time-aligned measurements give the owner, EPC contractor and network operator a common record of operating conditions."}, {"title": "Healthcare and Laboratories", "img": "IMG2", "p1": "Warranty or service review may require evidence of the supply conditions present while the equipment was operating. A spot measurement may miss intermittent events.", "findings": ["Recorded supply conditions compared with manufacturer requirements.", "Evidence relevant to distinguishing supply-related events from equipment faults.", "Recommended next checks prioritised by technical criticality and operational impact."], "statLabel": "Technical note", "statText": "IEC 60601-1-2 includes immunity testing for voltage dips and short interruptions in medical electrical equipment.", "statSource": "Source: IEC"}, {"title": "Data Centres and IT Infrastructure", "img": "IMG3", "p1": "Generators start and transfer on a different time scale from millisecond-level disturbances. Time-stamped monitoring records can be compared with UPS and IT logs.", "findings": ["UPS input loading relative to rated capacity.", "Correlation between restarts, battery operation and recorded supply disturbances.", "Load profiles relevant to planned expansion."], "stat": "57%", "statLabel": "Statistic", "statText": "of respondents to Uptime&rsquo;s 2025 annual survey said their most recent major outage cost more than USD 100,000.", "statSource": "Source: Uptime Institute, Annual Outage Analysis 2026"}, {"title": "Commercial Buildings", "img": "IMG4", "p1": "Measurements can help distinguish upstream supply conditions from disturbances generated within the building or by tenant equipment.", "findings": ["Evidence relevant to the likely source of a disturbance.", "Electrical conditions associated with overheating or protective-device operation.", "Power factor, reactive power and load trends relevant to billing or capacity."], "statLabel": "Technical note", "statText": "Power-quality events can originate on either side of the customer meter.", "statSource": "Source: U.S. DOE / LBNL"}, {"title": "Investment and Technical Review", "img": "IMG5", "p1": "Diagnostic or continuous monitoring provides an independent record under actual operation. The findings can support technical due diligence, handover, warranty review or performance assessment.", "findings": ["Observed loading and power quality at relevant points.", "Recorded conditions associated with interruptions or reduced output.", "Limitations, risks and recommended further checks."], "note": "Reports can be prepared in Armenian, Russian or English."}], "otherT": "Other Critical Electrical Systems", "otherP": "Do not see your sector here? Describe the issue and the equipment affected. Monitoring is defined by the technical question, not by the sector alone.", "ixExtra": [{"href": "/partners/", "title": "For Partners"}], "imgs": {"IMG0": "/uploads/img/02_manufacturing_industrial_robot.jpg", "IMG1": "/uploads/img/03_solar_power_plant.jpg", "IMG2": "/uploads/img/06_healthcare_laboratory.jpg", "IMG3": "/uploads/img/05_data_center.jpg", "IMG4": "/uploads/img/04_commercial_building.jpg", "IMG5": "/uploads/img/08_finance_investment.jpg"}};
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var PT=window.PT;
@@ -1679,7 +1763,8 @@ if(irail)PT.cards.forEach(function(o,i){
   irail.appendChild(card);
 });
 var navLinks=[].slice.call(document.querySelectorAll('nav a.lk')).map(function(a){
-  return {a:a,sec:document.querySelector(a.getAttribute('href'))};
+  var h=a.getAttribute('href')||'';
+  return {a:a,sec:h.charAt(0)==='#'&&h.length>1?document.querySelector(h):null};
 }).filter(function(x){return x.sec;});
 function mNav(){
   var probe=innerHeight*0.34,best=-1;
@@ -1865,7 +1950,7 @@ function wipeToTop(){
 }
 var HDR_OFF=72;
 var brandA=document.querySelector('.brand');
-if(brandA)brandA.addEventListener('click',function(e){
+if(brandA&&brandA.getAttribute('href')==='#top')brandA.addEventListener('click',function(e){
   if(e.metaKey||e.ctrlKey||e.shiftKey)return;
   e.preventDefault();e.stopPropagation();
   if(typeof PS!=='undefined'&&PS.on){psTo(0);}else{window.scrollTo({top:0,behavior:rm?'auto':'smooth'});}
@@ -1944,6 +2029,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   if(total>10485760){document.getElementById('ptfSizeErr').style.display='block';return;}
   var app=picked>=0?PT.appTypes[picked]:'';
   var fields={name:nm,company:co,email:em,phone:ph,application:app,message:ms};
+  if(PT.page)fields.page=PT.page;
   sending=true;
   function done(){document.getElementById('f_main').style.display='none';
     var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;}
@@ -2089,6 +2175,15 @@ ixItems.forEach(function(it){
   li.querySelector('a').setAttribute('aria-label',it.no+' '+it.title);
   li.style.setProperty('--i',ixlist.children.length);
   ixlist.appendChild(li);
+});
+(PT.ixExtra||[]).forEach(function(x){
+  var li=document.createElement('li');li.className='ixx';
+  var a=document.createElement('a');a.href=x.href;
+  a.innerHTML='<span class="no"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><span class="tl"></span>';
+  letterize(a.querySelector('.tl'),x.title);
+  a.setAttribute('aria-label',x.title);
+  li.style.setProperty('--i',ixlist.children.length);
+  li.appendChild(a);ixlist.appendChild(li);
 });
 ixItems.forEach(function(it,i){
   var cnt=it.sec.querySelector(".cnt");

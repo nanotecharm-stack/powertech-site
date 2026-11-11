@@ -221,7 +221,9 @@ FOOT_IDS = [('why', 'WHY_H2'), ('applications', 'APP_H2'), ('services', 'SVC_H2'
             ('report', 'REP_H2'), ('assignments', 'ASG_H2'), ('measure', 'MEA_H2'),
             ('company', 'CO_H2')]  # 'contact' снят из списка разделов подвала — владелец (2026-09-14)
 
-def foot_links(d):
+def foot_links(d, home='', here=False):
+    """home — адрес главной для страниц, которые ею не являются: якоря разделов
+    оттуда ведут на главную. here — мы на странице «Партнёрам» (aria-current)."""
     out = []
     for sid, tok in FOOT_IDS:
         t = re.sub(r'<[^>]+>', ' ', d[tok])
@@ -229,7 +231,10 @@ def foot_links(d):
         # Номер из списка снят: рядом стоит название раздела, а ссылкой цифра
         # здесь не была — те же 01…08 печатались на странице трижды (счётчик,
         # панель, подвал), и от трёх копий ни одна не читается адресом.
-        out.append('<li><a href="#%s"><span>%s</span></a></li>' % (sid, t))
+        out.append('<li><a href="%s#%s"><span>%s</span></a></li>' % (home, sid, t))
+    # Страница «Партнёрам» (2026-11-11) — отдельный адрес, последней строкой списка.
+    out.append('<li><a href="%s"%s><span>%s</span></a></li>'
+               % (d['PARTNERS_HREF'], ' aria-current="page"' if here else '', d['NAV_PARTNERS']))
     return ''.join(out)
 
 # ---------------------------------------------------------------- висячие слова
@@ -267,7 +272,9 @@ NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT'
            'HEADFONT', 'HEADWT', 'H1WT', 'BIGLS', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
            'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'SVC_DAYS', 'REP_LIST',
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
-           'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA'}
+           'REP_NOTE2', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA',
+           'HOME', 'BRAND_HREF', 'PARTNERS_HREF', 'PARTNERS_CUR',
+           'PAR1_ART', 'PAR2_ART', 'PAR3_ART'}
 # PP_BODY намеренно НЕ здесь: nbsp разбирает строку по тегам и правит только
 # текст между ними, а числу с единицей («24 месяца», «30 дней») склейка нужна
 # ровно так же, как в остальном наборе.
@@ -470,6 +477,9 @@ EN = {
  # переключателя заодно стала симметричной — на HY-странице стоит «EN».
  'LANG_HREF': './hy.html', 'LANG_LABEL': 'ARM', 'LANG_ARIA': 'Հայերեն · Armenian',
  'NAV_SERVICES': 'Services', 'NAV_INDUSTRIES': 'Industries', 'NAV_COMPANY': 'Company',
+ # Страница «Партнёрам» (2026-11-11). HOME пуст на главной; адреса сразу деплойные.
+ 'NAV_PARTNERS': 'For Partners', 'PARTNERS_HREF': '/partners/', 'PARTNERS_CUR': '',
+ 'HOME': '', 'BRAND_HREF': '#top',
  'IX_LABEL': 'Index', 'IX_ARIA': 'Section index',
  'CTA': 'Describe the issue', 'NAV_CTA': 'Get in touch',
  'HERO_EYEBROW': 'POWER QUALITY MONITORING',
@@ -787,6 +797,8 @@ HY = {
  # 84 px давали блок выше английского в полтора раза
  'LANG_HREF': './index.html', 'LANG_LABEL': 'ENG', 'LANG_ARIA': 'English · Անգլերեն',
  'NAV_SERVICES': 'Ծառայություններ', 'NAV_INDUSTRIES': 'Ոլորտներ', 'NAV_COMPANY': 'Ընկերություն',
+ 'NAV_PARTNERS': 'Գործընկերների համար', 'PARTNERS_HREF': '/hy/partners/', 'PARTNERS_CUR': '',
+ 'HOME': '', 'BRAND_HREF': '#top',
  'IX_LABEL': 'Բաժիններ', 'IX_ARIA': 'Բաժինների ցանկ',
  'CTA': 'Նկարագրել խնդիրը', 'NAV_CTA': 'Կապ մեզ հետ',
  'HERO_EYEBROW': 'Էլեկտրաէներգիայի որակի մոնիթորինգ',
@@ -1069,6 +1081,142 @@ EN_DATA['otherP'] = EN['OTHER_P']
 HY_DATA['otherT'] = HY['OTHER_T']
 HY_DATA['otherP'] = HY['OTHER_P']
 
+# ------------------------------------------------------------ партнёрам: тексты и чертежи
+# Тексты страницы «Партнёрам» утверждены владельцем (2026-11-11) и стоят БЕЗ ПРАВОК.
+# Лежат здесь, а не у сборки страницы: названия и строки-лиды нужны и главной —
+# на ней стоит полоса из трёх входов на эту страницу.
+#
+# Чертежи вместо значков (владелец: «знаки не соответствуют названиям»). Рисунок
+# отвечает на вопрос «кто это», а не «какое явление»:
+#   1 — однолинейная схема щита с двигателем и генератором: язык проектировщика;
+#   2 — единица оборудования на питающей линии и шкала срока под ней: предмет лизинга;
+#   3 — контур защиты и запись события с отметкой: то, с чем работает страховщик.
+# Акцент везде один и тот же — точка измерения Gridec.
+PAR_ART = [
+ # 1. single-line diagram
+ '<g fill="none" stroke="currentColor" stroke-width="1.2">'
+ '<path d="M120 4v4M120 35v11"/><circle cx="120" cy="16" r="8"/><circle cx="120" cy="27" r="8"/>'
+ '<path d="M56 46v16M56 72v33M120 46v16M120 72v33M184 46v16M184 72v34"/>'
+ '<rect x="51" y="62" width="10" height="10"/><rect x="115" y="62" width="10" height="10"/>'
+ '<rect x="179" y="62" width="10" height="10"/>'
+ '<circle cx="56" cy="120" r="15"/><circle cx="120" cy="120" r="15"/>'
+ '<rect x="170" y="106" width="28" height="28"/><path d="M176 115h16M176 120h16M176 125h16" opacity=".55"/></g>'
+ '<path d="M24 46h192" stroke="currentColor" stroke-width="2.6"/>'
+ '<g fill="currentColor" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="middle">'
+ '<text x="56" y="124.6">M</text><text x="120" y="124.6">G</text></g>'
+ '<g fill="none" stroke="var(--brand)" stroke-width="1.6">'
+ '<ellipse cx="56" cy="88" rx="9" ry="4.6"/><path d="M65 88h17"/>'
+ '<rect x="82" y="79" width="24" height="18" rx="1.5"/>'
+ '<path d="M86 88q2-6 4 0t4 0 4 0 4 0" stroke-width="1.1"/></g>',
+ # 2. equipment on its supply line, with the term below
+ '<g fill="none" stroke="currentColor" stroke-width="1.2">'
+ '<rect x="96" y="20" width="104" height="62" rx="2"/><rect x="106" y="30" width="48" height="34"/>'
+ '<rect x="164" y="30" width="26" height="16"/><path d="M164 54h26M164 60h26" opacity=".55"/>'
+ '<path d="M104 82v8h88v-8"/><path d="M20 50v24M20 62h76"/>'
+ '<path d="M20 120h200"/>'
+ '<path d="M40 120v5M60 120v5M80 120v5M100 120v5M120 120v5M140 120v5M160 120v5M180 120v5M200 120v5" opacity=".55"/>'
+ '<circle cx="220" cy="120" r="3.4" fill="var(--par-ground,#EFEDEA)"/></g>'
+ '<circle cx="20" cy="120" r="3.4" fill="currentColor"/>'
+ '<g fill="none" stroke="var(--brand)" stroke-width="1.6">'
+ '<ellipse cx="56" cy="62" rx="4.6" ry="9"/></g>'
+ '<g stroke="var(--brand)" stroke-width="2.2" stroke-linecap="round">'
+ '<path d="M70 120v-10M110 120v-10M170 120v-10"/></g>',
+ # 3. protection contour and a flagged event record
+ '<g fill="none" stroke="currentColor" stroke-width="1.2">'
+ '<path d="M120 10 166 26v42c0 30-20 52-46 66-26-14-46-36-46-66V26z"/>'
+ '<path d="M28 62h184" stroke-dasharray="3 3" opacity=".45" stroke-width=".9"/>'
+ '<path d="M28 84h72l6-36 8 60 6-24h92" stroke-linejoin="round"/></g>'
+ '<circle cx="106" cy="48" r="5" fill="none" stroke="var(--brand)" stroke-width="1.6"/>'
+ '<path d="M106 39v-9" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round"/>',
+]
+
+PAR_EN = {
+ # Английский текст заменён владельцем 2026-11-11 (вторая редакция) — стоит без правок.
+ 'TITLE': 'For Partners | Gridec',
+ 'META_DESC': 'For engineering firms, system integrators, leasing and insurance companies: '
+              'Gridec measures power quality and identifies the source of problems.',
+ 'LANG_HREF': '/hy/partners/', 'HOME': '/', 'BRAND_HREF': '/',
+ 'PARTNERS_CUR': ' aria-current="page"',
+ 'PAR_H1': 'For Partners',
+ 'PAR1_T': 'Engineering Firms &amp; System Integrators',
+ 'PAR1_TAG': 'Make sure electrical systems work as intended.',
+ 'PAR1_P1': 'Electrical problems often appear only when equipment starts running under load. '
+            'Motor starts, generator changeovers and harmonics can reveal issues that were not '
+            'apparent during initial testing.',
+ 'PAR1_P2': 'Gridec measures power quality, identifies the source of problems and recommends '
+            'practical technical solutions. We also help select and integrate power monitoring '
+            'equipment, check whether corrective measures have worked and provide measurement '
+            'reports for commissioning and project handover.',
+ 'PAR2_T': 'Leasing Companies',
+ 'PAR2_TAG': 'Check electrical conditions before installing expensive equipment.',
+ 'PAR2_P1': "CNC machines, production lines and medical equipment need a power supply that meets "
+            "the manufacturer's requirements. Poor power quality can cause shutdowns, damage "
+            "equipment and disrupt production.",
+ 'PAR2_P2': 'Gridec checks the power supply before equipment is put into service. We also offer '
+            'permanent monitoring systems to track electrical conditions throughout the lease, '
+            'helping investigate failures and resolve disputes.',
+ 'PAR3_T': 'Insurance Companies',
+ 'PAR3_TAG': 'Identify electrical risks before equipment fails.',
+ 'PAR3_P1': 'Some electrical problems are difficult to spot during a routine inspection. Voltage '
+            'fluctuations, phase imbalance and harmonics can affect equipment without obvious '
+            'warning signs.',
+ 'PAR3_P2': 'Gridec measures power quality, identifies recurring disturbances and recommends '
+            'technical solutions to reduce electrical risks. We also provide and integrate '
+            'monitoring systems that record electrical events and help investigate equipment '
+            'failures.',
+ 'PAR_CTA': 'Discuss a Partnership',
+}
+PAR_HY = {
+ # Армянский текст заменён владельцем 2026-11-11 (вторая редакция) — стоит без правок.
+ # Абзацев в блоках больше, чем в английском (три и четыре): см. partners_tokens.
+ 'TITLE': 'Գործընկերների համար | Gridec',
+ 'META_DESC': 'Նախագծող, ինժեներական, լիզինգային և ապահովագրական ընկերությունների համար։ '
+              'Gridec-ը չափում է էլեկտրաէներգիայի որակը և օգնում գտնել խնդիրների աղբյուրը։',
+ 'LANG_HREF': '/partners/', 'HOME': '/hy/', 'BRAND_HREF': '/hy/',
+ 'PARTNERS_CUR': ' aria-current="page"',
+ 'PAR_H1': 'Գործընկերների համար',
+ 'PAR1_T': 'Նախագծող և ինժեներական ընկերություններ, համակարգային ինտեգրատորներ',
+ 'PAR1_TAG': 'Որպեսզի համակարգը ճիշտ աշխատի նաև իրական ծանրաբեռնվածության տակ։',
+ 'PAR1_P1': 'Նախագիծն ավարտված է, սարքավորումները՝ տեղադրված ու փորձարկված։ Բայց երբ միանում են '
+            'հզոր շարժիչները կամ օբյեկտն անցնում է գեներատորային սնուցման, կարող են առաջանալ '
+            'լարման անկումներ, անսպասելի անջատումներ և այլ խնդիրներ, որոնք նախնական ստուգումների '
+            'ժամանակ չեն նկատվել։',
+ 'PAR1_P2': 'Gridec-ը չափումներ է կատարում գործող համակարգում, օգնում գտնել խնդիրների աղբյուրը և '
+            'առաջարկում տեխնիկական լուծումներ։ Կարող ենք նաև ընտրել, տեղադրել ու կարգավորել '
+            'մոնիթորինգի սարքավորումները, իսկ անհրաժեշտ փոփոխություններից հետո կրկին չափել՝ '
+            'համոզվելու համար, որ խնդիրը լուծված է։',
+ 'PAR1_P3': 'Չափումների արդյունքները կարող են օգտագործվել նաև համակարգը պատվիրատուին հանձնելիս։',
+ 'PAR2_T': 'Լիզինգային ընկերություններ',
+ 'PAR2_TAG': 'Թանկարժեք սարքավորումը պետք է աշխատի իրեն համապատասխան էլեկտրասնուցման պայմաններում։',
+ 'PAR2_P1': 'Նոր հաստոցը կամ արտադրական գիծը կարող է պարբերաբար կանգ առնել, նույնիսկ երբ '
+            'սարքավորումն ինքնին սարքին է։ Պատճառը երբեմն լարման անկումներն են, ֆազերի '
+            'անհամաչափությունը կամ էլեկտրական ցանցի այլ խնդիրները։',
+ 'PAR2_P2': 'Gridec-ը մինչև սարքավորման գործարկումը ստուգում է էլեկտրասնուցման պայմանները և '
+            'համեմատում արտադրողի պահանջների հետ։',
+ 'PAR2_P3': 'Առաջարկում ենք նաև մշտական մոնիթորինգ, որպեսզի լիզինգի ընթացքում հնարավոր լինի հետևել '
+            'էլեկտրասնուցման վիճակին։ Եթե սարքավորումը խափանվի, գրանցված տվյալները կօգնեն հասկանալ՝ '
+            'ինչ էր կատարվում ցանցում և արդյոք խափանումը կարող էր կապված լինել էլեկտրասնուցման հետ։',
+ 'PAR3_T': 'Ապահովագրական ընկերություններ',
+ 'PAR3_TAG': 'Էլեկտրական խնդիրները միշտ չէ, որ երևում են սովորական զննման ժամանակ։',
+ 'PAR3_P1': 'Սարքավորումը կարող է ամիսներ շարունակ աշխատել լարման կրկնվող անկումների, ֆազերի '
+            'անհամաչափության կամ հարմոնիկ աղավաղումների պայմաններում։ Սովորական զննմամբ նման '
+            'խնդիրները հաճախ հնարավոր չէ հայտնաբերել։',
+ 'PAR3_P2': 'Gridec-ը չափում է էլեկտրաէներգիայի որակը, ուսումնասիրում հայտնաբերված խանգարումները և '
+            'առաջարկում դրանցից բխող ռիսկերը նվազեցնելու տեխնիկական լուծումներ։',
+ 'PAR3_P3': 'Կարող ենք նաև տեղադրել մշտական մոնիթորինգի համակարգեր, որոնք գրանցում են լարման '
+            'փոփոխություններն ու այլ խանգարումները։ Այդ տվյալները հետագայում կարող են օգնել '
+            'ուսումնասիրել սարքավորման վնասման հանգամանքները և գնահատել՝ արդյոք պատճառը կապված է '
+            'եղել էլեկտրասնուցման հետ։',
+ 'PAR_CTA': 'Քննարկել համագործակցությունը',
+}
+
+# Названия, строки-лиды и чертежи трёх блоков — общие для главной и страницы партнёров.
+for _t, _p in ((EN, PAR_EN), (HY, PAR_HY)):
+    for _k in ('PAR1_T', 'PAR1_TAG', 'PAR2_T', 'PAR2_TAG', 'PAR3_T', 'PAR3_TAG'):
+        _t[_k] = _p[_k]
+    for _i, _a in enumerate(PAR_ART):
+        _t['PAR%d_ART' % (_i + 1)] = ('<svg viewBox="0 0 240 150" aria-hidden="true">%s</svg>' % _a)
+
 for _d in (EN, HY):
     _d['FOOT_LINKS'] = foot_links(_d)
 
@@ -1120,8 +1268,8 @@ def mark_standards(text):
     return STD_NUM.sub(r'<span class="std">\1</span>', text)
 
 
-def fill(tokens, data, ff, imgs):
-    s = shell
+def fill(tokens, data, ff, imgs, tpl=None):
+    s = tpl or shell
     d = dict(data)
     d['imgs'] = imgs
     s = s.replace('%%DATA%%', json.dumps(d, ensure_ascii=False))
@@ -1488,8 +1636,10 @@ def deploy_urls(html):
         html = html.replace(a, b)
     return html
 
-def render_deploy(tokens, data, ff, out_path, post=None):
-    s = fill(tokens, data, ff, IMGD_D)
+def render_deploy(tokens, data, ff, out_path, post=None, page='', tpl=None):
+    # page — путь страницы внутри языка ('' — главная, 'partners/' — партнёрам):
+    # canonical и hreflang обязаны называть СВОЮ страницу, а не главную.
+    s = fill(tokens, data, ff, IMGD_D, tpl)
     # Две языковые версии одной страницы должны знать друг о друге, иначе поиск
     # считает их конкурентами и показывает не ту. Адреса абсолютные: домен назван,
     # а canonical и og:url относительный путь принимают, но склейку дубликатов
@@ -1497,7 +1647,7 @@ def render_deploy(tokens, data, ff, out_path, post=None):
     #
     # noindex снят. Он стоял, пока страница жила без домена и её незачем было
     # показывать; теперь запрет означал бы, что сайта нет ни в одном поиске.
-    en, hy = SITE_URL + '/', SITE_URL + '/hy/'
+    en, hy = SITE_URL + '/' + page, SITE_URL + '/hy/' + page
     head = ('<link rel="canonical" href="%s">\n'
             '<meta property="og:url" content="%s">\n'
             '<link rel="alternate" hreflang="en" href="%s">\n'
@@ -1636,9 +1786,46 @@ def write_text(rel, text):
     return path
 
 os.makedirs(DEPLOY, exist_ok=True)
-render_deploy(EN, EN_DATA, FF_EN_D, os.path.join(DEPLOY, 'index.html'), blueify)
+# ------------------------------------------------------------ партнёрам
+# Страница «Партнёрам» (2026-11-11, задание владельца): /partners/ и /hy/partners/.
+# Шаблон тот же — shell.html с его шапкой, подвалом, формой и скриптом; меняется
+# только содержимое <main> (partners.html). Тексты утверждены владельцем и стоят
+# БЕЗ ПРАВОК; своё здесь только TITLE, META_DESC и подпись строки «на главную».
+_m0, _m1 = shell.index('<main>') + len('<main>'), shell.index('</main>')
+SHELL_PAR = (shell[:_m0] + '\n'
+             + io.open(os.path.join(HERE, 'partners.html'), encoding='utf-8').read()
+             + shell[_m1:])
+
+def partners_tokens(base, par):
+    t = dict(base); t.update(par)
+    # Число абзацев у блока своё в каждом языке: собираем столько, сколько дано.
+    for n in '123':
+        t['PAR%s_BODY' % n] = ''.join(
+            '<p>%s</p>' % par[k] for k in ('PAR%s_P%d' % (n, i) for i in range(1, 6)) if k in par)
+    t['FOOT_LINKS'] = foot_links(t, home=t['HOME'], here=True)
+    return t
+
+def with_extra(data, href, title, page=None):
+    """Строка указателя, ведущая на другую страницу сайта (PT.ixExtra)."""
+    d = dict(data); d['ixExtra'] = [{'href': href, 'title': title}]
+    if page:
+        d['page'] = page
+    return d
+
+for _base, _par, _data, _ff, _dir, _home in (
+        (EN, PAR_EN, EN_DATA, FF_EN_D, 'partners', 'Home'),
+        (HY, PAR_HY, HY_DATA, FF_HY_D, os.path.join('hy', 'partners'), 'Գլխավոր էջ')):
+    os.makedirs(os.path.join(DEPLOY, _dir), exist_ok=True)
+    render_deploy(partners_tokens(_base, _par),
+                  with_extra(_data, _par['HOME'], _home, page='For Partners'), _ff,
+                  os.path.join(DEPLOY, _dir, 'index.html'), blueify,
+                  page='partners/', tpl=SHELL_PAR)
+
+render_deploy(EN, with_extra(EN_DATA, EN['PARTNERS_HREF'], EN['NAV_PARTNERS']), FF_EN_D,
+              os.path.join(DEPLOY, 'index.html'), blueify)
 os.makedirs(os.path.join(DEPLOY, 'hy'), exist_ok=True)
-render_deploy(HY, HY_DATA, FF_HY_D, os.path.join(DEPLOY, 'hy', 'index.html'), blueify)
+render_deploy(HY, with_extra(HY_DATA, HY['PARTNERS_HREF'], HY['NAV_PARTNERS']), FF_HY_D,
+              os.path.join(DEPLOY, 'hy', 'index.html'), blueify)
 # Прежнее имя убираем: оставленный файл — это второй адрес той же страницы.
 _stale = os.path.join(DEPLOY, 'hy.html')
 if os.path.exists(_stale):
@@ -1697,11 +1884,11 @@ write_text('sitemap.xml',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
            '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
            + ''.join(
-               '  <url><loc>%s</loc>%s\n'
-               '    <xhtml:link rel="alternate" hreflang="en" href="%s/"/>\n'
-               '    <xhtml:link rel="alternate" hreflang="hy" href="%s/hy/"/>\n'
-               '  </url>\n' % (loc, _lm, SITE_URL, SITE_URL)
-               for loc in (SITE_URL + '/', SITE_URL + '/hy/'))
+               '  <url><loc>%s%s%s</loc>%s\n'
+               '    <xhtml:link rel="alternate" hreflang="en" href="%s/%s"/>\n'
+               '    <xhtml:link rel="alternate" hreflang="hy" href="%s/hy/%s"/>\n'
+               '  </url>\n' % (SITE_URL, lang, pg, _lm, SITE_URL, pg, SITE_URL, pg)
+               for pg in ('', 'partners/') for lang in ('/', '/hy/'))
            + '</urlset>\n')
 print(DEPLOY, '<- deploy tree')
 print('done')

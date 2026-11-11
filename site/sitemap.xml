@@ -9,4 +9,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://gridec.am/"/>
     <xhtml:link rel="alternate" hreflang="hy" href="https://gridec.am/hy/"/>
   </url>
+  <url><loc>https://gridec.am/partners/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gridec.am/partners/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://gridec.am/hy/partners/"/>
+  </url>
+  <url><loc>https://gridec.am/hy/partners/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gridec.am/partners/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://gridec.am/hy/partners/"/>
+  </url>
 </urlset>

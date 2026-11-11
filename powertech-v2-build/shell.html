@@ -2180,14 +2180,105 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 /* 360-й экран, армянская кнопка «Կապ մեզ հետ»: без глобуса и с узкими полями группа помещается (замер: было +16). */
 @media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
+
+/* ============ СТРАНИЦА «ПАРТНЁРАМ» (2026-11-11) ============
+   Новых цветов и кеглей нет: счётчик раздела, строка-лид, проза и тёмная плита —
+   те же, что на главной. Три блока различаются грунтом (бумага / плита / бумага),
+   номером и листом с чертежом. Отступы меньше, чем у разделов главной: владелец
+   просил компактную страницу без пустых полей.
+   Второй заход (тот же день, владелец: «не гармонично», «знаки не соответствуют
+   названиям», «усилить разделы»): мелкий значок-осциллограмма заменён листом с
+   чертежом в пять колонок, оглавление под заголовком снято. */
+.par-head{padding:calc(76px + clamp(28px,4vw,60px)) 0 clamp(28px,3.4vw,48px);}
+.par-head h1{margin-top:16px;}
+.par{padding:clamp(40px,4.6vw,68px) 0;}
+.par:not(.plate2){border-top:1px solid var(--hair);}
+.par-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:var(--s5) clamp(28px,5vw,80px);align-items:center;}
+/* Лист чертежа: поднятая плоскость с миллиметровкой, как лист отчёта в разделе 04. */
+.par-art{--par-ground:var(--panel);position:relative;background:var(--panel);
+  box-shadow:inset 0 0 0 1px var(--hair);padding:clamp(18px,2.6vw,36px);color:var(--fg);
+  background-image:linear-gradient(var(--hair2) 1px,transparent 1px),
+    linear-gradient(90deg,var(--hair2) 1px,transparent 1px);
+  background-size:24px 24px;background-position:-1px -1px;}
+.par-art svg,.pb-list svg{display:block;width:100%;height:auto;overflow:visible;}
+.plate2 .par-art{--par-ground:#14161C;background-color:rgba(239,237,234,.04);color:#EFEDEA;
+  box-shadow:inset 0 0 0 1px rgba(239,237,234,.16);
+  background-image:linear-gradient(rgba(239,237,234,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(239,237,234,.06) 1px,transparent 1px);}
+.par h2{font-size:calc(clamp(26px,2.9vw,42px) * var(--hs));line-height:1.08;max-width:none;}
+.par-body .par-tag{font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-head);
+  max-width:44ch;margin:var(--s4) 0 var(--s5);text-wrap:balance;}
+.par-body p{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);max-width:62ch;}
+.par-body p+p{margin-top:var(--s3);}
+.plate2 .par-body .par-tag{color:#F4F3F1;}
+.plate2 .par-body p{color:var(--on-dark);}
+.plate.par-ct .wrap.ct-one{padding-top:clamp(52px,6vw,88px);padding-bottom:clamp(52px,6vw,88px);}
+.par-ct .cnt{margin-bottom:var(--s4);}
+@media (max-width:860px){
+  .par-grid{grid-template-columns:1fr;}
+  .par-art{max-width:420px;}
+  .par h2,.par-body .par-tag{max-width:none;}
+}
+@media (max-width:700px){.par-head{padding-top:calc(62px + 28px);}}
+
+/* ---- три входа на главной ---- */
+.pband{padding:0 0 clamp(52px,6.2vw,92px);}
+.pband .wrap::before{content:"";display:block;height:1px;background:var(--hair);
+  margin-bottom:clamp(40px,4.6vw,68px);}
+.pb-list{list-style:none;margin:clamp(24px,3vw,40px) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));background:var(--panel);
+  box-shadow:inset 0 0 0 1px var(--hair);}
+.pb-list li+li{border-left:1px solid var(--hair);}
+.pb-list a{--par-ground:var(--panel);position:relative;display:flex;flex-direction:column;height:100%;
+  padding:clamp(18px,2vw,28px);color:var(--fg);transition:background .25s var(--e);}
+.pb-list svg{max-width:210px;margin-bottom:clamp(18px,2vw,26px);}
+.pb-list b{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;color:var(--fg-head);
+  font-size:calc(clamp(19px,1.7vw,24px) * var(--hs));line-height:1.18;padding-right:34px;}
+.pb-list span{font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-mid);margin-top:var(--s2);
+  max-width:34ch;}
+.pb-list i{position:absolute;top:clamp(18px,2vw,28px);right:clamp(18px,2vw,28px);display:grid;
+  place-items:center;width:26px;height:26px;border-radius:2px;font-style:normal;font-size:14px;
+  background:var(--inv);color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
+@media (hover:hover){
+  .pb-list a:hover{background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
+  .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:#fff;}
+}
+@media (max-width:860px){
+  .pb-list{grid-template-columns:1fr;}
+  .pb-list li+li{border-left:none;border-top:1px solid var(--hair);}
+  .pb-list a{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:var(--s4);align-items:start;}
+  .pb-list svg{grid-row:1 / span 2;margin:0;}
+  .pb-list span{grid-column:2;}
+}
+
+/* ---- ссылка в шапке и строка указателя ---- */
+.hpl{display:none;}
+@media (min-width:901px){
+  html[data-nav="5"] .hpl{display:inline-block;padding:7px 4px;font-size:var(--t-hdr);font-weight:500;
+    letter-spacing:.01em;color:var(--hc);white-space:nowrap;
+    transition:box-shadow .28s var(--e),color .4s var(--e);}
+  html[data-nav="5"] .hpl:hover,html[data-nav="5"] .hpl:focus-visible,
+  html[data-nav="5"] .hpl[aria-current]{box-shadow:inset 0 -1px 0 currentColor;}
+  html[data-nav="5"]:has(#ixp.on) .hpl{color:#EFEDEA;}
+}
+/* Строка на другую страницу идёт во всю ширину листа, под обеими колонками. */
+.ixp li.ixx{grid-column:1 / -1;}
+.ixp li.ixx a{padding-left:0;padding-right:0;}
+.ixp li.ixx .no svg{display:block;width:12px;height:12px;transform:translateY(1px);}
 </style>
 
 <div id="wipe"><canvas aria-hidden="true"></canvas></div>
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
-  <a class="brand" href="#top" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
-  <nav><a class="lk" href="#applications">%%NAV_INDUSTRIES%%</a><a class="lk" href="#services">%%NAV_SERVICES%%</a><a class="lk" href="#company">%%NAV_COMPANY%%</a></nav>
+  <a class="brand" href="%%BRAND_HREF%%" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="325" height="92" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="325" height="92" decoding="async" aria-hidden="true"></a>
+  <!-- %%HOME%% пуст на главной и равен её адресу на остальных страницах: оттуда
+       ссылки на разделы ведут на главную, а не в пустоту (2026-11-11). -->
+  <nav><a class="lk" href="%%HOME%%#applications">%%NAV_INDUSTRIES%%</a><a class="lk" href="%%HOME%%#services">%%NAV_SERVICES%%</a><a class="lk" href="%%HOME%%#company">%%NAV_COMPANY%%</a><a class="lk" href="%%PARTNERS_HREF%%"%%PARTNERS_CUR%%>%%NAV_PARTNERS%%</a></nav>
   <div class="navr">
+    <!-- Ссылка на страницу партнёров стоит в шапке открыто (2026-11-11, владелец: «только
+         в указателе — этого мало»). На узком экране её нет: там она строкой указателя. -->
+    <a class="hpl" href="%%PARTNERS_HREF%%"%%PARTNERS_CUR%%>%%NAV_PARTNERS%%</a>
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="%%IX_ARIA%%"><span class="ixw">%%IX_LABEL%%</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     <!-- Подпись «EN»/«HY» понятна на глаз, но экранному читателю она ничего не
          говорит: две буквы без контекста. Полное название языка идёт в
@@ -2352,6 +2443,19 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <h2 class="h2gap">%%CO_H2%%</h2>
   <p class="lede">%%CO_P%%</p></div>
   <div class="story">%%CO_STORY%%</div>
+</div></section>
+
+<!-- ТРИ ВХОДА ДЛЯ ПАРТНЁРОВ (2026-11-11). Полоса перед контактом: название страницы,
+     три названия и три строки-лида — те же утверждённые тексты, что на самой странице,
+     ничего нового не написано. Номера раздела нет намеренно: это не девятый лист
+     главной, а дверь на другую страницу, и счёт 01–08 остаётся прежним. -->
+<section class="pband" id="partners" aria-labelledby="pb_h"><div class="wrap">
+  <h2 id="pb_h" class="rv">%%NAV_PARTNERS%%</h2>
+  <ul class="pb-list rv">
+    <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#leasing">%%PAR2_ART%%<b>%%PAR2_T%%</b><span>%%PAR2_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#insurance">%%PAR3_ART%%<b>%%PAR3_T%%</b><span>%%PAR3_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
+  </ul>
 </div></section>
 
 <section class="plate" id="contact"><div class="wrap ct-one">
@@ -2837,8 +2941,11 @@ if(irail)PT.cards.forEach(function(o,i){
   irail.appendChild(card);
 });
 
+/* Только якоря этой страницы: адрес другой страницы («/partners/») — не селектор,
+   и querySelector на нём бросает ошибку, которая остановила бы весь скрипт. */
 var navLinks=[].slice.call(document.querySelectorAll('nav a.lk')).map(function(a){
-  return {a:a,sec:document.querySelector(a.getAttribute('href'))};
+  var h=a.getAttribute('href')||'';
+  return {a:a,sec:h.charAt(0)==='#'&&h.length>1?document.querySelector(h):null};
 }).filter(function(x){return x.sec;});
 function mNav(){
   var probe=innerHeight*0.34,best=-1;
@@ -3109,7 +3216,8 @@ function wipeToTop(){
    в собственной плавной прокрутке ниже. */
 var HDR_OFF=72;
 var brandA=document.querySelector('.brand');
-if(brandA)brandA.addEventListener('click',function(e){
+/* На странице «Партнёрам» логотип — обычная ссылка на главную: прокручивать нечего. */
+if(brandA&&brandA.getAttribute('href')==='#top')brandA.addEventListener('click',function(e){
   if(e.metaKey||e.ctrlKey||e.shiftKey)return;
   e.preventDefault();e.stopPropagation();
   if(typeof PS!=='undefined'&&PS.on){psTo(0);}else{window.scrollTo({top:0,behavior:rm?'auto':'smooth'});}
@@ -3206,6 +3314,8 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   if(total>10485760){document.getElementById('ptfSizeErr').style.display='block';return;}
   var app=picked>=0?PT.appTypes[picked]:'';
   var fields={name:nm,company:co,email:em,phone:ph,application:app,message:ms};
+  /* Форма одна на весь сайт; в письме видно, с какой страницы пришёл запрос. */
+  if(PT.page)fields.page=PT.page;
   sending=true;
   /* Фокус переезжает на подтверждение: иначе он остаётся на кнопке отправки,
      которая только что исчезла вместе с формой, и человек без экрана не узнаёт,
@@ -3394,6 +3504,20 @@ ixItems.forEach(function(it){
   li.querySelector('a').setAttribute('aria-label',it.no+' '+it.title);
   li.style.setProperty('--i',ixlist.children.length);
   ixlist.appendChild(li);
+});
+/* Ссылки на ДРУГИЕ страницы сайта (2026-11-11): строка с главной ведёт к «Партнёрам»,
+   строка со страницы партнёров — на главную. Полоса навигации в шапке скрыта, поэтому
+   указатель — единственное место, где это видно и на компьютере, и на телефоне.
+   В счёт разделов строка не входит: это не лист этой страницы. */
+(PT.ixExtra||[]).forEach(function(x){
+  var li=document.createElement('li');li.className='ixx';
+  var a=document.createElement('a');a.href=x.href;
+  /* Стрелка нарисована линиями: глиф в пиксельном шрифте на 11 px выходил кляксой. */
+  a.innerHTML='<span class="no"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><span class="tl"></span>';
+  letterize(a.querySelector('.tl'),x.title);
+  a.setAttribute('aria-label',x.title);
+  li.style.setProperty('--i',ixlist.children.length);
+  li.appendChild(a);ixlist.appendChild(li);
 });
 ixItems.forEach(function(it,i){
   var cnt=it.sec.querySelector(".cnt");
