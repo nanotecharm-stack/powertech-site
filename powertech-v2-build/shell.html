@@ -3377,22 +3377,40 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   function done(){document.getElementById('f_main').style.display='none';
     var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;}
   function sendFail(){sending=false;document.getElementById('ptfSendErr').style.display='block';}
-  if(files.length){
+  /* ОТПРАВКА (аудит 2026-11-11). Прежде заявка с файлами уходила одним запросом в режиме
+     no-cors: ответ службы в нём прочитать нельзя, и ЛЮБОЙ ответ — в том числе отказ —
+     вёл на «отправлено». Клиент видел галочку, а письма не было.
+     Теперь текст заявки всегда идёт запросом, ответ которого читается (JSON), и
+     «отправлено» показывается только после подтверждения службы. Файлы идут вторым
+     письмом: читаемого ответа для них служба не даёт, поэтому в первом письме стоит
+     их перечень — пропажа вложений видна получателю и не остаётся молчаливой.
+     Отказ при заявке с файлами показывает ошибку, а не открывает почтовую программу:
+     файлы через mailto не уходят, и «отправлено» было бы неправдой. */
+  var SUBJ='Gridec website request';
+  var payload=Object.assign({},fields,{_subject:SUBJ});
+  if(files.length)payload.attachments=files.map(function(f){return f.name+' ('+fmtSize(f.size)+')';}).join(', ')+' - sent in a separate message';
+  function sendFiles(){
     var fd=new FormData();
     Object.keys(fields).forEach(function(k){fd.append(k,fields[k]);});
-    fd.append('_subject','Gridec website request');fd.append('_captcha','false');fd.append('_template','table');
+    fd.append('_subject',SUBJ+' - attachments ('+nm+')');fd.append('_captcha','false');fd.append('_template','table');
     files.forEach(function(f){fd.append('attachment',f,f.name);});
-    fetch('https://formsubmit.co/sales@gridec.am',{method:'POST',body:fd,mode:'no-cors'}).then(done).catch(sendFail);
-  }else{
-    var payload=Object.assign({},fields,{_subject:'Gridec website request'});
-    fetch('https://formsubmit.co/ajax/sales@gridec.am',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){if(!r.ok)throw new Error('send failed');done();})
-      .catch(function(){
-        var body=encodeURIComponent('Name: '+fields.name+'\nCompany: '+fields.company+'\nEmail: '+fields.email+'\nPhone: '+fields.phone+'\nApplication: '+fields.application+'\n\n'+fields.message);
-        location.href='mailto:sales@gridec.am?subject='+encodeURIComponent('Gridec website request')+'&body='+body;
-        done();
-      });
+    return fetch('https://formsubmit.co/sales@gridec.am',{method:'POST',body:fd,mode:'no-cors'});
   }
+  fetch('https://formsubmit.co/ajax/sales@gridec.am',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){if(!r.ok)throw new Error('send failed');return r.json().catch(function(){return {};});})
+    .then(function(j){
+      /* Служба отвечает 200 и на отказ (например, адрес не подтверждён): success приходит строкой. */
+      if(j&&String(j.success)==='false')throw new Error('send rejected');
+      /* Ждём файлы, прежде чем показать подтверждение: закрытая вкладка оборвала бы загрузку. */
+      if(files.length)return sendFiles().then(done,done);
+      done();
+    })
+    .catch(function(){
+      if(files.length){sendFail();return;}
+      var body=encodeURIComponent('Name: '+fields.name+'\nCompany: '+fields.company+'\nEmail: '+fields.email+'\nPhone: '+fields.phone+'\nApplication: '+fields.application+'\n\n'+fields.message);
+      location.href='mailto:sales@gridec.am?subject='+encodeURIComponent(SUBJ)+'&body='+body;
+      done();
+    });
 });
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
   document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
