@@ -2220,9 +2220,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 .par-ct .par-home .ph-tx b{color:#0D2440;}
 .par-ct .par-home .ph-tx small{color:rgba(13,14,19,.76);}
 @media (max-width:860px){.plate.par-ct .wrap.ct-one{grid-template-columns:1fr;}}
-/* Плавающая метка: только узкий экран. */
-.par-chip{display:none;}
-@media (max-width:900px){
+/* Плавающая метка — на любой ширине: ссылки «Home» в шапке страницы партнёров больше нет,
+   и без метки с середины страницы пришлось бы мотать к карточке. */
+@media all{
   .par-chip{position:fixed;left:clamp(18px,4vw,56px);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:55;
     display:inline-flex;align-items:center;gap:10px;padding:11px 15px 11px 13px;border-radius:2px;
     background:var(--inv);color:var(--inv-fg);box-shadow:inset 0 0 0 1px rgba(239,237,234,.28);
@@ -2330,7 +2330,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="navr">
     <!-- Ссылка на страницу партнёров стоит в шапке открыто (2026-11-11, владелец: «только
          в указателе — этого мало»). На узком экране её нет: там она строкой указателя. -->
-    <a class="hpl" href="%%HPL_HREF%%">%%HPL_LABEL%%</a>
+    <!-- На самой странице партнёров ссылки в шапке нет (владелец, 2026-11-11: «убери кнопку
+         из шапки»): токен пуст. Возврат там — карточки и плавающая метка. -->
+    %%HPL%%
     <button class="ixb" id="ixb" aria-expanded="false" aria-controls="ixp" aria-label="%%IX_ARIA%%"><span class="ixw">%%IX_LABEL%%</span><b id="ixn">01</b><s>/</s><em id="ixt">08</em><i class="cv">&#8595;</i></button>
     <!-- Подпись «EN»/«HY» понятна на глаз, но экранному читателю она ничего не
          говорит: две буквы без контекста. Полное название языка идёт в
