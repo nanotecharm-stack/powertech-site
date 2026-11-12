@@ -3498,11 +3498,13 @@ function openForm(trigger){
 document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',function(){openForm(b);});});
 
 /* ============ ПАРТНЁРАМ: плавающая метка «на главную» ============
-   Видна, пока на экране нет ни одной карточки возврата (верхней или нижней). */
+   Видна, пока на экране нет ни карточки возврата, ни нижней строки подвала: у строки
+   с «©» метка ложилась на текст (владелец, 2026-11-13, Safari на телефоне). В подвале
+   путь на главную дают ссылки разделов. */
 (function(){
   var chip=document.getElementById('parChip');
   if(!chip||!('IntersectionObserver' in window))return;
-  var cards=[].slice.call(document.querySelectorAll('.par-home')),seen=[];
+  var cards=[].slice.call(document.querySelectorAll('.par-home, footer .fbot')),seen=[];
   var o=new IntersectionObserver(function(es){
     es.forEach(function(e){var i=cards.indexOf(e.target);seen[i]=e.isIntersecting;});
     var on=!seen.some(Boolean);

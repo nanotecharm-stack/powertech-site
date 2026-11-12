@@ -2165,7 +2165,7 @@ document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventList
 (function(){
   var chip=document.getElementById('parChip');
   if(!chip||!('IntersectionObserver' in window))return;
-  var cards=[].slice.call(document.querySelectorAll('.par-home')),seen=[];
+  var cards=[].slice.call(document.querySelectorAll('.par-home, footer .fbot')),seen=[];
   var o=new IntersectionObserver(function(es){
     es.forEach(function(e){var i=cards.indexOf(e.target);seen[i]=e.isIntersecting;});
     var on=!seen.some(Boolean);
