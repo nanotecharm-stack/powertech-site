@@ -1146,9 +1146,7 @@ PAR_EN = {
  'PAR_H1': 'For Partners',
  'PAR1_T': 'Engineering Firms &amp; System Integrators',
  'PAR1_TAG': 'Power quality measurements for your projects.',
- 'PAR1_P1': 'Some problems appear only under working load: voltage dips on motor starts, voltage '
-            'and frequency deviations at generator changeover, harmonic distortion from drives '
-            'and rectifiers. No-load tests do not show them.',
+ 'PAR1_P1': "Some problems appear only under working load: voltage dips on motor starts, voltage and frequency deviations at generator changeover, harmonic distortion from variable-speed drives and rectifiers. No-load tests do not show them.",
  'PAR1_P2': 'Gridec works as your subcontractor or alongside your team. We record baseline '
             'conditions before new equipment goes in, investigate disturbances on operating '
             'sites and repeat the measurements after corrective work to show what changed. '
@@ -1156,26 +1154,13 @@ PAR_EN = {
             'commissioning and handover, and supply and integrate permanent monitoring '
             'where a project needs it.',
  'PAR2_T': 'Leasing Companies',
- 'PAR2_TAG': 'Know the supply before the equipment is connected.',
- 'PAR2_P1': "CNC machines, production lines and medical equipment are specified for a supply "
-            "within stated limits. Whether the lessee's site stays within them is a separate "
-            "question, and it is easier to answer before delivery than after a failure.",
- 'PAR2_P2': "Gridec measures the supply at the point of connection before commissioning and "
-            "compares it with the manufacturer's stated requirements. That report is the "
-            "baseline. For higher-value assets, a permanent monitor keeps a time-stamped record "
-            "for the lease term. Gridec holds the data, and every party to the lease has access "
-            "to it. If the equipment faults, or a dispute follows, the record shows "
-            "what the supply was doing at the time.",
+ 'PAR2_TAG': "Your asset runs on someone else's power supply.",
+ 'PAR2_P1': "Poor power quality at the lessee's site can stop or damage leased equipment. Then a dispute starts over who pays, and you have no facts.",
+ 'PAR2_P2': "Gridec gives you those facts. Before delivery, we measure the supply and tell you whether it meets the equipment manufacturer's requirements. During the lease, a monitoring system keeps a record you can show to the lessee, the supplier and the insurer.",
  'PAR3_T': 'Insurance Companies',
- 'PAR3_TAG': 'Measured electrical conditions, before and after a loss.',
- 'PAR3_P1': 'Voltage dips, unbalance, harmonic distortion and transients do not show up in a '
-            'routine inspection. They can trip drives, overheat motors and transformers and '
-            'damage electronics, and they leave no record unless an instrument is logging.',
- 'PAR3_P2': 'Gridec assesses power quality at insured facilities and reports which disturbances '
-            'occur, how often and how severe. Where a monitor is installed, its event records '
-            'can be compared with the time of a failure. This is evidence for your adjusters and '
-            'experts to weigh, not a finding on cause. The scope is power quality; it is not an '
-            'electrical safety inspection.',
+ 'PAR3_TAG': "Measurement data, before the policy and after a loss.",
+ 'PAR3_P1': "Poor power quality can damage equipment, but a visual inspection does not show it. So the risk is unknown when you write the policy, and the cause is unclear when a claim arrives.",
+ 'PAR3_P2': "Gridec measures it. Before the policy, you see whether the power quality at the site is a risk. After a loss, monitoring records show whether a supply disturbance occurred at the time. You assess and control the risk on measurements, not on assumptions.",
  'PAR_CTA': 'Discuss a Partnership',
 }
 PAR_HY = {
@@ -1193,10 +1178,7 @@ PAR_HY = {
  'PAR_H1': 'Գործընկերների համար',
  'PAR1_T': 'Նախագծող ընկերություններ և ինտեգրատորներ',
  'PAR1_TAG': 'Էլեկտրաէներգիայի որակի չափումներ՝ ձեր նախագծերի համար։',
- 'PAR1_P1': 'Որոշ խնդիրներ երևում են միայն աշխատանքային ռեժիմում։ Հզոր շարժիչների գործարկման '
-            'պահին լարումը կարճատև ընկնում է, գեներատորային սնուցման անցնելիս շեղվում են լարումն '
-            'ու հաճախականությունը, իսկ ոչ գծային բեռները հարմոնիկ աղավաղումներ են առաջացնում։ '
-            'Առանց բեռի փորձարկումները դա ցույց չեն տալիս։',
+ 'PAR1_P1': "Որոշ խնդիրներ երևում են միայն աշխատանքային ռեժիմում։ Հզոր շարժիչների գործարկման պահին լարումը կարճատև ընկնում է, գեներատորային սնուցման անցնելիս շեղվում են լարումն ու հաճախականությունը, իսկ ոչ գծային բեռները հարմոնիկ աղավաղումներ են առաջացնում։ Առանց բեռի կատարված փորձարկումները դա ցույց չեն տալիս։",
  'PAR1_P2': 'Gridec-ը կարող է աշխատել որպես ձեր ենթակապալառու կամ ձեր թիմի հետ միասին։ Չափում ենք '
             'ցանցի ելակետային վիճակը մինչև նոր սարքավորման տեղադրումը, ուսումնասիրում '
             'խանգարումները գործող համակարգում, իսկ անհրաժեշտ փոփոխություններից հետո չափում ենք '
@@ -1205,28 +1187,13 @@ PAR_HY = {
             'համար, իսկ անհրաժեշտության դեպքում մատակարարում և տեղադրում ենք մշտական մոնիթորինգի '
             'սարքավորումներ։',
  'PAR2_T': 'Լիզինգային ընկերություններ',
- 'PAR2_TAG': 'Ստուգեք էլեկտրասնուցումը, մինչև սարքավորումը միացվի։',
- 'PAR2_P1': 'Հաստոցը, արտադրական գիծը կամ բժշկական սարքավորումը նախատեսված են որոշակի սահմաններում '
-            'գտնվող էլեկտրասնուցման համար, և այդ սահմանները նշում է արտադրողը։ Թե որքանով է '
-            'լիզինգառուի մոտ սնուցումը համապատասխանում այդ պահանջներին, ավելի հեշտ է պարզել մինչև '
-            'մատակարարումը, քան խափանումից հետո։',
- 'PAR2_P2': 'Gridec-ը մինչև գործարկումը չափում է սնուցումը սարքավորման միացման կետում և համեմատում '
-            'արտադրողի պահանջների հետ։ Այս հաշվետվությունը դառնում է ելակետային փաստաթուղթ։',
- 'PAR2_P3': 'Թանկարժեք սարքավորումների համար կարելի է տեղադրել մշտական մոնիթորինգ, որը լիզինգի ողջ '
-            'ժամկետում գրանցում է ցանցի վիճակը՝ ժամանակի նշումով։ Տվյալները պահում է Gridec-ը, և '
-            'դրանք հասանելի են պայմանագրի բոլոր կողմերին։ Եթե սարքավորումը խափանվի կամ վեճ առաջանա, '
-            'գրանցումները ցույց կտան, թե այդ պահին ինչ էր կատարվում ցանցում։',
+ 'PAR2_TAG': "Ձեր սարքավորումը սնվում է լիզինգառուի ցանցից։",
+ 'PAR2_P1': "Լիզինգառուի մոտ էլեկտրաէներգիայի ցածր որակը կարող է կանգնեցնել կամ վնասել ձեր սարքավորումը։ Այդ դեպքում սկսվում է վեճ՝ ով է վճարելու, իսկ փաստեր չկան։",
+ 'PAR2_P2': "Այդ փաստերը տալիս է Gridec-ը։ Մինչև մատակարարումը չափում ենք էլեկտրաէներգիայի որակը և ասում՝ համապատասխանո՞ւմ է այն սարքավորման արտադրողի պահանջներին։ Լիզինգի ընթացքում մոնիթորինգի համակարգը գրանցում է ցանցի վիճակը, և այդ տվյալները կարող եք ներկայացնել լիզինգառուին, մատակարարին և ապահովագրողին։",
  'PAR3_T': 'Ապահովագրական ընկերություններ',
- 'PAR3_TAG': 'Չափված տվյալներ՝ պատահարից առաջ և հետո։',
- 'PAR3_P1': 'Լարման կարճատև անկումները, լարման անհամաչափությունը, հարմոնիկ աղավաղումները և '
-            'իմպուլսային գերլարումները սովորական զննմամբ չեն երևում։ Դրանք կարող են կանգնեցնել '
-            'սարքավորումը, գերտաքացնել շարժիչներն ու տրանսֆորմատորները, վնասել էլեկտրոնիկան և հետք '
-            'չեն թողնում, եթե չափիչ սարքով չեն գրանցվում։',
- 'PAR3_P2': 'Gridec-ը չափում է էլեկտրաէներգիայի որակը ապահովագրված տարածքում և հաշվետվության մեջ '
-            'նշում, թե ինչ խանգարումներ են գրանցվել, որքան հաճախ և ինչ չափի։ Եթե տեղադրված է '
-            'մշտական մոնիթորինգ, գրանցված իրադարձությունները կարելի է համադրել խափանման ժամանակի հետ։',
- 'PAR3_P3': 'Սա տեխնիկական տվյալ է ձեր փորձագետների համար, ոչ թե եզրակացություն վնասի պատճառի '
-            'մասին։ Չափում ենք միայն էլեկտրաէներգիայի որակը։ Դա էլեկտրաանվտանգության ստուգում չէ։',
+ 'PAR3_TAG': "Չափումների տվյալներ՝ պայմանագրից առաջ և պատահարից հետո։",
+ 'PAR3_P1': "Էլեկտրաէներգիայի ցածր որակը կարող է վնասել սարքավորումը, բայց արտաքին զննմամբ դա չի երևում։ Ուստի պայմանագիր կնքելիս ռիսկը հայտնի չէ, իսկ վնասի դեպքում պատճառը պարզ չէ։",
+ 'PAR3_P2': "Gridec-ը դա չափում է։ Մինչև պայմանագիրը տեսնում եք՝ արդյոք տվյալ տարածքում էլեկտրաէներգիայի որակը ռիսկային է։ Պատահարից հետո մոնիթորինգի գրանցումները ցույց են տալիս՝ եղե՞լ է ցանցում խանգարում այդ պահին։ Այսպես ռիսկը գնահատում և վերահսկում եք չափումների հիման վրա, ոչ թե ենթադրություններով։",
  'PAR_CTA': 'Քննարկել համագործակցությունը',
 }
 
