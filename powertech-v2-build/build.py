@@ -1134,84 +1134,99 @@ PAR_ART = [
 ]
 
 PAR_EN = {
- # Английский текст заменён владельцем 2026-11-11 (вторая редакция) — стоит без правок.
+ # Английский текст: третья редакция 2026-11-12 по брифу владельца (разбор и обоснование —
+ # brief/partners-en-rewrite.md; владелец: «Yes, apply»). Армянский пока прежний.
  'TITLE': 'For Partners | Gridec',
- 'META_DESC': 'For engineering firms, system integrators, leasing and insurance companies: '
-              'Gridec measures power quality and identifies the source of problems.',
+ 'META_DESC': 'Power quality measurement and monitoring for engineering firms, system integrators, '
+              'leasing companies and insurers: baseline surveys, disturbance investigation and '
+              'verification after corrective work.',
  'LANG_HREF': '/hy/partners/', 'HOME': '/', 'BRAND_HREF': '/',
  'HOME_LABEL': 'Home', 'HPL': '',
  'PARTNERS_CUR': ' aria-current="page"',
  'PAR_H1': 'For Partners',
  'PAR1_T': 'Engineering Firms &amp; System Integrators',
- 'PAR1_TAG': 'Make sure electrical systems work as intended.',
- 'PAR1_P1': 'Electrical problems often appear only when equipment starts running under load. '
-            'Motor starts, generator changeovers and harmonics can reveal issues that were not '
-            'apparent during initial testing.',
- 'PAR1_P2': 'Gridec measures power quality, identifies the source of problems and recommends '
-            'practical technical solutions. We also help select and integrate power monitoring '
-            'equipment, check whether corrective measures have worked and provide measurement '
-            'reports for commissioning and project handover.',
+ 'PAR1_TAG': 'Power quality measurements for your projects.',
+ 'PAR1_P1': 'Some problems appear only under working load: voltage dips on motor starts, voltage '
+            'and frequency deviations at generator changeover, harmonic distortion from drives '
+            'and rectifiers. No-load tests do not show them.',
+ 'PAR1_P2': 'Gridec works as your subcontractor or alongside your team. We record baseline '
+            'conditions before new equipment goes in, investigate disturbances on operating '
+            'sites and repeat the measurements after corrective work to show what changed. '
+            'Design and installation remain yours. We also prepare measurement reports for '
+            'commissioning and handover, and supply and integrate permanent monitoring '
+            'where a project needs it.',
  'PAR2_T': 'Leasing Companies',
- 'PAR2_TAG': 'Check electrical conditions before installing expensive equipment.',
- 'PAR2_P1': "CNC machines, production lines and medical equipment need a power supply that meets "
-            "the manufacturer's requirements. Poor power quality can cause shutdowns, damage "
-            "equipment and disrupt production.",
- 'PAR2_P2': 'Gridec checks the power supply before equipment is put into service. We also offer '
-            'permanent monitoring systems to track electrical conditions throughout the lease, '
-            'helping investigate failures and resolve disputes.',
+ 'PAR2_TAG': 'Know the supply before the equipment is connected.',
+ 'PAR2_P1': "CNC machines, production lines and medical equipment are specified for a supply "
+            "within stated limits. Whether the lessee's site stays within them is a separate "
+            "question, and it is easier to answer before delivery than after a failure.",
+ 'PAR2_P2': "Gridec measures the supply at the point of connection before commissioning and "
+            "compares it with the manufacturer's stated requirements. That report is the "
+            "baseline. For higher-value assets, a permanent monitor keeps a time-stamped record "
+            "for the lease term. Gridec holds the data, and every party to the lease has access "
+            "to it. If the equipment faults, or a dispute follows, the record shows "
+            "what the supply was doing at the time.",
  'PAR3_T': 'Insurance Companies',
- 'PAR3_TAG': 'Identify electrical risks before equipment fails.',
- 'PAR3_P1': 'Some electrical problems are difficult to spot during a routine inspection. Voltage '
-            'fluctuations, phase imbalance and harmonics can affect equipment without obvious '
-            'warning signs.',
- 'PAR3_P2': 'Gridec measures power quality, identifies recurring disturbances and recommends '
-            'technical solutions to reduce electrical risks. We also provide and integrate '
-            'monitoring systems that record electrical events and help investigate equipment '
-            'failures.',
+ 'PAR3_TAG': 'Measured electrical conditions, before and after a loss.',
+ 'PAR3_P1': 'Voltage dips, unbalance, harmonic distortion and transients do not show up in a '
+            'routine inspection. They can trip drives, overheat motors and transformers and '
+            'damage electronics, and they leave no record unless an instrument is logging.',
+ 'PAR3_P2': 'Gridec assesses power quality at insured facilities and reports which disturbances '
+            'occur, how often and how severe. Where a monitor is installed, its event records '
+            'can be compared with the time of a failure. This is evidence for your adjusters and '
+            'experts to weigh, not a finding on cause. The scope is power quality; it is not an '
+            'electrical safety inspection.',
  'PAR_CTA': 'Discuss a Partnership',
 }
 PAR_HY = {
- # Армянский текст заменён владельцем 2026-11-11 (вторая редакция) — стоит без правок.
- # Абзацев в блоках больше, чем в английском (три и четыре): см. partners_tokens.
+ # Армянский текст: третья редакция 2026-11-12 по брифу владельца (разбор —
+ # brief/partners-hy-rewrite.md; термины подтверждены владельцем). В каждом блоке три абзаца.
+ # ⚠ До выкладки текст должен прочитать носитель языка.
  'TITLE': 'Գործընկերների համար | Gridec',
- 'META_DESC': 'Նախագծող, ինժեներական, լիզինգային և ապահովագրական ընկերությունների համար։ '
-              'Gridec-ը չափում է էլեկտրաէներգիայի որակը և օգնում գտնել խնդիրների աղբյուրը։',
+ 'META_DESC': 'Նախագծող ընկերությունների, ինտեգրատորների, լիզինգային և '
+              'ապահովագրական ընկերությունների համար։ Gridec-ը չափում և գրանցում է '
+              'էլեկտրաէներգիայի որակը՝ մինչև սարքավորման տեղադրումը, խանգարումների ժամանակ և '
+              'փոփոխություններից հետո։',
  'LANG_HREF': '/partners/', 'HOME': '/hy/', 'BRAND_HREF': '/hy/',
  'HOME_LABEL': 'Գլխավոր էջ', 'HPL': '',
  'PARTNERS_CUR': ' aria-current="page"',
  'PAR_H1': 'Գործընկերների համար',
- 'PAR1_T': 'Նախագծող և ինժեներական ընկերություններ, համակարգային ինտեգրատորներ',
- 'PAR1_TAG': 'Որպեսզի համակարգը ճիշտ աշխատի նաև իրական ծանրաբեռնվածության տակ։',
- 'PAR1_P1': 'Նախագիծն ավարտված է, սարքավորումները՝ տեղադրված ու փորձարկված։ Բայց երբ միանում են '
-            'հզոր շարժիչները կամ օբյեկտն անցնում է գեներատորային սնուցման, կարող են առաջանալ '
-            'լարման անկումներ, անսպասելի անջատումներ և այլ խնդիրներ, որոնք նախնական ստուգումների '
-            'ժամանակ չեն նկատվել։',
- 'PAR1_P2': 'Gridec-ը չափումներ է կատարում գործող համակարգում, օգնում գտնել խնդիրների աղբյուրը և '
-            'առաջարկում տեխնիկական լուծումներ։ Կարող ենք նաև ընտրել, տեղադրել ու կարգավորել '
-            'մոնիթորինգի սարքավորումները, իսկ անհրաժեշտ փոփոխություններից հետո կրկին չափել՝ '
-            'համոզվելու համար, որ խնդիրը լուծված է։',
- 'PAR1_P3': 'Չափումների արդյունքները կարող են օգտագործվել նաև համակարգը պատվիրատուին հանձնելիս։',
+ 'PAR1_T': 'Նախագծող ընկերություններ և ինտեգրատորներ',
+ 'PAR1_TAG': 'Էլեկտրաէներգիայի որակի չափումներ՝ ձեր նախագծերի համար։',
+ 'PAR1_P1': 'Որոշ խնդիրներ երևում են միայն աշխատանքային ռեժիմում։ Հզոր շարժիչների գործարկման '
+            'պահին լարումը կարճատև ընկնում է, գեներատորային սնուցման անցնելիս շեղվում են լարումն '
+            'ու հաճախականությունը, իսկ ոչ գծային բեռները հարմոնիկ աղավաղումներ են առաջացնում։ '
+            'Առանց բեռի փորձարկումները դա ցույց չեն տալիս։',
+ 'PAR1_P2': 'Gridec-ը կարող է աշխատել որպես ձեր ենթակապալառու կամ ձեր թիմի հետ միասին։ Չափում ենք '
+            'ցանցի ելակետային վիճակը մինչև նոր սարքավորման տեղադրումը, ուսումնասիրում '
+            'խանգարումները գործող համակարգում, իսկ անհրաժեշտ փոփոխություններից հետո չափում ենք '
+            'կրկին՝ ցույց տալու, թե ինչ է փոխվել։ Նախագծումն ու մոնտաժը մնում են ձեզ։',
+ 'PAR1_P3': 'Պատրաստում ենք նաև չափումների հաշվետվություն՝ գործարկման և պատվիրատուին հանձնելու '
+            'համար, իսկ անհրաժեշտության դեպքում մատակարարում և տեղադրում ենք մշտական մոնիթորինգի '
+            'սարքավորումներ։',
  'PAR2_T': 'Լիզինգային ընկերություններ',
- 'PAR2_TAG': 'Թանկարժեք սարքավորումը պետք է աշխատի իրեն համապատասխան էլեկտրասնուցման պայմաններում։',
- 'PAR2_P1': 'Նոր հաստոցը կամ արտադրական գիծը կարող է պարբերաբար կանգ առնել, նույնիսկ երբ '
-            'սարքավորումն ինքնին սարքին է։ Պատճառը երբեմն լարման անկումներն են, ֆազերի '
-            'անհամաչափությունը կամ էլեկտրական ցանցի այլ խնդիրները։',
- 'PAR2_P2': 'Gridec-ը մինչև սարքավորման գործարկումը ստուգում է էլեկտրասնուցման պայմանները և '
-            'համեմատում արտադրողի պահանջների հետ։',
- 'PAR2_P3': 'Առաջարկում ենք նաև մշտական մոնիթորինգ, որպեսզի լիզինգի ընթացքում հնարավոր լինի հետևել '
-            'էլեկտրասնուցման վիճակին։ Եթե սարքավորումը խափանվի, գրանցված տվյալները կօգնեն հասկանալ՝ '
-            'ինչ էր կատարվում ցանցում և արդյոք խափանումը կարող էր կապված լինել էլեկտրասնուցման հետ։',
+ 'PAR2_TAG': 'Ստուգեք էլեկտրասնուցումը, մինչև սարքավորումը միացվի։',
+ 'PAR2_P1': 'Հաստոցը, արտադրական գիծը կամ բժշկական սարքավորումը նախատեսված են որոշակի սահմաններում '
+            'գտնվող էլեկտրասնուցման համար, և այդ սահմանները նշում է արտադրողը։ Թե որքանով է '
+            'լիզինգառուի մոտ սնուցումը համապատասխանում այդ պահանջներին, ավելի հեշտ է պարզել մինչև '
+            'մատակարարումը, քան խափանումից հետո։',
+ 'PAR2_P2': 'Gridec-ը մինչև գործարկումը չափում է սնուցումը սարքավորման միացման կետում և համեմատում '
+            'արտադրողի պահանջների հետ։ Այս հաշվետվությունը դառնում է ելակետային փաստաթուղթ։',
+ 'PAR2_P3': 'Թանկարժեք սարքավորումների համար կարելի է տեղադրել մշտական մոնիթորինգ, որը լիզինգի ողջ '
+            'ժամկետում գրանցում է ցանցի վիճակը՝ ժամանակի նշումով։ Տվյալները պահում է Gridec-ը, և '
+            'դրանք հասանելի են պայմանագրի բոլոր կողմերին։ Եթե սարքավորումը խափանվի կամ վեճ առաջանա, '
+            'գրանցումները ցույց կտան, թե այդ պահին ինչ էր կատարվում ցանցում։',
  'PAR3_T': 'Ապահովագրական ընկերություններ',
- 'PAR3_TAG': 'Էլեկտրական խնդիրները միշտ չէ, որ երևում են սովորական զննման ժամանակ։',
- 'PAR3_P1': 'Սարքավորումը կարող է ամիսներ շարունակ աշխատել լարման կրկնվող անկումների, ֆազերի '
-            'անհամաչափության կամ հարմոնիկ աղավաղումների պայմաններում։ Սովորական զննմամբ նման '
-            'խնդիրները հաճախ հնարավոր չէ հայտնաբերել։',
- 'PAR3_P2': 'Gridec-ը չափում է էլեկտրաէներգիայի որակը, ուսումնասիրում հայտնաբերված խանգարումները և '
-            'առաջարկում դրանցից բխող ռիսկերը նվազեցնելու տեխնիկական լուծումներ։',
- 'PAR3_P3': 'Կարող ենք նաև տեղադրել մշտական մոնիթորինգի համակարգեր, որոնք գրանցում են լարման '
-            'փոփոխություններն ու այլ խանգարումները։ Այդ տվյալները հետագայում կարող են օգնել '
-            'ուսումնասիրել սարքավորման վնասման հանգամանքները և գնահատել՝ արդյոք պատճառը կապված է '
-            'եղել էլեկտրասնուցման հետ։',
+ 'PAR3_TAG': 'Չափված տվյալներ՝ պատահարից առաջ և հետո։',
+ 'PAR3_P1': 'Լարման կարճատև անկումները, լարման անհամաչափությունը, հարմոնիկ աղավաղումները և '
+            'իմպուլսային գերլարումները սովորական զննմամբ չեն երևում։ Դրանք կարող են կանգնեցնել '
+            'սարքավորումը, գերտաքացնել շարժիչներն ու տրանսֆորմատորները, վնասել էլեկտրոնիկան և հետք '
+            'չեն թողնում, եթե չափիչ սարքով չեն գրանցվում։',
+ 'PAR3_P2': 'Gridec-ը չափում է էլեկտրաէներգիայի որակը ապահովագրված տարածքում և հաշվետվության մեջ '
+            'նշում, թե ինչ խանգարումներ են գրանցվել, որքան հաճախ և ինչ չափի։ Եթե տեղադրված է '
+            'մշտական մոնիթորինգ, գրանցված իրադարձությունները կարելի է համադրել խափանման ժամանակի հետ։',
+ 'PAR3_P3': 'Սա տեխնիկական տվյալ է ձեր փորձագետների համար, ոչ թե եզրակացություն վնասի պատճառի '
+            'մասին։ Չափում ենք միայն էլեկտրաէներգիայի որակը։ Դա էլեկտրաանվտանգության ստուգում չէ։',
  'PAR_CTA': 'Քննարկել համագործակցությունը',
 }
 
