@@ -1369,6 +1369,8 @@ def wrap(tokens, body, extra_head='', icons='../'):
         # сам — иначе сбой скрипта оставил бы пустой экран.
         '<style>html{background:#EFEDEA}html.wiping{background:#AC4A29}'
         'html.wiping body{visibility:hidden}</style>\n',
+        # Класс .js: появление блоков (.rv) прячет их только при работающем скрипте.
+        '<script>document.documentElement.className+=" js";</script>\n',
         '<script>try{if(sessionStorage.getItem("ptwipe")==="1"){'
         'var _h=document.documentElement;_h.className+=" wiping";'
         'setTimeout(function(){_h.classList.remove("wiping")},2000);}}catch(e){}</script>\n',
@@ -1578,6 +1580,111 @@ def palette_pass(name):
 
 mintify = palette_pass('mint')
 warmify = palette_pass('warm')
+# ---------------------------------------------------------------- именованные значения
+# Полировка Hallmark (2026-11-14, владелец: «Polish only»). В отгружаемой странице ни один
+# цвет и ни одна гарнитура не стоят литералом в правилах: каждое значение получает имя
+# в одном блоке :root, а правило ссылается на него через var(). Делается это здесь,
+# последним проходом над готовой страницей, а не в shell.html, потому что shell написан
+# в терракотовой палитре и цвета в нём переводит палитровый проход — литералы ему нужны.
+# Значение имени — ровно тот текст, что стоял в правиле, поэтому отрисовка не меняется.
+# Имена цветов — из DESIGN.md; прозрачность дописана хвостом (-a58 = альфа .58).
+HM_NAMES = {
+    'f6f1e9': 'paper', 'f9f5ee': 'paper-tint', 'f0eae0': 'paper-shade', 'ebe4d8': 'paper-deep',
+    'dcd3c4': 'paper-placeholder', 'fdfaf4': 'whitewash', '2b2722': 'ink-warm',
+    '0d2440': 'ink-plate', '12294a': 'ink-plate-mid', '162e52': 'ink-plate-high',
+    '183256': 'ink-plate-top', '102745': 'ink-plate-low', '081a31': 'ink-shadow',
+    'ffffff': 'highlight', '2e5e99': 'brand', '7ba4d0': 'brand-on-plate', 'a32c26': 'error',
+}
+HM_STAMP = (
+    '/* Hallmark · checked: 2026-11-14 · genre: modern-minimal (inferred)\n'
+    ' * floor: open 67 (tracked labels, locked by DESIGN.md), 15, 34, 48, 76 · fixed: 4 (15, 48, 50, 62) · layout kept\n'
+    ' * built: the project · redesign: polish · copy: verbatim · v2.0.0 */\n')
+_HM_COLOR = re.compile(r'#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![0-9A-Za-z_-])'
+                       r'|(?<![\w-])(?:rgba?|hsla?)\([^()]*\)')
+_HM_MASK = re.compile(r'"(?:[^"\\]|\\.)*"|\'(?:[^\'\\]|\\.)*\'|url\([^)\'"]*\)')
+_HM_GENERIC = {'serif', 'sans-serif', 'monospace', 'cursive', 'fantasy', 'system-ui',
+               'inherit', 'initial', 'unset', 'revert'}
+
+def hallmark_tokens(html):
+    toks = {}     # имя -> текст значения
+
+    def claim(name, lit):
+        key = re.sub(r'\s+', '', lit).lower()
+        while name in toks and re.sub(r'\s+', '', toks[name]).lower() != key:
+            name += 'b'
+        toks.setdefault(name, lit)
+        return name
+
+    def color_name(lit):
+        t = lit.lower()
+        if t.startswith('#'):
+            h = t[1:]
+            if len(h) in (3, 4):
+                h = ''.join(c * 2 for c in h)
+            tail = ''
+            if len(h) == 8:
+                h, tail = h[:6], '-x' + h[6:]
+            return '--c-' + HM_NAMES.get(h, h) + tail
+        m = re.match(r'rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+%?)\s*)?\)$', t)
+        if m:
+            h = '%02x%02x%02x' % tuple(int(x) for x in m.group(1, 2, 3))
+            name = '--c-' + HM_NAMES.get(h, h)
+            if m.group(4) is not None:
+                a = m.group(4)
+                name += '-a' + (re.sub(r'[^0-9]', '', a[1:] if a.startswith('0.') else a) or '0')
+            return name
+        return '--c-' + re.sub(r'[^a-z0-9]+', '-', t).strip('-')
+
+    def do_css(css):
+        masks = []
+        def mask(m):
+            masks.append(m.group(0))
+            return '\x00%d\x00' % (len(masks) - 1)
+        def unmask(t):
+            return re.sub(r'\x00(\d+)\x00', lambda m: masks[int(m.group(1))], t)
+        body = _HM_MASK.sub(mask, css)
+
+        def decl(text):
+            if ':' not in text:
+                return text
+            prop, val = text.split(':', 1)
+            if prop.strip().lower() == 'font-family':
+                v = val.strip()
+                if 'var(' in v or '!' in v:
+                    return text
+                full = unmask(v)
+                first = full.split(',')[0].strip().strip('\'"')
+                if first.lower() in _HM_GENERIC:
+                    return text
+                name = claim('--face-' + re.sub(r'[^a-z0-9]+', '-', first.lower()).strip('-'), full)
+                return prop + ':var(%s)' % name
+            return prop + ':' + _HM_COLOR.sub(
+                lambda m: 'var(%s)' % claim(color_name(m.group(0)), m.group(0)), val)
+
+        out, stack, pend = [], [], ''
+        for part in re.split(r'([{};])', body):
+            if part == '{':
+                stack.append(pend.strip()); out.append(pend + '{'); pend = ''
+            elif part in (';', '}'):
+                keep = (not stack or stack[-1].startswith(':root')
+                        or any(x.startswith('@font-face') for x in stack))
+                out.append((pend if keep else decl(pend)) + part); pend = ''
+                if part == '}' and stack:
+                    stack.pop()
+            else:
+                pend += part
+        out.append(pend)
+        return unmask(''.join(out))
+
+    blocks = []
+    def grab(m):
+        blocks.append(do_css(m.group(2)))
+        return m.group(1) + '\x01%d\x01' % (len(blocks) - 1) + m.group(3)
+    html = re.sub(r'(<style[^>]*>)(.*?)(</style>)', grab, html, flags=re.S)
+    root = ':root{' + ''.join('%s:%s;' % (k, toks[k]) for k in sorted(toks)) + '}\n'
+    blocks[0] = '\n' + HM_STAMP + root + blocks[0].lstrip('\n')
+    return re.sub(r'\x01(\d+)\x01', lambda m: blocks[int(m.group(1))], html)
+
 def render(tokens, data, out_body, out_full, post=None):
     s = fill(tokens, data, tokens['FONTFACES'], IMGD)
     # Переключатель языка ведёт на деплойные имена — в паре v2 это index.html и
@@ -1722,6 +1829,7 @@ def render_deploy(tokens, data, ff, out_path, post=None, page='', tpl=None):
         full = post(full)
     full = strip_comments(full)
     full = deploy_urls(full)
+    full = hallmark_tokens(full)
     io.open(out_path, 'w', encoding='utf-8').write(full)
     print(out_path, round(len(full) / 1024), 'KB')
 
