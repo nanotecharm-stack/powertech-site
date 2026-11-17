@@ -1894,10 +1894,9 @@ def render_deploy(tokens, data, ff, out_path, post=None, page='', tpl=None):
 SITE_PALETTE = os.environ.get('PT_PALETTE', 'green')
 blueify = palette_pass(SITE_PALETTE)
 
-render(EN, EN_DATA, 'art-en.html', 'pt-en.html', blueify)
-render(HY, HY_DATA, 'art-hy.html', 'pt-hy.html', blueify)
-render(EN, EN_DATA, 'art-en-mint.html', 'pt-en-mint.html', mintify)
-render(EN, EN_DATA, 'art-en-warm.html', 'pt-en-warm.html', warmify)
+# Страницы просмотра pt-*/art-* (синяя/мятная/тёплая палитры, август) больше не пишутся
+# (2026-11-17, владелец: «почисти от мусора проект»). render() оставлен — при нужде
+# вызвать вручную: render(EN, EN_DATA, 'art-en.html', 'pt-en.html', blueify).
 
 # ------------------------------------------------------------------- deploy
 # `site/` в корне репозитория — это ровно то, что уходит в ветку main, файл в файл.
