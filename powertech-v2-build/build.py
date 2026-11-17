@@ -1461,6 +1461,34 @@ PALETTES = {
         shadow='#081A31',
         light='#2E5E99', dark='#7BA4D0', glow='#4C8ACB', deep='#0A1A2E', err='#A32C26',
     ),
+    # Зелёная палитра (2026-11-17, владелец: «в целом мне этот зелёный больше нравится»,
+    # затем «сделай в этом варианте …acc=loud»). Бумага и тёплые чернила прежние; синие
+    # плашки повёрнуты в зелёно-графитовые той же светлоты, марка — глубокий зелёный.
+    # Акцент на плашке НЕ мятный (владелец: «этот акцент нет»): мелкие метки на тёмном
+    # тихие, цвета бумаги (#C5C4BD = бумага .78 поверх плашки #17241F). Громкий цвет —
+    # медь, по правилу «два тихих цвета, один громкий»: по одной метке на экран.
+    'green': dict(
+        paper='#F6F1E9', lo='#EBE4D8', tint='#F0EAE0', tint2='#F9F5EE',
+        ph='#DCD3C4', offwhite='#FDFAF4',
+        inkwarm='#2B2722',
+        ink='#17241F', ink2='#1B2B24', ink3='#1E3129', ink4='#21352C', ink5='#19271F',
+        shadow='#0E1814',
+        light='#2F6B4F', dark='#C5C4BD', glow='#4F9A74', deep='#0E1A15', err='#A32C26',
+        # синие литералы, которые shell.html держит вне палитры (поле записи события,
+        # подписи раздела 01, подложка окна героя)
+        extra=[('#17334A', '#1F3A2E'), ('#17375B', '#214234'),
+               ('#A4BAD0', '#A8C4B4'), ('#B5C3D0', '#B8CBBF'),
+               # синие, вписанные в shell.html прямо (заголовок, фокус в подвале,
+               # запасной цвет и холст перехода смены языка)
+               ('#0D2440', '#17241F'), ('#7BA4D0', '#C5C4BD')],
+        # медь: стрелка главной кнопки героя, ссылка раздела 03, стрелка в «Контактах».
+        # Наведение сохраняет прежнее поведение (белая подсветка).
+        extra_css=(
+            '#top .btn i,#contact .ct-act button i{background:#E08A4B;color:#17241F;}\n'
+            '#top .btn:hover i{background:rgba(255,255,255,.22);color:#fff;}\n'
+            '#services .alink{color:#E08A4B;}\n'
+            '#services .alink:hover{color:#fff;}\n'),
+    ),
 }
 
 def _mix(a, b, t):
@@ -1561,7 +1589,8 @@ def palette_pass(name):
     css = PAL_CSS % dict(p, name=name, inkrgb=_rgb(p['ink']),
                          inkw=inkw, inkwrgb=_rgb(inkw),
                          darkrgb=_rgb(p['dark']), glowrgb=_rgb(p['glow']))
-    rules = palette_map(p)
+    css += p.get('extra_css', '')
+    rules = palette_map(p) + list(p.get('extra', []))
 
     def run(html):
         for a, b in rules:
@@ -1594,6 +1623,10 @@ HM_NAMES = {
     '0d2440': 'ink-plate', '12294a': 'ink-plate-mid', '162e52': 'ink-plate-high',
     '183256': 'ink-plate-top', '102745': 'ink-plate-low', '081a31': 'ink-shadow',
     'ffffff': 'highlight', '2e5e99': 'brand', '7ba4d0': 'brand-on-plate', 'a32c26': 'error',
+    # зелёная палитра (2026-11-17): те же роли, другие значения
+    '17241f': 'ink-plate', '1b2b24': 'ink-plate-mid', '1e3129': 'ink-plate-high',
+    '21352c': 'ink-plate-top', '19271f': 'ink-plate-low', '0e1814': 'ink-shadow',
+    '2f6b4f': 'brand', 'c5c4bd': 'brand-on-plate', 'e08a4b': 'copper',
 }
 HM_STAMP = (
     '/* Hallmark · checked: 2026-11-14 · genre: modern-minimal (inferred)\n'
@@ -1836,7 +1869,12 @@ def render_deploy(tokens, data, ff, out_path, post=None, page='', tpl=None):
 # Синяя палитра — базовая, а не обзорный вариант: решение принято 2026-08-04.
 # Тот же пост-проход, что делает mint и warm, только применён к основным сборкам,
 # поэтому английская и армянская страницы получают её одинаково.
-blueify = palette_pass('blue')
+#
+# 2026-11-17 владелец перевёл сайт на зелёную палитру. Синяя оставлена в PALETTES:
+# PT_PALETTE=blue собирает прежний вид байт в байт. Имя blueify сохранено, чтобы
+# не трогать все места вызова.
+SITE_PALETTE = os.environ.get('PT_PALETTE', 'green')
+blueify = palette_pass(SITE_PALETTE)
 
 render(EN, EN_DATA, 'art-en.html', 'pt-en.html', blueify)
 render(HY, HY_DATA, 'art-hy.html', 'pt-hy.html', blueify)
