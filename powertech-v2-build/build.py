@@ -1393,13 +1393,13 @@ def wrap(tokens, body, extra_head='', icons='../'):
         # найдя в голове единственную иконку в svg, он не идёт искать /favicon.ico
         # по соглашению — и рисует в выдаче безликий глобус. В .ico есть кадр
         # 48×48, ровно тот размер, до которого Google всё приводит.
-        '<link rel="icon" href="', icons, 'favicon.ico?v=of1" sizes="48x48">\n',
-        # ?v=of1 — значок «open frame» (2026-11-17): Chrome держал прежний значок по адресу;
+        '<link rel="icon" href="', icons, 'favicon.ico?v=of2" sizes="48x48">\n',
+        # ?v=of2 — значок «open frame» (2026-11-17): Chrome держал прежний значок по адресу;
         # новый адрес заставляет скачать заново. При следующей смене значка сменить метку.
         # PNG кратный 48 — то, что рекомендует Google для значка в выдаче (2026-09-14, icons_mark.py).
-        '<link rel="icon" href="', icons, 'favicon-96.png?v=of1" type="image/png" sizes="96x96">\n',
-        '<link rel="icon" href="', icons, 'favicon.svg?v=of1" type="image/svg+xml">\n',
-        '<link rel="apple-touch-icon" href="', icons, 'apple-touch-icon.png?v=of1">\n',
+        '<link rel="icon" href="', icons, 'favicon-96.png?v=of2" type="image/png" sizes="96x96">\n',
+        '<link rel="icon" href="', icons, 'favicon.svg?v=of2" type="image/svg+xml">\n',
+        '<link rel="apple-touch-icon" href="', icons, 'apple-touch-icon.png?v=of2">\n',
         '<meta property="og:type" content="website">\n',
         '<meta property="og:title" content="', tokens['TITLE'], '">\n',
         '<meta property="og:description" content="', desc, '">\n',
