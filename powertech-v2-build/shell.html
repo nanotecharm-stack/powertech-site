@@ -787,7 +787,10 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   .hero h1{width:auto;max-width:none;font-size:calc(clamp(36px,10vw,44px) * var(--hs));}
   .hero .hp{font-size:16.5px;}
   .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:60% 50%;}
-  .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:var(--t-aux);line-height:1.7;letter-spacing:.1em;}
+  .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:var(--t-aux);line-height:1.7;letter-spacing:.1em;
+    /* 2026-11-17: под фото подпись лежала на серой подложке загрузки #7F7E7E тёмным текстом —
+       в Safari на телефоне читалась плохо. Своя бумага и цвет вторичного текста. */
+    background:var(--bg);color:var(--fg-mid);}
   .hmark span{display:inline;}
   .hmark span+span::before{content:"\00a0\00a0\00b7\00a0\00a0";}
   .hmark::after{display:none;}
@@ -2348,7 +2351,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Ведёт к разделу контактов, а не открывает окно: форма остаётся на кнопке
          героя и на заголовке восьмого раздела. Стрелка та же, что у ссылок
          внутри страницы. -->
-    <a class="btn" href="#end"><span>%%NAV_CTA%%</span><i>&#8599;</i></a>
+    <a class="btn" href="#end"><span>%%NAV_CTA%%</span><i>&#8599;&#xFE0E;</i></a>
   </div>
 </div>
 <span class="hprog-clip" aria-hidden="true"><i class="hprog" id="hprog"></i></span>
@@ -2365,7 +2368,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">%%HERO_P%%</p>
-      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;&#xFE0E;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
   </div>
   </div>
   <!-- ФОТО ГЕРОЯ (бриф 2026-09-14): сгенерированная иллюстрация измерений у электрощита
@@ -2419,7 +2422,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="igrid" id="irail"></div>
   <div class="iother rv">
     <div><h3>%%OTHER_T%%</h3><p>%%OTHER_P%%</p></div>
-    <button class="btn" type="button" data-open-form><span>%%CTA%%</span><i>&#8599;</i></button>
+    <button class="btn" type="button" data-open-form><span>%%CTA%%</span><i>&#8599;&#xFE0E;</i></button>
   </div>
 </div></section>
 
@@ -2453,7 +2456,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <p class="wk-note">%%SVC_P2%%</p>
     <div class="steps">%%SVC_STEPS%%</div>
   </div>
-  <a class="alink rv" href="#report">%%SVC_LINK%% ↗</a>
+  <a class="alink rv" href="#report">%%SVC_LINK%% ↗︎</a>
 </div></section>
 
 <!-- ОТЧЁТ КАК ДОКУМЕНТ (бриф 2). Тёмная плита мониторинга не обрывается
@@ -2513,15 +2516,15 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <section class="pband" id="partners" aria-labelledby="pb_h"><div class="wrap">
   <h2 id="pb_h" class="rv">%%NAV_PARTNERS%%</h2>
   <ul class="pb-list rv">
-    <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
-    <li><a href="%%PARTNERS_HREF%%#leasing">%%PAR2_ART%%<b>%%PAR2_T%%</b><span>%%PAR2_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
-    <li><a href="%%PARTNERS_HREF%%#insurance">%%PAR3_ART%%<b>%%PAR3_T%%</b><span>%%PAR3_TAG%%</span><i aria-hidden="true">&#8599;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#leasing">%%PAR2_ART%%<b>%%PAR2_T%%</b><span>%%PAR2_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#insurance">%%PAR3_ART%%<b>%%PAR3_T%%</b><span>%%PAR3_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
   </ul>
 </div></section>
 
 <section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
-  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;</i></button></h2>
+  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;&#xFE0E;</i></button></h2>
   <p class="ct-sub">%%CT_SUB%%</p></div>
 </div></section>
 
@@ -2614,7 +2617,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Отказ сети при отправке с вложениями: раньше catch вёл на тот же done()
          и человек видел «отправлено» при неушедшем письме. -->
     <div class="errline" id="ptfSendErr" role="alert">%%F_SEND_ERR%%</div>
-    <button class="btn" id="ptfSubmit" type="submit"><span>%%F_SEND%% ↗</span></button>
+    <button class="btn" id="ptfSubmit" type="submit"><span>%%F_SEND%% ↗︎</span></button>
     <!-- Строка о данных стоит у кнопки, а не в подвале: прочитать её нужно до
          отправки, а не после того, как файлы уже ушли. -->
     <p class="fpriv">%%F_PRIV%%</p>
