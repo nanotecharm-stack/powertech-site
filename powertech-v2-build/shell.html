@@ -2193,6 +2193,23 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 /* Армянское «Բաժիններ» шире: с глобусом и «ENG» группа выходила за край на 430 (замер +9). Слово
    уходит до 479, кнопка указателя остаётся стрелкой с aria-label; зона нажатия — не ниже 40 px. */
 @media(max-width:479px){ html[data-nav="5"][lang="hy"] .ixw{display:none;} html[data-nav="5"] .ixb{padding:12px 6px;margin-right:-6px;} }
+/* 2026-11-17, владелец: «в шапке не видно названия только стрелка разделов» → «Move ENG into menu».
+   На телефоне (до 529; на 480–529 слово с глобусом и «ENG» наезжало на знак на 9 px) переключатель языка уходит из шапки в нижнюю строку панели указателя,
+   а слово «Բաժիններ» / «Index» возвращается в шапку. Ниже 375 места нет и с этим — там остаётся
+   стрелка (замер: на 375 слово с кнопкой «Կապ մեզ հետ» встаёт впритык, кнопке снято 2 px поля). */
+.ixp .ixlang{display:none;}
+@media(max-width:529px){
+  html[data-nav="5"] #hdr .lang{display:none;}
+  html[data-nav="5"] .ixp .ixlang{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;margin-top:6px;padding:12px 0 6px;
+    color:rgba(239,237,234,.84);text-decoration:none;font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.12em;}
+  html[data-nav="5"][lang="hy"] .ixp .ixlang{font-family:%%BODYFONT%%;letter-spacing:.04em;}
+  html[data-nav="5"] .ixp .ixlang .gl{width:14px;height:14px;flex:0 0 auto;}
+}
+@media(min-width:375px) and (max-width:529px){
+  html[data-nav="5"][lang] .ixw{display:inline;}
+  html[data-nav="5"] #hdr .btn{padding-left:9px;padding-right:9px;}
+  html[data-nav="5"] #hdr .ixb .cv{margin-left:5px;}
+}
 /* 360-й экран, армянская кнопка «Կապ մեզ հետ»: без глобуса и с узкими полями группа помещается (замер: было +16). */
 @media(max-width:379px){ .lang .gl{display:none;} html[data-nav="5"] .lang{padding:7px 6px;margin-right:-6px;} html[data-nav="5"] header .btn{padding:10px 11px;} }
 @media(max-width:359px){ html[data-nav="5"] .ixw{display:none;} }
@@ -2363,7 +2380,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 </div>
 <span class="hprog-clip" aria-hidden="true"><i class="hprog" id="hprog"></i></span>
 <div class="ixsc" id="ixsc"></div>
-<div class="ixp" id="ixp" hidden><div class="ixin"><ol id="ixlist"></ol></div></div>
+<div class="ixp" id="ixp" hidden><div class="ixin"><ol id="ixlist"></ol><a class="flang ixlang" href="%%LANG_HREF%%" aria-label="%%LANG_ARIA%%"><svg class="gl" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><circle cx="7" cy="7" r="5.6"/><ellipse cx="7" cy="7" rx="2.4" ry="5.6"/><path d="M1.4 7h11.2M2.5 4.1h9M2.5 9.9h9"/></svg><span>%%LANG_LABEL%%</span></a></div></div>
 </header>
 <main>
 
