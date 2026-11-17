@@ -2621,8 +2621,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="fr">
       <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" required aria-required="true" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true" aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
@@ -3386,17 +3386,14 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   if(sending)return;
   document.getElementById('ptfSendErr').style.display='none';
   var nm=gv('ptfName').trim(),co=gv('ptfCompany').trim(),em=gv('ptfEmail').trim(),ph=gv('ptfPhone').trim(),ms=gv('ptfMsg').trim();
-  /* Аудит 2026-09-14: обязательны имя, описание и ХОТЯ БЫ ОДИН контакт. Компания и второй
-     контакт — по желанию. Ошибка стоит у своего поля; общая строка — только сводка. */
-  var emailOk=!em||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
-  var phoneOk=!ph||(ph.replace(/\D/g,'').length>=6);
-  var noContact=!em&&!ph;
+  /* Обязательны имя, почта, телефон и описание; компания — по желанию (2026-11-17, владелец:
+     «Both required»; с аудита 2026-09-14 до этого хватало одного контакта). Ошибка стоит у
+     своего поля; общая строка — только сводка. */
+  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+  var phoneOk=ph.replace(/\D/g,'').length>=6;
   var errs={ptfName:nm?'':PT.errName,ptfMsg:ms?'':PT.errMsg,
-            /* 2026-11-17, владелец: одна фраза под каждым полем читалась как «почта требует телефон»,
-               а общая под парой — как требование только к почте. Теперь фраза разрезана по полям:
-               «Укажите почту» под почтой, «или телефон.» под телефоном — читается слева направо. */
-            ptfEmail:noContact?PT.errContactA:(emailOk?'':PT.errEmail),
-            ptfPhone:noContact?PT.errContactB:(phoneOk?'':PT.errPhone)};
+            ptfEmail:!em?PT.errEmailReq:(emailOk?'':PT.errEmail),
+            ptfPhone:!ph?PT.errPhoneReq:(phoneOk?'':PT.errPhone)};
   var isBad=function(k){return !!errs[k];};
   var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k),fe=document.getElementById(k+'Err'),bad=isBad(k);
     el.classList.toggle('err',bad);
@@ -3456,9 +3453,6 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
   document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
     var fe=document.getElementById(id+'Err');if(fe){fe.textContent='';fe.classList.remove('on');}
-    /* контакт один на два поля: ввод в одно снимает ошибку и с другого */
-    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err');
-      if(oe&&(oe.textContent===PT.errContactA||oe.textContent===PT.errContactB)){o.classList.remove('err');o.removeAttribute('aria-invalid');oe.textContent='';oe.classList.remove('on');}}
     document.getElementById('ptfFormErr').style.display='none';});
 });
 

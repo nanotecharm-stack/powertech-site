@@ -723,8 +723,8 @@ EN_DATA = {
  'errName': 'Please enter your name.', 'errMsg': 'Please describe what happened.',
  'errEmail': 'Please enter a valid email address.', 'errPhone': 'Please enter a valid phone number.',
  'errContact': 'Enter an email or a phone number.',
- # та же фраза, разрезанная по двум полям (2026-11-17): «почта» под почтой, «или телефон» под телефоном
- 'errContactA': 'Enter an email', 'errContactB': 'or a phone number.',
+ # 2026-11-17, владелец: «Both required» — почта и телефон обязательны оба, у каждого поля своё сообщение
+ 'errEmailReq': 'Please enter your email.', 'errPhoneReq': 'Please enter your phone number.',
  'hint1': ' file · ', 'hintN': ' files · ', 'hintSuf': ' of 10 MB', 'hint0': 'Up to 10 MB total.',
  'appTypes': ['Manufacturing', 'Solar PV', 'Healthcare / Laboratory',
               'Data Centre / IT', 'Commercial Building',
@@ -1024,7 +1024,7 @@ HY_DATA.update({
  'errName': 'Նշեք ձեր անունը։', 'errMsg': 'Նկարագրեք՝ ինչ է տեղի ունեցել։',
  'errEmail': 'Նշեք վավեր էլ. փոստի հասցե։', 'errPhone': 'Նշեք վավեր հեռախոսահամար։',
  'errContact': 'Նշեք էլ. փոստ կամ հեռախոսահամար։',
- 'errContactA': 'Նշեք էլ. փոստ', 'errContactB': 'կամ հեռախոսահամար։',
+ 'errEmailReq': 'Նշեք ձեր էլ. փոստը։', 'errPhoneReq': 'Նշեք ձեր հեռախոսահամարը։',
  'hint1': ' ֆայլ · ', 'hintN': ' ֆայլ · ', 'hintSuf': ' / 10 ՄԲ', 'hint0': 'Առավելագույնը՝ 10 ՄԲ։',
  'appTypes': ['Արտադրություն', 'Արևային կայան', 'Բուժհաստատություն / լաբորատորիա',
               'Տվյալների կենտրոն / IT', 'Կոմերցիոն շենք',
