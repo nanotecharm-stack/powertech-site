@@ -1806,8 +1806,6 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* Ошибка у своего поля: появляется только с текстом, читается диктором как alert. */
 #fmd .ferr{display:none;font-size:14px;line-height:1.45;color:#A8341F;margin-top:6px;}
 #fmd .ferr.on{display:block;}
-/* общее сообщение «почта или телефон» — на всю ширину ряда, сразу под парой полей */
-#fmd .fr>.ferr-pair{grid-column:1/-1;margin-top:-16px;}
 #fmd .gl{margin-top:38px;}
 #fmd .gl small{margin-left:2px;}
 #fmd .gl em{font-style:normal;color:var(--brand-ink);}
@@ -1926,7 +1924,6 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   .navr{gap:var(--s2);}
   .btn{padding:11px 14px;font-size:13px;}
       #fmd .fr{grid-template-columns:1fr;gap:18px;}
-#fmd .fr>.ferr-pair{margin-top:-12px;}
       .md .x{top:8px;right:8px;}
 }
 /* Снятые переходы не отменяют начальных состояний: без этих сбросов ряды
@@ -2624,11 +2621,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="fr">
       <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr ptfContactErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr ptfContactErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
-      <!-- 2026-11-17, владелец: «в поле где нужна почта требует телефон, а где телефон — почту». Правило
-           «почта ИЛИ телефон» — одно на оба поля, поэтому и сообщение одно, под парой полей. -->
-      <span class="ferr ferr-pair" id="ptfContactErr" role="alert"></span>
+      <div><label for="ptfEmail">%%F_EMAIL%%</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%%</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
@@ -3398,11 +3392,12 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   var phoneOk=!ph||(ph.replace(/\D/g,'').length>=6);
   var noContact=!em&&!ph;
   var errs={ptfName:nm?'':PT.errName,ptfMsg:ms?'':PT.errMsg,
-            ptfEmail:emailOk?'':PT.errEmail,
-            ptfPhone:phoneOk?'':PT.errPhone};
-  /* нет ни почты, ни телефона: оба поля подчёркнуты, сообщение одно — под парой */
-  var ce=document.getElementById('ptfContactErr');ce.textContent=noContact?PT.errContact:'';ce.classList.toggle('on',noContact);
-  var isBad=function(k){return !!errs[k]||(noContact&&(k==='ptfEmail'||k==='ptfPhone'));};
+            /* 2026-11-17, владелец: одна фраза под каждым полем читалась как «почта требует телефон»,
+               а общая под парой — как требование только к почте. Теперь фраза разрезана по полям:
+               «Укажите почту» под почтой, «или телефон.» под телефоном — читается слева направо. */
+            ptfEmail:noContact?PT.errContactA:(emailOk?'':PT.errEmail),
+            ptfPhone:noContact?PT.errContactB:(phoneOk?'':PT.errPhone)};
+  var isBad=function(k){return !!errs[k];};
   var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k),fe=document.getElementById(k+'Err'),bad=isBad(k);
     el.classList.toggle('err',bad);
     if(fe){fe.textContent=errs[k]||'';fe.classList.toggle('on',bad);}
@@ -3462,9 +3457,8 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
     var fe=document.getElementById(id+'Err');if(fe){fe.textContent='';fe.classList.remove('on');}
     /* контакт один на два поля: ввод в одно снимает ошибку и с другого */
-    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err'),ce=document.getElementById('ptfContactErr');
-      if(ce.classList.contains('on')){ce.textContent='';ce.classList.remove('on');
-        if(!(oe&&oe.textContent)){o.classList.remove('err');o.removeAttribute('aria-invalid');}}}
+    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err');
+      if(oe&&(oe.textContent===PT.errContactA||oe.textContent===PT.errContactB)){o.classList.remove('err');o.removeAttribute('aria-invalid');oe.textContent='';oe.classList.remove('on');}}
     document.getElementById('ptfFormErr').style.display='none';});
 });
 
