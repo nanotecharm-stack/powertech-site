@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#F6F1E9"/><svg x="7" y="7" width="50" height="50" viewBox="24 28 176 192"><svg xmlns="http://www.w3.org/2000/svg" viewBox="24 28 176 192" width="176" height="192" role="img" aria-label="Gridec symbol">
-  <title>Gridec symbol, light backgrounds</title>
-  <g id="mark" transform="translate(15 23) scale(.72)">
-    <path id="back-orange" d="M 21 65 Q 21 47 38.2 41.6 L 157.8 4.4 Q 175 -1 175 17 L 175 127 Q 175 145 157.8 150.4 L 38.2 187.6 Q 21 193 21 175 Z" transform="translate(0 16)" fill="#E08A4B"/>
-    <path id="middle-green" d="M 21 65 Q 21 47 38.2 41.6 L 157.8 4.4 Q 175 -1 175 17 L 175 127 Q 175 145 157.8 150.4 L 38.2 187.6 Q 21 193 21 175 Z" transform="translate(37 44)" fill="#17241F"/>
-    <path id="front-green" d="M 21 65 Q 21 47 38.2 41.6 L 157.8 4.4 Q 175 -1 175 17 L 175 127 Q 175 145 157.8 150.4 L 38.2 187.6 Q 21 193 21 175 Z" transform="translate(74 72)" fill="#86C2A0"/>
-  </g></svg></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#F6F1E9"/><svg x="7" y="7" width="50" height="50" viewBox="0 0 132 143"><svg xmlns="http://www.w3.org/2000/svg" width="132" height="143" viewBox="0 0 132 143" role="img" aria-label="GRIDEC open-frame symbol">
+  <title>GRIDEC open-frame symbol</title>
+  <g id="gridec-mark">
+    <path id="lower-green-plane" d="M 13 101 C 18 98.4 23 97.8 29 100.6 L 60 114.4 C 63.9 116.1 66.9 116.1 70.8 114.4 L 102 100.6 C 108 97.8 113 98.4 118 101 C 125.7 104.8 127.8 111.8 119.3 116 L 71 138 C 66.5 140 63.5 140 59 138 L 10.7 116 C 2.2 111.8 4.3 104.8 13 101 Z" fill="#86C2A0"/>
+    <path id="middle-open-frame" d="M 60 4 C 63 2.2 67 2.2 70 4 L 119 26 C 127.5 29.8 127.5 37.5 119 41.5 L 70 63.5 C 66 65.6 63 65.6 59 63.5 L 10 41.5 C 1.5 37.5 1.5 29.8 10 26 Z" transform="translate(0 34)" fill="none" stroke="#17241F" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="upper-orange-plane" d="M 60 4 C 63 2.2 67 2.2 70 4 L 119 26 C 127.5 29.8 127.5 37.5 119 41.5 L 70 63.5 C 66 65.6 63 65.6 59 63.5 L 10 41.5 C 1.5 37.5 1.5 29.8 10 26 Z" fill="#E08A4B"/>
+  </g>
+</svg></svg>

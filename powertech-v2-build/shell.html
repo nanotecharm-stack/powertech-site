@@ -205,7 +205,7 @@ header a,header button,header nav,header .navr{pointer-events:auto;}
    плоскостями шире (3.4 вместо 1.5) и задняя плоскость на шаг темнее, иначе при
    32px зазоры пропадают и знак сливается в пятно. На тёмном — dark-версия.
    Сдвиг −7px: оптическое выравнивание по средней плоскости (задняя висит в поле). */
-.brand .wm{display:block;flex:0 0 auto;height:35px;width:auto;margin:0 0 0 -6px;}/* 2026-11-17 логотип «solid v3» владельца: рамка 684×192 без полей; 35 px = тот же размер рисунка, что был при 37 */   /* 32 → 37: владелец «на 15 %» (2026-09-13); сдвиг оптики −7 → −8 пропорционально */
+.brand .wm{display:block;flex:0 0 auto;height:36px;width:auto;margin:0 0 0 -6px;}/* 2026-11-17 логотип «open frame» владельца: рамка 492×143; 36 px = та же ширина логотипа (~124 px), что у «solid v3» при 35 */   /* 32 → 37: владелец «на 15 %» (2026-09-13); сдвиг оптики −7 → −8 пропорционально */
 .brand .lg-d{display:none;}
 header.on-dark .brand .lg-l{display:none;}
 header.on-dark .brand .lg-d{display:block;}
@@ -1595,7 +1595,7 @@ footer .fgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,1.15
 /* Владелец (2026-09-14): знак и имя юрлица под ним спорили — два имени одного
    веса подряд. Имя юрлица ушло в строку реквизитов к номеру: знак называет
    компанию один раз, юрлицо читают вместе с номером. */
-footer .fbrand .flg{display:block;height:41px;width:auto;margin:0 0 22px -7px;}
+footer .fbrand .flg{display:block;height:42px;width:auto;margin:0 0 22px -7px;}
 /* Учётный номер компании. Он ярче описания над ним, потому что это
    проверяемый факт, а не подпись: по этому номеру компанию находят в
    государственном реестре — ради чего он в футере и стоит. Обозначение
@@ -2375,7 +2375,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <div id="wipe"><canvas aria-hidden="true"></canvas></div>
 <div class="rake" aria-hidden="true"></div>
 <header id="hdr" data-tone="paper"><div class="hin">
-  <a class="brand" href="%%BRAND_HREF%%" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="684" height="192" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="684" height="192" decoding="async" aria-hidden="true"></a>
+  <a class="brand" href="%%BRAND_HREF%%" aria-label="Gridec"><img class="wm lg-l" src="./brand/gridec-logo-light-s.svg" alt="Gridec" width="492" height="143" decoding="async"><img class="wm lg-d" src="./brand/gridec-logo-dark.svg" alt="" width="492" height="143" decoding="async" aria-hidden="true"></a>
   <!-- %%HOME%% пуст на главной и равен её адресу на остальных страницах: оттуда
        ссылки на разделы ведут на главную, а не в пустоту (2026-11-11). -->
   <nav><a class="lk" href="%%HOME%%#applications">%%NAV_INDUSTRIES%%</a><a class="lk" href="%%HOME%%#services">%%NAV_SERVICES%%</a><a class="lk" href="%%HOME%%#company">%%NAV_COMPANY%%</a><a class="lk" href="%%PARTNERS_HREF%%"%%PARTNERS_CUR%%>%%NAV_PARTNERS%%</a></nav>
@@ -2578,7 +2578,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <footer>
   <div class="wrap fgrid">
     <div class="fbrand rv">
-      <img class="flg" src="./brand/gridec-logo-dark.svg" alt="Gridec" width="684" height="192" loading="lazy" decoding="async">
+      <img class="flg" src="./brand/gridec-logo-dark.svg" alt="Gridec" width="492" height="143" loading="lazy" decoding="async">
       <p>%%HERO_EYEBROW%%</p>
       <p class="freg">%%CO_LEGAL%%<span class="fsep">·</span>%%CO_TIN_LB%% <b>%%CO_TIN%%</b></p>
     </div>
