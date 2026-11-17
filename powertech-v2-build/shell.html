@@ -914,6 +914,9 @@ html.wipecover .rv{transition:none;}
   .ic-art{aspect-ratio:4/3;}
   .ic-foot{padding:0 16px 14px;}
   .iother{grid-template-columns:1fr;row-gap:16px;}
+  /* 2026-11-17, владелец: «кнопка странно смотрится» — в одну колонку кнопка тянулась на всю
+     ширину, надпись со стрелкой оставались слева. Теперь по своей ширине, как кнопка героя. */
+  .iother .btn{justify-self:start;}
 }
 
 /* what we measure — signatures in a table of cells.
