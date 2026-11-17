@@ -1,6 +1,6 @@
 ---
 name: Gridec
-description: A measurement sheet for a power-quality diagnostics practice — warm paper, ink plates, one blue that only marks what was measured.
+description: A measurement sheet for a power-quality diagnostics practice — warm paper, ink plates, one green that only marks what was measured, and one copper mark for the next step.
 colors:
   paper: "#F6F1E9"
   paper-tint: "#F9F5EE"
@@ -9,15 +9,16 @@ colors:
   paper-placeholder: "#DCD3C4"
   whitewash: "#FDFAF4"
   ink-warm: "#2B2722"
-  ink-plate: "#0D2440"
-  ink-plate-mid: "#12294A"
-  ink-plate-high: "#162E52"
-  ink-plate-top: "#183256"
-  ink-plate-low: "#102745"
-  ink-shadow: "#081A31"
+  ink-plate: "#17241F"
+  ink-plate-mid: "#1B2B24"
+  ink-plate-high: "#1E3129"
+  ink-plate-top: "#21352C"
+  ink-plate-low: "#19271F"
+  ink-shadow: "#0E1814"
   highlight: "#FFFFFF"
-  brand: "#2E5E99"
-  brand-on-plate: "#7BA4D0"
+  brand: "#2F6B4F"
+  brand-on-plate: "#C5C4BD"
+  copper: "#E08A4B"
   error: "#A32C26"
 typography:
   display:
@@ -232,37 +233,38 @@ The world is deliberately not: a dark technical dashboard, a startup landing pag
 **Key Characteristics:**
 - Warm paper ground with a directional light and 6 % grain — never a flat fill, never a cool grey
 - Hairlines instead of frames; 2 px radius everywhere
-- One blue, spent only on measured things
+- One green, spent only on measured things; one copper mark per screen for the action
 - Pixel type for anything an instrument would print
 - Two languages on one type scale, matched by cap height rather than by point size
 - Depth by sheet order, not by shadow
 
 ## Colors
 
-A warm paper ground, ink plates that read as the back of the sheet, and a single blue that behaves like a marking pen.
+A warm paper ground, ink plates that read as the back of the sheet, and a single green that behaves like a marking pen. Two quiet colours carry the page; copper is the one loud colour, used in a very small quantity (palette changed from blue on 2026-11-17).
 
 ### Primary
-- **Цвет марки / Brand Blue** (`#2E5E99`): the accent on paper. Section numbers, the small measured values, the tick where the signal wire lands, the active state of a chip, the focus ring. It is never a decorative fill.
-- **Цвет марки на плите / Brand Blue on Plate** (`#7BA4D0`): the same voice on an ink plate, lightened so it survives the dark ground. Used for the accented word in a plate heading and for numbering inside dark cards.
+- **Цвет марки / Brand Green** (`#2F6B4F`): the accent on paper. Section numbers, the small measured values, the tick where the signal wire lands, the active state of a chip, the focus ring. It is never a decorative fill.
+- **Метки на плите / Quiet Mark on Plate** (`#C5C4BD`, paper at .78 over the plate): small labels, numbering and the accented word on an ink plate. Deliberately not a light green — the owner rejected the mint accent (2026-11-17).
+- **Медь / Copper** (`#E08A4B`): the one loud colour. Exactly one mark per screen, on the next action: the arrow chip of the hero button, the link at the end of section 03, the arrow chip in Contact. Hover keeps the white wash. Never a fill, never text in prose, never on measured values.
 
 ### Neutral
 - **Тёплая бумага / Warm Paper** (`#F6F1E9`): the page. Every light section is this one tone; the variation comes from light, not from different fills.
 - **Тёплая бумага, светлее / Paper Tint** (`#F9F5EE`): the top of the hero gradient and the fill of form fields — a single step above the page, never white.
 - **Тёплая бумага, глубже / Paper Shade** (`#F0EAE0`) and **Paper Deep** (`#EBE4D8`): alternate bands and low contrast surfaces.
 - **Белило / Whitewash** (`#FDFAF4`): type and marks on ink plates; the warm light end of the raking gradient.
-- **Тёплые чернила / Warm Ink** (`#2B2722`): all body text and small graphics on paper. Warm, not black — it sits at the same lightness as the blues, so contrast does not drop when the two meet.
-- **Чернильная плита / Ink Plate** (`#0D2440`) with its ramp (`#102745`, `#12294A`, `#162E52`, `#183256`): the dark sections, the industry cards, the index panel, the footer. The ramp exists so a plate can be a gradient of itself rather than a different colour.
-- **Тень плиты / Ink Shadow** (`#081A31`): the darkest member of the ink family, used only inside shadow and scrim values — never as a fill.
+- **Тёплые чернила / Warm Ink** (`#2B2722`): all body text and small graphics on paper. Warm, not black — it sits at the same lightness as the plate greens, so contrast does not drop when the two meet.
+- **Чернильная плита / Ink Plate** (`#17241F`, green graphite) with its ramp (`#19271F`, `#1B2B24`, `#1E3129`, `#21352C`): the dark sections, the industry cards, the index panel, the footer. The ramp exists so a plate can be a gradient of itself rather than a different colour.
+- **Тень плиты / Ink Shadow** (`#0E1814`): the darkest member of the ink family, used only inside shadow and scrim values — never as a fill.
 - **Блик / Highlight** (`#FFFFFF`): pure white exists in exactly one role — the peak of a hover state on an ink ground (button text and the arrow chip's wash). It is never a surface. On paper the light end is Whitewash, not white.
 - **Ошибка / Error** (`#A32C26`): form validation only.
 
 ### Named Rules
 
-**The Measured-Only Rule.** The brand blue marks something that was measured, counted or selected — a section number, a value, an event tick, a chosen chip, a focused field. If a proposed use of blue cannot answer "what was measured here?", it is decoration and does not ship.
+**The Measured-Only Rule.** The brand green marks something that was measured, counted or selected — a section number, a value, an event tick, a chosen chip, a focused field. If a proposed use of green cannot answer "what was measured here?", it is decoration and does not ship.
 
 **The One Paper Rule.** There is a single light ground. When a light surface needs to feel different, change the light on it (the raking gradient, the grain) or the sheet it sits on — never introduce a second beige.
 
-**The Warm Ink Rule.** Text on paper is `#2B2722`, not the plate ink. The plate ink on paper reads as a cold blue-black and pulls the page toward a screen; the warm ink keeps it a document.
+**The Warm Ink Rule.** Text on paper is `#2B2722`, not the plate ink. The plate ink on paper reads as a cold green-black and pulls the page toward a screen; the warm ink keeps it a document.
 
 ## Typography
 
@@ -364,7 +366,7 @@ The recurring silhouette is the rectangle divided by hairlines: cells that share
 
 ### Buttons
 - **Shape:** square with a 2 px radius; an arrow glyph sits in its own 22 px square chip inside the button.
-- **Primary:** ink plate fill (`#0D2440`) with paper text, 13 px / 20 px padding, 14 px semibold. On an ink section it inverts to paper fill with ink text.
+- **Primary:** ink plate fill (`#17241F`) with paper text, 13 px / 20 px padding, 14 px semibold. On an ink section it inverts to paper fill with ink text.
 - **Hover:** a wash sweeps the fill from the left; the arrow chip translates 2 px up and to the right. 0.4–0.45 s on the house curve.
 - **Ghost:** transparent with a hairline edge, warm ink text — used for the secondary action next to a primary one.
 - **Active:** `translateY(1px)`. Focus: 2 px brand outline, 3 px offset, switching to whitewash on dark grounds.
@@ -382,9 +384,9 @@ The recurring silhouette is the rectangle divided by hairlines: cells that share
 
 ### Inputs / Fields
 
-The enquiry form is set as a sheet of a measurement protocol, not as a web form. Each row carries a pixel number in the brand blue and a name in sentence case; the numbering runs continuously through the whole form and is driven by a CSS counter, so it cannot drift out of order by hand.
+The enquiry form is set as a sheet of a measurement protocol, not as a web form. Each row carries a pixel number in the brand green and a name in sentence case; the numbering runs continuously through the whole form and is driven by a CSS counter, so it cannot drift out of order by hand.
 
-- **Line fields** (name, company, email, phone): no box and no fill — the text is written on a rule (`inset 0 -1px 0` hairline) at 16 px. Focus thickens the rule to 2 px and turns it brand blue; an error turns it `#A32C26`. This is the single biggest reason the form reads as a document: four boxes became four writing lines.
+- **Line fields** (name, company, email, phone): no box and no fill — the text is written on a rule (`inset 0 -1px 0` hairline) at 16 px. Focus thickens the rule to 2 px and turns it brand green; an error turns it `#A32C26`. This is the single biggest reason the form reads as a document: four boxes became four writing lines.
 - **The one box** is the description field — it is a region rather than a line, and it is the most important field in the form. Paper-tint fill, hairline inset, 2 px radius, 15 px.
 - **Labels** are 13 px in sentence case, never caps; the only caps in the dialog is the section marker above the contact rows, and it takes no number.
 - **Placeholders** are the same ink as the value, only lighter (5.0:1 against 13.7:1), so an example can never be mistaken for an entry.
@@ -407,7 +409,7 @@ Escape closes, the backdrop closes, and the page behind is scroll-locked while a
 - **Mobile:** the centre navigation is replaced entirely by the index panel; the header compacts twice, at 900 px and at 430 px.
 
 ### The Readout
-The hero carries a live instrument readout: a caption in the pixel face, a 22 px pixel value with its unit, and a state line that turns brand blue when the wave field registers an event. It is the clearest statement of the whole system — the page shows a measurement rather than describing one. It is also the last thing in the hero's reading order, after the heading and the paragraph.
+The hero carries a live instrument readout: a caption in the pixel face, a 22 px pixel value with its unit, and a state line that turns brand green when the wave field registers an event. It is the clearest statement of the whole system — the page shows a measurement rather than describing one. It is also the last thing in the hero's reading order, after the heading and the paragraph.
 
 ### The Footer Plate
 The page ends on a fixed ink plate that the content slides off: the company name in the body face, contacts, the section index, and a bottom bar. It is revealed by scroll position rather than by animation, and the effect is disabled below 960 px where fixed layers misbehave.
@@ -415,7 +417,7 @@ The page ends on a fixed ink plate that the content slides off: the company name
 ## Do's and Don'ts
 
 ### Do:
-- **Do** spend the brand blue only on something measured, counted or selected — the Measured-Only Rule.
+- **Do** spend the brand green only on something measured, counted or selected — the Measured-Only Rule.
 - **Do** draw edges as `box-shadow: inset 0 0 0 1px` so hover and focus can change an edge without moving the layout.
 - **Do** keep one radius (2 px) and one easing curve (`cubic-bezier(.16, 1, .3, 1)`) across every component; durations run 0.16 s for a press to 0.45 s for a ground change.
 - **Do** set numbers, units, counters and values in Departure Mono, and sentences in the text face.
