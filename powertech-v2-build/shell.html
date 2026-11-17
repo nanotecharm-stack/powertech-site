@@ -694,6 +694,9 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
+/* Стрелка-квадрат рисуется SVG, а не символом ↗ (2026-11-17): Safari на iPhone рисовал символ
+   эмодзи, а с U+FE0E — системным шрифтом со смещением. Линия 1.4px при любом размере квадрата. */
+i>svg.ar,.pb-list i>svg.ar{display:block;width:.8em;height:.8em;max-width:none;margin:0;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.4px;stroke-linecap:square;vector-effect:non-scaling-stroke;}
 .btn i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:var(--r-in);
   background:color-mix(in srgb,var(--inv-fg) 16%,transparent);font-style:normal;font-size:12px;
   transition:transform .2s var(--e),background .2s var(--e);}
@@ -2355,7 +2358,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Ведёт к разделу контактов, а не открывает окно: форма остаётся на кнопке
          героя и на заголовке восьмого раздела. Стрелка та же, что у ссылок
          внутри страницы. -->
-    <a class="btn" href="#end"><span>%%NAV_CTA%%</span><i>&#8599;&#xFE0E;</i></a>
+    <a class="btn" href="#end"><span>%%NAV_CTA%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></a>
   </div>
 </div>
 <span class="hprog-clip" aria-hidden="true"><i class="hprog" id="hprog"></i></span>
@@ -2372,7 +2375,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">%%HERO_P%%</p>
-      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i>&#8599;&#xFE0E;</i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
   </div>
   </div>
   <!-- ФОТО ГЕРОЯ (бриф 2026-09-14): сгенерированная иллюстрация измерений у электрощита
@@ -2426,7 +2429,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   <div class="igrid" id="irail"></div>
   <div class="iother rv">
     <div><h3>%%OTHER_T%%</h3><p>%%OTHER_P%%</p></div>
-    <button class="btn" type="button" data-open-form><span>%%CTA%%</span><i>&#8599;&#xFE0E;</i></button>
+    <button class="btn" type="button" data-open-form><span>%%CTA%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button>
   </div>
 </div></section>
 
@@ -2520,15 +2523,15 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <section class="pband" id="partners" aria-labelledby="pb_h"><div class="wrap">
   <h2 id="pb_h" class="rv">%%NAV_PARTNERS%%</h2>
   <ul class="pb-list rv">
-    <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
-    <li><a href="%%PARTNERS_HREF%%#leasing">%%PAR2_ART%%<b>%%PAR2_T%%</b><span>%%PAR2_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
-    <li><a href="%%PARTNERS_HREF%%#insurance">%%PAR3_ART%%<b>%%PAR3_T%%</b><span>%%PAR3_TAG%%</span><i aria-hidden="true">&#8599;&#xFE0E;</i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true"><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#leasing">%%PAR2_ART%%<b>%%PAR2_T%%</b><span>%%PAR2_TAG%%</span><i aria-hidden="true"><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></a></li>
+    <li><a href="%%PARTNERS_HREF%%#insurance">%%PAR3_ART%%<b>%%PAR3_T%%</b><span>%%PAR3_TAG%%</span><i aria-hidden="true"><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></a></li>
   </ul>
 </div></section>
 
 <section class="plate" id="contact"><div class="wrap ct-one">
   <div class="rv"><div class="cnt">08</div>
-  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i>&#8599;&#xFE0E;</i></button></h2>
+  <h2 class="ct-act"><button data-open-form><span>%%CT_H2%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button></h2>
   <p class="ct-sub">%%CT_SUB%%</p></div>
 </div></section>
 
