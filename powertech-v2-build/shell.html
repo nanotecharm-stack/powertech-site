@@ -2382,6 +2382,40 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   .pb-list b{font-size:calc(19px * var(--hs));text-wrap:wrap;}
   .pb-list span{grid-column:2;}
 }
+/* «Партнёрам» на тёмной плите (2026-11-17, владелец: «как можно сделать более премиальный
+   вид?» → «может ещё варианты? более в стиле технобутик» → из пяти проб выбрал E).
+   Коробка снята: строки на плите марки между волосяными линиями, номер 01–03 моноширинным,
+   чертёж светлыми линиями, название крупнее. Наведение: по низу строки прочерчивается
+   бледно-зелёная черта, чертёж зеленеет и сдвигается на 4 px. Медные плитки ↗ — как везде.
+   Отвергнуто в пробе: B (то же на бумаге), C (чертёж в ячейке), D (маркировка P-01,
+   миллиметровка, шкала). */
+.pband{background:#17241F;color:#EFEDEA;padding-top:clamp(56px,6.2vw,92px);
+  padding-bottom:clamp(28px,3.2vw,48px);}/* ниже — тёмная плита «Контакты»: поле меньше, чтобы две плиты не разрывала пустая полоса */
+.pband .wrap::before{display:none;}
+.pband h2{color:#F4F3F1;}
+.pb-list{counter-reset:pb;background:none;box-shadow:none;
+  border-top:1px solid rgba(239,237,234,.55);border-bottom:1px solid rgba(239,237,234,.13);}
+.pb-list li{counter-increment:pb;}
+.pb-list li+li{border-top-color:rgba(239,237,234,.13);}
+.pb-list a{position:relative;color:#EFEDEA;--par-ground:#17241F;background:none!important;}
+.pb-list a>svg{color:rgba(239,237,234,.82);transition:color .4s ease,transform .7s cubic-bezier(.16,1,.3,1);}
+.pb-list b{color:#F4F3F1;}
+.pb-list span{color:rgba(239,237,234,.68);}
+.pb-list a::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#86C2A0;
+  transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.16,1,.3,1);}
+@media (min-width:861px){
+  .pb-list a{grid-template-columns:44px clamp(120px,11vw,156px) minmax(0,1.1fr) minmax(0,1fr) 30px;
+    padding:clamp(26px,2.6vw,38px) 0;}
+  .pb-list a::before{content:counter(pb,decimal-leading-zero);font-family:%%MONOFONT%%;font-size:12px;line-height:1;
+    letter-spacing:.22em;color:rgba(239,237,234,.5);align-self:start;padding-top:.5em;}
+  .pb-list b{font-size:calc(clamp(22px,2vw,30px) * var(--hs));}
+}
+/* до 860 px строка держит прежнюю раскладку, без коробки: поля по краям сняты, текст по оси */
+@media (max-width:860px){.pb-list a{padding-left:0;padding-right:0;}}
+@media (hover:hover){
+  .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
+  .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:#86C2A0;transform:translateX(4px);}
+}
 
 /* ---- ссылка в шапке и строка указателя ---- */
 .hpl{display:none;}
@@ -2586,7 +2620,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
      три названия и три строки-лида — те же утверждённые тексты, что на самой странице,
      ничего нового не написано. Номера раздела нет намеренно: это не девятый лист
      главной, а дверь на другую страницу, и счёт 01–08 остаётся прежним. -->
-<section class="pband" id="partners" aria-labelledby="pb_h"><div class="wrap">
+<section class="pband" id="partners" data-tone="ink" aria-labelledby="pb_h"><div class="wrap">
   <h2 id="pb_h" class="rv">%%NAV_PARTNERS%%</h2>
   <ul class="pb-list rv">
     <li><a href="%%PARTNERS_HREF%%#integrators">%%PAR1_ART%%<b>%%PAR1_T%%</b><span>%%PAR1_TAG%%</span><i aria-hidden="true"><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></a></li>
