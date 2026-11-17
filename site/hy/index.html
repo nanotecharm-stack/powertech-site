@@ -949,6 +949,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .ghd-note{font-size:14px;line-height:1.5;color:var(--fg-soft);margin:-8px 0 18px;}
 #fmd .ferr{display:none;font-size:14px;line-height:1.45;color:var(--c-error);margin-top:6px;}
 #fmd .ferr.on{display:block;}
+#fmd .fr>.ferr-pair{grid-column:1/-1;margin-top:-16px;}
 #fmd .gl{margin-top:38px;}
 #fmd .gl small{margin-left:2px;}
 #fmd .gl em{font-style:normal;color:var(--brand-ink);}
@@ -1027,6 +1028,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   .navr{gap:var(--s2);}
   .btn{padding:11px 14px;font-size:13px;}
       #fmd .fr{grid-template-columns:1fr;gap:18px;}
+#fmd .fr>.ferr-pair{margin-top:-12px;}
       .md .x{top:8px;right:8px;}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}
@@ -1508,8 +1510,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <div class="fr">
       <div><label for="ptfName">Անուն <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="Ձեր անունը" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
       <div><label for="ptfCompany">Ընկերություն <span class="opt">ըստ ցանկության</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="Ընկերության անվանումը"></div>
-      <div><label for="ptfEmail">Էլ. փոստ</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">Հեռախոս</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">Էլ. փոստ</label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="ptfEmailErr ptfContactErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">Հեռախոս</label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." aria-describedby="ptfPhoneErr ptfContactErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      
+      <span class="ferr ferr-pair" id="ptfContactErr" role="alert"></span>
     </div>
     <div class="gl" id="glApp">Ոլորտ</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
@@ -2087,14 +2091,16 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   var phoneOk=!ph||(ph.replace(/\D/g,'').length>=6);
   var noContact=!em&&!ph;
   var errs={ptfName:nm?'':PT.errName,ptfMsg:ms?'':PT.errMsg,
-            ptfEmail:noContact?PT.errContact:(emailOk?'':PT.errEmail),
-            ptfPhone:noContact?PT.errContact:(phoneOk?'':PT.errPhone)};
-  var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k),fe=document.getElementById(k+'Err'),bad=!!errs[k];
+            ptfEmail:emailOk?'':PT.errEmail,
+            ptfPhone:phoneOk?'':PT.errPhone};
+  var ce=document.getElementById('ptfContactErr');ce.textContent=noContact?PT.errContact:'';ce.classList.toggle('on',noContact);
+  var isBad=function(k){return !!errs[k]||(noContact&&(k==='ptfEmail'||k==='ptfPhone'));};
+  var any=false;Object.keys(errs).forEach(function(k){var el=document.getElementById(k),fe=document.getElementById(k+'Err'),bad=isBad(k);
     el.classList.toggle('err',bad);
     if(fe){fe.textContent=errs[k]||'';fe.classList.toggle('on',bad);}
     if(bad){el.setAttribute('aria-invalid','true');any=true;}else{el.removeAttribute('aria-invalid');}});
   document.getElementById('ptfFormErr').style.display=any?'block':'none';
-  if(any){var firstBad=Object.keys(errs).filter(function(k){return errs[k];})[0];
+  if(any){var firstBad=['ptfName','ptfEmail','ptfPhone','ptfMsg'].filter(isBad)[0];
     if(firstBad)document.getElementById(firstBad).focus();return;}
   var total=files.reduce(function(s,f){return s+f.size;},0);
   if(total>10485760){document.getElementById('ptfSizeErr').style.display='block';return;}
@@ -2132,8 +2138,9 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
   document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
     var fe=document.getElementById(id+'Err');if(fe){fe.textContent='';fe.classList.remove('on');}
-    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err');
-      if(oe&&oe.textContent===PT.errContact){o.classList.remove('err');o.removeAttribute('aria-invalid');oe.textContent='';oe.classList.remove('on');}}
+    if(id==='ptfEmail'||id==='ptfPhone'){var o=document.getElementById(id==='ptfEmail'?'ptfPhone':'ptfEmail'),oe=document.getElementById(o.id+'Err'),ce=document.getElementById('ptfContactErr');
+      if(ce.classList.contains('on')){ce.textContent='';ce.classList.remove('on');
+        if(!(oe&&oe.textContent)){o.classList.remove('err');o.removeAttribute('aria-invalid');}}}
     document.getElementById('ptfFormErr').style.display='none';});
 });
 function focusables(root){
