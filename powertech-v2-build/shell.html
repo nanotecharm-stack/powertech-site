@@ -4135,47 +4135,7 @@ addEventListener('orientationchange',function(){
     window.scrollTo(0,y+1);window.scrollTo(0,y);
   },320);
 });
-/* ============ ЗНАЧОК ВКЛАДКИ РАЗВОРАЧИВАЕТСЯ — ОДИН РАЗ ============ */
-/* Буква набирается по столбцам слева направо и останавливается. Именно
-   ОДИН РАЗ, а не по кругу: вечно живой значок читается как «страница ещё
-   грузится» или как реклама, и вдобавок держит браузер занятым всё время,
-   пока вкладка открыта. Здесь пятая доля секунды на пять столбцов — и всё,
-   дальше значок обычная картинка.
-
-   Сетка буквы та же, что в файле значка: пять на восемь, снятая с глифа
-   Departure Mono. Рисуем квадратами — шрифта у значка нет, а сглаживание на
-   шестнадцати пикселях съело бы букву.
-
-   Не играем при выключенных анимациях в системе и в фоновой вкладке: там
-   браузер душит таймеры примерно до кадра в секунду, и разворот получился бы
-   рваным. В обоих случаях просто остаётся готовый значок из файла. */
-(function(){
-  var link=document.querySelector('link[rel="icon"]');
-  if(!link||rm||document.visibilityState!=='visible')return;
-  var cv=document.createElement('canvas');
-  if(!cv.getContext)return;
-  var G=['.###.','#...#','#....','#....','#..##','#...#','#...#','.###.'],
-      S=32,U=S/16,x=cv.getContext('2d');
-  cv.width=cv.height=S;
-  var png=document.createElement('link');
-  png.rel='icon';png.type='image/png';
-  function draw(k){
-    x.clearRect(0,0,S,S);
-    var r=2*U;
-    x.fillStyle='#0D2440';x.beginPath();x.moveTo(r,0);
-    x.arcTo(S,0,S,S,r);x.arcTo(S,S,0,S,r);x.arcTo(0,S,0,0,r);x.arcTo(0,0,S,0,r);
-    x.closePath();x.fill();
-    x.fillStyle='#F6F1E9';
-    for(var row=0;row<8;row++)for(var c=0;c<5;c++)
-      if(c<k&&G[row].charAt(c)==='#')x.fillRect((5+c)*U,(4+row)*U,U,U);
-    png.href=cv.toDataURL('image/png');
-  }
-  draw(0);
-  /* Свой файл убираем только теперь, когда замена уже нарисована: иначе между
-     снятием одного и появлением другого браузер успевает показать пустой лист. */
-  document.head.appendChild(png);
-  link.parentNode.removeChild(link);
-  var k=0,t=setInterval(function(){draw(++k);if(k>=5)clearInterval(t);},80);
-})();
+/* Анимация значка вкладки (буква «G» на canvas, август) снята 2026-11-17: она подменяла
+   файл значка старой буквой поверх нового знака (владелец: «на англ старый-синий»). */
 })();
 </script>
