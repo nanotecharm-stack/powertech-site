@@ -1496,7 +1496,13 @@ PALETTES = {
             '.btn:not(:hover) i,.ct-act button i,.pb-list i'
             '{background:#E08A4B!important;color:#17241F!important;}\n'
             '#services .alink{color:#E08A4B;}\n'
-            '#services .alink:hover{color:#fff;}\n'),
+            '#services .alink:hover{color:#fff;}\n'
+            # 2026-11-17, владелец: «кнопки выглядят черными» — плашка #17241F на бумаге
+            # читается как чёрный. Кнопка берёт зелёный марки (бумага на нём 6:1), наведение
+            # заливает на шаг темнее того же тона. На тёмной шапке --inv задано правилом
+            # header[data-tone=ink] .btn выше по весу — там кнопка светлая, как была.
+            '.btn:not(.gh){--inv:#2F6B4F;}\n'
+            '.btn:not(.gh)::before{background:#24563F;}\n'),
     ),
 }
 
