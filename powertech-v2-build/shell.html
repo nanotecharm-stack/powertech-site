@@ -895,24 +895,20 @@ html.wipecover .rv{transition:none;}
 /* Стрелка снята с карточки (2026-09-17); разметка .ic-go остаётся в скрипте — на случай возврата. */
 .ic-go{display:none;}
 /* Наведение на карточку (2026-11-17, владелец: «можно сделать взаимодействие более премиальным?
-   сейчас как-то плохо»). Было: только наезд фото 1.04→1.07 за .3 s — резко и почти незаметно.
-   Стало, тем же языком, что ссылка героя: фото медленно наезжает (1.1 s, мягкий выход),
-   низ кадра на тон темнее, подпись поднимается на 4 px, под ней прочерчивается зелёная
-   черта марки; соседние карточки чуть гаснут — взгляд остаётся на выбранной. Без плашек,
-   стрелок и теней (отвергнуты 2026-09-17). Только для мыши: на телефоне всё как было. */
-.ic-t{background:linear-gradient(var(--brand),var(--brand)) 0 100%/0% 1px no-repeat;
-  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding-bottom:3px;}
+   сейчас как-то плохо» → из трёх проб выбрал C). Было: наезд фото 1.04→1.07 за .3 s — резко и
+   почти незаметно. Стало: фото медленно наезжает (1.1 s, мягкий выход) и чуть светлеет, внутри
+   кадра проявляется волосяная рамка (сходится от 1.03 к месту), подпись отходит от края вместе
+   с ней. Отвергнуто в пробе: A — зелёная черта под подписью и гаснущие соседи; B — строка
+   находки под подписью. Без плашек, стрелок и теней (2026-09-17). Только мышь: телефон как был. */
 @media (hover:hover){
   .ic-art img{transition:transform 1.1s cubic-bezier(.16,1,.3,1),filter .5s ease;}
-  .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);}
-  .ic-art::before{content:"";position:absolute;pointer-events:none;z-index:2;inset:-1px;opacity:0;
-    background:linear-gradient(180deg,transparent 45%,rgba(13,14,19,.32) 100%);transition:opacity .6s ease;}
-  .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;}
-  .ic-foot{transition:transform .6s cubic-bezier(.16,1,.3,1);}
-  .icard:hover .ic-foot,.icard:focus-within .ic-foot{transform:translateY(-4px);}
-  .ic-t{transition:background-size .6s cubic-bezier(.16,1,.3,1) .05s;}
-  .icard:hover .ic-t,.icard:focus-within .ic-t{background-size:100% 1px;}
-  .igrid:has(.icard:hover) .icard:not(:hover) .ic-art img{filter:brightness(.72) saturate(.9);}
+  .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);filter:brightness(1.12) contrast(1.04);}
+  .ic-art::before{content:"";position:absolute;pointer-events:none;z-index:2;inset:12px;opacity:0;
+    border:1px solid rgba(247,246,243,.72);border-radius:1px;transform:scale(1.03);
+    transition:opacity .5s ease,transform .8s cubic-bezier(.16,1,.3,1);}
+  .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;transform:none;}
+  .ic-foot{transition:padding .6s cubic-bezier(.16,1,.3,1);}
+  .icard:hover .ic-foot,.icard:focus-within .ic-foot{padding-left:30px;padding-bottom:29px;}
 }
 /* строка «другие системы»: волосяные линии, без плашки и скруглений */
 .iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
@@ -3056,11 +3052,11 @@ if(irail)PT.cards.forEach(function(o,i){
   var card=document.createElement('article');card.className='icard rv';card.style.transitionDelay=(i%3)*60+'ms';
   var src=PT.imgs[o.img]||'';
   card.innerHTML='<div class="ic-art"><img alt="" loading="'+(i<3?'eager':'lazy')+'" decoding="async"></div>'+
-    '<div class="ic-foot"><h3><button type="button" class="ic-open"><span class="ic-t"></span></button></h3>'+
+    '<div class="ic-foot"><h3><button type="button" class="ic-open"></button></h3>'+
     '<span class="ic-go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.7 12.3 12.3 3.7"/><path d="M12.3 8.7V3.7H7.3"/></svg></span></div>';
   var img=card.querySelector('img');
   if(src){img.src=src;img.srcset=src.replace(/\.jpg$/,'-756.jpg')+' 756w, '+src+' 1536w';img.sizes='(max-width:600px) 100vw, (max-width:1024px) 50vw, 400px';}
-  var btn=card.querySelector('.ic-open');btn.querySelector('.ic-t').textContent=o.title;
+  var btn=card.querySelector('.ic-open');btn.textContent=o.title;
   btn.addEventListener('click',function(){openInd(o,btn);});
   /* Картинка и вся карточка тоже открывают окно; клик по самой кнопке уже обработан выше. */
   card.addEventListener('click',function(e){if(e.target.closest('.ic-open'))return;openInd(o,btn);});
