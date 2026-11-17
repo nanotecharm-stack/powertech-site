@@ -367,6 +367,17 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   text-decoration-color:var(--c-ink-plate-a3);}
 .hero .acts .btn.gh::before{display:none;}
 .hero .acts .btn.gh:hover span{color:var(--fg-head);}
+.hero .acts .btn.gh{text-decoration:none;}
+.hero .acts .btn.gh>span{display:inline-flex;align-items:baseline;gap:.42em;padding-bottom:5px;
+  background:linear-gradient(var(--brand),var(--brand)) 0 100%/0% 1px no-repeat,
+    linear-gradient(var(--c-ink-plate-a3),var(--c-ink-plate-a3)) 0 100%/100% 1px no-repeat;
+  transition:background-size .55s var(--e),color .25s var(--e);}
+.hero .acts .btn.gh:hover>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
+  background-size:100% 1px,100% 1px;}
+.hero .acts .btn.gh .gh-ar{display:inline-block;transition:transform .45s var(--e);}
+.hero .acts .btn.gh:hover .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
+.hero .acts .btn.gh:active .gh-ar{transform:translateY(5px);transition-duration:.12s;}
+.hero .acts .btn.gh:focus-visible{outline:2px solid var(--brand);outline-offset:6px;border-radius:var(--r);}
 .hphoto{position:relative;margin:0;width:100%;background:var(--c-7f7e7e);}
 .hphoto img{display:block;width:100%;height:auto;}
 .hmark{position:absolute;left:var(--hx);top:20%;margin:0;width:max-content;max-width:22%;
@@ -1320,7 +1331,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">Gridec records power quality parameters while your electrical system is running, and inspects the installation on site. The report presents our findings and recommended next steps.</p>
-      <div class="acts"><button class="btn" data-open-form><span>Describe the issue</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button><a class="btn gh" href="#assignments"><span>When measurements help &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>Describe the issue</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button><a class="btn gh" href="#assignments"><span>When measurements help<span class="gh-ar" aria-hidden="true">&darr;</span></span></a></div>
   </div>
   </div>
   

@@ -762,6 +762,21 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   text-decoration-color:rgba(13,14,19,.3);}
 .hero .acts .btn.gh::before{display:none;}
 .hero .acts .btn.gh:hover span{color:var(--fg-head);}
+/* 2026-11-17, владелец: «добавь взаимодействия премиального к этой кнопке». Спокойно, как у прибора:
+   в покое — тонкая серая черта; при наведении и фокусе с клавиатуры зелёная черта марки
+   прочерчивается слева направо поверх серой, надпись темнеет, стрелка опускается на 3 px — туда,
+   куда ведёт ссылка; при нажатии ещё на 2 px. Движение снимает общее правило reduced-motion. */
+.hero .acts .btn.gh{text-decoration:none;}
+.hero .acts .btn.gh>span{display:inline-flex;align-items:baseline;gap:.42em;padding-bottom:5px;
+  background:linear-gradient(var(--brand),var(--brand)) 0 100%/0% 1px no-repeat,
+    linear-gradient(rgba(13,14,19,.3),rgba(13,14,19,.3)) 0 100%/100% 1px no-repeat;
+  transition:background-size .55s var(--e),color .25s var(--e);}
+.hero .acts .btn.gh:hover>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
+  background-size:100% 1px,100% 1px;}
+.hero .acts .btn.gh .gh-ar{display:inline-block;transition:transform .45s var(--e);}
+.hero .acts .btn.gh:hover .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
+.hero .acts .btn.gh:active .gh-ar{transform:translateY(5px);transition-duration:.12s;}
+.hero .acts .btn.gh:focus-visible{outline:2px solid var(--brand);outline-offset:6px;border-radius:var(--r);}
 /* ФОТО: целиком, натуральная пропорция; width/height на <img> резервируют место. */
 /* Подложка под фото на время загрузки. Прежний var(--lo) нигде не объявлен —
    подложки не было вовсе, и до прихода файла в окне лежала бумага. Тон #7F7E7E —
@@ -2395,7 +2410,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <div class="hside">
       <p class="hp">%%HERO_P%%</p>
-      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%% &darr;</span></a></div>
+      <div class="acts"><button class="btn" data-open-form><span>%%CTA%%</span><i><svg class="ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3 2h5v5"/></svg></i></button><a class="btn gh" href="#assignments"><span>%%HERO_CTA2%%<span class="gh-ar" aria-hidden="true">&darr;</span></span></a></div>
   </div>
   </div>
   <!-- ФОТО ГЕРОЯ (бриф 2026-09-14): сгенерированная иллюстрация измерений у электрощита
