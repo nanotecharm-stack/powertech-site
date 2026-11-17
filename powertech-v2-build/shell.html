@@ -694,7 +694,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
 .lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
-.btn i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:2px;
+.btn i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:var(--r-in);
   background:color-mix(in srgb,var(--inv-fg) 16%,transparent);font-style:normal;font-size:12px;
   transition:transform .2s var(--e),background .2s var(--e);}
 /* Стрелка при наведении светлеет вместе с надписью. Прежде цвет ей задавала
@@ -848,8 +848,10 @@ html.wipecover .rv{transition:none;}
    «Другие критические электрические системы» — отдельная компактная строка под сеткой. */
 .igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,22px);
   margin-top:clamp(24px,3vw,40px);}
+/* UI refinement 2026-11-17: радиусы, линии на тёмном и первый слой поверхности плашки. */
+:root{--r:2px;--r-in:1px;--line-d:rgba(239,237,234,.13);--line-d2:rgba(239,237,234,.22);--surf-d1:rgba(239,237,234,.025);}
 .icard{position:relative;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;
-  background:#101218;color:#EFEDEA;border:1px solid #101218;border-radius:2px;}
+  background:#101218;color:#EFEDEA;border:1px solid var(--hair);border-radius:var(--r);}
 /* Подпись карточки — просто текст на фотографии (2026-09-17, владелец: «сделай надписи более
    органичными и чистыми» → плашка под фото (A), светлая карточка, приглушённое фото, список,
    сетка без фото — всё отвергнуто → «просто текст на фото, чтобы буквы выглядели чётко,
@@ -936,9 +938,11 @@ html.wipecover .rv{transition:none;}
 .mi-alt::before{content:"";position:absolute;top:0;left:0;width:26px;height:2px;
   background:var(--brand);}
 /* on the dark plate the cells stay transparent, so the empty slot is just air */
-.plate2 .meas{border-top-color:rgba(239,237,234,.13);}
-.plate2 .mi{border-left-color:rgba(239,237,234,.13);}
-.plate2 .mi:nth-child(n+5){border-top-color:rgba(239,237,234,.13);}
+.plate2 .meas{border-top-color:var(--line-d);}
+.plate2 .mi{border-left-color:var(--line-d);}
+/* 5: первый слой поверхности; «Риски» (.mi-alt) остаётся вторым, светлее */
+.plate2 .mi:not(.mi-alt){background:var(--surf-d1);}
+.plate2 .mi:nth-child(n+5){border-top-color:var(--line-d);}
 .plate2 .mi svg{color:#EFEDEA;}
 .plate2 .mi .mlb{color:rgba(239,237,234,.84);}
 /* on the plate the accent tint has to come from the light side of the brand */
@@ -1147,7 +1151,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 /* Поля по обе стороны равные: абзац стоит посередине между своей выноской
    и соседней, а не прижат к левой (владелец, 2026-09-12: «текст и линии
    слишком близко, текст не по центру»). */
-.obs .step{position:relative;padding:var(--s1) clamp(var(--s5),2.4vw,var(--s6));border-left:1px solid rgba(239,237,234,.22);
+.obs .step{position:relative;padding:var(--s1) clamp(var(--s5),2.4vw,var(--s6));border-left:1px solid var(--line-d2);
   transition:border-color .5s var(--e);}
 /* Выноска доходит ровно до линейки и не заходит на деление: ниже
    на пиксель — и деление с выноской читались двумя линиями. */
@@ -1185,7 +1189,7 @@ html[lang="hy"] #obs.wk .wk-cap{font-family:%%BODYFONT%%;font-size:12px;letter-s
 #obs.wk .wk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
   font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.08em;color:var(--on-dark-small);}
 html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:12px;letter-spacing:.02em;}
-#obs.wk .wk-days span{display:block;padding-left:10px;border-left:1px solid rgba(239,237,234,.22);line-height:1;padding-bottom:12px;}
+#obs.wk .wk-days span{display:block;padding-left:10px;border-left:1px solid var(--line-d2);line-height:1;padding-bottom:12px;}
 #obs.wk .obs-field{height:clamp(72px,8vw,104px);margin-top:0;}
 #obs.wk .obs-ruler line{stroke:rgba(239,237,234,.2);stroke-width:1;}
 #obs.wk .obs-ruler .obs-day{stroke:rgba(239,237,234,.38);}
@@ -1201,7 +1205,7 @@ html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:12px;letter-
 #obs.wk .stat span{display:inline;margin:0;font-size:var(--t-note);line-height:1.4;color:var(--on-dark-small);}
 /* Шаги — ряд под неделей, статичный. Метка места во времени вместо номера. */
 #obs.wk .steps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));column-gap:0;margin-top:clamp(40px,4.5vw,64px);}
-#obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){border-left:1px solid rgba(239,237,234,.22);padding:2px clamp(var(--s4),2vw,var(--s6)) 0 clamp(var(--s4),2vw,var(--s6));}
+#obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){border-left:1px solid var(--line-d2);padding:2px clamp(var(--s4),2vw,var(--s6)) 0 clamp(var(--s4),2vw,var(--s6));}
 #obs.wk .step:nth-child(1){grid-column:1 / span 2;}
 #obs.wk .step:nth-child(2){grid-column:3 / span 3;}
 #obs.wk .step:nth-child(3){grid-column:6 / span 2;}
@@ -1562,7 +1566,7 @@ footer,.footrev{--foot-h:530px;}
   display:flex;flex-direction:column;justify-content:space-between;
   /* самая глубокая поверхность сайта: страница уходит вверх и открывает основание */
   background:#0D0E13;color:#EFEDEA;padding:clamp(44px,6vw,86px) 0 26px;
-  box-shadow:inset 0 1px 0 rgba(239,237,234,.14);}
+  box-shadow:inset 0 1px 0 var(--line-d);}
 footer .fgrid{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,1.15fr) minmax(0,.85fr);
   gap:clamp(28px,4vw,var(--s8));align-items:start;}
 /* Не знак, а имя компании тем же начертанием, что весь набор: сюда придут
@@ -1592,7 +1596,7 @@ footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:var(--t-aux)
 footer h3{font-family:%%MONOFONT%%;font-size:var(--t-lbl);letter-spacing:.12em;font-weight:500;
   text-transform:uppercase;color:rgba(239,237,234,.78);margin-bottom:20px;
   display:flex;align-items:center;gap:var(--s3);}
-footer h3::after{content:"";flex:1;height:1px;background:rgba(239,237,234,.14);}
+footer h3::after{content:"";flex:1;height:1px;background:var(--line-d);}
 footer ul{list-style:none;margin:0;padding:0;}
 footer .flist li+li,footer .fcon li+li{margin-top:11px;}
 footer .flist a{display:block;
@@ -1611,7 +1615,7 @@ footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:c
   /* Отбивка над линейкой: на телефоне последняя строка списка разделов стояла
      вплотную к ней (владелец, 2026-09-12). */
   margin-top:clamp(36px,5vw,56px);
-  padding-top:22px;border-top:1px solid rgba(239,237,234,.14);
+  padding-top:22px;border-top:1px solid var(--line-d);
   font-family:%%MONOFONT%%;font-size:var(--t-aux);letter-spacing:.1em;text-transform:uppercase;
   color:rgba(239,237,234,.62);}
 /* Копирайт и ссылка на политику — одна группа слева, переключатель языка

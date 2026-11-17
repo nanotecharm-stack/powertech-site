@@ -370,15 +370,15 @@ def qa_pics(items):
 # decisions below.
 MEAS_ICONS = [
  # 01 voltage & current — three linked loops crossing one axis, the middle phase lit
- '<g fill="none" stroke="currentColor" stroke-width="1.1">'
+ '<g fill="none" stroke="currentColor" stroke-width="1.25">'
  '<ellipse cx="13" cy="15" rx="6.6" ry="10.4"/><ellipse cx="31" cy="15" rx="6.6" ry="10.4"/></g>'
- '<ellipse cx="22" cy="15" rx="6.6" ry="10.4" fill="none" stroke="var(--brand)" stroke-width="1.4"/>'
- '<g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".7">'
+ '<ellipse cx="22" cy="15" rx="6.6" ry="10.4" fill="none" stroke="var(--brand)" stroke-width="1.6"/>'
+ '<g stroke="currentColor" stroke-width="1.25" stroke-linecap="round" opacity=".7">'
  '<path d="M2.5 15h10"/><path d="M31.5 15h10"/></g>'
- '<path d="M19 15h6" stroke="var(--brand)" stroke-width="1.7" stroke-linecap="round"/>',
+ '<path d="M19 15h6" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round"/>',
  # 02 harmonics — a decaying spectrum, the third order carrying the accent
  '<path d="M2 21h40" stroke="currentColor" stroke-width="1" opacity=".5"/>'
- '<g fill="none" stroke="currentColor" stroke-width="1">'
+ '<g fill="none" stroke="currentColor" stroke-width="1.25">'
  '<rect x="8" y="4" width="3" height="19"/><rect x="13" y="7" width="3" height="16"/>'
  '<rect x="23" y="13" width="3" height="10"/><rect x="28" y="16" width="3" height="7"/>'
  '<rect x="33" y="18.4" width="3" height="4.6"/></g>'
@@ -386,15 +386,15 @@ MEAS_ICONS = [
  # 03 flicker — the fluctuation held between two limit lines
  '<g stroke="currentColor" stroke-width="1" opacity=".38" stroke-dasharray="3 3">'
  '<path d="M4 8h36"/><path d="M4 22h36"/></g>'
- '<path d="M4 15c2 4 4 4 6 0s4-6 6 0 4 8 6 0 4-6 6 0 4 4 6 0" fill="none" stroke="currentColor" stroke-width="1.4"/>'
- '<path d="M4 15c2 4 4 4 6 0s4-6 6 0 4 8 6 0" fill="none" stroke="var(--brand)" stroke-width="1.4"/>',
+ '<path d="M4 15c2 4 4 4 6 0s4-6 6 0 4 8 6 0 4-6 6 0 4 4 6 0" fill="none" stroke="currentColor" stroke-width="1.25"/>'
+ '<path d="M4 15c2 4 4 4 6 0s4-6 6 0 4 8 6 0" fill="none" stroke="var(--brand)" stroke-width="1.6"/>',
  # 04 voltage dip — a smooth sag that recovers short of where it started,
  #    with the accent marking the depth it reached
  '<path d="M2 10c6 0 7 13 13 13s6-6 12-6 9 1 15 1" fill="none" stroke="currentColor" '
- 'stroke-width="1.4" stroke-linecap="round"/>'
- '<path d="M12.5 23h9" stroke="var(--brand)" stroke-width="2.2" stroke-linecap="round"/>',
+ 'stroke-width="1.25" stroke-linecap="round"/>'
+ '<path d="M12.5 23h9" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round"/>',
  # 05 unbalance — a star point whose lit phase runs long
- '<g stroke="currentColor" stroke-width="1.4" stroke-linecap="round">'
+ '<g stroke="currentColor" stroke-width="1.25" stroke-linecap="round">'
  '<path d="M22 15.5 13.5 21"/><path d="M22 15.5 30.5 21"/></g>'
  '<g fill="currentColor"><circle cx="13.5" cy="21" r="1.9"/><circle cx="30.5" cy="21" r="1.9"/></g>'
  '<path d="M22 15.5V4" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round"/>'
@@ -402,20 +402,20 @@ MEAS_ICONS = [
  '<circle cx="22" cy="15.5" r="2.1" fill="currentColor"/>',
  # 06 power & energy — the area accumulated under the curve, closed by the accent
  '<path d="M2 24c8 0 10-13 18-13s10 8 22 4v9z" fill="currentColor" opacity=".14"/>'
- '<path d="M2 24c8 0 10-13 18-13s10 8 22 4" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+ '<path d="M2 24c8 0 10-13 18-13s10 8 22 4" fill="none" stroke="currentColor" stroke-width="1.25"/>'
  '<path d="M2 24h40" stroke="var(--brand)" stroke-width="1.6"/>',
  # 07 events — a transient on a quiet line, flagged
  '<path d="M2 18h14l3-13 3.4 22 2.6-9h17" fill="none" stroke="currentColor" '
- 'stroke-width="1.4" stroke-linejoin="round"/>'
+ 'stroke-width="1.25" stroke-linejoin="round"/>'
  '<rect x="27" y="10.5" width="3" height="5.4" rx=".9" fill="var(--brand)"/>',
  # 08 risk indicators — NOT an electrical parameter: a trend read off the baseline
  #    whose latest point is flagged. This is the one card that draws a conclusion
  #    rather than a measurement, which is why its cell is marked (.mi-alt).
- '<g stroke="currentColor" stroke-width=".8" opacity=".26">'
+ '<g stroke="currentColor" stroke-width="1" opacity=".26">'
  '<path d="M8 21v5"/><path d="M14 18v8"/><path d="M20 20v6"/><path d="M26 14v12"/>'
  '<path d="M32 16v10"/></g>'
  '<path d="M3 24 8 21 14 18 20 20 26 14 32 16 37 11" fill="none" stroke="currentColor" '
- 'stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>'
+ 'stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>'
  '<g fill="currentColor"><circle cx="8" cy="21" r="1.4"/><circle cx="14" cy="18" r="1.4"/>'
  '<circle cx="20" cy="20" r="1.4"/><circle cx="26" cy="14" r="1.4"/><circle cx="32" cy="16" r="1.4"/></g>'
  '<circle cx="37" cy="11" r="2.5" fill="none" stroke="var(--brand)" stroke-width="1.6"/>'
