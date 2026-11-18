@@ -493,7 +493,8 @@ EN = {
  'HERO_MARK1': 'MEASURE', 'HERO_MARK2': 'ANALYSE', 'HERO_MARK3': 'RECOMMEND',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'WHY_H2': 'Power supply problems are not always obvious',
- 'WHY_NAV': '',  # пусто = в указателе и подвале стоит сам заголовок
+ # Владелец (2026-11-18): «в английской версии тоже надо исправить, и меню разделов тоже» — то же короткое имя, что на HY.
+ 'WHY_NAV': 'Hidden problems',
  'WHY_P': 'A voltage dip can last only a few cycles. A later spot check may show normal readings. Continuous monitoring records the event and when it occurred, allowing us to analyse the measured conditions.',
  'APP_H2': 'Where monitoring helps',
  'APP_P': 'Monitoring helps when power quality affects equipment or operations, or when you need measurements to make a technical decision.',
