@@ -57,6 +57,9 @@ def font_face(fam, weight, fn):
 # Archivo, Big Shoulders Display и Martian Mono больше не вшиваются: после замены на
 # них не ссылается ни одно правило. Файлы оставлены в fonts на случай возврата.
 FF_EN = font_face('Overused Grotesk', '300 900', 'overused-grotesk-latin.woff2')
+# Заголовочная копия (2026-11-18): та же гарнитура, но пары «буква + t/f» сведены мягче —
+# на жирном 700 они слипались. Обычный текст остаётся на исходном файле. См. fonts/make_head.py.
+FF_EN += '\n' + font_face('Overused Grotesk Head', '300 900', 'overused-grotesk-head.woff2')
 # Departure Mono, пиксельный, SIL OFL — шрифт показаний. Вес объявлен диапазоном,
 # хотя начертание одно: иначе на элементах с 600 браузер подделает жир и размажет
 # пиксельные штрихи.
@@ -128,7 +131,7 @@ ARIAN_REG = '400'
 # владелец выбрал сохранить Overused Grotesk.
 _OG = "'Overused Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif"
 # Трекинг заголовков 0 (было −.015/−.022em: владелец — «слишком близко буквы»), интерлиньяж 1.05.
-TY = dict(EN_BODY=_OG, EN_HEAD=_OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='0', HY_LS='0')
+TY = dict(EN_BODY=_OG, EN_HEAD="'Overused Grotesk Head'," + _OG, EN_TT='', EN_LH='1.05', EN_LS='0', EN_H1WT='700', EN_BIGLS='0', HY_LS='0')
 
 
 # Аудит 2026-09-14: армянская страница целиком на Mardoto — 400 для прозы, 500 для
@@ -788,7 +791,8 @@ HY = {
  'HEADFONT': "'Mardoto','Arian AMU',sans-serif", 'HEADWT': '500',
  'MONOFONT': MONO_HY,
  'NAVFONT': 'inherit',
- 'HEADTT': '', 'HEADLH': '1.0', 'HEADLS': TY['HY_LS'], 'H1WT': '500', 'BIGLS': TY['HY_LS'],
+ 'HEADTT': '', 'HEADLH': '1.08',  # было 1.0: в двустрочных заголовках строки стояли в 1–2 px друг от друга (замер 2026-11-18)
+ 'HEADLS': TY['HY_LS'], 'H1WT': '500', 'BIGLS': TY['HY_LS'],
  # Шкала та же, что в английской версии, буква в букву. Мерили не кегль, а
  # рост знака: у Arian AMU и Overused Grotesk доли прописной и строчной от
  # кегля совпадают (.72 и .53), поэтому одинаковые числа дают одинаковый
@@ -1226,6 +1230,7 @@ def font_face_url(fam, weight, fn):
 # поэтому на глаз это не ловилось — а выложенная страница уходила в системный.
 FF_EN_D = '\n'.join([
     font_face_url('Overused Grotesk', '300 900', 'overused-grotesk-latin.woff2'),
+    font_face_url('Overused Grotesk Head', '300 900', 'overused-grotesk-head.woff2'),
     font_face_url('Departure Mono', '100 900', 'departure-mono.woff2'),
 ])
 
@@ -1879,7 +1884,7 @@ def render_deploy(tokens, data, ff, out_path, post=None, page='', tpl=None):
     # Serif 700 сюда не входит: им набрано выделение ниже сгиба, и держать ради
     # него ещё 20 КБ в высоком приоритете незачем.
     preload = {
-        'en': ['overused-grotesk-latin.woff2'],
+        'en': ['overused-grotesk-latin.woff2', 'overused-grotesk-head.woff2'],  # заголовок героя — выше сгиба
         'hy': ['mardoto-400.woff2', 'mardoto-500.woff2'],
     }.get(tokens['LANG'], [])
     for fn in ['departure-mono.woff2'] + preload:
@@ -1928,7 +1933,7 @@ DEPLOY = os.environ.get('PT_DEPLOY') or os.path.join(ROOT, 'site')
 
 # Ровно те начертания, которые объявлены в FF_EN_D и FF_HY_D. Лишние не кладём:
 # каждый файл в каталоге сайта — это то, что кто-то может скачать.
-DEPLOY_FONTS = (['overused-grotesk-latin.woff2', 'departure-mono.woff2',
+DEPLOY_FONTS = (['overused-grotesk-latin.woff2', 'overused-grotesk-head.woff2', 'departure-mono.woff2',
                  'arian-amu-400.woff2', 'arian-amu-700.woff2']
                 + ['mardoto-400.woff2', 'mardoto-500.woff2', 'mardoto-700.woff2'])
 DEPLOY_ICONS = ['favicon.svg', 'favicon.ico', 'favicon-96.png', 'apple-touch-icon.png']

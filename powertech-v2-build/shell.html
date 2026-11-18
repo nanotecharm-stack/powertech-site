@@ -890,7 +890,7 @@ html.wipecover .rv{transition:none;}
   background:linear-gradient(180deg,rgba(13,14,19,.16) 0%,rgba(13,14,19,.08) 42%,rgba(13,14,19,.40) 72%,rgba(13,14,19,.66) 100%);}
 .ic-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;
   justify-content:space-between;gap:14px;padding:0 20px 17px;}
-.ic-foot h3{margin:0;font-size:calc(clamp(20px,1.5vw,22px) * var(--hs));line-height:1.15;letter-spacing:0;color:#F7F6F3;}
+.ic-foot h3{text-wrap:balance;margin:0;font-size:calc(clamp(20px,1.5vw,22px) * var(--hs));line-height:1.15;letter-spacing:0;color:#F7F6F3;}
 .ic-open{appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
   text-align:left;cursor:pointer;}
 /* растянутая зона накрывает только подпись (.ic-foot — её containing block); клик по картинке
@@ -1489,6 +1489,10 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
   /* Те же ступени, что на остальных разделах: вопрос — текстовый кегль 16 с
      весом 500 (как строки перечня 04), ответ — 16/1.75, ярлыки — роль .tag. */
   padding:16px 0;font:inherit;font-size:var(--t-q);line-height:1.5;font-weight:500;letter-spacing:0;}
+/* 2026-11-18, аудит заголовков: последнее слово не остаётся одно на строке */
+.lede{text-wrap:pretty;}
+/* вопросы раздела 05: pretty оставлял одно слово на второй строке (замер: 470/84 px) — строки уравниваются */
+.qa-t{text-wrap:balance;}
 .qa-q:hover .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
 .qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
