@@ -1495,7 +1495,10 @@ PALETTES = {
         # раздела 03. !important — потому что у шапки свои правила html[data-nav] header .btn i.
         # У .btn при наведении остаётся прежняя подсветка (правило только для :not(:hover)).
         extra_css=(
-            '.btn:not(:hover) i,.ct-act button i,.pb-list i'
+            # 2026-11-18, владелец: «поменяй местами, чтобы кнопка в покое была тёмной, а при
+            # наведении светлой. Все кнопки должны быть такими» — медь на плитке .btn теперь
+            # при наведении, в покое плитка тихая (базовое правило .btn i).
+            '.btn:hover i,.ct-act button i,.pb-list i'
             '{background:#E08A4B!important;color:#17241F!important;}\n'
             '#services .alink{color:#E08A4B;}\n'
             '#services .alink:hover{color:#fff;}\n'
@@ -1503,8 +1506,9 @@ PALETTES = {
             # читается как чёрный. Кнопка берёт зелёный марки (бумага на нём 6:1), наведение
             # заливает на шаг темнее того же тона. На тёмной шапке --inv задано правилом
             # header[data-tone=ink] .btn выше по весу — там кнопка светлая, как была.
-            '.btn:not(.gh){--inv:#2F6B4F;}\n'
-            '.btn:not(.gh)::before{background:#24563F;}\n'),
+            # 2026-11-18: состояния поменяны местами — покой #24563F, наведение #2F6B4F.
+            '.btn:not(.gh){--inv:#24563F;}\n'
+            '.btn:not(.gh)::before{background:#2F6B4F;}\n'),
     ),
 }
 
