@@ -1045,6 +1045,14 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .att button:hover{background:var(--c-error);color:var(--c-highlight);}
 #fmd .hint{font-size:14px;color:var(--fg-soft);margin:10px 0 var(--s5);}
 #fmd .errline{font-size:14px;color:var(--c-error);margin-bottom:14px;display:none;}
+#fmd{overflow:clip;}
+#fmd .fbar{position:sticky;bottom:-34px;z-index:2;display:flex;align-items:center;flex-wrap:wrap;gap:10px var(--s4);
+  margin:0 calc(-1 * clamp(26px,4vw,46px));
+  padding:14px clamp(26px,4vw,46px) calc(14px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);box-shadow:0 -1px 0 var(--hair2);}
+#fmd .fbar .btn{flex:none;}
+#fmd .fbar .errline{margin:0;}
+@media (max-height:520px){#fmd .fbar{position:static;}}
 #fmd .done{display:none;text-align:center;padding:36px 0;}
 #fmd .done .ok{width:46px;height:46px;border-radius:2px;background:var(--brand);
   color:var(--brand-on);font-size:20px;display:flex;align-items:center;
@@ -1599,10 +1607,12 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     
     <div class="errline" id="ptfSizeErr" role="alert">Attachments exceed the 10 MB limit. Please remove some files.</div>
     <div class="hint" id="ptfHint">Up to 10 MB</div>
-    <div class="errline" id="ptfFormErr" role="alert">Please check the highlighted fields.</div>
     
-    <div class="errline" id="ptfSendErr" role="alert">Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am</div>
-    <button class="btn" id="ptfSubmit" type="submit"><span>Send ↗︎</span></button>
+    
+    <div class="fbar">
+      <button class="btn" id="ptfSubmit" type="submit"><span>Send ↗︎</span></button>
+      <div class="fbar-e"><div class="errline" id="ptfFormErr" role="alert">Please check the highlighted fields.</div><div class="errline" id="ptfSendErr" role="alert">Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am</div></div>
+    </div>
     
     <p class="fpriv">We use these details only to answer your enquiry. The form is delivered through FormSubmit, a third-party service. <button type="button" data-open-privacy>Privacy Policy</button></p>
     </form>

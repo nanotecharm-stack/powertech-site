@@ -1969,6 +1969,20 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .att button:hover{background:#A8341F;color:#fff;}
 #fmd .hint{font-size:14px;color:var(--fg-soft);margin:10px 0 var(--s5);}
 #fmd .errline{font-size:14px;color:#A8341F;margin-bottom:14px;display:none;}
+/* Полоса отправки. overflow:clip вместо hidden у коробки: hidden делает коробку своей
+   областью прокрутки и sticky внутри неё не работает; clip обрезает так же, но прокрутку
+   оставляет за .ovl. Где clip не знают — остаётся hidden и прежнее поведение. На низком
+   экране (телефон с клавиатурой) полоса не липнет, чтобы не отнимать место у полей. */
+#fmd{overflow:clip;}
+/* bottom:-34px — поле .ovl снизу: липкая полоса считается от области содержимого, и при 0
+   под ней оставалась щель 34 px, в которой проглядывали поля формы. */
+#fmd .fbar{position:sticky;bottom:-34px;z-index:2;display:flex;align-items:center;flex-wrap:wrap;gap:10px var(--s4);
+  margin:0 calc(-1 * clamp(26px,4vw,46px));
+  padding:14px clamp(26px,4vw,46px) calc(14px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);box-shadow:0 -1px 0 var(--hair2);}
+#fmd .fbar .btn{flex:none;}
+#fmd .fbar .errline{margin:0;}
+@media (max-height:520px){#fmd .fbar{position:static;}}
 #fmd .done{display:none;text-align:center;padding:36px 0;}
 #fmd .done .ok{width:46px;height:46px;border-radius:2px;background:var(--brand);
   color:var(--brand-on);font-size:20px;display:flex;align-items:center;
@@ -2751,11 +2765,15 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
          слышит ответа. -->
     <div class="errline" id="ptfSizeErr" role="alert">%%F_SIZE_ERR%%</div>
     <div class="hint" id="ptfHint">%%F_HINT0%%</div>
-    <div class="errline" id="ptfFormErr" role="alert">%%F_FORM_ERR%%</div>
     <!-- Отказ сети при отправке с вложениями: раньше catch вёл на тот же done()
          и человек видел «отправлено» при неушедшем письме. -->
-    <div class="errline" id="ptfSendErr" role="alert">%%F_SEND_ERR%%</div>
-    <button class="btn" id="ptfSubmit" type="submit"><span>%%F_SEND%% ↗︎</span></button>
+    <!-- 2026-11-18, владелец: «появляются надписи о незаполненных полях, и кнопка отправки съезжает
+         за экран, в арм. версии вообще пропадает» — кнопка и сводка ошибки стоят в полосе, которая
+         липнет к нижней кромке окна: видна всегда, сколько бы строк ошибок ни появилось выше. -->
+    <div class="fbar">
+      <button class="btn" id="ptfSubmit" type="submit"><span>%%F_SEND%% ↗︎</span></button>
+      <div class="fbar-e"><div class="errline" id="ptfFormErr" role="alert">%%F_FORM_ERR%%</div><div class="errline" id="ptfSendErr" role="alert">%%F_SEND_ERR%%</div></div>
+    </div>
     <!-- Строка о данных стоит у кнопки, а не в подвале: прочитать её нужно до
          отправки, а не после того, как файлы уже ушли. -->
     <p class="fpriv">%%F_PRIV%%</p>
