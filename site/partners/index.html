@@ -845,7 +845,7 @@ footer .fbrand .freg b{font-weight:400;color:var(--c-paper-a86);margin-left:10px
 footer .fbrand p{margin-top:20px;font-family:var(--face-overused-grotesk);font-size:var(--t-aux);
   letter-spacing:.14em;text-transform:uppercase;color:var(--c-paper-a62);max-width:26ch;
   line-height:1.8;}
-:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:30ch;text-transform:none;}
+:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:none;white-space:nowrap;text-transform:none;}
 footer h3{font-family:var(--face-overused-grotesk);font-size:var(--t-lbl);letter-spacing:.12em;font-weight:500;
   text-transform:uppercase;color:var(--c-paper-a78);margin-bottom:20px;
   display:flex;align-items:center;gap:var(--s3);}
@@ -2215,7 +2215,7 @@ var ixItems=[].slice.call(document.querySelectorAll('section')).map(function(sec
   [].slice.call(t.querySelectorAll('br')).forEach(function(b){b.replaceWith(' ');});
   [].slice.call(t.querySelectorAll('i,svg')).forEach(function(x){x.remove();});
   return {id:sec.id,no:cnt.textContent.trim(),
-          title:t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
+          title:h2.getAttribute('data-ix')||t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
 }).filter(Boolean);
 if(ixt)ixt.textContent=ixItems.length<10?('0'+ixItems.length):String(ixItems.length);
 ixItems.forEach(function(it){

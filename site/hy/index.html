@@ -849,7 +849,7 @@ footer .fbrand .freg b{font-weight:400;color:var(--c-paper-a86);margin-left:10px
 footer .fbrand p{margin-top:20px;font-family:var(--face-mardoto);font-size:var(--t-aux);
   letter-spacing:.14em;text-transform:uppercase;color:var(--c-paper-a62);max-width:26ch;
   line-height:1.8;}
-:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:30ch;text-transform:none;}
+:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:none;white-space:nowrap;text-transform:none;}
 footer h3{font-family:var(--face-mardoto);font-size:var(--t-lbl);letter-spacing:.12em;font-weight:500;
   text-transform:uppercase;color:var(--c-paper-a78);margin-bottom:20px;
   display:flex;align-items:center;gap:var(--s3);}
@@ -1396,7 +1396,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <section class="sec thesis" id="why"><div class="wrap">
   <div class="rv intro">
     <div class="cnt">01</div>
-    <h2>Էլեկտրասնուցման խնդիրները միշտ չէ, որ նկատելի են</h2>
+    <h2 data-ix="Թաքնված խնդիրներ">Էլեկտրասնուցման խնդիրները միշտ չէ, որ նկատելի են</h2>
     <p class="lede">Լարման անկումը կարող է տևել ընդամենը մի քանի պարբերություն։ Հետագա ստուգման պահին լարումն արդեն կարող է բնականոն լինել։ Անընդհատ մոնիթորինգը գրանցում է իրադարձությունը, դրա ժամանակը և չափված պարամետրերը՝ հետագա վերլուծության համար։</p>
   </div>
   
@@ -1531,7 +1531,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     </div>
     <nav class="fcol rv" style="--i:2" aria-label="Բաժիններ">
       <h3>Բաժիններ</h3>
-      <ul class="flist"><li><a href="#why"><span>Էլեկտրասնուցման խնդիրները միշտ չէ, որ նկատելի են</span></a></li><li><a href="#applications"><span>Որտեղ է օգնում մոնիթորինգը</span></a></li><li><a href="#services"><span>7-օրյա մոնիթորինգ</span></a></li><li><a href="#report"><span>Հաշվետվություն</span></a></li><li><a href="#assignments"><span>Ինժեներական խնդիրներ</span></a></li><li><a href="#measure"><span>Ինչ ենք չափում</span></a></li><li><a href="#company"><span>Մեր մասին</span></a></li><li><a href="/hy/partners/"><span>Գործընկերների համար</span></a></li></ul>
+      <ul class="flist"><li><a href="#why"><span>Թաքնված խնդիրներ</span></a></li><li><a href="#applications"><span>Որտեղ է օգնում մոնիթորինգը</span></a></li><li><a href="#services"><span>7-օրյա մոնիթորինգ</span></a></li><li><a href="#report"><span>Հաշվետվություն</span></a></li><li><a href="#assignments"><span>Ինժեներական խնդիրներ</span></a></li><li><a href="#measure"><span>Ինչ ենք չափում</span></a></li><li><a href="#company"><span>Մեր մասին</span></a></li><li><a href="/hy/partners/"><span>Գործընկերների համար</span></a></li></ul>
     </nav>
   </div>
   <div class="wrap fbot rv" style="--i:3">
@@ -2314,7 +2314,7 @@ var ixItems=[].slice.call(document.querySelectorAll('section')).map(function(sec
   [].slice.call(t.querySelectorAll('br')).forEach(function(b){b.replaceWith(' ');});
   [].slice.call(t.querySelectorAll('i,svg')).forEach(function(x){x.remove();});
   return {id:sec.id,no:cnt.textContent.trim(),
-          title:t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
+          title:h2.getAttribute('data-ix')||t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
 }).filter(Boolean);
 if(ixt)ixt.textContent=ixItems.length<10?('0'+ixItems.length):String(ixItems.length);
 ixItems.forEach(function(it){

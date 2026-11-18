@@ -1643,7 +1643,9 @@ footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:var(--t-aux)
   letter-spacing:.14em;text-transform:uppercase;color:rgba(239,237,234,.62);max-width:26ch;
   line-height:1.8;}
 /* Армянские прописные шире: с разрядкой .2em слово «ԷԼԵԿՏՐԱԷՆԵՐԳԻԱՍԻ» не помещалось в 24ch (замер 163 при 155). */
-:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:30ch;text-transform:none;}
+/* Владелец (2026-11-18): подпись ломалась на две строки, слово «մոնիթորինգ» висело одно —
+   предел 30ch снят, подпись стоит одной строкой. */
+:lang(hy) footer .fbrand p{letter-spacing:.04em;max-width:none;white-space:nowrap;text-transform:none;}
 footer h3{font-family:%%MONOFONT%%;font-size:var(--t-lbl);letter-spacing:.12em;font-weight:500;
   text-transform:uppercase;color:rgba(239,237,234,.78);margin-bottom:20px;
   display:flex;align-items:center;gap:var(--s3);}
@@ -2501,7 +2503,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 <section class="sec thesis" id="why"><div class="wrap">
   <div class="rv intro">
     <div class="cnt">01</div>
-    <h2>%%WHY_H2%%</h2>
+    <h2 data-ix="%%WHY_NAV%%">%%WHY_H2%%</h2>
     <p class="lede">%%WHY_P%%</p>
   </div>
   <!-- СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ. Композиция и движение — по референсу
@@ -3701,7 +3703,7 @@ var ixItems=[].slice.call(document.querySelectorAll('section')).map(function(sec
   [].slice.call(t.querySelectorAll('br')).forEach(function(b){b.replaceWith(' ');});
   [].slice.call(t.querySelectorAll('i,svg')).forEach(function(x){x.remove();});
   return {id:sec.id,no:cnt.textContent.trim(),
-          title:t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
+          title:h2.getAttribute('data-ix')||t.textContent.replace(/\s+/g,' ').trim(),sec:sec};
 }).filter(Boolean);
 if(ixt)ixt.textContent=ixItems.length<10?('0'+ixItems.length):String(ixItems.length);
 ixItems.forEach(function(it){

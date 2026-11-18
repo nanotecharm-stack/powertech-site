@@ -226,7 +226,7 @@ def foot_links(d, home='', here=False):
     оттуда ведут на главную. here — мы на странице «Партнёрам» (aria-current)."""
     out = []
     for sid, tok in FOOT_IDS:
-        t = re.sub(r'<[^>]+>', ' ', d[tok])
+        t = re.sub(r'<[^>]+>', ' ', d.get(tok.replace('_H2', '_NAV')) or d[tok])
         t = re.sub(r'\s+', ' ', t).strip()
         # Номер из списка снят: рядом стоит название раздела, а ссылкой цифра
         # здесь не была — те же 01…08 печатались на странице трижды (счётчик,
@@ -493,6 +493,7 @@ EN = {
  'HERO_MARK1': 'MEASURE', 'HERO_MARK2': 'ANALYSE', 'HERO_MARK3': 'RECOMMEND',
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'WHY_H2': 'Power supply problems are not always obvious',
+ 'WHY_NAV': '',  # пусто = в указателе и подвале стоит сам заголовок
  'WHY_P': 'A voltage dip can last only a few cycles. A later spot check may show normal readings. Continuous monitoring records the event and when it occurred, allowing us to analyse the measured conditions.',
  'APP_H2': 'Where monitoring helps',
  'APP_P': 'Monitoring helps when power quality affects equipment or operations, or when you need measurements to make a technical decision.',
@@ -815,6 +816,8 @@ HY = {
 
  # Поле героя: форма волны напряжения. Подписи по брифу владельца, дословно.
  'WHY_H2': 'Էլեկտրասնուցման խնդիրները միշտ չէ, որ նկատելի են',
+ # Короткое имя раздела 01 для указателя и подвала — владелец (2026-11-18): «длинное название раздела в футере и меню».
+ 'WHY_NAV': 'Թաքնված խնդիրներ',
  'WHY_P': 'Լարման անկումը կարող է տևել ընդամենը մի քանի պարբերություն։ Հետագա ստուգման պահին լարումն արդեն կարող է բնականոն լինել։ Անընդհատ մոնիթորինգը գրանցում է իրադարձությունը, դրա ժամանակը և չափված պարամետրերը՝ հետագա վերլուծության համար։',
  'APP_H2': 'Որտեղ է օգնում մոնիթորինգը',
  'APP_P': 'Մոնիթորինգն օգնում է, երբ էլեկտրաէներգիայի որակն ազդում է սարքավորումների կամ աշխատանքային գործընթացների վրա, կամ երբ տեխնիկական որոշում կայացնելու համար անհրաժեշտ են չափումների տվյալներ։',
