@@ -647,7 +647,7 @@ EN = {
   ('How we use it', [
    'To answer your enquiry, to clarify what needs measuring, to prepare a quotation, and '
    'to arrange the follow-up. We do not use your details for marketing, and we '
-   "do not sell them or share them for anyone else's purposes."]),
+   "do not sell them or share them for anyone else’s purposes."]),
   ('Legal basis', [
    'By completing and sending the form, you give us these details so that we can handle '
    'your enquiry and reply to you. That is what we use them for.',
@@ -1158,9 +1158,9 @@ PAR_EN = {
  'PAR1_P2': "Gridec works as an independent measurement subcontractor or alongside your team. We document existing conditions before new equipment or loads are added and investigate likely causes of disturbances using measurement data. Finding the source may require measurements at several points. After corrective work, we repeat measurements under comparable operating conditions to assess the results. Your team remains responsible for the project design and installation.",
  'PAR1_P3': "We also prepare measurement reports to support commissioning and handover, and can supply and integrate permanent monitoring systems where needed.",
  'PAR2_T': 'Leasing Companies',
- 'PAR2_TAG': "Your asset runs on someone else's power supply.",
- 'PAR2_P1': "Poor power quality at the lessee's site may disrupt operations or contribute to equipment damage. Without recorded data, it can be difficult to establish the electrical conditions when a failure occurs.",
- 'PAR2_P2': "Before installation, Gridec assesses the existing electrical supply and compares the measured parameters with the manufacturer's stated electrical requirements, where available. After commissioning, we can measure again under actual operating loads to document conditions with the new equipment running.",
+ 'PAR2_TAG': "Your asset runs on someone else’s power supply.",
+ 'PAR2_P1': "Poor power quality at the lessee’s site may disrupt operations or contribute to equipment damage. Without recorded data, it can be difficult to establish the electrical conditions when a failure occurs.",
+ 'PAR2_P2': "Before installation, Gridec assesses the existing electrical supply and compares the measured parameters with the manufacturer’s stated electrical requirements, where available. After commissioning, we can measure again under actual operating loads to document conditions with the new equipment running.",
  'PAR2_P3': "Where appropriate, a permanent monitoring system can record supply conditions during the lease term. These records can help the lessor, lessee, equipment supplier and insurer investigate a subsequent problem.",
  'PAR3_T': 'Insurance Companies',
  'PAR3_TAG': "Power quality data for underwriting and claims investigations.",
