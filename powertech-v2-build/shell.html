@@ -226,7 +226,7 @@ header nav{justify-self:center;display:flex;align-items:center;gap:2px;padding:v
 /* section names carry the label voice — the serif in Armenian, the body face in English */
 header nav a{font-family:%%BODYFONT%%;position:relative;padding:var(--s2) 15px;white-space:nowrap;border-radius:2px;color:rgba(13,14,19,.82);
   transition:color .35s var(--e),background .35s var(--e);}
-header nav a:hover:not(.noh *){color:#0D0E13;background:rgba(13,14,19,.07);}
+header nav a:hover:where(:not(.noh *)){color:#0D0E13;background:rgba(13,14,19,.07);}
 header nav a.here{color:var(--inv-fg);background:var(--inv);}
 /* ============ HEADER VARIANTS (under review) ============================
    0 = the glass capsule as built, 1 = titleblock, 2 = hairline rail, 3 = chips.
@@ -258,7 +258,7 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
   transform:rotate(45deg);}
 .ixb[aria-expanded="true"] .cv{transform:rotate(180deg);}
 .ixb[aria-expanded="true"]{box-shadow:inset 0 0 0 1px rgba(13,14,19,.34);}
-.ixb:hover:not(.noh *){box-shadow:inset 0 0 0 1px rgba(13,14,19,.3);}
+.ixb:hover:where(:not(.noh *)){box-shadow:inset 0 0 0 1px rgba(13,14,19,.3);}
 /* the index sheet: numbered rows, nothing decorative */
 /* Панель — отдельный лист, положенный поверх страницы: тон светлее бумаги,
    под нижней кромкой настоящая тень со смещением, а сама страница уходит под
@@ -328,9 +328,9 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
    задержек: строка гаснет разом, как только курсор ушёл. */
 .ixp .tl .lt i{display:block;height:1.35em;font-style:normal;
   transition:transform .3s var(--e);transition-delay:0s;}
-.ixp a:hover:not(.noh *) .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
+.ixp a:hover:where(:not(.noh *)) .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
   transition:transform .6s var(--e);transition-delay:var(--d,0ms);}
-.ixp a:hover:not(.noh *) .tl{color:#F4F3F1;}
+.ixp a:hover:where(:not(.noh *)) .tl{color:#F4F3F1;}
 /* Текущий раздел виден без чтения: линейка и название в цвете марки. */
 .ixp a.here .no{font-weight:600;}
 .ixp a.here .tl{color:var(--brand-ink);}
@@ -430,7 +430,7 @@ body::before{opacity:1;z-index:-1;mix-blend-mode:soft-light;
   .ixp li{opacity:1;transform:none;}
   .ixp::before{transform:scaleX(1);}
   .ixp .tl .lt i{transition:none;}
-  .ixp a:hover:not(.noh *) .tl .lt i{transform:none;}
+  .ixp a:hover:where(:not(.noh *)) .tl .lt i{transform:none;}
 }
 
 /* ---- 1 titleblock: the bar is a real strip of paper -------------------- */
@@ -459,7 +459,7 @@ html[data-nav="2"] .ixb .sheet,html[data-nav="3"] .ixb .sheet{display:none;}
 html[data-nav="2"] .btn{background:none;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(13,14,19,.22);
   padding:11px var(--s4);font-size:13px;}
 html[data-nav="2"] .btn::before{background:var(--fg);}
-html[data-nav="2"] .btn:hover:not(.noh *) span{color:var(--bg);}
+html[data-nav="2"] .btn:hover:where(:not(.noh *)) span{color:var(--bg);}
 html[data-nav="2"] .btn i{background:rgba(13,14,19,.09);}
 /* over an ink section the whole rail inverts, hairline included */
 html[data-nav="2"] header[data-tone="ink"] .hin{box-shadow:inset 0 -1px 0 rgba(239,237,234,.22);}
@@ -469,7 +469,7 @@ html[data-nav="2"] header[data-tone="ink"] .lang,
 html[data-nav="2"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="2"] header[data-tone="ink"] .btn{color:#EFEDEA;box-shadow:inset 0 0 0 1px rgba(239,237,234,.34);}
 html[data-nav="2"] header[data-tone="ink"] .btn::before{background:#EFEDEA;}
-html[data-nav="2"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#0D0E13;}
+html[data-nav="2"] header[data-tone="ink"] .btn:hover:where(:not(.noh *)) span{color:#0D0E13;}
 html[data-nav="2"] header[data-tone="ink"] .btn i{background:rgba(239,237,234,.18);}
 html[data-nav="2"] .brand,html[data-nav="2"] .ixb,html[data-nav="2"] .lang,html[data-nav="2"] .btn{
   transition:color .45s var(--e),box-shadow .45s var(--e);}
@@ -484,7 +484,7 @@ html[data-nav="1"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="1"] header[data-tone="ink"] .ixb::before{background:rgba(239,237,234,.3);}
 html[data-nav="1"] header[data-tone="ink"] .btn{background:#EFEDEA;color:#0D0E13;}
 html[data-nav="1"] header[data-tone="ink"] .btn::before{background:#0D0E13;}
-html[data-nav="1"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#EFEDEA;}
+html[data-nav="1"] header[data-tone="ink"] .btn:hover:where(:not(.noh *)) span{color:#EFEDEA;}
 html[data-nav="1"] header[data-tone="ink"] .btn i{background:rgba(13,14,19,.14);}
 /* над тёмным разделом плашка логотипа становится тёмной, знак — светлым */
 html[data-nav="3"] header[data-tone="ink"] .brand{--acc:currentColor;}
@@ -495,7 +495,7 @@ html[data-nav="3"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="3"] header[data-tone="ink"] .lang::before{background:rgba(239,237,234,.18);}
 html[data-nav="3"] header[data-tone="ink"] .btn{background:#EFEDEA;color:#0D0E13;}
 html[data-nav="3"] header[data-tone="ink"] .btn::before{background:#0D0E13;}
-html[data-nav="3"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#EFEDEA;}
+html[data-nav="3"] header[data-tone="ink"] .btn:hover:where(:not(.noh *)) span{color:#EFEDEA;}
 html[data-nav="3"] header[data-tone="ink"] .btn i{background:rgba(13,14,19,.14);}
 html[data-nav="1"] header,html[data-nav="1"] .btn,html[data-nav="3"] .brand,
 html[data-nav="3"] .navr,html[data-nav="3"] .btn{
@@ -700,7 +700,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 .lang{display:inline-flex;align-items:center;gap:6px;font-family:%%BODYFONT%%;font-size:var(--t-aux);font-weight:500;letter-spacing:.06em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,14,19,.12);
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
-.lang:hover:not(.noh *){color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
+.lang:hover:where(:not(.noh *)){color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
 /* Стрелка-квадрат рисуется SVG, а не символом ↗ (2026-11-17): Safari на iPhone рисовал символ
    эмодзи, а с U+FE0E — системным шрифтом со смещением. Линия 1.4px при любом размере квадрата. */
@@ -711,11 +711,11 @@ i>svg.ar,.pb-list i>svg.ar{display:block;width:.8em;height:.8em;max-width:none;m
 /* Стрелка при наведении светлеет вместе с надписью. Прежде цвет ей задавала
    только кнопка в покое, и на залитой кнопке она оставалась тёмной: подпись
    белая, плитка светлая, а знак внутри — чернильный. */
-.btn:hover:not(.noh *) i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
+.btn:hover:where(:not(.noh *)) i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
 .btn{display:inline-flex;align-items:center;gap:12px;background:var(--inv);color:var(--inv-fg);font-size:14px;font-weight:600;padding:13px 14px 13px 20px;/* оптика 2026-09-20: плитка стрелки — блок, ей нужно меньше поля, чем тексту; зазор 9→12 */position:relative;overflow:hidden;isolation:isolate;border-radius:2px;}
 .btn span{position:relative;z-index:1;transition:color .2s var(--e);}
 .btn::before{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--e);}
-.btn:hover:not(.noh *)::before{transform:scaleX(1);}.btn:hover:not(.noh *) span{color:#fff;}
+.btn:hover:where(:not(.noh *))::before{transform:scaleX(1);}.btn:hover:where(:not(.noh *)) span{color:#fff;}
 /* the surface has to answer the press — nothing here had an :active state */
 /* Бриф владельца по микроанимациям (2026-11-18): нажатие .995 глазом не читалось —
    кнопка сжимается до .97 за 120 мс и возвращается. Только transform: соседи не двигаются.
@@ -775,7 +775,7 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   font-size:15px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(13,14,19,.3);}
 .hero .acts .btn.gh::before{display:none;}
-.hero .acts .btn.gh:hover:not(.noh *) span{color:var(--fg-head);}
+.hero .acts .btn.gh:hover:where(:not(.noh *)) span{color:var(--fg-head);}
 /* 2026-11-17, владелец: «добавь взаимодействия премиального к этой кнопке». Спокойно, как у прибора:
    в покое — тонкая серая черта; при наведении и фокусе с клавиатуры зелёная черта марки
    прочерчивается слева направо поверх серой, надпись темнеет, стрелка опускается на 3 px — туда,
@@ -785,10 +785,10 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   background:linear-gradient(var(--brand),var(--brand)) 0 100%/0% 1px no-repeat,
     linear-gradient(rgba(13,14,19,.3),rgba(13,14,19,.3)) 0 100%/100% 1px no-repeat;
   transition:background-size .55s var(--e),color .25s var(--e);}
-.hero .acts .btn.gh:hover:not(.noh *)>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
+.hero .acts .btn.gh:hover:where(:not(.noh *))>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
   background-size:100% 1px,100% 1px;}
 .hero .acts .btn.gh .gh-ar{display:inline-block;transition:transform .45s var(--e);}
-.hero .acts .btn.gh:hover:not(.noh *) .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
+.hero .acts .btn.gh:hover:where(:not(.noh *)) .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
 .hero .acts .btn.gh:active .gh-ar{transform:translateY(5px);transition-duration:.12s;}
 .hero .acts .btn.gh:focus-visible{outline:2px solid var(--brand);outline-offset:6px;border-radius:var(--r);}
 /* ФОТО: целиком, натуральная пропорция; width/height на <img> резервируют место. */
@@ -833,10 +833,10 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
 header.on-dark .brand{color:#EFEDEA;}
 header.on-dark nav{box-shadow:inset 0 0 0 1px rgba(255,251,249,.28);background:rgba(20,22,28,.42);}
 header.on-dark nav a{color:rgba(244,243,241,.88);}
-header.on-dark nav a:hover:not(.noh *){color:#fff;background:rgba(239,237,234,.10);}
+header.on-dark nav a:hover:where(:not(.noh *)){color:#fff;background:rgba(239,237,234,.10);}
 header.on-dark nav a.here{color:#0D0E13;background:#EFEDEA;}
 header.on-dark .lang{color:rgba(255,251,249,.9);background:rgba(20,22,28,.42);box-shadow:inset 0 0 0 1px rgba(255,251,249,.3);}
-header.on-dark .lang:hover:not(.noh *){color:#fff;}
+header.on-dark .lang:hover:where(:not(.noh *)){color:#fff;}
 header.on-dark .btn{background:#14161C;color:#fff;}
 header.on-dark .btn i{background:rgba(255,255,255,.22);}
 
@@ -869,7 +869,7 @@ html.wipecover .rv{transition:none;}
 .plate2 h2,.plate2 h3{color:#F4F3F1;}
 .plate2 .lede{color:var(--on-dark-lede);}
 .plate2 .cnt{color:rgba(239,237,234,.58);}
-.plate2 .alink:hover:not(.noh *){color:#fff;}
+.plate2 .alink:hover:where(:not(.noh *)){color:#fff;}
 .plate2 .display{color:#F4F3F1;}
 .plate2 .note{color:var(--on-dark-note);}
 .plate2 h2 i,.plate2 .lede i{color:rgba(239,237,234,.4);}
@@ -895,8 +895,8 @@ html.wipecover .rv{transition:none;}
 .ic-art{position:relative;aspect-ratio:3/2;overflow:hidden;background:#15171E;}
 .ic-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
   transform:scale(1.04);transform-origin:52% 45%;transition:transform .3s var(--e);}
-html:not(.noh) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
-/* html:not(.noh) — как у строк «Партнёрам» (2026-11-20, владелец: «сделай то же самое для карточек
+:where(html:not(.noh)) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
+/* :where(html:not(.noh)) — как у строк «Партнёрам» (2026-11-20, владелец: «сделай то же самое для карточек
    в разделе 02»): пока страница едет под стоящим курсором, карточки наведение не отыгрывают. */
 .ic-art::after{content:"";position:absolute;pointer-events:none;z-index:2;inset:-1px;
   background:linear-gradient(180deg,rgba(13,14,19,.16) 0%,rgba(13,14,19,.08) 42%,rgba(13,14,19,.40) 72%,rgba(13,14,19,.66) 100%);}
@@ -920,18 +920,18 @@ html:not(.noh) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transfor
    находки под подписью. Без плашек, стрелок и теней (2026-09-17). Только мышь: телефон как был. */
 @media (hover:hover){
   .ic-art img{transition:transform 1.1s cubic-bezier(.16,1,.3,1),filter .5s ease;}
-  html:not(.noh) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);filter:brightness(1.12) contrast(1.04);}
+  :where(html:not(.noh)) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);filter:brightness(1.12) contrast(1.04);}
   .ic-art::before{content:"";position:absolute;pointer-events:none;z-index:2;inset:12px;opacity:0;
     border:1px solid rgba(247,246,243,.86);border-radius:1px;transform:scale(1.03);
     /* 2026-11-18, владелец: «на светлых фото рамка не видна» — светлой линии дана тёмная
        пара снаружи и внутри: на светлом фото рамку держит тёмная, на тёмном — светлая. */
     box-shadow:0 0 0 1px rgba(13,14,19,.34),inset 0 0 0 1px rgba(13,14,19,.22);
     transition:opacity .5s ease,transform .8s cubic-bezier(.16,1,.3,1);}
-  html:not(.noh) .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;transform:none;}
+  :where(html:not(.noh)) .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;transform:none;}
   /* 2026-11-18, бриф владельца: подпись отходила от края через padding (пересчёт раскладки
      каждый кадр) — тот же ход 10 px вправо и 12 px вверх теперь даёт transform. */
   .ic-foot{transition:transform .6s cubic-bezier(.16,1,.3,1);}
-  html:not(.noh) .icard:hover .ic-foot,.icard:focus-within .ic-foot{transform:translate(10px,-12px);}
+  :where(html:not(.noh)) .icard:hover .ic-foot,.icard:focus-within .ic-foot{transform:translate(10px,-12px);}
 }
 /* строка «другие системы»: волосяные линии, без плашки и скруглений */
 .iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
@@ -1109,7 +1109,7 @@ html[lang="hy"] .hero h1,html[lang="hy"] #why h2,html[lang="hy"] #company h2{lin
   /* 12px были ниже названной ступени Action (14). Трекинг ослаблен: на большем
      кегле прежний растягивал строку и мешал читать её как фразу. */
   letter-spacing:.11em;text-transform:uppercase;color:var(--brand-ink);}
-.alink:hover:not(.noh *){text-decoration:underline;text-underline-offset:4px;}
+.alink:hover:where(:not(.noh *)){text-decoration:underline;text-underline-offset:4px;}
 
 /* sticky sequence */
 /* ============ СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ ============
@@ -1175,7 +1175,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .other p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:52ch;}
 .other .btn{background:var(--brand);color:#fff;}
 .other .btn::before{background:var(--bg);}
-.other .btn:hover:not(.noh *) span{color:var(--fg);}
+.other .btn:hover:where(:not(.noh *)) span{color:var(--fg);}
 
 /* services */
 .display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(%%DISPSIZE%% * var(--hs));line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
@@ -1422,8 +1422,8 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 /* Наведение подсвечивает ряд, как строку в таблице, и не двигает его: сдвиг
    обещал переход, которого нет, — этот жест мы уже снимали. */
 @media (hover:hover){
-  .list div:hover:not(.noh *){background:color-mix(in srgb,var(--fg) 3%,transparent);}
-  .list div:hover:not(.noh *)::after{background:var(--hair);}}
+  .list div:hover:where(:not(.noh *)){background:color-mix(in srgb,var(--fg) 3%,transparent);}
+  .list div:hover:where(:not(.noh *))::after{background:var(--hair);}}
 /* Наведения здесь нет намеренно. Строки списка — перечень содержания отчёта,
    а не ссылки: ни адреса, ни обработчика, ни фокуса. Сдвиг содержимого вбок
    обещал действие, которого не происходит, и в ряду с линейками сверху и снизу
@@ -1515,7 +1515,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .lede{text-wrap:pretty;}
 /* вопросы раздела 05: pretty оставлял одно слово на второй строке (замер: 470/84 px) — строки уравниваются */
 .qa-t{text-wrap:balance;}
-.qa-q:hover:not(.noh *) .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
+.qa-q:hover:where(:not(.noh *)) .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
 .qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
 .qa-t{transition:color .2s var(--e);}
@@ -1616,15 +1616,15 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .ct-act button span::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:2px;
   background:var(--brand);transform:scaleX(0);transform-origin:left;
   transition:transform .6s var(--e);}
-.ct-act button:hover:not(.noh *) span::after,.ct-act button:focus-visible span::after{transform:scaleX(1);}
+.ct-act button:hover:where(:not(.noh *)) span::after,.ct-act button:focus-visible span::after{transform:scaleX(1);}
 .ct-act button i{flex:0 0 auto;align-self:flex-start;display:grid;place-items:center;/* оптика 2026-09-20: квадрат высотой в строку и на верху текста; 64 свисал на 25 px под базовую */
   width:clamp(40px,3.4vw,48px);height:clamp(40px,3.4vw,48px);border-radius:2px;
   background:var(--brand);color:#fff;font-style:normal;font-family:%%BODYFONT%%;
   font-size:clamp(15px,1.4vw,20px);
   transition:transform .5s var(--e),background .4s var(--e);}
-.ct-act button:hover:not(.noh *) i{transform:translate(4px,-4px);}
+.ct-act button:hover:where(:not(.noh *)) i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
-.plate .btn:hover:not(.noh *) span{color:var(--fg);}
+.plate .btn:hover:where(:not(.noh *)) span{color:var(--fg);}
 /* Селектор с .plate — иначе правило .plate p (17px) сильнее и строка остаётся примечанием. */
 .plate p.ct-sub{margin-top:26px;max-width:34ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:#F4F3F1;}
 .plate .wrap.ct-one{grid-template-columns:minmax(0,1fr);padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px);}
@@ -1689,13 +1689,13 @@ footer .flist li+li,footer .fcon li+li{margin-top:11px;}
 footer .flist a{display:block;
   font-size:15px;line-height:1.5;color:var(--on-dark-link);
   transition:color .3s var(--e);}
-footer .flist a:hover:not(.noh *){color:#fff;}
+footer .flist a:hover:where(:not(.noh *)){color:#fff;}
 /* Роль Body: телефон и адрес — то, ради чего в футер и приходят, их читают,
    а не проглядывают. Тон поднят с .72 до .82: на чернильной плите это
    единственные строки, по которым будут звонить. */
 footer .fcon li{font-size:16px;line-height:1.65;color:rgba(239,237,234,.82);}
 footer .fcon a{color:var(--on-dark-link);transition:color .3s var(--e);}
-footer .fcon a:hover:not(.noh *){color:#fff;text-decoration:underline;text-underline-offset:4px;}
+footer .fcon a:hover:where(:not(.noh *)){color:#fff;text-decoration:underline;text-underline-offset:4px;}
 /* В колоночном флексе поля auto ужимают полосу до содержимого и ставят её
    посередине — ширину задаём явно, иначе строка копирайта висит в центре. */
 footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s4);
@@ -1711,11 +1711,11 @@ footer .fbl{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;}
 footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:6px 0;
   color:rgba(239,237,234,.7);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(239,237,234,.3);transition:color .3s var(--e),text-decoration-color .3s var(--e);}
-footer .fpp:hover:not(.noh *){color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
+footer .fpp:hover:where(:not(.noh *)){color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
 footer .fpp:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 footer .flang{color:rgba(239,237,234,.75);padding:9px 13px;border-radius:2px;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:color .3s var(--e),background .3s var(--e);}
-footer .flang:hover:not(.noh *){color:#0D0E13;background:#EFEDEA;}
+footer .flang:hover:where(:not(.noh *)){color:#0D0E13;background:#EFEDEA;}
 footer a:focus-visible,.flang:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 /* Появление с задержкой по колонкам — то же, что делает пример своим stagger. */
 footer .rv{transition-delay:calc(var(--i,0) * .09s);}
@@ -1807,7 +1807,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   background:#14161C;color:#EFEDEA;z-index:5;font-size:18px;line-height:1;
   display:grid;place-items:center;
   box-shadow:0 0 0 1px rgba(239,237,234,.55);}
-.md .x:hover:not(.noh *){background:var(--brand);color:#fff;
+.md .x:hover:where(:not(.noh *)){background:var(--brand);color:#fff;
   box-shadow:0 0 0 1px rgba(255,251,249,.7);}
 /* the industry detail: the card opens into a full plate */
 #imd{max-width:880px;}
@@ -1966,7 +1966,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   box-shadow:none;
   transition:background .25s var(--e),color .25s var(--e),transform .12s var(--e);}
 #fmd .tps button:active{transform:scale(.97);}
-#fmd .tps button:hover:not(.noh *){background:#E9E6E2;color:var(--fg);}
+#fmd .tps button:hover:where(:not(.noh *)){background:#E9E6E2;color:var(--fg);}
 #fmd .tps button.on{background:var(--inv);color:var(--inv-fg);box-shadow:none;}
 #fmd .tps button:focus-visible{outline:1px solid var(--brand-ink);outline-offset:2px;}
 /* Пунктира на сайте нет ни в одном месте — кромка волосяная, как у плашек. */
@@ -1979,7 +1979,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   border:0;border-radius:0;padding:var(--s3) 2px 14px;cursor:pointer;
   text-align:left;background:none;box-shadow:inset 0 -1px 0 var(--hair);
   transition:box-shadow .25s var(--e),background .25s var(--e);}
-#fmd .drop:hover:not(.noh *){box-shadow:inset 0 -1px 0 rgba(13,14,19,.3);}
+#fmd .drop:hover:where(:not(.noh *)){box-shadow:inset 0 -1px 0 rgba(13,14,19,.3);}
 #fmd .drop.on{background:rgba(200,96,61,.05);
   box-shadow:inset 0 0 0 1px var(--brand-ink);}
 #fmd .drop b{display:inline;font-family:%%BODYFONT%%;font-size:15px;letter-spacing:0;
@@ -2000,7 +2000,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .att .sz{font-family:%%MONOFONT%%;font-size:var(--t-aux);color:var(--fg-soft);}
 #fmd .att button{width:44px;height:44px;margin:-9px -10px -9px 0;border-radius:2px;background:transparent;
   font-size:18px;line-height:1;color:var(--fg);transition:background .2s var(--e),color .2s var(--e);}
-#fmd .att button:hover:not(.noh *){background:#A8341F;color:#fff;}
+#fmd .att button:hover:where(:not(.noh *)){background:#A8341F;color:#fff;}
 #fmd .hint{font-size:14px;color:var(--fg-soft);margin:10px 0 var(--s5);}
 #fmd .errline{font-size:14px;color:#A8341F;margin-bottom:14px;display:none;}
 /* Полоса отправки. overflow:clip вместо hidden у коробки: hidden делает коробку своей
@@ -2288,7 +2288,7 @@ html[data-nav="5"]:has(#ixp.on) .hprog{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn{background:transparent;color:#EFEDEA;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.32);
   transition:background .16s var(--e) .23s,color .16s var(--e) .23s,box-shadow .16s var(--e) .23s;}
-html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover:not(.noh *){background:#EFEDEA;color:#0D0E13;}
+html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover:where(:not(.noh *)){background:#EFEDEA;color:#0D0E13;}
 /* Без :has() (старые браузеры) шапка просто остаётся на своей пелене — шов
    вернётся, но ничего не сломается и всё читается. */
 
@@ -2372,9 +2372,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
 .par-home i svg{display:block;width:14px;height:12px;}
 @media (hover:hover){
-  .par-home:hover:not(.noh *){box-shadow:inset 0 0 0 1px var(--brand-ink);}
-  .par-home:hover:not(.noh *) .ph-pic img{transform:scale(1.06);}
-  .par-home:hover:not(.noh *) i{transform:translateX(-3px);background:var(--brand);color:#fff;}
+  .par-home:hover:where(:not(.noh *)){box-shadow:inset 0 0 0 1px var(--brand-ink);}
+  .par-home:hover:where(:not(.noh *)) .ph-pic img{transform:scale(1.06);}
+  .par-home:hover:where(:not(.noh *)) i{transform:translateX(-3px);background:var(--brand);color:#fff;}
 }
 @media (max-width:700px){.par-home{width:100%;}.ph-pic{width:112px;}}
 /* Карточка в конце страницы — справа от призыва, на телефоне под ним. */
@@ -2450,8 +2450,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   font-size:15px;background:var(--inv);color:var(--inv-fg);
   transition:transform .2s var(--e),background .2s var(--e);}
 @media (hover:hover){
-  .pb-list a:hover:not(.noh *){background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
-  html:not(.noh) .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:#fff;}
+  .pb-list a:hover:where(:not(.noh *)){background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
+  :where(html:not(.noh)) .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:#fff;}
 }
 @media (max-width:860px){
   .pb-list a{grid-template-columns:96px minmax(0,1fr) 30px;column-gap:var(--s4);align-items:start;}
@@ -2503,8 +2503,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
      едет, строки проходят под стоящим курсором, и каждая отыгрывала наведение — черта, сдвиг
      чертежа на 4 px, плитка. Класс ставит скрипт при прокрутке и снимает при настоящем движении
      мыши; с клавиатуры (focus-visible) всё как было. */
-  html:not(.noh) .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
-  html:not(.noh) .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:#86C2A0;transform:translateX(4px);}
+  :where(html:not(.noh)) .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
+  :where(html:not(.noh)) .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:#86C2A0;transform:translateX(4px);}
 }
 
 /* ===== КАСАНИЕ (бриф владельца «Mobile UX Audit & Refinement», 2026-11-20) =====
@@ -4076,8 +4076,12 @@ function toneUnderBar(){aTone(mTone());}
 document.documentElement.setAttribute('data-nav','5');
 /* ?rise=old — подъём .rv на тёмных плитах для сравнения (см. стили .plate2 .rv). */
 if(/[?&]rise=old/.test(location.search))document.documentElement.setAttribute('data-rise','old');
+/* ВЕС ПРАВИЛ (2026-11-20): условие «не .noh» всегда пишется внутри :where() — оно не должно
+   добавлять веса. Без :where правило наведения становилось тяжелее правила состояния и
+   перекрывало его: в форме выбранный сектор оставался в виде «наведено», пока курсор не уйдёт
+   (владелец: «приходится несколько раз нажимать, как бы тормозит»). */
 /* html.noh — «наведение молчит, пока едет страница» (см. стили .pb-list). С 2026-11-20 тем же
-   классом через :hover:not(.noh *) заглушены .btn, строки .list (04), .ct-act (08) и вопросы .qa-q (05):
+   классом через :hover:where(:not(.noh *)) заглушены .btn, строки .list (04), .ct-act (08) и вопросы .qa-q (05):
    владелец после замера всех разделов — «Yes, fix all 4». Ставится на первом
    событии прокрутки, снимается, когда мышь действительно сдвинулась: Chrome после прокрутки сам
    шлёт mousemove без движения, поэтому сравниваем экранные координаты. */

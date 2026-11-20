@@ -1507,10 +1507,10 @@ PALETTES = {
             # 2026-11-18, владелец: «поменяй местами, чтобы кнопка в покое была тёмной, а при
             # наведении светлой. Все кнопки должны быть такими» — медь на плитке .btn теперь
             # при наведении, в покое плитка тихая (базовое правило .btn i).
-            '.btn:hover:not(.noh *) i,.ct-act button i,.pb-list i'
+            '.btn:hover:where(:not(.noh *)) i,.ct-act button i,.pb-list i'
             '{background:#E08A4B!important;color:#17241F!important;}\n'
             '#services .alink{color:#E08A4B;}\n'
-            '#services .alink:hover:not(.noh *){color:#fff;}\n'
+            '#services .alink:hover:where(:not(.noh *)){color:#fff;}\n'
             # 2026-11-17, владелец: «кнопки выглядят черными» — плашка #17241F на бумаге
             # читается как чёрный. Кнопка берёт зелёный марки (бумага на нём 6:1), наведение
             # заливает на шаг темнее того же тона. На тёмной шапке --inv задано правилом
