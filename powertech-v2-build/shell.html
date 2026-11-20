@@ -813,7 +813,7 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   .hside{padding-top:22px;}
   .hero h1{width:auto;max-width:none;font-size:calc(clamp(36px,10vw,44px) * var(--hs));}
   .hero .hp{font-size:16.5px;}
-  .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:60% 50%;}
+  .hphoto img{aspect-ratio:4/3;object-fit:cover;object-position:94% 50%;/* кадр 2026-11-20: при 60% анализатор с графиками резался правой кромкой */}
   .hmark{position:static;width:auto;max-width:none;padding:12px clamp(20px,4vw,24px) 0;font-size:var(--t-aux);line-height:1.7;letter-spacing:.1em;
     /* 2026-11-17: под фото подпись лежала на серой подложке загрузки #7F7E7E тёмным текстом —
        в Safari на телефоне читалась плохо. Своя бумага и цвет вторичного текста. */
@@ -2537,9 +2537,12 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
        конкретный прибор. Полновылетное, целиком; надпись на светлой панели — живой текст,
        на телефоне становится подписью под фото. Приоритетная загрузка, место зарезервировано. -->
   <figure class="hphoto">
-    <img src="./uploads/hero/switchboard-1942.webp"
-         srcset="./uploads/hero/switchboard-971.webp 971w, ./uploads/hero/switchboard-1942.webp 1942w"
-         sizes="100vw" width="1942" height="809" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="sync">
+    <!-- 2026-11-20: владелец прислал новый кадр того же сюжета (на экране анализатора графики),
+         1860×846 — «Yes, on dev». Исходник: img/hero/_src/switchboard2-src.webp. Прежние файлы
+         switchboard-1942/-971 остаются в выкладке: страница из кэша Pages ещё 10 минут зовёт их. -->
+    <img src="./uploads/hero/switchboard2-1860.webp"
+         srcset="./uploads/hero/switchboard2-930.webp 930w, ./uploads/hero/switchboard2-1860.webp 1860w"
+         sizes="100vw" width="1860" height="846" alt="%%HERO_PHOTO_ALT%%" fetchpriority="high" decoding="sync">
     <!-- decoding="sync" (2026-09-17, владелец: «в самой верхней позиции при обновлении картинка
          героя моргает»): с async Chrome рисовал первый кадр без фото даже из кеша — на 10–16 мс
          в окне была бумага, потом фото. sync включает уже скачанный файл в первый же кадр;
