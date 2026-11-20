@@ -360,10 +360,13 @@ def qa_pics(items):
     srcset (2026-09-17): коробка картинки на десктопе 450–464 px при 1280–2560, а файл
     1448 px нужен только экрану с плотностью 2. Обычный экран берёт готовый 724 px (тот
     же, что у телефона) — вчетверо меньше пикселей на раскодирование при прокрутке.
-    До 960 px стопка скрыта (display:none), там картинка идёт в ответе, см. qa_html."""
+    До 960 px стопка скрыта (display:none), там картинка идёт в ответе, см. qa_html.
+
+    loading="lazy" (2026-11-20): без него телефон качал все пять файлов скрытой стопки
+    (~0,8 МБ) при каждом визите. fetchpriority="low" снят: ленивой картинке он не нужен."""
     return ''.join('<img src="./uploads/qa/%s.webp" srcset="./uploads/qa/%s-724.webp 724w, ./uploads/qa/%s.webp 1448w" '
-                   'sizes="(max-width:960px) 100vw, 464px" width="1448" height="1086" alt="%s" decoding="async"%s>'
-                   % (QA_IMGS[k], QA_IMGS[k], QA_IMGS[k], it[3], ' fetchpriority="low"' if k != 1 else '') for k, it in enumerate(items))
+                   'sizes="(max-width:960px) 100vw, 464px" width="1448" height="1086" alt="%s" loading="lazy" decoding="async">'
+                   % (QA_IMGS[k], QA_IMGS[k], QA_IMGS[k], it[3]) for k, it in enumerate(items))
 
 # Each parameter gets its own measurement signature. Drawn to the owner's sketches
 # (2026-07-28) in the site's own hairline language: one stroke weight, currentColor for
