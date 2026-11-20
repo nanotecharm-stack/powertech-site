@@ -447,7 +447,7 @@ html.wipecover .rv{transition:none;}
 .ic-art{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--c-ink-plate-top);}
 .ic-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
   transform:scale(1.04);transform-origin:52% 45%;transition:transform .3s var(--e);}
-.icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
+html:not(.noh) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.07);}
 .ic-art::after{content:"";position:absolute;pointer-events:none;z-index:2;inset:-1px;
   background:linear-gradient(180deg,var(--c-ink-plate-a16) 0%,var(--c-ink-plate-a08) 42%,var(--c-ink-plate-a40) 72%,var(--c-ink-plate-a66) 100%);}
 .ic-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:flex-end;
@@ -461,14 +461,14 @@ html.wipecover .rv{transition:none;}
 .ic-go{display:none;}
 @media (hover:hover){
   .ic-art img{transition:transform 1.1s cubic-bezier(.16,1,.3,1),filter .5s ease;}
-  .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);filter:brightness(1.12) contrast(1.04);}
+  html:not(.noh) .icard:hover .ic-art img,.icard:focus-within .ic-art img{transform:scale(1.08);filter:brightness(1.12) contrast(1.04);}
   .ic-art::before{content:"";position:absolute;pointer-events:none;z-index:2;inset:12px;opacity:0;
     border:1px solid var(--c-f7f6f3-a86);border-radius:1px;transform:scale(1.03);
     box-shadow:0 0 0 1px var(--c-ink-plate-a34),inset 0 0 0 1px var(--c-ink-plate-a22);
     transition:opacity .5s ease,transform .8s cubic-bezier(.16,1,.3,1);}
-  .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;transform:none;}
+  html:not(.noh) .icard:hover .ic-art::before,.icard:focus-within .ic-art::before{opacity:1;transform:none;}
   .ic-foot{transition:transform .6s cubic-bezier(.16,1,.3,1);}
-  .icard:hover .ic-foot,.icard:focus-within .ic-foot{transform:translate(10px,-12px);}
+  html:not(.noh) .icard:hover .ic-foot,.icard:focus-within .ic-foot{transform:translate(10px,-12px);}
 }
 .iother{margin-top:clamp(22px,2.6vw,36px);padding:clamp(18px,2vw,26px) 0;
   border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
