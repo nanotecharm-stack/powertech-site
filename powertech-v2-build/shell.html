@@ -226,7 +226,7 @@ header nav{justify-self:center;display:flex;align-items:center;gap:2px;padding:v
 /* section names carry the label voice — the serif in Armenian, the body face in English */
 header nav a{font-family:%%BODYFONT%%;position:relative;padding:var(--s2) 15px;white-space:nowrap;border-radius:2px;color:rgba(13,14,19,.82);
   transition:color .35s var(--e),background .35s var(--e);}
-header nav a:hover{color:#0D0E13;background:rgba(13,14,19,.07);}
+header nav a:hover:not(.noh *){color:#0D0E13;background:rgba(13,14,19,.07);}
 header nav a.here{color:var(--inv-fg);background:var(--inv);}
 /* ============ HEADER VARIANTS (under review) ============================
    0 = the glass capsule as built, 1 = titleblock, 2 = hairline rail, 3 = chips.
@@ -258,7 +258,7 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
   transform:rotate(45deg);}
 .ixb[aria-expanded="true"] .cv{transform:rotate(180deg);}
 .ixb[aria-expanded="true"]{box-shadow:inset 0 0 0 1px rgba(13,14,19,.34);}
-.ixb:hover{box-shadow:inset 0 0 0 1px rgba(13,14,19,.3);}
+.ixb:hover:not(.noh *){box-shadow:inset 0 0 0 1px rgba(13,14,19,.3);}
 /* the index sheet: numbered rows, nothing decorative */
 /* Панель — отдельный лист, положенный поверх страницы: тон светлее бумаги,
    под нижней кромкой настоящая тень со смещением, а сама страница уходит под
@@ -328,9 +328,9 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
    задержек: строка гаснет разом, как только курсор ушёл. */
 .ixp .tl .lt i{display:block;height:1.35em;font-style:normal;
   transition:transform .3s var(--e);transition-delay:0s;}
-.ixp a:hover .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
+.ixp a:hover:not(.noh *) .tl .lt i,.ixp a:focus-visible .tl .lt i{transform:translateY(-100%);
   transition:transform .6s var(--e);transition-delay:var(--d,0ms);}
-.ixp a:hover .tl{color:#F4F3F1;}
+.ixp a:hover:not(.noh *) .tl{color:#F4F3F1;}
 /* Текущий раздел виден без чтения: линейка и название в цвете марки. */
 .ixp a.here .no{font-weight:600;}
 .ixp a.here .tl{color:var(--brand-ink);}
@@ -430,7 +430,7 @@ body::before{opacity:1;z-index:-1;mix-blend-mode:soft-light;
   .ixp li{opacity:1;transform:none;}
   .ixp::before{transform:scaleX(1);}
   .ixp .tl .lt i{transition:none;}
-  .ixp a:hover .tl .lt i{transform:none;}
+  .ixp a:hover:not(.noh *) .tl .lt i{transform:none;}
 }
 
 /* ---- 1 titleblock: the bar is a real strip of paper -------------------- */
@@ -700,7 +700,7 @@ html[data-nav="3"] .ixp{margin-top:var(--s3);}
 .lang{display:inline-flex;align-items:center;gap:6px;font-family:%%BODYFONT%%;font-size:var(--t-aux);font-weight:500;letter-spacing:.06em;padding:9px var(--s3);
   border-radius:2px;color:#FDFAF4;box-shadow:inset 0 0 0 1px rgba(13,14,19,.12);
   background:rgba(252,251,250,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
-.lang:hover{color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
+.lang:hover:not(.noh *){color:#0D0E13;box-shadow:inset 0 0 0 1px rgba(13,14,19,.26);}
 /* the arrow sits in its own square, flush inside the button */
 /* Стрелка-квадрат рисуется SVG, а не символом ↗ (2026-11-17): Safari на iPhone рисовал символ
    эмодзи, а с U+FE0E — системным шрифтом со смещением. Линия 1.4px при любом размере квадрата. */
@@ -824,17 +824,19 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
        в Safari на телефоне читалась плохо. Своя бумага и цвет вторичного текста. */
     background:var(--bg);color:var(--fg-mid);}
   .hmark span{display:inline;}
-  .hmark span+span::before{content:"\00a0\00a0\00b7\00a0\00a0";}
+  /* Последний пробел разделителя — обычный (2026-11-20): с пятью неразрывными строка не могла
+     перенестись, и на HY при 320 px третье слово обрезалось кромкой героя. */
+  .hmark span+span::before{content:"\00a0\00a0\00b7\00a0\0020";}
   .hmark::after{display:none;}
 }
 /* header over the dark hero: light chrome until scrolled */
 header.on-dark .brand{color:#EFEDEA;}
 header.on-dark nav{box-shadow:inset 0 0 0 1px rgba(255,251,249,.28);background:rgba(20,22,28,.42);}
 header.on-dark nav a{color:rgba(244,243,241,.88);}
-header.on-dark nav a:hover{color:#fff;background:rgba(239,237,234,.10);}
+header.on-dark nav a:hover:not(.noh *){color:#fff;background:rgba(239,237,234,.10);}
 header.on-dark nav a.here{color:#0D0E13;background:#EFEDEA;}
 header.on-dark .lang{color:rgba(255,251,249,.9);background:rgba(20,22,28,.42);box-shadow:inset 0 0 0 1px rgba(255,251,249,.3);}
-header.on-dark .lang:hover{color:#fff;}
+header.on-dark .lang:hover:not(.noh *){color:#fff;}
 header.on-dark .btn{background:#14161C;color:#fff;}
 header.on-dark .btn i{background:rgba(255,255,255,.22);}
 
@@ -867,7 +869,7 @@ html.wipecover .rv{transition:none;}
 .plate2 h2,.plate2 h3{color:#F4F3F1;}
 .plate2 .lede{color:var(--on-dark-lede);}
 .plate2 .cnt{color:rgba(239,237,234,.58);}
-.plate2 .alink:hover{color:#fff;}
+.plate2 .alink:hover:not(.noh *){color:#fff;}
 .plate2 .display{color:#F4F3F1;}
 .plate2 .note{color:var(--on-dark-note);}
 .plate2 h2 i,.plate2 .lede i{color:rgba(239,237,234,.4);}
@@ -1107,7 +1109,7 @@ html[lang="hy"] .hero h1,html[lang="hy"] #why h2,html[lang="hy"] #company h2{lin
   /* 12px были ниже названной ступени Action (14). Трекинг ослаблен: на большем
      кегле прежний растягивал строку и мешал читать её как фразу. */
   letter-spacing:.11em;text-transform:uppercase;color:var(--brand-ink);}
-.alink:hover{text-decoration:underline;text-underline-offset:4px;}
+.alink:hover:not(.noh *){text-decoration:underline;text-underline-offset:4px;}
 
 /* sticky sequence */
 /* ============ СОБЫТИЕ ПРОШЛО, ЗАПИСЬ ОСТАЛАСЬ ============
@@ -1687,13 +1689,13 @@ footer .flist li+li,footer .fcon li+li{margin-top:11px;}
 footer .flist a{display:block;
   font-size:15px;line-height:1.5;color:var(--on-dark-link);
   transition:color .3s var(--e);}
-footer .flist a:hover{color:#fff;}
+footer .flist a:hover:not(.noh *){color:#fff;}
 /* Роль Body: телефон и адрес — то, ради чего в футер и приходят, их читают,
    а не проглядывают. Тон поднят с .72 до .82: на чернильной плите это
    единственные строки, по которым будут звонить. */
 footer .fcon li{font-size:16px;line-height:1.65;color:rgba(239,237,234,.82);}
 footer .fcon a{color:var(--on-dark-link);transition:color .3s var(--e);}
-footer .fcon a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;}
+footer .fcon a:hover:not(.noh *){color:#fff;text-decoration:underline;text-underline-offset:4px;}
 /* В колоночном флексе поля auto ужимают полосу до содержимого и ставят её
    посередине — ширину задаём явно, иначе строка копирайта висит в центре. */
 footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s4);
@@ -1709,11 +1711,11 @@ footer .fbl{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;}
 footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:6px 0;
   color:rgba(239,237,234,.7);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(239,237,234,.3);transition:color .3s var(--e),text-decoration-color .3s var(--e);}
-footer .fpp:hover{color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
+footer .fpp:hover:not(.noh *){color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
 footer .fpp:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 footer .flang{color:rgba(239,237,234,.75);padding:9px 13px;border-radius:2px;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:color .3s var(--e),background .3s var(--e);}
-footer .flang:hover{color:#0D0E13;background:#EFEDEA;}
+footer .flang:hover:not(.noh *){color:#0D0E13;background:#EFEDEA;}
 footer a:focus-visible,.flang:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
 /* Появление с задержкой по колонкам — то же, что делает пример своим stagger. */
 footer .rv{transition-delay:calc(var(--i,0) * .09s);}
@@ -1793,7 +1795,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   background:#14161C;color:#EFEDEA;z-index:5;font-size:18px;line-height:1;
   display:grid;place-items:center;
   box-shadow:0 0 0 1px rgba(239,237,234,.55);}
-.md .x:hover{background:var(--brand);color:#fff;
+.md .x:hover:not(.noh *){background:var(--brand);color:#fff;
   box-shadow:0 0 0 1px rgba(255,251,249,.7);}
 /* the industry detail: the card opens into a full plate */
 #imd{max-width:880px;}
@@ -1952,7 +1954,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   box-shadow:none;
   transition:background .25s var(--e),color .25s var(--e),transform .12s var(--e);}
 #fmd .tps button:active{transform:scale(.97);}
-#fmd .tps button:hover{background:#E9E6E2;color:var(--fg);}
+#fmd .tps button:hover:not(.noh *){background:#E9E6E2;color:var(--fg);}
 #fmd .tps button.on{background:var(--inv);color:var(--inv-fg);box-shadow:none;}
 #fmd .tps button:focus-visible{outline:1px solid var(--brand-ink);outline-offset:2px;}
 /* Пунктира на сайте нет ни в одном месте — кромка волосяная, как у плашек. */
@@ -1965,7 +1967,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
   border:0;border-radius:0;padding:var(--s3) 2px 14px;cursor:pointer;
   text-align:left;background:none;box-shadow:inset 0 -1px 0 var(--hair);
   transition:box-shadow .25s var(--e),background .25s var(--e);}
-#fmd .drop:hover{box-shadow:inset 0 -1px 0 rgba(13,14,19,.3);}
+#fmd .drop:hover:not(.noh *){box-shadow:inset 0 -1px 0 rgba(13,14,19,.3);}
 #fmd .drop.on{background:rgba(200,96,61,.05);
   box-shadow:inset 0 0 0 1px var(--brand-ink);}
 #fmd .drop b{display:inline;font-family:%%BODYFONT%%;font-size:15px;letter-spacing:0;
@@ -1986,7 +1988,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .att .sz{font-family:%%MONOFONT%%;font-size:var(--t-aux);color:var(--fg-soft);}
 #fmd .att button{width:44px;height:44px;margin:-9px -10px -9px 0;border-radius:2px;background:transparent;
   font-size:18px;line-height:1;color:var(--fg);transition:background .2s var(--e),color .2s var(--e);}
-#fmd .att button:hover{background:#A8341F;color:#fff;}
+#fmd .att button:hover:not(.noh *){background:#A8341F;color:#fff;}
 #fmd .hint{font-size:14px;color:var(--fg-soft);margin:10px 0 var(--s5);}
 #fmd .errline{font-size:14px;color:#A8341F;margin-bottom:14px;display:none;}
 /* Полоса отправки. overflow:clip вместо hidden у коробки: hidden делает коробку своей
@@ -2351,9 +2353,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   color:var(--inv-fg);transition:transform .2s var(--e),background .2s var(--e);}
 .par-home i svg{display:block;width:14px;height:12px;}
 @media (hover:hover){
-  .par-home:hover{box-shadow:inset 0 0 0 1px var(--brand-ink);}
-  .par-home:hover .ph-pic img{transform:scale(1.06);}
-  .par-home:hover i{transform:translateX(-3px);background:var(--brand);color:#fff;}
+  .par-home:hover:not(.noh *){box-shadow:inset 0 0 0 1px var(--brand-ink);}
+  .par-home:hover:not(.noh *) .ph-pic img{transform:scale(1.06);}
+  .par-home:hover:not(.noh *) i{transform:translateX(-3px);background:var(--brand);color:#fff;}
 }
 @media (max-width:700px){.par-home{width:100%;}.ph-pic{width:112px;}}
 /* Карточка в конце страницы — справа от призыва, на телефоне под ним. */
@@ -2429,7 +2431,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   font-size:15px;background:var(--inv);color:var(--inv-fg);
   transition:transform .2s var(--e),background .2s var(--e);}
 @media (hover:hover){
-  .pb-list a:hover{background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
+  .pb-list a:hover:not(.noh *){background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
   html:not(.noh) .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:#fff;}
 }
 @media (max-width:860px){
@@ -2485,6 +2487,24 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   html:not(.noh) .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
   html:not(.noh) .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:#86C2A0;transform:translateX(4px);}
 }
+
+/* ===== КАСАНИЕ (бриф владельца «Mobile UX Audit & Refinement», 2026-11-20) =====
+   Только то, что замер подтвердил; вид не меняется.
+   touch-action: быстрый двойной тап по кнопке не увеличивает страницу; щипок и прокрутка целы,
+   масштаб пользователю не запрещён.
+   Подсветка касания: системная голубая (Android) заменена тихой графитовой; там, где у элемента
+   есть своё состояние :active, она снята совсем.
+   .ovl: у края формы и окна отрасли прокрутка не передаётся странице под ними.
+   Области нажатия: ссылки подвала были 23 и 16 px высотой, ссылка героя 23, «политика» в форме 22 —
+   область расширена невидимым псевдоэлементом, раскладка не сдвинута ни на пиксель. */
+a,button,input,textarea,select,label,summary{touch-action:manipulation;}
+html{-webkit-tap-highlight-color:rgba(23,36,31,.1);}
+.btn,.md .x,#fmd .tps button,.lang,.alink,header nav a,.ic-go{-webkit-tap-highlight-color:transparent;}
+.ovl{overscroll-behavior:contain;}
+footer .flist a,footer .fcon a,.hero .acts .btn.gh,#fmd .fpriv button{position:relative;}
+footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:-5px 0;}
+.hero .acts .btn.gh::after,#fmd .fpriv button::after{content:"";position:absolute;inset:-9px 0;}
+@media (pointer:coarse){#fmd .fbar .btn{min-height:44px;}}
 
 /* ---- ссылка в шапке и строка указателя ---- */
 .hpl{display:none;}
@@ -2771,10 +2791,10 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
     <!-- Заголовок «Контактные данные *» и подсказка «почта или телефон» сняты (2026-09-16,
          владелец: без почты или телефона форма всё равно не отправится — правило живёт в проверке). -->
     <div class="fr">
-      <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
-      <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" required aria-required="true" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true" aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" enterkeyhint="next" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
+      <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" enterkeyhint="next" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
+      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" enterkeyhint="next" name="email" type="email" autocomplete="email" placeholder="name@company.com" required aria-required="true" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" enterkeyhint="next" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true" aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
@@ -3542,6 +3562,12 @@ finput.addEventListener('change',function(){files=files.concat([].slice.call(fin
 drop.addEventListener('dragleave',function(){drop.classList.remove('on');});
 drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('on');if(e.dataTransfer&&e.dataTransfer.files)files=files.concat([].slice.call(e.dataTransfer.files));renderFiles();});
 function gv(id){var el=document.getElementById(id);return el?el.value:'';}
+/* Enter в однострочном поле ведёт к следующему полю, а не отправляет недописанную форму
+   (у полей enterkeyhint="next" — подпись клавиши на телефоне совпадает с действием). */
+(function(){var ord=['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'];
+  ord.slice(0,4).forEach(function(id,i){var el=document.getElementById(id);if(!el)return;
+    el.addEventListener('keydown',function(e){if(e.key!=='Enter'||e.isComposing)return;
+      e.preventDefault();var nx=document.getElementById(ord[i+1]);if(nx)nx.focus();});});})();
 document.getElementById('ptfForm').addEventListener('submit',function(e){e.preventDefault();
   if(sending)return;
   document.getElementById('ptfSendErr').style.display='none';
@@ -4012,6 +4038,9 @@ if(/[?&]rise=old/.test(location.search))document.documentElement.setAttribute('d
    событии прокрутки, снимается, когда мышь действительно сдвинулась: Chrome после прокрутки сам
    шлёт mousemove без движения, поэтому сравниваем экранные координаты. */
 (function(){var de=document.documentElement,lx=null,ly=null,on=false;
+  /* Сенсорный экран (нет наведения): класс стоит всегда — после касания :hover не «залипает»
+     на кнопке или карточке. Нажатие показывает :active, фокус с клавиатуры — :focus-visible. */
+  if(window.matchMedia&&matchMedia('(hover:none)').matches){de.classList.add('noh');return;}
   addEventListener('scroll',function(){if(!on){on=true;de.classList.add('noh');}},{passive:true});
   addEventListener('mousemove',function(e){if(e.screenX===lx&&e.screenY===ly)return;
     var first=lx===null;lx=e.screenX;ly=e.screenY;if(on&&!first){on=false;de.classList.remove('noh');}},{passive:true});
