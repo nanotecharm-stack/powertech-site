@@ -2013,7 +2013,12 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 /* --kb — высота экранной клавиатуры (ставит скрипт по visualViewport). На iPhone клавиатура
    ложится ПОВЕРХ окна, не сжимая его: полоса липла к низу окна и оказывалась под клавиатурой —
    кнопку «Отправить» нельзя было нажать (владелец, Safari на iPhone, 2026-11-20). */
-#fmd .fbar{position:sticky;bottom:calc(-34px + var(--kb,0px));z-index:2;display:flex;align-items:center;flex-wrap:wrap;gap:10px var(--s4);
+/* Поднимается не сама полоса, а нижнее поле окна формы: липкая полоса считает свой низ от него,
+   а у формы появляется запас прокрутки на высоту клавиатуры — конец формы (файлы, политика)
+   можно докрутить выше клавиатуры, и в конце полоса встаёт на своё место, ничего не закрывая
+   (владелец после первой правки: «кнопка отправки закрывает кнопку и поле для файлов»). */
+#fovl{padding-bottom:calc(34px + var(--kb,0px));}
+#fmd .fbar{position:sticky;bottom:-34px;z-index:2;display:flex;align-items:center;flex-wrap:wrap;gap:10px var(--s4);
   margin:0 calc(-1 * clamp(26px,4vw,46px));
   padding:14px clamp(26px,4vw,46px) calc(14px + env(safe-area-inset-bottom,0px));
   background:var(--bg);box-shadow:0 -1px 0 var(--hair2);}
@@ -3580,14 +3585,12 @@ function gv(id){var el=document.getElementById(id);return el?el.value:'';}
 /* Клавиатура телефона: сколько низа окна она закрыла. Считаем только пока фокус в поле формы
    и страница не увеличена щипком; меньше 80 px — это не клавиатура, а панель браузера. */
 (function(){var vv=window.visualViewport,md=document.getElementById('fmd');if(!vv||!md)return;
-  var ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
   function upd(){var a=document.activeElement,inF=a&&md.contains(a)&&/^(INPUT|TEXTAREA)$/.test(a.tagName);
     var k=(inF&&vv.scale<1.01)?window.innerHeight-vv.height-vv.offsetTop:0;
     if(k<80)k=0;if(k>window.innerHeight*.7)k=0;
-    /* iPhone: над клавиатурой плавает панель «▲ ▼ ✓» и ложится на низ видимой области —
-       на снимке владельца она закрывала кнопку. Запас под неё. */
-    if(k&&ios)k+=56;
-    md.style.setProperty('--kb',Math.round(k)+'px');}
+    /* Запаса под плавающую панель «▲ ▼ ✓» нет: по снимку владельца с запасом 56 px полоса
+       встала на ~90 px выше панели — видимая область iPhone панель уже исключает. */
+    (md.closest('.ovl')||md).style.setProperty('--kb',Math.round(k)+'px');}
   vv.addEventListener('resize',upd);vv.addEventListener('scroll',upd);
   md.addEventListener('focusin',upd);md.addEventListener('focusout',function(){setTimeout(upd,80);});
 })();
