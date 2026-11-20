@@ -888,9 +888,10 @@ footer .flang:hover:not(.noh *){color:var(--c-ink-plate);background:var(--c-pape
 footer a:focus-visible,.flang:focus-visible{outline:1px solid var(--c-brand-on-plate);outline-offset:3px;}
 footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 @media (max-width:960px){
-  .footrev{height:auto;clip-path:none;}
-  .footrev>.fpin{position:static;height:auto;}
-  .footrev footer{position:static;height:auto;top:auto;}
+  .footrev{height:auto;display:flow-root;background:var(--c-ink-plate);clip-path:inset(0);}
+  .footrev>.fpin{position:static;height:auto;margin-top:-100vh;margin-top:-100lvh;}
+  .footrev>.fpin::before{content:"";display:block;height:100vh;height:100lvh;}
+  .footrev footer{position:sticky;height:auto;top:auto;bottom:min(0px,calc(100svh - var(--fh,9999px)));}
   footer .fgrid{grid-template-columns:minmax(0,1fr);gap:38px;}
   footer .fbot{gap:var(--s3);}
 }
@@ -2294,6 +2295,10 @@ function openForm(trigger){
   openDialog(fovl,document.getElementById('fmd'),trigger&&trigger.nodeType===1?trigger:null);
 }
 document.querySelectorAll('[data-open-form]').forEach(function(b){b.addEventListener('click',function(){openForm(b);});});
+(function(){var w=document.querySelector('.footrev'),f=w&&w.querySelector('footer');
+  if(!f||!window.ResizeObserver)return;
+  new ResizeObserver(function(){w.style.setProperty('--fh',f.offsetHeight+'px');}).observe(f);
+})();
 (function(){
   var chip=document.getElementById('parChip');
   if(!chip||!('IntersectionObserver' in window))return;
