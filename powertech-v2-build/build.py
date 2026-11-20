@@ -1507,7 +1507,7 @@ PALETTES = {
             # 2026-11-18, владелец: «поменяй местами, чтобы кнопка в покое была тёмной, а при
             # наведении светлой. Все кнопки должны быть такими» — медь на плитке .btn теперь
             # при наведении, в покое плитка тихая (базовое правило .btn i).
-            '.btn:hover i,.ct-act button i,.pb-list i'
+            '.btn:hover:not(.noh *) i,.ct-act button i,.pb-list i'
             '{background:#E08A4B!important;color:#17241F!important;}\n'
             '#services .alink{color:#E08A4B;}\n'
             '#services .alink:hover{color:#fff;}\n'

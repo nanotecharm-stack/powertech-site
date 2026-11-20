@@ -459,7 +459,7 @@ html[data-nav="2"] .ixb .sheet,html[data-nav="3"] .ixb .sheet{display:none;}
 html[data-nav="2"] .btn{background:none;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(13,14,19,.22);
   padding:11px var(--s4);font-size:13px;}
 html[data-nav="2"] .btn::before{background:var(--fg);}
-html[data-nav="2"] .btn:hover span{color:var(--bg);}
+html[data-nav="2"] .btn:hover:not(.noh *) span{color:var(--bg);}
 html[data-nav="2"] .btn i{background:rgba(13,14,19,.09);}
 /* over an ink section the whole rail inverts, hairline included */
 html[data-nav="2"] header[data-tone="ink"] .hin{box-shadow:inset 0 -1px 0 rgba(239,237,234,.22);}
@@ -469,7 +469,7 @@ html[data-nav="2"] header[data-tone="ink"] .lang,
 html[data-nav="2"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="2"] header[data-tone="ink"] .btn{color:#EFEDEA;box-shadow:inset 0 0 0 1px rgba(239,237,234,.34);}
 html[data-nav="2"] header[data-tone="ink"] .btn::before{background:#EFEDEA;}
-html[data-nav="2"] header[data-tone="ink"] .btn:hover span{color:#0D0E13;}
+html[data-nav="2"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#0D0E13;}
 html[data-nav="2"] header[data-tone="ink"] .btn i{background:rgba(239,237,234,.18);}
 html[data-nav="2"] .brand,html[data-nav="2"] .ixb,html[data-nav="2"] .lang,html[data-nav="2"] .btn{
   transition:color .45s var(--e),box-shadow .45s var(--e);}
@@ -484,7 +484,7 @@ html[data-nav="1"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="1"] header[data-tone="ink"] .ixb::before{background:rgba(239,237,234,.3);}
 html[data-nav="1"] header[data-tone="ink"] .btn{background:#EFEDEA;color:#0D0E13;}
 html[data-nav="1"] header[data-tone="ink"] .btn::before{background:#0D0E13;}
-html[data-nav="1"] header[data-tone="ink"] .btn:hover span{color:#EFEDEA;}
+html[data-nav="1"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#EFEDEA;}
 html[data-nav="1"] header[data-tone="ink"] .btn i{background:rgba(13,14,19,.14);}
 /* над тёмным разделом плашка логотипа становится тёмной, знак — светлым */
 html[data-nav="3"] header[data-tone="ink"] .brand{--acc:currentColor;}
@@ -495,7 +495,7 @@ html[data-nav="3"] header[data-tone="ink"] .ixb{color:#EFEDEA;}
 html[data-nav="3"] header[data-tone="ink"] .lang::before{background:rgba(239,237,234,.18);}
 html[data-nav="3"] header[data-tone="ink"] .btn{background:#EFEDEA;color:#0D0E13;}
 html[data-nav="3"] header[data-tone="ink"] .btn::before{background:#0D0E13;}
-html[data-nav="3"] header[data-tone="ink"] .btn:hover span{color:#EFEDEA;}
+html[data-nav="3"] header[data-tone="ink"] .btn:hover:not(.noh *) span{color:#EFEDEA;}
 html[data-nav="3"] header[data-tone="ink"] .btn i{background:rgba(13,14,19,.14);}
 html[data-nav="1"] header,html[data-nav="1"] .btn,html[data-nav="3"] .brand,
 html[data-nav="3"] .navr,html[data-nav="3"] .btn{
@@ -711,11 +711,11 @@ i>svg.ar,.pb-list i>svg.ar{display:block;width:.8em;height:.8em;max-width:none;m
 /* Стрелка при наведении светлеет вместе с надписью. Прежде цвет ей задавала
    только кнопка в покое, и на залитой кнопке она оставалась тёмной: подпись
    белая, плитка светлая, а знак внутри — чернильный. */
-.btn:hover i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
+.btn:hover:not(.noh *) i{transform:translate(2px,-2px);background:rgba(255,255,255,.22);color:#fff;}
 .btn{display:inline-flex;align-items:center;gap:12px;background:var(--inv);color:var(--inv-fg);font-size:14px;font-weight:600;padding:13px 14px 13px 20px;/* оптика 2026-09-20: плитка стрелки — блок, ей нужно меньше поля, чем тексту; зазор 9→12 */position:relative;overflow:hidden;isolation:isolate;border-radius:2px;}
 .btn span{position:relative;z-index:1;transition:color .2s var(--e);}
 .btn::before{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--e);}
-.btn:hover::before{transform:scaleX(1);}.btn:hover span{color:#fff;}
+.btn:hover:not(.noh *)::before{transform:scaleX(1);}.btn:hover:not(.noh *) span{color:#fff;}
 /* the surface has to answer the press — nothing here had an :active state */
 /* Бриф владельца по микроанимациям (2026-11-18): нажатие .995 глазом не читалось —
    кнопка сжимается до .97 за 120 мс и возвращается. Только transform: соседи не двигаются.
@@ -775,7 +775,7 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   font-size:15px;font-weight:500;color:var(--fg-mid);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(13,14,19,.3);}
 .hero .acts .btn.gh::before{display:none;}
-.hero .acts .btn.gh:hover span{color:var(--fg-head);}
+.hero .acts .btn.gh:hover:not(.noh *) span{color:var(--fg-head);}
 /* 2026-11-17, владелец: «добавь взаимодействия премиального к этой кнопке». Спокойно, как у прибора:
    в покое — тонкая серая черта; при наведении и фокусе с клавиатуры зелёная черта марки
    прочерчивается слева направо поверх серой, надпись темнеет, стрелка опускается на 3 px — туда,
@@ -785,10 +785,10 @@ html[lang="hy"] .hero .hp{font-size:16px;line-height:1.6;}
   background:linear-gradient(var(--brand),var(--brand)) 0 100%/0% 1px no-repeat,
     linear-gradient(rgba(13,14,19,.3),rgba(13,14,19,.3)) 0 100%/100% 1px no-repeat;
   transition:background-size .55s var(--e),color .25s var(--e);}
-.hero .acts .btn.gh:hover>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
+.hero .acts .btn.gh:hover:not(.noh *)>span,.hero .acts .btn.gh:focus-visible>span{color:var(--fg-head);
   background-size:100% 1px,100% 1px;}
 .hero .acts .btn.gh .gh-ar{display:inline-block;transition:transform .45s var(--e);}
-.hero .acts .btn.gh:hover .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
+.hero .acts .btn.gh:hover:not(.noh *) .gh-ar,.hero .acts .btn.gh:focus-visible .gh-ar{transform:translateY(3px);}
 .hero .acts .btn.gh:active .gh-ar{transform:translateY(5px);transition-duration:.12s;}
 .hero .acts .btn.gh:focus-visible{outline:2px solid var(--brand);outline-offset:6px;border-radius:var(--r);}
 /* ФОТО: целиком, натуральная пропорция; width/height на <img> резервируют место. */
@@ -1173,7 +1173,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .other p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:52ch;}
 .other .btn{background:var(--brand);color:#fff;}
 .other .btn::before{background:var(--bg);}
-.other .btn:hover span{color:var(--fg);}
+.other .btn:hover:not(.noh *) span{color:var(--fg);}
 
 /* services */
 .display{font-family:%%HEADFONT%%;font-weight:%%HEADWT%%;font-size:calc(%%DISPSIZE%% * var(--hs));line-height:.96;%%HEADTT%%color:var(--fg);margin:clamp(36px,5vw,var(--s8)) 0 0;}
@@ -1420,8 +1420,8 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 /* Наведение подсвечивает ряд, как строку в таблице, и не двигает его: сдвиг
    обещал переход, которого нет, — этот жест мы уже снимали. */
 @media (hover:hover){
-  .list div:hover{background:color-mix(in srgb,var(--fg) 3%,transparent);}
-  .list div:hover::after{background:var(--hair);}}
+  .list div:hover:not(.noh *){background:color-mix(in srgb,var(--fg) 3%,transparent);}
+  .list div:hover:not(.noh *)::after{background:var(--hair);}}
 /* Наведения здесь нет намеренно. Строки списка — перечень содержания отчёта,
    а не ссылки: ни адреса, ни обработчика, ни фокуса. Сдвиг содержимого вбок
    обещал действие, которого не происходит, и в ряду с линейками сверху и снизу
@@ -1513,7 +1513,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .lede{text-wrap:pretty;}
 /* вопросы раздела 05: pretty оставлял одно слово на второй строке (замер: 470/84 px) — строки уравниваются */
 .qa-t{text-wrap:balance;}
-.qa-q:hover .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
+.qa-q:hover:not(.noh *) .qa-t,.qa-q:focus-visible .qa-t{color:var(--brand-ink);}
 .qa-n,.qa-svc{font-family:%%MONOFONT%%;font-size:var(--t-tag);letter-spacing:.13em;color:var(--brand-ink);text-transform:uppercase;}
 .qa-n{position:relative;top:-1px;}
 .qa-t{transition:color .2s var(--e);}
@@ -1614,15 +1614,15 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
 .ct-act button span::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:2px;
   background:var(--brand);transform:scaleX(0);transform-origin:left;
   transition:transform .6s var(--e);}
-.ct-act button:hover span::after,.ct-act button:focus-visible span::after{transform:scaleX(1);}
+.ct-act button:hover:not(.noh *) span::after,.ct-act button:focus-visible span::after{transform:scaleX(1);}
 .ct-act button i{flex:0 0 auto;align-self:flex-start;display:grid;place-items:center;/* оптика 2026-09-20: квадрат высотой в строку и на верху текста; 64 свисал на 25 px под базовую */
   width:clamp(40px,3.4vw,48px);height:clamp(40px,3.4vw,48px);border-radius:2px;
   background:var(--brand);color:#fff;font-style:normal;font-family:%%BODYFONT%%;
   font-size:clamp(15px,1.4vw,20px);
   transition:transform .5s var(--e),background .4s var(--e);}
-.ct-act button:hover i{transform:translate(4px,-4px);}
+.ct-act button:hover:not(.noh *) i{transform:translate(4px,-4px);}
 .plate .btn::before{background:var(--bg);}
-.plate .btn:hover span{color:var(--fg);}
+.plate .btn:hover:not(.noh *) span{color:var(--fg);}
 /* Селектор с .plate — иначе правило .plate p (17px) сильнее и строка остаётся примечанием. */
 .plate p.ct-sub{margin-top:26px;max-width:34ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:#F4F3F1;}
 .plate .wrap.ct-one{grid-template-columns:minmax(0,1fr);padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px);}
@@ -2267,7 +2267,7 @@ html[data-nav="5"]:has(#ixp.on) .hprog{opacity:0;}
 html[data-nav="5"]:has(#ixp.on) #hdr .btn{background:transparent;color:#EFEDEA;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.32);
   transition:background .16s var(--e) .23s,color .16s var(--e) .23s,box-shadow .16s var(--e) .23s;}
-html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover{background:#EFEDEA;color:#0D0E13;}
+html[data-nav="5"]:has(#ixp.on) #hdr .btn:hover:not(.noh *){background:#EFEDEA;color:#0D0E13;}
 /* Без :has() (старые браузеры) шапка просто остаётся на своей пелене — шов
    вернётся, но ничего не сломается и всё читается. */
 
@@ -4006,7 +4006,9 @@ function toneUnderBar(){aTone(mTone());}
 document.documentElement.setAttribute('data-nav','5');
 /* ?rise=old — подъём .rv на тёмных плитах для сравнения (см. стили .plate2 .rv). */
 if(/[?&]rise=old/.test(location.search))document.documentElement.setAttribute('data-rise','old');
-/* html.noh — «наведение молчит, пока едет страница» (см. стили .pb-list). Ставится на первом
+/* html.noh — «наведение молчит, пока едет страница» (см. стили .pb-list). С 2026-11-20 тем же
+   классом через :hover:not(.noh *) заглушены .btn, строки .list (04), .ct-act (08) и вопросы .qa-q (05):
+   владелец после замера всех разделов — «Yes, fix all 4». Ставится на первом
    событии прокрутки, снимается, когда мышь действительно сдвинулась: Chrome после прокрутки сам
    шлёт mousemove без движения, поэтому сравниваем экранные координаты. */
 (function(){var de=document.documentElement,lx=null,ly=null,on=false;
