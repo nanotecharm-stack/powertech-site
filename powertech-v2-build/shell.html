@@ -730,6 +730,9 @@ i>svg.ar,.pb-list i>svg.ar{display:block;width:.8em;height:.8em;max-width:none;m
 #ptfSubmit[aria-busy="true"]{opacity:.5;cursor:progress;pointer-events:none;}
 .lang:active,.alink:active,header nav a:active,.ic-go:active{transform:translateY(1px);}
 .md .x:active{transform:scale(.97);}
+/* Аудит кнопок 2026-11-20 (бриф владельца «геометрия кнопок», «Yes, press states»):
+   у четырёх элементов не было ответа на нажатие — тот же ход 1 px, что у шапки. */
+footer .flang:active,.qa-q:active,.ct-act button:active,#fmd .att button:active{transform:translateY(1px);}
 /* Кольцо кнопки при наведении раньше щёлкало: box-shadow не был в списке
    перехода, и кромка менялась мгновенно, пока цвет плыл. Теперь всё вместе. */
 .lang,.md .x{transition:transform .16s var(--e),background .35s var(--e),color .35s var(--e),box-shadow .35s var(--e);}
