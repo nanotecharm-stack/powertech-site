@@ -150,7 +150,7 @@ html[lang="hy"]{--t-lede:clamp(19px,1.45vw,21px);--t-lede-lh:1.45;--t-p:15px;--t
    были крупнее EN (1,15–1,36) — карточка записи 25→22, ссылка-действие 14→13,
    подписи недели 13→12, --t-aux 13→12. Подписи разделов --t-lbl 15 не тронуты
    (владелец: «чтобы читались»). */
-html[lang="hy"] .ev-record p{font-size:22px;}
+html[lang="hy"] .ev-record p{font-size:22px;letter-spacing:0;}
 html[lang="hy"] .alink{font-size:13px;}
 /* Шапка (2026-09-15, владелец: «в англ. версии значительно меньше буквы»): при одном кегле
    прописные Mardoto 75/100 против 65/100 у Overused Grotesk. EN 15/14 и HY 13/12 дают
@@ -1060,12 +1060,22 @@ h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
    (правило ниже), а размер заголовка оставался обычным — роль объявлялась
    наполовину. */
 #why h2,#company h2{font-size:calc(clamp(28px,4.25vw,64px) * var(--hs));letter-spacing:%%BIGLS%%;line-height:1.05;}
-#company{padding-top:clamp(64px,7.5vw,112px);}
+/* HY: три заголовка с собственным интерлиньяжем 1.05 остались плотнее прочих
+   армянских (1.08) — как раз трёхстрочные (замер 2026-11-20, бриф владельца
+   «Visual Refinement»). */
+html[lang="hy"] .hero h1,html[lang="hy"] #why h2,html[lang="hy"] #company h2{line-height:1.08;}
+/* Верхнее поле #company — обычное поле раздела: перед ним уже стоит полоса
+   .dith в 170 px, и с прежними 112 пауза выходила длиннее, чем у соседей
+   (119 px до заголовка против 88; бриф владельца 2026-11-20). */
+#company{padding-top:clamp(52px,6.2vw,92px);}
 /* Раздел 01 идёт сразу за героем, и большое поле «главного раздела» ему
    больше не нужно: прежде стык заполнял чертёж с жилой, теперь его нет, и
    от текста героя до «01» выходило 400 с лишком пикселей пустоты —
    владелец: «слишком большое расстояние, неправильно воспринимается». */
-#why{padding-top:clamp(48px,6vw,88px);}
+/* Низ раздела короче обычного (бриф владельца 2026-11-20: «после графика провала
+   остаётся значительная пустая область»): от графика до заголовка 02 было 193 px
+   против 127–174 у остальных стыков. */
+#why{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(40px,5vw,72px);}
 /* Раздел 01 в один экран (владелец, 2026-09-13: «либо текст виден, либо график»): от 1200 px
    текст слева (5/12), сцена с записью справа (7/12 ≥ 580 px — настольная раскладка сцены),
    по вертикали по центру. Заголовок чуть меньше, чтобы колонка держала три-четыре строки. */
@@ -1073,7 +1083,7 @@ h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
   #why .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(40px,5vw,96px);align-items:center;}
   #why .evs{margin-top:0;}
   #why h2{font-size:calc(clamp(28px,3.4vw,50px) * var(--hs));}
-  #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(40px,5vw,72px);}
+  #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(28px,3.2vw,46px);}
 }
 #measure h2{font-size:calc(clamp(19px,2vw,28px) * var(--hs));letter-spacing:0;}
 #measure{padding-top:clamp(26px,3vw,46px);padding-bottom:clamp(36px,4.2vw,60px);/* оптика: было 43 сверху / 83 снизу */}
@@ -2990,7 +3000,8 @@ function paintJoints(){aJoints(mJoints());}
        +'<rect class="ev-node" x="'+n(c-4)+'" y="'+n(y-4)+'" width="8" height="8"/>'
        +'<path class="ev-link" d="M'+n(c)+' '+n(y-6)+' V'+n(y-40)+' H'+n(ax+aw/2)+' V'+n(rec.offsetHeight+8)+'"/>';
       for(var x=x0;x<=end;x+=18)d+='<path class="ev-tick" d="M'+n(x)+' '+n(153+off)+' v'+((Math.abs(x-a)<18||Math.abs(x-c)<18)?9:4)+'"/>';
-      scene.style.height=(236+off+els['ev-trip'].offsetHeight+30)+'px';
+      /* Хвост под подписью 6, а не 30: пустое дно сцены складывалось с полем раздела (2026-11-20). */
+      scene.style.height=(236+off+els['ev-trip'].offsetHeight+6)+'px';
     }else{
       var xv=12,dx=53,lx=78;ay=0;
       place(rec,0,ay,w);
@@ -3008,7 +3019,7 @@ function paintJoints(){aJoints(mJoints());}
        +'<rect class="ev-node" x="'+(dx-4)+'" y="'+n(212+offv)+'" width="8" height="8"/>'
        +'<rect class="ev-node" x="'+(xv-4)+'" y="'+n(cv-4)+'" width="8" height="8"/>'
        +'<path class="ev-link" d="M'+xv+' '+n(36+offv)+' V'+n(rec.offsetHeight+22)+' H'+n(w/2)+' V'+n(rec.offsetHeight+6)+'"/>';
-      scene.style.height=Math.max(316+offv+28,retB)+'px';
+      scene.style.height=Math.max(316+offv+8,retB-20)+'px';
     }
     svg.setAttribute('viewBox','0 0 '+w+' '+scene.clientHeight);
     svg.innerHTML=d;
