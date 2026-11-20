@@ -1306,7 +1306,7 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
   transition:transform .2s var(--e),background .2s var(--e);}
 @media (hover:hover){
   .pb-list a:hover{background:color-mix(in srgb,var(--brand) 6%,var(--panel));--par-ground:color-mix(in srgb,var(--brand) 6%,var(--panel));}
-  .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:var(--brand-on);}
+  html:not(.noh) .pb-list a:hover i{transform:translate(2px,-2px);background:var(--brand);color:var(--brand-on);}
 }
 @media (max-width:860px){
   .pb-list a{grid-template-columns:96px minmax(0,1fr) 30px;column-gap:var(--s4);align-items:start;}
@@ -1344,8 +1344,8 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 }
 @media (max-width:860px){.pb-list a{padding-left:0;padding-right:0;}}
 @media (hover:hover){
-  .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
-  .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:var(--c-86c2a0);transform:translateX(4px);}
+  html:not(.noh) .pb-list a:hover::after,.pb-list a:focus-visible::after{transform:scaleX(1);}
+  html:not(.noh) .pb-list a:hover>svg,.pb-list a:focus-visible>svg{color:var(--c-86c2a0);transform:translateX(4px);}
 }
 .hpl{display:none;}
 @media (min-width:901px){
@@ -2512,6 +2512,11 @@ function aTone(st){
 function toneUnderBar(){aTone(mTone());}
 document.documentElement.setAttribute('data-nav','5');
 if(/[?&]rise=old/.test(location.search))document.documentElement.setAttribute('data-rise','old');
+(function(){var de=document.documentElement,lx=null,ly=null,on=false;
+  addEventListener('scroll',function(){if(!on){on=true;de.classList.add('noh');}},{passive:true});
+  addEventListener('mousemove',function(e){if(e.screenX===lx&&e.screenY===ly)return;
+    var first=lx===null;lx=e.screenX;ly=e.screenY;if(on&&!first){on=false;de.classList.remove('noh');}},{passive:true});
+})();
 var PS={t:0,c:0,raf:0,last:0,self:false,lerp:0.085,mult:0.9,vmax:9,vmin:0.5,on:false};
 function psActive(){
   return !rm && matchMedia('(pointer:fine)').matches && innerWidth>=900
