@@ -727,6 +727,7 @@ i>svg.ar,.pb-list i>svg.ar{display:block;width:.8em;height:.8em;max-width:none;m
 .btn:active{transform:scale(.97);}
 .btn.gh:active{transform:translateY(1px) scale(.995);}
 .btn:disabled:active{transform:none;}
+#ptfSubmit[aria-busy="true"]{opacity:.5;cursor:progress;pointer-events:none;}
 .lang:active,.alink:active,header nav a:active,.ic-go:active{transform:translateY(1px);}
 .md .x:active{transform:scale(.97);}
 /* Кольцо кнопки при наведении раньше щёлкало: box-shadow не был в списке
@@ -2814,16 +2815,16 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
     <!-- Заголовок «Контактные данные *» и подсказка «почта или телефон» сняты (2026-09-16,
          владелец: без почты или телефона форма всё равно не отправится — правило живёт в проверке). -->
     <div class="fr">
-      <div><label for="ptfName">%%F_NAME%% <em>*</em></label><input id="ptfName" enterkeyhint="next" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr" role="alert"></span></div>
+      <div><label for="ptfName">%%F_NAME%% <em aria-hidden="true">*</em></label><input id="ptfName" enterkeyhint="next" name="name" type="text" autocomplete="name" placeholder="%%F_NAME_PH%%" required aria-required="true" aria-invalid="false" aria-describedby="ptfNameErr"><span class="ferr" id="ptfNameErr"></span></div>
       <div><label for="ptfCompany">%%F_COMPANY%% <span class="opt">%%F_ATT_OPT%%</span></label><input id="ptfCompany" enterkeyhint="next" name="company" type="text" autocomplete="organization" placeholder="%%F_COMPANY_PH%%"></div>
-      <div><label for="ptfEmail">%%F_EMAIL%% <em>*</em></label><input id="ptfEmail" enterkeyhint="next" name="email" type="email" autocomplete="email" placeholder="name@company.com" required aria-required="true" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr" role="alert"></span></div>
-      <div><label for="ptfPhone">%%F_PHONE%% <em>*</em></label><input id="ptfPhone" enterkeyhint="next" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true" aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr" role="alert"></span></div>
+      <div><label for="ptfEmail">%%F_EMAIL%% <em aria-hidden="true">*</em></label><input id="ptfEmail" enterkeyhint="next" name="email" type="email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="name@company.com" required aria-required="true" aria-invalid="false" aria-describedby="ptfEmailErr"><span class="ferr" id="ptfEmailErr"></span></div>
+      <div><label for="ptfPhone">%%F_PHONE%% <em aria-hidden="true">*</em></label><input id="ptfPhone" enterkeyhint="next" name="phone" type="tel" autocomplete="tel" placeholder="+374 ..." required aria-required="true" aria-invalid="false" aria-describedby="ptfPhoneErr"><span class="ferr" id="ptfPhoneErr"></span></div>
     </div>
     <div class="gl" id="glApp">%%F_APP%%</div>
     <div class="tps" id="ptfTypes" role="group" aria-labelledby="glApp"></div>
-    <label class="gl" id="glWhat" for="ptfMsg">%%F_WHAT%% <em>*</em></label>
-    <textarea id="ptfMsg" name="message" placeholder="%%F_MSG_PH%%" required aria-required="true" aria-describedby="ptfMsgErr"></textarea>
-    <span class="ferr" id="ptfMsgErr" role="alert"></span>
+    <label class="gl" id="glWhat" for="ptfMsg">%%F_WHAT%% <em aria-hidden="true">*</em></label>
+    <textarea id="ptfMsg" name="message" placeholder="%%F_MSG_PH%%" required aria-required="true" aria-invalid="false" aria-describedby="ptfMsgErr"></textarea>
+    <span class="ferr" id="ptfMsgErr"></span>
     <label class="gl" id="glAtt" for="ptfInput">%%F_ATT%% <small>%%F_ATT_OPT%%</small></label>
     <!-- Кнопка, а не див: до вложений нужно доходить табом. Сам файловый вход
          скрыт и лежит СНАРУЖИ — интерактивный элемент внутри button недопустим. -->
@@ -3554,8 +3555,8 @@ var fovl=document.getElementById('fovl');
 var files=[],picked=-1,sending=false;
 var tps=document.getElementById('ptfTypes');
 PT.appTypes.forEach(function(t,i){
-  var b=document.createElement('button');b.type='button';b.textContent=t;
-  b.addEventListener('click',function(){picked=i;[].forEach.call(tps.children,function(x,j){x.classList.toggle('on',j===i);});});
+  var b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',function(){picked=i;[].forEach.call(tps.children,function(x,j){x.classList.toggle('on',j===i);x.setAttribute('aria-pressed',j===i?'true':'false');});});
   tps.appendChild(b);
 });
 function fmtSize(b){return b<1048576?Math.max(1,Math.round(b/1024))+' KB':(b/1048576).toFixed(1)+' MB';}
@@ -3568,7 +3569,7 @@ function renderFiles(){
     nb.title=nm;nb.setAttribute('aria-label',nm);
     var fh=document.createElement('span');fh.className='fh';fh.textContent=nm.slice(0,cut);nb.appendChild(fh);
     if(cut<nm.length){var ft=document.createElement('span');ft.className='ft';ft.textContent=nm.slice(cut);nb.appendChild(ft);}
-    var x=document.createElement('button');x.type='button';x.textContent='×';
+    var x=document.createElement('button');x.type='button';x.textContent='×';x.setAttribute('aria-label',(PT.rm||'×')+' '+nm);
     x.addEventListener('click',function(){files.splice(i,1);renderFiles();});
     d.appendChild(x);list.appendChild(d);
   });
@@ -3584,6 +3585,11 @@ finput.addEventListener('change',function(){files=files.concat([].slice.call(fin
 ['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('on');});});
 drop.addEventListener('dragleave',function(){drop.classList.remove('on');});
 drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('on');if(e.dataTransfer&&e.dataTransfer.files)files=files.concat([].slice.call(e.dataTransfer.files));renderFiles();});
+/* Пока письмо уходит, кнопка тускнеет и объявляет «занято»: с файлом до 10 МБ ждать долго.
+   Не disabled — иначе кнопка теряет фокус; от повторной отправки защищает флаг sending. */
+function busy(on){var sb=document.getElementById('ptfSubmit');if(!sb)return;
+  if(on){sb.setAttribute('aria-busy','true');sb.setAttribute('aria-disabled','true');}
+  else{sb.removeAttribute('aria-busy');sb.removeAttribute('aria-disabled');}}
 function gv(id){var el=document.getElementById(id);return el?el.value:'';}
 /* Клавиатура телефона (третья версия, 2026-11-20). На iPhone клавиатура не сжимает окно, а
    сдвигает видимую область внутри него: закреплённое окно формы оставалось во весь экран, его
@@ -3625,7 +3631,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
     el.classList.toggle('err',bad);
     el.classList.remove('shk');if(bad){void el.offsetWidth;el.classList.add('shk');}
     if(fe){fe.textContent=errs[k]||'';fe.classList.toggle('on',bad);}
-    if(bad){el.setAttribute('aria-invalid','true');any=true;}else{el.removeAttribute('aria-invalid');}});
+    if(bad){el.setAttribute('aria-invalid','true');any=true;}else{el.setAttribute('aria-invalid','false');}});
   document.getElementById('ptfFormErr').style.display=any?'block':'none';
   if(any){var firstBad=['ptfName','ptfEmail','ptfPhone','ptfMsg'].filter(isBad)[0];
     if(firstBad)document.getElementById(firstBad).focus();return;}
@@ -3635,13 +3641,14 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   var fields={name:nm,company:co,email:em,phone:ph,application:app,message:ms};
   /* Форма одна на весь сайт; в письме видно, с какой страницы пришёл запрос. */
   if(PT.page)fields.page=PT.page;
-  sending=true;
+  sending=true;busy(true);
   /* Фокус переезжает на подтверждение: иначе он остаётся на кнопке отправки,
      которая только что исчезла вместе с формой, и человек без экрана не узнаёт,
      что заявка ушла. */
   function done(){document.getElementById('f_main').style.display='none';
-    var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;}
-  function sendFail(){sending=false;document.getElementById('ptfSendErr').style.display='block';}
+    var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;busy(false);}
+  function sendFail(){sending=false;busy(false);var se=document.getElementById('ptfSendErr'),st=se.getAttribute('data-t')||se.textContent;
+    se.setAttribute('data-t',st);se.textContent='';se.style.display='block';setTimeout(function(){se.textContent=st;},60);}
   /* ОТПРАВКА (аудит 2026-11-11). Прежде заявка с файлами уходила одним запросом в режиме
      no-cors: ответ службы в нём прочитать нельзя, и ЛЮБОЙ ответ — в том числе отказ —
      вёл на «отправлено». Клиент видел галочку, а письма не было.
@@ -3678,7 +3685,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
     });
 });
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
-  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.removeAttribute('aria-invalid');
+  document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.setAttribute('aria-invalid','false');
     var fe=document.getElementById(id+'Err');if(fe){fe.textContent='';fe.classList.remove('on');}
     document.getElementById('ptfFormErr').style.display='none';});
 });
