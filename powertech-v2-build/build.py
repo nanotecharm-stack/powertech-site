@@ -473,7 +473,9 @@ EN = {
  'HEADTT': TY['EN_TT'], 'HEADLH': TY['EN_LH'], 'HEADLS': TY['EN_LS'], 'H1WT': TY['EN_H1WT'], 'BIGLS': TY['EN_BIGLS'],
  # Шкала умножена на 0,66: узкий Big Shoulders сменился нормальным по ширине
  # гротеском, и при прежнем кегле строка героя выходила из колонки в полтора раза.
- 'H1SIZE': 'clamp(48px,4.6vw,74px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ # H2: нижняя граница 24 px (было 20) — на телефоне заголовок раздела был не крупнее лида
+ # под ним (20 против 20); бриф владельца 2026-11-20 «визуальная иерархия».
+ 'H1SIZE': 'clamp(48px,4.6vw,74px)', 'H2SIZE': 'clamp(24px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',
  # Латинский код, а не «ՀԱՅ»: в EN-сборку вшита только латинская подрезка Martian
  # Mono, армянские буквы падали в системную подмену и выглядели чужеродно. Пара
@@ -562,7 +564,8 @@ EN = {
  # пояснение относится именно к этой карточке.
  'MEA_NOTE': lnote_html('* We use measurement data to assess the risk of equipment damage, downtime and electrical fires.'),
  'CO_H2': 'About us',
- 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan. We solve problems in electrical power systems, combining our team’s hands-on engineering experience with high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
+ 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan.',
+ 'CO_P2': 'We solve problems in electrical power systems, combining our team’s hands-on engineering experience with high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
  # \u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0432\u043e\u043b\u044e \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f.
  # Номера «01 ·», «02 ·», «03 ·» с подписей сняты: на странице уже есть одна
@@ -802,7 +805,8 @@ HY = {
  # те же три строки.
  # Прежде HY-h1 был чуть меньше EN (44–70 против 48–74); теперь та же шкала, а разницу
  # шрифтов держит один коэффициент --hs в shell.html.
- 'H1SIZE': 'clamp(48px,4.6vw,74px)', 'H2SIZE': 'clamp(20px,3.17vw,48px)',
+ # H2: нижняя граница 25.6 px × --hs .86 = 22 px (было 17,2 при лиде 19) — 2026-11-20.
+ 'H1SIZE': 'clamp(48px,4.6vw,74px)', 'H2SIZE': 'clamp(25.6px,3.17vw,48px)',
  'DISPSIZE': 'clamp(23px,3.96vw,55px)',   # та же шкала, что и в английской: прежние
  # 84 px давали блок выше английского в полтора раза
  'LANG_HREF': './index.html', 'LANG_LABEL': 'ENG', 'LANG_ARIA': 'English · Անգլերեն',
@@ -882,7 +886,8 @@ HY = {
  # капс. Принудительных переносов нет — в этой редакции их не задавали, строки
  # раскладывает колонка.
  'CO_H2': 'Մեր մասին',
- 'CO_P': 'Gridec-ը Երևանում գործող անկախ էլեկտրատեխնիկական ընկերություն է։ Մենք լուծում ենք էլեկտրամատակարարման տեխնիկական խնդիրներ՝ հենվելով թիմի գործնական փորձի վրա և օգտագործելով ժամանակակից, բարձր ճշգրտության սարքավորումներ ու փորձված մեթոդներ։ Աշխատում ենք միջազգային ստանդարտներով՝ հաշվի առնելով սարքավորումների շահագործման պայմանները։',
+ 'CO_P': 'Gridec-ը Երևանում գործող անկախ էլեկտրատեխնիկական ընկերություն է։',
+ 'CO_P2': 'Մենք լուծում ենք էլեկտրամատակարարման տեխնիկական խնդիրներ՝ հենվելով թիմի գործնական փորձի վրա և օգտագործելով ժամանակակից, բարձր ճշգրտության սարքավորումներ ու փորձված մեթոդներ։ Աշխատում ենք միջազգային ստանդարտներով՝ հաշվի առնելով սարքավորումների շահագործման պայմանները։',
  'CO_STORY': story_html([
     # Тексты владельца (2026-09-15, вторая редакция того же дня): лид и два подблока.
     ('Ինչու սկսեցինք',

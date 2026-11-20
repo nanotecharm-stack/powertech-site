@@ -133,7 +133,10 @@ h1,h2{margin-left:-.05em;}
    Значение то же, что стояло инлайном у этих двух h2. */
 h2.h2gap{margin-top:var(--s4);}
 
-.lede{max-width:38ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-head);margin-top:var(--s5);}
+/* Цвет лида — цвет основного текста, а не заголовка (бриф владельца 2026-11-20 «визуальная
+   иерархия»): заголовок и лид одной краской читались одним блоком. На тёмных плитах цвет
+   задают свои правила (.plate2 .lede, .rep-head .lede). */
+.lede{max-width:38ch;font-size:var(--t-lede);line-height:var(--t-lede-lh);color:var(--fg-mid);margin-top:var(--s5);}
 /* Два вводных абзаца подряд стояли теснее, чем абзац к своему заголовку, и
    читались одним куском. Разводим их на строку. */
 /* Лид один: второй вводный абзац стоит на ступень ниже, размером прозы, цвет наследует. */
@@ -1068,11 +1071,13 @@ h2{font-size:calc(%%H2SIZE%% * var(--hs));text-wrap:balance;}
    #company держит ту же ступень: большое верхнее поле у него было и раньше
    (правило ниже), а размер заголовка оставался обычным — роль объявлялась
    наполовину. */
-#why h2,#company h2{font-size:calc(clamp(28px,4.25vw,64px) * var(--hs));letter-spacing:%%BIGLS%%;line-height:1.05;}
+/* 2026-11-20 (бриф владельца «визуальная иерархия», «Да, все пять»): #company снят с большой
+   ступени — «О нас» было самым крупным заголовком страницы (60 px против 45 у услуги). */
+#why h2{font-size:calc(clamp(28px,4.25vw,64px) * var(--hs));letter-spacing:%%BIGLS%%;line-height:1.05;}
 /* HY: три заголовка с собственным интерлиньяжем 1.05 остались плотнее прочих
    армянских (1.08) — как раз трёхстрочные (замер 2026-11-20, бриф владельца
    «Visual Refinement»). */
-html[lang="hy"] .hero h1,html[lang="hy"] #why h2,html[lang="hy"] #company h2{line-height:1.08;}
+html[lang="hy"] .hero h1,html[lang="hy"] #why h2{line-height:1.08;}
 /* Верхнее поле #company — обычное поле раздела: перед ним уже стоит полоса
    .dith в 170 px, и с прежними 112 пауза выходила длиннее, чем у соседей
    (119 px до заголовка против 88; бриф владельца 2026-11-20). */
@@ -1349,7 +1354,8 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
   .rep-side{grid-column:1 / -1;padding-top:var(--s6);}
   .rep-side:has(.rep-figs){margin-top:0;padding-top:var(--s6);}
 }
-@media (min-width:600px) and (max-width:960px){.rep-figs{grid-template-columns:1fr 1fr;}}
+/* 2026-11-20: и на телефоне два листа в один ряд — столбцом они занимали 437 px без сведений. */
+@media (max-width:960px){.rep-figs{grid-template-columns:1fr 1fr;}}
 /* what the report contains, read as a numbered sheet rather than a panel */
 /* Перечень — это содержание самого отчёта, поэтому он и выглядит как лист,
    положенный на страницу: та же светлая поверхность и та же волосяная кромка,
@@ -2723,7 +2729,10 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
 <section class="sec" id="company"><div class="wrap">
   <div class="rv"><div class="cnt">07</div>
   <h2 class="h2gap">%%CO_H2%%</h2>
-  <p class="lede">%%CO_P%%</p></div>
+  <!-- 2026-11-20: крупным идёт только первое предложение; остальное — вторым .lede,
+       который по правилу «.lede + .lede» набирается основным текстом. Слова те же. -->
+  <p class="lede">%%CO_P%%</p>
+  <p class="lede">%%CO_P2%%</p></div>
   <div class="story">%%CO_STORY%%</div>
 </div></section>
 
