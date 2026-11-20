@@ -105,7 +105,7 @@ p{margin:0;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cur
    крупного кегля встаёт на ось счётчика и линеек, а не боковой свес глифа. −3 px при 66, −2 при 46. */
 h1,h2{margin-left:-.05em;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px);}
-.plate .cnt,.plate2 .cnt{color:rgba(239,237,234,.58);}
+.plate .cnt,.plate2 .cnt{color:rgba(239,237,234,.62);}
 .cnt{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.22em;color:var(--fg-soft);display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 /* Отметка раздела. Прежде здесь лежала волосяная линейка на 190px — приём,
    который стоит на каждом втором шаблоне, и работы он не делал никакой.
@@ -317,7 +317,7 @@ header nav a.here{color:var(--inv-fg);background:var(--inv);}
 .ixp a{display:grid;grid-template-columns:34px minmax(0,1fr);
   gap:14px;align-items:baseline;padding:13px 0;color:var(--inv-fg);}
 .ixp a .no{font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.14em;color:var(--brand-ink);}
-.ixp a .tl{font-size:17px;line-height:1.35;color:rgba(239,237,234,.88);transition:color .2s var(--e);
+.ixp a .tl{font-size:17px;line-height:1.35;color:rgba(239,237,234,.84);transition:color .2s var(--e);
   display:inline-flex;flex-wrap:wrap;}
 /* Побуквенный разбег названий ВОЗВРАЩЁН (2026-09-16, владелец: «надо вернуть анимацию букв»);
    снимался аудитом 2026-09-14. Кегль и цвет — аудита (17 px, .88). */
@@ -871,7 +871,7 @@ html.wipecover .rv{transition:none;}
 .plate2>.wrap{position:relative;z-index:1;}
 .plate2 h2,.plate2 h3{color:#F4F3F1;}
 .plate2 .lede{color:var(--on-dark-lede);}
-.plate2 .cnt{color:rgba(239,237,234,.58);}
+.plate2 .cnt{color:rgba(239,237,234,.62);}
 .plate2 .alink:hover:where(:not(.noh *)){color:#fff;}
 .plate2 .display{color:#F4F3F1;}
 .plate2 .note{color:var(--on-dark-note);}
@@ -1100,7 +1100,8 @@ html[lang="hy"] .hero h1,html[lang="hy"] #why h2{line-height:1.08;}
   #why{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(28px,3.2vw,46px);}
 }
 #measure h2{font-size:calc(clamp(19px,2vw,28px) * var(--hs));letter-spacing:0;}
-#measure{padding-top:clamp(26px,3vw,46px);padding-bottom:clamp(36px,4.2vw,60px);/* оптика: было 43 сверху / 83 снизу */}
+/* 2026-11-20: пиксельная полоса перед разделом снята, плита начинается с обычного поля .sec. */
+#measure{padding-bottom:clamp(36px,4.2vw,60px);}
 /* Раздел, к которому приложение относится, закрывается короче обычного —
    иначе укороченная пауза сверху съедалась длинной паузой снизу. */
 #services,#assignments{padding-bottom:clamp(30px,3.4vw,52px);}
@@ -1175,7 +1176,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 
 /* industries grid */
 .other{margin-top:10px;background:var(--inv);color:var(--inv-fg);padding:clamp(26px,3.4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;border-radius:2px;}
-.other .no{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.14em;color:rgba(239,237,234,.58);}
+.other .no{font-family:%%MONOFONT%%;font-size:12px;letter-spacing:.14em;color:rgba(239,237,234,.62);}
 .other h3{font-size:calc(clamp(21px,2.4vw,32px) * var(--hs));margin:var(--s3) 0 10px;letter-spacing:.01em;}
 .other p{color:var(--on-dark);font-size:var(--t-p);line-height:var(--t-p-lh);max-width:52ch;}
 .other .btn{background:var(--brand);color:#fff;}
@@ -1241,7 +1242,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
 .obs .step p{color:rgba(239,237,234,.78);transition:color .3s var(--e);}
 .obs .step.on{border-left-color:var(--brand);}
 .obs .step.on::before{background:var(--brand);}
-.obs .step.on p{color:rgba(239,237,234,.9);}
+.obs .step.on p{color:rgba(239,237,234,.84);}
 /* ============ ТРИ ШАГА КАК ПОСЛЕДОВАТЕЛЬНОСТЬ ============
    Три абзаца стояли в ряд без единого знака порядка: ни линии, ни отметки —
    в тёмной плите они читались тремя случайными колонками текста. Номеров у
@@ -1253,7 +1254,7 @@ html[lang="hy"] .ev-tag{font-family:%%BODYFONT%%;letter-spacing:.04em;text-trans
    Загорание — раз, при появлении (.in от наблюдателя .rv), не по прокрутке:
    ряд горизонтальный, «текущий шаг» при вертикальном чтении не существует.
    При reduce отметки стоят готовыми. */
-@media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(239,237,234,.9);}
+@media (prefers-reduced-motion:reduce){.obs .step p{color:rgba(239,237,234,.84);}
   .obs .step{border-left-color:var(--brand);}.obs .step::before{background:var(--brand);}}
 /* ---- Неделя записи (2026-09-15) — правила с #obs.wk перекрывают прежнюю шкалу
    с крупными числами и головкой записи, включая её мобильные правила ниже. ---- */
@@ -1287,7 +1288,7 @@ html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:12px;letter-
 #obs.wk .step::before{display:none;}
 #obs.wk .step .stag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
 html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;letter-spacing:.02em;text-transform:none;}
-#obs.wk .step p{color:rgba(239,237,234,.88);}
+#obs.wk .step p{color:rgba(239,237,234,.84);}
 @media (max-width:767px){
   #obs.wk .wk-days span:nth-child(n+2){visibility:hidden;}
   #obs.wk .wk-days span:nth-child(7){visibility:visible;}
@@ -1320,7 +1321,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
      окна, и при малом поле «04 Report» уходил под шапку (владелец, телефон). */
   color:#EFEDEA;padding:clamp(56px,6.2vw,92px) 0 var(--rep-over);}
 .rep-head h2{color:#F4F3F1;}
-.rep-head .cnt{color:rgba(239,237,234,.58);}
+.rep-head .cnt{color:rgba(239,237,234,.62);}
 .rep-head .lede{color:var(--on-dark-lede);}
 .rep-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,1.8vw,24px);
   align-items:start;padding-bottom:clamp(48px,6vw,96px);}
@@ -1676,9 +1677,9 @@ footer .fbrand .flg{display:block;height:42px;width:auto;margin:0 0 22px -7px;}
    Grotesk на английской, Arian AMU Serif на армянской), поэтому «ՀՎՀՀ» не
    проваливается в системный шрифт, как провалилось бы в приборной. */
 footer .fbrand .freg{margin-top:14px;text-transform:none;letter-spacing:.04em;white-space:nowrap;
-  max-width:none;color:rgba(239,237,234,.72);}
+  max-width:none;color:rgba(239,237,234,.78);}
 footer .fbrand .freg .fsep{opacity:.5;margin:0 10px;}
-footer .fbrand .freg b{font-weight:400;color:rgba(239,237,234,.86);margin-left:10px;}
+footer .fbrand .freg b{font-weight:400;color:rgba(239,237,234,.84);margin-left:10px;}
 footer .fbrand p{margin-top:20px;font-family:%%MONOFONT%%;font-size:var(--t-aux);
   letter-spacing:.14em;text-transform:uppercase;color:rgba(239,237,234,.62);max-width:none;white-space:nowrap;/* 2026-11-18, владелец: подпись одной строкой и на EN (было 26ch — «MONITORING» висело одно) */
   line-height:1.8;}
@@ -1699,7 +1700,7 @@ footer .flist a:hover:where(:not(.noh *)){color:#fff;}
 /* Роль Body: телефон и адрес — то, ради чего в футер и приходят, их читают,
    а не проглядывают. Тон поднят с .72 до .82: на чернильной плите это
    единственные строки, по которым будут звонить. */
-footer .fcon li{font-size:16px;line-height:1.65;color:rgba(239,237,234,.82);}
+footer .fcon li{font-size:16px;line-height:1.65;color:rgba(239,237,234,.84);}
 footer .fcon a{color:var(--on-dark-link);transition:color .3s var(--e);}
 footer .fcon a:hover:where(:not(.noh *)){color:#fff;text-decoration:underline;text-underline-offset:4px;}
 /* В колоночном флексе поля auto ужимают полосу до содержимого и ставят её
@@ -1715,11 +1716,11 @@ footer .fbot{width:100%;display:flex;justify-content:space-between;align-items:c
    остаётся у правого края. Без обёртки space-between развёл бы их натрое. */
 footer .fbl{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;}
 footer .fpp{font:inherit;letter-spacing:inherit;text-transform:inherit;padding:6px 0;
-  color:rgba(239,237,234,.7);text-decoration:underline;text-underline-offset:4px;
+  color:rgba(239,237,234,.78);text-decoration:underline;text-underline-offset:4px;
   text-decoration-color:rgba(239,237,234,.3);transition:color .3s var(--e),text-decoration-color .3s var(--e);}
 footer .fpp:hover:where(:not(.noh *)){color:#EFEDEA;text-decoration-color:rgba(239,237,234,.6);}
 footer .fpp:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
-footer .flang{color:rgba(239,237,234,.75);padding:9px 13px;border-radius:2px;
+footer .flang{color:rgba(239,237,234,.78);padding:9px 13px;border-radius:2px;
   box-shadow:inset 0 0 0 1px rgba(239,237,234,.2);transition:color .3s var(--e),background .3s var(--e);}
 footer .flang:hover:where(:not(.noh *)){color:#0D0E13;background:#EFEDEA;}
 footer a:focus-visible,.flang:focus-visible{outline:1px solid #7BA4D0;outline-offset:3px;}
@@ -2490,9 +2491,9 @@ html[data-nav="5"] #hdr .btn{white-space:nowrap;}
 .pb-list li{counter-increment:pb;}
 .pb-list li+li{border-top-color:rgba(239,237,234,.13);}
 .pb-list a{position:relative;color:#EFEDEA;--par-ground:#17241F;background:none!important;}
-.pb-list a>svg{color:rgba(239,237,234,.82);transition:color .4s ease,transform .7s cubic-bezier(.16,1,.3,1);}
+.pb-list a>svg{color:rgba(239,237,234,.84);transition:color .4s ease,transform .7s cubic-bezier(.16,1,.3,1);}
 .pb-list b{color:#F4F3F1;}
-.pb-list span{color:rgba(239,237,234,.68);}
+.pb-list span{color:rgba(239,237,234,.78);}
 .pb-list a::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#86C2A0;
   transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.16,1,.3,1);}
 @media (min-width:861px){
@@ -2647,8 +2648,6 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
 </div></section>
 
 
-<div class="dith" data-dith="#EFEDEA,#0D0E13,#C8603D"></div>
-
 <section class="sec plate2" id="services"><div class="wrap">
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
@@ -2716,15 +2715,11 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
   <div class="qa-right rv"><ol class="qa-list" id="qalist">%%ASG_CARDS%%</ol></div>
 </div></section>
 
-<div class="dith" data-dith="#EFEDEA,#0D0E13,#C8603D"></div>
-
 <section class="sec plate2" id="measure"><div class="wrap rv">
   <div class="cnt">06</div><h2>%%MEA_H2%%</h2>
   <div class="meas">%%MEA_CHIPS%%</div>
   %%MEA_NOTE%%
 </div></section>
-
-<div class="dith" data-dith="#14161C,#EFEDEA,#C8603D"></div>
 
 <section class="sec" id="company"><div class="wrap">
   <div class="rv"><div class="cnt">07</div>
