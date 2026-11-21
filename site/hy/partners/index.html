@@ -2150,12 +2150,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
       if(files.length)return sendFiles().then(done,done);
       done();
     })
-    .catch(function(){
-      if(files.length){sendFail();return;}
-      var body=encodeURIComponent('Name: '+fields.name+'\nCompany: '+fields.company+'\nEmail: '+fields.email+'\nPhone: '+fields.phone+'\nApplication: '+fields.application+'\n\n'+fields.message);
-      location.href='mailto:sales@gridec.am?subject='+encodeURIComponent(SUBJ)+'&body='+body;
-      done();
-    });
+    .catch(function(){sendFail();});
 });
 ['ptfName','ptfCompany','ptfEmail','ptfPhone','ptfMsg'].forEach(function(id){
   document.getElementById(id).addEventListener('input',function(){this.classList.remove('err');this.setAttribute('aria-invalid','false');
