@@ -709,6 +709,13 @@ html[lang="hy"] #obs.wk .step .stag{font-family:var(--face-mardoto);font-size:12
   .rep-side:has(.rep-figs){margin-top:0;padding-top:var(--s6);}
 }
 @media (max-width:960px){.rep-figs{grid-template-columns:1fr 1fr;}}
+.rep-pages{grid-template-columns:1fr 1fr;}
+@media (max-width:960px){.rep-pages{max-width:560px;}}
+a.rep-fig{display:block;}
+.rep-fig img{display:block;width:100%;height:auto;}
+.rep-smp{margin-top:clamp(12px,1.4vw,18px);font-size:var(--t-note);line-height:var(--t-note-lh);color:var(--fg-soft);}
+.rep-dl{display:flex;flex-wrap:wrap;gap:6px 28px;margin-bottom:clamp(24px,2.6vw,36px);}
+.rep-dl .alink{margin-top:12px;}
 .list{display:grid;grid-auto-rows:1fr;border-top:1px solid var(--hair2);}
 .list div{--row:56px;--i:0;position:relative;
   display:grid;grid-template-columns:1fr;gap:0;align-items:baseline;
