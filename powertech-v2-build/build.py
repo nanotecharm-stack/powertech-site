@@ -311,20 +311,19 @@ def intro_html(text):
     """Вводная строка формы. Пустое значение не оставляет пустого абзаца с полями."""
     return '<p class="intro">%s</p>' % text if text else ''
 
-def rep_figs_html(lang, alts, smp, pdf_label, zip_label):
+def rep_figs_html(lang, alts, smp, pdf_label):
     """Раздел 04: две страницы учебного отчёта, пометка «пример» и ссылки на PDF и данные.
 
     Файлы готовит report/make_site_assets.py, на сайт они идут в uploads/report.
     """
-    pdf = './uploads/report/GRIDEC_Sample_Report_PV_Trips_%s.pdf' % lang.upper()
+    pdf = './uploads/report/GRIDEC_Demonstration_Report_%s.pdf' % lang.upper()
     figs = ''.join(
         '<a class="rep-fig" href="%s" target="_blank" rel="noopener">'
         '<img src="./uploads/report/page-%s-%d.webp" width="720" height="1019" alt="%s" loading="lazy" decoding="async"></a>'
         % (pdf, lang, no, alt) for no, alt in zip((4, 6), alts))
     return ('<div class="rep-figs rep-pages">%s</div><p class="rep-smp">%s</p>'
-            '<p class="rep-dl"><a class="alink" href="%s" target="_blank" rel="noopener">%s ↗︎</a>'
-            '<a class="alink" href="./uploads/report/GRIDEC_sample_measurement_data.zip" download>%s ↗︎</a></p>'
-            % (figs, smp, pdf, pdf_label, zip_label))
+            '<p class="rep-dl"><a class="alink" href="%s" target="_blank" rel="noopener">%s ↗︎</a></p>'
+            % (figs, smp, pdf, pdf_label))
 
 
 def lnote_html(text):
@@ -561,7 +560,7 @@ EN = {
  # Учебный отчёт (2026-11-21): данные синтетические, это сказано строкой под страницами.
  'REP_FIGS': rep_figs_html('en', ('Sample report page: voltage and power over the week',
                                   'Sample report page: record of one inverter trip'),
-                           'Sample report. Synthetic data.', 'Sample report · PDF, 10 pages', 'Source data · ZIP'),
+                           'Sample report. Synthetic data.', 'Sample report · PDF, 10 pages'),
  # Раздел адресован владельцу, а не инженеру, и должен отвечать на «чем это полезно
  # мне», а не «что мы делаем». Отрасли уже названы в 02, запись и отчёт — в 01 и 04,
  # поэтому здесь ни то, ни другое не может быть сообщением: каждая карточка ставится
@@ -890,8 +889,7 @@ HY = {
  # армянскую формулировку должен утвердить владелец, а не я.
  'REP_FIGS': rep_figs_html('hy', ('Հաշվետվության օրինակի էջ՝ լարումը և հզորությունը շաբաթվա ընթացքում',
                                   'Հաշվետվության օրինակի էջ՝ ինվերտորի մեկ անջատման գրառում'),
-                           'Հաշվետվության օրինակ։ Մոդելավորված տվյալներ։', 'Հաշվետվության օրինակ · PDF, 10 էջ',
-                           'Սկզբնական տվյալներ · ZIP'),
+                           'Հաշվետվության օրինակ։ Մոդելավորված տվյալներ։', 'Հաշվետվության օրինակ · PDF, 10 էջ'),
  'REP_NOTE2': lnote_html(
      # Формулировка владельца (2026-09-14).
      'Եթե գրանցված տվյալները բավարար չեն եզրակացություն անելու համար, '
@@ -2040,6 +2038,7 @@ for fn in sorted(os.listdir(QA_DIR)):
 # Фото героя (2026-09-13): два WebP (2172 и 1086 по ширине, q84) из img/hero; PNG-исходник на сайт не идёт.
 # Учебный отчёт раздела 04 (2026-11-21): PDF на двух языках, ZIP с данными, миниатюры страниц.
 REPORT_DIR = os.path.join(HERE, 'report', 'site')
+shutil.rmtree(os.path.join(DEPLOY, 'uploads', 'report'), ignore_errors=True)
 for fn in sorted(os.listdir(REPORT_DIR)):
     deploy_asset(os.path.join(REPORT_DIR, fn), os.path.join(DEPLOY, 'uploads', 'report', fn))
 HERO_DIR = os.path.join(IMGS, 'hero')

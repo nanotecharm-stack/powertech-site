@@ -1,0 +1,251 @@
+GRIDEC TECHNICAL REPORT
+01 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+SYNTHETIC DATA / DEMONSTRATION ONLY
+Repeated PV inverter trips
+Seven-day illustrative power quality investigation / heavy-equipment repair workshop
+SITE
+Heavy-equipment repair workshop (fictional)
+MONITORING PERIOD
+8–14 June 2026 / UTC+04:00
+PV PLANT
+100 kW AC / 125 kWp DC
+ELECTRICAL SYSTEM
+400/230 V / 50 Hz / TN-S (assumed)
+INVERTER TRIPS
+08
+TOTAL DOWNTIME
+51:10
+HIGHEST 20 ms RMS
+255.3 V
+FEEDER RISE A–B
+10.8–12.3 V
+Engineering finding
+Eight trips were generated in the synthetic inverter model. Immediately before each disconnection, L2–N voltage
+at the inverter AC terminals (B) rose above the modelled 253 V threshold. The highest 20 ms RMS value at B was
+255.3 V. At the same instants, voltage at B was 10.8–12.3 V higher than at the main switchboard (A).
+The model attributes most of this difference to resistance in the 185 m PV feeder. A separate brief rise at A takes
+B above the assumed protection threshold. Ten-minute voltage values at A remain in the indicative 207–253 V
+band. This is not a network compliance assessment.
+IMPORTANT — The model uses a fictional inverter rule: disconnect after L2–N voltage exceeds 253 V for about 2.1 s.
+No real inverter model, approved grid profile or manufacturer-specific fault code is claimed. Real settings must be
+verified before diagnosing a site.
+GRIDEC 01 / INSTALLATION
+02 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Installation and measurement points
+POINT A / MAIN SWITCHBOARD
+Internal diagnostic point. This is not an established
+contractual point of supply. Workshop loads connect
+here.
+POINT B / PV INVERTER
+AC terminals of the PV inverter. Positive PV output is
+defined at B; positive grid import is defined at A.
+PV FEEDER
+Aluminium 4 × 70 mm² (L1/L2/L3/N), 185 m;
+separate modelled copper PE. The PE size and route
+remain to be checked.
+ASSUMED RESISTANCE
+R = 0.095 Ω per phase at about 60 °C. This value is
+a calculation assumption, not a measurement.
+SIMPLIFIED ONE-LINE DIAGRAM / NOT AN INSTALLATION DRAWING
+A B
+Al 4 × 70 mm² / 185 m
+GRID
+SWITCHBOARD INVERTER
+LOADS
+SEPARATE PE / SIZE TO VERIFY
+During export, current flows from inverter B to switchboard A. At unity power factor, cable resistance makes
+the L–N voltage at B higher than at A.
+ASSUMED MEASUREMENT SETUP
+Two three-phase PQ analysers at A and B, with Class S diagnostic capabilities. The example assumes a common
+synthetic event time axis; no real 20 ms synchronisation performance has been demonstrated.
+GRIDEC 02 / METHOD
+03 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Measurement and modelling method
+RECORDING BASIS
+Seven full days: 1,008 ten-minute records per reported time series. Separate 20 ms RMS event traces are aligned
+to a shared synthetic time axis. No field recording or instrument traceability is implied.
+SOURCE MODELLED VARIABLES AVAILABLE SERIES
+A / switchboard L1/L2/L3–N RMS voltage; grid import/export; THD(U), U2/U1,
+synthetic Pst/Plt; frequency
+Ten-minute series and
+event traces
+B / inverter L1/L2/L3–N RMS voltage; inverter active power; feeder current Ten-minute series and 20
+ms event traces
+Inverter logic Disconnection times, illustrative code AC_OV_1, operating status
+and reconnect interval
+Trip list and one-second
+recovery series
+MODEL ASSUMPTIONS
+Balanced three-phase, active-power-only model at unity power factor. Per-phase feeder resistance is fixed at 0.095 Ω
+and equivalent upstream resistance at 0.070 Ω. The load flow is solved iteratively. Cable reactance, reactive power,
+harmonic currents, changing conductor temperature and inverter control dynamics are excluded from the power-flow
+calculation.
+Voltage and power series come from the synthetic simulation. Pst, Plt and THD(U) are illustrative channels, not IEC
+61000-4-15/-4-7 compliant instrument results. The artificial 253 V / ~2.1 s disconnection rule must not be used as a real
+protection setting.
+FOR ACTUAL FIELD WORK — Verify wiring, PE continuity and sizing, voltage and current connections, CT ratios and
+orientation, instrument class/options, calibration, clock synchronisation, inverter model, approved grid profile and
+point of supply.
+GRIDEC 03 / WEEK
+04 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Seven-day operating profile
+L2–N VOLTAGE AT A AND B / TEN-MINUTE MEANS
+INVERTER OUTPUT AND WORKSHOP LOAD / TEN-MINUTE MEANS
+WEEKLY ENERGY BALANCE
+PV production at B
+4 883.8 kWh
+Feeder losses
+175.2 kWh
+Workshop consumption
+2 748.1 kWh
+Grid import at A
+812.9 kWh
+Grid export at A
+2 773.4 kWh
+PV arriving at A
+4 708.6 kWh
+Energy balance at 1 s resolution: PV(B) + grid import = workshop demand + feeder losses + grid export. Totals use
+unrounded values; the displayed figures are rounded to 0.1 kWh.
+GRIDEC 04 / TRIPS
+05 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Inverter trip summary
+EVENT / LOCAL TIME B MAX. 20 ms
+RMS, V
+A RMS, V A–B, V PV, kW OFF, min:s UNPRODUCED,
+kWh
+E-01 08.06 12:41:16 255.1 242.8 12.3 99.1 6:20 10.5
+E-02 10.06 11:57:42 254.4 242.7 11.7 93.8 5:40 9.0
+E-03 10.06 13:22:18 254.5 243.1 11.5 92.1 7:10 11.3
+E-04 11.06 12:08:09 254.2 243.4 10.8 87.1 6:05 9.1
+E-05 13.06 11:36:27 254.4 243.1 11.3 90.5 6:45 10.5
+E-06 13.06 12:54:31 254.7 243.1 11.6 93.2 5:35 8.6
+E-07 14.06 11:21:54 254.2 243.1 11.1 89.3 7:25 11.4
+E-08 14.06 13:11:38 255.3 243.5 11.9 95.6 6:10 10.1
+A and B values refer to the same synthetic instant immediately before each trip. PV power is the modelled pre-trip output,
+not a ten-minute average. Columns are independently rounded; subtracting displayed values can differ from the listed A–B
+rise by 0.1 V.
+OBSERVATIONS
+• All eight disconnections follow the same fictional inverter rule: L2–N voltage at B exceeds 253 V for approximately
+2.08–2.10 s. AC_OV_1 is an illustrative log label, not a verified manufacturer code.
+• Trips occur from 11:20 to 13:25 on five of seven days, coinciding with high simulated PV production.
+• Unproduced energy is estimated from modelled output without disconnections. It is not metered lost revenue or a
+weather-corrected yield estimate.
+Estimated unproduced energy: 80.4 kWh / cumulative disconnected time: 51 min 10 s
+The sum of rounded individual event losses is 80.5 kWh; the model total from unrounded data is 80.4 kWh.
+GRIDEC 05 / EVENT E-08
+06 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Event E-08: voltage before disconnection
+14 June 2026, 13:11:38 / synthetic 20 ms L2–N RMS event trace
+TIME FROM TRIP A, V B, V DESCRIPTION
+−9.00 s 237.6 249.8 Before the brief voltage rise
+−2.00 s 241.2 253.1 Above assumed threshold
+−0.02 s 243.5 255.3 Maximum pre-trip RMS value
++10.00 s 228.6 228.6 Inverter disconnected
+EVENT INTERPRETATION
+The inverter model exports 95.6 kW before E-08. Voltage at B exceeds the assumed 253 V rule for 2.08 s, reaching
+255.3 V; A reaches 243.5 V at the same synthetic instant. When the inverter disconnects, feeder current and the
+resistive A–B voltage rise fall to approximately zero.
+These traces were generated analytically. A real Class S analyser and an inverter event log must not be assumed to
+have 20 ms relative timing accuracy without a documented synchronisation test.
+GRIDEC 06 / POWER QUALITY
+07 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Power quality indicators / diagnostic only
+TEN-MINUTE DIAGNOSTIC SERIES AT A
+INDICATOR MIN P95 MAX REFERENCE
+U L1–N 227.27 V 236.37 V 237.91 V 207–253 V
+U L2–N 227.87 V 236.85 V 238.44 V 207–253 V
+U L3–N 227.42 V 236.53 V 237.94 V 207–253 V
+THD(U) * 1.46 % 1.82 % 1.95 % —
+U2/U1 * 0.04 % 0.08 % 0.09 % —
+Pst * 0.32 0.50 0.57 —
+Plt (2 h) * 0.36 0.47 0.49 —
+Frequency 49.98 Hz 50.02 Hz 50.02 Hz —
+P95 is the 95th percentile of each reported model series, not a standards-based compliance statistic. * Values are synthetic
+diagnostic indicators; Pst and Plt have not been derived by an IEC 61000-4-15 flickermeter.
+INVERTER TERMINAL VOLTAGE AT B / TEN-MINUTE SERIES
+PHASE MIN P95 MAX
+L1–N 227.3 V 248.0 V 250.3 V
+L2–N 227.9 V 248.5 V 250.7 V
+L3–N 227.4 V 248.2 V 250.2 V
+The maximum ten-minute mean at B is 250.7 V (L2–N). A two-second event can exceed 253 V without lifting the ten-minute
+mean above that value.
+OTHER SHORT EVENTS
+Two independent modelled voltage dips at A: L1–N to 197.4 V for 320 ms (9 June, 08:37:12), and L3–N to 201.3 V for 440 ms
+(12 June, 16:09:45). Both are associated with simulated compressor starting and are unrelated to the eight inverter trips.
+The indicative 230 V ±10% band does not establish compliance with EN 50160 or GOST 32144-2013. A real assessment
+requires the applicable standard, verified point of supply, appropriate equipment and defined measurement method.
+GRIDEC 07 / ANALYSIS
+08 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Voltage-rise mechanism and calculation
+E-08 / CALCULATED RESISTIVE FEEDER RISE
+Al conductor limit at 20 °C: 0.443 Ω/km × 0.185 km = 0.08196 Ω/phase
+Assumed conductor resistance near 60 °C: R = 0.095 Ω/phase
+Current ≈ 95.6 kW ÷ (3 × 255.3 V) = 124.83 A
+Feeder voltage rise ≈ 124.83 A × 0.095 Ω = 11.86 V
+The IEC 60228 value is a maximum conductor DC resistance at 20 °C, not a site reading. The assumed 60 °C temperature
+is not measured. Cable reactance and termination resistance are omitted.
+A–B VOLTAGE RISE AS PV OUTPUT INCREASES
+THREE CONTRIBUTIONS TO THE OBSERVED EVENT
+• Feeder A–B: injected PV current raises voltage at B relative to A; this term disappears when feeder current reaches zero.
+• Upstream system: exported power can also raise the voltage at A. Its magnitude cannot be assigned to a real operator
+network from this model.
+• Brief voltage change at A: an additional common rise appears just before the trips; its physical cause is intentionally
+unspecified.
+GRIDEC 08 / ACTIONS
+09 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Recommendations and verification
+01 / DO NOT CHANGE PROTECTION SETTINGS
+Do not raise the modelled 253 V threshold as a quick fix. Obtain the actual inverter make/model, approved grid profile,
+overvoltage stages, time delays and fault-log meaning. Confirm permissible changes with the relevant network operator.
+02 / CHECK THE PV FEEDER DESIGN
+Have the designer check conductor cross-section, PE routing and sizing, current-carrying capacity, protection
+coordination, termination condition and voltage-rise limit. Compare a larger cable, parallel conductors or a shorter route,
+including installation cost and losses.
+03 / CHECK INVERTER CONTROL FUNCTIONS
+Review P(U) active-power reduction and Q(U) reactive-power control only where supported and allowed by the
+connection agreement. P(U) reduces yield. Q(U) changes current and may not eliminate disconnections.
+04 / INVESTIGATE VOLTAGE AT A
+Log L–N voltage, active and reactive power, feeder current and nearby large loads at A. If warranted, discuss upstream
+variations with the distribution operator; this model does not assign responsibility.
+05 / VERIFY THE RESULT AFTER ANY CHANGE
+Repeat simultaneous A/B recordings at similar high PV output and low workshop demand. Capture weather, inverter
+settings, connection details and instrument timing/uncertainty.
+PROPOSED VERIFICATION CRITERIA
+• No overvoltage-related trip during a pre-agreed verification window with comparable irradiance and plant output.
+• Maximum terminal voltage and A–B rise remain within design limits defined using the approved inverter protection profile,
+measured uncertainty and operating conditions.
+• Before/after datasets, inverter settings, calculations and responsible engineer’s review are archived.
+GRIDEC 09 / SCOPE
+10 / 10
+GRIDEC / ENGINEERING EXAMPLE / SYNTHETIC DATA
+Scope, limitations and references
+DATA REFERENCED BY THE ORIGINAL DEMONSTRATION
+Ten-minute series, a trip list, eight 20 ms RMS event traces, an E-08 restart series, two simulated voltage dips, a model
+summary and an automated consistency log. These files are not embedded in this PDF. Only PDFs and a validation log
+were available for this revision.
+LIMITS OF THIS DEMONSTRATION
+• No actual workshop, meter installation, verified cable temperature or tested PE design.
+• No approved inverter grid profile or measured inverter protection settings; the 253 V / ~2.1 s rule and AC_OV_1 code
+are illustrative.
+• No traceable instrument export, real synchronization test, calibration certificate or verified contractual point of supply.
+• No full impedance model, reactive-power behaviour, measured irradiance, energy settlement data or regulatory finding.
+TERMS
+A = main switchboard; B = inverter AC terminals; 20 ms RMS = one-cycle RMS at 50 Hz; P95 = 95th percentile; P(U)/Q(U) =
+voltage-dependent active/reactive-power controls.
+TECHNICAL REFERENCES
+IEC 61000-4-30 (PQ measurement); IEC 61000-4-7 (harmonics); IEC 61000-4-15 (flicker); IEC 60228 (conductor resistance); EN
+50160 and GOST 32144-2013 (voltage characteristics). Site-specific applicability and local connection rules require
+confirmation.
+This report is an educational synthetic case. Its calculations are consistent with the stated simplified model; they do not
+validate a physical failure, approved inverter settings, network compliance or legal responsibility. Validation of a real
+site requires original measurement data and verified equipment settings.
+
