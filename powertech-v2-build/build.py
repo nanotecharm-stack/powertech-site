@@ -630,6 +630,7 @@ EN = {
  'F_FORM_ERR': 'Please check the highlighted fields.',
  # Аудит 2026-09-14: обязательны имя, описание и один контакт (почта ИЛИ телефон).
  'F_ONE_CONTACT': 'Email or phone: at least one, so that we can reply.',
+ 'F_FILES_ERR': 'Your message was sent, but the attached files did not upload. Please email them to sales@gridec.am.',
  'F_SEND_ERR': 'Sending failed. Please check your connection and try again, or write to us directly: sales@gridec.am',
  'F_SEND': 'Send',
  # Имя кнопки закрытия: символ «×» экранный диктор читает как знак умножения
@@ -944,6 +945,7 @@ HY = {
  'F_FORM_ERR': 'Ստուգեք նշված դաշտերը։',
  # ⚠ ЧЕРНОВИК: армянские формулировки ошибок — на проверку владельцу.
  'F_ONE_CONTACT': 'Էլ. փոստ կամ հեռախոս՝ գոնե մեկը, որպեսզի կարողանանք պատասխանել։',
+ 'F_FILES_ERR': 'Հաղորդագրությունն ուղարկվել է, սակայն կցված ֆայլերը չհաջողվեց ուղարկել։ Խնդրում ենք ուղարկել դրանք sales@gridec.am հասցեով։',
  'F_SEND_ERR': 'Հաղորդագրությունը չհաջողվեց ուղարկել։ Ստուգեք ինտերնետ կապը և փորձեք կրկին, կամ գրեք մեզ՝ sales@gridec.am հասցեով։',
  'F_SEND': 'Ուղարկել',
  'A_CLOSE': 'Փակել',

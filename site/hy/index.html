@@ -1047,7 +1047,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .drop b::before{content:"+";display:inline-block;width:1.1em;
   font-family:var(--face-departure-mono);color:var(--brand-ink);}
 #fmd .drop span{display:block;margin-top:5px;font-size:14px;line-height:1.55;
-  color:color-mix(in srgb,var(--fg) 60%,transparent);}
+  color:var(--fg-mid);}
 #fmd .att{display:flex;align-items:center;gap:10px;background:var(--c-paper-tint);border:0;
   box-shadow:inset 0 0 0 1px var(--hair2);border-radius:2px;padding:9px var(--s3);
   margin-top:var(--s2);font-size:14px;}
@@ -1076,6 +1076,7 @@ footer .rv{transition-delay:calc(var(--i,0) * .09s);}
 #fmd .done b{display:block;font-size:21px;font-weight:600;margin-bottom:9px;}
 #fmd .done p{font-size:var(--t-note);line-height:1.6;color:var(--fg-mid);max-width:40ch;margin:0 auto 26px;}
 #fmd .done .btn{padding-left:20px;padding-right:20px;}
+#fmd .done p.fwarn{display:none;color:var(--c-error);}
 @media (max-width:960px){
   .plate .wrap{grid-template-columns:minmax(0,1fr);}
   header nav{display:none;}
@@ -1634,7 +1635,7 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
     </form>
   </div>
   <div class="done" id="f_done" tabindex="-1">
-    <div class="ok">✓</div><b>Շնորհակալություն։</b><p>Կուսումնասիրենք ձեր հարցումը և կկապվենք ձեզ հետ՝ մանրամասները ճշտելու համար։</p>
+    <div class="ok">✓</div><b>Շնորհակալություն։</b><p>Կուսումնասիրենք ձեր հարցումը և կկապվենք ձեզ հետ՝ մանրամասները ճշտելու համար։</p><p class="fwarn" id="f_files_err" role="alert">Հաղորդագրությունն ուղարկվել է, սակայն կցված ֆայլերը չհաջողվեց ուղարկել։ Խնդրում ենք ուղարկել դրանք sales@gridec.am հասցեով։</p>
     <button class="btn" data-close><span>Փակել</span></button>
   </div>
 </div></div></div>
@@ -2224,7 +2225,8 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
   var fields={name:nm,company:co,email:em,phone:ph,application:app,message:ms};
   if(PT.page)fields.page=PT.page;
   sending=true;busy(true);
-  function done(){document.getElementById('f_main').style.display='none';
+  function done(filesFailed){document.getElementById('f_main').style.display='none';
+    document.getElementById('f_files_err').style.display=filesFailed===true?'block':'none';
     var dn=document.getElementById('f_done');dn.style.display='block';dn.focus();sending=false;busy(false);}
   function sendFail(){sending=false;busy(false);var se=document.getElementById('ptfSendErr'),st=se.getAttribute('data-t')||se.textContent;
     se.setAttribute('data-t',st);se.textContent='';se.style.display='block';setTimeout(function(){se.textContent=st;},60);}
@@ -2242,7 +2244,7 @@ document.getElementById('ptfForm').addEventListener('submit',function(e){e.preve
     .then(function(r){if(!r.ok)throw new Error('send failed');return r.json().catch(function(){return {};});})
     .then(function(j){
       if(j&&String(j.success)==='false')throw new Error('send rejected');
-      if(files.length)return sendFiles().then(done,done);
+      if(files.length)return sendFiles().then(function(){done();},function(){done(true);});
       done();
     })
     .catch(function(){sendFail();});
