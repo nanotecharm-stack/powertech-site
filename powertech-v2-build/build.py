@@ -273,7 +273,7 @@ def nbsp(value, lang):
 # Технические строки: пути, размеры, гарнитуры, готовые блоки разметки.
 NO_GLUE = {'LANG', 'LANG_HREF', 'LANG_LABEL', 'FONTFACES', 'READOUT', 'BODYFONT',
            'HEADFONT', 'HEADWT', 'H1WT', 'BIGLS', 'MONOFONT', 'NAVFONT', 'HEADTT', 'HEADLH', 'HEADLS',
-           'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_STEPS', 'SVC_DAYS', 'REP_LIST',
+           'H1SIZE', 'H2SIZE', 'DISPSIZE', 'SVC_STATS', 'SVC_DIM', 'SVC_STEPS', 'SVC_DAYS', 'REP_LIST',
            'CO_STORY', 'ASG_CARDS', 'ASG_PICS', 'MEA_CELLS', 'FOOT_LINKS', 'META_DESC',
            'REP_NOTE2', 'REP_FIGS', 'MEA_NOTE', 'IX_LABEL', 'IX_ARIA',
            'HOME', 'BRAND_HREF', 'PARTNERS_HREF', 'PARTNERS_CUR',
@@ -533,8 +533,9 @@ EN = {
  # честное, но оно с другой оси — разрешение прибора, — и ряд от него терял смысл:
  # владелец такого вопроса не задаёт. Место технического метода — примечание к
  # разделу 04, рядом с Class S, а не ряд, адресованный владельцу.
- 'SVC_STATS': stats_html([('7', 'Days of monitoring'),
-                          ('24/7', 'Continuous data recording')]),
+ 'SVC_DIM': stats_html([('7', 'Days of monitoring')]),
+ 'SVC_STATS': stats_html([('24/7', 'Continuous data recording')]),
+ 'SVC_MORE_TAG': 'If needed',
  'SVC_DISPLAY': 'Measured<br>under actual<br><span class="ac">load</span>',
  'SVC_CAP': 'Measured under actual load',
  'SVC_DAYS': days_html('Day'),
@@ -853,8 +854,9 @@ HY = {
  'OTHER_P': 'Չե՞ք գտնում ձեր ոլորտն այստեղ։ Նկարագրեք խնդիրը և դրա ազդեցությունը սարքավորման աշխատանքի վրա։',
  'SVC_H2': '7-օրյա մոնիթորինգ',
  'SVC_P2': 'Մոնիթորինգի տևողությունն ընտրում ենք այնպես, որ գրանցենք համակարգի բնորոշ աշխատանքային ռեժիմները։ Եթե խնդիրը հազվադեպ կամ անկանոն է դրսևորվում, առաջարկում ենք երկարացնել չափումների ժամանակահատվածը։ Նույնն առաջարկում ենք, եթե աշխատանքային ցիկլն ավելի երկար է։',
- 'SVC_STATS': stats_html([('7', 'օր մոնիթորինգ'),
-                          ('24/7', 'անընդհատ տվյալների գրանցում')]),
+ 'SVC_DIM': stats_html([('7', 'օր մոնիթորինգ')]),
+ 'SVC_STATS': stats_html([('24/7', 'անընդհատ տվյալների գրանցում')]),
+ 'SVC_MORE_TAG': 'Անհրաժեշտության դեպքում',
  'SVC_DISPLAY': 'Չափումներ՝<br>փաստացի<br><span class="ac">բեռնվածությամբ</span>',
  'SVC_CAP': 'Չափումներ՝ փաստացի բեռնվածությամբ',
  'SVC_DAYS': days_html('Օր'),
