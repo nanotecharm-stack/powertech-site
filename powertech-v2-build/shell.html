@@ -141,6 +141,7 @@ h2.h2gap{margin-top:var(--s4);}
    читались одним куском. Разводим их на строку. */
 /* Лид один: второй вводный абзац стоит на ступень ниже, размером прозы, цвет наследует. */
 .lede + .lede{margin-top:18px;font-size:var(--t-p);line-height:var(--t-p-lh);max-width:46ch;}
+.lede.co-one{font-size:var(--t-p);line-height:var(--t-p-lh);}
 /* Армянский текст длиннее на треть: тот же лид на ступень ниже, иначе десять строк. */
 /* Проза HY (2026-09-15, владелец выбрал пробу B из двух): Mardoto при том же кегле выше
    Overused Grotesk на 15 % по прописным, а армянские строчные почти в рост прописных —
@@ -2738,10 +2739,9 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
 <section class="sec" id="company"><div class="wrap">
   <div class="rv"><div class="cnt">07</div>
   <h2 class="h2gap">%%CO_H2%%</h2>
-  <!-- 2026-11-20: крупным идёт только первое предложение; остальное — вторым .lede,
-       который по правилу «.lede + .lede» набирается основным текстом. Слова те же. -->
-  <p class="lede">%%CO_P%%</p>
-  <p class="lede">%%CO_P2%%</p></div>
+  <!-- 2026-11-22, владелец: крупный подзаголовок снят, первое предложение соединено
+       с текстом; весь абзац — основным размером (правило #company .lede.co-one). -->
+  <p class="lede co-one">%%CO_P2%%</p></div>
   <div class="story">%%CO_STORY%%</div>
 </div></section>
 

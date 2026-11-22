@@ -586,8 +586,7 @@ EN = {
  # пояснение относится именно к этой карточке.
  'MEA_NOTE': lnote_html('* We use measurement data to assess the risk of equipment damage, downtime and electrical fires.'),
  'CO_H2': 'About us',
- 'CO_P': 'Gridec is an independent electrical engineering company based in Yerevan.',
- 'CO_P2': 'We solve problems in electrical power systems. We use hands-on engineering experience, high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
+ 'CO_P2': 'Gridec is an independent electrical engineering company based in Yerevan that solves problems in electrical power systems. We use hands-on engineering experience, high-precision instruments and established methods. We work to relevant international standards and take equipment operating conditions into account.',
  # \u041f\u0435\u0440\u0435\u043d\u043e\u0441\u044b \u0432 \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u044f\u0445 \u0437\u0430\u0434\u0430\u043d\u044b \u0437\u0430\u043a\u0430\u0437\u0447\u0438\u043a\u043e\u043c \u043f\u043e\u0441\u0442\u0440\u043e\u0447\u043d\u043e \u0438 \u0441\u0442\u043e\u044f\u0442 \u0440\u0430\u0437\u043c\u0435\u0442\u043a\u043e\u0439, \u0430 \u043d\u0435
  # \u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0432\u043e\u043b\u044e \u0438\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f.
  # Номера «01 ·», «02 ·», «03 ·» с подписей сняты: на странице уже есть одна
@@ -912,8 +911,7 @@ HY = {
  # капс. Принудительных переносов нет — в этой редакции их не задавали, строки
  # раскладывает колонка.
  'CO_H2': 'Մեր մասին',
- 'CO_P': 'Gridec-ը Երևանում գործող անկախ էլեկտրատեխնիկական ընկերություն է։',
- 'CO_P2': 'Մենք լուծում ենք էլեկտրամատակարարման տեխնիկական խնդիրներ։ Հենվում ենք թիմի գործնական փորձի վրա և օգտագործում ենք ժամանակակից, բարձր ճշգրտության սարքավորումներ ու փորձված մեթոդներ։ Աշխատում ենք միջազգային ստանդարտներով՝ հաշվի առնելով սարքավորումների շահագործման պայմանները։',
+ 'CO_P2': 'Gridec-ը Երևանում գործող անկախ էլեկտրատեխնիկական ընկերություն է, որը լուծում է էլեկտրամատակարարման տեխնիկական խնդիրներ։ Հենվում ենք թիմի գործնական փորձի վրա և օգտագործում ենք ժամանակակից, բարձր ճշգրտության սարքավորումներ ու փորձված մեթոդներ։ Աշխատում ենք միջազգային ստանդարտներով՝ հաշվի առնելով սարքավորումների շահագործման պայմանները։',
  'CO_STORY': story_html([
     # Тексты владельца (2026-09-15, вторая редакция того же дня): лид и два подблока.
     ('Ինչու սկսեցինք',
