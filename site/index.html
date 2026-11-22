@@ -665,6 +665,7 @@ html[lang="hy"] #obs.wk .wk-days{font-family:var(--face-overused-grotesk);font-s
 #obs.wk .step:nth-child(1){grid-column:1 / span 2;}
 #obs.wk .step:nth-child(2){grid-column:3 / span 3;}
 #obs.wk .step:nth-child(3){grid-column:6 / span 2;}
+#obs.wk .step:only-child{grid-column:1 / span 4;}
 #obs.wk .step::before{display:none;}
 #obs.wk .step .stag{display:block;font-family:var(--face-overused-grotesk);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
 html[lang="hy"] #obs.wk .step .stag{font-family:var(--face-overused-grotesk);font-size:12px;letter-spacing:.02em;text-transform:none;}
@@ -676,7 +677,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:var(--face-overused-grotesk);fon
   #obs.wk .stats{grid-template-columns:1fr;row-gap:10px;}
   #obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){justify-content:flex-start;text-align:left;}
   #obs.wk .steps{grid-template-columns:1fr;row-gap:24px;}
-  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){grid-column:auto;}
+  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3),#obs.wk .step:only-child{grid-column:auto;}
 }
 .step p{font-size:var(--t-p);line-height:var(--t-p-lh);color:var(--fg-mid);}
 .rep{padding:0;--rep-over:clamp(120px,14vw,200px);}
@@ -1471,8 +1472,8 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
 <section class="sec plate2" id="services"><div class="wrap">
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
-    <h2 class="h2gap">Seven-day monitoring</h2>
-    <p class="lede">We record power quality data during normal operation. Then we interpret it for your specific issue.</p></div>
+    <h2 class="h2gap">Seven-day monitoring</h2></div>
+    
   </div>
   
   <div class="obs wk rv" id="obs">
@@ -1485,10 +1486,10 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
         <g class="obs-marks"></g>
       </svg>
     </div>
-    <div class="stats"><div class="stat"><b>7</b><span>Days of monitoring</span></div><div class="stat"><b>24/7</b><span>Continuous data recording</span></div><div class="stat"><b>1</b><span>Engineering report</span></div></div>
+    <div class="stats"><div class="stat"><b>7</b><span>Days of monitoring</span></div><div class="stat"><b>24/7</b><span>Continuous data recording</span></div></div>
     
     <p class="wk-note">We select a period that shows your typical operating conditions. If the issue comes and goes, or your operating cycle is long, we recommend a longer period.</p>
-    <div class="steps"><div class="step"><span class="stag">Before recording</span><p>Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.</p></div><div class="step"><span class="stag">During recording</span><p>We take measurements during the agreed operating conditions.</p></div><div class="step"><span class="stag">After recording</span><p>We analyse the recorded data and present our conclusions and recommended next steps in the report.</p></div></div>
+    <div class="steps"><div class="step"><span class="stag">Before recording</span><p>Before monitoring starts, we agree on the equipment to assess, the measurements required and the decision the results will support.</p></div></div>
   </div>
   <a class="alink rv" href="#report">See what monitoring can reveal ↗︎</a>
 </div></section>

@@ -1290,6 +1290,7 @@ html[lang="hy"] #obs.wk .wk-days{font-family:%%BODYFONT%%;font-size:12px;letter-
 #obs.wk .step:nth-child(1){grid-column:1 / span 2;}
 #obs.wk .step:nth-child(2){grid-column:3 / span 3;}
 #obs.wk .step:nth-child(3){grid-column:6 / span 2;}
+#obs.wk .step:only-child{grid-column:1 / span 4;}
 #obs.wk .step::before{display:none;}
 #obs.wk .step .stag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
 html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;letter-spacing:.02em;text-transform:none;}
@@ -1301,7 +1302,7 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
   #obs.wk .stats{grid-template-columns:1fr;row-gap:10px;}
   #obs.wk .stat:nth-child(2),#obs.wk .stat:nth-child(3){justify-content:flex-start;text-align:left;}
   #obs.wk .steps{grid-template-columns:1fr;row-gap:24px;}
-  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3){grid-column:auto;}
+  #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3),#obs.wk .step:only-child{grid-column:auto;}
 }
 /* У шагов больше нет названий, и промежуток от номера до текста,
    который держал заголовок, берёт на себя сам абзац. */
@@ -2667,8 +2668,9 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
 <section class="sec plate2" id="services"><div class="wrap">
   <div class="svc-head">
     <div class="rv"><div class="cnt">03</div>
-    <h2 class="h2gap">%%SVC_H2%%</h2>
-    <p class="lede">%%SVC_P1%%</p></div>
+    <h2 class="h2gap">%%SVC_H2%%</h2></div>
+    <!-- 2026-11-22, владелец (вариант A): вводный абзац снят — повторял героя;
+         оставлены срок (7 / 24/7), абзац о длительности и шаг «до записи». -->
   </div>
   <!-- НЕДЕЛЯ ЗАПИСИ (2026-09-15, владелец: «цифры и анимация задачу не решают»).
        Поле — семь суток по 24 деления: 7 — это семь колонок, 24/7 — 168 часовых
