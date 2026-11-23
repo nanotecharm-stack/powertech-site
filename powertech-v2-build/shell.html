@@ -1304,49 +1304,6 @@ html[lang="hy"] #obs.wk .step .stag{font-family:%%BODYFONT%%;font-size:12px;lett
   #obs.wk .steps{grid-template-columns:1fr;row-gap:24px;}
   #obs.wk .step,#obs.wk .step:nth-child(1),#obs.wk .step:nth-child(2),#obs.wk .step:nth-child(3),#obs.wk .step:only-child{grid-column:auto;}
 }
-/* ---- Чертёж недели (2026-11-22). Поля по 10 % — те же, что в buildObs(). ---- */
-#obs.wk{--wk-in:10%;--wk-ln:rgba(239,237,234,.38);--wk-gap:clamp(36px,4vw,52px);}
-#obs.wk .wk-dim,#obs.wk .wk-days{margin-left:var(--wk-in);margin-right:var(--wk-in);}
-/* Размерная линия: засечки на концах, подпись в разрыве линии. */
-#obs.wk .wk-dim{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
-#obs.wk .wk-dim i{flex:1;height:13px;position:relative;}
-#obs.wk .wk-dim i::before{content:"";position:absolute;left:0;right:0;top:6px;border-top:1px solid var(--wk-ln);}
-#obs.wk .wk-dim i:first-child{border-left:1px solid var(--wk-ln);}
-#obs.wk .wk-dim i:last-child{border-right:1px solid var(--wk-ln);}
-#obs.wk .wk-dim .stat{display:flex;align-items:baseline;gap:10px;}
-#obs.wk .wk-days span:first-child{border-left-color:transparent;}
-#obs.wk .obs-night rect{fill:rgba(239,237,234,.028);}
-#obs.wk .obs-pre{fill:none;stroke:var(--wk-ln);stroke-width:1.2;stroke-dasharray:3 5;}
-#obs.wk .obs-post{fill:none;stroke:var(--brand);stroke-width:1.4;stroke-dasharray:3 5;opacity:.7;}
-#obs.wk .obs-marks .obs-open{fill:none;stroke:var(--wk-ln);stroke-width:1.2;}
-/* Три подписи на выносках: левый край поля, середина недели, правый край. */
-#obs.wk .wk-ends{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);column-gap:var(--s6);
-  align-items:start;margin-top:var(--wk-gap);}
-#obs.wk .wk-ends>*{position:relative;grid-column:auto;grid-row:1;}
-#obs.wk .wk-ends>*::after{content:"";position:absolute;bottom:100%;width:1px;height:var(--wk-gap);background:var(--line-d2);}
-#obs.wk .wk-ends .steps{display:block;margin:0;}
-#obs.wk .wk-ends .steps::after{left:0;}
-#obs.wk .wk-ends .step{border-left:1px solid var(--line-d2);padding:2px 0 0 clamp(var(--s4),2vw,var(--s5));max-width:44ch;}
-#obs.wk .wk-ends .stats{display:block;margin:0;text-align:center;padding-top:2px;}
-#obs.wk .wk-ends .stats::after{left:50%;}
-#obs.wk .wk-ends .stat{display:flex;flex-direction:column;align-items:center;gap:8px;}
-#obs.wk .wk-more{justify-self:end;text-align:right;max-width:44ch;border-right:1px solid var(--line-d2);
-  padding:2px clamp(var(--s4),2vw,var(--s5)) 0 0;}
-#obs.wk .wk-more::after{right:-1px;}
-#obs.wk .wk-more .stag{display:block;font-family:%%MONOFONT%%;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:12px;}
-html[lang="hy"] #obs.wk .wk-more .stag{font-family:%%BODYFONT%%;font-size:12px;letter-spacing:.02em;text-transform:none;}
-#obs.wk .wk-more .wk-note{margin:0;max-width:none;color:rgba(239,237,234,.78);}
-#obs.wk .wk-ends p{text-wrap:pretty;}
-@media (max-width:767px){
-  #obs.wk{--wk-gap:28px;}
-  #obs.wk .wk-ends{grid-template-columns:1fr;row-gap:24px;}
-  #obs.wk .wk-ends>*{grid-row:auto;}
-  #obs.wk .wk-ends>*::after{display:none;}
-  #obs.wk .wk-ends .stats{text-align:left;}
-  #obs.wk .wk-ends .stat{flex-direction:row;align-items:baseline;gap:10px;}
-  #obs.wk .wk-more{justify-self:start;text-align:left;border-right:0;border-left:1px solid var(--line-d2);
-    padding:2px 0 0 clamp(var(--s4),2vw,var(--s5));}
-}
 /* У шагов больше нет названий, и промежуток от номера до текста,
    который держал заголовок, берёт на себя сам абзац. */
 /* Отступ сверху был зазором под номером шага; номера нет — нет и зазора */
@@ -2722,27 +2679,19 @@ footer .flist a::after,footer .fcon a::after{content:"";position:absolute;inset:
        Ничего не движется по прокрутке: поле статично, как чертёж. -->
   <div class="obs wk rv" id="obs">
     <div class="wk-cap">%%SVC_CAP%%</div>
-    <!-- 2026-11-22, владелец: «полный чертёж». Неделя — средняя часть поля; слева
-         пунктир «до записи», справа пунктир «дольше при необходимости». Над неделей —
-         размерная линия, на неделе — ночные полосы (просто сутки, не данные).
-         Три подписи внизу висят на выносках: левый край, середина, правый край. -->
-    <div class="wk-dim"><i></i><div class="wk-dim-l">%%SVC_DIM%%</div><i></i></div>
     <div class="wk-days" aria-hidden="true">%%SVC_DAYS%%</div>
     <div class="obs-field" aria-hidden="true">
       <svg class="obs-svg" preserveAspectRatio="none">
-        <g class="obs-night"></g>
         <g class="obs-ruler"></g>
-        <path class="obs-pre" d=""/>
         <path class="obs-rec" d=""/>
-        <path class="obs-post" d=""/>
         <g class="obs-marks"></g>
       </svg>
     </div>
-    <div class="wk-ends">
-      <div class="steps">%%SVC_STEPS%%</div>
-      <div class="stats">%%SVC_STATS%%</div>
-      <div class="wk-more"><span class="stag">%%SVC_MORE_TAG%%</span><p class="wk-note">%%SVC_P2%%</p></div>
-    </div>
+    <div class="stats">%%SVC_STATS%%</div>
+    <!-- Абзац о выборе длительности стоит под полем, к которому относится, а не в шапке
+         (владелец, 2026-09-15: «весь экран перегружен»). -->
+    <p class="wk-note">%%SVC_P2%%</p>
+    <div class="steps">%%SVC_STEPS%%</div>
   </div>
   <a class="alink rv" href="#report">%%SVC_LINK%% ↗︎</a>
 </div></section>
@@ -3219,25 +3168,16 @@ function buildObs(){
   if(!obsSvg)return;
   var r=obsSvg.getBoundingClientRect(),W=r.width,H=r.height;
   if(!W||!H||(Math.abs(W-obsW)<0.5&&Math.abs(H-obsH)<0.5))return;obsW=W;obsH=H;
-  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.46)+0.5,yb=H-0.5,i,x,g='',n='';
+  var f=function(v){return (+v).toFixed(1);},yr=Math.round(H*0.46)+0.5,yb=H-0.5,i,x,g='';
   obsSvg.setAttribute('viewBox','0 0 '+f(W)+' '+f(H));
-  /* Неделя — от P до Q; поля по краям — те же 10 %, что --wk-in в стилях. */
-  var P=Math.round(W*0.1)+0.5,Q=Math.round(W*0.9)-0.5,U=(Q-P)/168;
-  for(i=0;i<=168;i++){x=P+U*i;var day=(i%24===0);
+  for(i=0;i<=168;i++){x=W*i/168-0.5;var day=(i%24===0);if(i===0)x=0.5;if(i===168)x=W-0.5;
     g+='<line class="'+(day?'obs-day':'')+'" x1="'+f(x)+'" y1="'+f(yb-(day?16:5))+'" x2="'+f(x)+'" y2="'+f(yb)+'"/>';}
-  g+='<line x1="'+f(P)+'" y1="'+f(yb)+'" x2="'+f(Q)+'" y2="'+f(yb)+'"/>';
+  g+='<line x1="0" y1="'+f(yb)+'" x2="'+f(W)+'" y2="'+f(yb)+'"/>';
   obsSvg.querySelector('.obs-ruler').innerHTML=g;
-  /* Ночи 22:00–06:00 — тихие полосы: читается ритм суток, не измерение. */
-  for(i=0;i<=7;i++){var a=Math.max(0,24*i-2),b=Math.min(168,24*i+6);
-    if(b>a)n+='<rect x="'+f(P+U*a)+'" y="0" width="'+f(U*(b-a))+'" height="'+f(yb)+'"/>';}
-  obsSvg.querySelector('.obs-night').innerHTML=n;
   var xe=W-14;
-  obsSvg.querySelector('.obs-pre').setAttribute('d','M1 '+f(yr)+' H'+f(P-6));
-  obsSvg.querySelector('.obs-rec').setAttribute('d','M'+f(P)+' '+f(yr)+' H'+f(Q));
-  obsSvg.querySelector('.obs-post').setAttribute('d','M'+f(Q+6)+' '+f(yr)+' H'+f(xe-4));
-  /* пустой квадрат — договорённость; полный — включение; лист — отчёт */
-  var m='<rect class="obs-open" x="0.5" y="'+f(yr-3.5)+'" width="7" height="7"/>'
-       +'<rect class="obs-dot" x="'+f(P-3.5)+'" y="'+f(yr-3.5)+'" width="7" height="7"/>'
+  obsSvg.querySelector('.obs-rec').setAttribute('d','M0 '+f(yr)+' H'+f(xe-2));
+  /* включение — точка; конец — лист документа с загнутым углом */
+  var m='<rect class="obs-dot" x="-3.5" y="'+f(yr-3.5)+'" width="7" height="7"/>'
        +'<path d="M'+f(xe)+' '+f(yr-9)+' h9 l5 5 v13 h-14 z M'+f(xe+9)+' '+f(yr-9)+' v5 h5"/>';
   obsSvg.querySelector('.obs-marks').innerHTML=m;
 }
